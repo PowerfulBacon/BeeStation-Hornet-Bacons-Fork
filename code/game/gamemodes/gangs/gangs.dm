@@ -60,6 +60,10 @@ GLOBAL_LIST_EMPTY(gangs)
 		M.add_antag_datum(B)
 		B.equip_gang()
 
+/datum/game_mode/proc/generate_report() //Generates a small text blurb for the gamemode in centcom report
+	return "Many stations in this sector have reported a surge in unnofficial clubs ran by the employees. Nanotrasen would like to remind all crew that any clubs, groups or gangs must be \
+	officially accepted by nanotrasen under employee contract section 26 subsection 17. Security are to watch the progression of employee groups and issue mindshields to any uncooperative employees."
+
 ///////////////////////////////////////////////////
 //Deals with checking if player is a gangster    //
 ///////////////////////////////////////////////////
