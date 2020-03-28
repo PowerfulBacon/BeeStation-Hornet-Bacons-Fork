@@ -2846,6 +2846,7 @@
 #include "code\modules\shuttle\monastery.dm"
 #include "code\modules\shuttle\navigation_computer.dm"
 #include "code\modules\shuttle\on_move.dm"
+#include "code\modules\shuttle\prefab_shuttle.dm"
 #include "code\modules\shuttle\ripple.dm"
 #include "code\modules\shuttle\shuttle.dm"
 #include "code\modules\shuttle\shuttle_rotate.dm"

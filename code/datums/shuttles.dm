@@ -482,7 +482,7 @@
 	if(SHUTTLE_UNLOCK_ALIENTECH in SSshuttle.shuttle_purchase_requirements_met)
 		return TRUE
 	return FALSE
-	
+
 /datum/map_template/shuttle/arrival/box
 	suffix = "box"
 	name = "arrival shuttle (Box)"
@@ -610,6 +610,10 @@
 /datum/map_template/shuttle/snowdin/excavation
 	suffix = "excavation"
 	name = "Snowdin Excavation Elevator"
+
+/datum/map_template/shuttle/prefab_syndicate
+	suffix = "prefab_syndicate"
+	name = "Syndicate Pre-built Shuttle"
 
  // Turbolifts
 /datum/map_template/shuttle/turbolift/debug/primary

@@ -1,0 +1,44 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/obj/structure/fans/tiny,/obj/docking_port/mobile{dheight = 5; dir = 8; dwidth = 0; height = 7; hidden = 1; width = 10},/obj/machinery/door/airlock/survival_pod{name = "Syndicate Shuttle"; icon_state = "closed"; dir = 4},/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"c" = (/obj/machinery/light{icon_state = "tube"; dir = 4},/obj/effect/turf_decal/stripes/corner,/obj/structure/rack,/obj/item/shuttle_creator/auto_assign{hide_spawned_shuttle = 1},/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"d" = (/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"e" = (/turf/closed/wall/mineral/plastitanium,/area/shuttle/custom/syndicate)
+"f" = (/obj/structure/table/reinforced,/obj/item/stack/sheet/iron/twenty,/obj/item/stack/sheet/glass{amount = 20},/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"g" = (/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"h" = (/obj/structure/chair/comfy/shuttle{icon_state = "shuttle_chair"; dir = 1},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"i" = (/obj/structure/extinguisher_cabinet{pixel_x = 32},/obj/structure/table/reinforced,/obj/machinery/recharger,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"j" = (/obj/machinery/light{icon_state = "tube"; dir = 8},/obj/machinery/autolathe/hacked,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"k" = (/obj/machinery/computer/camera_advanced/shuttle_docker/custom,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"l" = (/obj/machinery/computer/custom_shuttle{name = "syndicate shuttle flight controller"},/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"m" = (/obj/machinery/computer/crew,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"n" = (/obj/effect/turf_decal/stripes/line{icon_state = "warningline"; dir = 4},/obj/effect/turf_decal/caution{icon_state = "caution"; dir = 8},/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"o" = (/obj/machinery/power/apc{locked = 0; pixel_x = -32},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"p" = (/obj/effect/spawner/structure/window/plastitanium,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"q" = (/obj/machinery/door/airlock/survival_pod{name = "Shuttle Maintenance"},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"s" = (/obj/machinery/atmospherics/pipe/simple/purple/visible{icon_state = "pipe11-2"; dir = 6},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"t" = (/obj/machinery/atmospherics/pipe/manifold/purple/visible{icon_state = "manifold-2"; dir = 1},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"u" = (/obj/machinery/atmospherics/pipe/simple/purple/visible{icon_state = "pipe11-2"; dir = 10},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"v" = (/obj/machinery/power/port_gen,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"w" = (/obj/machinery/atmospherics/pipe/simple/purple/visible{icon_state = "pipe11-2"; dir = 6},/obj/machinery/power/smes,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"x" = (/obj/machinery/atmospherics/pipe/manifold/purple/visible{icon_state = "manifold-2"; dir = 4},/obj/item/storage/toolbox/syndicate,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"y" = (/obj/machinery/atmospherics/components/unary/portables_connector/visible{icon_state = "connector_map-2"; dir = 1},/obj/machinery/portable_atmospherics/canister/toxins,/obj/machinery/light/small,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"z" = (/obj/machinery/atmospherics/pipe/manifold/purple/visible{icon_state = "manifold-2"; dir = 8},/obj/item/pipe_dispenser,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"A" = (/obj/machinery/atmospherics/pipe/simple/purple/visible{icon_state = "pipe11-2"; dir = 10},/obj/machinery/portable_atmospherics/canister/toxins,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"B" = (/obj/machinery/atmospherics/components/unary/shuttle/heater{dir = 1; initialize_directions = 1},/obj/structure/window/reinforced/spawner/north,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"C" = (/obj/machinery/shuttle/engine/plasma{dir = 1},/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+"E" = (/obj/structure/chair/comfy/shuttle{icon_state = "shuttle_chair"; dir = 1},/obj/effect/turf_decal/stripes/line{icon_state = "warningline"; dir = 1},/obj/machinery/computer/security/telescreen/entertainment{pixel_x = -32},/obj/item/toy/plush/carpplushie,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"F" = (/obj/structure/chair/comfy/shuttle{icon_state = "shuttle_chair"; dir = 1},/obj/effect/turf_decal/stripes/line{icon_state = "warningline"; dir = 5},/obj/item/toy/plush/slimeplushie,/turf/open/floor/pod/light,/area/shuttle/custom/syndicate)
+"G" = (/obj/item/paper/guides/syndicate_prefab_shuttle,/turf/open/floor/pod/dark,/area/shuttle/custom/syndicate)
+
+(1,1,1) = {"
+apppppa
+ppklmpp
+efghgie
+ejgGgce
+eEFddnb
+eepqpee
+eostuve
+ewxyzAe
+eBBeBBe
+eCCeCCe
+"}
