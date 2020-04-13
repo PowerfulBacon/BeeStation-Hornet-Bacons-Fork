@@ -875,6 +875,7 @@
 #include "code\game\objects\items\crab17.dm"
 #include "code\game\objects\items\crayons.dm"
 #include "code\game\objects\items\credit_holochip.dm"
+#include "code\game\objects\items\cursed_necklace.dm"
 #include "code\game\objects\items\defib.dm"
 #include "code\game\objects\items\dehy_carp.dm"
 #include "code\game\objects\items\dice.dm"
@@ -1938,7 +1939,6 @@
 #include "code\modules\integrated_electronics\subtypes\logic.dm"
 #include "code\modules\integrated_electronics\subtypes\manipulation.dm"
 #include "code\modules\integrated_electronics\subtypes\memory.dm"
-#include "code\modules\integrated_electronics\subtypes\mining.dm"
 #include "code\modules\integrated_electronics\subtypes\output.dm"
 #include "code\modules\integrated_electronics\subtypes\power.dm"
 #include "code\modules\integrated_electronics\subtypes\reagents.dm"
@@ -3045,5 +3045,6 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
+#include "E:\Space Station 13\maps\base_A.dmm"
 // END_INCLUDE
 
