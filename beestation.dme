@@ -3045,6 +3045,5 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
-#include "E:\Space Station 13\maps\base_A.dmm"
 // END_INCLUDE
 
