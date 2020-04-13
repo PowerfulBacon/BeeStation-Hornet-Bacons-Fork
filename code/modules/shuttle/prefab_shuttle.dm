@@ -38,11 +38,7 @@
 
 /datum/map_template/shuttle/shuttle_syndicate
 	name = "Syndicate Shuttle"
-<<<<<<< Updated upstream
 	suffix = "prefab_shuttle"
-=======
-	suffix = "custom"
->>>>>>> Stashed changes
 	shuttle_id = "prefab_shuttle"
 	description = "A smaller sized shuttle that comes packed with \
 		built-in navigation, entertainment, maintenance tools and a \
