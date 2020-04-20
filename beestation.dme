@@ -1546,6 +1546,7 @@
 #include "code\modules\awaymissions\mission_code\stationCollision.dm"
 #include "code\modules\awaymissions\mission_code\undergroundoutpost45.dm"
 #include "code\modules\awaymissions\mission_code\wildwest.dm"
+#include "code\modules\bluespace_exploration\sublevel_generator.dm"
 #include "code\modules\bsql\includes.dm"
 #include "code\modules\buildmode\bm_mode.dm"
 #include "code\modules\buildmode\buildmode.dm"
