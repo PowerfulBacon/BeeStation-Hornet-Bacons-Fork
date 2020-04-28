@@ -16,6 +16,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/hide_mode = 0
 	var/datum/game_mode/mode = null
+	var/datum/modifiers_controller/modifiers = null
 
 	var/login_music							//music played in pregame lobby
 	var/round_end_sound						//music/jingle played when the world reboots
@@ -203,6 +204,7 @@ SUBSYSTEM_DEF(ticker)
 
 		if(GAME_STATE_PLAYING)
 			mode.process(wait * 0.1)
+			modifiers.process(wait * 0.1)
 			check_queue()
 			check_maprotate()
 
@@ -252,6 +254,8 @@ SUBSYSTEM_DEF(ticker)
 	//Configure mode and assign player to special mode stuff
 	var/can_continue = 0
 	can_continue = src.mode.pre_setup()		//Choose antagonists
+	CHECK_TICK
+	modifiers.setup() //Setup modifiers
 	CHECK_TICK
 	can_continue = can_continue && SSjob.DivideOccupations() 				//Distribute jobs
 	CHECK_TICK
@@ -317,6 +321,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
 	mode.post_setup()
+	modifiers.post_setup()
 	GLOB.start_state = new /datum/station_state()
 	GLOB.start_state.count()
 
