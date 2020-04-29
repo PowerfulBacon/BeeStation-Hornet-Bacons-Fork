@@ -524,6 +524,6 @@ TOPIC_MAX_SIZE 500
 ##Round modifiers
 modifiers_enabled
 minimum_modifiers 0
-maximum_modifiers 3
-minimum_points 1
-maximum_points 4
+maximum_modifiers 2
+minimum_points 0
+maximum_points 3
