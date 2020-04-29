@@ -403,4 +403,18 @@
 /datum/config_entry/number/max_shuttle_size
 	config_entry_value = 250
 
+/datum/config_entry/number/minimum_modifiers
+	config_entry_value = 0
+
+/datum/config_entry/number/maximum_modifiers
+	config_entry_value = 3
+
+/datum/config_entry/number/minimum_points
+	config_entry_value = 1
+
+/datum/config_entry/number/maximum_points
+	config_entry_value = 3
+
+/datum/config_entry/flag/modifiers_enabled
+
 /datum/config_entry/flag/restricted_suicide

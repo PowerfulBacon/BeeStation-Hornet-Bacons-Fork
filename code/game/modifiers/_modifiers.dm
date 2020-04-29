@@ -1,6 +1,8 @@
 //Todo: Config setup
-#define MODIFIERS_MINIMUM 1
-#define MODIFIERS_MAXIMUM 3
+#define MODIFIERS_MINIMUM CONFIG_GET(number/minimum_modifiers)
+#define MODIFIERS_MAXIMUM CONFIG_GET(number/maximum_modifiers)
+#define MODIFIERS_MINIMUM_POINTS CONFIG_GET(number/minimum_points)
+#define MODIFIERS_MAXIMUM_POINTS CONFIG_GET(number/maximum_points)
 #define SECTOR_REPORT_MIN 30 SECONDS
 #define SECTOR_REPORT_MAX 5 MINUTES
 
@@ -13,24 +15,32 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 	var/total_weight = 0
 
 /datum/modifiers_controller/proc/setup()
+	if(!CONFIG_GET(flag/modifiers_enabled))
+		return FALSE
 	generate_station_modifiers()
 	for(var/datum/round_modifier/modifier in GLOB.current_modifiers)
 		modifier.pre_setup()
 	addtimer(CALLBACK(src, .proc/send_sector_report, 0), rand(SECTOR_REPORT_MIN, SECTOR_REPORT_MAX))
+	return TRUE
 
 /datum/modifiers_controller/proc/generate_station_modifiers()
 	if(!allowed_modifiers)
 		generate_allowed_modifiers()
+	picks_left = rand(MODIFIERS_MINIMUM, MODIFIERS_MAXIMUM)
+	points_left = rand(MODIFIERS_MINIMUM_POINTS, MODIFIERS_MAXIMUM_POINTS)
 	while(picks_left > 0)
 		picks_left --
 		//Choose one :)
 		var/weight_left = total_weight
 		for(var/datum/round_modifier/M in allowed_modifiers)
 			if(prob(weight_left?(M.weight / weight_left) * 100:0))
+				if(picks_left - M.points < 0)
+					continue
 				log_game("[M.name] was chosen as the round modifier, with a [weight_left?(M.weight / weight_left) * 100:0]% chance of spawning")
 				GLOB.current_modifiers += M
 				total_weight -= M.weight
 				allowed_modifiers -= M
+				picks_left -= M.points
 				//Don't spawn these modifiers either
 				for(var/datum/round_modifier/mod_to_remove in allowed_modifiers)
 					if(!(mod_to_remove in M.incompatible_modifiers))
@@ -75,5 +85,7 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 
 #undef MODIFIERS_MINIMUM
 #undef MODIFIERS_MAXIMUM
+#undef MODIFIERS_MINIMUM_POINTS
+#undef MODIFIERS_MAXIMUM_POINTS
 #undef SECTOR_REPORT_MIN
 #undef SECTOR_REPORT_MAX
