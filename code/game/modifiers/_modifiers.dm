@@ -23,9 +23,8 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 		//Choose one :)
 		var/weight_left = total_weight
 		for(var/datum/round_modifier/M in allowed_modifiers)
-			message_admins("[M.name] is being considered as a modifier") //DEBUG
-			if(prob((M.weight / weight_left) * 100))
-				message_admins("[M.name] was selected as a roundstart modifier with change [M.weight] out of [weight_left]") //DEBUG
+			if(prob(weight_left?(M.weight / weight_left) * 100:0))
+				log_game("[M.name] was chosen as the round modifier, with a [weight_left?(M.weight / weight_left) * 100:0]% chance of spawning")
 				GLOB.current_modifiers += M
 				total_weight -= M.weight
 				allowed_modifiers -= M
@@ -35,14 +34,14 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 /datum/modifiers_controller/proc/generate_allowed_modifiers()
 	allowed_modifiers = list()
 	var/pop_count = GLOB.player_list.len
-	for(var/datum/round_modifier/M in subtypesof(/datum/round_modifier))
+	for(var/M in subtypesof(/datum/round_modifier))
 		var/datum/round_modifier/instantiated_modifier = new M()
 		if(pop_count < instantiated_modifier.minimum_pop)
 			continue
 		if(pop_count > instantiated_modifier.maximum_pop)
 			continue
-		allowed_modifiers += M
-		total_weight += M.weight
+		allowed_modifiers += instantiated_modifier
+		total_weight += instantiated_modifier.weight
 
 /datum/modifiers_controller/process()
 	for(var/datum/round_modifier/modifier in GLOB.current_modifiers)
