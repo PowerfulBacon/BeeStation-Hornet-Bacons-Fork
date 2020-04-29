@@ -16,6 +16,7 @@
 	var/minimum_pop = 0 //Minimum pop this can spawn on
 	var/maximum_pop = 500 //maximum pop this can spawn on
 	var/list/blacklisted_gamemodes = list() //datums of gamemodes this will not spawn on
+	var/list/incompatible_modifiers = list() //Datums of modifiers that cannot be active alongside this one.
 
 /datum/round_modifier/proc/pre_setup()
 	return 1

@@ -31,6 +31,12 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 				GLOB.current_modifiers += M
 				total_weight -= M.weight
 				allowed_modifiers -= M
+				//Don't spawn these modifiers either
+				for(var/datum/round_modifier/mod_to_remove in allowed_modifiers)
+					if(!(mod_to_remove in M.incompatible_modifiers))
+						continue
+					total_weight -= mod_to_remove.weight
+					allowed_modifiers -= mod_to_remove
 				break
 			weight_left -= M.weight
 

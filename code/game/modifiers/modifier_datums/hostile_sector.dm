@@ -6,6 +6,7 @@
 	points = -3
 	weight = 1	//Make this pretty rare due to the chaos it could cause
 	blacklisted_gamemodes = list(/datum/game_mode/extended)	//This can trigger on non traitor gamemodes, but will not affect the antagonist count.
+	incompatible_modifiers = list(/datum/round_modifier/quiet_shift)
 	minimum_pop = 40
 
 /datum/round_modifier/hostile_sector/pre_setup()
