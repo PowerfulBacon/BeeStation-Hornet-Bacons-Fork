@@ -1,12 +1,14 @@
 //Todo: Config setup
 #define MODIFIERS_MINIMUM 1
 #define MODIFIERS_MAXIMUM 3
+#define SECTOR_REPORT_MIN 30 SECONDS
+#define SECTOR_REPORT_MAX 5 MINUTES
 
 GLOBAL_LIST_EMPTY(current_modifiers)
 
 /datum/modifiers_controller
 	var/allowed_modifiers = null
-	var/points_left = 2
+	var/points_left = 2	//Not implemented yet, don't push without this being done
 	var/picks_left = 3
 	var/total_weight = 0
 
@@ -14,6 +16,7 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 	generate_station_modifiers()
 	for(var/datum/round_modifier/modifier in GLOB.current_modifiers)
 		modifier.pre_setup()
+	addtimer(CALLBACK(src, .proc/send_sector_report, 0), rand(SECTOR_REPORT_MIN, SECTOR_REPORT_MAX))
 
 /datum/modifiers_controller/proc/generate_station_modifiers()
 	if(!allowed_modifiers)
@@ -40,6 +43,7 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 			continue
 		if(pop_count > instantiated_modifier.maximum_pop)
 			continue
+		if(SSticker.mode in instantiated_modifier.blacklisted_gamemodes)
 		allowed_modifiers += instantiated_modifier
 		total_weight += instantiated_modifier.weight
 
@@ -51,5 +55,19 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 	for(var/datum/round_modifier/modifier in GLOB.current_modifiers)
 		modifier.post_setup()
 
+/datum/modifiers_controller/proc/send_sector_report()
+	var/text = "<b><i>Central Command Status Summary</i></b><hr>"
+	text += "<b>Sensor data has been recorded and interpreted for the shift, data for the\
+	sector has been provided below.</b><hr>"
+	var/extra_data = ""
+	for(var/datum/round_modifier/modifier in GLOB.current_modifiers)
+		extra_data += "[modifier.desc]<br>"
+	text += extra_data ? extra_data : "No anomalous data has been reported. Have a secure shift. <br>"
+	text += "Thank you for your attention. Glory to nanotrasen."
+	print_command_report(text, "Central Command Status Summary", announce=FALSE)
+	priority_announce("A secure sector report has been downloaded to all communication consoles.", "Sector summary report downloaded.", 'sound/ai/commandreport.ogg')
+
 #undef MODIFIERS_MINIMUM
 #undef MODIFIERS_MAXIMUM
+#undef SECTOR_REPORT_MIN
+#undef SECTOR_REPORT_MAX

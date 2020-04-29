@@ -40,6 +40,7 @@ GLOBAL_VAR(changeling_team_objective_type) //If this is not null, we hand our th
 
 	var/csc = CONFIG_GET(number/changeling_scaling_coeff)
 	if(csc)
+		csc *= antag_spawner_multiplier
 		num_changelings = max(1, min(round(num_players() / (csc * 2)) + 2, round(num_players() / csc)))
 	else
 		num_changelings = max(1, min(num_players(), changeling_amount))
@@ -80,7 +81,7 @@ GLOBAL_VAR(changeling_team_objective_type) //If this is not null, we hand our th
 	..()
 
 /datum/game_mode/changeling/make_antag_chance(mob/living/carbon/human/character) //Assigns changeling to latejoiners
-	var/csc = CONFIG_GET(number/changeling_scaling_coeff)
+	var/csc = CONFIG_GET(number/changeling_scaling_coeff) * antag_spawner_multiplier
 	var/changelingcap = min(round(GLOB.joined_player_list.len / (csc * 2)) + 2, round(GLOB.joined_player_list.len / csc))
 	if(changelings.len >= changelingcap) //Caps number of latejoin antagonists
 		return

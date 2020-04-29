@@ -15,6 +15,7 @@
 	var/points = 0 //The overall chaos / danger of event. -5 would be terrible, 5 would be amazing
 	var/minimum_pop = 0 //Minimum pop this can spawn on
 	var/maximum_pop = 500 //maximum pop this can spawn on
+	var/list/blacklisted_gamemodes = list() //datums of gamemodes this will not spawn on
 
 /datum/round_modifier/proc/pre_setup()
 	return 1

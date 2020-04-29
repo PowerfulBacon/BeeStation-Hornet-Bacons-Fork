@@ -30,6 +30,7 @@
 	var/num_teams = team_amount
 	var/bsc = CONFIG_GET(number/brother_scaling_coeff)
 	if(bsc)
+		bsc *= antag_spawner_multiplier
 		num_teams = max(1, round(num_players() / bsc))
 
 	for(var/j = 1 to num_teams)
