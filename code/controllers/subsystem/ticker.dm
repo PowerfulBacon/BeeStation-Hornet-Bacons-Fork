@@ -255,6 +255,7 @@ SUBSYSTEM_DEF(ticker)
 	var/can_continue = 0
 	can_continue = src.mode.pre_setup()		//Choose antagonists
 	CHECK_TICK
+	modifiers = new()
 	modifiers.setup() //Setup modifiers
 	CHECK_TICK
 	can_continue = can_continue && SSjob.DivideOccupations() 				//Distribute jobs

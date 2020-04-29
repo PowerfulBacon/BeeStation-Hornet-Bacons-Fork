@@ -5,7 +5,7 @@
 GLOBAL_LIST_EMPTY(current_modifiers)
 
 /datum/modifiers_controller
-	var/allowed_modifiers = list()
+	var/allowed_modifiers = null
 	var/points_left = 2
 	var/picks_left = 3
 	var/total_weight = 0
@@ -23,6 +23,7 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 		//Choose one :)
 		var/weight_left = total_weight
 		for(var/datum/round_modifier/M in allowed_modifiers)
+			message_admins("[M.name] is being considered as a modifier") //DEBUG
 			if(prob((M.weight / weight_left) * 100))
 				message_admins("[M.name] was selected as a roundstart modifier with change [M.weight] out of [weight_left]") //DEBUG
 				GLOB.current_modifiers += M
@@ -32,6 +33,7 @@ GLOBAL_LIST_EMPTY(current_modifiers)
 			weight_left -= M.weight
 
 /datum/modifiers_controller/proc/generate_allowed_modifiers()
+	allowed_modifiers = list()
 	var/pop_count = GLOB.player_list.len
 	for(var/datum/round_modifier/M in subtypesof(/datum/round_modifier))
 		var/datum/round_modifier/instantiated_modifier = new M()
