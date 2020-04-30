@@ -12,6 +12,12 @@ Format:
 	disabled (disables the map)
 endmap
 
+map corgistation
+	default
+	maxplayers 60
+	votable
+endmap
+
 map boxstation
 	maxplayers 60
 	votable

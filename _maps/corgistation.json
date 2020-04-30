@@ -1,0 +1,11 @@
+{
+    "map_name": "corgistation",
+    "map_path": "map_files/CorgiStation",
+    "map_file": "corgistation.dmm",
+    "shuttles": {
+	    "cargo": "cargo_box",
+	    "ferry": "ferry_fancy",
+	    "whiteship": "whiteship_box",
+	    "emergency": "emergency_box"
+    }
+}

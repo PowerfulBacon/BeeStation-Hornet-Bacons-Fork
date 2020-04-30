@@ -39,6 +39,12 @@ map donutstation
 	disabled
 endmap
 
+map corgistation
+	minplayers 0
+	maxplayers 60
+	votable
+endmap
+
 map runtimestation
 	disabled
 endmap
