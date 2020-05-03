@@ -126,7 +126,7 @@
 
 	if(brainmob) //if we aren't trying to heal the brain, pass the attack onto the brainmob.
 		O.attack(brainmob, user) //Oh noooeeeee
-    
+
   if(O.force != 0 && !(O.item_flags & NOBLUDGEON))
 	  setOrganDamage(maxHealth) //fails the brain as the brain was attacked, they're pretty fragile.
 
@@ -270,7 +270,7 @@
 			to_chat(owner, "<span class='warning'>Alert: Posibrain heavily damaged.</span>")
 		if(2)
 			owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, 25)
-			to_chat(owner, "<span class='warning'>Alert: Posibrain damaged.</span>") 
+			to_chat(owner, "<span class='warning'>Alert: Posibrain damaged.</span>")
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
@@ -330,6 +330,8 @@
 //Direct trauma gaining proc. Necessary to assign a trauma to its brain. Avoid using directly.
 /obj/item/organ/brain/proc/brain_gain_trauma(datum/brain_trauma/trauma, resilience, list/arguments)
 	if(!can_gain_trauma(trauma, resilience))
+		return
+	if(owner?.stat == DEAD)
 		return
 
 	var/datum/brain_trauma/actual_trauma
