@@ -202,6 +202,18 @@
 	tagname = copytext(sanitize(input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot") as null|text),1,MAX_NAME_LEN)
 	name = "[initial(name)] - [tagname]"
 
+/obj/item/clothing/neck/petcollar/equipped(mob/user, slot)
+	. = ..()
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		H.dna.add_mutation(/datum/mutation/human/nyagger)
+
+/obj/item/clothing/neck/petcollar/dropped(mob/user)
+	. = ..()
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		H.dna.remove_mutation(/datum/mutation/human/nyagger)
+
 //////////////
 //DOPE BLING//
 //////////////
