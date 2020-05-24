@@ -245,6 +245,11 @@
 	build_path = /obj/machinery/computer/cargo
 	var/contraband = FALSE
 
+/obj/item/circuitboard/computer/galactic_market
+	name = "Galactic Market Console (Computer Board)"
+	build_path = /obj/machinery/computer/galactic_market
+	var/contraband = FALSE
+
 /obj/item/circuitboard/computer/cargo/multitool_act(mob/living/user)
 	if(!(obj_flags & EMAGGED))
 		contraband = !contraband

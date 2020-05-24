@@ -1,11 +1,73 @@
-//Cross station market
-//Gives a lot more dynamic to cargo
-//One station is selling loads of resources? Buy them on the market while they are cheap,
-//and sell them back at a higher price!
+/*
+ * Cross station market
+ * Gives a lot more dynamic to cargo
+ * One station is selling loads of resources? Buy them on the market while they are cheap,
+ * and sell them back at a higher price!
+ *
+ * Remember, Centcom still buys and sells materials, so alot of money can be made
+ * by buying things from the market and selling them to Centcom, but buying too much will
+ * drop the price, so its not exploitable forever.
+ *
+ *
+ * === REALLY BORING MATHS I SPENT TOO LONG DOING, JUST TO AVOID AN EXPENSIVE FOR LOOP ===
+ *
+ * So the price of each object is calculated by y = dpx^{-1}
+ * where y = price
+ * x = quantity
+ * and d and p are constants (d = demand value, p = price factor)
+ *
+ * If you want to find out how much buying multiple costs, you cannot
+ * just do cost for 1 at price * amount, since the more you buy, the
+ * more expensive each unit gets.
+ *
+ * In the equation we need to make, the gradient is the price at the contents
+ * value, which is the previous equation
+ *
+ * To get the cumulative cost of items, we simple need to integrate and then
+ * do some shit to the graph
+ * y = dpln(x) + C (where C is an unknown constant)
+ * would be the integral of the graph, however this only accounts
+ * for the cost of the item / material starting at 0, and since its a 1/x
+ * graph, the cost at 0 starts at a number that is undefined, but practically infinity
+ * but its not infinity.
+ * To offset this value, we need to find the point at which on the integral graph
+ * the amount we want crosses the x axis point (amount, 0) lies on the graph
+ * y = dpln(x) + C
+ * y = 0, x = a (starting amount)
+ * 0 = dpln(a) + C
+ * C = -dpln(a)
+ *
+ * This gives us: y=dpln(x)-dpln(a)
+ * (This is relative to the final amount of resources on the market)
+ * To make this relative to the amount we are buying and selling, we simply
+ * translate the graph to the left by the amount giving us
+ * y=dpln(x+a)-dpln(a)
+ * Where y = cost of order
+ * x = amount ordering (or selling (in which case it is negative))
+ * a = current amount on market
+ * and d and p are the constant values from earlier.
+ *
+ * quite simple actually
+ *
+ * =======================================================
+ * ======================Handling=========================
+ * =======================================================
+ * Buying:
+ * Buying is pretty simple, upon buying things, put it in a reserver
+ * and shove it on the supply shuttle when it docks.
+ *
+ * Selling:
+ * The galactic market console and supply console can now send the ship
+ * to 2 locations. Sending it to centcom, sells to centcom.
+ * Sending to the galactic market hub, sells to the market.
+ * If the ship is sent to the market hub it cannot collect centcom goods,
+ * but can travel to centcom much quicker.
+ *
+*/
 
-//Remember, Centcom still buys and sells materials, so alot of money can be made
-//by buying things from the market and selling them to Centcom, but buying too much will
-//drop the price, so its not exploitable forever.
+#define DATABASE_REFRESH_TIME 5 SECONDS
+
+GLOBAL_VAR_INIT(last_db_refresh, 0)
 
 SUBSYSTEM_DEF(galactic_market)
 	name = "Galactic Market"
@@ -46,6 +108,7 @@ SUBSYSTEM_DEF(galactic_market)
 //Galactic market. If not, create new tables for it
 
 /datum/controller/subsystem/galactic_market/proc/check_database()
+	GLOB.last_db_refresh = world.time
 	var/datum/DBQuery/query_validate_database_existance = SSdbcore.NewQuery("SELECT 1 FROM [format_table_name("galactic_market_resources")] LIMIT 1")
 	query_validate_database_existance.Execute()
 	if(!query_validate_database_existance.warn_execute())
@@ -114,6 +177,27 @@ SUBSYSTEM_DEF(galactic_market)
 		qdel(query_write_resource)
 	else
 		return
+
+//The reason this is estimate is because the market could have been updated
+//while we were fucking about in the computer
+//amount_change : (POSITIVE IS SELLING TO MARKET, NEGATIVE IS BUYING FROM) (amount_change is the amount of resource change from the markets perspective)
+//Output: The amount of money that you will make from the purchase (negative for costing)
+//These are not interchangeable, as buying 10 costs a different amount to selling 10
+//Positive - Round down
+//Negative - Round up (we always scam the crew, never the market)
+/datum/controller/subsystem/galactic_market/proc/estimate_delta_money(datum/galactic_market/resource/R, amount_change)
+	var/exact_value = (R.market_demand_factor * R.market_fair_price * log(amount_change + R.market_current_supply)) - (R.market_demand_factor * R.market_fair_price * log(market_current_supply))
+	if(exact_value > 0)
+		return FLOOR(exact_value, 1)
+	return FLOOR(exact_value + 0.9999, 1)
+
+/datum/controller/subsystem/galactic_market/proc/estimate_cost(datum/galactic_market/resource/R, amount_buying)
+	return estimate_delta_money(R, -amount_buying)
+
+//Reads it first before calculating the cost
+/datum/controller/subsystem/galactic_market/proc/calculate_delta_money(datum/galactic_market/resource/R, amount_change)
+	read_galactic_market()
+	estimate_delta_money(R, amount_change)
 
 //================Reading the market data================
 
