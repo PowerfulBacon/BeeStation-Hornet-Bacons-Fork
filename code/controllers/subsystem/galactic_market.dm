@@ -186,7 +186,7 @@ SUBSYSTEM_DEF(galactic_market)
 //Positive - Round down
 //Negative - Round up (we always scam the crew, never the market)
 /datum/controller/subsystem/galactic_market/proc/estimate_delta_money(datum/galactic_market/resource/R, amount_change)
-	var/exact_value = (R.market_demand_factor * R.market_fair_price * log(amount_change + R.market_current_supply)) - (R.market_demand_factor * R.market_fair_price * log(market_current_supply))
+	var/exact_value = (R.market_demand_factor * R.market_fair_price * log(amount_change + R.market_current_supply)) - (R.market_demand_factor * R.market_fair_price * log(R.market_current_supply))
 	if(exact_value > 0)
 		return FLOOR(exact_value, 1)
 	return FLOOR(exact_value + 0.9999, 1)

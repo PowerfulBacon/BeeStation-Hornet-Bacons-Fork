@@ -15,7 +15,7 @@
 	var/a_ui_y
 	var/a_auto_update = TRUE
 
-	var/owner_manager
+	var/datum/admin_ui_manager/owner_manager
 
 /datum/admin_ui/ui_interact(mob/user, ui_key = "generic_admin_ui", datum/tgui/ui = null, force_open = TRUE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.admin_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
