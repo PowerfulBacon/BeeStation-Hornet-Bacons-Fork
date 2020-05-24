@@ -29,7 +29,7 @@ GLOBAL_PROTECT(href_token)
 	var/deadmined
 
 	//Admin help manager
-	var/datum/admin_help_ui/admin_interface
+	var/datum/admin_ui_manager/admin_interface
 
 /datum/admins/New(datum/admin_rank/R, ckey, force_active = FALSE, protected)
 	if(IsAdminAdvancedProcCall())
@@ -60,6 +60,7 @@ GLOBAL_PROTECT(href_token)
 		activate()
 	else
 		deactivate()
+	admin_interface = new()
 
 /datum/admins/Destroy()
 	if(IsAdminAdvancedProcCall())
