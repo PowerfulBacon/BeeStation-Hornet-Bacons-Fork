@@ -181,6 +181,17 @@ CREATE TABLE IF NOT EXISTS `SS13_feedback` (
 
 
 
+-- Dumping structure for table ss13tgdb.SS13_galactic_market_resources
+DROP TABLE IF EXISTS `SS13_galactic_market_resources`;
+CREATE TABLE IF NOT EXISTS `SS13_galactic_market_resources` (
+  `resource_type` VARCHAR(32) NOT NULL,
+  `resource_category` VARCHAR(32) NOT NULL,
+  `resource_amount` INT(16) unsigned,
+  PRIMARY KEY (`resource_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 -- Dumping structure for table ss13tgdb.SS13_ipintel
 DROP TABLE IF EXISTS `SS13_ipintel`;
 CREATE TABLE IF NOT EXISTS `SS13_ipintel` (
@@ -522,8 +533,6 @@ CREATE TABLE IF NOT EXISTS `SS13_stickyban_matched_ip` (
   `last_matched` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`stickyban`,`matched_ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

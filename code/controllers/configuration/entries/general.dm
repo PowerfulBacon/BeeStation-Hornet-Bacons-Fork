@@ -526,3 +526,9 @@
 
 /datum/config_entry/string/redirect_address
 	config_entry_value = ""
+
+/datum/config_entry/flag/market_enabled
+
+/datum/config_entry/flag/market_never_use_db
+
+/datum/config_entry/flag/market_allow_db_formatting

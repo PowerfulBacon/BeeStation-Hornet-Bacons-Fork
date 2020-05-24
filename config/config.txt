@@ -520,3 +520,15 @@ TOPIC_MAX_SIZE 500
 ## Uncomment to enable redirecting to the specified address. If a user attempts to join after EXTREEME_POPCAP has been reached, redirect them to this address.
 ## The given address is a format example. "byond://" is required to function. Create a potential infinite loop at your own risk.
 #REDIRECT_ADDRESS byond://golden.beestation13.com:7777
+
+##Data for the galactic market
+##Is the galactic market enabled or not?
+MARKET_ENABLED
+
+##Override DB connection and always use files (disables cross server markets)
+#MARKET_NEVER_USE_DB
+
+##Should we create a table in the database if we cannot find the market table?
+##THIS SHOULD BE ALLOWED TO RUN ONE TIME, THEN ONCE THE TABLES ARE CREATED COMMENT THIS OUT
+##(This acts as a failsafe just in case and isn't 100% necessary, but should be done)
+MARKET_ALLOW_DB_FORMATTING

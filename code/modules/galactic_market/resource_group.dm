@@ -1,20 +1,39 @@
 //A set of resources / purchasable goods on the galactic market
 
 /datum/galactic_market/resource_group
+	var/name = ""
 	var/list/resources	//Key = "resource name", value = resource datum
+	var/resource_parent_datum = null
+
+	var/illegal = FALSE
+
+/datum/galactic_market/resource_group/proc/generate_group_contents()
+	if(isnull(resource_parent_datum))
+		log_game("Galactic Market error: Resource group has no parent resource datum")
+		return
+	var/list/resource_datums = subtypesof(resource_parent_datum)
+	resources = list()
+	for(var/resource_datum in resource_datums)
+		var/datum/galactic_market/resource/R = new resource_datum()
+		resources[R.resource_id] = R
 
 /datum/galactic_market/resource
 	var/name = "Resource"
 	var/desc = "A valuable resource found rarely across the galaxy."
+	var/category = ""
 	var/resource_id = "resource"	//Just so there are definately no duplicates
+
+	var/illegal = FALSE
+	var/exists_in_db = FALSE
 
 	//Cost Calculations
 	var/market_fair_price = 10	//The price of the item if supply and demand are perfectly balanced
-	var/market_current_supply = 5000	//The current supply of the item (Starts as a constant but is persistant between rounds)
+	var/base_supply_factor = 5000		//The value that the supply will drift towards over time if no sales happen.
+										//If this is lower than the demand, the price will drift towards being higher and will be more stable for selling but not for buying and vice versa
 	var/market_demand_factor = 5000		//The demand of this item (A constant that about equates to rarity) (The greater this value, the greater it will be affected by mass purchasing)
 
 	//Production Calculations
-	var/base_supply_factor = 5000		//The value that the supply will drift towards over time if no sales happen
+	var/market_current_supply = 5000	//The current supply of the item (Starts as a constant but is persistant between rounds)
 	var/supply_instability = 1			//How quickly the supply returns to it's default value (1 = supply is always base supply) (Higher values return slower and are more affected by mass buying)
 
 	var/calculated_price = INFINITY
@@ -42,5 +61,7 @@
 
 // Calculate the supply value, the greater the difference in current supply and base supply, the greater the current supply will move towards the base supply.
 /datum/galactic_market/resource/proc/recalculate_supply()
+	if(market_current_supply <= 0)
+		market_current_supply = 1
 	var/percentage_difference = (base_supply_factor - market_current_supply) / market_current_supply
-	market_current_supply = percentage_difference * (market_current_supply ** (1 / supply_instability))
+	market_current_supply += percentage_difference * (market_current_supply ** (1 / supply_instability))
