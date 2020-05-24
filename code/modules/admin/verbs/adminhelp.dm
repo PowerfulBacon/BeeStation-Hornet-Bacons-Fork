@@ -8,9 +8,9 @@
 
 // UI holder for admins
 /datum/admin_ui/admin_help_ui
-	a_ui_key = "ticketmanager"
-	a_ui_filename = "TicketManager"
-	a_window_name = "ticket manager"
+	a_ui_key = "ticketbrowser"
+	a_ui_filename = "TicketBrowser"
+	a_window_name = "ticket browser"
 	a_ui_x = 720
 	a_ui_y = 480
 
