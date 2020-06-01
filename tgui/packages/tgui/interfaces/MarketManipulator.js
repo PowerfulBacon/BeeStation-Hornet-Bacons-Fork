@@ -8,6 +8,7 @@ export const MarketManipulator = (props, context) => {
     <Window
       resizable>
       <Window.Content>
+        ss
       </Window.Content>
     </Window>
   );

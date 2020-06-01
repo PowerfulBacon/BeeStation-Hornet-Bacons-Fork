@@ -96,6 +96,14 @@ SUBSYSTEM_DEF(galactic_market)
 	//Check if another server has updated the market recently
 	return
 
+/datum/controller/subsystem/galactic_market/proc/get_resource_from_id(resource_id)
+	for(var/cat in resource_groups)
+		var/datum/galactic_market/resource_group/RG = resource_groups[cat]
+		for(var/res in RG.resources)
+			var/datum/galactic_market/resource/R = RG.resources[res]
+			if(R.resource_id == resource_id)
+				return R
+
 //==============Setup - Get all resource groups==============
 /datum/controller/subsystem/galactic_market/proc/generate_resource_groups()
 	for(var/category_datum in subtypesof(/datum/galactic_market/resource_group))
@@ -172,7 +180,7 @@ SUBSYSTEM_DEF(galactic_market)
 			using_database = FALSE
 			update_market_supply(R)
 			return
-		var/datum/DBQuery/query_write_resource = SSdbcore.NewQuery("UPDATE [format_table_name("galactic_market_resources")] SET resource_amount = [R.market_current_supply] WHERE resource_type = [R.resource_id]")
+		var/datum/DBQuery/query_write_resource = SSdbcore.NewQuery("UPDATE [format_table_name("galactic_market_resources")] SET resource_amount = [R.market_current_supply] WHERE resource_type='[R.resource_id]'")
 		query_write_resource.Execute()
 		qdel(query_write_resource)
 	else
@@ -186,7 +194,15 @@ SUBSYSTEM_DEF(galactic_market)
 //Positive - Round down
 //Negative - Round up (we always scam the crew, never the market)
 /datum/controller/subsystem/galactic_market/proc/estimate_delta_money(datum/galactic_market/resource/R, amount_change)
-	var/exact_value = (R.market_demand_factor * R.market_fair_price * log(amount_change + R.market_current_supply)) - (R.market_demand_factor * R.market_fair_price * log(R.market_current_supply))
+	var/supply = R.market_current_supply
+	if(supply == 0)
+		supply = 0.01
+		return
+	if(amount_change + supply < 0)
+		return -INFINITY	//Idealy this should never be reached if proper checks are in place
+	else if(amount_change + supply == 0)
+		amount_change = -supply + 0.1	//Very high, but calculatable
+	var/exact_value = (R.market_demand_factor * R.market_fair_price * log(amount_change + supply)) - (R.market_demand_factor * R.market_fair_price * log(supply))
 	if(exact_value > 0)
 		return FLOOR(exact_value, 1)
 	return FLOOR(exact_value + 0.9999, 1)
@@ -219,7 +235,7 @@ SUBSYSTEM_DEF(galactic_market)
 	while(query_read_resource.NextRow())
 		var/resource_type = query_read_resource.item[1]
 		var/resource_category = query_read_resource.item[2]
-		var/resource_amount = query_read_resource.item[3]
+		var/resource_amount = text2num(query_read_resource.item[3])
 
 		var/datum/galactic_market/resource_group/resource_category_datum = resource_groups[resource_category]
 		if(!resource_category_datum)

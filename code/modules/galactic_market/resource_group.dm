@@ -4,6 +4,7 @@
 	var/name = ""
 	var/list/resources	//Key = "resource name", value = resource datum
 	var/resource_parent_datum = null
+	var/buy_tax = 1.25	//Buying is more expensive.
 
 	var/illegal = FALSE
 
@@ -15,13 +16,17 @@
 	resources = list()
 	for(var/resource_datum in resource_datums)
 		var/datum/galactic_market/resource/R = new resource_datum()
+		R.category = src
 		resources[R.resource_id] = R
+	log_game("Loaded resource group [name] sucessfully.")
 
 /datum/galactic_market/resource
 	var/name = "Resource"
 	var/desc = "A valuable resource found rarely across the galaxy."
-	var/category = ""
+	var/category = null
 	var/resource_id = "resource"	//Just so there are definately no duplicates
+
+	var/item_datum
 
 	var/illegal = FALSE
 	var/exists_in_db = FALSE
@@ -43,6 +48,7 @@
 	if(supply_instability == 0)
 		log_runtime("Supply instability was set to 0 on the galactic resource [name]. Please change the config value of this.")
 		supply_instability = 1
+	update_resource()
 
 /*
  * Oversupply causes price to reduce
@@ -51,6 +57,13 @@
  * As the price rises, the supply increases due to mining being more worth
  * As the price drops, the supply decreases due to production being less valueable
 */
+
+/datum/galactic_market/resource/proc/get_buy_tax()
+	var/datum/galactic_market/resource_group/cat = category
+	if(cat)
+		return cat.buy_tax
+	else
+		return 1.25
 
 /datum/galactic_market/resource/proc/update_resource()
 	recalculate_supply()
