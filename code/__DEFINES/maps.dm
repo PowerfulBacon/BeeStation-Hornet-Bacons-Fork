@@ -50,12 +50,12 @@ require only minor tweaks.
 
 /// enum - how space transitions should affect this level
 #define ZTRAIT_LINKAGE "Linkage"
-    /// UNAFFECTED if absent - no space transitions
-    #define UNAFFECTED null
-    /// SELFLOOPING - space transitions always self-loop
-    #define SELFLOOPING "Self"
-    /// CROSSLINKED - mixed in with the cross-linked space pool
-    #define CROSSLINKED "Cross"
+/// UNAFFECTED if absent - no space transitions
+#define UNAFFECTED null
+/// SELFLOOPING - space transitions always self-loop
+#define SELFLOOPING "Self"
+/// CROSSLINKED - mixed in with the cross-linked space pool
+#define CROSSLINKED "Cross"
 
 /// string - type path of the z-level's baseturf (defaults to space)
 #define ZTRAIT_BASETURF "Baseturf"
