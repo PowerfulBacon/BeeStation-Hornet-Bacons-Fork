@@ -37,11 +37,7 @@ export const LabeledListItem = props => {
           'LabeledList__cell',
           'LabeledList__label',
         ])}>
-        {label
-          && (typeof label === 'string'
-            && label + ':'
-            || label)
-          || null}
+        {label ? label + ':' : null}
       </Box>
       <Box
         as="td"

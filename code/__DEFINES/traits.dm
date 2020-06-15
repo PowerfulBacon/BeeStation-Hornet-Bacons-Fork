@@ -158,9 +158,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SECURITY_HUD		"sec_hud"
 #define TRAIT_MEDIBOTCOMINGTHROUGH "medbot" //Is a medbot healing you
 #define TRAIT_PASSTABLE			"passtable"
+<<<<<<< HEAD
 #define TRAIT_ONEWAYROAD	"one-way road"
 #define TRAIT_APPRAISAL			"appraisal"
 #define TRAIT_NOBLOCK			"noblock"
+=======
+>>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
 
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it
@@ -260,5 +263,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define LEGION_CORE_TRAIT "legion_core_trait"
 #define MIRROR_TRAIT "mirror_trait"
 #define CRAYON_TRAIT "crayon_trait"
+<<<<<<< HEAD
 #define GUARDIAN_TRAIT	"guardian_trait"
 #define PARRY_TRAIT	"parry_trait"
+=======
+>>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
