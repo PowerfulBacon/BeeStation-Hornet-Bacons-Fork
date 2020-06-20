@@ -36,11 +36,7 @@
 #define ROLE_LAVALAND			"Lavaland"
 #define ROLE_INTERNAL_AFFAIRS	"Internal Affairs Agent"
 #define ROLE_GANG				"Gangster"
-<<<<<<< HEAD
 #define ROLE_HOLOPARASITE		"Holoparasite"
-=======
-#define ROLE_SPECIAL			"Special Antagonists"
->>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
 
 //Missing assignment means it's not a gamemode specific role, IT'S NOT A BUG OR ERROR.
 //The gamemode specific ones are just so the gamemodes can query whether a player is old enough
@@ -68,11 +64,7 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_INTERNAL_AFFAIRS = /datum/game_mode/traitor/internal_affairs,
 	ROLE_SENTIENCE,
 	ROLE_GANG = /datum/game_mode/gang,
-<<<<<<< HEAD
 	ROLE_HOLOPARASITE
-=======
-	ROLE_SPECIAL
->>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
 ))
 
 //Job defines for what happens when you fail to qualify for any job during job selection

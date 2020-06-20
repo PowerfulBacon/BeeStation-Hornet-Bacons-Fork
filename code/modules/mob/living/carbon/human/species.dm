@@ -1209,17 +1209,17 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/movement_delay(mob/living/carbon/human/H)
 	. = 0	//We start at 0.
 	var/gravity = 0
-	gravity = H.has_gravity()	
+	gravity = H.has_gravity()
 
-	if(!HAS_TRAIT(H, TRAIT_IGNORESLOWDOWN) && gravity)	
-		if(H.wear_suit)	
-			. += H.wear_suit.slowdown	
-		if(H.shoes)	
-			. += H.shoes.slowdown	
-		if(H.back)	
-			. += H.back.slowdown	
-		for(var/obj/item/I in H.held_items)	
-			if(I.item_flags & SLOWS_WHILE_IN_HAND)	
+	if(!HAS_TRAIT(H, TRAIT_IGNORESLOWDOWN) && gravity)
+		if(H.wear_suit)
+			. += H.wear_suit.slowdown
+		if(H.shoes)
+			. += H.shoes.slowdown
+		if(H.back)
+			. += H.back.slowdown
+		for(var/obj/item/I in H.held_items)
+			if(I.item_flags & SLOWS_WHILE_IN_HAND)
 				. += I.slowdown
 
 		if(gravity > STANDARD_GRAVITY)
@@ -1321,7 +1321,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		var/damage = user.dna.species.punchdamage
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
-	
+
 		if(!damage || !affecting)//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, 1, -1)
 			target.visible_message("<span class='danger'>[user]'s [atk_verb] misses [target]!</span>",\
@@ -1354,15 +1354,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return
 
-<<<<<<< HEAD
-/datum/species/proc/disarm(mob/living/carbon/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
-		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to shove [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(15, BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
-		return FALSE
-=======
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
->>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s shoving attempt!</span>", \
 							"<span class='userdanger'>You block [user]'s shoving attempt!</span>")
