@@ -1860,6 +1860,7 @@
 #include "code\modules\guardian\abilities\minor\snares.dm"
 #include "code\modules\guardian\abilities\minor\teleport.dm"
 #include "code\modules\guardian\abilities\special\absolution.dm"
+#include "code\modules\guardian\abilities\special\pocket.dm"
 #include "code\modules\guardian\abilities\special\time.dm"
 =======
 >>>>>>> parent of b4bab664dd... Build-a-Stand Mk1: JoJo Harder (#1711)
