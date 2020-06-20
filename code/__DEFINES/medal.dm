@@ -12,7 +12,6 @@
 #define BOSS_MEDAL_LEGION	  "Legion"
 #define BOSS_MEDAL_TENDRIL	  "Tendril"
 #define BOSS_MEDAL_SWARMERS   "Swarmer Beacon"
-#define BOSS_MEDAL_STAR		  "Forgotten Star"
 
 // Score names
 #define HIEROPHANT_SCORE 	 "Hierophants Killed"
@@ -22,7 +21,6 @@
 #define DRAKE_SCORE 	     "Drakes Killed"
 #define LEGION_SCORE 	     "Legion Killed"
 #define SWARMER_BEACON_SCORE "Swarmer Beacons Killed"
-#define STAR_SCORE			 "Forgotten Stars Killed"
 #define TENDRIL_CLEAR_SCORE	 "Tendrils Killed"
 
 //Misc medals

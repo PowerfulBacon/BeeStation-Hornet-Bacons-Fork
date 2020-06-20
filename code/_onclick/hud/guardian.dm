@@ -32,7 +32,6 @@
 	using.hud = src
 	static_inventory += using
 
-/*
 /datum/hud/dextrous/guardian/New(mob/living/simple_animal/hostile/guardian/owner) //for a dextrous guardian
 	..()
 	var/obj/screen/using
@@ -99,7 +98,6 @@
 				D.internal_storage.screen_loc = null
 
 	..()
-*/
 
 /obj/screen/guardian
 	icon = 'icons/mob/guardian.dmi'
