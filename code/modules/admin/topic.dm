@@ -717,6 +717,12 @@
 		var/target_key = href_list["addnote"]
 		create_message("note", target_key)
 
+	else if(href_list["addwarn"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/target_key = href_list["addwarn"]
+		create_message("warning", target_key)
+
 	else if(href_list["addwatch"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -737,6 +743,11 @@
 		if(!check_rights(R_ADMIN))
 			return
 		create_message("note")
+
+	else if(href_list["addwarnempty"])
+		if(!check_rights(R_ADMIN))
+			return
+		create_message("warning")
 
 	else if(href_list["addwatchempty"])
 		if(!check_rights(R_ADMIN))

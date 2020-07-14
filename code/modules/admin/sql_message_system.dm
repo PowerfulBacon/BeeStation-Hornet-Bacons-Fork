@@ -5,7 +5,7 @@
 	if(!type)
 		return
 	var/target_ckey = ckey(target_key)
-	if(!target_key && (type == "note" || type == "message" || type == "watchlist entry"))
+	if(!target_key && (type == "note" || type == "message" || type == "watchlist entry" || type == "warning"))
 		var/new_key = input(usr,"Who would you like to create a [type] for?","Enter a key or ckey",null) as null|text
 		if(!new_key)
 			return
@@ -94,12 +94,14 @@
 		"expiry" = expiry,
 		"note_severity" = note_severity,
 	))
-	var/pm = "[key_name(usr)] has created a [type][(type == "note" || type == "message" || type == "watchlist entry") ? " for [target_key]" : ""]: [text]"
-	var/header = "[key_name_admin(usr)] has created a [type][(type == "note" || type == "message" || type == "watchlist entry") ? " for [target_key]" : ""]"
+	var/pm = "[key_name(usr)] has created a [type][(type == "note" || type == "message" || type == "watchlist entry" || type == "warning") ? " for [target_key]" : ""]: [text]"
+	var/header = "[key_name_admin(usr)] has created a [type][(type == "note" || type == "message" || type == "watchlist entry" || type == "warning") ? " for [target_key]" : ""]"
 	if(!query_create_message.warn_execute())
 		qdel(query_create_message)
 		return
 	qdel(query_create_message)
+	if(type == "warning")
+		update_warning(target_ckey, TRUE, TRUE)
 	if(logged)
 		log_admin_private(pm)
 		message_admins("[header]:<br>[text]")
@@ -109,6 +111,33 @@
 			browse_messages("[type]")
 		else
 			browse_messages(target_ckey = target_ckey, agegate = TRUE)
+
+/proc/update_warning(ckey, send_message = FALSE, apply_ban = FALSE, warn_message="")
+	var/datum/DBQuery/query_get_warnings = SSdbcore.NewQuery("
+		SELECT adminckey FROM [format_table_name("messages")] WHERE type = :type AND target_ckey = :target_ckey AND expiry < Now()",
+		list(
+		"type" = "warning",
+		"target_ckey" = target_ckey
+	))
+	if(!query_get_warnings.Execute())
+		qdel(query_get_warnings)
+		return
+	var/warnings = query_get_warnings.rows.len
+	if(send_message && get_mob_by_ckey(ckey))
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'><font size='9'>You have been issued a warning! (Total of [warnings])</font></span>")
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'>You have been issued a warning for:</span>")
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminnotice'>[warn_message]</span>")
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'>Upon reaching a total of 3 warnings you may be temporarilly banned from the server.</span>")
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'>If you believe this warning was issued incorrectly you can issue an appeal at [CONFIG_GET(string/forumurl)].</span>")
+	if(warnings > 2)
+		var/mob/target = get_mob_by_ckey(ckey)
+		if(!(target?.client))
+			message_admins("Failed to remove [ckey], no client/mob associated with that Ckey located. Please check if they are still in the server and contact coders.")
+			return
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'>You have been temporarilly banned from this server!</span>")
+		to_chat(get_mob_by_ckey(ckey), "<span class='adminhelp'>Reason: (Automatic Ban) Issued too many warnings.</span>")
+		qdel(target.client)
+		return
 
 /proc/delete_message(message_id, logged = 1, browse)
 	if(!SSdbcore.Connect())
@@ -551,6 +580,7 @@
 		output += "<h2><center>[target_key]</center></h2><center>"
 		if(!linkless)
 			output += "<a href='?_src_=holder;[HrefToken()];addnote=[target_key]'>Add note</a>"
+			output += "<a href='?_src_=holder;[HrefToken()];addwarn=[target_key]'>Add warning</a>"
 			output += " <a href='?_src_=holder;[HrefToken()];addmessage=[target_key]'>Add message</a>"
 			output += " <a href='?_src_=holder;[HrefToken()];addwatch=[target_key]'>Add to watchlist</a>"
 			output += " <a href='?_src_=holder;[HrefToken()];showmessageckey=[target_ckey]'>Refresh page</a></center>"
@@ -576,7 +606,7 @@
 					output += "<center><a href='?_src_=holder;[HrefToken()];showmessageckey=[target_ckey]'>Hide Old</a></center>"
 	if(index)
 		var/search
-		output += "<center><a href='?_src_=holder;[HrefToken()];addmessageempty=1'>Add message</a><a href='?_src_=holder;[HrefToken()];addwatchempty=1'>Add watchlist entry</a><a href='?_src_=holder;[HrefToken()];addnoteempty=1'>Add note</a></center>"
+		output += "<center><a href='?_src_=holder;[HrefToken()];addmessageempty=1'>Add message</a><a href='?_src_=holder;[HrefToken()];addwatchempty=1'>Add watchlist entry</a><a href='?_src_=holder;[HrefToken()];addnoteempty=1'>Add note</a><a href='?_src_=holder;[HrefToken()];addwarnempty=1'>Add warning</a></center>"
 		output += ruler
 		switch(index)
 			if(1)
@@ -609,7 +639,7 @@
 			output += "<a href='?_src_=holder;[HrefToken()];showmessageckey=[index_ckey]'>[index_key]</a><br>"
 		qdel(query_list_messages)
 	else if(!type && !target_ckey && !index)
-		output += "<center><a href='?_src_=holder;[HrefToken()];addmessageempty=1'>Add message</a><a href='?_src_=holder;[HrefToken()];addwatchempty=1'>Add watchlist entry</a><a href='?_src_=holder;[HrefToken()];addnoteempty=1'>Add note</a></center>"
+		output += "<center><a href='?_src_=holder;[HrefToken()];addmessageempty=1'>Add message</a><a href='?_src_=holder;[HrefToken()];addwatchempty=1'>Add watchlist entry</a><a href='?_src_=holder;[HrefToken()];addnoteempty=1'>Add note</a><a href='?_src_=holder;[HrefToken()];addwarnempty=1'>Add warning</a></center>"
 		output += ruler
 	var/datum/browser/browser = new(usr, "Note panel", "Manage player notes", 1000, 500)
 	var/datum/asset/notes_assets = get_asset_datum(/datum/asset/simple/notes)
