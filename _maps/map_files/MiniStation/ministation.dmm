@@ -1,0 +1,3196 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ac" = (
+/obj/machinery/door_timer{
+	id = "Cell 3";
+	name = "Cell 3";
+	pixel_y = -32
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"aQ" = (
+/obj/machinery/computer/security/hos,
+/turf/open/floor/carpet/red,
+/area/space)
+"bi" = (
+/obj/machinery/atmospherics/miner/nitrogen,
+/turf/open/floor/engine/n2,
+/area/space)
+"bu" = (
+/turf/open/space/basic,
+/area/space)
+"bR" = (
+/obj/structure/closet/secure_closet/brig{
+	id = "Cell 2";
+	name = "Cell 2 Locker"
+	},
+/obj/machinery/flasher{
+	id = "Cell 2";
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"cn" = (
+/obj/machinery/atmospherics/components/binary/volume_pump/on{
+	dir = 4;
+	icon_state = "volpump_on_map-1";
+	name = "Cold loop to Gas"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"dJ" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/closed/wall/r_wall,
+/area/space)
+"dL" = (
+/obj/structure/tank_dispenser/oxygen,
+/turf/open/floor/plasteel,
+/area/space)
+"dR" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"ee" = (
+/obj/machinery/door/window/brigdoor/security/cell{
+	id = "Cell 2";
+	name = "Cell 2"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"en" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 9
+	},
+/turf/open/floor/engine,
+/area/space)
+"eE" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/components/trinary/filter/critical{
+	dir = 4;
+	filter_type = "n2"
+	},
+/turf/open/floor/engine,
+/area/space)
+"fa" = (
+/obj/structure/window/plasma/reinforced{
+	dir = 1
+	},
+/obj/machinery/power/rad_collector/anchored,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 9
+	},
+/turf/open/floor/engine,
+/area/space)
+"fz" = (
+/obj/structure/closet/secure_closet/security/sec,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"fE" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/turf/open/floor/plasteel,
+/area/space)
+"ge" = (
+/obj/machinery/disposal/bin,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"gk" = (
+/obj/machinery/vending/cola/random,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"gt" = (
+/obj/machinery/button/door{
+	id = "permacell1";
+	name = "Cell 1 Lockdown";
+	pixel_x = -26;
+	pixel_y = 6;
+	req_access_txt = "2"
+	},
+/obj/machinery/disposal/bin,
+/turf/open/floor/plasteel,
+/area/space)
+"gL" = (
+/obj/machinery/door_timer{
+	id = "Cell 1";
+	name = "Cell 1";
+	pixel_y = -32
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"gP" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/toilet{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"ha" = (
+/obj/machinery/atmospherics/pipe/heat_exchanging/junction{
+	dir = 8
+	},
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/plasteel,
+/area/space)
+"hs" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/machinery/disposal/bin,
+/turf/open/floor/plasteel,
+/area/space)
+"ht" = (
+/turf/open/floor/engine,
+/area/space)
+"hB" = (
+/obj/machinery/atmospherics/pipe/manifold/green/visible{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"hH" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/components/unary/outlet_injector/atmos/engine_waste{
+	dir = 8
+	},
+/turf/open/space/basic,
+/area/space)
+"hK" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/machinery/computer/cryopod{
+	pixel_x = 32
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"hT" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"hU" = (
+/obj/structure/reflector/single/anchored{
+	dir = 9
+	},
+/turf/open/floor/plating,
+/area/space)
+"ip" = (
+/obj/machinery/atmospherics/components/binary/volume_pump{
+	dir = 8;
+	name = "Gas to Filter"
+	},
+/turf/open/floor/engine,
+/area/space)
+"ir" = (
+/obj/machinery/holopad,
+/turf/open/floor/plasteel,
+/area/space)
+"iz" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/engine,
+/area/space)
+"iM" = (
+/obj/structure/closet/secure_closet/brig{
+	id = "Cell 1";
+	name = "Cell 1 Locker"
+	},
+/obj/machinery/flasher{
+	id = "Cell 1";
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"iS" = (
+/turf/open/floor/plasteel,
+/area/space)
+"iY" = (
+/obj/machinery/door/airlock/security{
+	name = "Armory";
+	req_access_txt = "3"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"jE" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/carpet/red,
+/area/space)
+"jH" = (
+/obj/structure/closet/secure_closet/brig_phys,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/regular,
+/turf/open/floor/plasteel/white,
+/area/space)
+"kj" = (
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"kl" = (
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"kv" = (
+/obj/structure/rack,
+/obj/item/gun/energy/e_gun{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/gun/energy/e_gun{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/gun/energy/e_gun{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/gun/energy/e_gun{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/gun/ballistic/shotgun,
+/obj/item/gun/ballistic/shotgun,
+/obj/item/gun/ballistic/shotgun,
+/obj/item/radio/intercom{
+	dir = 4;
+	pixel_x = 27
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"kz" = (
+/obj/machinery/door/airlock/command{
+	name = "Head of Security's Office";
+	req_access_txt = "58"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"kB" = (
+/obj/machinery/computer/prisoner/management,
+/turf/open/floor/carpet/red,
+/area/space)
+"kM" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plating,
+/area/space)
+"kN" = (
+/obj/machinery/light,
+/obj/structure/table,
+/obj/machinery/recharger{
+	pixel_y = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"li" = (
+/obj/structure/closet/crate,
+/obj/item/stack/sheet/mineral/plasma{
+	amount = 30
+	},
+/obj/item/stock_parts/cell/high{
+	charge = 100;
+	maxcharge = 15000
+	},
+/obj/item/electronics/airlock,
+/obj/item/electronics/airlock,
+/obj/item/stack/rods/fifty,
+/obj/item/stack/sheet/glass/fifty,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/gps,
+/turf/open/floor/plating,
+/area/space)
+"lu" = (
+/obj/structure/closet/secure_closet/hos,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"lv" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/open/floor/engine,
+/area/space)
+"ly" = (
+/obj/structure/closet/secure_closet/brig{
+	id = "Cell 3";
+	name = "Cell 3 Locker"
+	},
+/obj/machinery/flasher{
+	id = "Cell 3";
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"lL" = (
+/obj/machinery/power/emitter/anchored{
+	dir = 1;
+	state = 2
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating,
+/area/space)
+"lT" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/preopen{
+	id = "permacell1";
+	name = "Cell Shutters"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"mu" = (
+/obj/machinery/light/small,
+/obj/machinery/hydroponics/constructable,
+/obj/item/seeds/carrot,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"mM" = (
+/obj/machinery/portable_atmospherics/canister/toxins,
+/turf/open/floor/plating,
+/area/space)
+"mN" = (
+/obj/machinery/door/window/brigdoor/security/cell{
+	id = "Cell 1";
+	name = "Cell 1"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"nc" = (
+/obj/structure/table,
+/obj/machinery/recharger{
+	pixel_y = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"nm" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"nQ" = (
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"oq" = (
+/obj/machinery/suit_storage_unit/ce,
+/turf/open/floor/carpet/orange,
+/area/space)
+"os" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"oR" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 9
+	},
+/turf/open/space/basic,
+/area/space)
+"pz" = (
+/obj/machinery/vending/tool,
+/turf/open/floor/plasteel,
+/area/space)
+"pM" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
+	dir = 8
+	},
+/turf/open/floor/engine,
+/area/space)
+"pP" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/cyan/visible,
+/turf/open/floor/engine,
+/area/space)
+"qb" = (
+/obj/effect/landmark/blobstart,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"qk" = (
+/obj/machinery/power/emitter,
+/obj/effect/landmark/blobstart,
+/turf/open/floor/plating,
+/area/space)
+"qm" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Supermatter Engine";
+	req_access_txt = "10"
+	},
+/turf/open/floor/engine,
+/area/space)
+"qs" = (
+/obj/structure/table/optable,
+/turf/open/floor/plasteel/white,
+/area/space)
+"qz" = (
+/obj/structure/rack,
+/obj/item/gun/energy/disabler,
+/obj/item/gun/energy/disabler,
+/obj/item/gun/energy/disabler,
+/obj/item/gun/energy/disabler,
+/obj/item/grenade/barrier{
+	pixel_x = -3;
+	pixel_y = 1
+	},
+/obj/item/grenade/barrier{
+	pixel_x = -3;
+	pixel_y = 1
+	},
+/obj/item/grenade/barrier{
+	pixel_x = -3;
+	pixel_y = 1
+	},
+/obj/item/grenade/barrier{
+	pixel_x = -3;
+	pixel_y = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"rP" = (
+/obj/structure/closet/secure_closet/engineering_chief,
+/turf/open/floor/carpet/orange,
+/area/space)
+"sB" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"sS" = (
+/obj/machinery/biogenerator,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"sZ" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"tx" = (
+/obj/machinery/door/airlock/command{
+	name = "Chief Engineer's Office";
+	req_access_txt = "56"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"uf" = (
+/obj/machinery/door/airlock/engineering/glass/critical{
+	heat_proof = 1;
+	name = "Supermatter Chamber";
+	req_access_txt = "10"
+	},
+/turf/open/floor/engine,
+/area/space)
+"uI" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 6
+	},
+/turf/open/space/basic,
+/area/space)
+"uM" = (
+/obj/machinery/mech_bay_recharge_port,
+/turf/open/floor/plasteel,
+/area/space)
+"uP" = (
+/obj/structure/table/wood,
+/obj/machinery/recharger,
+/obj/item/phone{
+	desc = "Supposedly a direct line to Nanotrasen Central Command. It's not even plugged in.";
+	pixel_y = 11
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"vJ" = (
+/obj/machinery/holopad,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"vO" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Laser Room";
+	req_access_txt = "10"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"wj" = (
+/obj/machinery/atmospherics/components/binary/volume_pump{
+	dir = 4;
+	name = "Gas to Chamber"
+	},
+/turf/open/floor/engine,
+/area/space)
+"wp" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/space)
+"wq" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"wD" = (
+/obj/structure/closet/secure_closet{
+	name = "contraband locker";
+	req_access_txt = "3"
+	},
+/obj/effect/spawner/lootdrop/armory_contraband/metastation,
+/obj/effect/spawner/lootdrop/armory_contraband/metastation,
+/obj/effect/spawner/lootdrop/maintenance/three,
+/obj/effect/spawner/lootdrop/armory_contraband/metastation,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/clothing/suit/armor/laserproof,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"wE" = (
+/obj/machinery/atmospherics/components/binary/volume_pump{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"wF" = (
+/obj/machinery/suit_storage_unit/hos,
+/turf/open/floor/carpet/red,
+/area/space)
+"wH" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/engine,
+/area/space)
+"wI" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"xt" = (
+/obj/structure/bed,
+/obj/item/bedsheet,
+/turf/open/floor/plasteel,
+/area/space)
+"xv" = (
+/obj/structure/table/reinforced,
+/obj/item/gun/energy/ionrifle/carbine,
+/obj/item/gun/energy/ionrifle/carbine,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/storage/box/teargas{
+	pixel_x = 1;
+	pixel_y = -2
+	},
+/obj/item/storage/box/flashes{
+	pixel_x = 3
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"xG" = (
+/turf/open/floor/plasteel/dark,
+/area/space)
+"yg" = (
+/obj/structure/closet/secure_closet/lethalshots,
+/obj/machinery/light,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"yq" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/space)
+"yv" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/plasteel,
+/area/space)
+"yB" = (
+/obj/machinery/computer/mecha,
+/turf/open/floor/plasteel,
+/area/space)
+"zb" = (
+/turf/closed/wall/r_wall,
+/area/space)
+"AT" = (
+/obj/machinery/computer/card/minor/ce,
+/turf/open/floor/plasteel,
+/area/space)
+"Bh" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 5
+	},
+/turf/open/space/basic,
+/area/space)
+"BC" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on,
+/turf/open/floor/engine,
+/area/space)
+"Cc" = (
+/obj/machinery/door_timer{
+	id = "Cell 2";
+	name = "Cell 2";
+	pixel_y = -32
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Cj" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/open/floor/engine,
+/area/space)
+"CH" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/iv_drip,
+/turf/open/floor/plasteel/white,
+/area/space)
+"CR" = (
+/obj/machinery/vending/wardrobe/engi_wardrobe,
+/turf/open/floor/plasteel,
+/area/space)
+"Db" = (
+/obj/machinery/atmospherics/miner/n2o,
+/turf/open/space/basic,
+/area/space)
+"Dc" = (
+/obj/machinery/power/emitter/anchored{
+	dir = 4;
+	state = 2
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/space)
+"Dd" = (
+/turf/open/floor/carpet/orange,
+/area/space)
+"DI" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"DJ" = (
+/obj/item/reagent_containers/glass/bottle/morphine{
+	pixel_y = 6
+	},
+/obj/item/storage/backpack/duffelbag/sec/surgery{
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/spray/cleaner,
+/turf/open/floor/plasteel/white,
+/area/space)
+"DL" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/preopen{
+	id = "permacell1";
+	name = "Cell Shutters"
+	},
+/turf/open/floor/plating,
+/area/space)
+"DQ" = (
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Ec" = (
+/obj/machinery/power/supermatter_crystal/engine,
+/turf/open/floor/engine,
+/area/space)
+"Ef" = (
+/obj/machinery/door/poddoor{
+	id = "Secure Storage";
+	name = "Secure Storage"
+	},
+/turf/open/floor/plating,
+/area/space)
+"ED" = (
+/obj/machinery/computer/arcade,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"EH" = (
+/obj/machinery/door/airlock/security/glass{
+	name = "Long-Term Cell 1";
+	req_access_txt = "2"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"EK" = (
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"EL" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 9
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"FM" = (
+/obj/structure/window/plasma/reinforced,
+/obj/machinery/power/rad_collector/anchored,
+/obj/structure/cable/yellow,
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 10
+	},
+/turf/open/floor/engine,
+/area/space)
+"FU" = (
+/obj/structure/reflector/box/anchored{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"GJ" = (
+/obj/machinery/atmospherics/miner/toxins,
+/turf/open/space/basic,
+/area/space)
+"GM" = (
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space)
+"GU" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 10
+	},
+/turf/open/space/basic,
+/area/space)
+"GV" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/machinery/holopad,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Hu" = (
+/obj/machinery/door/poddoor/shutters{
+	id = "armory";
+	name = "armory shutters"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"HK" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/turf/open/floor/engine,
+/area/space)
+"HL" = (
+/obj/machinery/door/window/brigdoor/security/cell{
+	id = "Cell 3";
+	name = "Cell 3"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Ig" = (
+/obj/machinery/door/airlock/public/glass{
+	id_tag = "permabolt1";
+	name = "Cell 1"
+	},
+/obj/machinery/door/poddoor/preopen{
+	id = "permacell1";
+	name = "Cell Shutters"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Ip" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"It" = (
+/obj/structure/chair/office/light{
+	dir = 8;
+	pixel_y = 3
+	},
+/turf/open/floor/carpet/orange,
+/area/space)
+"Iw" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/components/trinary/filter/critical{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"Jg" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Jm" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/firedoor/window,
+/turf/open/floor/plating,
+/area/space)
+"Jp" = (
+/obj/machinery/atmospherics/components/unary/thermomachine/freezer,
+/turf/open/floor/plasteel,
+/area/space)
+"Jq" = (
+/obj/machinery/vending/sustenance{
+	desc = "A vending machine normally reserved for work camps.";
+	name = "\improper sustenance vendor";
+	product_slogans = "Enjoy your meal.;Enough calories to support any worker."
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Ju" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 8
+	},
+/turf/open/space/basic,
+/area/space)
+"Jv" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible,
+/turf/open/floor/plasteel,
+/area/space)
+"Jy" = (
+/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"JH" = (
+/obj/structure/table/reinforced,
+/obj/item/cartridge/engineering{
+	pixel_x = -3;
+	pixel_y = 2
+	},
+/obj/item/cartridge/engineering{
+	pixel_x = 3
+	},
+/obj/item/cartridge/engineering{
+	pixel_x = 4;
+	pixel_y = 5
+	},
+/obj/item/cartridge/atmos,
+/turf/open/floor/plasteel,
+/area/space)
+"JT" = (
+/mob/living/simple_animal/bot/secbot{
+	arrest_type = 1;
+	health = 45;
+	icon_state = "secbot1";
+	idcheck = 1;
+	name = "Sergeant-at-Armsky";
+	weaponscheck = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"JY" = (
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "outerbrig";
+	name = "Brig";
+	req_access_txt = "63"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Ke" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/plating,
+/area/space)
+"Kh" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"KA" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 9
+	},
+/turf/open/floor/engine,
+/area/space)
+"KQ" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/space)
+"Lf" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/open/floor/plasteel,
+/area/space)
+"LM" = (
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/plasteel,
+/area/space)
+"LT" = (
+/obj/structure/reflector/box/anchored{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/space)
+"MI" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/holopad,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"MK" = (
+/turf/open/floor/engine/n2,
+/area/space)
+"MS" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 4
+	},
+/turf/open/space/basic,
+/area/space)
+"Ne" = (
+/obj/machinery/hydroponics/constructable,
+/obj/item/seeds/ambrosia,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Nv" = (
+/obj/structure/window/plasma/reinforced{
+	dir = 1
+	},
+/obj/machinery/power/rad_collector/anchored,
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/general/visible,
+/turf/open/floor/engine,
+/area/space)
+"NG" = (
+/turf/open/floor/engine/o2,
+/area/space)
+"Oe" = (
+/obj/machinery/seed_extractor,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Ot" = (
+/obj/machinery/vending/wardrobe/sec_wardrobe,
+/turf/open/floor/plasteel,
+/area/space)
+"ON" = (
+/obj/structure/rack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood/AMinus,
+/obj/item/reagent_containers/blood/APlus,
+/obj/item/reagent_containers/blood/BMinus,
+/obj/item/reagent_containers/blood/BPlus,
+/obj/item/reagent_containers/blood/OMinus,
+/obj/item/reagent_containers/blood/OPlus,
+/turf/open/floor/plasteel/white,
+/area/space)
+"OT" = (
+/turf/open/floor/engine/air,
+/area/space)
+"Pi" = (
+/obj/structure/filingcabinet/chestdrawer,
+/mob/living/simple_animal/parrot/Poly,
+/turf/open/floor/carpet/orange,
+/area/space)
+"Pt" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plasteel,
+/area/space)
+"Pw" = (
+/obj/machinery/camera/motion{
+	c_tag = "Armory - Internal";
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Py" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/engine,
+/area/space)
+"PM" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 6
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Qm" = (
+/obj/machinery/field/generator,
+/turf/open/floor/plating,
+/area/space)
+"Qq" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/turf/open/floor/engine,
+/area/space)
+"QH" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"QK" = (
+/obj/machinery/power/emitter,
+/turf/open/floor/plating,
+/area/space)
+"QM" = (
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 8
+	},
+/turf/open/floor/plasteel/white,
+/area/space)
+"Rb" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/engine,
+/area/space)
+"Rd" = (
+/obj/machinery/vending/snack/random,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Rj" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 5
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Rm" = (
+/obj/machinery/atmospherics/pipe/simple/orange/visible{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/space)
+"Rn" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/secure/briefcase,
+/obj/item/clothing/mask/cigarette/cigar,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Rp" = (
+/turf/open/floor/plasteel/white,
+/area/space)
+"RA" = (
+/obj/machinery/suit_storage_unit/security,
+/turf/open/floor/plasteel,
+/area/space)
+"RG" = (
+/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
+	dir = 1
+	},
+/turf/open/floor/engine,
+/area/space)
+"Sc" = (
+/obj/machinery/atmospherics/components/binary/volume_pump/on{
+	dir = 8;
+	icon_state = "volpump_on_map-1";
+	name = "Cold to Atmos"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Sf" = (
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Laser Room";
+	req_access_txt = "10"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Sq" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = -32
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"SG" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"SI" = (
+/obj/structure/window/plasma/reinforced,
+/obj/machinery/power/rad_collector/anchored,
+/obj/structure/cable/yellow,
+/obj/machinery/atmospherics/pipe/manifold/general/visible{
+	dir = 1
+	},
+/turf/open/floor/engine,
+/area/space)
+"SQ" = (
+/obj/structure/closet/secure_closet/security/sec,
+/turf/open/floor/plasteel,
+/area/space)
+"SR" = (
+/obj/machinery/computer/secure_data,
+/turf/open/floor/carpet/red,
+/area/space)
+"Tf" = (
+/obj/structure/rack,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/head/helmet/alt,
+/obj/item/clothing/head/helmet/alt,
+/obj/item/clothing/head/helmet/alt,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Tv" = (
+/obj/machinery/light/small,
+/obj/machinery/hydroponics/constructable,
+/obj/item/plant_analyzer,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"TV" = (
+/obj/machinery/holopad,
+/turf/open/floor/carpet/orange,
+/area/space)
+"TZ" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible,
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Uc" = (
+/obj/machinery/button/door{
+	desc = "A remote control-switch for secure storage.";
+	id = "Secure Storage";
+	name = "Engineering Secure Storage";
+	pixel_x = -24;
+	pixel_y = 5;
+	req_access_txt = "11"
+	},
+/turf/open/floor/carpet/orange,
+/area/space)
+"Ug" = (
+/turf/closed/wall,
+/area/space)
+"Uv" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/suit_storage_unit/security,
+/turf/open/floor/plasteel,
+/area/space)
+"UI" = (
+/obj/machinery/hydroponics/constructable,
+/obj/item/seeds/glowshroom,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"UP" = (
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"UU" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 4
+	},
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office"
+	},
+/turf/open/floor/engine,
+/area/space)
+"Ve" = (
+/obj/machinery/atmospherics/miner/oxygen,
+/turf/open/floor/engine/o2,
+/area/space)
+"Vf" = (
+/obj/structure/closet/secure_closet/lethalshots,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/breacherslug,
+/obj/item/storage/box/rubbershot,
+/obj/item/storage/box/rubbershot,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Vg" = (
+/obj/effect/spawner/structure/window/plasma/reinforced,
+/turf/open/floor/engine,
+/area/space)
+"Vi" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/open/floor/engine,
+/area/space)
+"Vn" = (
+/obj/machinery/button/door{
+	id = "armory";
+	name = "Armory Shutters";
+	pixel_x = 28;
+	req_access_txt = "3"
+	},
+/obj/structure/rack,
+/obj/item/gun/ballistic/automatic/c20r/unrestricted,
+/obj/item/gun/ballistic/automatic/c20r/unrestricted,
+/obj/item/gun/ballistic/automatic/c20r/unrestricted,
+/obj/item/gun/ballistic/automatic/c20r/unrestricted,
+/obj/item/gun/ballistic/automatic/pistol/m1911,
+/obj/item/gun/ballistic/automatic/pistol/m1911,
+/obj/item/gun/ballistic/automatic/pistol/m1911,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Vp" = (
+/obj/machinery/atmospherics/pipe/manifold/orange/visible{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"Vr" = (
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
+	dir = 5
+	},
+/turf/open/floor/engine,
+/area/space)
+"VE" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/turf/open/floor/engine,
+/area/space)
+"VO" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"VQ" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 1
+	},
+/turf/open/floor/engine,
+/area/space)
+"VT" = (
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/obj/machinery/holopad,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"VX" = (
+/obj/machinery/atmospherics/pipe/simple/green/visible{
+	dir = 4
+	},
+/turf/open/floor/engine,
+/area/space)
+"WZ" = (
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 4
+	},
+/obj/structure/table/wood,
+/obj/item/storage/secure/briefcase{
+	pixel_x = -2
+	},
+/obj/item/book/manual/wiki/security_space_law,
+/obj/item/cartridge/detective,
+/turf/open/floor/carpet/red,
+/area/space)
+"Xq" = (
+/obj/structure/bed,
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office";
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Xz" = (
+/obj/machinery/power/smes/engineering,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"XB" = (
+/obj/machinery/door/airlock/security/glass{
+	name = "Security Office";
+	req_one_access_txt = "1;4"
+	},
+/turf/open/floor/plasteel,
+/area/space)
+"XM" = (
+/obj/structure/table/reinforced,
+/obj/item/ammo_box/magazine/pistolm9mm,
+/obj/item/ammo_box/magazine/pistolm9mm,
+/obj/item/ammo_box/magazine/pistolm9mm,
+/obj/item/ammo_box/magazine/pistolm9mm,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/gun/grenadelauncher,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"XU" = (
+/obj/machinery/camera{
+	c_tag = "Chief Engineer's Office"
+	},
+/turf/open/floor/engine,
+/area/space)
+"Yf" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/engine,
+/area/space)
+"Yl" = (
+/obj/machinery/holopad,
+/turf/open/floor/plasteel/dark,
+/area/space)
+"Yp" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/mecha/combat/gygax,
+/turf/open/floor/mech_bay_recharge_floor,
+/area/space)
+"Ys" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating,
+/area/space)
+"YF" = (
+/turf/open/floor/plating,
+/area/space)
+"YN" = (
+/obj/machinery/atmospherics/miner/carbon_dioxide,
+/turf/open/space/basic,
+/area/space)
+"YX" = (
+/obj/machinery/disposal/bin,
+/turf/open/floor/carpet/orange,
+/area/space)
+"ZI" = (
+/obj/machinery/vending/security,
+/turf/open/floor/plasteel,
+/area/space)
+
+(1,1,1) = {"
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+Jm
+zb
+Jm
+zb
+Ug
+Jm
+Jm
+Jm
+Ug
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(2,1,1) = {"
+KQ
+RA
+Sq
+iS
+SQ
+Ug
+Xq
+gP
+lT
+Jq
+xG
+Tv
+zb
+iS
+iS
+iS
+iS
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(3,1,1) = {"
+zb
+dL
+iS
+iS
+kN
+Ug
+xG
+xG
+Ig
+xG
+qb
+UI
+zb
+iS
+iS
+iS
+iS
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(4,1,1) = {"
+KQ
+Uv
+iS
+iS
+nc
+Ug
+EH
+Ug
+Ug
+Oe
+Yl
+sS
+zb
+iS
+iS
+iS
+iS
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(5,1,1) = {"
+zb
+fz
+iS
+iS
+ZI
+KQ
+iS
+gt
+DL
+ED
+xG
+Ne
+zb
+iS
+iS
+iS
+iS
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(6,1,1) = {"
+KQ
+SQ
+iS
+iS
+iS
+XB
+iS
+iS
+DL
+hK
+xG
+mu
+zb
+Ug
+Ug
+Ug
+Ug
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(7,1,1) = {"
+zb
+SQ
+iS
+iS
+Ot
+KQ
+iS
+iS
+zb
+zb
+zb
+zb
+zb
+ge
+Rd
+gk
+Ug
+iS
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(8,1,1) = {"
+zb
+KQ
+KQ
+Rp
+KQ
+zb
+ir
+iS
+KQ
+nm
+iM
+KQ
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(9,1,1) = {"
+zb
+DJ
+Rp
+Rp
+jH
+zb
+os
+iS
+mN
+nQ
+xt
+KQ
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(10,1,1) = {"
+zb
+qs
+QM
+CH
+ON
+KQ
+iS
+gL
+Ug
+Ug
+Ug
+zb
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(11,1,1) = {"
+zb
+zb
+zb
+zb
+zb
+zb
+iS
+iS
+KQ
+nm
+bR
+KQ
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(12,1,1) = {"
+zb
+uM
+Pw
+xG
+xG
+iY
+iS
+iS
+ee
+nQ
+xt
+KQ
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(13,1,1) = {"
+zb
+Yp
+iS
+xG
+Vf
+KQ
+iS
+Cc
+Ug
+Ug
+Ug
+zb
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(14,1,1) = {"
+zb
+yB
+iS
+xG
+yg
+zb
+iS
+iS
+KQ
+nm
+ly
+KQ
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(15,1,1) = {"
+zb
+wD
+xv
+JT
+XM
+zb
+ir
+iS
+HL
+nQ
+xt
+KQ
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(16,1,1) = {"
+zb
+Kh
+xG
+Yl
+xG
+Hu
+iS
+ac
+zb
+zb
+zb
+zb
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(17,1,1) = {"
+zb
+qz
+kv
+Tf
+Vn
+zb
+iS
+iS
+JY
+iS
+iS
+JY
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(18,1,1) = {"
+zb
+zb
+zb
+zb
+zb
+zb
+iS
+iS
+KQ
+MI
+LM
+KQ
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(19,1,1) = {"
+zb
+kB
+WZ
+uP
+lu
+KQ
+iS
+EK
+zb
+zb
+zb
+zb
+Ug
+Ug
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(20,1,1) = {"
+zb
+SR
+jE
+xG
+xG
+kz
+iS
+iS
+zb
+YF
+YF
+YF
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(21,1,1) = {"
+zb
+aQ
+wF
+xG
+ge
+KQ
+iS
+hs
+zb
+YF
+YF
+YF
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(22,1,1) = {"
+zb
+KQ
+KQ
+KQ
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+YF
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(23,1,1) = {"
+bu
+GM
+bu
+GM
+bu
+KQ
+iS
+iS
+Uc
+oq
+zb
+zb
+zb
+zb
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(24,1,1) = {"
+bu
+uI
+Bh
+uI
+Bh
+KQ
+iS
+AT
+TV
+Pi
+zb
+QK
+QK
+Qm
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(25,1,1) = {"
+bu
+MS
+MS
+MS
+Ju
+KQ
+iS
+JH
+Dd
+YX
+zb
+QK
+qk
+Qm
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(26,1,1) = {"
+bu
+MS
+GU
+oR
+Ju
+KQ
+iS
+Rn
+It
+rP
+zb
+mM
+YF
+li
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(27,1,1) = {"
+bu
+MS
+GM
+uI
+oR
+KQ
+iS
+zb
+Pt
+Pt
+zb
+zb
+Ef
+zb
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(28,1,1) = {"
+zb
+ha
+yv
+ha
+zb
+zb
+tx
+zb
+Lf
+Jp
+zb
+CR
+iS
+pz
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+zb
+NG
+Ve
+zb
+MK
+bi
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(29,1,1) = {"
+zb
+cn
+iS
+Sc
+vJ
+PM
+fE
+fE
+Jy
+EL
+iS
+ir
+iS
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+zb
+NG
+NG
+zb
+MK
+MK
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(30,1,1) = {"
+zb
+Vp
+wE
+hB
+Jv
+TZ
+Jv
+Rj
+iS
+iS
+nQ
+iS
+UP
+iS
+iS
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+zb
+YF
+YF
+zb
+YF
+YF
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(31,1,1) = {"
+zb
+Rm
+qm
+Vg
+zb
+QH
+zb
+sB
+qm
+zb
+zb
+Ke
+DI
+Ke
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(32,1,1) = {"
+zb
+Iw
+pM
+pP
+pP
+en
+Yf
+sZ
+Yf
+HK
+zb
+kl
+VO
+kj
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(33,1,1) = {"
+zb
+SG
+RG
+Vr
+zb
+uf
+zb
+VX
+ht
+wH
+zb
+DQ
+Ip
+VT
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(34,1,1) = {"
+zb
+eE
+KA
+wj
+zb
+XU
+zb
+ip
+ht
+VQ
+zb
+Xz
+hT
+wI
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(35,1,1) = {"
+zb
+SG
+Vg
+yq
+zb
+uf
+zb
+yq
+Vg
+wH
+zb
+zb
+Sf
+dJ
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(36,1,1) = {"
+zb
+SG
+Py
+SI
+Vi
+ht
+BC
+Nv
+HK
+wH
+zb
+Dc
+wp
+Ys
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(37,1,1) = {"
+zb
+UU
+VE
+SI
+Vi
+Ec
+BC
+Nv
+iz
+lv
+vO
+Jg
+GV
+kM
+zb
+bu
+zb
+YF
+YF
+zb
+YF
+YF
+zb
+YF
+YF
+zb
+YF
+YF
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(38,1,1) = {"
+zb
+dR
+Qq
+FM
+Vi
+ht
+BC
+fa
+Cj
+ht
+wq
+FU
+xG
+lL
+zb
+bu
+zb
+bu
+bu
+zb
+bu
+bu
+zb
+bu
+bu
+zb
+OT
+OT
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(39,1,1) = {"
+zb
+Rb
+zb
+zb
+zb
+Vg
+zb
+zb
+zb
+zb
+zb
+Ke
+Ke
+zb
+zb
+bu
+zb
+bu
+GJ
+zb
+bu
+YN
+zb
+bu
+Db
+zb
+OT
+OT
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
+(40,1,1) = {"
+bu
+hH
+bu
+bu
+GM
+LT
+GM
+bu
+GM
+bu
+GM
+hU
+GM
+bu
+bu
+bu
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+bu
+"}
