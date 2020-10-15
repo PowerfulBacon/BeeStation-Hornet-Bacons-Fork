@@ -987,6 +987,7 @@
 #include "code\game\objects\items\devices\taperecorder.dm"
 #include "code\game\objects\items\devices\traitordevices.dm"
 #include "code\game\objects\items\devices\transfer_valve.dm"
+#include "code\game\objects\items\devices\ghostbuster\emf_reader.dm"
 #include "code\game\objects\items\devices\PDA\cart.dm"
 #include "code\game\objects\items\devices\PDA\PDA.dm"
 #include "code\game\objects\items\devices\PDA\PDA_types.dm"
