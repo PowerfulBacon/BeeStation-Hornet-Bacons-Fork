@@ -1,5 +1,5 @@
 /obj/item/emf_reader
-	name = "EMF Reader"
+	name = "\improperEMF reader"
 	desc = "A device that measures the relative levels of electromotive force in the surrounding area."
 	icon = 'icons/obj/ghost_hunter.dmi'
 	icon_state = "emf-off"
@@ -9,22 +9,25 @@
 
 /obj/item/emf_reader/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	unregister_emf_reader()
 	. = ..()
 
-/obj/item/emf_reader/attack_hand(mob/user)
+/obj/item/emf_reader/attack_self(mob/user)
 	. = ..()
 	if(.)
 		return
 	enabled = !enabled
 	if(enabled)
 		START_PROCESSING(SSobj, src)
+		register_emf_reader()
 	else
 		STOP_PROCESSING(SSobj, src)
+		unregister_emf_reader()
 	to_chat(user, "<span class='notice'>You toggle [src] [enabled?"on":"off"]!</span>")
 	update_icon()
 
 /obj/item/emf_reader/process()
-	var/new_emf = 1
+	var/new_emf = 0
 	//Change our icon
 	if(new_emf != detected_emf)
 		detected_emf = new_emf
