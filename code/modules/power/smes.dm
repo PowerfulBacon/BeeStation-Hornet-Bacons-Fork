@@ -298,6 +298,8 @@
 	if(last_disp != chargedisplay() || last_chrg != inputting || last_onln != outputting)
 		update_icon()
 
+	//Batteries create EMF
+	create_emf(1, 6)
 
 
 // called after all power processes are finished

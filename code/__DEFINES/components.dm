@@ -373,4 +373,5 @@
 #define COMSIG_XENO_MONKEY_CLICK_CTRL "xeno_monkey_click_ctrl"				//! from monkey CtrlClickOn(): (/mob)
 
 //spooky EMF
-#define COMSIG_ATOM_EMF_READ "emf_read"							//! called when EMF is created near an EMF source: (/datum/emf_source)
+#define COMSIG_ATOM_EMF_REGISTER "emf_read"							//! called when EMF is created near an EMF source: (/datum/emf_source)
+#define COMSIG_ATOM_EMF_UNREGISTER "emf_unreg"						//! Called when an EMF source is removed: (/datum/emf_source)

@@ -7,6 +7,10 @@
 	var/default_state = "emf"
 	var/detected_emf = 0
 
+/obj/item/emf_reader/Initialize()
+	. = ..()
+	AddComponent(/datum/component/emf_tracker)
+
 /obj/item/emf_reader/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	unregister_emf_reader()
@@ -27,7 +31,8 @@
 	update_icon()
 
 /obj/item/emf_reader/process()
-	var/new_emf = 0
+	var/datum/component/emf_tracker = GetComponent(/datum/component/emf_tracker)
+	var/new_emf = emf_tracker.get_emf_reading()
 	//Change our icon
 	if(new_emf != detected_emf)
 		detected_emf = new_emf
