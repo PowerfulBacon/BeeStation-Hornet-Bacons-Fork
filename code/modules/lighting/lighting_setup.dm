@@ -4,10 +4,7 @@
 			continue
 
 		for(var/turf/T in A)
-
-			if(!IS_DYNAMIC_LIGHTING(T))
-				continue
-
-			new/atom/movable/lighting_object(T)
+			if(T.x % 8 == 0 && T.y % 8 == 0)
+				new/atom/movable/lighting_object(T)
 			CHECK_TICK
 		CHECK_TICK

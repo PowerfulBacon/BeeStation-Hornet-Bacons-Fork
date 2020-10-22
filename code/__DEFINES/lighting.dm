@@ -1,4 +1,5 @@
-//Bay lighting engine shit, not in /code/modules/lighting because BYOND is being shit about it
+#define LIGHTING_OVERLAY_SIZE 8	//8x8
+
 #define LIGHTING_INTERVAL       5 // frequency, in 1/10ths of a second, of the lighting process
 
 #define MINIMUM_USEFUL_LIGHT_RANGE 1.4
@@ -9,6 +10,7 @@
 #define LIGHTING_ROUND_VALUE    (1 / 64) //! Value used to round lumcounts, values smaller than 1/129 don't matter (if they do, thanks sinking points), greater values will make lighting less precise, but in turn increase performance, VERY SLIGHTLY.
 
 #define LIGHTING_ICON 'icons/effects/lighting_object.dmi' //! icon used for lighting shading effects
+#define LIGHTING_BIG 'icons/effects/lighting_big.dmi'
 
 /// If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting objects. Set to zero to disable soft lighting. Luminosity changes then work if it's lit at all.
 #define LIGHTING_SOFT_THRESHOLD 0
