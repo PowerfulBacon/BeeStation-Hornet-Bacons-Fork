@@ -279,11 +279,11 @@ world
 	Opaque()
 	AddAlphaMask(mask)
 
-/icon/proc/AddAlphaMask(mask)
+/icon/proc/AddAlphaMask(mask, mask_x=1, mask_y=1)
 	var/icon/M = new(mask)
 	M.Blend("#ffffff", ICON_SUBTRACT)
 	// apply mask
-	Blend(M, ICON_ADD)
+	Blend(M, ICON_ADD, mask_x, mask_y)
 
 /*
 	HSV format is represented as "#hhhssvv" or "#hhhssvvaa"

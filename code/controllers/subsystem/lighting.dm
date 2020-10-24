@@ -7,6 +7,8 @@ SUBSYSTEM_DEF(lighting)
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
 
+	var/list/lighting_mask_queue = list()
+
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	if(!initialized)
 		if (CONFIG_GET(flag/starlight))
@@ -14,13 +16,11 @@ SUBSYSTEM_DEF(lighting)
 				var/area/A = I
 				if (A.dynamic_lighting == DYNAMIC_LIGHTING_IFSTARLIGHT)
 					A.luminosity = 0
-
-		create_all_lighting_objects()
 		initialized = TRUE
 	return ..()
 
 /datum/controller/subsystem/lighting/fire(resumed, init_tick_checks)
-
+	return
 
 /datum/controller/subsystem/lighting/Recover()
 	initialized = SSlighting.initialized

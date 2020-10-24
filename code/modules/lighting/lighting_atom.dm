@@ -4,7 +4,7 @@
 	var/light_range = 0 // Range in tiles of the light.
 	var/light_color     // Hexadecimal RGB string representing the colour of the light.
 
-	var/tmp/datum/light_source/light // Our light source. Don't fuck with this directly unless you have a good reason!
+	var/tmp/atom/movable/lighting_mask/light // Our light source. Don't fuck with this directly unless you have a good reason!
 	var/tmp/list/light_sources       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
 
 // The proc you should always use to set the light of this atom.
@@ -28,8 +28,12 @@
 
 #undef NONSENSICAL_VALUE
 
-// Will update the light (duh).
-// Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
+/*
+ * Updates the light
+ * Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
+ *
+ * TODO: This should be private to atom
+ */
 /atom/proc/update_light()
 	set waitfor = FALSE
 	if (QDELETED(src))
@@ -38,15 +42,11 @@
 	if (!light_power || !light_range) // We won't emit light anyways, destroy the light source.
 		QDEL_NULL(light)
 	else
-		if (!ismovableatom(loc)) // We choose what atom should be the top atom of the light here.
-			. = src
-		else
-			. = loc
-
-		if (light) // Update the light or create it if it does not exist.
-			light.update(.)
-		else
-			light = new/datum/light_source(src, .)
+		if(!light)
+			light = add_lighting_mask()
+		light.set_range(light_range)
+		light.set_power(light_power)
+		light.set_color(light_color)
 
 // If we have opacity, make sure to tell (potentially) affected light sources.
 /atom/movable/Destroy()
@@ -78,15 +78,6 @@
 		if (old_has_opaque_atom != T.has_opaque_atom)
 			T.reconsider_lights()
 
-
-/atom/movable/Moved(atom/OldLoc, Dir)
-	. = ..()
-	var/datum/light_source/L
-	var/thing
-	for (thing in light_sources) // Cycle through the light sources on this atom and tell them to update.
-		L = thing
-		L.source_atom.update_light()
-
 /atom/vv_edit_var(var_name, var_value)
 	switch (var_name)
 		if ("light_range")
@@ -106,7 +97,6 @@
 
 	return ..()
 
-
 /atom/proc/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = LIGHT_COLOR_WHITE, _duration = FLASH_LIGHT_DURATION, _reset_lighting = TRUE)
 	return
 
@@ -124,6 +114,7 @@
 		temp_power = light_power
 		temp_range = light_range
 	set_light(_range, _power, _color)
+	fade_light(_duration)
 	addtimer(CALLBACK(src, /atom/proc/set_light, _reset_lighting ? initial(light_range) : temp_range, _reset_lighting ? initial(light_power) : temp_power, _reset_lighting ? initial(light_color) : temp_color), _duration, TIMER_OVERRIDE|TIMER_UNIQUE)
 
 /mob/living/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = LIGHT_COLOR_WHITE, _duration = FLASH_LIGHT_DURATION, _reset_lighting = TRUE)

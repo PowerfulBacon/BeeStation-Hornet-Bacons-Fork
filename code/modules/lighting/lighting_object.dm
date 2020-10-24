@@ -3,8 +3,8 @@
 
 	anchored      = TRUE
 
-	icon             = LIGHTING_BIG
-	icon_state       = "opaque"
+	icon             = LIGHTING_ICON
+	icon_state       = "dark"
 	plane            = LIGHTING_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer            = LIGHTING_LAYER
