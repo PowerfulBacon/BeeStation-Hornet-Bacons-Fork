@@ -2,7 +2,7 @@
 	addtimer(CALLBACK(GLOBAL_PROC, /proc/clockcult_gg), 700)
 	sleep(50)
 	set_security_level("delta")
-	priority_announce("Huge gravitational-energy spike detected emminating from a neutron star near your sector. Event has been determined to be survivable by 0% of life. ESTIMATED TIME UNTIL ENERGY PULSE REACHES [GLOB.station_name]: 56 SECONDS. Godspeed crew, glory to Nanotrasen. -Admiral Telvig.", "Central Command Anomolous Materials Division", 'sound/misc/bloblarm.ogg')
+	priority_announce("Huge gravitational-energy spike detected emminating from a neutron star near your sector. Event has been determined to be survivable by 0% of life. ESTIMATED TIME UNTIL ENERGY PULSE REACHES [GLOB.station_name]: 56 SECONDS. Godspeed crew, glory to Nanotrasen. -Admiral Telvig.", "Central Command Anomalous Materials Division", 'sound/misc/bloblarm.ogg')
 	for(var/mob/M in GLOB.clients)
 		SEND_SOUND(M, sound('sound/misc/airraid.ogg', 1))
 	sleep(500)

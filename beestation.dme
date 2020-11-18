@@ -3023,6 +3023,7 @@
 #include "code\modules\station_goals\dna_vault.dm"
 #include "code\modules\station_goals\shield.dm"
 #include "code\modules\station_goals\station_goal.dm"
+#include "code\modules\station_war\pvp_loadouts.dm"
 #include "code\modules\station_war\pvp_spawns.dm"
 #include "code\modules\surgery\amputation.dm"
 #include "code\modules\surgery\blood_filter.dm"
