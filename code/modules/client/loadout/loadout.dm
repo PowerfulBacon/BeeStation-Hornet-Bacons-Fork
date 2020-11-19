@@ -57,6 +57,9 @@ GLOBAL_LIST_EMPTY(gear_datums)
 		var/obj/O = path
 		description = initial(O.desc)
 
+/datum/gear/proc/can_purchase(var/client/C)
+	return cost < C.get_metabalance()
+
 /datum/gear/proc/purchase(var/client/C) //Called when the gear is first purchased
 	return
 
