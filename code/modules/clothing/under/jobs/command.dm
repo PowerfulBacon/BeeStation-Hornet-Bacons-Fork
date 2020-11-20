@@ -11,6 +11,7 @@
 /obj/item/clothing/under/rank/captain/suit
 	name = "captain's suit"
 	desc = "A green suit and yellow necktie. Exemplifies authority."
+	wear_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
 	icon_state = "green_suit"
 	item_state = "dg_suit"
 	item_color = "green_suit"

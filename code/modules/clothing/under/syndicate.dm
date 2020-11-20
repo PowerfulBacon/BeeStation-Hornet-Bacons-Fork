@@ -20,6 +20,7 @@
 /obj/item/clothing/under/syndicate/sniper
 	name = "Tactical turtleneck suit"
 	desc = "A double seamed tactical turtleneck disguised as a civilian grade silk suit. Intended for the most formal operator. The collar is really sharp."
+	wear_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
 	icon_state = "really_black_suit"
 	item_state = "bl_suit"
 	item_color = "black_suit"
