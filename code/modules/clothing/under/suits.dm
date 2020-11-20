@@ -1,5 +1,5 @@
 /obj/item/clothing/under/suit
-	worn_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
 
 /obj/item/clothing/under/suit/white_on_white
 	name = "white suit"

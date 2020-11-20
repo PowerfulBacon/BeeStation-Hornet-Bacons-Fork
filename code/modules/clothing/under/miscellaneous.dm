@@ -1,7 +1,7 @@
 /obj/item/clothing/under/misc/pj
 	name = "\improper PJs"
 	desc = "A comfy set of sleepwear, for taking naps or being lazy instead of working."
-	worn_icon = 'icons/mob/worn_icons/uniform/pyjamas.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/pyjamas.dmi'
 
 /obj/item/clothing/under/misc/pj/red
 	icon_state = "red_pyjamas"
@@ -18,7 +18,7 @@
 /obj/item/clothing/under/misc/patriotsuit
 	name = "Patriotic Suit"
 	desc = "Motorcycle not included."
-	worn_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
 	icon_state = "ek"
 	item_state = "ek"
 	item_color = "ek"
@@ -27,7 +27,7 @@
 /obj/item/clothing/under/misc/mailman
 	name = "mailman's jumpsuit"
 	desc = "<i>'Special delivery!'</i>"
-	worn_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
 	icon_state = "mailman"
 	item_state = "b_suit"
 	item_color = "mailman"
@@ -35,7 +35,7 @@
 /obj/item/clothing/under/misc/vice_officer
 	name = "vice officer's jumpsuit"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
-	worn_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
 	icon_state = "vice"
 	item_state = "gy_suit"
 	item_color = "vice"
@@ -43,7 +43,7 @@
 
 /obj/item/clothing/under/misc/adminsuit
 	name = "administrative cybernetic jumpsuit"
-	worn_icon = 'icons/mob/worn_icons/uniform/syndicate.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/syndicate.dmi'
 	icon_state = "syndicate"
 	item_state = "bl_suit"
 	item_color = "syndicate"
@@ -62,7 +62,7 @@
 /obj/item/clothing/under/misc/burial
 	name = "burial garments"
 	desc = "Traditional burial garments from the early 22nd century."
-	worn_icon = 'icons/mob/worn_icons/uniform/service.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/service.dmi'
 	icon_state = "burial"
 	item_state = "burial"
 	item_color = "burial"
@@ -72,7 +72,7 @@
 /obj/item/clothing/under/misc/overalls
 	name = "laborer's overalls"
 	desc = "A set of durable overalls for getting the job done."
-	worn_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
 	icon_state = "overalls"
 	item_state = "lb_suit"
 	item_color = "overalls"
@@ -82,7 +82,7 @@
 /obj/item/clothing/under/misc/assistantformal
 	name = "assistant's formal uniform"
 	desc = "An assistant's formal-wear. Why an assistant needs formal-wear is still unknown."
-	worn_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
 	icon_state = "assistant_formal"
 	item_state = "gy_suit"
 	item_color = "assistant_formal"
@@ -91,7 +91,7 @@
 /obj/item/clothing/under/plasmaman
 	name = "plasma envirosuit"
 	desc = "A special containment suit that allows plasma-based lifeforms to exist safely in an oxygenated environment, and automatically extinguishes them in a crisis. Despite being airtight, it's not spaceworthy."
-	worn_icon = 'icons/mob/worn_icons/uniform/envirosuit.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/envirosuit.dmi'
 	icon_state = "plasmaman"
 	item_state = "plasmaman"
 	item_color = "plasmaman"
@@ -146,7 +146,7 @@
 /obj/item/clothing/under/misc/durathread
 	name = "durathread jumpsuit"
 	desc = "A jumpsuit made from durathread, its resilient fibres provide some protection to the wearer."
-	worn_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
 	icon_state = "durathread"
 	item_state = "durathread"
 	item_color = "durathread"

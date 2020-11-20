@@ -3,7 +3,7 @@
 
 /obj/item/clothing/under/trek
 	can_adjust = FALSE
-	worn_icon = 'icons/mob/worn_icons/uniform/trek.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/trek.dmi'
 
 //TOS
 /obj/item/clothing/under/trek/command

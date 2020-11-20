@@ -1,5 +1,5 @@
 /obj/item/clothing/under/rank/rnd
-	worn_icon = 'icons/mob/worn_icons/uniform/science.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/science.dmi'
 
 /obj/item/clothing/under/rank/rnd/research_director
 	desc = "It's a suit worn by those with the know-how to achieve the position of \"Research Director\". Its fabric provides minor protection from biological contaminants."

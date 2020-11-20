@@ -1,6 +1,6 @@
 //Contains: Engineering department jumpsuits
 /obj/item/clothing/under/rank/engineering
-	worn_icon = 'icons/mob/worn_icons/uniform/engineering.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/engineering.dmi'
 
 /obj/item/clothing/under/rank/engineering/chief_engineer
 	desc = "It's a high visibility jumpsuit given to those engineers insane enough to achieve the rank of \"Chief Engineer\". It has minor radiation shielding."

@@ -2,7 +2,7 @@
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
 	body_parts_covered = CHEST|GROIN
-	worn_icon = 'icons/mob/worn_icons/uniform/costume.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
 
 /obj/item/clothing/under/dress/sundress
 	name = "sundress"
@@ -45,7 +45,7 @@
 	desc = "A black skirt, very fancy!"
 	icon_state = "blackskirt"
 	item_color = "blackskirt"
-	worn_icon = 'icons/mob/worn_icons/uniform/skirts.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/skirts.dmi'
 
 /obj/item/clothing/under/dress/skirt/blue
 	name = "blue skirt"

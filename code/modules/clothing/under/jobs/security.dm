@@ -10,7 +10,7 @@
  */
 
 /obj/item/clothing/under/rank/security
-	worn_icon = 'icons/mob/worn_icons/uniform/security.dmi'
+	wear_icon = 'icons/mob/worn_icons/uniform/security.dmi'
 
 /obj/item/clothing/under/rank/security/officer
 	name = "security jumpsuit"
