@@ -1,6 +1,7 @@
 /obj/item/clothing/under/syndicate
 	name = "tactical turtleneck"
 	desc = "A non-descript and slightly suspicious looking turtleneck with digital camouflage cargo pants."
+	worn_icon = 'icons/mob/worn_icons/uniform/syndicate.dmi'
 	icon_state = "syndicate"
 	item_state = "bl_suit"
 	item_color = "syndicate"
@@ -35,6 +36,7 @@
 /obj/item/clothing/under/syndicate/soviet
 	name = "Ratnik 5 tracksuit"
 	desc = "Badly translated labels tell you to clean this in Vodka. Great for squatting in."
+	worn_icon = 'icons/mob/worn_icons/uniform/shorts.dmi'
 	icon_state = "trackpants"
 	item_color = "trackpants"
 	can_adjust = FALSE
@@ -51,6 +53,7 @@
 /obj/item/clothing/under/syndicate/rus_army
 	name = "advanced military tracksuit"
 	desc = "Military grade tracksuits for frontline squatting."
+	worn_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
 	icon_state = "rus_under"
 	item_color = "rus_under"
 	can_adjust = FALSE

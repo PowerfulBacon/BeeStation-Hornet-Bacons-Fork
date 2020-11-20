@@ -1,4 +1,7 @@
 //Contains: Engineering department jumpsuits
+/obj/item/clothing/under/rank/engineering
+	worn_icon = 'icons/mob/worn_icons/uniform/engineering.dmi'
+
 /obj/item/clothing/under/rank/engineering/chief_engineer
 	desc = "It's a high visibility jumpsuit given to those engineers insane enough to achieve the rank of \"Chief Engineer\". It has minor radiation shielding."
 	name = "chief engineer's jumpsuit"
@@ -32,31 +35,3 @@
 	item_state = "suit-orange"
 	item_color = "hazard"
 	alt_covers_chest = TRUE
-
-/obj/item/clothing/under/rank/engineer/skirt
-	name = "engineer's jumpskirt"
-	desc = "It's an orange high visibility jumpskirt worn by engineers."
-	icon_state = "engine_skirt"
-	item_state = "engi_suit"
-	item_color = "engine_skirt"
-	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
-
-/obj/item/clothing/under/rank/roboticist
-	desc = "It's a slimming black with reinforced seams; great for industrial work."
-	name = "roboticist's jumpsuit"
-	icon_state = "robotics"
-	item_state = "robotics"
-	item_color = "robotics"
-	resistance_flags = NONE
-
-/obj/item/clothing/under/rank/roboticist/skirt
-	name = "roboticist's jumpskirt"
-	desc = "It's a slimming black with reinforced seams; great for industrial work."
-	icon_state = "robotics_skirt"
-	item_state = "robotics"
-	item_color = "robotics_skirt"
-	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP

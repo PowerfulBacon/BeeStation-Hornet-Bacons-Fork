@@ -16,6 +16,7 @@
 /obj/item/clothing/under/rank/civilian/curator/nasa
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
+	worn_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
 	icon_state = "black"
 	item_state = "bl_suit"
 	item_color = "black"

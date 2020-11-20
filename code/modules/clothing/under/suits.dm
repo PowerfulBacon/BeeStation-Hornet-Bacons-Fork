@@ -1,3 +1,6 @@
+/obj/item/clothing/under/suit
+	worn_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
+
 /obj/item/clothing/under/suit/white_on_white
 	name = "white suit"
 	desc = "A white suit, suitable for an excellent host."

@@ -1,3 +1,6 @@
+/obj/item/clothing/under/costume
+	worn_icon = 'icons/mob/worn_icons/uniform/costumes.dmi'
+
 /obj/item/clothing/under/costume/roman
 	name = "\improper Roman armor"
 	desc = "Ancient Roman armor. Made of metallic and leather straps."
@@ -29,14 +32,6 @@
 	icon_state = "griffin"
 	item_color = "griffin"
 	can_adjust = FALSE
-
-/obj/item/clothing/under/costume/cloud
-	name = "cloud costume"
-	desc = "A costume made to resemble a fluffy cloud. Hopefully concealing any naughty bits the children might see."
-	icon_state = "cloud"
-	item_color = "cloud"
-	can_adjust = FALSE
-
 
 /obj/item/clothing/under/costume/schoolgirl
 	name = "blue schoolgirl uniform"
@@ -247,29 +242,6 @@
 	fitted = NO_FEMALE_UNIFORM
 	can_adjust = FALSE
 	resistance_flags = NONE
-
-/obj/item/clothing/under/costume/mech_suit
-	name = "red mech pilot's suit"
-	desc = "A red mech pilot's suit. Might make your butt look big."
-	icon_state = "red_mech_suit"
-	item_state = "red_mech_suit"
-	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	fitted = NO_FEMALE_UNIFORM
-	alternate_worn_layer = GLOVES_LAYER //covers hands but gloves can go over it. This is how these things work in my head.
-	can_adjust = FALSE
-
-/obj/item/clothing/under/costume/mech_suit/white
-	name = "white mech pilot's suit"
-	desc = "A white mech pilot's suit. Very fetching."
-	icon_state = "white_mech_suit"
-	item_state = "white_mech_suit"
-
-/obj/item/clothing/under/costume/mech_suit/blue
-	name = "blue mech pilot's suit"
-	desc = "A blue mech pilot's suit. For the more reluctant mech pilots."
-	icon_state = "blue_mech_suit"
-	item_state = "blue_mech_suit"
 
 /obj/item/clothing/under/costume/russian_officer
 	name = "\improper Russian officer's uniform"

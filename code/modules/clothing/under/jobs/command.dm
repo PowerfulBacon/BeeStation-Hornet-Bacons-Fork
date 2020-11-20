@@ -1,6 +1,7 @@
 /obj/item/clothing/under/rank/captain
 	desc = "It's a blue jumpsuit with some gold markings denoting the rank of \"Captain\"."
 	name = "captain's jumpsuit"
+	worn_icon = 'icons/mob/worn_icons/uniform/command.dmi'
 	icon_state = "captain"
 	item_state = "b_suit"
 	item_color = "captain"

@@ -1,5 +1,6 @@
 /obj/item/clothing/under/color
 	desc = "A standard issue colored jumpsuit. Variety is the spice of life!"
+	worn_icon = 'icons/mob/worn_icons/uniform/assistant.dmi'
 
 /obj/item/clothing/under/color/random
 	icon_state = "random_jumpsuit"

@@ -1,6 +1,7 @@
 /obj/item/clothing/under/cluwne
     name = "clown suit"
     desc = "<i>'HONK!'</i>"
+	worn_icon = 'icons/mob/worn_icons/uniform/service.dmi'
     icon_state = "greenclown"
     item_state = "greenclown"
     resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF

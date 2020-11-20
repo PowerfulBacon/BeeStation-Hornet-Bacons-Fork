@@ -9,6 +9,9 @@
  * Security
  */
 
+/obj/item/clothing/under/rank/security
+	worn_icon = 'icons/mob/worn_icons/uniform/security.dmi'
+
 /obj/item/clothing/under/rank/security/officer
 	name = "security jumpsuit"
 	desc = "A tactical security jumpsuit for officers complete with Nanotrasen belt buckle."
@@ -163,7 +166,7 @@
 	item_state = "wardenblueclothes"
 	item_color = "wardenblueclothes"
 	alt_covers_chest = TRUE
-	
+
 /obj/item/clothing/under/rank/security/head_of_security/formal
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
 	name = "head of security's formal uniform"
@@ -205,11 +208,11 @@
 	has_sensor = LOCKED_SENSORS
 	sensor_mode = SENSOR_COORDS
 	random_sensor = FALSE
-	
+
 /*
  * Triiodine's security uniforms
  */
- 
+
 
 /obj/item/clothing/under/rank/security/officer/mallcop
 	name = "NT mall cop uniform"

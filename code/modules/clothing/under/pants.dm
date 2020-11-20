@@ -4,6 +4,7 @@
 	fitted = NO_FEMALE_UNIFORM
 	can_adjust = FALSE
 	custom_price = 20
+	worn_icon = 'icons/mob/worn_icons/uniform/shorts.dmi'
 
 /obj/item/clothing/under/pants/classicjeans
 	name = "classic jeans"

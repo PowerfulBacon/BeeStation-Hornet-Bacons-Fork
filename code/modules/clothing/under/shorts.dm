@@ -6,6 +6,7 @@
 	fitted = NO_FEMALE_UNIFORM
 	mutantrace_variation = MUTANTRACE_VARIATION
 	can_adjust = FALSE
+	worn_icon = 'icons/mob/worn_icons/uniform/shorts.dmi'
 
 /obj/item/clothing/under/shorts/red
 	name = "red athletic shorts"

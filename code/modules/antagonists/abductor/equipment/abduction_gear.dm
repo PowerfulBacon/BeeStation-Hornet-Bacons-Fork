@@ -840,6 +840,7 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 /obj/item/clothing/under/abductor
 	desc = "The most advanced form of jumpsuit known to reality, looks uncomfortable."
 	name = "alien jumpsuit"
+	worn_icon = 'icons/mob/worn_icons/uniform/abductor.dmi'
 	icon_state = "abductor-suit"
 	item_state = "bl_suit"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 10, bio = 10, rad = 0, fire = 0, acid = 0)

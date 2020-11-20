@@ -1,3 +1,6 @@
+/obj/item/clothing/under/rank/cargo
+	worn_icon = 'icons/mob/worn_icons/uniform/cargo.dmi'
+
 /obj/item/clothing/under/rank/cargo/qm
 	name = "quartermaster's jumpsuit"
 	desc = "It's a jumpsuit worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."

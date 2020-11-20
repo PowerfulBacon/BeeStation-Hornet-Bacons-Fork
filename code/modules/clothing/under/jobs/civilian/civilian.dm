@@ -1,5 +1,8 @@
 //Alphabetical order of civilian jobs.
 
+/obj/item/clothing/under/rank/civilian
+	worn_icon = 'icons/mob/worn_icons/uniform/service.dmi'
+
 /obj/item/clothing/under/rank/civilian/bartender
 	desc = "It looks like it could use some more flair."
 	name = "bartender's uniform"
@@ -37,10 +40,11 @@
 	icon_state = "altchef"
 	item_color = "altchef"
 	alt_covers_chest = TRUE
-	
+
 /obj/item/clothing/under/rank/civilian/head_of_personnel
 	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
 	name = "head of personnel's jumpsuit"
+	worn_icon = 'icons/mob/worn_icons/uniform/command.dmi'
 	icon_state = "hop"
 	item_state = "b_suit"
 	item_color = "hop"
@@ -49,6 +53,7 @@
 /obj/item/clothing/under/rank/civilian/head_of_personnel/suit
 	name = "head of personnel's suit"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
+	worn_icon = 'icons/mob/worn_icons/uniform/suits.dmi'
 	icon_state = "teal_suit"
 	item_state = "g_suit"
 	item_color = "teal_suit"
@@ -82,6 +87,7 @@
 /obj/item/clothing/under/rank/civilian/lawyer
 	desc = "Slick threads."
 	name = "Lawyer suit"
+	worn_icon = 'icons/mob/worn_icons/uniform/lawyer.dmi'
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/lawyer/black
