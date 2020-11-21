@@ -19,6 +19,12 @@
 	can_adjust = TRUE
 	alt_covers_chest = TRUE
 
+/obj/item/clothing/under/rank/rnd/research_director/skirt
+	desc = "It's a skirt worn by those with the know-how to achieve the position of \"Research Director\". Its design offers excellent protection from biological contamination from almost all directions."
+	name = "research director's skirt"
+	icon_state = "rdskirt"
+	item_color = "rdskirt"
+
 /obj/item/clothing/under/rank/rnd/research_director/alt
 	desc = "Maybe you'll engineer your own half-man, half-pig creature some day. Its fabric provides minor protection from biological contaminants."
 	name = "research director's tan suit"
