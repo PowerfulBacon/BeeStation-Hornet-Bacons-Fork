@@ -202,6 +202,17 @@
 	tagname = stripped_input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot", MAX_NAME_LEN)
 	name = "[initial(name)] - [tagname]"
 
+/obj/item/clothing/neck/petcollar/equipped(mob/user, slot)
+	. = ..()
+	if(slot == SLOT_NECK)
+		ADD_TRAIT(user, TRAIT_GRABWEAKNESS, COLLAR_TRAIT)
+	else
+		REMOVE_TRAIT(user, TRAIT_GRABWEAKNESS, COLLAR_TRAIT)
+
+/obj/item/clothing/neck/petcollar/dropped(mob/user)
+	. = ..()
+	REMOVE_TRAIT(user, TRAIT_GRABWEAKNESS, COLLAR_TRAIT)
+
 //////////////
 //DOPE BLING//
 //////////////
