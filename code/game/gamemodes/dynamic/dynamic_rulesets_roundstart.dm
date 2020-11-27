@@ -49,7 +49,7 @@
 /datum/dynamic_ruleset/roundstart/traitorbro
 	name = "Blood Brothers"
 	antag_flag = ROLE_BROTHER
-	antag_datum = /datum/antagonist/brother/
+	antag_datum = /datum/antagonist/brother
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Brig Physician")
 	restricted_roles = list("Cyborg", "AI")
 	required_candidates = 2
@@ -692,7 +692,7 @@
 	flags = HIGHLANDER_RULESET
 	var/datum/team/clock_cult/main_cult
 	var/list/selected_servants = list()
-	
+
 /datum/dynamic_ruleset/roundstart/clockcult/pre_execute()
 	//Load Reebe
 	var/list/errorList = list()
