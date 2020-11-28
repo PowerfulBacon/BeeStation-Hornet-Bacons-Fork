@@ -157,6 +157,7 @@
 	button_icon_state = "emp"
 	health_cost = 10
 	invocation = "Ta'gh fara'qha fel d'amar det!"
+	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/innate/cult/blood_spell/emp/Activate()
 	owner.visible_message("<span class='warning'>[owner]'s hand flashes a bright blue!</span>", \
@@ -281,6 +282,7 @@
 	button_icon_state = "gone"
 	charges = 10
 	var/revealing = FALSE //if it reveals or not
+	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/innate/cult/blood_spell/veiling/Activate()
 	if(!revealing)

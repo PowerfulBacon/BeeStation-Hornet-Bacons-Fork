@@ -878,7 +878,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		while(!QDELETED(src) && !QDELETED(user) && !QDELETED(new_human) && (user in T))
 			if(user.stat || new_human.InCritical())
 				break
-			user.apply_damage(0.1, BRUTE)
+			user.apply_damage(0.05, BRUTE)
 			sleep(1)
 
 		qdel(N)
