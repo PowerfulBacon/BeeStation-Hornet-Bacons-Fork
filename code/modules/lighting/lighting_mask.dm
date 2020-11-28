@@ -94,6 +94,9 @@
 
 /*
  * Updates the transformation matrix of this light object.
+ *
+ * Todo:
+ *  - Use animate to allow for smooth updating.
  */
 /atom/movable/lighting_mask/proc/update_matrix()
 	//Where the fun starts
@@ -101,13 +104,16 @@
 	// SCALE
 	//  - Scale so we are the right size
 	//Icon radius is 4 tiles (8x8), so we must scale our range accordingly to that
+	// E.G: Range of 4, size scale should be 1
 	var/size_proportion = range / 4
 	object_matrix *= size_proportion
 	// TRANSLATION
 	//  - Translate so that the light is where it should be relative to the source.
-	object_matrix.Translate(-128 + (128/range), -128 + (256/128))
+	//  - Original sprite is 256 x 256, so sprites needs to be moved by -128 * size_proportion on x and y directions
+	object_matrix.Translate(-128 * size_proportion, -128 * size_proportion)
 	// ROTATION
 	//  - Rotate so we are in the right direction.
+	//  - Wait shouldn't this be before translation?
 	object_matrix.Turn(angle)
 	//Set the transform
 	transform = object_matrix
@@ -134,7 +140,8 @@
  * Calculates the shadows for the object, and masks the image where it should have shadows
  */
 /atom/movable/lighting_mask/proc/calculate_shadows()
-	var/icon/I = new(LIGHTING_BIG, "light_no_trans")
+	return
+	/*var/icon/I = new(LIGHTING_BIG, "light_no_trans")
 	var/range_floor = FLOOR(range, 1)
 	var/range_integer = range_floor + (range_floor < range)
 	var/minx = x - range_integer
@@ -151,30 +158,17 @@
 		var/relative_x = (T.x - minx) * one_turf_pixel_size
 		var/relative_y = (T.y - miny) * one_turf_pixel_size
 		I.DrawBox(rgb(0, 0, 0), relative_x, relative_y, relative_x + one_turf_pixel_size, relative_y + one_turf_pixel_size)
-	icon = I
+	icon = I*/
 
 /*
  * Adds a lighting mask with this atom as its source
- * TODO: Make light sources hold the masks
+ * TODO:
+ *  - add_overlay
  */
 /atom/proc/add_lighting_mask()
 	var/atom/movable/lighting_mask/mask = new(get_turf(src))
-	mask.AddComponent(/datum/component/light_attach, src)
+	var/atom/movable/this = src
+	if(!istype(this))
+		return
+	this.vis_contents += mask
 	return mask
-
-/datum/component/light_attach
-	var/atom/movable/following
-	var/atom/movable/follower
-
-/datum/component/light_attach/Initialize(_target)
-	following = _target
-	follower = parent
-
-	if(!istype(follower) || !istype(following))
-		return COMPONENT_INCOMPATIBLE
-
-	RegisterSignal(following, COMSIG_MOVABLE_MOVED, .proc/onMove)
-
-/datum/component/light_attach/proc/onMove(atom/movable/mover, atom/oldloc, direction)
-	follower.forceMove(get_turf(following))
-	follower.setDir(following.dir)
