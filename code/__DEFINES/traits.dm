@@ -271,3 +271,4 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define PARRY_TRAIT	"parry_trait"
 #define BATTLE_ROYALE_TRAIT "battleroyale_trait"
 #define MADE_UNCLONEABLE "made-uncloneable"
+#define ADMINORDRAZINE_TRAIT "adminordrazine"
