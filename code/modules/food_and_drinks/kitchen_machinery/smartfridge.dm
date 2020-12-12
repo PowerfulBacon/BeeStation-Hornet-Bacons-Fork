@@ -136,9 +136,9 @@
 		return ..()
 
 
-/obj/machinery/smartfridge/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)	
+/obj/machinery/smartfridge/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(!stat)
-		if (istype(AM, /obj/item))		
+		if (istype(AM, /obj/item))
 			var/obj/item/O = AM
 			if(contents.len < max_n_of_items && accept_check(O))
 				load(O)
@@ -341,7 +341,8 @@
 			S.forceMove(drop_location())
 		else
 			var/dried = S.dried_type
-			new dried(drop_location())
+			var/obj/dried_object = new dried(drop_location())
+			S.reagents.trans_to(dried_object, no_react = TRUE, show_message = FALSE)
 			qdel(S)
 		return TRUE
 	for(var/obj/item/stack/sheet/wetleather/WL in src)
