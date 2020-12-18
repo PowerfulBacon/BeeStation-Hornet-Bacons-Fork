@@ -49,6 +49,12 @@
 #define RESEARCH_FABRICATOR_SCREEN_SEARCH 4
 #define RESEARCH_FABRICATOR_SCREEN_CATEGORYVIEW 5
 
+#define ARTIFACT_TRIGGER_USE_HAND 0
+#define ARTIFACT_TRIGGER_CROSS 1
+#define ARTIFACT_TRIGGER_PICKUP 2
+#define ARTIFACT_TRIGGER_ATTACK 3
+#define ARTIFACT_TRIGGER_TIME 4
+
 #define DEPARTMENTAL_FLAG_SECURITY		(1<<0)
 #define DEPARTMENTAL_FLAG_MEDICAL		(1<<1)
 #define DEPARTMENTAL_FLAG_CARGO			(1<<2)
@@ -62,16 +68,26 @@
 
 #define RESEARCH_MATERIAL_RECLAMATION_ID "__materials"
 
-//When adding new types, update the list below!
-#define TECHWEB_POINT_TYPE_GENERIC "General Research"
-#define TECHWEB_POINT_TYPE_NANITES "Nanite Research"
+#define RDSERVER_ENGINEERING 0
+#define RDSERVER_BIOLOGY 1
 
-#define TECHWEB_POINT_TYPE_DEFAULT TECHWEB_POINT_TYPE_GENERIC
+//When adding new types, update the list below!
+#define TECHWEB_POINT_TYPE_ENGINEERING "Engineering Research" //Used for power / engineering items. (Research Servers, Tesla / Supermatter generation)
+#define TECHWEB_POINT_TYPE_BIOLOGY "Biological Research" //Used for medical things and biological things (Research Servers, Analyzing people / new species)
+#define TECHWEB_POINT_TYPE_MINING "Mining Research" //Used for mining upgrades (Analyzing lavaland artifacts)
+#define TECHWEB_POINT_TYPE_BLUESPACE "Bluespace Research" //Used for bluespace things. (Analyzing lavaland artifacts)
+#define TECHWEB_POINT_TYPE_NANITES "Nanite Research" //Used for nanites (Nanites)
 
 //defined here so people don't forget to change this!
+//Note: why is this like this?
 #define TECHWEB_POINT_TYPE_LIST_ASSOCIATIVE_NAMES list(\
-	TECHWEB_POINT_TYPE_GENERIC = "General Research",\
-	TECHWEB_POINT_TYPE_NANITES = "Nanite Research"\
+	TECHWEB_POINT_TYPE_ENGINEERING = TECHWEB_POINT_TYPE_ENGINEERING,\
+	TECHWEB_POINT_TYPE_BIOLOGY = TECHWEB_POINT_TYPE_BIOLOGY,\
+	TECHWEB_POINT_TYPE_MINING = TECHWEB_POINT_TYPE_MINING,\
+	TECHWEB_POINT_TYPE_BLUESPACE = TECHWEB_POINT_TYPE_BLUESPACE,\
+	TECHWEB_POINT_TYPE_NANITES = TECHWEB_POINT_TYPE_NANITES\
 	)
 
 #define TECHWEB_BOMB_POINTCAP		50000 //! Adjust as needed; Stops toxins from nullifying RND progression mechanics. Current Value Cap Radius: 100
+
+//#define TECHWEB_POINT_TYPE_GENERIC

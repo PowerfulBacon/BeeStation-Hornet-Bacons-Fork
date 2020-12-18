@@ -20,6 +20,7 @@ const RDServerStatus = (props, context) => {
     temperature_max,
     enabled,
     overheated,
+    mode,
   } = value;
   const tempState = (
     temperature < temperature_warning && 'good'
@@ -36,7 +37,7 @@ const RDServerStatus = (props, context) => {
       <Flex mx={0.5} my={0.5} direction="row" justify="space-around">
         <Flex direction="column" align="auto">
           <Flex.Item color="label">
-            {name}
+            {name} ({mode})
           </Flex.Item>
           <Flex.Item>
             <Flex direction="row" justify="space-between">

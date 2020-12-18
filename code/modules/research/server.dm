@@ -22,6 +22,7 @@
 	// This allows the servers to rapidly heat up in under 5 min to the shut off point and make it annoying to cool back
 	// down, giving time for RD to fire the guy who shut off the cooler
 
+	var/research_mode = RDSERVER_ENGINEERING	//The research we are currently gathering
 	var/heating_power = 10000		// Changed the value from 40000.  Just enough for a T1 freezer to keep up with 2 of them
 	var/heating_effecency = 0.25
 	var/temp_tolerance_low = T0C
@@ -42,6 +43,8 @@
 			if(test_id == S.server_id)
 				test_id = 0
 		server_id = test_id
+
+	research_mode = pick(list(RDSERVER_ENGINEERING, RDSERVER_BIOLOGY))
 
 	name += " [uppertext(num2hex(server_id, -1))]" //gives us a random four-digit hex number as part of the name. Y'know, for fluff.
 	SSresearch.servers |= src
@@ -166,11 +169,15 @@
 	// Cheap way to refresh if we are operational or not.  mine() is run on the tech web
 	// subprocess.  This saves us having to run our own subprocess
 	refresh_working()
+	var/mode = TECHWEB_POINT_TYPE_ENGINEERING
+	switch(research_mode)
+		if(RDSERVER_BIOLOGY)
+			mode = TECHWEB_POINT_TYPE_BIOLOGY
 	if(working)
 		var/penalty = max((get_env_temp() - temp_tolerance_high), 0) * temp_penalty_coefficient
-		return list(TECHWEB_POINT_TYPE_GENERIC = max(base_mining_income - penalty, 0))
+		return list(mode = max(base_mining_income - penalty, 0))
 	else
-		return list(TECHWEB_POINT_TYPE_GENERIC = 0)
+		return list()
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
@@ -204,6 +211,7 @@
 			"temperature_max" = S.temp_tolerance_damage,
 			"enabled" = !S.research_disabled,
 			"overheated" = S.overheated,
+			"mode" = S.research_mode ? "Biological Simulations" : "Physics Simulations",
 		))
 	data["servers"] = servers
 
