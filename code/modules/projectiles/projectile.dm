@@ -321,7 +321,7 @@
 	return FALSE
 
 /obj/item/projectile/proc/check_ricochet_flag(atom/A)
-	if(A.flags_1 & CHECK_RICOCHET_1)
+	if(A.flags_1 & (CHECK_RICOCHET_1 | ADAMANTINE_COATED_1))
 		return TRUE
 	return FALSE
 

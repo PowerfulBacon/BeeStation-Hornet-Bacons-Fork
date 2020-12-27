@@ -840,6 +840,7 @@
 	. = ..()
 	if (dna && dna.species)
 		. += dna.species.check_species_weakness(weapon, attacker)
+	. *= attacker.damage_mod
 
 /mob/living/carbon/human/is_literate()
 	return TRUE

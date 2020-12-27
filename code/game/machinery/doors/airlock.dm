@@ -1138,7 +1138,7 @@
 
 
 /obj/machinery/door/airlock/open(forced=0)
-	if( operating || welded || locked )
+	if( operating || welded || locked || flags_1 & ADAMANTINE_COATED_1 )
 		return FALSE
 	if(!forced)
 		if(!hasPower() || wires.is_cut(WIRE_OPEN))
@@ -1192,7 +1192,7 @@
 
 
 /obj/machinery/door/airlock/close(forced=0)
-	if(operating || welded || locked)
+	if(operating || welded || locked || flags_1 & ADAMANTINE_COATED_1 )
 		return
 	if(density)
 		return TRUE

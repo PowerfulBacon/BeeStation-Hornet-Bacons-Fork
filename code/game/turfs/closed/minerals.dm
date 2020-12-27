@@ -176,7 +176,8 @@
 		/turf/closed/mineral/uranium/volcanic = 35, /turf/closed/mineral/diamond/volcanic = 30, /turf/closed/mineral/gold/volcanic = 45, /turf/closed/mineral/titanium/volcanic = 45,
 		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/copper/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20)
 
-
+/turf/closed/mineral/random/high_chance/always
+	mineralChance = 100
 
 /turf/closed/mineral/random/low_chance
 	icon_state = "rock_lowchance"

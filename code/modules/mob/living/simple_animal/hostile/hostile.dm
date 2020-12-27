@@ -72,7 +72,15 @@
 /mob/living/simple_animal/hostile/handle_automated_action()
 	if(AIStatus == AI_OFF)
 		return 0
-	var/list/possible_targets = ListTargets() //we look around for potential targets and make it a list for later use.
+	var/list/possible_targets //we look around for potential targets and make it a list for later use.
+
+	if(eye_blind)
+		toggle_ai(AI_ON)
+		DestroyObjectsInDirection(pick(1, 2, 4, 8))
+		MoveToTarget(get_step(src, pick(1, 2, 4, 8)))
+		return
+	else
+		possible_targets = ListTargets()
 
 	if(environment_smash)
 		EscapeConfinement()
@@ -128,17 +136,18 @@
 //////////////HOSTILE MOB TARGETTING AND AGGRESSION////////////
 
 /mob/living/simple_animal/hostile/proc/ListTargets()//Step 1, find out what we can see
+	var/check_distance = eye_blind ? 1 : vision_range
 	if(!search_objects)
-		. = hearers(vision_range, targets_from) - src //Remove self, so we don't suicide
+		. = hearers(check_distance, targets_from) - src //Remove self, so we don't suicide
 
 		var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
 
-		for(var/HM in typecache_filter_list(range(vision_range, targets_from), hostile_machines))
-			if(can_see(targets_from, HM, vision_range))
+		for(var/HM in typecache_filter_list(range(check_distance, targets_from), hostile_machines))
+			if(can_see(targets_from, HM, check_distance))
 				. += HM
 	else
 		. = list()
-		for (var/atom/movable/A in oview(vision_range, targets_from))
+		for (var/atom/movable/A in oview(check_distance, targets_from))
 			. += A
 
 /mob/living/simple_animal/hostile/proc/FindTarget(var/list/possible_targets, var/HasTargetsList = 0)//Step 2, filter down possible targets to things we actually care about
@@ -575,3 +584,7 @@ mob/living/simple_animal/hostile/proc/DestroySurroundings() // for use with mega
 				. += M
 			else if (M.loc.type in hostile_machines)
 				. += M.loc
+
+/mob/living/simple_animal/hostile/adjust_blindness()
+	. = ..()
+	FindTarget()

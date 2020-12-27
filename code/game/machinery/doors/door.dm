@@ -35,7 +35,7 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/real_explosion_block	//ignore this, just use explosion_block
 	var/red_alert_access = FALSE //if TRUE, this door will always open on red alert
-	var/poddoor = FALSE	
+	var/poddoor = FALSE
 	var/unres_sides = 0 //Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
 	var/open_speed = 5
 
@@ -288,7 +288,7 @@
 /obj/machinery/door/proc/open()
 	if(!density)
 		return 1
-	if(operating)
+	if(operating || (flags_1 & ADAMANTINE_COATED_1))
 		return
 	operating = TRUE
 	do_animate("opening")
@@ -310,7 +310,7 @@
 /obj/machinery/door/proc/close()
 	if(density)
 		return TRUE
-	if(operating || welded)
+	if(operating || welded || (flags_1 & ADAMANTINE_COATED_1))
 		return
 	if(safe)
 		for(var/atom/movable/M in get_turf(src))

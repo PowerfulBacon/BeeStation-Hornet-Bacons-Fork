@@ -130,3 +130,7 @@
 	var/icon/held_rh = 'icons/mob/pets_held_rh.dmi'
 	var/icon/head_icon = 'icons/mob/pets_held.dmi'//what it looks like on your head
 	var/held_state = ""//icon state for the above
+
+	//What to multiply the damage by
+	// Note: Only perform multiplicative actions on this var. Do not add or subtract raw numbers.
+	var/damage_mod = 1

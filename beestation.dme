@@ -2919,6 +2919,7 @@
 #include "code\modules\research\xenobiology\crossbreeding\chilling.dm"
 #include "code\modules\research\xenobiology\crossbreeding\consuming.dm"
 #include "code\modules\research\xenobiology\crossbreeding\crystalized.dm"
+#include "code\modules\research\xenobiology\crossbreeding\detonating.dm"
 #include "code\modules\research\xenobiology\crossbreeding\gentle.dm"
 #include "code\modules\research\xenobiology\crossbreeding\industrial.dm"
 #include "code\modules\research\xenobiology\crossbreeding\prismatic.dm"
