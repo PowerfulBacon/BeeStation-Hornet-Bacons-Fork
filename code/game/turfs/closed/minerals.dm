@@ -221,6 +221,17 @@
 		/turf/closed/mineral/iron/volcanic = 95)
 
 
+/turf/closed/mineral/random/basic
+	icon_state = "rock_highchance"
+	mineralChance = 10
+	mineralSpawnChanceList = list(
+		/turf/closed/mineral/iron = 60,
+		/turf/closed/mineral/copper = 30,
+		/turf/closed/mineral/silver = 10,
+		/turf/closed/mineral/plasma = 10
+	)
+
+
 
 /turf/closed/mineral/iron
 	mineralType = /obj/item/stack/ore/iron
