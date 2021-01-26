@@ -13214,7 +13214,6 @@
 	},
 /turf/open/floor/mineral/plastitanium{
 	initial_gas_mix = "o2=22;n2=82;TEMP=180";
-	planetary_atmos = 1;
 	temperature = 180
 	},
 /area/awaymission/snowdin/cave)
@@ -13226,7 +13225,6 @@
 /obj/machinery/suit_storage_unit/syndicate,
 /turf/open/floor/mineral/plastitanium{
 	initial_gas_mix = "o2=22;n2=82;TEMP=180";
-	planetary_atmos = 1;
 	temperature = 180
 	},
 /area/awaymission/snowdin/cave)
@@ -13240,7 +13238,6 @@
 	},
 /turf/open/floor/mineral/plastitanium{
 	initial_gas_mix = "o2=22;n2=82;TEMP=180";
-	planetary_atmos = 1;
 	temperature = 180
 	},
 /area/awaymission/snowdin/cave)

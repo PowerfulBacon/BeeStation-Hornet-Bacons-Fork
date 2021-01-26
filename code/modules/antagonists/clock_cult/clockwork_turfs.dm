@@ -239,7 +239,6 @@
 	icon_state = "reebe"
 	baseturfs = /turf/open/floor/clockwork/reebe
 	uses_overlay = FALSE
-	planetary_atmos = TRUE
 	var/list/heal_people
 
 /turf/open/floor/clockwork/reebe/Initialize()

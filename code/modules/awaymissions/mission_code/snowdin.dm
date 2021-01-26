@@ -5,6 +5,8 @@
 	icon_state = "awaycontent1"
 	requires_power = FALSE
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	planetary_atmospherics = TRUE
+	initial_gas_mix = FROZEN_ATMOS
 
 /area/awaymission/snowdin/outside
 	name = "Snowdin Tundra Plains"
@@ -150,8 +152,6 @@
 //liquid plasma!!!!!!//
 
 /turf/open/floor/plasteel/dark/snowdin
-	initial_gas_mix = FROZEN_ATMOS
-	planetary_atmos = 1
 	temperature = 180
 
 /turf/open/lava/plasma

@@ -183,6 +183,7 @@
 	noteleport = TRUE
 	hidden = TRUE
 	ambient_effects = REEBE
+	planetary_atmospherics = TRUE
 
 /area/reebe/city_of_cogs
 	name = "Reebe - City of Cogs"

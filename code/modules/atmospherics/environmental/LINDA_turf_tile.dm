@@ -29,12 +29,17 @@
 	var/datum/gas_mixture/turf/air
 
 	var/obj/effect/hotspot/active_hotspot
-	var/planetary_atmos = FALSE //air will revert to initial_gas_mix over time
+
+	var/planetary_atmos = FALSE //Set by area, used by monstermos in C++
 
 	var/list/atmos_overlay_types //gas IDs of current active gas overlays
 	is_openturf = TRUE
 
 /turf/open/Initialize()
+	var/area/A = loc
+	planetary_atmos = A.planetary_atmospherics
+	if(initial_gas_mix == OPENTURF_DEFAULT_ATMOS)
+		initial_gas_mix = A.initial_gas_mix
 	if(!blocks_air)
 		air = new
 		air.copy_from_turf(src)
@@ -50,6 +55,16 @@
 	return ..()
 
 /turf/proc/update_air_ref()
+
+/////////////////Gas Atmosphere Setup/////////////////
+
+/turf/open/change_area(area/old_area, area/new_area)
+	. = ..()
+	//Atmospherics
+	planetary_atmos = new_area.planetary_atmospherics
+	//Set our initial_gas_mix assuming the turf doesn't have a special gas mix
+	if(initial_gas_mix == OPENTURF_DEFAULT_ATMOS || initial_gas_mix == old_area.initial_gas_mix)
+		initial_gas_mix = new_area.initial_gas_mix
 
 /////////////////GAS MIXTURE PROCS///////////////////
 

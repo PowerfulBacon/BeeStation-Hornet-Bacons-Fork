@@ -582,3 +582,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	. = ..()
 	if(. != BULLET_ACT_FORCE_PIERCE)
 		. =  BULLET_ACT_TURF
+
+/turf/proc/setup_world_turf()
+	return

@@ -117,12 +117,7 @@
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
 	baseturfs = /turf/open/lava/smooth/lava_land_surface
-
-
-
 
 /turf/open/floor/plating/asteroid/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -158,7 +153,6 @@
 
 	data_having_type = /turf/open/floor/plating/asteroid/airless/cave/volcanic/has_data
 	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
 /turf/open/floor/plating/asteroid/airless/cave/volcanic/has_data //subtype for producing a tunnel with given data
 	has_data = TRUE
@@ -312,11 +306,9 @@
 	baseturfs = /turf/open/floor/plating/asteroid/snow
 	icon_state = "snow"
 	icon_plating = "snow"
-	initial_gas_mix = FROZEN_ATMOS
 	slowdown = 2
 	environment_type = "snow"
 	flags_1 = NONE
-	planetary_atmos = TRUE
 	burnt_states = list("snow_dug")
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null
@@ -335,7 +327,6 @@
 	name = "icy snow"
 	desc = "Looks colder."
 	baseturfs = /turf/open/floor/plating/asteroid/snow/ice
-	initial_gas_mix = "o2=0;n2=82;plasma=24;TEMP=120"
 	floor_variance = 0
 	icon_state = "snow-ice"
 	icon_plating = "snow-ice"
@@ -353,7 +344,3 @@
 
 /turf/open/floor/plating/asteroid/snow/temperatre
 	initial_gas_mix = "o2=22;n2=82;TEMP=255.37"
-
-/turf/open/floor/plating/asteroid/snow/atmosphere
-	initial_gas_mix = FROZEN_ATMOS
-	planetary_atmos = FALSE

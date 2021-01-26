@@ -11,16 +11,16 @@
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ab" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ac" = (
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ad" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
@@ -40,13 +40,13 @@
 /obj/structure/stone_tile/surrounding_tile/cracked{
 	pixel_y = 16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ae" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "af" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -60,19 +60,19 @@
 	pixel_x = -8;
 	pixel_y = -8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ag" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ah" = (
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ai" = (
 /obj/structure/stone_tile/cracked{
@@ -81,7 +81,7 @@
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aj" = (
 /obj/structure/stone_tile/slab/cracked{
@@ -90,7 +90,7 @@
 /obj/structure/stone_tile/slab/cracked{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ak" = (
 /obj/structure/stone_tile/cracked,
@@ -103,7 +103,7 @@
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "al" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -128,7 +128,7 @@
 	dir = 1;
 	pixel_y = -16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "am" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -153,17 +153,17 @@
 	dir = 1;
 	pixel_y = -16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "an" = (
 /obj/structure/stone_tile/slab,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ao" = (
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ap" = (
 /obj/structure/stone_tile{
@@ -172,29 +172,29 @@
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aq" = (
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ar" = (
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "as" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "at" = (
 /obj/structure/stone_tile/cracked,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "au" = (
 /obj/structure/stone_tile/surrounding/cracked{
@@ -216,7 +216,7 @@
 /obj/structure/stone_tile/slab/cracked{
 	dir = 8;
 	name = "cracked stone block";
-	
+
 	},
 /obj/structure/stone_tile/slab/cracked{
 	dir = 1
@@ -237,18 +237,18 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aA" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aB" = (
 /obj/structure/stone_tile,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aC" = (
 /obj/structure/stone_tile{
@@ -257,7 +257,7 @@
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aD" = (
 /obj/structure/stone_tile{
@@ -276,12 +276,12 @@
 /obj/structure/stone_tile/surrounding_tile/cracked{
 	dir = 1;
 	pixel_x = -16;
-	
+
 	},
 /obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aF" = (
 /obj/structure/stone_tile/slab/cracked{
@@ -292,7 +292,7 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aG" = (
 /obj/structure/stone_tile/burnt,
@@ -314,7 +314,7 @@
 	dir = 4;
 	pixel_x = 16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aI" = (
 /obj/structure/stone_tile/slab/burnt,
@@ -334,24 +334,24 @@
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 2;
 	pixel_x = -16;
-	
+
 	},
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 1;
 	pixel_x = -16;
-	
+
 	},
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aL" = (
 /obj/structure/stone_tile/block,
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aM" = (
 /obj/structure/stone_tile/burnt{
@@ -364,7 +364,7 @@
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aO" = (
 /obj/structure/stone_tile/cracked{
@@ -387,7 +387,7 @@
 /obj/structure/stone_tile/burnt{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aS" = (
 /obj/structure/stone_tile/burnt{
@@ -396,19 +396,19 @@
 /obj/structure/stone_tile/burnt{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aT" = (
 /obj/structure/stone_tile/burnt{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aU" = (
 /obj/structure/stone_tile/block/burnt{
 	dir = 4
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aV" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -433,7 +433,7 @@
 	dir = 8;
 	pixel_y = 16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aW" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -447,7 +447,7 @@
 	pixel_x = -16
 	},
 /obj/structure/stone_tile/block,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aX" = (
 /obj/structure/stone_tile/block/burnt{
@@ -471,28 +471,28 @@
 	dir = 8;
 	pixel_y = 16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aY" = (
 /obj/structure/stone_tile/slab/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "aZ" = (
 /obj/structure/stone_tile/burnt{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "ba" = (
 /obj/structure/stone_tile/burnt{
 	dir = 8
 	},
 /obj/structure/stone_tile/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bb" = (
 /obj/structure/stone_tile/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bc" = (
 /obj/structure/stone_tile/surrounding_tile{
@@ -506,22 +506,22 @@
 	pixel_x = 8;
 	pixel_y = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bd" = (
 /obj/structure/stone_tile/block,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "be" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
 /obj/structure/stone_tile/block,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bf" = (
 /obj/structure/stone_tile/block/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bg" = (
 /obj/structure/stone_tile/surrounding_tile/burnt{
@@ -537,7 +537,7 @@
 /obj/structure/stone_tile/burnt{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bh" = (
 /obj/structure/stone_tile/block{
@@ -546,15 +546,15 @@
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 4;
 	pixel_x = 16;
-	
+
 	},
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 8;
 	pixel_x = 16;
-	
+
 	},
 /obj/structure/stone_tile/block,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bi" = (
 /obj/structure/stone_tile{
@@ -599,7 +599,7 @@
 	dir = 2;
 	pixel_y = 16
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bm" = (
 /obj/structure/stone_tile,
@@ -612,7 +612,7 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bn" = (
 /obj/structure/stone_tile/burnt{
@@ -625,7 +625,7 @@
 /obj/structure/stone_tile/burnt{
 	dir = 1
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bo" = (
 /obj/structure/stone_tile{
@@ -638,7 +638,7 @@
 	dir = 1
 	},
 /obj/structure/stone_tile,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bp" = (
 /obj/structure/stone_tile/slab,
@@ -682,7 +682,7 @@
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 8;
 	pixel_x = 16;
-	
+
 	},
 /obj/structure/stone_tile/block,
 /obj/structure/stone_tile/block{
@@ -691,9 +691,9 @@
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 4;
 	pixel_x = 16;
-	
+
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bv" = (
 /obj/structure/stone_tile{
@@ -716,28 +716,28 @@
 /obj/structure/stone_tile/surrounding_tile/burnt{
 	dir = 1;
 	pixel_x = -16;
-	
+
 	},
 /obj/structure/stone_tile/block/burnt,
 /obj/structure/stone_tile/surrounding_tile/burnt{
 	dir = 2;
 	pixel_x = -16;
-	
+
 	},
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "by" = (
 /obj/structure/stone_tile/block/burnt{
 	dir = 1
 	},
 /obj/structure/stone_tile/block/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bz" = (
 /obj/structure/stone_tile/surrounding_tile/burnt{
 	dir = 4;
 	pixel_x = 16;
-	
+
 	},
 /obj/structure/stone_tile/block/burnt{
 	dir = 1
@@ -745,10 +745,10 @@
 /obj/structure/stone_tile/surrounding_tile/burnt{
 	dir = 8;
 	pixel_x = 16;
-	
+
 	},
 /obj/structure/stone_tile/block/burnt,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/tdome/arena)
 "bA" = (
 /obj/structure/stone_tile{

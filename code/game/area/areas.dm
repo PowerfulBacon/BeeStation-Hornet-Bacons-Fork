@@ -80,6 +80,10 @@
 	var/lighting_brightness_bulb = 6
 	var/lighting_brightness_night = 6
 
+	//Atmospherics
+	var/planetary_atmospherics = FALSE
+	var/initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
 /**
   * A list of teleport locations
   *

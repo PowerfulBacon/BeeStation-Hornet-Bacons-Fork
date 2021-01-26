@@ -103,9 +103,7 @@
 	desc = "Looks cold."
 	icon_state = "snow"
 	ore_type = /obj/item/stack/sheet/mineral/snow
-	planetary_atmos = TRUE
 	floor_tile = null
-	initial_gas_mix = FROZEN_ATMOS
 	slowdown = 2
 	bullet_sizzle = TRUE
 	footstep = FOOTSTEP_SAND
@@ -125,7 +123,6 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "basalt"
 	ore_type = /obj/item/stack/ore/glass/basalt
-	initial_gas_mix = OPENTURF_LOW_PRESSURE
 	slowdown = 0
 
 /turf/open/floor/grass/snow/basalt/Initialize()
@@ -136,8 +133,6 @@
 
 /turf/open/floor/grass/snow/safe
 	slowdown = 1.5
-	planetary_atmos = FALSE
-
 
 /turf/open/floor/grass/fakebasalt //Heart is not a real planeteer power
 	name = "aesthetic volcanic flooring"

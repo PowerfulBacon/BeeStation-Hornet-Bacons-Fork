@@ -3,18 +3,18 @@
 /turf/closed/indestructible/necropolis,
 /area/shuttle_arena)
 "b" = (
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle_arena)
 "c" = (
 /obj/effect/forcefield/arena_shuttle,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle_arena)
 "d" = (
 /turf/open/lava/smooth,
 /area/shuttle_arena)
 "e" = (
 /obj/effect/landmark/shuttle_arena_entrance,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle_arena)
 "f" = (
 /turf/template_noop,
@@ -34,7 +34,7 @@
 	},
 /area/shuttle/escape/arena)
 "j" = (
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "k" = (
 /obj/structure/fluff/drake_statue,
@@ -44,19 +44,19 @@
 /area/shuttle/escape/arena)
 "l" = (
 /obj/structure/closet/crate/necropolis/tendril,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "m" = (
 /obj/structure/fluff/drake_statue,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "p" = (
 /obj/structure/healingfountain,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "z" = (
 /obj/effect/landmark/shuttle_arena_safe,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "L" = (
 /obj/effect/forcefield/arena_shuttle_entrance,
@@ -64,12 +64,12 @@
 	name = "The Arena"
 	},
 /obj/structure/fans/tiny/invisible,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 "N" = (
 /obj/effect/forcefield/arena_shuttle_entrance,
 /obj/structure/fans/tiny/invisible,
-/turf/open/indestructible/necropolis/air,
+/turf/open/indestructible/necropolis,
 /area/shuttle/escape/arena)
 
 (1,1,1) = {"

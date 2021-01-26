@@ -112,6 +112,8 @@
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
+	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	planetary_atmospherics = TRUE
 
 /area/lavaland/surface
 	name = "Lavaland"

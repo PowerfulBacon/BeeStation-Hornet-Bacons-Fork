@@ -3,7 +3,6 @@
 	icon_state = "reebemap"
 	layer = SPACE_LAYER
 	baseturfs = /turf/open/indestructible/reebe_void
-	planetary_atmos = TRUE
 	bullet_bounce_sound = null //forever falling
 	tiled_dirt = FALSE
 	flags_1 = NOJAUNT_1

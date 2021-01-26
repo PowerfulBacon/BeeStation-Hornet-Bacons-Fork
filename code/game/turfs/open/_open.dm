@@ -74,7 +74,6 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "necro1"
 	baseturfs = /turf/open/indestructible/necropolis
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
@@ -86,22 +85,14 @@
 	if(prob(12))
 		icon_state = "necro[rand(2,3)]"
 
-/turf/open/indestructible/necropolis/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-
 /turf/open/indestructible/boss //you put stone tiles on this and use it as a base
 	name = "necropolis floor"
 	icon = 'icons/turf/boss_floors.dmi'
 	icon_state = "boss"
 	baseturfs = /turf/open/indestructible/boss
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-
-/turf/open/indestructible/boss/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 
 /turf/open/indestructible/hierophant
 	icon = 'icons/turf/floors/hierophant_floor.dmi'
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	baseturfs = /turf/open/indestructible/hierophant
 	smooth = SMOOTH_TRUE
 	tiled_dirt = FALSE
