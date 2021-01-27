@@ -502,6 +502,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 			// No need to empty() these, because it's world init and they're
 			// already /turf/open/space/basic.
 			var/turf/T = t
+			T.empty(RESERVED_TURF_TYPE, RESERVED_TURF_TYPE, null, TRUE)
 			T.flags_1 |= UNUSED_RESERVATION_TURF_1
 		unused_turfs["[i]"] = block
 	clearing_reserved_turfs = FALSE

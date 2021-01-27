@@ -1,13 +1,13 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "ab" = (
 /obj/structure/lattice,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "ac" = (
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "ad" = (
 /turf/closed/wall/r_wall,
@@ -15,14 +15,14 @@
 "ae" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "af" = (
 /turf/open/floor/plating,
 /area/maintenance/department/bridge)
 "ag" = (
 /obj/structure/lattice,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "ah" = (
 /turf/closed/wall/r_wall,
@@ -55,7 +55,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "ao" = (
 /obj/structure/lattice/catwalk,
@@ -65,7 +65,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "ap" = (
 /obj/machinery/airalarm{
@@ -162,14 +162,14 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "aB" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "aC" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -265,7 +265,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "aR" = (
 /obj/structure/lattice/catwalk,
@@ -275,7 +275,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "aS" = (
 /obj/structure/table,

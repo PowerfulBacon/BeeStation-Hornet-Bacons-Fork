@@ -16,8 +16,13 @@
 	cost = 1
 	next_knowledge = list(/datum/eldritch_knowledge/rust_regen)
 	var/rust_force = 500
-	var/static/list/blacklisted_turfs = typecacheof(list(/turf/closed,/turf/open/space,/turf/open/lava,/turf/open/chasm,/turf/open/floor/plating/rust))
+	var/static/list/blacklisted_turfs = null
 	route = PATH_RUST
+
+/datum/eldritch_knowledge/rust_fist/New()
+	if(!blacklisted_turfs)
+		blacklisted_turfs = typecacheof(list(/turf/closed,/turf/open/space,/turf/open/lava,/turf/open/chasm,/turf/open/floor/plating/rust, SSmapping.config.default_turf_type))
+	. = ..()
 
 /datum/eldritch_knowledge/rust_fist/on_mansus_grasp(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
@@ -155,12 +160,14 @@
 /datum/rust_spread
 	var/list/edge_turfs = list()
 	var/list/turfs = list()
-	var/static/list/blacklisted_turfs = typecacheof(list(/turf/open/indestructible,/turf/closed/indestructible,/turf/open/space,/turf/open/lava,/turf/open/chasm))
+	var/static/list/blacklisted_turfs = null
 	var/spread_per_tick = 6
 
 
 /datum/rust_spread/New(loc)
 	. = ..()
+	if(!blacklisted_turfs)
+		blacklisted_turfs = typecacheof(list(/turf/open/indestructible,/turf/closed/indestructible,/turf/open/space,/turf/open/lava,/turf/open/chasm, SSmapping.config.default_turf_type))
 	var/turf/turf_loc = get_turf(loc)
 	turf_loc.rust_heretic_act()
 	turfs += turf_loc

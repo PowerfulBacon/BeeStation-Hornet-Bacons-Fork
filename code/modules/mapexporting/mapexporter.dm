@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(save_file_chars, list(
 				location = /area/template_noop
 				objects = list()
 			//Ignore things in space, must be a space turf and the area has to be empty space
-			else if(istype(place, /turf/open/space) && get_area(place).type == /area/space && !(save_flag & SAVE_SPACE))
+			else if(((istype(place, SSmapping.config.default_turf_type) && get_area(place).type == world.area) || (istype(place, /turf/open/space) && get_area(place).type == /area/space)) && !(save_flag & SAVE_SPACE))
 				place = /turf/template_noop
 				location = /area/template_noop
 			//Stuff to add

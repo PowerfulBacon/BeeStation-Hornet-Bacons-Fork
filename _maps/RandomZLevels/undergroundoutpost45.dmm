@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "ab" = (
 /turf/closed/indestructible/riveted,
@@ -375,7 +375,7 @@
 /area/awaymission/undergroundoutpost45/central)
 "bd" = (
 /obj/effect/spawner/structure/window/reinforced,
-/turf/open/space,
+/turf/open/world_turf,
 /area/awaymission/undergroundoutpost45/central)
 "be" = (
 /obj/structure/closet/secure_closet{
@@ -13912,7 +13912,7 @@
 	},
 /area/awaymission/undergroundoutpost45/caves)
 "zi" = (
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "KE" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{

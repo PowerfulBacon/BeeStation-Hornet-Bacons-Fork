@@ -194,7 +194,8 @@
 				/turf/open/floor/engine/cult,
 				/turf/open/space,
 				/turf/open/lava,
-				/turf/open/chasm))
+				/turf/open/chasm,
+				SSmapping.config.default_turf_type))
 			if(is_type_in_typecache(T, blacklisted_pylon_turfs))
 				continue
 			else

@@ -5,7 +5,7 @@
 "b" = (
 /obj/structure/window/reinforced/spawner/east,
 /obj/structure/lattice,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "e" = (
 /obj/structure/window/reinforced/spawner,
@@ -35,7 +35,7 @@
 "l" = (
 /obj/structure/window/reinforced/spawner/west,
 /obj/structure/window/reinforced/spawner,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "m" = (
 /obj/structure/window/reinforced/spawner/north,
@@ -55,7 +55,7 @@
 /area/template_noop)
 "p" = (
 /obj/structure/lattice,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "s" = (
 /obj/structure/window/reinforced/spawner,
@@ -64,7 +64,7 @@
 "v" = (
 /obj/structure/window/reinforced/spawner/west,
 /obj/structure/lattice,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "z" = (
 /obj/structure/window/reinforced/spawner,
@@ -74,16 +74,16 @@
 /area/template_noop)
 "B" = (
 /obj/structure/window/reinforced/spawner,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "D" = (
 /obj/structure/window/reinforced/spawner/west,
 /obj/structure/window/reinforced/spawner/north,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "E" = (
 /obj/structure/window/reinforced/spawner/north,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "F" = (
 /obj/effect/landmark/event_spawn,
@@ -100,7 +100,7 @@
 "H" = (
 /obj/structure/window/reinforced/spawner/north,
 /obj/structure/window/reinforced/spawner/east,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "K" = (
 /obj/machinery/light,
@@ -133,7 +133,7 @@
 "Z" = (
 /obj/structure/window/reinforced/spawner/east,
 /obj/structure/window/reinforced/spawner,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 
 (1,1,1) = {"

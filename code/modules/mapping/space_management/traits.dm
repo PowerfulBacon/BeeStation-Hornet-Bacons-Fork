@@ -53,6 +53,9 @@
 /datum/controller/subsystem/mapping/proc/get_turf_below(turf/T)
 	if (!T)
 		return
+	//Could potentially break dynamically loading multi-z away missions :(
+	if(T.z > SSmapping.z_list.len)
+		return
 	var/offset = level_trait(T.z, ZTRAIT_DOWN)
 	if (!offset)
 		return
@@ -61,6 +64,9 @@
 // Attempt to get the turf above the provided one according to Z traits
 /datum/controller/subsystem/mapping/proc/get_turf_above(turf/T)
 	if (!T)
+		return
+	//Could potentially break dynamically loading multi-z away missions :(
+	if(T.z > SSmapping.z_list.len)
 		return
 	var/offset = level_trait(T.z, ZTRAIT_UP)
 	if (!offset)

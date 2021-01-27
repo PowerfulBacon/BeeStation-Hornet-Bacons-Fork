@@ -30,7 +30,7 @@
 		var/obj/docking_port/stationary/S = V
 		if(jumpto_ports[S.id])
 			z_lock |= S.z
-	whitelist_turfs = typecacheof(whitelist_turfs)
+	whitelist_turfs = typecacheof(whitelist_turfs + SSmapping.config.default_turf_type)
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/Destroy()
 	. = ..()

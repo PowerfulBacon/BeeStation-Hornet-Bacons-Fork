@@ -283,7 +283,7 @@
 		// 2. the space_key isn't set yet
 		// 3. there are exactly 2 members
 		// 4. with no attributes
-		// 5. and the members are world.turf and world.area
+		// 5. and the members are SSmapping.config.default_turf_type and world.area
 		// Basically, if we find an entry like this: "XXX" = (/turf/default, /area/default)
 		// We can skip calling this proc every time we see XXX
 		if(no_changeturf \
@@ -293,7 +293,7 @@
 			&& length(members_attributes[1]) == 0 \
 			&& length(members_attributes[2]) == 0 \
 			&& (world.area in members) \
-			&& (world.turf in members))
+			&& (SSmapping.config.default_turf_type in members))
 
 			.[SPACE_KEY] = model_key
 			continue

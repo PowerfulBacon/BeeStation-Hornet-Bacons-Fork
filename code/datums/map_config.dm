@@ -26,8 +26,8 @@
 
 	//var/default_turf_type = /turf/open/space
 	//var/default_area_type = /area/space
-	var/default_turf_type = /turf/open/floor/plating/asteroid/snow
-	var/default_area_type = /area/awaymission/snowdin
+	var/default_turf_type = /turf/open/floor/plating/asteroid/basalt
+	var/default_area_type = /area/lavaland/surface/outdoors/unexplored
 
 	var/allow_custom_shuttles = TRUE
 	var/shuttles = list(

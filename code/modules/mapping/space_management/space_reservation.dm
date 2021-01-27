@@ -10,6 +10,10 @@
 	var/wipe_reservation_on_release = TRUE
 	var/turf_type = /turf/open/space
 
+/datum/turf_reservation/New()
+	turf_type = SSmapping.config.default_turf_type
+	. = ..()
+
 /datum/turf_reservation/transit
 	turf_type = /turf/open/space/transit
 

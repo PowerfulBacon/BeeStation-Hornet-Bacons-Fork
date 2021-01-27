@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "ab" = (
 /turf/closed/indestructible/riveted,
@@ -10,7 +10,7 @@
 /turf/closed/indestructible/riveted,
 /area/space)
 "ad" = (
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "ae" = (
 /obj/structure/window/reinforced{
@@ -2245,7 +2245,7 @@
 	desc = "I bet you think you're pretty clever... well you are.";
 	name = "easter egg"
 	},
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "fS" = (
 /obj/effect/turf_decal/tile/red{
@@ -3179,7 +3179,7 @@
 	name = "CentCom";
 	width = 20
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "jD" = (
 /obj/effect/turf_decal/loading_area{
@@ -6330,7 +6330,7 @@
 	},
 /area/centcom/holding)
 "pz" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/centcom/ferry)
 "pA" = (
 /obj/docking_port/stationary{
@@ -6342,7 +6342,7 @@
 	name = "CentCom Ferry Dock";
 	width = 5
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/centcom/ferry)
 "pB" = (
 /obj/effect/turf_decal/stripes/line{
@@ -9178,7 +9178,7 @@
 	name = "CentCom Emergency Shuttle Dock";
 	width = 50
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "vj" = (
 /turf/open/floor/wood,
@@ -14401,7 +14401,7 @@
 /area/tdome/tdomeobserve)
 "GX" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/open/space,
+/turf/open/world_turf,
 /area/wizard_station)
 "GY" = (
 /obj/structure/chair/wood/wings{
@@ -14706,7 +14706,7 @@
 	desc = "I bet you think you're pretty clever... well you are.";
 	name = "easter egg"
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "HI" = (
 /obj/structure/sink{
@@ -15946,7 +15946,7 @@
 	roundstart_template = /datum/map_template/shuttle/emergency/backup;
 	width = 8
 	},
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "Kn" = (
 /obj/structure/bookcase/random,
@@ -16262,7 +16262,7 @@
 	name = "recovery ship";
 	width = 3
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "KM" = (
 /obj/docking_port/stationary{
@@ -16273,7 +16273,7 @@
 	name = "recovery ship";
 	width = 3
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "KN" = (
 /obj/structure/window/reinforced,
@@ -16459,7 +16459,7 @@
 	name = "recovery ship";
 	width = 3
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "Lt" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
@@ -16498,7 +16498,7 @@
 	name = "recovery ship";
 	width = 5
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "LA" = (
 /obj/structure/table,
@@ -16660,7 +16660,7 @@
 /area/awaymission/errorroom)
 "Mc" = (
 /obj/structure/lattice,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "Md" = (
 /obj/machinery/computer/secure_data{
@@ -18266,7 +18266,7 @@
 /area/ctf)
 "VX" = (
 /obj/effect/landmark/shuttle_import,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "Wc" = (
 /obj/machinery/door/airlock/centcom{
@@ -18496,7 +18496,7 @@
 /area/centcom/holding)
 "XT" = (
 /obj/effect/spawner/structure/window/reinforced,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/centcom/supplypod)
 "Ya" = (
 /obj/structure/table/wood,

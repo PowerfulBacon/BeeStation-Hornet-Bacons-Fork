@@ -17,14 +17,16 @@
 		z_list += S
 
 /datum/controller/subsystem/mapping/proc/add_new_zlevel(name, traits = list(), z_type = /datum/space_level)
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NEW_Z, args)
 	var/new_z = z_list.len + 1
+	SSturf_setter.start_creating_z(new_z)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NEW_Z, args)
 	if (world.maxz < new_z)
 		world.incrementMaxZ()
 		CHECK_TICK
 	// TODO: sleep here if the Z level needs to be cleared
 	var/datum/space_level/S = new z_type(new_z, name, traits)
 	z_list += S
+	SSturf_setter.on_z_level_loaded(new_z)
 	return S
 
 /datum/controller/subsystem/mapping/proc/get_level(z)

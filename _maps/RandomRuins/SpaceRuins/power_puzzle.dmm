@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "ab" = (
 /turf/closed/wall/r_wall,
@@ -430,7 +430,7 @@
 /turf/open/floor/plasteel,
 /area/ruin/space/has_grav/storage/central)
 "bz" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/ruin/space/has_grav/storage/central2)
 "bA" = (
 /obj/structure/cable{

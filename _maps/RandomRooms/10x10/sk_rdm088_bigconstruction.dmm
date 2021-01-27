@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "b" = (
 /turf/open/floor/plating,
@@ -75,7 +75,7 @@
 /area/template_noop)
 "m" = (
 /obj/structure/lattice,
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "n" = (
 /obj/structure/window/reinforced/spawner/west,

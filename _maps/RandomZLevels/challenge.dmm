@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space,
+/turf/open/world_turf,
 /area/space)
 "ab" = (
 /turf/closed/indestructible{
@@ -711,7 +711,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cn" = (
 /turf/open/floor/circuit,
@@ -733,7 +733,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cq" = (
 /obj/structure/table/wood,
@@ -788,14 +788,14 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cz" = (
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cA" = (
 /obj/structure/sign/warning/securearea,
@@ -841,7 +841,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cI" = (
 /obj/structure/window/reinforced{
@@ -850,7 +850,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cJ" = (
 /obj/structure/window/reinforced{
@@ -859,7 +859,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cK" = (
 /obj/structure/window/reinforced{
@@ -868,7 +868,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cL" = (
 /obj/structure/window/reinforced{
@@ -877,7 +877,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "cM" = (
 /obj/effect/spawner/structure/window/hollow/reinforced/directional{
@@ -1051,7 +1051,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "de" = (
 /obj/effect/spawner/structure/window/hollow/reinforced/end,
@@ -1093,7 +1093,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced,
-/turf/open/space,
+/turf/open/world_turf,
 /area/space/nearstation)
 "dk" = (
 /obj/machinery/door/airlock/centcom{

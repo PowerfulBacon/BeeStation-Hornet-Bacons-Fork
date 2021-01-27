@@ -15,7 +15,7 @@
 /turf/open/floor/plating,
 /area/shuttle/escape)
 "d" = (
-/turf/open/space/basic,
+/turf/open/world_turf,
 /area/space)
 "f" = (
 /obj/structure/chair/comfy/shuttle,

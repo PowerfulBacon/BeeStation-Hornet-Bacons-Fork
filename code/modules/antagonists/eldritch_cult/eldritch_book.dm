@@ -9,14 +9,18 @@
 	///how many charges do we have?
 	var/charge = 1
 	///Where we cannot create the rune?
-	var/static/list/blacklisted_turfs = typecacheof(list(/turf/closed,/turf/open/space,/turf/open/lava))
+	var/static/list/blacklisted_turfs = null
 	///Is it in use?
 	var/in_use = FALSE
+
+/obj/item/forbidden_book/Initialize()
+	. = ..()
+	if(!blacklisted_turfs)
+		blacklisted_turfs = typecacheof(list(/turf/closed,/turf/open/space,/turf/open/lava,SSmapping.config.default_turf_type))
 
 /obj/item/forbidden_book/Destroy()
 	last_user = null
 	. = ..()
-
 
 /obj/item/forbidden_book/examine(mob/user)
 	. = ..()
