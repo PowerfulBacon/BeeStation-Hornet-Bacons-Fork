@@ -1,11 +1,11 @@
 #define STARTING_PAYCHECKS 5
 
-#define PAYCHECK_ASSISTANT 5
-#define PAYCHECK_MINIMAL 5
-#define PAYCHECK_EASY 20
-#define PAYCHECK_MEDIUM 50
-#define PAYCHECK_HARD 100
-#define PAYCHECK_COMMAND 200
+#define PAYCHECK_ASSISTANT 10	//50 + 10 * paychecks
+#define PAYCHECK_MINIMAL 10		//50 + 10 * paychecks
+#define PAYCHECK_EASY 15		//75 + 15 * paychecks
+#define PAYCHECK_MEDIUM 25		//125 + 25 * paychecks
+#define PAYCHECK_HARD 40		//200 + 40 * paychecks
+#define PAYCHECK_COMMAND 60		//300 + 60 * paychecks
 #define PAYCHECK_VIP 300
 
 #define PAYCHECK_WELFARE 20 //NEETbucks
