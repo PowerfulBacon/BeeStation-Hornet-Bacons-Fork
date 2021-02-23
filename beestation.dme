@@ -2155,6 +2155,7 @@
 #include "code\modules\mentor\follow.dm"
 #include "code\modules\mentor\mentor.dm"
 #include "code\modules\mentor\mentor_admintools.dm"
+#include "code\modules\mentor\mentor_helper_mob.dm"
 #include "code\modules\mentor\mentor_memo.dm"
 #include "code\modules\mentor\mentor_verbs.dm"
 #include "code\modules\mentor\mentorhelp.dm"

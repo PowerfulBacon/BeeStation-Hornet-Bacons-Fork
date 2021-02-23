@@ -101,6 +101,11 @@
 	animal_species = /mob/living/simple_animal/pet/dog/corgi/exoticcorgi
 	nofur = TRUE
 
+/mob/living/simple_animal/pet/dog/corgi/exoticcorgi/Initialize()
+		. = ..()
+		var/newcolor = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
+		add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
+
 /mob/living/simple_animal/pet/dog/Initialize()
 	. = ..()
 	var/dog_area = get_area(src)
@@ -112,11 +117,6 @@
 /mob/living/simple_animal/pet/dog/corgi/Initialize()
 	. = ..()
 	regenerate_icons()
-
-/mob/living/simple_animal/pet/dog/corgi/exoticcorgi/Initialize()
-		. = ..()
-		var/newcolor = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
-		add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
 
 /mob/living/simple_animal/pet/dog/corgi/death(gibbed)
 	..(gibbed)
