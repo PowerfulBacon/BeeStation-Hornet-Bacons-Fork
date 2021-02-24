@@ -112,6 +112,15 @@
 /obj/effect/proc_holder/spell/targeted/eminence/reebe/cast(list/targets, mob/living/user)
 	user.forceMove(get_turf(GLOB.celestial_gateway))
 
+//=====Warp to Servant=====
+/obj/effect/proc_holder/spell/targeted/eminence/gotoservant
+	name = "Jump to Servant"
+	desc = "Teleport yourself to a servant."
+	action_icon_state = "Abscond"
+
+/obj/effect/proc_holder/spell/targeted/eminence/reebe/cast(list/targets, mob/living/user)
+	user.forceMove(get_turf(GLOB.celestial_gateway))
+
 //=====Warp to station=====
 /obj/effect/proc_holder/spell/targeted/eminence/station
 	name = "Jump to Station"

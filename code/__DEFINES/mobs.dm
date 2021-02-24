@@ -334,4 +334,5 @@
 
 #define SLEEP_CHECK_DEATH(X) sleep(X); if(QDELETED(src) || stat == DEAD) return;
 
-#define SILENCE_RANGED_MESSAGE (1<<0)
+#define SIMPLEMOB_SILENCE_RANGED_MESSAGE (1 << 0)
+#define SIMPLEMOB_LARGE_HITBOX (1 << 1)	//If the turf is clicked on with a weapon, the mob will be attacked.

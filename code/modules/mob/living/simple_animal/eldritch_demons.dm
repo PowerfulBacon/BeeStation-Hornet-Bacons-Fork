@@ -27,7 +27,7 @@
 	del_on_death = TRUE
 	deathmessage = "implodes into itself"
 	faction = list("heretics")
-	simple_mob_flags = SILENCE_RANGED_MESSAGE
+	simple_mob_flags = SIMPLEMOB_SILENCE_RANGED_MESSAGE
 	///Innate spells that are supposed to be added when a beast is created
 	var/list/spells_to_add
 

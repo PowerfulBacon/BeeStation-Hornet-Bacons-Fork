@@ -24,6 +24,7 @@ GLOBAL_LIST_INIT(cogscarabs, list())
 		You are not bound by any laws, do whatever you must to serve Rat'var!"
 	mobsay_color = LIGHT_COLOR_CLOCKWORK
 	initial_language_holder = /datum/language_holder/clockmob
+	simple_mob_flags = SIMPLEMOB_LARGE_HITBOX
 
 /mob/living/simple_animal/drone/cogscarab/do_after_coefficent() // This gets added to the delay on a do_after, default 1
 	return 0.6
