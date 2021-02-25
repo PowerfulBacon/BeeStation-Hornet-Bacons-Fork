@@ -10,9 +10,14 @@ import { PING_INTERVAL, PING_QUEUE_SIZE, PING_TIMEOUT } from './constants';
 
 export const pingMiddleware = store => {
   let initialized = false;
+  let denitialized = false;
   let index = 0;
   const pings = [];
   const sendPing = () => {
+    // If DS is reconnecting do not send pings. This will cause the reconnection to fail.
+    if (denitialized) {
+      return;
+    }
     for (let i = 0; i < PING_QUEUE_SIZE; i++) {
       const ping = pings[i];
       if (ping && Date.now() - ping.sentAt > PING_TIMEOUT) {
@@ -44,6 +49,14 @@ export const pingMiddleware = store => {
       }
       pings[index] = null;
       return next(pingSuccess(ping));
+    }
+    if (type === 'pingBegin') {
+      denitialized = false;
+      return next(action);
+    }
+    if (type === 'pingEnd') {
+      denitialized = true;
+      return next(action);
     }
     return next(action);
   };

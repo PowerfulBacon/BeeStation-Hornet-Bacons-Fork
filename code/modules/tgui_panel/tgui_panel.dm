@@ -97,3 +97,19 @@
  */
 /datum/tgui_panel/proc/send_roundrestart()
 	window.send_message("roundrestart")
+
+/*
+ * public
+ *
+ * Sends a message that tells pings to stop sending.
+ */
+/datum/tgui_panel/proc/start_pingrequests()
+	window.send_message("pingStart")
+
+/*
+ * public
+ *
+ * Sends a message that tells pings to start sending.
+ */
+/datum/tgui_panel/proc/stop_pingrequests()
+	window.send_message("pingEnd")
