@@ -8,6 +8,9 @@
 	health_percentage = 0.8
 	generation_mode = BLUESPACE_DRIVE_MININGLEVEL
 
+/obj/effect/abstract/mining_landmark
+	name = ""
+
 /obj/machinery/computer/system_map/mining
 	name = "mining shuttle console"
 	desc = "Used to call and send the mining shuttle."
