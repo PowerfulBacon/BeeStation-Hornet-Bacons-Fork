@@ -526,7 +526,7 @@
 /obj/item/circuitboard/computer/mining_shuttle
 	name = "mining shuttle console (Computer Board)"
 	icon_state = "supply"
-	build_path = /obj/machinery/computer/shuttle/mining
+	build_path = /obj/machinery/computer/system_map/mining
 
 /obj/item/circuitboard/computer/science_shuttle
 	name = "science shuttle console (Computer Board)"

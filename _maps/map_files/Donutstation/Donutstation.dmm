@@ -10987,7 +10987,7 @@
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
 	},
-/obj/machinery/computer/shuttle/mining,
+/obj/machinery/computer/system_map/mining,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "aAr" = (
@@ -20204,7 +20204,7 @@
 	},
 /area/hallway/secondary/entry)
 "aVk" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/yellow,
@@ -40960,7 +40960,7 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "bJD" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/blue{

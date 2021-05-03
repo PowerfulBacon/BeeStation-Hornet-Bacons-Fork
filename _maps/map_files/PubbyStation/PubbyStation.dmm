@@ -18607,7 +18607,7 @@
 /turf/open/floor/plasteel,
 /area/hallway/secondary/exit/departure_lounge)
 "aQw" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/machinery/computer/system_map/mining,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -25382,7 +25382,7 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "beP" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/brown,

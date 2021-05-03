@@ -15355,7 +15355,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 4;
 	req_access = null
 	},
@@ -23099,7 +23099,7 @@
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "aSJ" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/yellow{

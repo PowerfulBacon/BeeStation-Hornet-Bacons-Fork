@@ -116,7 +116,7 @@
 			if(!star)
 				return
 			//Check for jumping actions
-			if(attached_ship.bluespace)
+			if(attached_ship.generation_mode == BLUESPACE_DRIVE_BSLEVEL)
 				if(!bs_drive || QDELETED(bs_drive))
 					say("Your drive is experiencing issues, or cannot be located. Please contact your ship's engineer.")
 					return

@@ -18,7 +18,7 @@
 	var/list/mobs
 
 	//NPC ships aren't going to be bluespace by default.
-	bluespace = FALSE
+	generation_mode = FALSE
 
 /datum/ship_datum/npc/New()
 	. = ..()

@@ -21,7 +21,7 @@
 	var/calculated_research_potential = 0
 
 	//Which ruin pool to pull from
-	var/bluespace_ruins = FALSE
+	var/ruin_spawn_type = BLUESPACE_DRIVE_SPACELEVEL
 
 /datum/star_system/New(distance)
 	. = ..()

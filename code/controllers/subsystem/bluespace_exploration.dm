@@ -348,25 +348,35 @@ SUBSYSTEM_DEF(bluespace_exploration)
 	for(var/template_name in SSmapping.space_ruins_templates)
 		var/datum/map_template/ruin/space/R = SSmapping.space_ruins_templates[template_name]
 		standard_valid_ruins += R
+	//===Mining ruins
+	var/list/mining_ruins = list()
+	mining_ruins = SSmapping.lava_ruins_templates
 	//Generate Ruins
 	var/cost_limit = target_level.calculated_research_potential
-	if(target_level?.bluespace_ruins)
+	if(target_level?.ruin_spawn_type == BLUESPACE_DRIVE_BSLEVEL)
 		//Spawn at least 1 ruin
 		cost_limit = max(cost_limit / 10, 1)
-	var/ruins_left = 5
+	var/ruins_left = 6
+	if(target_level?.ruin_spawn_type == BLUESPACE_DRIVE_MININGLEVEL)
+		ruins_left = 9
 	while(cost_limit > 0 && ruins_left > 0)
 		if(!LAZYLEN(bluespace_valid_ruins))
 			break
 		ruins_left --
 		var/list/selectable_ruins = list()
-		if(target_level?.bluespace_ruins)
-			for(var/datum/map_template/ruin/exploration/ruin/R in bluespace_valid_ruins)
-				if(R.cost < cost_limit)
-					selectable_ruins += R
-		else
-			for(var/datum/map_template/ruin/space/R in standard_valid_ruins)
-				if(R.cost < cost_limit)
-					selectable_ruins += R
+		switch(target_level?.ruin_spawn_type)
+			if(BLUESPACE_DRIVE_BSLEVEL)
+				for(var/datum/map_template/ruin/exploration/ruin/R in bluespace_valid_ruins)
+					if(R.cost < cost_limit)
+						selectable_ruins += R
+			if(BLUESPACE_DRIVE_SPACELEVEL)
+				for(var/datum/map_template/ruin/space/R in standard_valid_ruins)
+					if(R.cost < cost_limit)
+						selectable_ruins += R
+			if(BLUESPACE_DRIVE_MININGLEVEL)
+				for(var/datum/map_template/ruin/lavaland/L in mining_ruins)
+					if(L.cost < cost_limit)
+						selectable_ruins += L
 		if(!LAZYLEN(selectable_ruins))
 			log_shuttle("Ran out of selectable ruins, with [cost_limit] spawn points left.")
 			break
@@ -375,14 +385,20 @@ SUBSYSTEM_DEF(bluespace_exploration)
 		if(!selected_ruin)
 			log_runtime("Warning, invalid ruin")
 			continue
-		if(target_level?.bluespace_ruins)
-			var/datum/map_template/ruin/exploration/ruin/BS_Ruin = selected_ruin
-			if(BS_Ruin.limited)
-				bluespace_valid_ruins -= BS_Ruin
-		else
-			var/datum/map_template/ruin/space/Space_ruin = selected_ruin
-			if(!Space_ruin.allow_duplicates)
-				standard_valid_ruins -= Space_ruin
+		switch(target_level?.ruin_spawn_type)
+			if(BLUESPACE_DRIVE_BSLEVEL)
+				var/datum/map_template/ruin/exploration/ruin/BS_Ruin = selected_ruin
+				if(BS_Ruin.limited)
+					bluespace_valid_ruins -= BS_Ruin
+			if(BLUESPACE_DRIVE_SPACELEVEL)
+				var/datum/map_template/ruin/space/Space_ruin = selected_ruin
+				if(!Space_ruin.allow_duplicates)
+					standard_valid_ruins -= Space_ruin
+			if(BLUESPACE_DRIVE_MININGLEVEL)
+				var/datum/map_template/ruin/lavaland/ruin = selected_ruin
+				if(!selected_ruin.allow_duplicates)
+					mining_ruins -= ruin
+
 		//Subtract Cost
 		selected_ruin.try_to_place(data_holder.z_value, /area/space)
 		cost_limit -= selected_ruin.cost

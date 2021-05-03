@@ -20,7 +20,7 @@ GLOBAL_VAR_INIT(ships_destroyed, 0)
 	var/combat_allowed = TRUE
 
 	//Do we use bluespace or normal generation
-	var/bluespace = TRUE
+	var/generation_mode = BLUESPACE_DRIVE_SPACELEVEL
 
 	//The star systems we can go to (We can choose 1 and new ones are generated after we jump)
 	var/list/star_systems
@@ -55,7 +55,7 @@ GLOBAL_VAR_INIT(ships_destroyed, 0)
 	//If somehow the docking port manages to get destroyed, assume the ship to be lost
 	var/obj/docking_port/mobile/M = SSshuttle.getShuttle(mobile_port_id, FALSE)
 	if(!M)
-		log_runtime("Unable to locate docking port [mobile_port_id]")
+		log_shuttle("Unable to locate docking port [mobile_port_id]")
 		qdel(src)
 		return
 	if(M.mode != SHUTTLE_IDLE)
@@ -148,12 +148,14 @@ GLOBAL_VAR_INIT(ships_destroyed, 0)
 	for(var/i in 0 to 5)
 		//Generate star systems
 		var/datum/star_system/system = new(jumps)
-		system.bluespace_ruins = bluespace
+		system.ruin_spawn_type = generation_mode
+		if(generation_mode == BLUESPACE_DRIVE_MININGLEVEL)
+			system.calculated_research_potential = max(system.calculated_research_potential + rand(10, 30), 50)
 		//Note: If another system has the same name, it will be overwritten which is fine.
 		star_systems[system.name] = system
 	jumps ++
 
 /datum/ship_datum/custom_shuttle
-	bluespace = FALSE
+	generation_mode = BLUESPACE_DRIVE_BSLEVEL
 	//Custom shuttles have to take a really, really heavy beating to be considered destroyed (it would be mean to nuke player ships)
 	health_percentage = 0.8

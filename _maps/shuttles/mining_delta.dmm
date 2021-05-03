@@ -20,7 +20,7 @@
 /turf/open/floor/pod/dark,
 /area/shuttle/mining)
 "d" = (
-/obj/machinery/computer/shuttle/mining,
+/obj/machinery/computer/system_map/mining,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -79,7 +79,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/docking_port/mobile{
+/obj/docking_port/mobile/mining{
 	dir = 4;
 	dwidth = 3;
 	height = 5;

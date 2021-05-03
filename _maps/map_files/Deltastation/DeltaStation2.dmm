@@ -3331,7 +3331,7 @@
 /turf/open/floor/plasteel,
 /area/construction/mining/aux_base)
 "afY" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/yellow,
@@ -25730,7 +25730,7 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/qm)
 "aWa" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -35669,7 +35669,7 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/miningoffice)
 "bma" = (
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	dir = 1
 	},
 /obj/effect/turf_decal/bot,

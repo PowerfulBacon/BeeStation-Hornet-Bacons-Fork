@@ -1242,7 +1242,7 @@
 /obj/machinery/airalarm{
 	pixel_y = 23
 	},
-/obj/machinery/computer/shuttle/mining{
+/obj/machinery/computer/system_map/mining{
 	req_access = null
 	},
 /obj/effect/turf_decal/tile/purple{
