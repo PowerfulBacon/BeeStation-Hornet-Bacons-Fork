@@ -350,7 +350,8 @@ SUBSYSTEM_DEF(bluespace_exploration)
 		standard_valid_ruins += R
 	//===Mining ruins
 	var/list/mining_ruins = list()
-	mining_ruins = SSmapping.lava_ruins_templates
+	for(var/template_name in SSmapping.lava_ruins_templates)
+		mining_ruins += SSmapping.lava_ruins_templates[template_name]
 	//Generate Ruins
 	var/cost_limit = target_level.calculated_research_potential
 	if(target_level?.ruin_spawn_type == BLUESPACE_DRIVE_BSLEVEL)

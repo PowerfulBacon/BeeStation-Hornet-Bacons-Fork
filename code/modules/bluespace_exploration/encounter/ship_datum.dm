@@ -150,7 +150,7 @@ GLOBAL_VAR_INIT(ships_destroyed, 0)
 		var/datum/star_system/system = new(jumps)
 		system.ruin_spawn_type = generation_mode
 		if(generation_mode == BLUESPACE_DRIVE_MININGLEVEL)
-			system.calculated_research_potential = max(system.calculated_research_potential + rand(10, 30), 50)
+			system.calculated_research_potential = min(system.calculated_research_potential + rand(10, 30), 50)
 		//Note: If another system has the same name, it will be overwritten which is fine.
 		star_systems[system.name] = system
 	jumps ++
