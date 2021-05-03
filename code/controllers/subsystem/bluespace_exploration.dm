@@ -334,7 +334,6 @@ SUBSYSTEM_DEF(bluespace_exploration)
 
 //===================SPAWNING RUINS PROCS===================
 
-//TODO: Make this slower and spread over a time limit
 /datum/controller/subsystem/bluespace_exploration/proc/place_ruins(datum/data_holder/bluespace_exploration/data_holder)
 	//(Temp) get randomly created level
 	//===Generate bluespace ruins===
