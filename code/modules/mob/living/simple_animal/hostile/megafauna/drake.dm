@@ -185,7 +185,7 @@ Difficulty: Medium
 		if(istype(T, /turf/open/indestructible))
 			continue
 		if(!istype(T, /turf/closed/indestructible))
-			T.ChangeTurf(/turf/open/floor/plating/asteroid/basalt/lava_land_surface, flags = CHANGETURF_INHERIT_AIR)
+			T.ChangeTurf(/turf/closed/mineral/random/mining, flags = CHANGETURF_INHERIT_AIR)
 		else
 			indestructible_turfs += T
 	SLEEP_CHECK_DEATH(10) // give them a bit of time to realize what attack is actually happening

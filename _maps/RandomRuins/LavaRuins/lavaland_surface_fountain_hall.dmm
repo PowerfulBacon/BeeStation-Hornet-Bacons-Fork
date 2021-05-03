@@ -28,6 +28,10 @@
 /obj/structure/fans/tiny/invisible,
 /turf/open/floor/engine/cult,
 /area/ruin/unpowered)
+"C" = (
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/engine/cult,
+/area/ruin/unpowered)
 
 (1,1,1) = {"
 a
@@ -86,7 +90,7 @@ b
 (4,1,1) = {"
 b
 c
-f
+C
 f
 f
 f

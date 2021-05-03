@@ -4,7 +4,7 @@
 /area/template_noop)
 "b" = (
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "c" = (
@@ -15,30 +15,30 @@
 /area/ruin/unpowered)
 "e" = (
 /obj/effect/decal/remains/human,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered)
 "f" = (
 /obj/structure/destructible/cult/pylon,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered)
 "g" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "i" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "k" = (
 /obj/effect/decal/remains/human,
 /obj/item/melee/cultblade,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "l" = (
@@ -46,16 +46,33 @@
 /obj/item/clothing/shoes/cult,
 /obj/item/clothing/suit/cultrobes,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "m" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
-"o" = (
+"q" = (
+/obj/effect/decal/remains/human,
+/obj/item/clothing/shoes/cult,
+/obj/item/clothing/suit/cultrobes,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/engine/cult{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/ruin/unpowered)
+"s" = (
+/turf/closed/mineral/random/mining,
+/area/ruin/unpowered)
+"v" = (
+/turf/open/floor/engine/cult{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"K" = (
 /obj/effect/rune/narsie{
 	color = "#ff0000";
 	used = 1
@@ -73,42 +90,31 @@
 	message = "<span class='cult italic'><b><span class='big'>You've made a grave mistake, haven't you?</span></b></span>";
 	name = "ohfuck"
 	},
+/obj/effect/abstract/mining_landmark,
 /turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/ruin/unpowered)
-"q" = (
-/obj/effect/decal/remains/human,
-/obj/item/clothing/shoes/cult,
-/obj/item/clothing/suit/cultrobes,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/engine/cult{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/unpowered)
-"s" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered)
 
 (1,1,1) = {"
-a
-a
-a
-a
-a
-a
-b
-c
+v
+v
+v
+v
+v
+v
 b
 a
-a
-a
-a
-a
-a
+b
+v
+v
+v
+v
+v
+v
 "}
 (2,1,1) = {"
-a
+v
 d
 e
 c
@@ -122,10 +128,10 @@ s
 c
 s
 d
-a
+v
 "}
 (3,1,1) = {"
-a
+v
 e
 f
 s
@@ -139,10 +145,10 @@ d
 e
 f
 s
-a
+v
 "}
 (4,1,1) = {"
-a
+v
 c
 s
 c
@@ -156,10 +162,10 @@ c
 c
 e
 c
-a
+v
 "}
 (5,1,1) = {"
-a
+v
 s
 d
 c
@@ -173,10 +179,10 @@ c
 c
 d
 s
-a
+v
 "}
 (6,1,1) = {"
-a
+v
 c
 c
 c
@@ -190,7 +196,7 @@ b
 c
 c
 c
-a
+v
 "}
 (7,1,1) = {"
 b
@@ -210,21 +216,21 @@ b
 b
 "}
 (8,1,1) = {"
-c
+a
 b
 g
 b
 b
 d
 b
-o
+K
 b
 d
 b
 b
 g
 b
-c
+a
 "}
 (9,1,1) = {"
 b
@@ -244,7 +250,7 @@ b
 b
 "}
 (10,1,1) = {"
-a
+v
 c
 c
 c
@@ -258,10 +264,10 @@ b
 c
 c
 c
-a
+v
 "}
 (11,1,1) = {"
-a
+v
 s
 d
 c
@@ -275,10 +281,10 @@ c
 c
 d
 s
-a
+v
 "}
 (12,1,1) = {"
-a
+v
 c
 s
 c
@@ -292,10 +298,10 @@ c
 c
 e
 c
-a
+v
 "}
 (13,1,1) = {"
-a
+v
 e
 f
 s
@@ -309,10 +315,10 @@ d
 e
 f
 s
-a
+v
 "}
 (14,1,1) = {"
-a
+v
 d
 e
 c
@@ -326,22 +332,22 @@ s
 c
 s
 d
-a
+v
 "}
 (15,1,1) = {"
-a
-a
-a
-a
-a
-a
-b
-c
+v
+v
+v
+v
+v
+v
 b
 a
-a
-a
-a
-a
-a
+b
+v
+v
+v
+v
+v
+v
 "}

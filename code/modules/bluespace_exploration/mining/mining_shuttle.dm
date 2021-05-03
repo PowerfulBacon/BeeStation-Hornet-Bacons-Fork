@@ -8,8 +8,18 @@
 	health_percentage = 0.8
 	generation_mode = BLUESPACE_DRIVE_MININGLEVEL
 
+GLOBAL_LIST_EMPTY(mining_landmarks)
+
 /obj/effect/abstract/mining_landmark
 	name = ""
+
+/obj/effect/abstract/mining_landmark/Initialize()
+	. = ..()
+	GLOB.mining_landmarks += src
+
+/obj/effect/abstract/mining_landmark/Destroy(force)
+	GLOB.mining_landmarks -= src
+	. = ..()
 
 /obj/machinery/computer/system_map/mining
 	name = "mining shuttle console"
@@ -19,7 +29,7 @@
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_ORANGE
 	shuttle_id = "mining"
-	standard_port_locations = list("mining_home", "mining_public")
+	standard_port_locations = list("mining_home")
 	var/list/dumb_rev_heads = list()
 
 /obj/machinery/computer/system_map/mining/attack_hand(mob/user)

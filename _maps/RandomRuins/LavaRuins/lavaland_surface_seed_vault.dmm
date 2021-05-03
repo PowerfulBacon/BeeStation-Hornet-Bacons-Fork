@@ -1,10 +1,10 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "ab" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "ah" = (
 /turf/open/floor/plasteel/freezer,
 /area/ruin/powered/seedvault)
@@ -24,8 +24,8 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "ak" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/seed_vault,
@@ -186,14 +186,14 @@
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "aM" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "aN" = (
 /obj/machinery/door/airlock,
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1{
@@ -251,6 +251,10 @@
 	},
 /turf/open/floor/plasteel/freezer,
 /area/ruin/powered/seedvault)
+"fc" = (
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/plasteel/freezer,
+/area/ruin/powered/seedvault)
 "gE" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 1
@@ -296,7 +300,7 @@
 /obj/machinery/atmospherics/components/unary/outlet_injector/on/layer3{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/powered/seedvault)
 "of" = (
 /obj/structure/table/wood,
@@ -463,6 +467,9 @@
 	},
 /turf/open/floor/plasteel/freezer,
 /area/ruin/powered/seedvault)
+"Tn" = (
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -483,8 +490,8 @@ aa
 aa
 aa
 aa
-ab
-ab
+Tn
+Tn
 "}
 (2,1,1) = {"
 aa
@@ -505,11 +512,11 @@ aa
 aa
 aa
 aa
-ab
-ab
+Tn
+Tn
 "}
 (3,1,1) = {"
-ab
+Tn
 aa
 aa
 aQ
@@ -526,12 +533,12 @@ aQ
 aa
 aa
 aa
-ab
+Tn
 aa
-ab
+Tn
 "}
 (4,1,1) = {"
-ab
+Tn
 aa
 aa
 aQ
@@ -553,7 +560,7 @@ aa
 aa
 "}
 (5,1,1) = {"
-aa
+Tn
 aa
 aQ
 aQ
@@ -619,7 +626,7 @@ aa
 aa
 "}
 (8,1,1) = {"
-ab
+Tn
 aa
 aQ
 tE
@@ -641,7 +648,7 @@ aa
 aa
 "}
 (9,1,1) = {"
-ab
+Tn
 aa
 aQ
 Hw
@@ -650,7 +657,7 @@ aQ
 ap
 Oy
 an
-ah
+fc
 ah
 aC
 ah
@@ -663,7 +670,7 @@ aa
 aa
 "}
 (10,1,1) = {"
-aa
+Tn
 aa
 aQ
 zi
@@ -707,7 +714,7 @@ aa
 aa
 "}
 (12,1,1) = {"
-ab
+Tn
 aa
 aQ
 aO
@@ -795,7 +802,7 @@ aa
 aa
 "}
 (16,1,1) = {"
-ab
+Tn
 aa
 ab
 aj
@@ -829,78 +836,78 @@ aQ
 am
 am
 aQ
-ab
-ab
-ab
+Tn
+Tn
+Tn
 aa
 aa
 aa
-ab
-ab
+Tn
+Tn
 "}
 (18,1,1) = {"
 aa
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
 aa
 aa
 aa
-ab
-ab
+Tn
+Tn
 "}
 (19,1,1) = {"
+Tn
 aa
 aa
 aa
-aa
-ab
-ab
-aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-aa
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
 aa
 aa
-ab
-ab
-ab
+aa
+Tn
+Tn
+Tn
 "}
 (20,1,1) = {"
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
+Tn
 aa
 aa
 aa
-ab
-ab
-ab
-aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-aa
-aa
-aa
-ab
-ab
-aa
+Tn
+Tn
+Tn
 "}

@@ -162,6 +162,7 @@ SUBSYSTEM_DEF(bluespace_exploration)
 			bluespace_systems[key] = BS_LEVEL_GENERATING
 			break	//Don't reserve every BS level like it used to
 	if(!free_level)
+		log_shuttle("No bluespace exploration free level found")
 		return
 	var/first_shuttle_id = ship_traffic_queue[1]
 	//Fetch the data holder and submit the target z
@@ -210,6 +211,7 @@ SUBSYSTEM_DEF(bluespace_exploration)
 //More time reliable at low and high tickrates than using CHECK_TICK
 
 /datum/controller/subsystem/bluespace_exploration/proc/wipe_z_level(z_level, datum/data_holder/bluespace_exploration/data_holder)
+	log_shuttle("Bluespace exploration: Wiping Z Level [z_level]")
 	wiping_z_level = TRUE
 	z_level_queue.Remove("[z_level]")
 	var/list/turfs = block(locate(1, 1, z_level), locate(world.maxx, world.maxy, z_level))
@@ -255,6 +257,7 @@ SUBSYSTEM_DEF(bluespace_exploration)
 			var/datum/data_holder/bluespace_exploration/data = data_holder
 			if(data.spawn_ruins)
 				addtimer(CALLBACK(src, .proc/place_ruins, data_holder), 0)
+			log_shuttle("Bluespace exploration: Z Level sucessfully wiped.")
 			wiping_z_level = FALSE	//Done :)
 			return
 
@@ -474,6 +477,7 @@ SUBSYSTEM_DEF(bluespace_exploration)
 		if(level.z_value == data_holder.z_value)
 			bluespace_systems[level] = BS_LEVEL_USED
 			break
+	log_shuttle("Bluespace exploration ATC: Bluespace tunnel generation complete, [data.shuttle_id] cleared for arrival.")
 	generating = world.time + shuttle.ignitionTime + 10
 	generating_level = -1
 
@@ -483,7 +487,8 @@ SUBSYSTEM_DEF(bluespace_exploration)
 
 /datum/controller/subsystem/bluespace_exploration/proc/shuttle_translation(shuttle_id, datum/data_holder/bluespace_exploration/data_holder)
 	var/obj/docking_port/mobile/shuttle = SSshuttle.getShuttle(shuttle_id)
-	if(!shuttle || generating)
+	if(!shuttle || (generating > world.time))
+		log_shuttle("Failed to perform shuttle translation: No shuttle / generation in progress")
 		return FALSE
 	generating = INFINITY
 	if(away_mission_port?.get_docked())
@@ -495,6 +500,7 @@ SUBSYSTEM_DEF(bluespace_exploration)
 	shuttle.destination = null
 	shuttle.mode = SHUTTLE_IGNITING
 	shuttle.setTimer(shuttle.ignitionTime)
+	log_shuttle("Bluespace exploration ATC: [shuttle_id] cleared for takeoff.")
 	//Clear the z-level after the shuttle leaves
 	addtimer(CALLBACK(src, .proc/generate_z_level, data_holder), shuttle.ignitionTime + 50, TIMER_UNIQUE)
 

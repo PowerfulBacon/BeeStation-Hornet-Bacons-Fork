@@ -3,155 +3,166 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "c" = (
 /obj/item/clockwork/alloy_shards/small,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
-"d" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "e" = (
 /obj/item/stack/tile/brass,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "f" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "g" = (
 /obj/item/clockwork/alloy_shards/medium/gear_bit,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "h" = (
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "i" = (
 /obj/structure/grille/ratvar/broken,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "j" = (
 /turf/closed/wall/clockwork,
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "k" = (
 /obj/item/clockwork/alloy_shards/small,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "l" = (
 /turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "m" = (
 /obj/item/clockwork/alloy_shards/medium,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "n" = (
 /obj/item/clockwork/component/belligerent_eye/blind_eye,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "o" = (
 /obj/item/clockwork/alloy_shards/large,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "p" = (
 /obj/item/clockwork/alloy_shards/medium,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "q" = (
 /obj/structure/lattice/catwalk/clockwork,
 /turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "r" = (
 /obj/structure/lattice/clockwork,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "s" = (
 /obj/item/clockwork/alloy_shards/large,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "t" = (
 /obj/item/stack/tile/brass,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "u" = (
 /obj/structure/grille/ratvar,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "v" = (
-/obj/item/clockwork/alloy_shards/medium,
-/obj/structure/lattice/clockwork,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/clockwork{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/mining/surface/outdoors/unexplored)
 "w" = (
 /obj/structure/grille/ratvar/broken,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
-"x" = (
-/obj/item/stack/tile/brass,
-/turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "y" = (
 /obj/item/clockwork/component/geis_capacitor/fallen_armor,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
-"z" = (
-/turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "A" = (
 /obj/item/clockwork/alloy_shards/clockgolem_remains,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "B" = (
 /obj/item/twohanded/clockwork/brass_spear,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "C" = (
 /obj/item/clockwork/alloy_shards/medium/gear_bit,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
+/area/mining/surface/outdoors/unexplored)
 "D" = (
 /obj/structure/grille/ratvar,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "E" = (
 /obj/item/clockwork/alloy_shards/clockgolem_remains,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 "F" = (
 /obj/structure/dead_ratvar,
 /turf/open/floor/clockwork{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/unexplored)
-"G" = (
+/area/mining/surface/outdoors/unexplored)
+"L" = (
+/obj/item/clockwork/alloy_shards/medium/gear_bit,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"M" = (
 /obj/item/stack/tile/brass/fifty,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"P" = (
+/obj/item/clockwork/alloy_shards/small,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"U" = (
+/obj/item/clockwork/alloy_shards/medium,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"W" = (
+/obj/structure/lattice/clockwork,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"Y" = (
+/obj/item/stack/tile/brass,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
+"Z" = (
+/obj/item/clockwork/alloy_shards/large,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors/unexplored)
 
 (1,1,1) = {"
 a
@@ -166,15 +177,15 @@ a
 a
 a
 a
-a
-b
-s
-h
-b
-a
-a
-a
-a
+f
+f
+f
+f
+f
+f
+f
+f
+f
 a
 a
 a
@@ -187,21 +198,21 @@ a
 a
 a
 a
-o
-b
 a
-h
-b
-r
+f
+f
+f
+f
+f
 c
 j
-x
+e
 b
 b
 g
-a
-a
-a
+f
+f
+f
 a
 a
 "}
@@ -210,14 +221,14 @@ a
 a
 a
 a
-a
-a
 f
-b
-l
-b
-v
-b
+f
+f
+f
+f
+f
+r
+f
 p
 w
 j
@@ -226,18 +237,18 @@ c
 l
 b
 b
-a
-a
-a
+f
+f
+f
 a
 "}
 (4,1,1) = {"
 a
 a
 a
-a
-a
-a
+f
+f
+f
 f
 l
 l
@@ -254,15 +265,15 @@ b
 h
 c
 r
-a
+f
 a
 "}
 (5,1,1) = {"
 a
-a
-a
-a
-a
+f
+f
+f
+f
 b
 l
 l
@@ -280,14 +291,14 @@ l
 D
 h
 r
-a
+f
 a
 "}
 (6,1,1) = {"
 a
-a
-a
-h
+f
+f
+f
 c
 h
 m
@@ -306,13 +317,13 @@ m
 c
 h
 f
-a
+f
 a
 "}
 (7,1,1) = {"
-a
-a
-b
+f
+f
+f
 b
 b
 l
@@ -332,13 +343,13 @@ l
 c
 f
 f
-b
+f
 a
 "}
 (8,1,1) = {"
-a
-h
-h
+f
+f
+f
 g
 c
 b
@@ -357,12 +368,12 @@ l
 l
 l
 f
-b
-a
+f
+f
 a
 "}
 (9,1,1) = {"
-a
+f
 b
 c
 b
@@ -383,12 +394,12 @@ l
 l
 b
 b
-b
-b
+f
+f
 a
 "}
 (10,1,1) = {"
-b
+f
 h
 l
 l
@@ -409,12 +420,12 @@ l
 l
 l
 m
-l
-l
+f
+f
 a
 "}
 (11,1,1) = {"
-c
+P
 i
 j
 j
@@ -435,12 +446,12 @@ l
 l
 l
 l
-l
-b
-a
+f
+f
+f
 "}
 (12,1,1) = {"
-d
+f
 j
 j
 j
@@ -463,11 +474,11 @@ l
 b
 h
 o
-a
+f
 "}
 (13,1,1) = {"
-e
-k
+Y
+P
 b
 l
 l
@@ -489,11 +500,11 @@ l
 l
 b
 b
-a
+f
 "}
 (14,1,1) = {"
-b
-b
+a
+f
 b
 m
 l
@@ -514,13 +525,13 @@ l
 l
 b
 b
-h
-b
+f
+f
 "}
 (15,1,1) = {"
-b
-b
-b
+a
+f
+f
 l
 l
 l
@@ -530,7 +541,7 @@ h
 h
 h
 h
-h
+v
 h
 k
 B
@@ -540,14 +551,14 @@ l
 l
 l
 b
-b
-a
+f
+f
 "}
 (16,1,1) = {"
+a
+a
 f
-l
-l
-l
+f
 l
 l
 l
@@ -570,10 +581,10 @@ f
 a
 "}
 (17,1,1) = {"
-b
-b
-b
-l
+a
+f
+f
+f
 l
 l
 b
@@ -592,13 +603,13 @@ l
 r
 l
 l
-b
-a
+f
+f
 "}
 (18,1,1) = {"
-b
-h
-l
+a
+f
+f
 l
 l
 b
@@ -618,11 +629,11 @@ r
 h
 b
 b
-m
-b
+U
+f
 "}
 (19,1,1) = {"
-b
+f
 b
 l
 l
@@ -644,11 +655,11 @@ c
 h
 r
 h
-b
-b
+f
+f
 "}
 (20,1,1) = {"
-b
+f
 l
 l
 l
@@ -670,11 +681,11 @@ l
 b
 E
 r
-G
-o
+M
+Z
 "}
 (21,1,1) = {"
-g
+L
 b
 l
 l
@@ -696,11 +707,11 @@ l
 l
 l
 j
-j
-r
+f
+W
 "}
 (22,1,1) = {"
-c
+P
 c
 b
 l
@@ -722,12 +733,12 @@ l
 l
 h
 j
-j
-j
+f
+f
 "}
 (23,1,1) = {"
-b
-h
+f
+f
 m
 n
 b
@@ -748,12 +759,12 @@ l
 b
 b
 w
-r
-b
+W
+f
 "}
 (24,1,1) = {"
-a
-a
+f
+f
 b
 b
 l
@@ -766,21 +777,21 @@ p
 h
 m
 e
-z
+h
 j
 j
 l
 l
 c
 l
-l
-b
-a
+f
+f
+f
 "}
 (25,1,1) = {"
-a
-a
-a
+f
+f
+f
 l
 l
 l
@@ -791,22 +802,22 @@ l
 b
 h
 r
-x
+e
 h
 l
 l
 l
 l
 l
-l
-a
-a
+f
+f
+f
 a
 "}
 (26,1,1) = {"
-a
-a
-a
+f
+f
+f
 c
 b
 l
@@ -823,17 +834,17 @@ l
 l
 l
 c
-m
-b
-a
+U
+f
+f
 a
 a
 "}
 (27,1,1) = {"
-a
-a
-a
-b
+f
+f
+f
+f
 h
 b
 l
@@ -849,17 +860,17 @@ l
 l
 l
 l
-b
-a
-a
+f
+f
+f
 a
 a
 "}
 (28,1,1) = {"
 a
-a
-a
-a
+f
+f
+f
 c
 b
 l
@@ -875,34 +886,34 @@ l
 b
 l
 f
-a
-a
+f
+f
 a
 a
 a
 "}
 (29,1,1) = {"
 a
-a
-a
-a
-b
-b
+f
+f
+f
+f
+f
 f
 c
 b
-l
+f
 c
 l
 l
 l
 l
 c
-o
-l
-b
-a
-a
+Z
+f
+f
+f
+f
 a
 a
 a
@@ -910,23 +921,23 @@ a
 (30,1,1) = {"
 a
 a
-a
-a
-a
+f
+f
+f
 g
 c
-b
-l
-l
-b
-m
+f
+f
+f
+f
+U
 l
 b
 l
 f
-b
-a
-a
+f
+f
+f
 a
 a
 a
@@ -938,20 +949,20 @@ a
 a
 a
 a
-a
-a
-a
-b
-l
-b
-a
-b
-l
-c
 f
 f
-a
-a
+f
+f
+f
+f
+f
+f
+f
+P
+f
+f
+f
+f
 a
 a
 a
@@ -971,10 +982,10 @@ a
 a
 a
 a
-a
-a
-a
-c
+f
+f
+f
+P
 a
 a
 a

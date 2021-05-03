@@ -3,11 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "c" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "d" = (
 /obj/structure/stone_tile/block{
 	dir = 8
@@ -15,8 +15,8 @@
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "e" = (
 /obj/structure/stone_tile/block{
 	dir = 8
@@ -24,8 +24,8 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "f" = (
 /obj/structure/stone_tile/block{
 	dir = 4
@@ -33,20 +33,20 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "g" = (
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "h" = (
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "i" = (
 /obj/structure/stone_tile{
 	dir = 8
@@ -55,8 +55,8 @@
 	dir = 1
 	},
 /obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "j" = (
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
@@ -65,8 +65,8 @@
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "k" = (
 /obj/structure/stone_tile/cracked,
 /obj/structure/stone_tile{
@@ -75,8 +75,8 @@
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "l" = (
 /obj/structure/stone_tile{
 	dir = 8
@@ -85,8 +85,8 @@
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "m" = (
 /obj/structure/stone_tile{
 	dir = 4
@@ -95,8 +95,8 @@
 	dir = 8
 	},
 /obj/structure/stone_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "n" = (
 /obj/structure/stone_tile/block{
 	dir = 8
@@ -105,14 +105,14 @@
 	dir = 4
 	},
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/hunter,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "o" = (
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "p" = (
 /obj/structure/stone_tile{
 	dir = 1
@@ -121,8 +121,8 @@
 	dir = 8
 	},
 /obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "q" = (
 /obj/structure/stone_tile{
 	dir = 4
@@ -131,8 +131,8 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "r" = (
 /obj/structure/stone_tile{
 	dir = 1
@@ -141,29 +141,41 @@
 	dir = 8
 	},
 /obj/structure/stone_tile,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "s" = (
 /obj/structure/stone_tile/surrounding_tile/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "t" = (
 /obj/structure/stone_tile/block/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "u" = (
 /obj/structure/stone_tile/surrounding_tile{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "v" = (
 /obj/structure/stone_tile/surrounding/cracked{
 	dir = 6
 	},
 /obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"E" = (
+/obj/structure/stone_tile/block{
+	dir = 8
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"L" = (
+/obj/structure/stone_tile/block/cracked{
+	dir = 4
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 
 (1,1,1) = {"
 a
@@ -238,10 +250,10 @@ b
 b
 "}
 (5,1,1) = {"
-b
+E
 c
 c
-c
+E
 c
 c
 c
@@ -256,7 +268,7 @@ c
 b
 "}
 (6,1,1) = {"
-b
+E
 d
 e
 e
@@ -274,12 +286,12 @@ c
 b
 "}
 (7,1,1) = {"
-b
 c
 c
+L
 c
 c
-c
+L
 c
 h
 j

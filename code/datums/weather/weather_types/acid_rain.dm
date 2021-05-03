@@ -17,7 +17,7 @@
 	end_message = "<span class='boldannounce'>The downpour gradually slows to a light shower. It should be safe outside now.</span>"
 	end_sound = 'sound/ambience/acidrain_end.ogg'
 
-	area_type = /area/lavaland/surface/outdoors
+	area_type = /area/mining/surface/outdoors
 	target_trait = ZTRAIT_MINING
 
 	immunity_type = "acid" // temp

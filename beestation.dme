@@ -1662,6 +1662,7 @@
 #include "code\modules\bluespace_exploration\encounter\mapping\encounter_loadouts.dm"
 #include "code\modules\bluespace_exploration\encounter\mapping\mob_spawners.dm"
 #include "code\modules\bluespace_exploration\factions\_faction.dm"
+#include "code\modules\bluespace_exploration\mining\mining_pointer.dm"
 #include "code\modules\bluespace_exploration\mining\mining_shuttle.dm"
 #include "code\modules\bluespace_exploration\ruins\landmarks.dm"
 #include "code\modules\bluespace_exploration\ruins\objective.dm"

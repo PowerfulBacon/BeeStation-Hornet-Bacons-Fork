@@ -1,329 +1,616 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"b" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"c" = (
-/turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"d" = (
-/turf/closed/wall/rust,
-/area/ruin/unpowered)
-"e" = (
 /obj/structure/mirror{
+	broken = 1;
 	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
 	icon_state = "mirror_broke";
-	pixel_x = -28;
-	broken = 1
-	},
-/obj/item/clothing/suit/hooded/bloated_human,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
-"f" = (
-/obj/structure/mirror{
-	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
-	icon_state = "mirror_broke";
-	pixel_x = 28;
-	broken = 1
+	pixel_x = 28
 	},
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
-/area/ruin/unpowered)
-"g" = (
-/obj/effect/decal/cleanable/blood/tracks,
-/obj/structure/mirror{
-	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
-	icon_state = "mirror_broke";
-	pixel_x = -28;
-	broken = 1
-	},
+/area/mining/surface/outdoors)
+"d" = (
+/obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"h" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/mining/surface/outdoors)
+"f" = (
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "i" = (
 /turf/open/floor/plating,
 /area/ruin/unpowered)
-"j" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
 "k" = (
-/obj/structure/mirror{
-	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
-	icon_state = "mirror_broke";
-	pixel_y = 28;
-	broken = 1
-	},
-/obj/item/kitchen/knife/envy,
+/obj/effect/abstract/mining_landmark,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/mining/surface/outdoors)
 "l" = (
 /obj/structure/mirror{
+	broken = 1;
 	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
 	icon_state = "mirror_broke";
-	pixel_x = 28;
-	broken = 1
-	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
-"m" = (
-/obj/structure/mirror{
-	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
-	icon_state = "mirror_broke";
-	pixel_x = -28;
-	broken = 1
+	pixel_x = 28
 	},
 /turf/open/floor/plating,
 /area/ruin/unpowered)
 "n" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"p" = (
+/turf/closed/wall/rust,
+/area/mining/surface/outdoors)
+"u" = (
+/turf/open/lava/smooth/lava_land_surface,
+/area/mining/surface/outdoors)
+"v" = (
 /turf/open/floor/plating{
 	icon_state = "platingdmg2"
 	},
-/area/ruin/unpowered)
-"o" = (
+/area/mining/surface/outdoors)
+"x" = (
+/obj/effect/decal/cleanable/blood/tracks,
 /obj/structure/mirror{
+	broken = 1;
 	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
 	icon_state = "mirror_broke";
-	pixel_x = -28;
-	broken = 1
+	pixel_x = -28
+	},
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"z" = (
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"B" = (
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"G" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating,
+/area/ruin/unpowered)
+"H" = (
+/turf/template_noop,
+/area/template_noop)
+"J" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_x = 28
+	},
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"K" = (
+/obj/machinery/door/airlock/hatch,
+/turf/open/floor/plating,
+/area/ruin/unpowered)
+"M" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_x = -28
+	},
+/obj/item/clothing/suit/hooded/bloated_human,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"N" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_x = -28
+	},
+/turf/open/floor/plating,
+/area/ruin/unpowered)
+"P" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_x = -28
 	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
 /area/ruin/unpowered)
-"p" = (
-/obj/machinery/door/airlock/hatch,
+"S" = (
+/obj/effect/mapping_helpers/no_lava,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"T" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_x = -28
+	},
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"U" = (
+/obj/structure/mirror{
+	broken = 1;
+	desc = "This mirror has been shattered. It looks like the bad luck energies spilling from it are taking immediate effect on your surroundings!";
+	icon_state = "mirror_broke";
+	pixel_y = 28
+	},
+/obj/item/kitchen/knife/envy,
+/turf/open/floor/plating,
+/area/mining/surface/outdoors)
+"V" = (
+/turf/closed/wall/rust,
+/area/ruin/unpowered)
+"X" = (
+/obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating,
 /area/ruin/unpowered)
-"A" = (
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 
 (1,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+f
+f
+f
+f
+f
+H
+H
+H
+H
+H
+H
+H
 "}
 (2,1,1) = {"
-a
-a
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-a
+H
+H
+H
+H
+H
+H
+H
+H
+H
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
+H
+H
+H
+H
 "}
 (3,1,1) = {"
-b
-c
-c
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-c
-a
+H
+H
+H
+f
+f
+f
+f
+H
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
 "}
 (4,1,1) = {"
-c
-c
-d
-d
-d
-e
-g
-g
-g
-m
-m
-m
-m
-m
-o
-m
-j
-d
-c
-a
+H
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
 "}
 (5,1,1) = {"
-c
-d
-d
-d
-d
-d
-h
-h
-i
-i
-i
-i
-i
-h
-i
-i
-i
-d
-A
-a
+H
+f
+f
+f
+f
+f
+f
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+f
+f
+f
+f
+f
 "}
 (6,1,1) = {"
-c
-d
-d
-d
-d
-d
-d
-k
-i
-i
-i
-i
-i
-i
-i
-i
-i
-p
-A
-a
+H
+f
+f
+f
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+B
+f
+f
 "}
 (7,1,1) = {"
-c
-d
-d
-d
-d
-d
-i
-i
-i
-j
-i
-n
-i
-i
-i
-i
-i
-d
-c
-a
+H
+f
+f
+u
+u
+p
+p
+p
+p
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+u
+B
+f
+f
 "}
 (8,1,1) = {"
-c
-c
-d
-d
-d
 f
-j
-l
-l
-l
-l
-l
-l
-l
-l
-l
-j
-d
-c
-a
+f
+u
+u
+p
+p
+p
+M
+x
+x
+x
+T
+T
+T
+N
+N
+P
+N
+G
+V
+u
+B
+f
+H
 "}
 (9,1,1) = {"
-b
-c
-c
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-d
-c
-a
+f
+f
+u
+p
+p
+p
+p
+p
+n
+n
+z
+z
+z
+z
+i
+X
+i
+i
+i
+V
+S
+f
+f
+H
 "}
 (10,1,1) = {"
-b
-b
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
+f
+f
+u
+p
+p
+p
+p
+p
+p
+U
+k
+z
+z
+z
+i
+i
+i
+i
+i
+K
+S
+f
+f
+H
+"}
+(11,1,1) = {"
+f
+f
+u
+p
+p
+p
+p
+p
+z
+z
+z
+d
+z
+v
+i
+i
+i
+i
+i
+V
+u
+B
+f
+H
+"}
+(12,1,1) = {"
+f
+f
+u
+u
+p
+p
+p
 a
+d
+J
+J
+J
+J
+J
+l
+l
+l
+l
+G
+V
+u
+B
+f
+f
+"}
+(13,1,1) = {"
+H
+f
+f
+u
+u
+p
+p
+p
+p
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+u
+f
+f
+f
+"}
+(14,1,1) = {"
+H
+f
+f
+f
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+u
+f
+f
+f
+f
+"}
+(15,1,1) = {"
+H
+f
+f
+f
+B
+B
+B
+B
+B
+B
+B
+B
+B
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
+"}
+(16,1,1) = {"
+H
+H
+f
+f
+f
+B
+B
+B
+B
+B
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
+H
+"}
+(17,1,1) = {"
+H
+H
+H
+H
+f
+f
+f
+f
+f
+f
+f
+f
+f
+H
+H
+H
+H
+f
+f
+f
+f
+f
+H
+H
+"}
+(18,1,1) = {"
+H
+H
+H
+H
+H
+f
+f
+f
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
+H
 "}

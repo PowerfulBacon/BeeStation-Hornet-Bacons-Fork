@@ -166,15 +166,14 @@
 		/turf/closed/mineral/uranium = 35, /turf/closed/mineral/diamond = 30, /turf/closed/mineral/gold = 45, /turf/closed/mineral/titanium = 45,
 		/turf/closed/mineral/silver = 50, /turf/closed/mineral/copper = 50,/turf/closed/mineral/plasma = 50, /turf/closed/mineral/bscrystal = 20)
 
-/turf/closed/mineral/random/high_chance/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/random/high_chance/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 	mineralSpawnChanceList = list(
-		/turf/closed/mineral/uranium/volcanic = 35, /turf/closed/mineral/diamond/volcanic = 30, /turf/closed/mineral/gold/volcanic = 45, /turf/closed/mineral/titanium/volcanic = 45,
-		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/copper/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20)
+		/turf/closed/mineral/uranium/mining = 35, /turf/closed/mineral/diamond/mining = 30, /turf/closed/mineral/gold/mining = 45, /turf/closed/mineral/titanium/mining = 45,
+		/turf/closed/mineral/silver/mining = 50, /turf/closed/mineral/copper/mining = 50, /turf/closed/mineral/plasma/mining = 50, /turf/closed/mineral/bscrystal/mining = 20)
 
 
 
@@ -187,18 +186,17 @@
 		/turf/closed/mineral/gibtonite = 2, /turf/closed/mineral/bscrystal = 1)
 
 
-/turf/closed/mineral/random/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/random/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless
+	baseturfs = /turf/open/floor/plating/asteroid/airless
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
-	mineralChance = 10
+	mineralChance = 69
 	mineralSpawnChanceList = list(
-		/turf/closed/mineral/uranium/volcanic = 5, /turf/closed/mineral/diamond/volcanic = 1, /turf/closed/mineral/gold/volcanic = 10, /turf/closed/mineral/titanium/volcanic = 11,
-		/turf/closed/mineral/silver/volcanic = 12, /turf/closed/mineral/copper/volcanic = 12, /turf/closed/mineral/plasma/volcanic = 20, /turf/closed/mineral/iron/volcanic = 40,
-		/turf/closed/mineral/gibtonite/volcanic = 4, /turf/open/floor/plating/asteroid/airless/cave/volcanic = 1, /turf/closed/mineral/bscrystal/volcanic = 1)
+		/turf/closed/mineral/uranium/mining = 5, /turf/closed/mineral/diamond/mining = 1, /turf/closed/mineral/gold/mining = 10, /turf/closed/mineral/titanium/mining = 11,
+		/turf/closed/mineral/silver/mining = 12, /turf/closed/mineral/copper/mining = 12, /turf/closed/mineral/plasma/mining = 20, /turf/closed/mineral/iron/mining = 40,
+		/turf/closed/mineral/gibtonite/mining = 4, /turf/open/floor/plating/asteroid/airless/cave = 1, /turf/closed/mineral/bscrystal/mining = 1)
 
 
 /turf/closed/mineral/random/labormineral
@@ -209,16 +207,15 @@
 	icon_state = "rock_labor"
 
 
-/turf/closed/mineral/random/labormineral/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/random/labormineral/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 	mineralSpawnChanceList = list(
-		/turf/closed/mineral/uranium/volcanic = 3, /turf/closed/mineral/diamond/volcanic = 1, /turf/closed/mineral/gold/volcanic = 8, /turf/closed/mineral/titanium/volcanic = 8,
-		/turf/closed/mineral/silver/volcanic = 20, /turf/closed/mineral/copper/volcanic = 20, /turf/closed/mineral/plasma/volcanic = 30, /turf/closed/mineral/bscrystal/volcanic = 1, /turf/closed/mineral/gibtonite/volcanic = 2,
-		/turf/closed/mineral/iron/volcanic = 95)
+		/turf/closed/mineral/uranium/mining = 3, /turf/closed/mineral/diamond/mining = 1, /turf/closed/mineral/gold/mining = 8, /turf/closed/mineral/titanium/mining = 8,
+		/turf/closed/mineral/silver/mining = 20, /turf/closed/mineral/copper/mining = 20, /turf/closed/mineral/plasma/mining = 30, /turf/closed/mineral/bscrystal/mining = 1, /turf/closed/mineral/gibtonite/mining = 2,
+		/turf/closed/mineral/iron/mining = 95)
 
 
 
@@ -228,11 +225,10 @@
 	spread = 1
 	scan_state = "rock_Iron"
 
-/turf/closed/mineral/iron/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/iron/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 /turf/closed/mineral/iron/ice
@@ -251,11 +247,10 @@
 	spread = 1
 	scan_state = "rock_Uranium"
 
-/turf/closed/mineral/uranium/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/uranium/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 
@@ -265,11 +260,10 @@
 	spread = 1
 	scan_state = "rock_Diamond"
 
-/turf/closed/mineral/diamond/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/diamond/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 /turf/closed/mineral/diamond/ice
@@ -288,11 +282,10 @@
 	spread = 1
 	scan_state = "rock_Gold"
 
-/turf/closed/mineral/gold/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/gold/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 
@@ -302,11 +295,10 @@
 	spread = 1
 	scan_state = "rock_Silver"
 
-/turf/closed/mineral/silver/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/silver/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 /turf/closed/mineral/copper
@@ -315,11 +307,10 @@
 	spread = 1
 	scan_state = "rock_Copper"
 
-/turf/closed/mineral/copper/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/copper/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 /turf/closed/mineral/titanium
@@ -328,11 +319,10 @@
 	spread = 1
 	scan_state = "rock_Titanium"
 
-/turf/closed/mineral/titanium/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/titanium/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 
@@ -342,11 +332,10 @@
 	spread = 1
 	scan_state = "rock_Plasma"
 
-/turf/closed/mineral/plasma/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/plasma/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 /turf/closed/mineral/plasma/ice
@@ -375,24 +364,22 @@
 	spread = 0
 	scan_state = "rock_BScrystal"
 
-/turf/closed/mineral/bscrystal/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/bscrystal/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1
 
 
-/turf/closed/mineral/volcanic
-	environment_type = "basalt"
+/turf/closed/mineral/mining
 	turf_type = /turf/open/floor/plating/asteroid/basalt
 	baseturfs = /turf/open/floor/plating/asteroid/basalt
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	initial_gas_mix = AIRLESS_ATMOS
 
-/turf/closed/mineral/volcanic/lava_land_surface
+/turf/closed/mineral/mining/lava_land_surface
 	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
 	defer_change = 1
 
 /turf/closed/mineral/ash_rock //wall piece
@@ -524,9 +511,8 @@
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
 
 
-/turf/closed/mineral/gibtonite/volcanic
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+/turf/closed/mineral/gibtonite/mining
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
+	initial_gas_mix = AIRLESS_ATMOS
 	defer_change = 1

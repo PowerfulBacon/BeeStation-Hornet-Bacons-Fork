@@ -108,12 +108,12 @@
 
 /**********************Lavaland Areas**************************/
 
-/area/lavaland
+/area/mining
 	icon_state = "mining"
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
 
-/area/lavaland/surface
+/area/mining/surface
 	name = "Lavaland"
 	icon_state = "explored"
 	always_unpowered = TRUE
@@ -124,7 +124,7 @@
 	requires_power = TRUE
 	ambient_effects = MINING
 
-/area/lavaland/underground
+/area/mining/underground
 	name = "Lavaland Caves"
 	icon_state = "unexplored"
 	always_unpowered = TRUE
@@ -136,15 +136,15 @@
 	ambient_effects = MINING
 
 
-/area/lavaland/surface/outdoors
+/area/mining/surface/outdoors
 	name = "Lavaland Wastes"
 	outdoors = TRUE
 
-/area/lavaland/surface/outdoors/unexplored //monsters and ruins spawn here
+/area/mining/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
 
-/area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
+/area/mining/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
 
-/area/lavaland/surface/outdoors/explored
+/area/mining/surface/outdoors/explored
 	name = "Lavaland Labor Camp"

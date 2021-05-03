@@ -1,29 +1,33 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "b" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "c" = (
 /obj/effect/decal/remains/human,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "d" = (
 /turf/closed/indestructible/riveted,
-/area/lavaland/surface/outdoors)
-"e" = (
+/area/mining/surface/outdoors)
+"i" = (
 /obj/machinery/wish_granter,
 /obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/obj/effect/abstract/mining_landmark,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"P" = (
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
-a
-a
-a
-a
-a
+P
+P
+P
+P
+P
 a
 a
 a
@@ -47,15 +51,15 @@ a
 a
 a
 a
-b
-a
+P
+P
 "}
 (2,1,1) = {"
-a
-a
-a
-a
-a
+P
+P
+P
+P
+P
 a
 a
 a
@@ -79,31 +83,27 @@ a
 a
 a
 a
-a
-a
+P
+P
 "}
 (3,1,1) = {"
-a
-b
-a
-a
-a
-a
-b
-a
-a
-a
-a
+P
+P
+P
 a
 a
 a
 b
 a
-b
-b
-b
 a
 a
+a
+a
+a
+a
+b
+a
+b
 b
 b
 a
@@ -112,28 +112,32 @@ b
 b
 a
 a
+b
+b
 a
+P
+P
 "}
 (4,1,1) = {"
-a
-a
-a
-a
-b
-b
-b
-a
-a
-a
-a
-a
-a
+P
+P
+P
 a
 b
 b
 b
 a
 a
+a
+a
+a
+a
+a
+b
+b
+b
+a
+a
 b
 b
 b
@@ -143,43 +147,44 @@ b
 b
 b
 a
-b
-b
+P
+P
 "}
 (5,1,1) = {"
-a
-a
-b
-b
-b
-b
-b
-a
-a
-a
-a
-a
-a
-a
-a
-a
-b
-b
-b
-b
-b
-b
-b
+P
+P
+P
 b
 b
 b
 b
 a
 a
+a
+a
+a
+a
+a
+a
+a
 b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+a
+a
+P
 "}
 (6,1,1) = {"
-b
+P
+P
 a
 a
 a
@@ -191,7 +196,6 @@ a
 a
 a
 a
-a
 b
 b
 b
@@ -208,11 +212,11 @@ b
 b
 b
 a
-b
+P
 "}
 (7,1,1) = {"
-b
-a
+P
+P
 a
 a
 a
@@ -243,8 +247,8 @@ b
 a
 "}
 (8,1,1) = {"
-a
-a
+P
+P
 a
 a
 a
@@ -275,8 +279,8 @@ b
 a
 "}
 (9,1,1) = {"
-a
-a
+P
+P
 b
 a
 a
@@ -307,7 +311,7 @@ b
 b
 "}
 (10,1,1) = {"
-a
+P
 a
 a
 a
@@ -339,7 +343,7 @@ b
 b
 "}
 (11,1,1) = {"
-a
+P
 a
 a
 b
@@ -371,7 +375,7 @@ b
 b
 "}
 (12,1,1) = {"
-a
+P
 a
 b
 a
@@ -403,7 +407,7 @@ b
 b
 "}
 (13,1,1) = {"
-a
+P
 a
 b
 b
@@ -512,7 +516,7 @@ c
 b
 d
 d
-e
+i
 d
 d
 b
@@ -787,12 +791,12 @@ a
 a
 "}
 (25,1,1) = {"
+P
 a
 a
-b
-b
-b
-b
+a
+a
+a
 b
 b
 b
@@ -819,14 +823,14 @@ a
 a
 "}
 (26,1,1) = {"
-b
-b
-b
-b
-b
-b
-b
-b
+P
+P
+a
+a
+a
+a
+a
+a
 b
 b
 c
@@ -851,9 +855,9 @@ a
 a
 "}
 (27,1,1) = {"
-b
-b
-b
+P
+P
+P
 a
 a
 a
@@ -883,9 +887,10 @@ a
 a
 "}
 (28,1,1) = {"
-b
-b
-b
+P
+P
+P
+P
 a
 a
 a
@@ -902,20 +907,23 @@ b
 b
 b
 b
-b
-b
-b
-c
-b
-b
-b
-b
-b
-b
-b
+a
+a
+a
+a
+a
+P
+P
+P
+P
+P
 "}
 (29,1,1) = {"
-b
+P
+P
+P
+P
+P
 a
 a
 a
@@ -924,13 +932,6 @@ a
 a
 a
 a
-a
-a
-b
-b
-b
-b
-b
 b
 b
 b
@@ -939,15 +940,23 @@ a
 a
 a
 a
-b
 a
-b
-b
-b
-b
+P
+P
+P
+P
+P
+P
+P
+P
 "}
 (30,1,1) = {"
-b
+P
+P
+P
+P
+P
+P
 a
 a
 a
@@ -961,20 +970,15 @@ a
 a
 a
 a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+P
+P
+P
+P
+P
+P
+P
+P
+P
+P
+P
 "}

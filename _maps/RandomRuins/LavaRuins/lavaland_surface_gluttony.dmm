@@ -1,19 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "b" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "c" = (
 /turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "e" = (
 /turf/open/lava/smooth,
-/area/ruin/powered/gluttony)
-"f" = (
-/obj/item/reagent_containers/syringe/gluttony,
-/turf/open/floor/plasteel/freezer,
 /area/ruin/powered/gluttony)
 "g" = (
 /obj/effect/gluttony,
@@ -71,6 +67,9 @@
 /obj/machinery/light/small,
 /turf/open/floor/plasteel/freezer,
 /area/ruin/powered/gluttony)
+"w" = (
+/turf/template_noop,
+/area/template_noop)
 "z" = (
 /obj/item/trash/plate,
 /obj/machinery/light/small{
@@ -84,6 +83,11 @@
 	},
 /turf/open/floor/plasteel/freezer,
 /area/ruin/powered/gluttony)
+"K" = (
+/obj/item/reagent_containers/syringe/gluttony,
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/plasteel/freezer,
+/area/ruin/powered/gluttony)
 "R" = (
 /turf/closed/indestructible/riveted/uranium,
 /area/ruin/powered/gluttony)
@@ -94,37 +98,32 @@
 /area/ruin/powered/gluttony)
 
 (1,1,1) = {"
-a
-a
-a
-b
-b
-a
-a
-b
-a
-b
-b
-b
-b
-b
-b
-b
+w
+w
+w
 a
 a
 a
 a
+a
+a
+a
+a
+a
+a
+a
+a
+w
+w
+w
+w
+w
 "}
 (2,1,1) = {"
+w
+w
 a
 a
-a
-b
-b
-b
-b
-b
-b
 b
 b
 b
@@ -136,31 +135,36 @@ a
 a
 a
 a
+a
+a
+a
+w
+w
 "}
 (3,1,1) = {"
-b
+w
+w
 a
 a
-a
 b
 b
-b
-c
-c
-c
 b
 c
 c
 c
 b
+c
+c
+c
+b
 b
 a
 a
-a
-a
+w
+w
 "}
 (4,1,1) = {"
-b
+w
 a
 a
 a
@@ -182,8 +186,8 @@ a
 a
 "}
 (5,1,1) = {"
-b
-b
+w
+a
 a
 a
 a
@@ -204,7 +208,7 @@ a
 a
 "}
 (6,1,1) = {"
-a
+w
 a
 a
 a
@@ -227,7 +231,7 @@ a
 "}
 (7,1,1) = {"
 a
-b
+a
 b
 b
 b
@@ -267,10 +271,10 @@ c
 c
 c
 c
-b
+a
 "}
 (9,1,1) = {"
-b
+a
 b
 c
 R
@@ -289,11 +293,11 @@ R
 R
 R
 c
-b
+a
 "}
 (10,1,1) = {"
 a
-b
+a
 c
 R
 e
@@ -311,14 +315,14 @@ l
 i
 R
 c
-b
+a
 "}
 (11,1,1) = {"
 a
 b
 c
 R
-f
+K
 g
 g
 g
@@ -333,11 +337,11 @@ i
 i
 S
 b
-b
+a
 "}
 (12,1,1) = {"
 a
-b
+a
 c
 R
 e
@@ -355,7 +359,7 @@ i
 q
 R
 c
-b
+a
 "}
 (13,1,1) = {"
 a
@@ -377,7 +381,7 @@ R
 R
 R
 c
-b
+a
 "}
 (14,1,1) = {"
 a
@@ -398,12 +402,12 @@ c
 c
 c
 c
-c
-b
+a
+a
 "}
 (15,1,1) = {"
 a
-b
+a
 b
 b
 b
@@ -420,12 +424,12 @@ b
 b
 b
 b
-b
-b
+a
+a
 "}
 (16,1,1) = {"
-b
-b
+a
+a
 b
 a
 b
@@ -446,9 +450,9 @@ a
 a
 "}
 (17,1,1) = {"
-b
-b
-b
+a
+a
+a
 a
 b
 b
@@ -465,14 +469,14 @@ b
 b
 a
 a
-a
+w
 "}
 (18,1,1) = {"
+w
+w
 a
 a
 a
-a
-b
 b
 b
 c
@@ -483,15 +487,15 @@ R
 R
 c
 b
-b
-b
 a
 a
 a
+a
+w
 "}
 (19,1,1) = {"
-a
-a
+w
+w
 a
 a
 a
@@ -504,14 +508,18 @@ b
 c
 c
 c
-b
-b
 a
 a
 a
 a
+w
+w
 "}
 (20,1,1) = {"
+w
+w
+w
+w
 a
 a
 a
@@ -519,17 +527,13 @@ a
 a
 a
 a
-b
-b
-b
-b
-b
-b
-b
-a
-a
-b
 a
 a
 a
+a
+a
+w
+w
+w
+w
 "}

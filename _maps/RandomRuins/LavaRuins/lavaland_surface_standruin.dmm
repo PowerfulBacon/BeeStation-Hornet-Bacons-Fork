@@ -3,10 +3,10 @@
 /turf/template_noop,
 /area/template_noop)
 "ab" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ac" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ad" = (
 /turf/closed/indestructible/riveted/boss,
@@ -20,10 +20,10 @@
 	dir = 4
 	},
 /obj/structure/glowshroom/single{
-	icon_state = "glowshroom3";
-	dir = 4
+	dir = 4;
+	icon_state = "glowshroom3"
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "af" = (
 /obj/structure/stone_tile/block,
@@ -33,7 +33,7 @@
 /obj/structure/stone_tile/burnt{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ag" = (
 /obj/structure/stone_tile/block,
@@ -44,7 +44,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ash/stem_shroom,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ah" = (
 /turf/open/lava/smooth/lava_land_surface,
@@ -63,18 +63,18 @@
 /obj/structure/glowshroom/single{
 	icon_state = "glowshroom3"
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aj" = (
 /obj/structure/stone_tile/slab/cracked,
 /obj/structure/glowshroom/single{
 	icon_state = "glowshroom3"
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ak" = (
 /obj/structure/stone_tile/slab/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "al" = (
 /obj/structure/stone_tile,
@@ -84,7 +84,7 @@
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "am" = (
 /obj/structure/stone_tile,
@@ -94,12 +94,12 @@
 /obj/structure/stone_tile/burnt{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "an" = (
 /obj/structure/stone_tile,
 /obj/structure/flora/ash/stem_shroom,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ao" = (
 /obj/structure/stone_tile/center/burnt,
@@ -108,19 +108,19 @@
 "ap" = (
 /obj/structure/stone_tile/slab/cracked,
 /obj/structure/glowshroom/single{
-	icon_state = "glowshroom1";
-	dir = 4
+	dir = 4;
+	icon_state = "glowshroom1"
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aq" = (
 /obj/structure/stone_tile/slab,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ar" = (
 /obj/structure/stone_tile/surrounding,
 /obj/structure/stone_tile/center,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "as" = (
 /obj/structure/stone_tile/burnt{
@@ -129,19 +129,19 @@
 /obj/structure/stone_tile/block/burnt{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "at" = (
 /obj/structure/stone_tile,
 /obj/effect/decal/remains/xeno,
 /obj/item/clothing/under/costume/gladiator/ash_walker,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "au" = (
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "av" = (
 /obj/structure/stone_tile/slab,
@@ -151,18 +151,18 @@
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ax" = (
 /obj/effect/decal/remains/human,
 /obj/item/clothing/under/rank/cargo/miner/lavaland,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "ay" = (
 /obj/structure/stone_tile/slab/burnt,
 /obj/structure/stone_tile/center,
 /obj/item/candle/infinite,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "az" = (
 /obj/structure/stone_tile/block{
@@ -188,11 +188,11 @@
 /obj/structure/stone_tile/slab/burnt,
 /obj/structure/stone_tile/center/burnt,
 /obj/item/candle/infinite,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aD" = (
 /obj/structure/stone_tile/slab/burnt,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aE" = (
 /obj/structure/stone_tile/block{
@@ -204,12 +204,12 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aF" = (
 /obj/structure/stone_tile/block/cracked,
 /obj/structure/flora/ash/stem_shroom,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aG" = (
 /obj/structure/stone_tile/block,
@@ -251,13 +251,13 @@
 "aL" = (
 /obj/effect/decal/remains/xeno,
 /obj/item/borg/sight/meson,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aM" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aN" = (
 /obj/structure/stone_tile/block{
@@ -276,7 +276,7 @@
 /obj/structure/stone_tile{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aP" = (
 /obj/structure/stone_tile{
@@ -286,7 +286,7 @@
 /obj/structure/stone_tile/block/burnt{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aQ" = (
 /obj/structure/stone_tile/block{
@@ -301,10 +301,6 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
-/turf/open/lava/smooth,
-/area/ruin/unpowered/standruin)
-"aS" = (
-/obj/structure/stone_tile/slab,
 /turf/open/lava/smooth,
 /area/ruin/unpowered/standruin)
 "aT" = (
@@ -330,11 +326,11 @@
 /obj/structure/stone_tile/block/burnt{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aX" = (
 /obj/structure/stone_tile/surrounding,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "aY" = (
 /obj/structure/stone_tile/block/cracked{
@@ -400,7 +396,7 @@
 /obj/structure/stone_tile/block,
 /obj/structure/stone_tile/center/cracked,
 /obj/item/candle/infinite,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bf" = (
 /obj/structure/stone_tile/block{
@@ -415,12 +411,12 @@
 /obj/structure/stone_tile/block/burnt,
 /obj/structure/stone_tile/center/cracked,
 /obj/item/candle/infinite,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bh" = (
 /obj/structure/stone_tile/slab/burnt,
 /obj/structure/glowshroom/single,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bi" = (
 /obj/structure/stone_tile/block{
@@ -428,7 +424,7 @@
 	},
 /obj/structure/flora/ash/tall_shroom,
 /obj/structure/glowshroom/single,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bj" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
@@ -448,39 +444,44 @@
 /area/ruin/unpowered/standruin)
 "bm" = (
 /obj/structure/flora/ash/cacti,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bn" = (
 /obj/structure/stone_tile/center,
 /obj/structure/glowshroom/single,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bo" = (
 /obj/structure/stone_tile/block/burnt{
 	dir = 8
 	},
-/turf/closed/mineral/volcanic/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bp" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
 /obj/structure/stone_tile/block/cracked,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "bq" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
 /obj/structure/stone_tile/block,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/standruin)
 "br" = (
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
 /obj/structure/stone_tile/block/burnt,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
+/area/ruin/unpowered/standruin)
+"zB" = (
+/obj/structure/stone_tile/slab,
+/obj/effect/abstract/mining_landmark,
+/turf/open/lava/smooth,
 /area/ruin/unpowered/standruin)
 
 (1,1,1) = {"
@@ -617,7 +618,7 @@ al
 as
 aA
 aI
-aS
+zB
 ba
 aU
 bm

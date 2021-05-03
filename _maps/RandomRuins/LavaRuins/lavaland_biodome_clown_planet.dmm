@@ -503,26 +503,6 @@
 	},
 /turf/open/floor/plating,
 /area/ruin/powered/clownplanet)
-"aY" = (
-/obj/item/bikehorn,
-/obj/structure/disposalpipe/segment{
-	invisibility = 101
-	},
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/turf/open/indestructible{
-	icon_state = "darkfull";
-	wet = 8
-	},
-/area/ruin/powered/clownplanet)
 "aZ" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -1210,38 +1190,79 @@
 	wet = 16
 	},
 /area/ruin/powered/clownplanet)
-"eX" = (
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors/explored)
-"gX" = (
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/chasm/lavaland,
-/area/lavaland/surface/outdoors/explored)
-"hY" = (
-/obj/machinery/light,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"pv" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"ye" = (
-/turf/open/lava/smooth,
-/area/ruin/powered/clownplanet)
-"CB" = (
+"gR" = (
 /obj/item/paper/crumpled/bloody/ruins/lavaland/clown_planet/hope,
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors/explored)
+/area/template_noop)
+"gZ" = (
+/obj/effect/mapping_helpers/no_lava,
+/obj/item/grown/bananapeel{
+	color = "#2F3000";
+	name = "stealth banana peel"
+	},
+/turf/open/floor/noslip{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"lI" = (
+/obj/item/grown/bananapeel{
+	color = "#2F3000";
+	name = "stealth banana peel"
+	},
+/obj/effect/mapping_helpers/no_lava,
+/turf/template_noop,
+/area/template_noop)
+"nr" = (
+/obj/structure/lattice,
+/turf/template_noop,
+/area/template_noop)
+"rQ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/obj/effect/abstract/mining_landmark,
+/turf/open/indestructible{
+	icon_state = "darkfull";
+	wet = 8
+	},
+/area/ruin/powered/clownplanet)
+"sy" = (
+/obj/machinery/light/small,
+/obj/effect/mapping_helpers/no_lava,
+/turf/open/floor/noslip{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"ye" = (
+/turf/open/lava/smooth,
+/area/ruin/powered/clownplanet)
+"AE" = (
+/obj/effect/mapping_helpers/no_lava,
+/turf/open/floor/noslip{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"FU" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/no_lava,
+/turf/template_noop,
+/area/template_noop)
 "Hj" = (
 /obj/effect/decal/cleanable/food/pie_smudge,
 /obj/effect/turf_decal/tile/yellow{
@@ -1259,15 +1280,130 @@
 	wet = 8
 	},
 /area/ruin/powered/clownplanet)
-"KX" = (
-/obj/item/grown/bananapeel{
-	color = "#2F3000";
-	name = "stealth banana peel"
+"HH" = (
+/obj/structure/disposalpipe/trunk,
+/obj/structure/disposaloutlet{
+	dir = 1
 	},
 /obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/explored)
-"LH" = (
+/turf/open/floor/noslip{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"JN" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	invisibility = 101
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/clown,
+/turf/open/indestructible{
+	icon_state = "darkfull";
+	wet = 8
+	},
+/area/ruin/powered/clownplanet)
+"MX" = (
+/obj/effect/mapping_helpers/no_lava,
+/turf/template_noop,
+/area/template_noop)
+"QU" = (
+/obj/structure/disposalpipe/segment{
+	invisibility = 101
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/clown,
+/turf/open/indestructible{
+	icon_state = "darkfull";
+	wet = 8
+	},
+/area/ruin/powered/clownplanet)
+"SG" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	invisibility = 101
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/clown,
+/turf/open/indestructible{
+	icon_state = "darkfull";
+	wet = 8
+	},
+/area/ruin/powered/clownplanet)
+"SI" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"Tn" = (
+/obj/item/bikehorn,
+/obj/structure/disposalpipe/segment{
+	invisibility = 101
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/clown,
+/turf/open/indestructible{
+	icon_state = "darkfull";
+	wet = 8
+	},
+/area/ruin/powered/clownplanet)
+"Ts" = (
+/obj/machinery/light,
+/obj/effect/mapping_helpers/no_lava,
+/turf/template_noop,
+/area/template_noop)
+"TQ" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/no_lava,
+/turf/template_noop,
+/area/template_noop)
+"VG" = (
+/obj/item/clothing/head/cone,
+/obj/effect/mapping_helpers/no_lava,
+/turf/open/floor/noslip{
+	initial_gas_mix = "TEMP=2.7"
+	},
+/area/template_noop)
+"YH" = (
 /obj/machinery/disposal/deliveryChute{
 	desc = "The following is engraved upon the chute: A FATE WORSE THAN DEATH LIES WITHIN";
 	dir = 1;
@@ -1276,56 +1412,9 @@
 /obj/structure/disposalpipe/trunk,
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/ruin/powered/clownplanet)
-"Mv" = (
-/obj/effect/mapping_helpers/no_lava,
-/mob/living/simple_animal/hostile/retaliate/clown,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/explored)
-"MR" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"TD" = (
-/obj/structure/disposalpipe/trunk,
-/obj/structure/disposaloutlet{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/powered/clownplanet)
-"Xm" = (
-/obj/item/clothing/head/cone,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors/explored)
-"XO" = (
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/explored)
-"Yf" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/ruin/powered/clownplanet)
-"YI" = (
-/obj/machinery/light/small,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/noslip{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/powered/clownplanet)
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -1333,26 +1422,26 @@ aa
 aa
 aa
 aa
+nr
+aa
+aa
+nr
 aa
 aa
 aa
+nr
 aa
 aa
+MX
+MX
+MX
+MX
+MX
 aa
 aa
+nr
 aa
-aa
-aa
-XO
-XO
-XO
-XO
-XO
-aa
-aa
-aa
-aa
-aa
+nr
 aa
 aa
 aa
@@ -1367,8 +1456,8 @@ aa
 aa
 aa
 aa
+nr
 aa
-aa
 cc
 cc
 cc
@@ -1376,13 +1465,13 @@ cc
 cc
 cc
 cc
-pv
-XO
-gX
-XO
-XO
-gX
-pv
+SI
+MX
+MX
+MX
+MX
+MX
+SI
 cc
 cc
 cc
@@ -1411,11 +1500,11 @@ ye
 ye
 cc
 cc
-gX
-gX
-KX
-gX
-gX
+MX
+MX
+lI
+MX
+MX
 cc
 cc
 ye
@@ -1431,7 +1520,7 @@ aa
 "}
 (4,1,1) = {"
 aa
-aa
+nr
 aa
 aa
 cc
@@ -1446,9 +1535,9 @@ aJ
 ye
 cc
 cc
-gX
-gX
-gX
+MX
+MX
+MX
 cc
 cc
 ye
@@ -1464,9 +1553,9 @@ aa
 aa
 "}
 (5,1,1) = {"
-aa
-aa
-aa
+nr
+nr
+nr
 cc
 cc
 ye
@@ -1499,7 +1588,7 @@ aa
 "}
 (6,1,1) = {"
 aa
-aa
+nr
 aa
 cc
 ye
@@ -1528,12 +1617,12 @@ aU
 ye
 ye
 cc
-Yf
+FU
 aa
 "}
 (7,1,1) = {"
-aa
-aa
+nr
+nr
 cc
 cc
 ye
@@ -1635,7 +1724,7 @@ aa
 "}
 (10,1,1) = {"
 aa
-Mv
+MX
 cc
 ye
 an
@@ -1669,14 +1758,14 @@ cc
 "}
 (11,1,1) = {"
 aa
-hY
+Ts
 cc
 ye
 ao
 ch
 dB
 aH
-az
+SG
 az
 aL
 bb
@@ -1703,7 +1792,7 @@ cc
 "}
 (12,1,1) = {"
 aa
-Mv
+MX
 cc
 ye
 ap
@@ -1736,8 +1825,8 @@ ye
 cc
 "}
 (13,1,1) = {"
-XO
-Mv
+MX
+MX
 cc
 ye
 cc
@@ -1770,17 +1859,17 @@ ye
 cc
 "}
 (14,1,1) = {"
-XO
-Xm
+MX
+VG
 cc
 cc
 ye
 an
 ar
+QU
 ar
 ar
-ar
-aY
+Tn
 ar
 aH
 aA
@@ -1804,15 +1893,15 @@ ye
 cc
 "}
 (15,1,1) = {"
-eX
-eX
-LH
+AE
+gZ
+YH
 ch
 ch
 au
 ar
 ch
-ar
+QU
 aT
 ch
 ax
@@ -1838,9 +1927,9 @@ ye
 cc
 "}
 (16,1,1) = {"
-eX
-CB
-YI
+AE
+gR
+sy
 cc
 ye
 ao
@@ -1854,7 +1943,7 @@ ar
 au
 bt
 aM
-aG
+rQ
 aV
 ch
 bN
@@ -1872,9 +1961,9 @@ ye
 cc
 "}
 (17,1,1) = {"
-eX
-eX
-TD
+AE
+AE
+HH
 ch
 ch
 av
@@ -1906,8 +1995,8 @@ ye
 cc
 "}
 (18,1,1) = {"
-XO
-eX
+MX
+AE
 cc
 cc
 ye
@@ -1917,7 +2006,7 @@ az
 az
 aA
 aA
-aA
+JN
 aC
 aM
 aG
@@ -1940,8 +2029,8 @@ ye
 cc
 "}
 (19,1,1) = {"
-XO
-Mv
+MX
+MX
 cc
 ye
 ye
@@ -1975,7 +2064,7 @@ cc
 "}
 (20,1,1) = {"
 aa
-Mv
+MX
 cc
 ye
 cc
@@ -2009,7 +2098,7 @@ cc
 "}
 (21,1,1) = {"
 aa
-hY
+Ts
 cc
 ye
 cc
@@ -2043,7 +2132,7 @@ cc
 "}
 (22,1,1) = {"
 aa
-Mv
+MX
 cc
 ye
 aq
@@ -2178,8 +2267,8 @@ cc
 aa
 "}
 (26,1,1) = {"
-aa
-aa
+nr
+nr
 cc
 cc
 ye
@@ -2208,12 +2297,12 @@ cu
 ye
 ye
 cc
-Yf
+FU
 aa
 "}
 (27,1,1) = {"
 aa
-aa
+nr
 aa
 cc
 cc
@@ -2246,10 +2335,10 @@ aa
 aa
 "}
 (28,1,1) = {"
-aa
-aa
-aa
-aa
+nr
+nr
+nr
+nr
 cc
 cc
 ye
@@ -2262,9 +2351,9 @@ cc
 ye
 cc
 cc
-gX
-gX
-gX
+MX
+MX
+MX
 cc
 cc
 ye
@@ -2281,10 +2370,10 @@ aa
 "}
 (29,1,1) = {"
 aa
+nr
 aa
 aa
 aa
-aa
 cc
 cc
 cc
@@ -2295,11 +2384,11 @@ ye
 ye
 cc
 cc
-gX
-gX
-KX
-gX
-gX
+MX
+MX
+lI
+MX
+MX
 cc
 cc
 ye
@@ -2319,8 +2408,8 @@ aa
 aa
 aa
 aa
+nr
 aa
-aa
 cc
 cc
 cc
@@ -2328,13 +2417,13 @@ cc
 cc
 cc
 cc
-MR
-XO
-XO
-XO
-XO
-gX
-MR
+TQ
+MX
+MX
+MX
+MX
+MX
+TQ
 cc
 cc
 cc
@@ -2353,26 +2442,26 @@ aa
 aa
 aa
 aa
+nr
+aa
+aa
+nr
 aa
 aa
 aa
+nr
 aa
 aa
+MX
+MX
+MX
+MX
+MX
 aa
 aa
+nr
 aa
-aa
-aa
-XO
-gX
-XO
-XO
-XO
-aa
-aa
-aa
-aa
-aa
+nr
 aa
 aa
 aa

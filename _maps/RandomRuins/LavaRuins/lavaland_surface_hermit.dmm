@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "b" = (
 /turf/closed/wall/mineral/sandstone,
 /area/ruin/powered)
@@ -81,9 +81,6 @@
 /obj/item/tank/internals/oxygen,
 /turf/open/floor/plating/asteroid/basalt,
 /area/ruin/powered)
-"s" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "t" = (
 /turf/closed/wall/mineral/titanium/survival/pod,
 /area/ruin/powered)
@@ -178,30 +175,38 @@
 /obj/effect/spawner/structure/window/shuttle,
 /turf/open/floor/pod/dark,
 /area/ruin/powered)
+"U" = (
+/obj/item/tank/jetpack/improvised,
+/turf/open/floor/plating/asteroid/basalt,
+/area/ruin/powered)
 "W" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/open/floor/plating/asteroid/basalt,
 /area/ruin/powered)
+"Z" = (
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
+Z
+Z
+Z
 a
 a
 a
 a
 a
-a
-a
-a
-s
-s
-s
-s
-s
-s
-s
-s
+Z
+Z
+Z
+Z
+Z
+Z
+Z
+Z
 "}
 (2,1,1) = {"
+Z
 a
 a
 a
@@ -211,15 +216,15 @@ a
 a
 a
 a
-a
-s
-s
-s
-s
-s
-s
+Z
+Z
+Z
+Z
+Z
+Z
 "}
 (3,1,1) = {"
+Z
 a
 a
 a
@@ -229,15 +234,15 @@ a
 a
 a
 a
-a
-s
-s
-s
-s
-s
-s
+Z
+Z
+Z
+Z
+Z
+Z
 "}
 (4,1,1) = {"
+Z
 a
 a
 a
@@ -248,12 +253,11 @@ a
 a
 a
 a
-a
-s
-s
-s
-s
-s
+Z
+Z
+Z
+Z
+Z
 "}
 (5,1,1) = {"
 a
@@ -269,9 +273,9 @@ t
 t
 t
 t
-s
-s
-s
+Z
+Z
+Z
 "}
 (6,1,1) = {"
 a
@@ -287,9 +291,9 @@ v
 x
 B
 t
-s
-s
-s
+Z
+Z
+Z
 "}
 (7,1,1) = {"
 a
@@ -305,9 +309,9 @@ w
 y
 y
 D
-s
-s
-s
+Z
+Z
+Z
 "}
 (8,1,1) = {"
 a
@@ -323,14 +327,14 @@ o
 z
 C
 Q
-s
-s
-s
+Z
+Z
+Z
 "}
 (9,1,1) = {"
 c
 c
-f
+U
 i
 g
 f
@@ -341,9 +345,9 @@ o
 t
 t
 F
-s
-s
-s
+Z
+Z
+Z
 "}
 (10,1,1) = {"
 b
@@ -359,9 +363,9 @@ o
 A
 b
 a
-s
-s
-s
+Z
+Z
+Z
 "}
 (11,1,1) = {"
 b
@@ -378,8 +382,8 @@ c
 b
 a
 a
-s
-s
+Z
+Z
 "}
 (12,1,1) = {"
 c
@@ -454,9 +458,9 @@ J
 J
 "}
 (16,1,1) = {"
-a
-a
-a
+Z
+Z
+Z
 a
 a
 a

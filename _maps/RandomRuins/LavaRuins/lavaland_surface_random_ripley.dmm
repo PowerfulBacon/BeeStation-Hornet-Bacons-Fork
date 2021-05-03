@@ -1,25 +1,26 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/template_noop,
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "b" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "c" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"d" = (
-/obj/mecha/working/ripley/mining{
-	ruin_mecha = 1
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "e" = (
 /obj/item/clothing/shoes/workboots/mining,
 /obj/item/clothing/under/rank/cargo/miner/lavaland,
 /obj/effect/decal/remains/human,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"r" = (
+/obj/mecha/working/ripley/mining{
+	ruin_mecha = 1
+	},
+/obj/effect/abstract/mining_landmark,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 
 (1,1,1) = {"
 a
@@ -38,7 +39,7 @@ b
 (3,1,1) = {"
 b
 c
-d
+r
 e
 b
 "}

@@ -154,8 +154,8 @@
 /area/ruin/powered/beach)
 "aF" = (
 /obj/machinery/vending/boozeomat{
-	set_obj_flags = "EMAGGED";
-	req_access_txt = "0"
+	req_access_txt = "0";
+	set_obj_flags = "EMAGGED"
 	},
 /turf/open/floor/wood,
 /area/ruin/powered/beach)
@@ -456,6 +456,12 @@
 	},
 /turf/open/floor/pod/dark,
 /area/ruin/powered/beach)
+"ge" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
 "gg" = (
 /obj/structure/table,
 /obj/item/storage/box/drinkingglasses,
@@ -480,14 +486,6 @@
 /obj/effect/turf_decal/sand,
 /turf/open/floor/pod/dark,
 /area/ruin/powered/beach)
-"lF" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/open/floor/pod/dark{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/powered/beach)
 "lM" = (
 /obj/structure/dresser,
 /turf/open/floor/pod/dark,
@@ -496,6 +494,16 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/ruin/powered/beach)
+"mP" = (
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/plating/beach/sand,
+/area/ruin/powered/beach)
+"nV" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
 "oK" = (
 /obj/effect/turf_decal/caution{
 	dir = 1
@@ -571,6 +579,10 @@
 	},
 /turf/open/floor/plating/beach/sand,
 /area/ruin/powered/beach)
+"DU" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/ruin/powered/beach)
 "Ec" = (
 /obj/machinery/door/airlock/sandstone{
 	name = "Beach Access"
@@ -603,14 +615,6 @@
 	},
 /turf/open/floor/plating/beach/sand,
 /area/ruin/powered/beach)
-"TP" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/open/floor/pod/dark{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/powered/beach)
 "VO" = (
 /turf/open/floor/pod/dark,
 /area/ruin/powered/beach)
@@ -633,7 +637,7 @@ aa
 aa
 aa
 aa
-lF
+aa
 aa
 bW
 bW
@@ -645,7 +649,7 @@ bW
 bW
 bW
 aa
-lF
+nV
 aa
 aa
 aa
@@ -662,8 +666,8 @@ aa
 aa
 aa
 aa
-bW
-bW
+DU
+DU
 bW
 bW
 bW
@@ -678,8 +682,8 @@ cR
 bW
 bW
 bW
-bW
-bW
+DU
+DU
 aa
 aa
 aa
@@ -692,9 +696,9 @@ aa
 aa
 aa
 aa
-bW
-bW
-bW
+DU
+DU
+DU
 ap
 cg
 ar
@@ -711,8 +715,8 @@ bW
 ad
 bQ
 bT
-bW
-bW
+DU
+DU
 bW
 aa
 aa
@@ -723,8 +727,8 @@ aa
 aa
 aa
 aa
-bW
-bW
+DU
+DU
 ap
 ar
 ar
@@ -754,8 +758,8 @@ aa
 (5,1,1) = {"
 aa
 aa
-bW
-bW
+DU
+DU
 ad
 ar
 ar
@@ -778,15 +782,15 @@ bT
 bU
 bU
 bU
-bW
-bW
+DU
+DU
 aa
 aa
 "}
 (6,1,1) = {"
 aa
 aa
-bW
+DU
 aq
 ar
 ar
@@ -811,7 +815,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 aa
 "}
@@ -876,7 +880,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (9,1,1) = {"
@@ -908,7 +912,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (10,1,1) = {"
@@ -940,7 +944,7 @@ bU
 bV
 bU
 bU
-bW
+DU
 aa
 "}
 (11,1,1) = {"
@@ -972,7 +976,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (12,1,1) = {"
@@ -1036,7 +1040,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (14,1,1) = {"
@@ -1068,7 +1072,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (15,1,1) = {"
@@ -1086,7 +1090,7 @@ aK
 aK
 aK
 aA
-ar
+mP
 ar
 ar
 ar
@@ -1100,7 +1104,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (16,1,1) = {"
@@ -1132,7 +1136,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (17,1,1) = {"
@@ -1164,7 +1168,7 @@ bV
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (18,1,1) = {"
@@ -1228,7 +1232,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (20,1,1) = {"
@@ -1252,7 +1256,7 @@ ar
 bA
 bG
 bL
-ar
+aa
 bR
 bT
 bU
@@ -1260,7 +1264,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (21,1,1) = {"
@@ -1292,7 +1296,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (22,1,1) = {"
@@ -1324,7 +1328,7 @@ bU
 bU
 bV
 bU
-bW
+DU
 aa
 "}
 (23,1,1) = {"
@@ -1356,7 +1360,7 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 "}
 (24,1,1) = {"
@@ -1394,7 +1398,7 @@ aa
 (25,1,1) = {"
 aa
 aa
-bW
+DU
 aq
 ar
 ar
@@ -1419,15 +1423,15 @@ bU
 bU
 bU
 bU
-bW
+DU
 aa
 aa
 "}
 (26,1,1) = {"
 aa
 aa
-bW
-bW
+DU
+DU
 ap
 ar
 ar
@@ -1450,8 +1454,8 @@ bT
 bU
 bU
 bU
-bW
-bW
+DU
+DU
 aa
 aa
 "}
@@ -1459,8 +1463,8 @@ aa
 aa
 aa
 aa
-bW
-bW
+DU
+DU
 ad
 ar
 ar
@@ -1492,9 +1496,9 @@ aa
 aa
 aa
 aa
-bW
-bW
-bW
+DU
+DU
+DU
 ap
 ch
 ap
@@ -1511,8 +1515,8 @@ bW
 bN
 bR
 bT
-bW
-bW
+DU
+DU
 bW
 aa
 aa
@@ -1526,8 +1530,8 @@ aa
 aa
 aa
 aa
-bW
-bW
+DU
+DU
 bW
 bW
 bW
@@ -1542,8 +1546,8 @@ cR
 bW
 bW
 bW
-bW
-bW
+DU
+DU
 aa
 aa
 aa
@@ -1561,7 +1565,7 @@ aa
 aa
 aa
 aa
-TP
+ge
 aa
 bW
 bW
@@ -1573,7 +1577,7 @@ bW
 bW
 bW
 aa
-TP
+ge
 aa
 aa
 aa

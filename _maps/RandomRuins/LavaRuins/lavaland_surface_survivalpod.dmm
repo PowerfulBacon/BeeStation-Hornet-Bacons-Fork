@@ -3,24 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"c" = (
-/obj/structure/sign/mining/survival{
-	pixel_y = -32
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "d" = (
 /turf/closed/wall/mineral/titanium/survival/pod,
 /area/ruin/powered)
-"e" = (
-/obj/structure/sign/mining/survival{
-	dir = 4;
-	pixel_x = 32
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "f" = (
 /obj/structure/fans,
 /turf/open/floor/pod/dark,
@@ -39,12 +26,12 @@
 	dir = 8;
 	pixel_x = -32
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "j" = (
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "k" = (
 /obj/machinery/sleeper/survival_pod,
 /turf/open/floor/pod/dark,
@@ -65,15 +52,15 @@
 /area/ruin/powered)
 "n" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "o" = (
 /obj/effect/decal/cleanable/blood,
 /mob/living/simple_animal/hostile/asteroid/goliath/beast{
 	health = 0
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "p" = (
 /obj/structure/table/survival_pod,
 /obj/item/kitchen/knife/combat/survival,
@@ -99,8 +86,8 @@
 /area/ruin/powered)
 "s" = (
 /obj/effect/decal/cleanable/blood/footprints,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "t" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 1
@@ -113,28 +100,26 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "v" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/footprints,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "w" = (
-/obj/structure/sign/mining/survival{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/obj/effect/decal/cleanable/blood/drip,
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "x" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 1
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "y" = (
 /obj/structure/sign/mining{
 	pixel_y = 32
@@ -142,29 +127,58 @@
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "z" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "A" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"D" = (
+/obj/structure/sign/mining/survival{
+	pixel_y = -32
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"F" = (
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"G" = (
+/obj/structure/sign/mining/survival{
+	pixel_y = 32
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"Y" = (
+/obj/structure/sign/mining/survival{
+	dir = 8;
+	pixel_x = -32
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
+"Z" = (
+/obj/structure/sign/mining/survival{
+	dir = 4;
+	pixel_x = 32
+	},
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 
 (1,1,1) = {"
 a
 a
 a
-b
-b
-b
-b
-b
+F
+F
+F
+F
+F
 a
 a
 a
@@ -172,46 +186,46 @@ a
 (2,1,1) = {"
 a
 a
-b
-b
-e
-b
-e
-b
-b
+F
+F
+Z
+F
+Z
+F
+F
 a
 a
 "}
 (3,1,1) = {"
 a
 a
-b
+F
 d
 d
 d
 d
 d
-b
+F
 a
 a
 "}
 (4,1,1) = {"
 a
-b
-c
+F
+D
 d
 f
 k
 p
 d
-w
-b
-b
+G
+F
+F
 "}
 (5,1,1) = {"
 a
-b
-b
+F
+F
 d
 g
 l
@@ -219,12 +233,12 @@ q
 t
 x
 b
-b
+F
 "}
 (6,1,1) = {"
-b
-b
-c
+F
+F
+D
 d
 h
 m
@@ -236,8 +250,8 @@ b
 "}
 (7,1,1) = {"
 a
-b
-b
+F
+F
 d
 d
 d
@@ -245,26 +259,26 @@ d
 d
 z
 j
-j
+w
 "}
 (8,1,1) = {"
 a
 a
-b
-b
-i
-b
+F
+F
+Y
+F
 i
 u
 A
-b
-b
+F
+F
 "}
 (9,1,1) = {"
 a
 a
-b
-b
+F
+F
 j
 n
 s

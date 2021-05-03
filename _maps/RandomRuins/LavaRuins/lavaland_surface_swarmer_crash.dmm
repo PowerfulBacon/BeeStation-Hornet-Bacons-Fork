@@ -3,14 +3,14 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/template_noop)
 "c" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/ruin/unpowered)
 "d" = (
 /turf/open/floor/mineral/plastitanium/red{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 "e" = (
@@ -22,7 +22,7 @@
 "f" = (
 /mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon,
 /turf/open/floor/mineral/plastitanium/red{
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered)
 

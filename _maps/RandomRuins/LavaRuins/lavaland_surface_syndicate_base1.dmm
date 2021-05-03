@@ -4,10 +4,10 @@
 /area/template_noop)
 "ab" = (
 /turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "ac" = (
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "ad" = (
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/locked,
@@ -100,7 +100,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 1;
 	name = "Virology APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
@@ -284,7 +284,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 8;
 	name = "Chemistry APC";
-	pixel_x = -25
+	pixel_x = -24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
@@ -335,7 +335,7 @@
 "dG" = (
 /obj/structure/lattice/catwalk,
 /turf/open/lava/smooth/lava_land_surface,
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "dI" = (
 /obj/structure/table/glass,
 /obj/machinery/reagentgrinder{
@@ -633,7 +633,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 1;
 	name = "Cargo Bay APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/closet/emcloset/anchored,
 /obj/effect/decal/cleanable/dirt,
@@ -667,7 +667,7 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/trunk,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/syndicate_lava_base/virology)
 "ej" = (
 /obj/structure/bed/roller,
@@ -1340,7 +1340,7 @@
 "fk" = (
 /obj/machinery/power/apc/syndicate{
 	name = "Experimentation Lab APC";
-	pixel_y = -23
+	pixel_y = -24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -2734,9 +2734,9 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "ih" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -2744,9 +2744,9 @@
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "ii" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/emergency,
@@ -2884,17 +2884,17 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "iv" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "iw" = (
 /obj/structure/chair{
 	dir = 4
@@ -3056,7 +3056,7 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered/syndicate_lava_base/arrivals)
 "iN" = (
@@ -3171,7 +3171,7 @@
 	},
 /obj/machinery/power/apc/syndicate{
 	name = "Dormitories APC";
-	pixel_y = -23
+	pixel_y = -24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
@@ -3301,9 +3301,9 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "jf" = (
 /obj/machinery/door/airlock{
 	name = "Cabin 1"
@@ -3338,7 +3338,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 8;
 	name = "Primary Hallway APC";
-	pixel_x = -25
+	pixel_x = -24
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -3355,9 +3355,9 @@
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "jl" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -3622,7 +3622,7 @@
 	dir = 8;
 	volume_rate = 200
 	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/turf/closed/mineral/random/mining,
 /area/ruin/unpowered/syndicate_lava_base/engineering)
 "jL" = (
 /obj/structure/table,
@@ -4068,7 +4068,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 1;
 	name = "Engineering APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -4342,7 +4342,7 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
 /area/ruin/unpowered/syndicate_lava_base/arrivals)
 "lf" = (
@@ -4515,17 +4515,17 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "lw" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/mapping_helpers/no_lava,
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "lx" = (
 /obj/structure/bookcase/random,
 /obj/effect/decal/cleanable/dirt,
@@ -4965,7 +4965,7 @@
 /obj/structure/cable/yellow,
 /obj/machinery/power/apc/syndicate{
 	name = "Bar APC";
-	pixel_y = -23
+	pixel_y = -24
 	},
 /turf/open/floor/wood,
 /area/ruin/unpowered/syndicate_lava_base/bar)
@@ -5442,7 +5442,7 @@
 /obj/machinery/power/apc/syndicate{
 	dir = 1;
 	name = "Arrival Hallway APC";
-	pixel_y = 23
+	pixel_y = 24
 	},
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -5988,7 +5988,7 @@
 /obj/structure/cable/yellow,
 /obj/machinery/power/apc/syndicate{
 	name = "Telecommunications APC";
-	pixel_y = -23
+	pixel_y = -24
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -6243,6 +6243,9 @@
 	},
 /turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/ruin/unpowered/syndicate_lava_base/cargo)
+"yp" = (
+/turf/closed/mineral/random/mining,
+/area/mining/surface/outdoors)
 "yv" = (
 /obj/structure/table/reinforced,
 /obj/item/surgicaldrill,
@@ -6378,9 +6381,9 @@
 	},
 /turf/open/floor/plating{
 	baseturfs = /turf/open/lava/smooth/lava_land_surface;
-	initial_gas_mix = "LAVALAND_ATMOS"
+	initial_gas_mix = "TEMP=2.7"
 	},
-/area/lavaland/surface/outdoors)
+/area/mining/surface/outdoors)
 "Tp" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
@@ -6411,38 +6414,38 @@ aa
 aa
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 aa
@@ -6459,43 +6462,43 @@ aa
 aa
 aa
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 aa
@@ -6506,8 +6509,32 @@ aa
 aa
 aa
 aa
-ab
+yp
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6517,70 +6544,46 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 "}
 (4,1,1) = {"
 aa
 aa
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+ab
+yp
 ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6594,15 +6597,23 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 aa
 aa
 "}
 (5,1,1) = {"
 aa
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6612,25 +6623,17 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6644,10 +6647,10 @@ wt
 ab
 ab
 ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 aa
 "}
 (6,1,1) = {"
@@ -6655,6 +6658,12 @@ aa
 aa
 aa
 aa
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6667,18 +6676,12 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6695,21 +6698,21 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 aa
 "}
 (7,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6723,11 +6726,11 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6745,19 +6748,19 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 aa
 "}
 (8,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6775,8 +6778,8 @@ eh
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 ab
 ab
 ab
@@ -6796,18 +6799,18 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (9,1,1) = {"
 aa
 aa
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6846,17 +6849,17 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (10,1,1) = {"
 aa
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6896,17 +6899,17 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (11,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6946,17 +6949,17 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (12,1,1) = {"
 aa
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -6996,15 +6999,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (13,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7046,15 +7049,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (14,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7096,15 +7099,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (15,1,1) = {"
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7146,14 +7149,14 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (16,1,1) = {"
 aa
-ab
-ab
+yp
+yp
 ab
 ab
 ab
@@ -7196,14 +7199,14 @@ oF
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (17,1,1) = {"
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ae
@@ -7246,13 +7249,13 @@ St
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (18,1,1) = {"
-ab
-ab
+yp
+yp
 ab
 ab
 ae
@@ -7296,13 +7299,13 @@ oF
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (19,1,1) = {"
-ab
-ab
+yp
+yp
 ab
 ab
 ae
@@ -7346,13 +7349,13 @@ ab
 ab
 ab
 ab
-ab
+yp
 aa
 aa
 "}
 (20,1,1) = {"
 aa
-ab
+yp
 ab
 ab
 ae
@@ -7396,13 +7399,13 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (21,1,1) = {"
 aa
-ab
+yp
 ab
 ab
 ae
@@ -7446,13 +7449,13 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (22,1,1) = {"
 aa
-ab
+yp
 ab
 ab
 ae
@@ -7496,13 +7499,13 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (23,1,1) = {"
 aa
-ab
+yp
 ab
 ab
 ae
@@ -7546,13 +7549,13 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (24,1,1) = {"
 aa
-ab
+yp
 ab
 ab
 ab
@@ -7597,13 +7600,13 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (25,1,1) = {"
 aa
-ab
-ab
+yp
+yp
 ab
 ab
 ab
@@ -7647,13 +7650,13 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (26,1,1) = {"
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7696,14 +7699,14 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (27,1,1) = {"
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7746,15 +7749,15 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (28,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7796,15 +7799,15 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 aa
 "}
 (29,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7846,15 +7849,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (30,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7896,16 +7899,16 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (31,1,1) = {"
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7946,16 +7949,16 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (32,1,1) = {"
 aa
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -7997,16 +8000,16 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (33,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8047,16 +8050,16 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (34,1,1) = {"
 aa
 aa
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8097,16 +8100,16 @@ ab
 ab
 ab
 ab
-ab
+yp
 aa
 "}
 (35,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8147,15 +8150,15 @@ ab
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (36,1,1) = {"
 aa
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8197,14 +8200,14 @@ nf
 ab
 ab
 ab
-ab
+yp
 aa
 "}
 (37,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8247,15 +8250,15 @@ oH
 ab
 ab
 ab
-ab
-ab
+yp
+yp
 "}
 (38,1,1) = {"
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8296,16 +8299,16 @@ ju
 nf
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (39,1,1) = {"
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8346,16 +8349,16 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (40,1,1) = {"
 aa
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8396,15 +8399,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (41,1,1) = {"
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8446,15 +8449,15 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 "}
 (42,1,1) = {"
 aa
 aa
-ab
-ab
+yp
+yp
 ab
 ab
 ab
@@ -8495,17 +8498,17 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
+yp
+yp
+yp
 aa
 "}
 (43,1,1) = {"
 aa
 aa
-ab
-ab
-ab
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8544,20 +8547,20 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
 aa
 "}
 (44,1,1) = {"
 aa
 aa
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8592,11 +8595,11 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 "}
@@ -8604,16 +8607,16 @@ aa
 aa
 aa
 aa
-ab
+yp
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8642,12 +8645,12 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 "}
 (46,1,1) = {"
@@ -8656,9 +8659,17 @@ aa
 aa
 aa
 aa
-ab
-ab
+yp
+yp
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
@@ -8683,20 +8694,12 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 "}
@@ -8711,42 +8714,42 @@ aa
 aa
 aa
 aa
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 ab
 ab
 ab
+yp
+yp
+yp
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 "}
@@ -8764,38 +8767,38 @@ aa
 aa
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
+yp
 aa
 aa
 aa

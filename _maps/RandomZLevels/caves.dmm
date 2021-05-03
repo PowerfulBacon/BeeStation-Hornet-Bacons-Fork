@@ -6,7 +6,7 @@
 /turf/open/space,
 /area/space)
 "ac" = (
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid/level_three)
 "ad" = (
 /turf/open/lava/smooth{
@@ -597,10 +597,10 @@
 	},
 /area/awaymission/caves/BMP_asteroid/level_two)
 "bK" = (
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid/level_two)
 "bL" = (
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid)
 "bM" = (
 /turf/open/lava/smooth{
@@ -2253,7 +2253,7 @@
 /area/awaymission/caves/BMP_asteroid)
 "gX" = (
 /obj/effect/baseturf_helper/lava,
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid/level_three)
 "gY" = (
 /obj/effect/baseturf_helper/lava,
@@ -2266,11 +2266,11 @@
 /area/awaymission/caves/BMP_asteroid/level_four)
 "gZ" = (
 /obj/effect/baseturf_helper/lava,
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid/level_two)
 "ha" = (
 /obj/effect/baseturf_helper/lava,
-/turf/closed/mineral/volcanic,
+/turf/closed/mineral/mining,
 /area/awaymission/caves/BMP_asteroid)
 "hb" = (
 /obj/effect/baseturf_helper/asteroid/basalt,

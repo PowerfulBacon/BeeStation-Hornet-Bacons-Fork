@@ -343,8 +343,8 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 			return FALSE
 		if(istype(place, /area/space))
 			overwritten_area = /area/space
-		else if(istype(place, /area/lavaland/surface/outdoors))
-			overwritten_area = /area/lavaland/surface/outdoors
+		else if(istype(place, /area/mining/surface/outdoors))
+			overwritten_area = /area/mining/surface/outdoors
 		else
 			to_chat(usr, "<span class='warning'>Caution, shuttle must not use any material connected to the station. Your shuttle is currenly overlapping with [place.name].</span>")
 			return FALSE

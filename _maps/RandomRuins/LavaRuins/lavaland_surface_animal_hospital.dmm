@@ -2,21 +2,6 @@
 "aa" = (
 /turf/template_noop,
 /area/template_noop)
-"ab" = (
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"ac" = (
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"ad" = (
-/obj/structure/flora/ausbushes/brflowers,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "ae" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/ruin/powered/animal_hospital)
@@ -130,17 +115,6 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/ruin/powered/animal_hospital)
-"ax" = (
-/obj/structure/closet/crate/trashcart,
-/obj/item/storage/bag/trash,
-/obj/item/trash/cheesie,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/bodybag,
-/obj/item/reagent_containers/food/drinks/bottle/vodka,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "ay" = (
 /obj/structure/sink{
 	dir = 8;
@@ -208,11 +182,6 @@
 /obj/structure/extinguisher_cabinet,
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/ruin/powered/animal_hospital)
-"aJ" = (
-/turf/open/floor/plasteel/grimy{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "aK" = (
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
@@ -364,16 +333,6 @@
 /obj/item/twohanded/required/kirbyplants,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
-"bu" = (
-/obj/structure/chair/comfy/teal{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/ruin/powered/animal_hospital)
 "bv" = (
 /obj/effect/mob_spawn/human/doctor/alive/lavaland{
 	dir = 4
@@ -422,26 +381,6 @@
 /obj/structure/fans/tiny/invisible,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
-"bL" = (
-/obj/vehicle/ridden/scooter/skateboard{
-	dir = 4
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"bM" = (
-/obj/structure/flora/ausbushes/sunnybush,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"bO" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "bP" = (
 /obj/structure/table/glass,
 /obj/item/storage/firstaid/fire,
@@ -485,64 +424,10 @@
 /obj/item/storage/box/gloves,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
-"bT" = (
-/obj/item/pickaxe,
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"bU" = (
-/obj/effect/decal/remains/human,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"bV" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "bW" = (
 /obj/structure/fans/tiny/invisible,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
-"bX" = (
-/obj/machinery/atmospherics/pipe/simple/general/visible{
-	dir = 6
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"bY" = (
-/obj/machinery/atmospherics/pipe/manifold/general/visible{
-	dir = 1
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"bZ" = (
-/obj/machinery/atmospherics/pipe/simple/general/visible{
-	dir = 10
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"ca" = (
-/obj/machinery/atmospherics/components/unary/tank/air{
-	dir = 1
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"cb" = (
-/obj/machinery/atmospherics/components/binary/valve,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "ch" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
@@ -576,27 +461,6 @@
 	},
 /turf/open/floor/plating,
 /area/ruin/powered/animal_hospital)
-"cn" = (
-/obj/machinery/light,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"cp" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
-"cx" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
 "cy" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -619,30 +483,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
-"cC" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"cD" = (
-/obj/structure/flora/ausbushes/sunnybush,
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/lavaland/surface/outdoors)
-"cE" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/no_lava,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors)
 "cH" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -685,6 +525,12 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"em" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 6
+	},
+/turf/open/floor/plating,
+/area/template_noop)
 "ep" = (
 /obj/structure/closet/crate/bin,
 /obj/item/trash/pistachios,
@@ -708,6 +554,10 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"eX" = (
+/obj/machinery/light,
+/turf/template_noop,
+/area/template_noop)
 "fY" = (
 /obj/machinery/door/airlock/medical{
 	name = "Rejuvenation Pods"
@@ -720,6 +570,11 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/ruin/powered/animal_hospital)
+"gf" = (
+/obj/structure/lattice,
+/obj/structure/lattice,
+/turf/template_noop,
+/area/template_noop)
 "gg" = (
 /obj/structure/table/wood,
 /obj/item/toy/plush/carpplushie,
@@ -856,6 +711,20 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"oS" = (
+/obj/machinery/atmospherics/pipe/manifold/general/visible{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/template_noop)
+"qy" = (
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/machinery/suit_storage_unit/cmo,
+/turf/open/floor/plasteel,
+/area/ruin/powered/animal_hospital)
 "qP" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -869,6 +738,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"ra" = (
+/obj/structure/lattice,
+/turf/template_noop,
+/area/template_noop)
 "rK" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 6
@@ -1011,6 +884,10 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/ruin/powered/animal_hospital)
+"xs" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/on,
+/turf/open/floor/plating,
+/area/ruin/powered/animal_hospital)
 "yx" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -1074,6 +951,12 @@
 	},
 /turf/open/floor/plating,
 /area/ruin/powered/animal_hospital)
+"Bf" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
 "BG" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
@@ -1096,6 +979,18 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/ruin/powered/animal_hospital)
+"EB" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"EP" = (
+/obj/machinery/atmospherics/pipe/simple/general/visible{
+	dir = 10
+	},
+/turf/open/floor/plating,
+/area/template_noop)
 "Fd" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -1138,6 +1033,12 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/ruin/powered/animal_hospital)
+"Fx" = (
+/obj/machinery/atmospherics/components/unary/tank/air{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/template_noop)
 "FD" = (
 /obj/machinery/door/airlock/shuttle{
 	name = "Operating Theatre"
@@ -1156,6 +1057,10 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel/white,
+/area/ruin/powered/animal_hospital)
+"Hq" = (
+/obj/effect/abstract/mining_landmark,
+/turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
 "HP" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
@@ -1184,6 +1089,13 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"JE" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/lattice/catwalk,
+/turf/template_noop,
+/area/template_noop)
 "JK" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
 	dir = 8
@@ -1226,6 +1138,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"Nv" = (
+/obj/machinery/atmospherics/components/binary/valve,
+/turf/open/floor/plating,
+/area/template_noop)
 "Oy" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -1244,6 +1160,17 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
+"OO" = (
+/obj/machinery/light,
+/obj/structure/lattice,
+/turf/template_noop,
+/area/template_noop)
+"Pp" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/template_noop)
 "QW" = (
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/sheet/mineral/titanium{
@@ -1256,6 +1183,9 @@
 /obj/item/stack/sheet/iron/twenty,
 /turf/open/floor/plating,
 /area/ruin/powered/animal_hospital)
+"QY" = (
+/turf/open/floor/plating,
+/area/template_noop)
 "Rp" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3/lavaland{
 	dir = 1
@@ -1448,11 +1378,9 @@
 /turf/open/floor/plasteel,
 /area/ruin/powered/animal_hospital)
 "Zg" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/on,
-/turf/open/floor/grass{
-	initial_gas_mix = "LAVALAND_ATMOS"
-	},
-/area/ruin/powered/animal_hospital)
+/obj/structure/lattice/catwalk,
+/turf/template_noop,
+/area/template_noop)
 "Zx" = (
 /obj/machinery/defibrillator_mount,
 /turf/closed/wall/mineral/titanium/nodiagonal,
@@ -1476,14 +1404,14 @@ aa
 aa
 aa
 aa
-ab
-ab
-ab
-aa
-ab
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+ra
 aa
 aa
 aa
@@ -1505,13 +1433,6 @@ aa
 aa
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
-ab
 aa
 aa
 aa
@@ -1519,11 +1440,18 @@ aa
 aa
 aa
 aa
+ra
+ra
+ra
+ra
+ra
+ra
+ra
 aa
 aa
-ab
-ab
-ab
+aa
+aa
+aa
 aa
 aa
 "}
@@ -1532,30 +1460,30 @@ aa
 aa
 aa
 aa
-aa
-ab
-ab
-ab
-ab
-aJ
-ab
-ab
-cx
-ab
+ra
+ra
+ra
+ra
+ra
+ra
 aa
 aa
+Bf
 aa
 aa
+ra
 aa
 aa
 aa
-ab
-ab
-ab
-bU
-bV
-ab
-ab
+ra
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 "}
 (4,1,1) = {"
 aa
@@ -1563,12 +1491,12 @@ aa
 aa
 aa
 aa
-ab
-cp
-ax
-ac
-aJ
-ac
+ra
+Bf
+aa
+ra
+aa
+aa
 ae
 ae
 ae
@@ -1577,15 +1505,15 @@ ae
 aa
 aa
 aa
+ra
 aa
-ab
-ab
-ab
-bT
-ab
-ab
-ab
-ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 "}
 (5,1,1) = {"
 aa
@@ -1609,19 +1537,19 @@ ae
 ae
 ae
 ae
-ac
-ab
-ab
-ab
-ab
-ab
-ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 "}
 (6,1,1) = {"
 aa
 aa
 aa
-ab
+aa
 ae
 ag
 qP
@@ -1639,19 +1567,19 @@ ep
 TA
 bF
 ae
-cC
-ac
-ab
-ab
-ab
-ab
-ab
+JE
+Zg
+Zg
+aa
+aa
+aa
+aa
 "}
 (7,1,1) = {"
 aa
-ab
-ab
-ab
+aa
+ra
+aa
 ae
 ah
 yU
@@ -1669,19 +1597,19 @@ bq
 um
 aP
 af
-ad
-ac
-ac
-ab
-ab
-ac
-ac
+QY
+QY
+Zg
+aa
+aa
+aa
+aa
 "}
 (8,1,1) = {"
 aa
-ab
-ab
-cn
+ra
+ra
+OO
 ae
 ae
 ae
@@ -1699,19 +1627,19 @@ br
 Yj
 aP
 af
-bL
-ac
-ac
-ac
-ab
-ab
-ab
+QY
+QY
+Zg
+aa
+aa
+aa
+aa
 "}
 (9,1,1) = {"
-ab
-ab
-ac
-ac
+aa
+aa
+ra
+aa
 ae
 wL
 Fd
@@ -1729,19 +1657,19 @@ bs
 nI
 aP
 bI
-bM
-ac
-ab
-ab
-ab
-ab
-ab
+QY
+QY
+Zg
+aa
+aa
+aa
+aa
 "}
 (10,1,1) = {"
-ab
-ab
-ab
-ac
+aa
+aa
+ra
+aa
 af
 gY
 at
@@ -1756,22 +1684,22 @@ ao
 ck
 aK
 aK
-aK
+Hq
 aK
 bJ
-aJ
-aJ
-aJ
-ab
-ab
-ab
-ab
+QY
+QY
+Zg
+aa
+aa
+aa
+aa
 "}
 (11,1,1) = {"
-ab
-ac
-ac
-ac
+aa
+ra
+gf
+ra
 af
 ak
 as
@@ -1789,19 +1717,19 @@ bt
 aK
 aK
 bW
-aJ
-aJ
-ab
-ab
-ac
-ab
-ab
+QY
+QY
+Zg
+aa
+ra
+aa
+aa
 "}
 (12,1,1) = {"
-ab
-ac
-ac
-ad
+aa
+aa
+ra
+aa
 af
 gg
 au
@@ -1819,19 +1747,19 @@ aK
 aK
 aP
 ae
-cD
-ac
-ac
-ab
-ab
-ab
-ab
+Pp
+QY
+Zg
+ra
+ra
+ra
+aa
 "}
 (13,1,1) = {"
-ab
-ab
-ac
-Zg
+aa
+aa
+aa
+xs
 nJ
 am
 ti
@@ -1845,23 +1773,23 @@ RQ
 Xl
 ae
 bm
-bu
-bu
+qy
+qy
 bG
 ae
-ac
-bO
-ac
-ab
-ab
-ab
-ab
+QY
+QY
+Zg
+aa
+ra
+aa
+aa
 "}
 (14,1,1) = {"
-ab
-ac
-bX
-ca
+aa
+aa
+em
+Fx
 ae
 ae
 ae
@@ -1882,16 +1810,16 @@ ae
 ae
 ae
 ae
-ab
-ab
+aa
+ra
 aa
 aa
 "}
 (15,1,1) = {"
-ab
-ab
-bY
-ca
+aa
+aa
+oS
+Fx
 ae
 Vv
 an
@@ -1912,16 +1840,16 @@ bn
 bv
 bP
 ae
-cE
-ab
+EB
+ra
 aa
 aa
 "}
 (16,1,1) = {"
 aa
-ab
-bZ
-cb
+aa
+EP
+Nv
 nJ
 vZ
 vm
@@ -1942,16 +1870,16 @@ Rp
 ao
 bQ
 ae
-ab
-aa
-aa
+ra
+ra
+ra
 aa
 "}
 (17,1,1) = {"
 aa
-ab
-ab
-cn
+aa
+aa
+eX
 ae
 Vg
 ao
@@ -1973,15 +1901,15 @@ bx
 af
 ae
 aa
-aa
+ra
 aa
 aa
 "}
 (18,1,1) = {"
 aa
 aa
-ab
-ac
+aa
+aa
 ae
 Fv
 ao
@@ -2010,8 +1938,8 @@ aa
 (19,1,1) = {"
 aa
 aa
-ab
-ab
+aa
+aa
 ae
 ar
 aw
@@ -2041,7 +1969,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 ae
 ae
 Zx

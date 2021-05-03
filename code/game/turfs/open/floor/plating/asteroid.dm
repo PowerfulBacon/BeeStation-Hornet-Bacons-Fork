@@ -81,7 +81,7 @@
 	contents_explosion(severity, target)
 
 /turf/open/floor/plating/lavaland_baseturf
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
+	baseturfs = /turf/open/floor/plating/asteroid/airless/cave
 
 /turf/open/floor/plating/asteroid/basalt
 	name = "volcanic floor"
@@ -116,14 +116,6 @@
 
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
-	baseturfs = /turf/open/lava/smooth/lava_land_surface
-
-
-
-
 /turf/open/floor/plating/asteroid/airless
 	initial_gas_mix = AIRLESS_ATMOS
 	baseturfs = /turf/open/floor/plating/asteroid/airless
@@ -157,7 +149,7 @@
 		SPAWN_MEGAFAUNA = 6, /mob/living/simple_animal/hostile/asteroid/goldgrub = 10, )
 
 	data_having_type = /turf/open/floor/plating/asteroid/airless/cave/volcanic/has_data
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
+	turf_type = /turf/open/floor/plating/asteroid/airless/cave
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
 /turf/open/floor/plating/asteroid/airless/cave/volcanic/has_data //subtype for producing a tunnel with given data
@@ -224,7 +216,7 @@
 		if(istype(tunnel))
 			// Small chance to have forks in our tunnel; otherwise dig our tunnel.
 			if(i > 3 && prob(20))
-				if(istype(tunnel.loc, /area/mine/explored) || (istype(tunnel.loc, /area/lavaland/surface/outdoors) && !istype(tunnel.loc, /area/lavaland/surface/outdoors/unexplored)))
+				if(istype(tunnel.loc, /area/mine/explored) || (istype(tunnel.loc, /area/mining/surface/outdoors) && !istype(tunnel.loc, /area/mining/surface/outdoors/unexplored)))
 					sanity = 0
 					break
 				var/turf/open/floor/plating/asteroid/airless/cave/C = tunnel.ChangeTurf(data_having_type, null, CHANGETURF_IGNORE_AIR)
@@ -244,7 +236,7 @@
 
 /turf/open/floor/plating/asteroid/airless/cave/proc/SpawnFloor(turf/T)
 	for(var/turf/NT as() in RANGE_TURFS(1, src))
-		if(!NT || isspaceturf(NT) || istype(NT.loc, /area/mine/explored) || (istype(NT.loc, /area/lavaland/surface/outdoors) && !istype(NT.loc, /area/lavaland/surface/outdoors/unexplored)))
+		if(!NT || isspaceturf(NT) || istype(NT.loc, /area/mine/explored) || (istype(NT.loc, /area/mining/surface/outdoors) && !istype(NT.loc, /area/mining/surface/outdoors/unexplored)))
 			sanity = 0
 			break
 	if(!sanity)
@@ -256,11 +248,11 @@
 
 /turf/open/floor/plating/asteroid/airless/cave/proc/SpawnMonster(turf/T)
 	if(prob(30))
-		if(istype(loc, /area/mine/explored) || !istype(loc, /area/lavaland/surface/outdoors/unexplored))
+		if(istype(loc, /area/mine/explored) || !istype(loc, /area/mining/surface/outdoors/unexplored))
 			return
 		var/randumb = pickweight(mob_spawn_list)
 		while(randumb == SPAWN_MEGAFAUNA)
-			if(istype(loc, /area/lavaland/surface/outdoors/unexplored/danger)) //this is danger. it's boss time.
+			if(istype(loc, /area/mining/surface/outdoors/unexplored/danger)) //this is danger. it's boss time.
 				var/maybe_boss = pickweight(megafauna_spawn_list)
 				if(megafauna_spawn_list[maybe_boss])
 					randumb = maybe_boss
@@ -285,7 +277,7 @@
 
 /turf/open/floor/plating/asteroid/airless/cave/proc/SpawnFlora(turf/T)
 	if(prob(12))
-		if(istype(loc, /area/mine/explored) || istype(loc, /area/lavaland/surface/outdoors/explored))
+		if(istype(loc, /area/mine/explored) || istype(loc, /area/mining/surface/outdoors/explored))
 			return
 		var/randumb = pickweight(flora_spawn_list)
 		for(var/obj/structure/flora/ash/F in range(4, T)) //Allows for growing patches, but not ridiculous stacks of flora
@@ -295,7 +287,7 @@
 
 /turf/open/floor/plating/asteroid/airless/cave/proc/SpawnTerrain(turf/T)
 	if(prob(2))
-		if(istype(loc, /area/mine/explored) || istype(loc, /area/lavaland/surface/outdoors/explored))
+		if(istype(loc, /area/mine/explored) || istype(loc, /area/mining/surface/outdoors/explored))
 			return
 		var/randumb = pickweight(terrain_spawn_list)
 		for(var/obj/structure/geyser/F in range(7, T))
