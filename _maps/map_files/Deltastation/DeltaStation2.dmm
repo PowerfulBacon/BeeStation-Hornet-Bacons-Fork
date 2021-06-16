@@ -3343,17 +3343,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/construction/mining/aux_base)
-"afY" = (
-/obj/machinery/computer/shuttle_flight/mining{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/turf/open/floor/plasteel,
-/area/construction/mining/aux_base)
 "agj" = (
 /obj/structure/closet/firecloset,
 /obj/effect/decal/cleanable/dirt,
@@ -25787,22 +25776,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/qm)
-"aWa" = (
-/obj/machinery/computer/shuttle_flight/mining{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/machinery/status_display/ai{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/qm)
 "aWb" = (
 /obj/structure/table/glass,
 /obj/item/storage/firstaid/regular,
@@ -27917,20 +27890,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/qm)
-"aZh" = (
-/obj/structure/table/reinforced,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
 	},
@@ -35734,13 +35693,6 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningoffice)
-"bma" = (
-/obj/machinery/computer/shuttle_flight/mining{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot,
-/turf/open/floor/plasteel,
-/area/quartermaster/miningoffice)
 "bmc" = (
 /obj/structure/cable/white,
 /obj/effect/spawner/structure/window/reinforced,
@@ -37573,20 +37525,6 @@
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/security/execution/transfer)
-"bpf" = (
-/obj/machinery/computer/shuttle_flight/labor,
-/obj/machinery/status_display/evac{
-	pixel_y = 32
-	},
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/red,
-/obj/effect/turf_decal/tile/red{
-	dir = 4
 	},
 /turf/open/floor/plasteel,
 /area/security/execution/transfer)
@@ -51079,15 +51017,6 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblue,
-/area/bridge)
-"bIS" = (
-/obj/structure/table/wood,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/item/paper_bin,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plasteel/grimy,
 /area/bridge)
 "bIT" = (
 /obj/machinery/status_display/ai,
@@ -105731,15 +105660,6 @@
 /obj/structure/lattice/catwalk,
 /turf/open/space,
 /area/solar/starboard/aft)
-"dBT" = (
-/obj/effect/turf_decal/tile/purple{
-	dir = 1
-	},
-/obj/machinery/computer/shuttle_flight/science{
-	dir = 1
-	},
-/turf/open/floor/plasteel/white,
-/area/science/shuttledock)
 "dBY" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -109558,6 +109478,23 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
+"dJw" = (
+/obj/machinery/computer/shuttle_flight/mining{
+	dir = 8;
+	recall_docking_port_id = "mining_home"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/status_display/ai{
+	pixel_x = 32
+	},
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/qm)
 "dJG" = (
 /obj/structure/chair,
 /obj/effect/decal/cleanable/dirt,
@@ -123093,6 +123030,16 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
+"lEe" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/machinery/computer/objective{
+	dir = 8
+	},
+/turf/open/floor/plasteel/grimy,
+/area/bridge)
 "lEm" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -123154,6 +123101,14 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/shuttledock)
+"lMX" = (
+/obj/machinery/computer/shuttle_flight/mining{
+	dir = 1;
+	recall_docking_port_id = "mining_home"
+	},
+/obj/effect/turf_decal/bot,
+/turf/open/floor/plasteel,
+/area/quartermaster/miningoffice)
 "lOp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
@@ -123194,6 +123149,22 @@
 	},
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
+"lSS" = (
+/obj/machinery/computer/shuttle_flight/labor{
+	recall_docking_port_id = "laborcamp_home"
+	},
+/obj/machinery/status_display/evac{
+	pixel_y = 32
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/security/execution/transfer)
 "lTa" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -123237,6 +123208,16 @@
 	},
 /turf/open/floor/plating,
 /area/construction/mining/aux_base)
+"lTW" = (
+/obj/effect/turf_decal/tile/purple{
+	dir = 1
+	},
+/obj/machinery/computer/shuttle_flight/science{
+	dir = 1;
+	recall_docking_port_id = "science_station"
+	},
+/turf/open/floor/plasteel/white,
+/area/science/shuttledock)
 "lUX" = (
 /obj/structure/girder,
 /obj/effect/decal/cleanable/dirt,
@@ -126092,18 +126073,6 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
-"sLK" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/obj/effect/turf_decal/tile/purple{
-	dir = 1
-	},
-/turf/open/floor/plasteel/white,
-/area/science/shuttledock)
 "sMH" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -126913,6 +126882,22 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/science/xenobiology)
+"uRO" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/obj/machinery/computer/objective{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/qm)
 "uSv" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -127328,6 +127313,19 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/exit/departure_lounge)
+"vZe" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/effect/turf_decal/tile/purple{
+	dir = 1
+	},
+/obj/machinery/computer/objective,
+/turf/open/floor/plasteel/white,
+/area/science/shuttledock)
 "wbe" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -127695,6 +127693,18 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
+"xjS" = (
+/obj/machinery/computer/shuttle_flight/mining{
+	dir = 8;
+	recall_docking_port_id = "mining_public"
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/open/floor/plasteel,
+/area/construction/mining/aux_base)
 "xlf" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/turf_decal/stripes/line{
@@ -153001,7 +153011,7 @@ saw
 lJW
 kcF
 hVM
-dBT
+lTW
 yhB
 aaa
 aaa
@@ -154797,7 +154807,7 @@ dqc
 gUH
 anD
 saw
-sLK
+vZe
 sEA
 wdG
 eaf
@@ -167591,7 +167601,7 @@ bzP
 bDH
 bFw
 bHg
-bIS
+lEe
 bKK
 bMD
 bOM
@@ -170608,7 +170618,7 @@ pNu
 aeE
 aff
 afG
-afY
+xjS
 ago
 ago
 ahc
@@ -174259,7 +174269,7 @@ bfF
 bfv
 bir
 bkd
-bma
+lMX
 bnC
 aad
 aaa
@@ -174765,7 +174775,7 @@ aSy
 aUo
 aVX
 aXD
-aZh
+uRO
 aQT
 aad
 bej
@@ -175791,7 +175801,7 @@ aad
 aQS
 aSA
 aUs
-aWa
+dJw
 aXH
 aQS
 aad
@@ -177859,7 +177869,7 @@ biz
 bkk
 bmd
 bnG
-bpf
+lSS
 brg
 btf
 buE

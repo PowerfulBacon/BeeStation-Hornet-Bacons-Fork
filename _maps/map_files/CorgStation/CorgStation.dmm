@@ -468,16 +468,6 @@
 "aeV" = (
 /turf/open/floor/plating,
 /area/construction/mining/aux_base)
-"afo" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/obj/machinery/modular_computer/console/preset/command,
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/bridge)
 "afz" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
@@ -4648,19 +4638,6 @@
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space)
-"aXw" = (
-/obj/machinery/computer/shuttle_flight/mining{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/construction/mining/aux_base)
 "aXD" = (
 /obj/effect/spawner/room/tenxten,
 /turf/open/floor/plating,
@@ -8206,19 +8183,6 @@
 	},
 /turf/open/floor/plating,
 /area/ai_monitored/turret_protected/AIsatextAP)
-"bVC" = (
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 8
-	},
-/obj/machinery/computer/shuttle_flight/mining{
-	dir = 8
-	},
-/turf/open/floor/plasteel/dark,
-/area/quartermaster/miningdock)
 "bVG" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/poddoor/shutters/preopen{
@@ -14243,24 +14207,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
-"dKA" = (
-/obj/effect/turf_decal/tile/green{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/yellow,
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 9
-	},
-/obj/machinery/computer/shuttle{
-	dir = 8;
-	possible_destinations = "corg_north;corg_south";
-	shuttleId = "tram_corg"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/primary/fore)
 "dKM" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -17604,6 +17550,25 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/chapel/main/monastery)
+"eHu" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 9
+	},
+/obj/machinery/computer/shuttle_flight{
+	dir = 8;
+	possible_destinations = "corg_north;corg_south";
+	recall_docking_port_id = "corg_north";
+	shuttleId = "tram_corg"
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/fore)
 "eHE" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/tile/red,
@@ -20929,6 +20894,32 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/dorms)
+"fIQ" = (
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/machinery/light_switch{
+	pixel_x = 1;
+	pixel_y = -25
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/obj/machinery/computer/objective{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/quartermaster/office)
 "fJc" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/poddoor/shutters/preopen{
@@ -22365,6 +22356,13 @@
 	},
 /turf/open/floor/plasteel,
 /area/science/lab)
+"gdS" = (
+/obj/machinery/computer/shuttle_flight/labor{
+	recall_docking_port_id = "laborcamp_home"
+	},
+/obj/machinery/advanced_airlock_controller/directional/north,
+/turf/open/floor/plasteel/dark,
+/area/security/brig)
 "gdT" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
@@ -32069,11 +32067,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/central)
-"iFr" = (
-/obj/machinery/computer/shuttle_flight/labor,
-/obj/machinery/advanced_airlock_controller/directional/north,
-/turf/open/floor/plasteel/dark,
-/area/security/brig)
 "iFy" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 4
@@ -41260,32 +41253,6 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/dorms)
-"lgO" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/obj/machinery/camera/autoname{
-	dir = 9
-	},
-/obj/structure/sign/poster/random{
-	pixel_x = 32
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/machinery/computer/shuttle{
-	possible_destinations = "corg_north;corg_south";
-	shuttleId = "tram_corg"
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
-	dir = 4
-	},
-/turf/open/floor/plasteel/dark,
-/area/maintenance/department/chapel/monastery)
 "lgV" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -62769,7 +62736,6 @@
 /obj/item/circuitboard/machine/shuttle/heater,
 /obj/item/circuitboard/machine/shuttle/engine/plasma,
 /obj/item/circuitboard/computer/shuttle/flight_control,
-/obj/item/circuitboard/computer/shuttle/docker,
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/plasteel,
 /area/engine/engine_room)
@@ -65338,6 +65304,20 @@
 	dir = 5
 	},
 /area/chapel/main/monastery)
+"sfF" = (
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/obj/machinery/computer/shuttle_flight/mining{
+	dir = 8;
+	recall_docking_port_id = "mining_home"
+	},
+/turf/open/floor/plasteel/dark,
+/area/quartermaster/miningdock)
 "sgw" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 1
@@ -69801,29 +69781,6 @@
 	},
 /turf/open/floor/plating,
 /area/quartermaster/sorting)
-"tyv" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 4
-	},
-/obj/machinery/light_switch{
-	pixel_x = 1;
-	pixel_y = -25
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
-/turf/open/floor/plasteel/dark,
-/area/quartermaster/office)
 "tyX" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer1{
 	dir = 8
@@ -72816,6 +72773,16 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/chemistry)
+"ulv" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/machinery/computer/objective,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "ulG" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
@@ -74877,6 +74844,33 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
+"uQL" = (
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/camera/autoname{
+	dir = 9
+	},
+/obj/structure/sign/poster/random{
+	pixel_x = 32
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/computer/shuttle_flight{
+	possible_destinations = "corg_north;corg_south";
+	recall_docking_port_id = "corg_south";
+	shuttleId = "tram_corg"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/maintenance/department/chapel/monastery)
 "uQS" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -80719,6 +80713,20 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai)
+"wvN" = (
+/obj/machinery/computer/shuttle_flight/mining{
+	dir = 4;
+	recall_docking_port_id = "mining_public"
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/construction/mining/aux_base)
 "wvO" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -105643,7 +105651,7 @@ jbr
 hJt
 hJt
 jbr
-lgO
+uQL
 hgD
 nBf
 mLw
@@ -116049,7 +116057,7 @@ aMT
 dJG
 rQM
 jxO
-dKA
+eHu
 eDP
 dfQ
 bfu
@@ -120419,7 +120427,7 @@ anT
 alZ
 ayh
 axb
-afo
+ulv
 uHP
 lVc
 ssm
@@ -124112,7 +124120,7 @@ fhO
 sag
 kfy
 ajV
-aXw
+wvN
 avI
 aeV
 aeV
@@ -128142,7 +128150,7 @@ aMT
 aMT
 aMT
 duF
-iFr
+gdS
 kFE
 rXl
 aMT
@@ -129456,7 +129464,7 @@ mmS
 gsk
 qXe
 iBK
-tyv
+fIQ
 dIv
 rvY
 utO
@@ -135088,7 +135096,7 @@ eNE
 eAI
 vPQ
 uJX
-bVC
+sfF
 aWM
 lnq
 gNy
