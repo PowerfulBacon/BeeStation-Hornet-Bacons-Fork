@@ -178,7 +178,7 @@
 			var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1)
 			reagents.reaction(L, INJECT, fraction)
 			reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user)
-			balloon_alert(user, "[amount_per_transfer_from_this]u injected", color = COLOR_BALLOON_NOTICE)
+			balloon_alert(user, "[amount_per_transfer_from_this]u injected", color = COLOR_BALLOON_INFOMATION)
 			to_chat(user, "<span class='notice'>You inject [amount_per_transfer_from_this] units of the solution. The syringe now contains [reagents.total_volume] units.</span>")
 			if (reagents.total_volume <= 0 && mode==SYRINGE_INJECT)
 				mode = SYRINGE_DRAW

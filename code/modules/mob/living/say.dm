@@ -236,7 +236,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
-	speaker.balloon_alert(src, deaf_alert, color = COLOR_BALLOON_WARNING, TRUE)
+	speaker.balloon_alert(src, deaf_alert, color = COLOR_BALLOON_WARNING, dont_to_chat = TRUE)
 	return message
 
 /mob/living/proc/hear_intercept(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list())

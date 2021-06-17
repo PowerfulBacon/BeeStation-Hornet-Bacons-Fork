@@ -364,9 +364,9 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		chat_text = "<span class='notice'>[text]</span>"
 	switch(viewer.client.prefs.see_balloon_alerts)
 		if(BALLOON_ALERT_ALWAYS)
-			new /datum/chatmessage/balloon_alert(text, src, viewer)
+			new /datum/chatmessage/balloon_alert(text, src, viewer, color)
 		if(BALLOON_ALERT_WITH_CHAT)
-			new /datum/chatmessage/balloon_alert(text, src, viewer)
+			new /datum/chatmessage/balloon_alert(text, src, viewer, color)
 			if(!dont_to_chat)
 				to_chat(viewer, chat_text)
 		if(BALLOON_ALERT_NEVER)
