@@ -87,7 +87,7 @@
 		if(SYRINGE_DRAW)
 
 			if(reagents.total_volume >= reagents.maximum_volume)
-				balloon_alert(user, "It's full")
+				balloon_alert(user, "Syringe full", color = COLOR_BALLOON_WARNING)
 				return
 
 			if(L) //living mob
@@ -105,22 +105,21 @@
 				if(L.transfer_blood_to(src, drawn_amount))
 					user.visible_message("[user] takes a blood sample from [L].")
 				else
-					to_chat(user, "<span class='warning'>You are unable to draw any blood from [L]!</span>")
-					balloon_alert(user, "Unable to take blood sample")
+					balloon_alert(user, "Cannot take blood", "<span class='warning'>You are unable to draw any blood from [L]!</span>", color = COLOR_BALLOON_WARNING)
 
 			else //if not mob
 				if(!target.reagents.total_volume)
-					balloon_alert(user, "It's empty")
+					balloon_alert(user, "Target empty", color = COLOR_BALLOON_WARNING)
 					return
 
 				if(!target.is_drawable(user))
-					balloon_alert(user, "You can't remove its reagents")
+					balloon_alert(user, "Cannot remove reagents", color = COLOR_BALLOON_WARNING)
 					return
 
 				var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user) // transfer from, transfer to - who cares?
 
 				to_chat(user, "<span class='notice'>You fill [src] with [trans] units of the solution. It now contains [reagents.total_volume] units.</span>")
-				balloon_alert(user, "You fill [src] with [trans]u")
+				balloon_alert(user, "Filled with [trans]u", color = COLOR_BALLOON_WARNING)
 			if (reagents.total_volume >= reagents.maximum_volume)
 				mode=!mode
 				update_icon()
@@ -131,15 +130,15 @@
 			log_combat(user, target, "attempted to inject", src, addition="which had [contained]")
 
 			if(!reagents.total_volume)
-				balloon_alert(user, "It's empty")
+				balloon_alert(user, "Syringe empty", color = COLOR_BALLOON_WARNING)
 				return
 
 			if(!L && !target.is_injectable(user)) //only checks on non-living mobs, due to how can_inject() handles
-				balloon_alert(user, "You cannot fill [target]")
+				balloon_alert(user, "[target] cannot be filled", color = COLOR_BALLOON_WARNING)
 				return
 
 			if(target.reagents.total_volume >= target.reagents.maximum_volume)
-				balloon_alert(user, "It's full")
+				balloon_alert(user, "Target full", color = COLOR_BALLOON_WARNING)
 				return
 
 			if(L) //living mob
@@ -179,7 +178,7 @@
 			var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1)
 			reagents.reaction(L, INJECT, fraction)
 			reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user)
-			balloon_alert(user, "[amount_per_transfer_from_this]u injected")
+			balloon_alert(user, "[amount_per_transfer_from_this]u injected", color = COLOR_BALLOON_NOTICE)
 			to_chat(user, "<span class='notice'>You inject [amount_per_transfer_from_this] units of the solution. The syringe now contains [reagents.total_volume] units.</span>")
 			if (reagents.total_volume <= 0 && mode==SYRINGE_INJECT)
 				mode = SYRINGE_DRAW

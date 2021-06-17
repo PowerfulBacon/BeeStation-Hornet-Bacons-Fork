@@ -59,6 +59,36 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559E"
 #define COLOR_ASSEMBLY_PURPLE  "#6F6192"
 
+//Colors used by balloon alerts
+#define COLOR_BALLOON_WARNING "#e77070"
+#define COLOR_BALLOON_INFOMATION "#90c5e4"
+#define COLOR_BALLOON_MECH_INFO "#d6a1eb"
+//Toggle states
+#define COLOR_BALLOON_ENABLED "#71e98b"
+#define COLOR_BALLOON_DISABLED "#ff8c8c"
+//Damage modes
+#define COLOR_BALLOON_BRUTE "#f39b9b"
+#define COLOR_BALLOON_BURN "#ffeea0"
+#define COLOR_BALLOON_TOXIN "#b4ffb1"
+#define COLOR_BALLOON_OXYGEN "#a8e3ff"
+//Weapon modes
+#define COLOR_BALLOON_ENERGY "#e897f3"
+#define COLOR_BALLOON_TASER "#f7e596"
+#define COLOR_BALLOON_LETHAL "#f14d4d"
+#define COLOR_BALLOON_DISABLE "#93ebe3"
+#define COLOR_BALLOON_DESTROY "#616dda"
+#define COLOR_BALLOON_ATTRACT "#94f5f0"
+#define COLOR_BALLOON_REPEL "#ffca67"
+#define COLOR_BALLOON_CHAOS "#cfcfcf"
+#define COLOR_BALLOON_PRACTICE "#cff5be"
+#define COLOR_BALLOON_ION "#ddfdfd"
+#define COLOR_BALLOON_YIELD "#fff4c4"
+#define COLOR_BALLOON_MUTATE "#a6ec9d"
+#define COLOR_BALLOON_FREEZE "#c2fdfa"
+#define COLOR_BALLOON_BAKE "#f3b68d"
+//Special
+#define COLOR_BALLOON_RAINBOW "rainbow"
+
 //Colours used by blood brothers
 #define COLOR_LIST_BLOOD_BROTHERS list(\
 	"#FF5050",\

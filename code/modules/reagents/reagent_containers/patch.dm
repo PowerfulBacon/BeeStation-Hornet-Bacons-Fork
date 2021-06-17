@@ -15,10 +15,10 @@
 	if(ishuman(L))
 		var/obj/item/bodypart/affecting = L.get_bodypart(check_zone(user.zone_selected))
 		if(!affecting)
-			balloon_alert(user, "The limb is missing")
+			balloon_alert(user, "Limb missing", "<span class='warning'>The limb is missing!</span>", color = COLOR_BALLOON_WARNING)
 			return
 		if(affecting.status != BODYPART_ORGANIC)
-			balloon_alert(user, "It doesn't work on robotic limb")
+			balloon_alert(user, "Cannot use on robotic limb", "<span class='warning'>It doesn't work on a robotic limb.</span>", color = COLOR_BALLOON_WARNING)
 			return
 	..()
 

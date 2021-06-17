@@ -12,7 +12,7 @@
 	. = ..()
 	if(!I.get_part_rating())
 		if (!stop_messages)
-			M.balloon_alert(M, "Only machine parts fit")
+			M.balloon_alert(M, "Only machine parts fit", color = COLOR_BALLOON_INFOMATION)
 		return FALSE
 
 /datum/component/storage/concrete/bluespace/rped
@@ -29,5 +29,5 @@
 	. = ..()
 	if(!I.get_part_rating())
 		if (!stop_messages)
-			M.balloon_alert(M, "Only machine parts fit")
+			M.balloon_alert(M, "Only machine parts fit", color = COLOR_BALLOON_INFOMATION)
 		return FALSE

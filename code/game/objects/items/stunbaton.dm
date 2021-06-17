@@ -91,15 +91,15 @@
 	if(istype(W, /obj/item/stock_parts/cell))
 		var/obj/item/stock_parts/cell/C = W
 		if(cell)
-			balloon_alert(user, "[src] already has a cell")
+			balloon_alert(user, "[src] already has a cell", color = COLOR_BALLOON_WARNING)
 		else
 			if(C.maxcharge < hitcost)
-				balloon_alert(user, "[src] requires a higher capacity cell")
+				balloon_alert(user, "[src] requires a higher capacity cell", color = COLOR_BALLOON_WARNING)
 				return
 			if(!user.transferItemToLoc(W, src))
 				return
 			cell = W
-			balloon_alert(user, "Cell installed")
+			balloon_alert(user, "Cell installed", color = COLOR_BALLOON_INFOMATION)
 			update_icon()
 
 	else if(W.tool_behaviour == TOOL_SCREWDRIVER)
@@ -107,7 +107,7 @@
 			cell.update_icon()
 			cell.forceMove(get_turf(src))
 			cell = null
-			balloon_alert(user, "Cell removed")
+			balloon_alert(user, "Cell removed", color = COLOR_BALLOON_INFOMATION)
 			turned_on = FALSE
 			update_icon()
 	else
@@ -116,14 +116,14 @@
 /obj/item/melee/baton/attack_self(mob/user)
 	if(cell && cell.charge > hitcost)
 		turned_on = !turned_on
-		balloon_alert(user, "[src] [turned_on ? "on" : "off"]")
+		balloon_alert(user, "[src] [turned_on ? "on" : "off"]", color = turned_on ? COLOR_BALLOON_ENABLED : COLOR_BALLOON_DISABLED)
 		playsound(src, "sparks", 75, TRUE, -1)
 	else
 		turned_on = FALSE
 		if(!cell)
-			balloon_alert(user, "No power source")
+			balloon_alert(user, "No power source", color = COLOR_BALLOON_WARNING)
 		else
-			balloon_alert(user, "Out of charge")
+			balloon_alert(user, "Out of charge", color = COLOR_BALLOON_WARNING)
 	update_icon()
 	add_fingerprint(user)
 

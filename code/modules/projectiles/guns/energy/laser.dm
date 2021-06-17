@@ -90,6 +90,7 @@
 /obj/item/ammo_casing/energy/laser/accelerator
 	projectile_type = /obj/item/projectile/beam/laser/accelerator
 	select_name = "accelerator"
+	select_color = COLOR_BALLOON_LETHAL
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 
 /obj/item/projectile/beam/laser/accelerator

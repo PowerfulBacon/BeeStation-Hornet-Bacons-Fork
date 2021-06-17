@@ -142,7 +142,7 @@
 		var/obj/item/stock_parts/cell/C = R.cell
 		if(active && !(C.use(hitcost)))
 			attack_self(R)
-			balloon_alert(R, "Out of charge")
+			balloon_alert(R, "Out of charge", color = COLOR_BALLOON_WARNING)
 			return
 		return ..()
 
@@ -215,13 +215,13 @@
 		if(!hacked)
 			hacked = TRUE
 			item_color = "rainbow"
-			balloon_alert(user, "RNBW_ENGAGE")
+			balloon_alert(user, "Rainbow engaged", "<span class='warning'>RNBW_ENGAGE</span>", color = COLOR_BALLOON_RAINBOW)
 
 			if(active)
 				icon_state = "swordrainbow"
 				user.update_inv_hands()
 		else
-			balloon_alert(user, "It's already fabulous!")
+			balloon_alert(user, "It's already fabulous!", color = COLOR_BALLOON_WARNING)
 	else
 		return ..()
 

@@ -162,7 +162,7 @@
 	return TRUE
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
-	balloon_alert(user, "Gun clicks")
+	balloon_alert(user, "*click*", color = COLOR_BALLOON_WARNING)
 	playsound(src, dry_fire_sound, 30, TRUE)
 
 
@@ -236,7 +236,7 @@
 				return
 
 	if(weapon_weight == WEAPON_HEAVY && user.get_inactive_held_item())
-		balloon_alert(user, "You need both hands free to fire")
+		balloon_alert(user, "Other hand full", "<span class='warning'>You need both hands free to fire!</span>", color = COLOR_BALLOON_WARNING)
 		return
 
 	//DUAL (or more!) WIELDING
@@ -271,7 +271,7 @@
 			pin.auth_fail(user)
 			return FALSE
 	else
-		balloon_alert(user, "No firing pin installed")
+		balloon_alert(user, "No firing pin", "<span class='warning'>[src] contains no firing pin!</span>", color = COLOR_BALLOON_WARNING)
 	return FALSE
 
 /obj/item/gun/proc/recharge_newshot()
@@ -398,7 +398,7 @@
 		if(!gun_light)
 			if(!user.transferItemToLoc(I, src))
 				return
-			balloon_alert(user, "[S] attached")
+			balloon_alert(user, "[S] attached", "<span class='notice'>You attach [S] to [src].</span>", color = COLOR_BALLOON_INFOMATION)
 			if(S.on)
 				set_light(0)
 			gun_light = S
@@ -412,7 +412,7 @@
 			return ..()
 		if(!user.transferItemToLoc(I, src))
 			return
-		balloon_alert(user, "[K] attached to [src]")
+		balloon_alert(user, "[K] attached", "<span class='notice'>You attach [K] to [src]!</span>", color = COLOR_BALLOON_INFOMATION)
 		bayonet = K
 		var/state = "bayonet"							//Generic state.
 		if(bayonet.icon_state in icon_states('icons/obj/guns/bayonets.dmi'))		//Snowflake state?
@@ -447,7 +447,7 @@
 /obj/item/gun/proc/remove_gun_attachment(mob/living/user, obj/item/tool_item, obj/item/item_to_remove, removal_verb)
 	if(tool_item)
 		tool_item.play_tool_sound(src)
-	balloon_alert(user, "[item_to_remove] removed")
+	balloon_alert(user, "[item_to_remove] removed", "<span class='notice'>You remove [item_to_remove] from [src].</span>", color = COLOR_BALLOON_INFOMATION)
 	item_to_remove.forceMove(drop_location())
 
 	if(Adjacent(user) && !issilicon(user))
@@ -489,7 +489,7 @@
 
 	var/mob/living/carbon/human/user = usr
 	gun_light.on = !gun_light.on
-	balloon_alert(user, "Flashlight [gun_light.on ? "on":"off"]")
+	balloon_alert(user, "Flashlight [gun_light.on ? "on":"off"]", color = gun_light.on ? COLOR_BALLOON_ENABLED:COLOR_BALLOON_DISABLED)
 
 	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
 	update_gunlight()

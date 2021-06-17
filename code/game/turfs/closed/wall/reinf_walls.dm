@@ -70,138 +70,138 @@
 				W.play_tool_sound(src, 100)
 				d_state = SUPPORT_LINES
 				update_icon()
-				balloon_alert(user, "Outer grille cut")
+				balloon_alert(user, "Outer grille cut", "<span class='notice'>You cut the outer grille free from [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(SUPPORT_LINES)
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)
-				balloon_alert(user, "You begin unsecuring the support lines")
+				balloon_alert(user, "Unsecuring support lines", "<span class='notice'>You begin unsecuring the support lines from [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_LINES)
 						return TRUE
 					d_state = COVER
 					update_icon()
-					balloon_alert(user, "Support lines unsecured")
+					balloon_alert(user, "Support lines unsecured", "<span class='notice'>You unsecure the support lines from [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 			else if(W.tool_behaviour == TOOL_WIRECUTTER)
 				W.play_tool_sound(src, 100)
 				d_state = INTACT
 				update_icon()
-				balloon_alert(user, "Outer grille repaired")
+				balloon_alert(user, "Outer grille repaired", "<span class='notice'>You repair the outer grille of [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(COVER)
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				balloon_alert(user, "You begin slicing through the metal cover")
+				balloon_alert(user, "Slicing cover", "<span class='notice'>You begin slicing through the metal cover of [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 60, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return TRUE
 					d_state = CUT_COVER
 					update_icon()
-					balloon_alert(user, "Metal cover removed")
+					balloon_alert(user, "Metal cover removed", "<span class='notice'>You remove the metal cover from [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_SCREWDRIVER)
-				balloon_alert(user, "You begin securing the support lines")
+				balloon_alert(user, "Securing support lines", "<span class='notice'>You being securing the support lines of [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return TRUE
 					d_state = SUPPORT_LINES
 					update_icon()
-					balloon_alert(user, "Support lines have been secured")
+					balloon_alert(user, "Support lines secured", "<span class='notice'>You unsecure the support lines of [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(CUT_COVER)
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				balloon_alert(user, "You struggle to pry off the cover")
+				balloon_alert(user, "Prying cover", "<span class='notice'>You struggle to pry the cover free from [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return TRUE
 					d_state = ANCHOR_BOLTS
 					update_icon()
-					balloon_alert(user, "Cover pried off")
+					balloon_alert(user, "Cover pried off", "<span class='notice'>You pry the cover free from [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				balloon_alert(user, "You begin welding the metal cover back to the frame")
+				balloon_alert(user, "Welding cover to frame", "<span class='notice'>You begin welding the metal cover back to the frame of [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 60, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return TRUE
 					d_state = COVER
 					update_icon()
-					balloon_alert(user, "Metal cover welded to the frame")
+					balloon_alert(user, "Metal cover welded to frame", "<span class='notice'>You weld the metal cover onto the frame of [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(ANCHOR_BOLTS)
 			if(W.tool_behaviour == TOOL_WRENCH)
-				balloon_alert(user, "You start loosening the anchoring bolts which secure the support rods to their frame")
+				balloon_alert(user, "Loosening anchoring bolts", "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 40, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return TRUE
 					d_state = SUPPORT_RODS
 					update_icon()
-					balloon_alert(user, "Bolts removed")
+					balloon_alert(user, "Bolts removed", "<span class='notice'>You lossen the anchoring bolts which secure the support rods to their frame.</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				balloon_alert(user, "You start to pry the cover back into place")
+				balloon_alert(user, "Prying cover into place", "<span class='notice'>You start to pry the cover back into place.</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 20, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return TRUE
 					d_state = CUT_COVER
 					update_icon()
-					balloon_alert(user, "The metal cover pried back into place")
+					balloon_alert(user, "Cover pried into place", "<span class='notice'>You pry the metal cover back into place.</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(SUPPORT_RODS)
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				balloon_alert(user, "You start slicing through the support rods")
+				balloon_alert(user, "Slicing support rods", "<span class='notice'>You begin slicing the support rods of [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return TRUE
 					d_state = SHEATH
 					update_icon()
-					balloon_alert(user, "Support rods sliced through")
+					balloon_alert(user, "Support rods sliced", "<span class='notice'>You slice through the support rods of [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_WRENCH)
-				balloon_alert(user, "You start tightening the bolts securing support rods")
+				balloon_alert(user, "Securing support rod bolts", "<span class='notice'>You begin tightening the bolts securing the support rods to [src].</span>", COLOR_BALLOON_INFOMATION)
 				W.play_tool_sound(src, 100)
 				if(W.use_tool(src, user, 40))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return TRUE
 					d_state = ANCHOR_BOLTS
 					update_icon()
-					balloon_alert(user, "Bolts tightened")
+					balloon_alert(user, "Support rod bolts tightened", "<span class='notice'>You tighten the support rod bolts of [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 
 		if(SHEATH)
 			if(W.tool_behaviour == TOOL_CROWBAR)
-				balloon_alert(user, "You start prying off the outer sheath")
+				balloon_alert(user, "Prying outer sheath", "<span class='notice'>You start prying off the outer sheath of [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SHEATH)
 						return TRUE
-					balloon_alert(user, "Outer sheath pried off")
+					balloon_alert(user, "Outer sheath pried", "<span class='notice'>You pry off the outer sheath of [src].</span>", COLOR_BALLOON_INFOMATION)
 					dismantle_wall()
 				return TRUE
 
 			if(W.tool_behaviour == TOOL_WELDER)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				balloon_alert(user, "You start welding the support rods back together")
+				balloon_alert(user, "Rewelding support rods", "<span class='notice'>You start welding the support rods back to [src].</span>", COLOR_BALLOON_INFOMATION)
 				if(W.use_tool(src, user, 100, volume=100))
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SHEATH)
 						return TRUE
 					d_state = SUPPORT_RODS
 					update_icon()
-					balloon_alert(user, "Support rods welded back together")
+					balloon_alert(user, "Support rods rewelded", "<span class='notice'>You weld the support rods back to [src].</span>", COLOR_BALLOON_INFOMATION)
 				return TRUE
 	return FALSE
 

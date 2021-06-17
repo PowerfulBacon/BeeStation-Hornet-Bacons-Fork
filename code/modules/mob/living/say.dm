@@ -213,13 +213,16 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	. = ..()
 	if(!client)
 		return
+	var/deaf_alert
 	var/deaf_message
 	var/deaf_type
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be seperate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
+			deaf_alert = "[speaker] [speaker.verb_say] something"
 			deaf_message = "<span class='name'>[speaker]</span> [speaker.verb_say] something but you cannot hear [speaker.p_them()]."
 			deaf_type = 1
 	else
+		deaf_alert = "You cannot hear yourself"
 		deaf_message = "<span class='notice'>You can't hear yourself!</span>"
 		deaf_type = 2 // Since you should be able to hear yourself without looking
 
@@ -233,6 +236,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
+	speaker.balloon_alert(src, deaf_alert, color = COLOR_BALLOON_WARNING, TRUE)
 	return message
 
 /mob/living/proc/hear_intercept(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list())

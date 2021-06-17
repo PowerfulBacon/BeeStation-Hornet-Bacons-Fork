@@ -42,7 +42,7 @@
 					amount_per_transfer_from_this = possible_transfer_amounts[i+1]
 				else
 					amount_per_transfer_from_this = possible_transfer_amounts[1]
-				balloon_alert(user, "Transferring [amount_per_transfer_from_this]u")
+				balloon_alert(user, "Transferring [amount_per_transfer_from_this]u / [possible_transfer_amounts[possible_transfer_amounts.len]]u", color = COLOR_BALLOON_INFOMATION)
 				return
 
 /obj/item/reagent_containers/attack(mob/M, mob/user, def_zone)
@@ -60,13 +60,13 @@
 		covered = "mask"
 	if(covered && user.a_intent != INTENT_HARM)
 		var/who = (isnull(user) || eater == user) ? "your" : "[eater.p_their()]"
-		balloon_alert(user, "Remove [who] [covered] first")
+		balloon_alert(user, "Mouth covered", "<span class='notice'>Remove [who] [covered] first!</span>", color = COLOR_BALLOON_WARNING)
 		return FALSE
 	if(!eater.has_mouth())
 		if(eater == user)
-			balloon_alert(eater, "You have no mouth")
+			balloon_alert(eater, "No mouth", "<span class='warning'>You have no mouth to eat with!</span>", color = COLOR_BALLOON_WARNING)
 		else
-			balloon_alert(user, "[eater] has no mouth")
+			balloon_alert(user, "No mouth", "<span class='warning'>[eater] has no mouth!</span>", color = COLOR_BALLOON_WARNING)
 		return FALSE
 	return TRUE
 

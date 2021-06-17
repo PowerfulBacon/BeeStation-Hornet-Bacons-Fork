@@ -1,6 +1,7 @@
 /obj/item/ammo_casing/energy/bolt
 	projectile_type = /obj/item/projectile/energy/bolt
 	select_name = "bolt"
+	select_color = COLOR_BALLOON_TOXIN
 	e_cost = 500
 	fire_sound = 'sound/weapons/genhit.ogg'
 

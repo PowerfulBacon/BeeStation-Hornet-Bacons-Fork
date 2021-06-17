@@ -130,7 +130,7 @@
 	fire_sound = shot.fire_sound
 	fire_delay = shot.delay
 	if (shot.select_name)
-		balloon_alert(user, "Set to [shot.select_name]")
+		balloon_alert(user, "Set to [shot.select_name]", color = shot.select_color)
 	chambered = null
 	recharge_newshot(TRUE)
 	update_icon(TRUE)

@@ -127,7 +127,7 @@
 		return
 	if(!status && O.is_refillable())
 		reagents.trans_to(O, reagents.total_volume, transfered_by = user)
-		balloon_alert(user, "Fuel tank emptied")
+		balloon_alert(user, "Fuel tank emptied", color = COLOR_BALLOON_INFOMATION)
 		update_icon()
 	if(isOn())
 		use(1)
@@ -191,12 +191,12 @@
 //Switches the welder on
 /obj/item/weldingtool/proc/switched_on(mob/user)
 	if(!status)
-		balloon_alert(user, "It can't be turned on while unsecured")
+		balloon_alert(user, "It can't be turned on while unsecured", color = COLOR_BALLOON_WARNING)
 		return
 	welding = !welding
 	if(welding)
 		if(get_fuel() >= 1)
-			balloon_alert(user, "[src] on")
+			balloon_alert(user, "[src] on", color = COLOR_BALLOON_ENABLED)
 			playsound(loc, acti_sound, 50, 1)
 			force = 15
 			damtype = "fire"
@@ -204,10 +204,10 @@
 			update_icon()
 			START_PROCESSING(SSobj, src)
 		else
-			balloon_alert(user, "No fuel")
+			balloon_alert(user, "No fuel", color = COLOR_BALLOON_WARNING)
 			switched_off(user)
 	else
-		balloon_alert(user, "[src] off")
+		balloon_alert(user, "[src] off", color = COLOR_BALLOON_DISABLED)
 		playsound(loc, deac_sound, 50, 1)
 		switched_off(user)
 
@@ -252,26 +252,26 @@
 // If welding tool ran out of fuel during a construction task, construction fails.
 /obj/item/weldingtool/tool_use_check(mob/living/user, amount)
 	if(!isOn() || !check_fuel())
-		balloon_alert(user, "[src] has to be on")
+		balloon_alert(user, "[src] has to be on", color = COLOR_BALLOON_WARNING)
 		return FALSE
 
 	if(get_fuel() >= amount)
 		return TRUE
 	else
-		balloon_alert(user, "Not enough fuel to complete this task")
+		balloon_alert(user, "Not enough fuel to complete this task", color = COLOR_BALLOON_WARNING)
 		return FALSE
 
 
 /obj/item/weldingtool/proc/flamethrower_screwdriver(obj/item/I, mob/user)
 	if(welding)
-		balloon_alert(user, "[src] should be turned off")
+		balloon_alert(user, "[src] should be turned off", color = COLOR_BALLOON_WARNING)
 		return
 	status = !status
 	if(status)
-		balloon_alert(user, "[src] secured and fuel tank closed")
+		balloon_alert(user, "[src] secured and fuel tank closed", color = COLOR_BALLOON_INFOMATION)
 		DISABLE_BITFIELD(reagents.flags, OPENCONTAINER)
 	else
-		balloon_alert(user, "[src] can now be attached, modified, and refuelled")
+		balloon_alert(user, "[src] can now be attached, modified, and refuelled", color = COLOR_BALLOON_INFOMATION)
 		ENABLE_BITFIELD(reagents.flags, OPENCONTAINER)
 	add_fingerprint(user)
 
@@ -284,10 +284,10 @@
 				user.transferItemToLoc(src, F, TRUE)
 			F.weldtool = src
 			add_fingerprint(user)
-			balloon_alert(user, "You start bulding flamethrower")
+			balloon_alert(user, "You start bulding flamethrower", color = COLOR_BALLOON_INFOMATION)
 			user.put_in_hands(F)
 		else
-			balloon_alert(user, "You need one rod to build flamethrower")
+			balloon_alert(user, "You need one rod to build flamethrower", color = COLOR_BALLOON_WARNING)
 
 /obj/item/weldingtool/ignition_effect(atom/A, mob/user)
 	if(use_tool(A, user, 0, amount=1))

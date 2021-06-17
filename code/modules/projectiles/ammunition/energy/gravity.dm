@@ -17,13 +17,16 @@
 /obj/item/ammo_casing/energy/gravity/repulse
 	projectile_type = /obj/item/projectile/gravityrepulse
 	select_name = "repulse"
+	select_color = COLOR_BALLOON_REPEL
 
 /obj/item/ammo_casing/energy/gravity/attract
 	projectile_type = /obj/item/projectile/gravityattract
 	select_name = "attract"
+	select_color = COLOR_BALLOON_ATTRACT
 
 /obj/item/ammo_casing/energy/gravity/chaos
 	projectile_type = /obj/item/projectile/gravitychaos
 	select_name = "chaos"
+	select_color = COLOR_BALLOON_CHAOS
 
 

@@ -357,17 +357,21 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		if(5)
 			return "#[num2hex(c, 2)][num2hex(m, 2)][num2hex(x, 2)]"
 
-/atom/proc/balloon_alert(mob/viewer, text)
+/atom/proc/balloon_alert(mob/viewer, text, chat_text, color = "#ffffff", dont_to_chat = FALSE)
 	if(!viewer.client)
 		return
+	if(!chat_text)
+		chat_text = "<span class='notice'>[text]</span>"
 	switch(viewer.client.prefs.see_balloon_alerts)
 		if(BALLOON_ALERT_ALWAYS)
 			new /datum/chatmessage/balloon_alert(text, src, viewer)
 		if(BALLOON_ALERT_WITH_CHAT)
 			new /datum/chatmessage/balloon_alert(text, src, viewer)
-			to_chat(viewer, "<span class='notice'>[text]</span>")
+			if(!dont_to_chat)
+				to_chat(viewer, chat_text)
 		if(BALLOON_ALERT_NEVER)
-			to_chat(viewer, text)
+			if(!dont_to_chat)
+				to_chat(viewer, chat_text)
 
 /atom/proc/balloon_alert_to_viewers(message, self_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
 	var/list/hearers = get_hearers_in_view(vision_distance, src)
@@ -382,13 +386,14 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 /datum/chatmessage/balloon_alert
 	tgt_color = "#ffffff"
 
-/datum/chatmessage/balloon_alert/New(text, atom/target, mob/owner)
+/datum/chatmessage/balloon_alert/New(text, atom/target, mob/owner, color = "#ffffff")
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
 	if(QDELETED(owner) || !istype(owner) || !owner.client)
 		stack_trace("/datum/chatmessage created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
+	tgt_color = color
 	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
 
 /datum/chatmessage/balloon_alert/generate_image(text, atom/target, mob/owner)

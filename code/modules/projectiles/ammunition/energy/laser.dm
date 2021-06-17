@@ -1,6 +1,7 @@
 /obj/item/ammo_casing/energy/laser
 	projectile_type = /obj/item/projectile/beam/laser
 	select_name = "kill"
+	select_color = COLOR_BALLOON_LETHAL
 
 /obj/item/ammo_casing/energy/laser/gatlinggun
 	e_cost = 1
@@ -9,11 +10,13 @@
 	projectile_type = /obj/item/projectile/beam/laser
 	e_cost = 71
 	select_name = "kill"
+	select_color = COLOR_BALLOON_LETHAL
 
 /obj/item/ammo_casing/energy/lasergun/old
 	projectile_type = /obj/item/projectile/beam/laser
 	e_cost = 200
 	select_name = "kill"
+	select_color = COLOR_BALLOON_LETHAL
 
 /obj/item/ammo_casing/energy/laser/hos
 	e_cost = 120
@@ -21,6 +24,7 @@
 /obj/item/ammo_casing/energy/laser/practice
 	projectile_type = /obj/item/projectile/beam/practice
 	select_name = "practice"
+	select_color = COLOR_BALLOON_PRACTICE
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/laser/scatter
@@ -28,6 +32,7 @@
 	pellets = 5
 	variance = 25
 	select_name = "scatter"
+	select_color = COLOR_BALLOON_LETHAL
 
 /obj/item/ammo_casing/energy/laser/scatter/disabler
 	projectile_type = /obj/item/projectile/beam/disabler
@@ -38,18 +43,21 @@
 /obj/item/ammo_casing/energy/laser/heavy
 	projectile_type = /obj/item/projectile/beam/laser/heavylaser
 	select_name = "anti-vehicle"
+	select_color = COLOR_BALLOON_PRACTICE
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 
 /obj/item/ammo_casing/energy/laser/pulse
 	projectile_type = /obj/item/projectile/beam/pulse
 	e_cost = 200
 	select_name = "DESTROY"
+	select_color = COLOR_BALLOON_DESTROY
 	fire_sound = 'sound/weapons/pulse.ogg'
 
 /obj/item/ammo_casing/energy/laser/bluetag
 	projectile_type = /obj/item/projectile/beam/lasertag/bluetag
 	select_name = "bluetag"
 	harmful = FALSE
+	select_color = COLOR_BALLOON_DESTROY
 
 /obj/item/ammo_casing/energy/laser/bluetag/hitscan
 	projectile_type = /obj/item/projectile/beam/lasertag/bluetag/hitscan
@@ -58,6 +66,7 @@
 	projectile_type = /obj/item/projectile/beam/lasertag/redtag
 	select_name = "redtag"
 	harmful = FALSE
+	select_color = COLOR_BALLOON_LETHAL
 
 /obj/item/ammo_casing/energy/laser/redtag/hitscan
 	projectile_type = /obj/item/projectile/beam/lasertag/redtag/hitscan
@@ -71,3 +80,4 @@
 	projectile_type = /obj/item/projectile/beam/mindflayer
 	select_name = "MINDFUCK"
 	fire_sound = 'sound/weapons/laser.ogg'
+	select_color = COLOR_BALLOON_ENERGY
