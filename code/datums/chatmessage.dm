@@ -393,7 +393,12 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		stack_trace("/datum/chatmessage created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
-	tgt_color = color
+	switch(color)
+		if(COLOR_BALLOON_RAINBOW)
+			tgt_color = "#ffffff"
+			text = "<span class='rainbow'>[text]</span>"
+		else
+			tgt_color = color
 	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
 
 /datum/chatmessage/balloon_alert/generate_image(text, atom/target, mob/owner)
@@ -419,6 +424,7 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	message.maptext_height = WXH_TO_HEIGHT(owned_by?.MeasureText(text, null, BALLOON_TEXT_WIDTH))
 	message.maptext_x = (BALLOON_TEXT_WIDTH - bound_width) * -0.5
 	message.maptext = MAPTEXT("<span style='text-align: center; -dm-text-outline: 1px #0005; color: [tgt_color]'>[text]</span>")
+	message.pixel_y = world.icon_size * 0.5
 
 	// View the message
 	owned_by.images += message
@@ -432,7 +438,7 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	// Animate the message
 	animate(
 		message,
-		pixel_y = world.icon_size * 1.2,
+		pixel_y = world.icon_size * 1.4,
 		time = BALLOON_TEXT_TOTAL_LIFETIME(1),
 		easing = SINE_EASING | EASE_OUT,
 	)

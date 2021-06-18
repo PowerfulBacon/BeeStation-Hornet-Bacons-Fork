@@ -77,7 +77,7 @@
 		return
 	if(!chassis.selected)
 		chassis.selected = available_equipment[1]
-		chassis.balloon_alert(owner, "[chassis.selected] selected", color = COLOR_BALLOON_MECH_INFO)
+		chassis.balloon_alert(owner, "[chassis.selected] selected", color = COLOR_BALLOON_ENABLED)
 		send_byjax(chassis.occupant,"exosuit.browser","eq_list",chassis.get_equipment_list())
 		button_icon_state = "mech_cycle_equip_on"
 		UpdateButtonIcon()
@@ -113,7 +113,7 @@
 	else
 		chassis.set_light(-chassis.lights_power)
 		button_icon_state = "mech_lights_off"
-	chassis.balloon_alert(owner, "Toggled lights [chassis.lights?"on":"off"]", color = chassis.lights ? COLOR_BALLOON_ENABLED : COLOR_BALLOON_ENABLED)
+	chassis.balloon_alert(owner, "Toggled lights [chassis.lights?"on":"off"]", color = chassis.lights ? COLOR_BALLOON_ENABLED : COLOR_BALLOON_DISABLED)
 	chassis.log_message("Toggled lights [chassis.lights?"on":"off"].", LOG_MECHA)
 	UpdateButtonIcon()
 
