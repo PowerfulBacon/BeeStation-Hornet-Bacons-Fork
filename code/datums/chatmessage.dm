@@ -393,13 +393,7 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		stack_trace("/datum/chatmessage created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
-	switch(color)
-		if(COLOR_BALLOON_RAINBOW)
-			tgt_color = "#ffffff"
-			//This is a bit hacky
-			text = "</span><span class='rainbow'><span style='text-align: center; -dm-text-outline: 1px #0005>[text]</span>"
-		else
-			tgt_color = color
+	tgt_color = color
 	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
 
 /datum/chatmessage/balloon_alert/generate_image(text, atom/target, mob/owner)
@@ -451,15 +445,19 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		flags = ANIMATION_PARALLEL,
 	)
 
-	animate(
-		alpha = 0,
-		time = BALLOON_TEXT_FULLY_VISIBLE_TIME * duration_mult,
-		easing = CUBIC_EASING | EASE_IN,
-	)
-
 	// Register with the runechat SS to handle EOL and destruction
 	scheduled_destruction = world.time + BALLOON_TEXT_TOTAL_LIFETIME(duration_mult)
 	enter_subsystem()
+
+/datum/chatmessage/balloon_alert/end_of_life(fadetime = BALLOON_TEXT_FADE_TIME)
+	eol_complete = scheduled_destruction + fadetime
+	animate(
+		message,
+		alpha = 0,
+		time = fadetime,
+		easing = CUBIC_EASING | EASE_IN,
+	)
+	enter_subsystem(eol_complete) // re-enter the runechat SS with the EOL completion time to QDEL self
 
 #undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MIN
 #undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MULT

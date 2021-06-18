@@ -215,7 +215,7 @@
 		if(!hacked)
 			hacked = TRUE
 			item_color = "rainbow"
-			balloon_alert(user, "Rainbow engaged", "<span class='warning'>RNBW_ENGAGE</span>", color = COLOR_BALLOON_RAINBOW)
+			balloon_alert(user, "Rainbow engaged", "<span class='warning'>RNBW_ENGAGE</span>", color = COLOR_BALLOON_WARNING)
 
 			if(active)
 				icon_state = "swordrainbow"
