@@ -396,7 +396,8 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	switch(color)
 		if(COLOR_BALLOON_RAINBOW)
 			tgt_color = "#ffffff"
-			text = "<span class='rainbow'>[text]</span>"
+			//This is a bit hacky
+			text = "</span><span class='rainbow'><span style='text-align: center; -dm-text-outline: 1px #0005>[text]</span>"
 		else
 			tgt_color = color
 	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
@@ -459,7 +460,6 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	// Register with the runechat SS to handle EOL and destruction
 	scheduled_destruction = world.time + BALLOON_TEXT_TOTAL_LIFETIME(duration_mult)
 	enter_subsystem()
-
 
 #undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MIN
 #undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MULT
