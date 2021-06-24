@@ -1,6 +1,7 @@
 /datum/wires/radio
 	holder_type = /obj/item/radio
 	proper_name = "Radio"
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/radio/New(atom/holder)
 	wires = list(

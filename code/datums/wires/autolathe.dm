@@ -1,6 +1,7 @@
 /datum/wires/autolathe
 	holder_type = /obj/machinery/modular_fabricator/autolathe
 	proper_name = "Autolathe"
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/autolathe/New(atom/holder)
 	wires = list(

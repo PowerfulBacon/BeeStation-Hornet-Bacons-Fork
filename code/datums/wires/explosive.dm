@@ -1,5 +1,6 @@
 /datum/wires/explosive
 	var/duds_number = 2
+	see_wires_trait = TRAIT_BOMBWIRES
 
 /datum/wires/explosive/New(atom/holder)
 	add_duds(duds_number) // In this case duds actually explode.
@@ -43,7 +44,7 @@
 	message_admins("\An [assembly] has pulsed a grenade, which was installed by [fingerprint].")
 	log_game("\An [assembly] has pulsed a grenade, which was installed by [fingerprint].")
 	var/mob/M = get_mob_by_ckey(fingerprint)
-	var/turf/T = get_turf(M)	
+	var/turf/T = get_turf(M)
 	G.log_grenade(M, T)
 	G.prime()
 

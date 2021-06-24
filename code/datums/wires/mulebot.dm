@@ -1,6 +1,7 @@
 /datum/wires/mulebot
 	holder_type = /mob/living/simple_animal/bot/mulebot
 	randomize = TRUE
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/mulebot/New(atom/holder)
 	wires = list(

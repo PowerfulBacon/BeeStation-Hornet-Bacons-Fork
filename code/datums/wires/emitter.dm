@@ -1,6 +1,7 @@
 
 /datum/wires/emitter
 	holder_type = /obj/machinery/power/emitter
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/emitter/New(atom/holder)
 	wires = list(WIRE_ZAP,WIRE_HACK)

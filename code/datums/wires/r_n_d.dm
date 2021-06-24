@@ -1,6 +1,7 @@
 /datum/wires/rnd
 	holder_type = /obj/machinery/rnd
 	randomize = TRUE
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/rnd/New(atom/holder)
 	wires = list(

@@ -45,6 +45,8 @@
 
 	var/list/spell_list = list() // Wizard mode & "Give Spell" badmin button.
 
+	var/datum/skilltree/skilltree
+
 	var/linglink
 	var/datum/martial_art/martial_art
 	var/static/default_martial_art = new/datum/martial_art
@@ -78,6 +80,7 @@
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
+	skilltree = new
 
 /datum/mind/Destroy()
 	SSticker.minds -= src

@@ -1,6 +1,7 @@
 /datum/wires/robot
 	holder_type = /mob/living/silicon/robot
 	randomize = TRUE
+	see_wires_trait = TRAIT_BORG_WIRES
 
 /datum/wires/robot/New(atom/holder)
 	wires = list(

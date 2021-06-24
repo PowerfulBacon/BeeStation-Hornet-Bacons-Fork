@@ -26,6 +26,7 @@
 	var/atom/holder = null // The holder (atom that contains these wires).
 	var/holder_type = null // The holder's typepath (used to make wire colors common to all holders).
 	var/proper_name = "Unknown" // The display name for the wire set shown in station blueprints. Not used if randomize is true or it's an item NT wouldn't know about (Explosives/Nuke)
+	var/see_wires_trait = null
 
 	var/list/wires = list() // List of wires.
 	var/list/cut_wires = list() // List of wires that have been cut.
@@ -242,6 +243,9 @@
 
 	// Station blueprints do that too, but only if the wires are not randomized.
 	else if(user.is_holding_item_of_type(/obj/item/areaeditor/blueprints) && !randomize)
+		reveal_wires = TRUE
+
+	else if(user.mind && see_wires_trait && HAS_TRAIT(user.mind, see_wires_trait))
 		reveal_wires = TRUE
 
 	for(var/color in colors)

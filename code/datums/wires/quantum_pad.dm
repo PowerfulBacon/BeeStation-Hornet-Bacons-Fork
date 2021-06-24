@@ -1,5 +1,6 @@
 /datum/wires/quantum_pad
 	holder_type = /obj/machinery/quantumpad
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/quantum_pad/New(atom/holder)
 	wires = list(WIRE_ACTIVATE)

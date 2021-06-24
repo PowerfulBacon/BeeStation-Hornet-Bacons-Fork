@@ -1,6 +1,7 @@
 /datum/wires/microwave
 	holder_type = /obj/machinery/microwave
 	proper_name = "Microwave"
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/microwave/New(atom/holder)
 	wires = list(

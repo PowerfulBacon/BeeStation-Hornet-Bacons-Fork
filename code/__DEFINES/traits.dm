@@ -174,6 +174,46 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_WARDED       		"curse_immune"
 #define TRAIT_NICE_SHOT			"nice_shot" //hnnnnnnnggggg..... you're pretty good....
 
+///Mind Traits
+//Medical
+#define TRAIT_SKILL_BETTERCPR	"traitbettercpr"		//Better at CPR
+#define TRAIT_SKILL_FAST_HEAL	"traitfastheal"			//Quicker at applying heal kits
+#define TRAIT_SKILL_FASTER_HEAL	"traitfasterheal"		//Quicker at applying heal kits
+#define TRAIT_SKILL_QUICKCARRY	"traitquickgrab"		//Quicker at fireman carrying people
+#define TRAIT_SKILL_FASTSELFHEAL "traitselfhealer"		//Quicker at healing self
+#define TRAIT_SURGERYBASIC		"traitsurgerybasic"		//Surgery is more likely to succeed
+#define TRAIT_SURGERYADV		"traitsurgeryadv"		//Surgery is faster and more likely to succeed
+#define TRAIT_CHEMMACHINE		"traitchemmachine"		//Chem machines use less power
+//Science
+#define TRAIT_MECH_PILOT		"traitmechpilot"		//No mech action slowdown
+#define TRAIT_MECH_EJECT		"traitmecheject"		//Quicker mech ejection
+#define TRAIT_BORG_WIRES		"traitborgwires"		//See borg wires
+#define TRAIT_SLIMEFRIEND		"traitslimefriend"		//Slimes will be friendly
+#define TRAIT_SLIMEANALYSER		"traitslimeanalyser"	//Examining slimes will scan them
+//Service
+#define TRAIT_DRINKFLIPPER		"traitdrinkflip"		//Thrown drinks wont spill
+#define TRAIT_MICROWAVEPRO		"traitmicrowavepro"		//Microwaves cook faster
+#define TRAIT_KITCHENCOMBAT		"traitkitchencombat"	//Can perform kitchen CQB, auto unlocked to chefs
+//Engineering
+#define TRAIT_DOORWIRES			"traitdoorwires"		//See the door wires
+#define TRAIT_GASDETECT			"traitgasdetect"		//Can see type of gases by examining self
+#define TRAIT_GASDETECT_ADV		"traitgasdetectadv"		//Can see moles of gases in air by examining self
+#define TRAIT_GASDETECT_CONTENT "traitgasdetectconts"	//Can see moles of gases inside containers
+#define TRAIT_SHOCKPROOF		"traitshockproof1"		//Less damaging shocks
+#define TRAIT_SHOCKPROOF_ADV	"traitshockproof2"		//Even less damaging shocks
+#define TRAIT_QUICKTOOLS		"traitquicktools"		//Tool actions are faster
+#define TRAIT_QUICKERTOOLS		"traitquickertools"		//Tool actions are even faster
+#define TRAIT_SEEWIRESBASIC		"traitseewiresbasic"	//See the wires of basic machines (APCs, air alarms)
+#define TRAIT_SEEWIRESADV		"traitseewiresadv"		//See the wires of more advanced machines
+//Weapons
+#define TRAIT_BLOCKING			"traitblocking"			//Unlocks the ability to block
+#define TRAIT_WALKBLOCKING		"traitwalkblocking"		//Blocking is improved while walking
+#define TRAIT_UNARMED_DAMAGE	"traitunarmed_damage"	//Increases unarmed damage
+#define TRAIT_UNARMED_BLOCKING	"traitunarmed_blocking"	//Ability to block while unarmed
+#define TRAIT_BLOCK_BREAKER		"traitblock_breaker"	//Ability to break blocks with unarmed shove
+//Antagonist
+#define TRAIT_BOMBWIRES			"traitbombwires"		//Ability to see bomb wires
+
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it
 
@@ -225,6 +265,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define ADMIN_TRAIT "admin" // (B)admins only.
 #define CHANGELING_TRAIT "changeling"
 #define CULT_TRAIT "cult"
+#define SKILL_TRAIT "skill"
 #define CURSED_ITEM_TRAIT "cursed-item" // The item is magically cursed
 #define ABSTRACT_ITEM_TRAIT "abstract-item"
 #define STATUS_EFFECT_TRAIT "status-effect"

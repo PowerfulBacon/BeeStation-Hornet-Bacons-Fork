@@ -17,7 +17,10 @@
 	var/mix_sound = 'sound/effects/bubbles.ogg' //The sound played upon mixing, if applicable
 
 /datum/chemical_reaction/proc/on_reaction(datum/reagents/holder, created_volume)
-	return
+	var/mob/living/M = usr
+	if(M?.mind)
+		//give the ID of the chem reaction
+		M.mind.skilltree.check_chem(id, created_volume)
 	//I recommend you set the result amount to the total volume of all components.
 
 /datum/chemical_reaction/proc/chemical_mob_spawn(datum/reagents/holder, amount_to_spawn, reaction_name, mob_class = HOSTILE_SPAWN, mob_faction = "chemicalsummon", random = TRUE)

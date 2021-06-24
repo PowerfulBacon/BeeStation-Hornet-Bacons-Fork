@@ -1,6 +1,7 @@
 /datum/wires/airalarm
 	holder_type = /obj/machinery/airalarm
 	proper_name = "Air Alarm"
+	see_wires_trait = TRAIT_SEEWIRESBASIC
 	FASTDMM_PROP(\
 		set_instance_vars(\
 			pixel_x = (dir & 3)? INSTANCE_VAR_DEFAULT : (dir == 4 ? -24 : 24),\

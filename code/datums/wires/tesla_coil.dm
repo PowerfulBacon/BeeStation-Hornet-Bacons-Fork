@@ -2,6 +2,7 @@
 /datum/wires/tesla_coil
 	randomize = 1	//Only one wire don't need blueprints
 	holder_type = /obj/machinery/power/tesla_coil
+	see_wires_trait = TRAIT_SEEWIRESADV
 
 /datum/wires/tesla_coil/New(atom/holder)
 	wires = list(WIRE_ZAP)
