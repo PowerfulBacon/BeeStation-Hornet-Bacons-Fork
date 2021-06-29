@@ -23,16 +23,15 @@
 	AddComponent(/datum/component/footstep, 1, 2)
 
 /mob/living/carbon/swap_hand(held_index)
+	. = ..()
+	if(!.)
+		var/obj/item/held_item = get_active_held_item()
+		to_chat(usr, "<span class='warning'>Your other hand is too busy holding [held_item].</span>")
+		return
+
 	if(!held_index)
 		held_index = (active_hand_index % held_items.len)+1
 
-	var/obj/item/item_in_hand = src.get_active_held_item()
-	if(item_in_hand) //this segment checks if the item in your hand is twohanded.
-		var/obj/item/twohanded/TH = item_in_hand
-		if(istype(TH))
-			if(TH.wielded == 1)
-				to_chat(usr, "<span class='warning'>Your other hand is too busy holding [TH].</span>")
-				return
 	var/oindex = active_hand_index
 	active_hand_index = held_index
 	if(hud_used)
@@ -232,6 +231,16 @@
 
 				visible_message("<span class='danger'>[usr] [internal ? "opens" : "closes"] the valve on [src]'s [ITEM.name].</span>", \
 								"<span class='userdanger'>You [internal ? "open" : "close"] the valve on [src]'s [ITEM.name].</span>")
+
+	if(href_list["embedded_object"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
+		var/obj/item/bodypart/L = locate(href_list["embedded_limb"]) in bodyparts
+		if(!L)
+			return
+		var/obj/item/I = locate(href_list["embedded_object"]) in L.embedded_objects
+		if(!I || I.loc != src) //no item, no limb, or item is not in limb or in the person anymore
+			return
+		SEND_SIGNAL(src, COMSIG_CARBON_EMBED_RIP, I, L)
+		return
 
 /mob/living/carbon/fall(forced)
     loc.handle_fall(src, forced)//it's loc so it doesn't call the mob's handle_fall which does nothing
@@ -762,7 +771,7 @@
 			death()
 			return
 		if(IsUnconscious() || IsSleeping() || getOxyLoss() > 50 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)) || (health <= HEALTH_THRESHOLD_FULLCRIT && !HAS_TRAIT(src, TRAIT_NOHARDCRIT)))
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 			blind_eyes(1)
 			if(CONFIG_GET(flag/near_death_experience) && health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
 				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
@@ -770,9 +779,9 @@
 				REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
 		else
 			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
-				stat = SOFT_CRIT
+				set_stat(SOFT_CRIT)
 			else
-				stat = CONSCIOUS
+				set_stat(CONSCIOUS)
 			adjust_blindness(-1)
 			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
 		update_mobility()
@@ -806,7 +815,7 @@
 		B.brain_death = FALSE
 	for(var/thing in diseases)
 		var/datum/disease/D = thing
-		if(D.severity != DISEASE_SEVERITY_BENEFICIAL && D.severity != DISEASE_SEVERITY_POSITIVE)
+		if(D.danger != DISEASE_BENEFICIAL && D.danger != DISEASE_POSITIVE)
 			D.cure(FALSE)
 	if(admin_revive)
 		suiciding = FALSE

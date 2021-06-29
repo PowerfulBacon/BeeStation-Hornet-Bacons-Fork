@@ -5,6 +5,9 @@
 	flash_power = BULLET_FLASH_POWER
 	flash_colour = LIGHT_COLOR_RED
 
+/obj/item/ammo_casing/energy/laser/gatlinggun
+	e_cost = 1
+
 /obj/item/ammo_casing/energy/lasergun
 	projectile_type = /obj/item/projectile/beam/laser
 	e_cost = 71

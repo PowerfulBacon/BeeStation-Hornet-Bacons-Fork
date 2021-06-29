@@ -135,7 +135,11 @@
 #define CAMERA_STATIC_LAYER 20
 #define CAMERA_STATIC_RENDER_TARGET "CAMERA_STATIC_PLANE"
 
+
 #define RUNECHAT_PLANE 21
+
+/// Plane for balloon text (text that fades up)
+#define BALLOON_CHAT_PLANE 21.5
 //HUD layer defines
 
 #define FULLSCREEN_PLANE 22

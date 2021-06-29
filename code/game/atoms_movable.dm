@@ -424,6 +424,8 @@
 		orbiting.end_orbit(src)
 		orbiting = null
 
+	vis_contents.Cut()
+
 // Make sure you know what you're doing if you call this, this is intended to only be called by byond directly.
 // You probably want CanPass()
 /atom/movable/Cross(atom/movable/AM)
@@ -724,10 +726,13 @@
 				break
 	. = dense_object_backup
 
-//called when a mob resists while inside a container that is itself inside something.
-/atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
+//Called when something resists while this atom is its loc
+/atom/movable/proc/container_resist(mob/living/user)
 	return
 
+//Called when a mob resists while inside a container that is itself inside something.
+/atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
+	return
 
 /atom/movable/proc/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && (visual_effect_icon || used_item))

@@ -48,7 +48,7 @@
 	var/loading_id = ""
 
 /area/centcom/supplypod/loading/Initialize()
-	. = ..() 
+	. = ..()
 	if(!loading_id)
 		CRASH("[type] created without a loading_id")
 	if(GLOB.supplypod_loading_bays[loading_id])
@@ -147,7 +147,7 @@
 	teleport_restriction = TELEPORT_ALLOW_NONE
 	blob_allowed = FALSE //Not... entirely sure this will ever come up... but if the bus makes blobs AND ops, it shouldn't aim for the ops to win.
 	flags_1 = NONE
-	ambient_effects = HIGHSEC
+	ambience_index = AMBIENCE_DANGER
 
 	base_lighting = "#555b72"
 	base_lighting_alpha = BASE_LIGHTING_ALPHA
@@ -211,7 +211,7 @@
 	has_gravity = STANDARD_GRAVITY
 	teleport_restriction = TELEPORT_ALLOW_CLOCKWORK
 	hidden = TRUE
-	ambient_effects = REEBE
+	ambience_index = AMBIENCE_REEBE
 
 	base_lighting = "#eed8c4"
 	base_lighting_alpha = BASE_LIGHTING_ALPHA

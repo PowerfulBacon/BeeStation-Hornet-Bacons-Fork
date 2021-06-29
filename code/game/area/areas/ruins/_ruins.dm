@@ -5,9 +5,9 @@
 	icon_state = "away"
 	has_gravity = STANDARD_GRAVITY
 	hidden = TRUE
-
-	ambient_effects = RUINS
-
+	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
+	ambience_index = AMBIENCE_RUINS
+	sound_environment = SOUND_ENVIRONMENT_STONEROOM
 
 /area/ruin/unpowered
 	always_unpowered = FALSE

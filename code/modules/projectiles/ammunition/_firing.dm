@@ -9,18 +9,25 @@
 			parent_item = fired_from.loc
 		flash_lighting_fx(MINIMUM_LIGHT_SHADOW_RADIUS, flash_power, flash_colour, 3, TRUE, 1, /atom/movable/lighting_mask/conical, parent_item.dir)
 	distro += variance
-	for (var/i = max(1, pellets), i > 0, i--)
-		var/targloc = get_turf(target)
-		ready_proj(target, user, quiet, zone_override, fired_from)
+	var/targloc = get_turf(target)
+	ready_proj(target, user, quiet, zone_override, fired_from)
+	if(pellets == 1)
 		if(distro) //We have to spread a pixel-precision bullet. throw_proj was called before so angles should exist by now...
 			if(randomspread)
 				spread = round((rand() - 0.5) * distro) * spread_mult
 			else //Smart spread
-				spread = round((i / pellets - 0.5) * distro) * spread_mult
+				spread = round(1 - 0.5) * distro * spread_mult
 		if(!throw_proj(target, targloc, user, params, spread))
-			return 0
-		if(i > 1)
-			newshot()
+			return FALSE
+	else
+		if(isnull(BB))
+			return FALSE
+		AddComponent(/datum/component/pellet_cloud, projectile_type, pellets)
+		SEND_SIGNAL(src, COMSIG_PELLET_CLOUD_INIT, target, user, fired_from, randomspread, spread, zone_override, params, distro)
+	if(click_cooldown_override)
+		user.changeNext_move(click_cooldown_override)
+	else
+		user.changeNext_move(CLICK_CD_RANGE)
 	user.newtonian_move(get_dir(target, user))
 	update_icon()
 	return TRUE
