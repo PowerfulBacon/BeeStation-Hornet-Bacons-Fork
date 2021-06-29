@@ -65,7 +65,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	sound_environment = SOUND_AREA_ASTEROID
 
 /area/asteroid/nearstation
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	ambience_index = AMBIENCE_RUINS
 	always_unpowered = FALSE
 	requires_power = TRUE
