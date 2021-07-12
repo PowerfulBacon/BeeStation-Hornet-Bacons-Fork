@@ -29,6 +29,8 @@
 		holder.pixel_x -= world.icon_size * range
 
 /datum/component/mirage_border/Destroy()
+	stack_trace("mirage holder deleted wtf")
+	message_admins("MIRAGE HOLDER DELETED.")
 	QDEL_NULL(holder)
 	return ..()
 

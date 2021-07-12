@@ -57,6 +57,10 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 // Creates a new turf
 // new_baseturfs can be either a single type or list of types, formated the same as baseturfs. see turf.dm
 /turf/proc/ChangeTurf(path, list/new_baseturfs, flags)
+
+	var/datum/component/mirage_border/border = GetComponent(/datum/component/mirage_border)
+	border?.RemoveComponent()
+
 	switch(path)
 		if(null)
 			return
@@ -84,6 +88,10 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	var/old_lighting_object = lighting_object
 	var/old_corners = corners
 
+	var/old_dest_x = destination_x
+	var/old_dest_y = destination_y
+	var/old_dest_z = destination_z
+
 	var/old_exl = explosion_level
 	var/old_exi = explosion_id
 	var/old_bp = blueprint_data
@@ -100,6 +108,13 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	changing_turf = TRUE
 	qdel(src)	//Just get the side effects and call Destroy
 	var/turf/W = new path(src)
+
+	W.destination_x = old_dest_x
+	W.destination_y = old_dest_y
+	W.destination_z = old_dest_z
+
+	if(border)
+		W.TakeComponent(border)
 
 	for(var/i in transferring_comps)
 		W.TakeComponent(i)
@@ -319,7 +334,3 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 	air.copy_from(total.remove_ratio(1/turf_count))
 	SSair.add_to_active(src)
-
-/turf/proc/ReplaceWithLattice()
-	ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-	new /obj/structure/lattice(locate(x, y, z))

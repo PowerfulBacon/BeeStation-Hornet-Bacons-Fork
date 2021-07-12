@@ -512,9 +512,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	if(!SSticker.HasRoundStarted())
 		add_blueprints(AM)
 
-/turf/proc/is_transition_turf()
-	return
-
 /turf/acid_act(acidpwr, acid_volume)
 	. = 1
 	var/acid_type = /obj/effect/acid
