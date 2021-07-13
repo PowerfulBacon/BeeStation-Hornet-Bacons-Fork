@@ -1,5 +1,5 @@
 
-/obj/item/bodypart
+/*/obj/item/bodypart
 	name = "limb"
 	desc = "Why is it detached..."
 	force = 3
