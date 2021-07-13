@@ -68,7 +68,7 @@
 			M.adjustBruteLoss(-5, FALSE)
 			M.adjustFireLoss(-5, FALSE)
 			M.adjustOxyLoss(-5, FALSE)
-			M.adjustToxLoss(-5, FALSE)
+			M.adjustToxLoss(-5, FALSE, TRUE)
 			M.adjustCloneLoss(-5)
 		else
 			visible_message("<span class='neovgre'>\The [src] fails to heal [M]!</span>", "<span class='neovgre'>There is insufficient vitality to heal your wounds!</span>")
@@ -97,10 +97,10 @@
 			if(!cogger.grab_ghost(TRUE))
 				//Replace the mob with a shell
 				qdel(cogger)
-				new /obj/item/drone_shell/cogscarab(get_turf(M))
+				new /obj/effect/mob_spawn/drone/cogscarab(get_turf(M))
 			add_servant_of_ratvar(cogger, silent=TRUE)
 			return
 		if(M.client)
-			M.visible_message("<span class='neovgre'>[src] looks weak as the color fades from their body.</span>", "<span class='neovgre'>You feel your soul faltering...</span>")
+			M.visible_message("<span class='neovgre'>[M] looks weak as the color fades from their body.</span>", "<span class='neovgre'>You feel your soul faltering...</span>")
 			GLOB.clockcult_vitality += 30
 		GLOB.clockcult_vitality += 10

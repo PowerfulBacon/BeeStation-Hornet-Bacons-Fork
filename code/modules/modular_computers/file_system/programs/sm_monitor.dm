@@ -31,24 +31,25 @@
 	refresh()
 
 /datum/computer_file/program/supermatter_monitor/kill_program(forced = FALSE)
-	active = null
+	for(var/supermatter in supermatters)
+		clear_supermatter(supermatter)
 	supermatters = null
 	..()
 
 // Refreshes list of active supermatter crystals
 /datum/computer_file/program/supermatter_monitor/proc/refresh()
+	for(var/supermatter in supermatters)
+		clear_supermatter(supermatter)
 	supermatters = list()
 	var/turf/T = get_turf(ui_host())
 	if(!T)
 		return
 	for(var/obj/machinery/power/supermatter_crystal/S in GLOB.machines)
 		// Delaminating, not within coverage, not on a tile.
-		if (!isturf(S.loc) || !(is_station_level(S.z) || is_mining_level(S.z) || S.z == T.z))
+		if (!isturf(S.loc) || !(is_station_level(S.z) || is_mining_level(S.z) || S.get_virtual_z_level() == T.get_virtual_z_level()))
 			continue
 		supermatters.Add(S)
-
-	if(!(active in supermatters))
-		active = null
+		RegisterSignal(S, COMSIG_PARENT_QDELETING, .proc/react_to_del)
 
 /datum/computer_file/program/supermatter_monitor/proc/get_status()
 	. = SUPERMATTER_INACTIVE
@@ -124,3 +125,13 @@
 				if(S.uid == newuid)
 					active = S
 			return TRUE
+
+/datum/computer_file/program/supermatter_monitor/proc/react_to_del(datum/source)
+	SIGNAL_HANDLER
+	clear_supermatter(source)
+
+/datum/computer_file/program/supermatter_monitor/proc/clear_supermatter(matter)
+	supermatters -= matter
+	if(matter == active)
+		active = null
+	UnregisterSignal(matter, COMSIG_PARENT_QDELETING)

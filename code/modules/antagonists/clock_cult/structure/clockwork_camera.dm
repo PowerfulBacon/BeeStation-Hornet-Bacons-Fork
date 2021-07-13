@@ -38,12 +38,13 @@
 	warping = TRUE
 	button_icon_state = "warp_cancel"
 	owner.update_action_buttons_icon()
+	var/mob/previous_mob = owner
 	if(do_after(M, 50, target=target_loc, extra_checks=CALLBACK(src, .proc/special_check)))
 		try_warp_servant(M, target_loc, 50, FALSE)
 		var/obj/machinery/computer/camera_advanced/console = cam.origin
 		console.remove_eye_control(M)
 	button_icon_state = "warp_down"
-	owner.update_action_buttons_icon()
+	previous_mob.update_action_buttons_icon()
 	warping = FALSE
 
 /datum/action/innate/clockcult/warp/proc/special_check()
@@ -68,10 +69,10 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/machinery/computer/camera_advanced/ratvar/process()
-	if(prob(3))
+/obj/machinery/computer/camera_advanced/ratvar/process(delta_time)
+	if(DT_PROB(3, delta_time))
 		new /obj/effect/temp_visual/steam_release(get_turf(src))
-	if(prob(7))
+	if(DT_PROB(7, delta_time))
 		playsound(get_turf(src), 'sound/machines/beep.ogg', 20, TRUE)
 
 /obj/machinery/computer/camera_advanced/ratvar/can_use(mob/living/user)

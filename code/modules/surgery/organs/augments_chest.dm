@@ -174,6 +174,8 @@
 		A.UpdateButtonIcon()
 
 /obj/item/organ/cyberimp/chest/thrusters/proc/move_react()
+	SIGNAL_HANDLER
+
 	allow_thrust(0.01)
 
 /obj/item/organ/cyberimp/chest/thrusters/proc/allow_thrust(num)
@@ -183,7 +185,8 @@
 	var/turf/T = get_turf(owner)
 	if(!T) // No more runtimes from being stuck in nullspace.
 		return 0
-
+	if(owner.is_flying() && owner.has_gravity())
+		return 0
 	// Priority 1: use air from environment.
 	var/datum/gas_mixture/environment = T.return_air()
 	if(environment && environment.return_pressure() > 30)

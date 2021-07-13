@@ -23,8 +23,6 @@
  * Sets the different available tabs.
  */
 /datum/tgui_panel/proc/set_tab_info(payload)
-	if(!is_ready())
-		return
 	window.send_message("stat/setStatTabs", payload)
 
 /**
@@ -33,8 +31,6 @@
  * Sends TGUI the data of every single verb accessable to the user.
  */
 /datum/tgui_panel/proc/set_verb_infomation(payload)
-	if(!is_ready())
-		return
 	window.send_message("stat/setVerbInfomation", payload)
 
 /**
@@ -43,8 +39,6 @@
  * Sets the infomation to be displayed of the current tab. (For non verb tabs)
  */
 /datum/tgui_panel/proc/set_panel_infomation(payload)
-	if(!is_ready())
-		return
 	window.send_message("stat/setPanelInfomation", payload)
 
 /**
@@ -53,8 +47,6 @@
  * Sets the current tab.
  */
 /datum/tgui_panel/proc/set_stat_tab(new_tab)
-	if(!is_ready())
-		return
 	window.send_message("stat/setTab", new_tab)
 
 /**
@@ -73,6 +65,16 @@
 /**
  * public
  *
+ * Clears the antagonist popup.
+ */
+/datum/tgui_panel/proc/clear_antagonist_popup()
+	if(!is_ready())
+		return
+	window.send_message("stat/clearAntagPopup", list())
+
+/**
+ * public
+ *
  * Displays the dead message.
  */
 /datum/tgui_panel/proc/give_dead_popup()
@@ -80,12 +82,14 @@
 		return
 	window.send_message("stat/deadPopup", list())
 
+
+
 /**
  * public
  *
  * Clears the death message
  */
-/datum/tgui_panel/proc/clear_dead_poup()
+/datum/tgui_panel/proc/clear_dead_popup()
 	if(!is_ready())
 		return
 	window.send_message("stat/clearDeadPopup", list())
@@ -112,3 +116,23 @@
 	if(!is_ready())
 		return
 	window.send_message("stat/clearAlertPopup", list())
+
+/**
+ * public
+ *
+ * Displays the message asking an admin to start battle royale
+ */
+/datum/tgui_panel/proc/give_br_popup()
+	if(!is_ready())
+		return
+	window.send_message("stat/alertBr")
+
+/**
+ * public
+ *
+ * Clears the message asking an admin to start battle royale
+ */
+/datum/tgui_panel/proc/clear_br_popup()
+	if(!is_ready())
+		return
+	window.send_message("stat/clearAlertBr", list())
