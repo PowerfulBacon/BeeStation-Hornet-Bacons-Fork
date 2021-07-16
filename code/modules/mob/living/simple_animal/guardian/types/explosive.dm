@@ -33,7 +33,7 @@
 				if(hasmatchingsummoner(L)) //if the summoner matches don't hurt them
 					continue
 				if(L != src && L != summoner)
-					L.apply_damage(15, BRUTE)
+					L.apply_damage(15, BODY_ZONE_CHEST, EXPLOSION)
 			new /obj/effect/temp_visual/explosion(get_turf(M))
 
 /mob/living/simple_animal/hostile/guardian/bomb/AltClickOn(atom/movable/A)

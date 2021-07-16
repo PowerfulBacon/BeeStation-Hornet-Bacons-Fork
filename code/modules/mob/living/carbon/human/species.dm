@@ -1566,7 +1566,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(I.is_sharp())
 		attackforce = max(attackforce, I.force)
 	if(attackforce >= dismemberthreshold && I.force >= 10)
-		if(affecting.dismember(I.damtype))
+		if(affecting.dismember())
 			I.add_mob_blood(H)
 			playsound(get_turf(H), I.get_dismember_sound(), 80, 1)
 

@@ -147,12 +147,12 @@
 				var/limbs_gone = ""
 				var/obj/item/bodypart/affected = C.get_bodypart(BODY_ZONE_L_ARM)
 				if(affected != null)
-					affected.dismember(damtype)
+					affected.dismember()
 					play_sound = TRUE
 					limbs_gone = ", [affected]"
 				affected = C.get_bodypart(BODY_ZONE_R_ARM)
 				if(affected != null)
-					affected.dismember(damtype)
+					affected.dismember()
 					play_sound = TRUE
 					limbs_gone = "[limbs_gone], [affected]"
 				if(play_sound)

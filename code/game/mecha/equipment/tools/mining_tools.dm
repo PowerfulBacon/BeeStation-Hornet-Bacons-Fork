@@ -135,7 +135,7 @@
 
 		//organs go everywhere
 		if(target_part && prob(10 * drill_level))
-			target_part.dismember(BRUTE)
+			target_part.dismember()
 
 /obj/item/mecha_parts/mecha_equipment/drill/diamonddrill
 	name = "diamond-tipped exosuit drill"

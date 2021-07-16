@@ -516,10 +516,11 @@
 /mob/living/simple_animal/slime/random/Initialize(mapload, new_colour, new_is_adult)
 	. = ..(mapload, pick(slime_colours), prob(50))
 
-/mob/living/simple_animal/slime/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE)
-	if(damage && damagetype == BRUTE && !forced && (transformeffects & SLIME_EFFECT_ADAMANTINE))
-		blocked += 50
-	. = ..(damage, damagetype, def_zone, blocked, forced)
+//bacon doesn't like this
+/mob/living/simple_animal/slime/apply_damage(damage, def_zone, damage_type, source, organs)
+	if(damage && (damagetype == BLUNT || damagetype == SHARP || damagetype == BLUNT || damagetype == BULLET) && !forced && (transformeffects & SLIME_EFFECT_ADAMANTINE))
+		damage *= 0.5
+	. = ..(damage, def_zone, damage_type, source, organs)
 
 /mob/living/simple_animal/slime/give_mind(mob/user)
 	. = ..()

@@ -512,7 +512,7 @@
 		if(target.stat == DEAD)
 			continue
 		target.Jitter(14)
-		target.apply_damage(35 + rand(0,15), STAMINA, target.get_bodypart(BODY_ZONE_HEAD))
+		target.apply_damage(35 + rand(0,15), BODY_ZONE_HEAD, STAMINA)
 		if(target.is_real_hivehost())
 			continue
 		if(prob(20))
@@ -540,7 +540,7 @@
 			if(4)
 				to_chat(target, "<span class='userdanger'>You feel nauseous as dread washes over you!</span>")
 				target.Dizzy(15)
-				target.apply_damage(30, STAMINA, target.get_bodypart(BODY_ZONE_HEAD))
+				target.apply_damage(30, BODY_ZONE_HEAD, STAMINA)
 				target.hallucination += 45
 
 	for(var/mob/living/silicon/target in targets)
@@ -632,13 +632,13 @@
 		if(user == victim || victim.is_real_hivehost())
 			continue
 		if(pulses < 4)
-			victim.apply_damage(10, STAMINA, victim.get_bodypart(BODY_ZONE_HEAD)) // 25 over 10 seconds when taking stamina regen (3 per tick(2 seconds)) into account
+			victim.apply_damage(10, BODY_ZONE_HEAD, STAMINA) // 25 over 10 seconds when taking stamina regen (3 per tick(2 seconds)) into account
 			victim.hallucination += 5
 		else if(pulses < 8)
-			victim.apply_damage(15, STAMINA, victim.get_bodypart(BODY_ZONE_HEAD)) // 45 over 10 seconds when taking stamina regen into account
+			victim.apply_damage(15, BODY_ZONE_HEAD, STAMINA) // 45 over 10 seconds when taking stamina regen into account
 			victim.hallucination += 10
 		else
-			victim.apply_damage(20, STAMINA, victim.get_bodypart(BODY_ZONE_HEAD)) // 65 over 10 seconds when taking stamina regen into account
+			victim.apply_damage(20, BODY_ZONE_HEAD, STAMINA) // 65 over 10 seconds when taking stamina regen into account
 			victim.hallucination += 15
 
 	if(pulses < pulse_cap && user && target)

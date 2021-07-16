@@ -16,6 +16,17 @@
 	//Flags for the bodypart
 	var/bodypart_flags = NONE
 
+	//Bodyslot of the bodypart
+	//Set when inserted into someone.
+	var/bodyslot
+
+	//If the bodypart is a holder for other bodyparts.
+	//E.G. The head usually holds the brain.
+	//Note: For things like IPCs with a brain in the chest, checks are required to make sure duplicate organs are
+	// not being added when this part is added to the new mob. Otherwise 2 brains could be inserted into a mob, causing problems.
+	//WARNING: It is possible to make infinite loops from this.
+	var/list/bodyslots_held = null
+
 	//Allowed slots and the efficiency multiplier for each
 	//For example left leg can be put in any leg slot, but is worse in the wrong slot
 	var/list/allowed_slots = list()
@@ -33,7 +44,7 @@
 	var/destroy_cause
 
 	//Owner of the bodypart.
-	var/mob/living/owner
+	var/datum/body/body
 
 	//Maxhealth of the bodypart
 	var/maxHealth = 10
@@ -51,6 +62,20 @@
 
 	//Objects embedded within us
 	var/list/embedded_objects = list()
+
+/obj/item/nbodypart/proc/dismember(silent = FALSE)
+	if(bodyslots_held)
+		for(var/held_bodyslot in bodyslots_held)
+			if(body.bodyparts[held_bodyslot])
+				var/obj/item/nbodypart/part = body.bodyparts[held_bodyslot]
+				//Take the part from the body
+				part.dismember(TRUE)
+				//Move the part inside of us
+				contents += part
+	//You just lost this.
+	body.bodyparts[bodyslot] = null
+	body = null
+	return TRUE
 
 /obj/item/nbodypart/proc/apply_damage(amount)
 	health -= CLAMP(amount, 0, maxHealth)

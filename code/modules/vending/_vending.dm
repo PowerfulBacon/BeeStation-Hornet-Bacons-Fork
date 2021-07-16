@@ -470,64 +470,56 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 	if(in_range(fatty, src))
 		for(var/mob/living/L in get_turf(fatty))
-			var/mob/living/carbon/C = L
 
-			if(istype(C))
-				var/crit_rebate = 0 // lessen the normal damage we deal for some of the crits
+			var/crit_rebate = 0 // lessen the normal damage we deal for some of the crits
 
-				if(crit_case != 5) // the head asplode case has its own description
-					C.visible_message("<span class='danger'>[C] is crushed by [src]!</span>", \
-						"<span class='userdanger'>You are crushed by [src]!</span>")
-
-				switch(crit_case) // only carbons can have the fun crits
-					if(1) // shatter their legs and bleed 'em
-						crit_rebate = 60
-						C.bleed(150)
-						var/obj/item/bodypart/l_leg/l = C.get_bodypart(BODY_ZONE_L_LEG)
-						if(l)
-							l.receive_damage(brute=200, updating_health=TRUE)
-						var/obj/item/bodypart/r_leg/r = C.get_bodypart(BODY_ZONE_R_LEG)
-						if(r)
-							r.receive_damage(brute=200, updating_health=TRUE)
-						if(l || r)
-							C.visible_message("<span class='danger'>[C]'s legs shatter with a sickening crunch!</span>", \
-								"<span class='userdanger'>Your legs shatter with a sickening crunch!</span>")
-					if(2) // pin them beneath the machine until someone untilts it
-						forceMove(get_turf(C))
-						buckle_mob(C, force=TRUE)
-						C.visible_message("<span class='danger'>[C] is pinned underneath [src]!</span>", \
-							"<span class='userdanger'>You are pinned down by [src]!</span>")
-					if(3) // glass candy
-						crit_rebate = 50
-						for(var/i = 0, i < num_shards, i++)
-							var/obj/item/shard/shard = new /obj/item/shard(get_turf(C))
-							shard.embedding = list(embed_chance = 100, ignore_throwspeed_threshold = TRUE, impact_pain_mult=1, pain_chance=5)
-							shard.updateEmbedding()
-							C.hitby(shard, skipcatch = TRUE, hitpush = FALSE)
-							shard.embedding = list()
-							shard.updateEmbedding()
-					if(4) // paralyze this binch
-						// the new paraplegic gets like 4 lines of losing their legs so skip them
-						visible_message("<span class='danger'>[C]'s spinal cord is obliterated with a sickening crunch!</span>")
-						C.gain_trauma(/datum/brain_trauma/severe/paralysis/paraplegic)
-					if(5) // skull squish!
-						var/obj/item/bodypart/head/O = C.get_bodypart(BODY_ZONE_HEAD)
-						if(O)
-							C.visible_message("<span class='danger'>[O] explodes in a shower of gore beneath [src]!</span>", \
-								"<span class='userdanger'>Oh f-</span>")
-							O.dismember()
-							O.drop_organs()
-							qdel(O)
-							new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
-
-				C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE)
-				C.AddElement(/datum/element/squish, 18 SECONDS)
-			else
+			if(crit_case != 5) // the head asplode case has its own description
 				L.visible_message("<span class='danger'>[L] is crushed by [src]!</span>", \
-				"<span class='userdanger'>You are crushed by [src]!</span>")
-				L.apply_damage(squish_damage, forced=TRUE)
-				if(crit_case)
-					L.apply_damage(squish_damage, forced=TRUE)
+					"<span class='userdanger'>You are crushed by [src]!</span>")
+
+			switch(crit_case) // only carbons can have the fun crits
+				if(1) // shatter their legs and bleed 'em
+					crit_rebate = 60
+					L.bleed(150)
+					var/obj/item/bodypart/l_leg/l = L.get_bodypart(BODY_ZONE_L_LEG)
+					if(l)
+						l.receive_damage(brute=200, updating_health=TRUE)
+					var/obj/item/bodypart/r_leg/r = L.get_bodypart(BODY_ZONE_R_LEG)
+					if(r)
+						r.receive_damage(brute=200, updating_health=TRUE)
+					if(l || r)
+						L.visible_message("<span class='danger'>[L]'s legs shatter with a sickening crunch!</span>", \
+							"<span class='userdanger'>Your legs shatter with a sickening crunch!</span>")
+				if(2) // pin them beneath the machine until someone untilts it
+					forceMove(get_turf(L))
+					buckle_mob(L, force=TRUE)
+					L.visible_message("<span class='danger'>[L] is pinned underneath [src]!</span>", \
+						"<span class='userdanger'>You are pinned down by [src]!</span>")
+				if(3) // glass candy
+					crit_rebate = 50
+					for(var/i = 0, i < num_shards, i++)
+						var/obj/item/shard/shard = new /obj/item/shard(get_turf(L))
+						shard.embedding = list(embed_chance = 100, ignore_throwspeed_threshold = TRUE, impact_pain_mult=1, pain_chance=5)
+						shard.updateEmbedding()
+						L.hitby(shard, skipcatch = TRUE, hitpush = FALSE)
+						shard.embedding = list()
+						shard.updateEmbedding()
+				if(4) // paralyze this binch
+					// the new paraplegic gets like 4 lines of losing their legs so skip them
+					visible_message("<span class='danger'>[C]'s spinal cord is obliterated with a sickening crunch!</span>")
+					L.gain_trauma(/datum/brain_trauma/severe/paralysis/paraplegic)
+				if(5) // skull squish!
+					var/obj/item/bodypart/head/O = C.get_bodypart(BODY_ZONE_HEAD)
+					if(O)
+						C.visible_message("<span class='danger'>[O] explodes in a shower of gore beneath [src]!</span>", \
+							"<span class='userdanger'>Oh f-</span>")
+						O.dismember()
+						O.drop_organs()
+						qdel(O)
+						new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
+
+			C.apply_damage_randomly(max(0, squish_damage - crit_rebate), CRUSH, src)
+			C.AddElement(/datum/element/squish, 18 SECONDS)
 
 			L.Paralyze(60)
 			L.emote("scream")

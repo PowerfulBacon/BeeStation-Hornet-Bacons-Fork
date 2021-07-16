@@ -11,6 +11,7 @@
 #define BURST "burst"	//Burst skin. Applied to mobs only.
 #define CRUSH "crush"	//Crushed. Ouch. Applied to mobs only.
 #define SOUND "sound"	//Sound based damage for ears.
+#define SURGERY_CUT "surgcut"	//Surgical cut. Painful but healed when fixed up.
 #define EXPLOSION "explosion"	//Explosive force
 #define STAMINA "stamina"
 

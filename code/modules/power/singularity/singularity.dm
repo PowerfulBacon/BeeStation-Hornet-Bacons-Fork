@@ -92,12 +92,12 @@
 		C.visible_message("<span class='danger'>[C]'s head begins to collapse in on itself!</span>", "<span class='userdanger'>Your head feels like it's collapsing in on itself! This was really not a good idea!</span>", "<span class='italics'>You hear something crack and explode in gore.</span>")
 		var/turf/T = get_turf(C)
 		for(var/i in 1 to 3)
-			C.apply_damage(30, BRUTE, BODY_ZONE_HEAD)
+			C.apply_damage(30, BODY_ZONE_HEAD, CRUSH)
 			new /obj/effect/gibspawner/generic(T, C)
 			sleep(1)
 		C.ghostize()
 		var/obj/item/bodypart/head/rip_u = C.get_bodypart(BODY_ZONE_HEAD)
-		rip_u.dismember(BURN) //nice try jedi
+		rip_u.dismember() //nice try jedi
 		qdel(rip_u)
 
 /obj/singularity/ex_act(severity, target)

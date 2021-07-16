@@ -1337,12 +1337,12 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		mob_occupant = occupant
 
 	else if(isbodypart(occupant))
-		var/obj/item/bodypart/head/head = occupant
+		var/obj/item/nbodypart/head/head = occupant
 
 		mob_occupant = head.brainmob
 
 	else if(isorgan(occupant))
-		var/obj/item/organ/brain/brain = occupant
+		var/obj/item/nbodypart/brain/brain
 		mob_occupant = brain.brainmob
 
 	return mob_occupant

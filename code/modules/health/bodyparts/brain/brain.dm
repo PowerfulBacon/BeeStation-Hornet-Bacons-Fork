@@ -21,6 +21,9 @@
 	//Name of conciousness. Changes the name of the conciousness stat on health analysers.
 	var/conciousness_name = "Conciousness"
 
+	//A mob that represents the person in this brain
+	var/mob/living/brainmob
+
 //AI is handled in the brain.
 //If you transplant a mechanical brain into a different mob, the new mob will act like the old one.
 //Returns a string of the action the mob wants to perform.

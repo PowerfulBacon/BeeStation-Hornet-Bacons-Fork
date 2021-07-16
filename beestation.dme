@@ -2046,6 +2046,7 @@
 #include "code\modules\health\bodyparts\parts\feet.dm"
 #include "code\modules\health\bodyparts\parts\finger.dm"
 #include "code\modules\health\bodyparts\parts\hand.dm"
+#include "code\modules\health\bodyparts\parts\head.dm"
 #include "code\modules\health\bodyparts\parts\jaw.dm"
 #include "code\modules\health\bodyparts\parts\leg.dm"
 #include "code\modules\health\bodyparts\parts\pelvis.dm"

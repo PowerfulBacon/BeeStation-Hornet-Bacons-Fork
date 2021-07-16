@@ -33,18 +33,18 @@
 	return TRUE
 
 /obj/vehicle/sealed/car/proc/RunOver(mob/living/carbon/human/H) //pasted right out of mulebot code
-	log_combat(src, H, "run over", null, "(DAMTYPE: [uppertext(BRUTE)])")
+	log_combat(src, H, "run over", null, "(DAMTYPE: [uppertext(CRUSH)])")
 	H.visible_message("<span class='danger'>[src] drives over [H]!</span>", \
 					"<span class='userdanger'>[src] drives over you!</span>")
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 	var/damage = 10
-	H.apply_damage(2*damage, BRUTE, BODY_ZONE_HEAD)
-	H.apply_damage(2*damage, BRUTE, BODY_ZONE_CHEST)
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_L_LEG)
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_R_LEG)
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_L_ARM)
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_R_ARM)
+	H.apply_damage(2*damage, BODY_ZONE_HEAD, CRUSH, src)
+	H.apply_damage(2*damage, BODY_ZONE_CHEST, CRUSH, src)
+	H.apply_damage(0.5*damage, BODY_ZONE_L_LEG, CRUSH, src)
+	H.apply_damage(0.5*damage, BODY_ZONE_R_LEG, CRUSH, src)
+	H.apply_damage(0.5*damage,  BODY_ZONE_L_ARM, CRUSH, src)
+	H.apply_damage(0.5*damage, BODY_ZONE_R_ARM, CRUSH, src)
 
 	var/turf/T = get_turf(src)
 	T.add_mob_blood(H)

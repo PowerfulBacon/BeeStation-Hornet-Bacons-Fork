@@ -24,9 +24,9 @@
 // Damage Procs
 //======================
 
-/mob/living/proc/apply_damage_to(damage_amount, bodypart_slot, damage_type, damage_source, allow_internal = FALSE)
+/mob/living/proc/apply_damage_to(damage_amount, bodypart_slot, damage_type, damage_source)
 	var/obj/item/nbodypart/hit_part = body.get_bodypart(bodypart_slot)
-	apply_damage_to_bodypart(hit_part, damage_amount, damage_type, damage_source, allow_internal)
+	apply_damage_to_bodypart(hit_part, damage_amount, damage_type, damage_source)
 
 /mob/living/proc/apply_damage_randomly(damage_amount, damage_type, damage_source, allow_internal = FALSE)
 	apply_damage(damage_amount, pick(BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG), damage_type, damage_source, allow_internal)
@@ -35,7 +35,6 @@
 // Will prefere to hit bodyparts with more health% more when the mob has taken less damage.
 // If a bodypart is destroyed and more than 20% of the damage is still remaining, damage will be applied to other bodyparts
 /mob/living/proc/apply_damage(damage_amount, def_zone, damage_type, damage_source, allow_internal = FALSE)
-	var/datum/injury/created_injury
 	var/hit_organ = FALSE
 	if(allow_internal)
 		hit_organ = TRUE
@@ -49,6 +48,7 @@
 	apply_damage_to_bodypart(hit_part, damage_amount, damage_type, damage_source)
 
 /mob/living/proc/apply_damage_to_bodypart(obj/item/nbodypart/hit_part, damage_amount, damage_type, damage_source)
+	var/datum/injury/created_injury
 	switch(damage_type)
 		if(BLUNT)
 			created_injury = new /datum/injury/bruise(body, hit_part, damage_amount, damage_source)

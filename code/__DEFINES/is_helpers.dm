@@ -242,7 +242,7 @@ GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 
 #define is_pointed(W) (is_type_in_typecache(W, GLOB.pointed_types))
 
-#define isbodypart(A) (istype(A, /obj/item/bodypart))
+#define isbodypart(A) (istype(A, /obj/item/nbodypart))
 
 #define isprojectile(A) (istype(A, /obj/item/projectile))
 
