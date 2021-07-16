@@ -102,8 +102,9 @@
 		AM.forceMove(T)
 		if(isliving(AM))
 			var/mob/living/L = AM
+			L.apply_damage_to(25, LEG_LEFT, BLUNT, "Falling")
+			L.apply_damage_to(25, LEG_RIGHT, BLUNT, "Falling")
 			L.Paralyze(100)
-			L.adjustBruteLoss(30)
 		falling_atoms -= AM
 
 	else

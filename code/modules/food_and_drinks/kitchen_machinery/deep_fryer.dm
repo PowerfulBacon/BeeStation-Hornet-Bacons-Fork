@@ -161,7 +161,7 @@ God bless America.
 		var/mob/living/carbon/C = user.pulling
 		user.visible_message("<span class = 'danger'>[user] dunks [C]'s face in [src]!</span>")
 		reagents.reaction(C, TOUCH)
-		C.apply_damage(min(30, reagents.total_volume), BURN, BODY_ZONE_HEAD)
+		C.apply_damage(min(30, reagents.total_volume), BODY_ZONE_HEAD, BURN)
 		reagents.remove_any((reagents.total_volume/2))
 		C.Paralyze(60)
 		user.changeNext_move(CLICK_CD_MELEE)

@@ -293,7 +293,7 @@
 			data["subjectStatus"] = STATUS_TRANSFORMING
 		else
 			data["subjectStatus"] = scanner_occupant.stat
-		data["subjectHealth"] = scanner_occupant.health
+		data["subjectDamage"] = scanner_occupant.body.get_damage()
 		data["subjectRads"] = scanner_occupant.radiation/(RAD_MOB_SAFE/100)
 		data["subjectEnzymes"] = scanner_occupant.dna.unique_enzymes
 		data["isMonkey"] = ismonkey(scanner_occupant)
@@ -303,7 +303,7 @@
 	else
 		data["subjectName"] = null
 		data["subjectStatus"] = null
-		data["subjectHealth"] = null
+		data["subjectDamage"] = null
 		data["subjectRads"] = null
 		data["subjectEnzymes"] = null
 		//data["subjectMutations"] = null

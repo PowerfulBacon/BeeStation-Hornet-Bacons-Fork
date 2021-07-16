@@ -157,7 +157,7 @@
 
 			if("lava" in L.weather_immunities)
 				continue
-			L.adjustFireLoss(20 * delta_time)
+			L.apply_damage_randomly(20 * delta_time, BURN, src)
 			if(L) //mobs turning into object corpses could get deleted here.
 				L.adjust_fire_stacks(20 * delta_time)
 				L.IgniteMob()

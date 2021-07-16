@@ -71,8 +71,8 @@
 	if(date)
 		new /obj/effect/temp_visual/love_heart/invisible(get_turf(date.loc), owner)
 		if(get_dist(get_turf(owner), get_turf(date)) < 7)
-			owner.heal_overall_damage(1, 1, BODYPART_ORGANIC)
-			date.heal_overall_damage(1, 1, BODYPART_ORGANIC)
+			owner.heal_total_damage(2, BODYPART_ORGANIC)	//Robots cannot feel love.
+			date.heal_total_damage(2, BODYPART_ORGANIC)
 
 /datum/status_effect/throat_soothed
 	id = "throat_soothed"
@@ -117,8 +117,8 @@
 			spell.charge_counter = spell.charge_max
 			spell.recharging = FALSE
 			spell.update_icon()
-		rewarded.adjustBruteLoss(-25)
-		rewarded.adjustFireLoss(-25)
+		rewarded.body.heal_total_damage(50)
+		//TODO
 		rewarded.adjustToxLoss(-25, FALSE, TRUE)
 		rewarded.adjustOxyLoss(-25)
 		rewarded.adjustCloneLoss(-25)

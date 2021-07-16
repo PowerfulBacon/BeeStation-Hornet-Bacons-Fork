@@ -69,7 +69,7 @@
 		if(prob(10))
 			playsound(get_turf(src), "punch", 25, 1, -1)
 			visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [A]!</span>")
-			apply_damage(5, BRUTE)
+			apply_damage_randomly(5, BLUNT, "Impact")
 			Paralyze(40)
 			addtimer(CALLBACK(src, .proc/can_bumpslam), 200)
 		else
@@ -1043,10 +1043,10 @@
 
 	amount -= RAD_BACKGROUND_RADIATION // This will always be at least 1 because of how skin protection is calculated
 
-	var/blocked = getarmor(null, "rad")
+	var/blocked = get_armour(null, "rad")
 
 	if(amount > RAD_BURN_THRESHOLD)
-		apply_damage((amount-RAD_BURN_THRESHOLD)/RAD_BURN_THRESHOLD, BURN, null, blocked)
+		apply_damage_randomly((amount-RAD_BURN_THRESHOLD)/RAD_BURN_THRESHOLD, BURN, "Radiation")
 
 	apply_effect((amount*RAD_MOB_COEFFICIENT)/max(1, (radiation**2)*RAD_OVERDOSE_REDUCTION), EFFECT_IRRADIATE, blocked)
 

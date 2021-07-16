@@ -181,7 +181,7 @@
 
 /obj/machinery/door/window/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
-		if(BRUTE)
+		if(BLUNT || SHARP || BITE || BULLET)
 			playsound(src, 'sound/effects/glasshit.ogg', 90, 1)
 		if(BURN)
 			playsound(src, 'sound/items/welder.ogg', 100, 1)
@@ -401,7 +401,7 @@
 	return FALSE
 
 /obj/machinery/door/window/clockwork/narsie_act()
-	take_damage(rand(30, 60), BRUTE)
+	take_damage(rand(30, 60), BURN)
 	if(src)
 		var/previouscolor = color
 		color = "#960000"

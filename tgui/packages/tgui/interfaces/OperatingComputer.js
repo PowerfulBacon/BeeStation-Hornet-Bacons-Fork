@@ -2,25 +2,6 @@ import { useBackend, useSharedState } from '../backend';
 import { AnimatedNumber, Button, LabeledList, NoticeBox, ProgressBar, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
-const damageTypes = [
-  {
-    label: 'Brute',
-    type: 'bruteLoss',
-  },
-  {
-    label: 'Burn',
-    type: 'fireLoss',
-  },
-  {
-    label: 'Toxin',
-    type: 'toxLoss',
-  },
-  {
-    label: 'Respiratory',
-    type: 'oxyLoss',
-  },
-];
-
 export const OperatingComputer = (props, context) => {
   const [tab, setTab] = useSharedState(context, 'tab', 1);
   return (
@@ -78,24 +59,15 @@ const PatientStateView = (props, context) => {
             <LabeledList.Item label="Blood Type">
               {patient.blood_type}
             </LabeledList.Item>
-            <LabeledList.Item label="Health">
+            <LabeledList.Item label="Damage">
               <ProgressBar
-                value={patient.health}
-                minValue={patient.minHealth}
-                maxValue={patient.maxHealth}
-                color={patient.health >= 0 ? 'good' : 'average'}>
-                <AnimatedNumber value={patient.health} />
+                value={patient.damage}
+                minValue={0}
+                maxValue={100}
+                color={patient.damage <= 0 ? 'good' : 'average'}>
+                <AnimatedNumber value={patient.damage} />
               </ProgressBar>
             </LabeledList.Item>
-            {damageTypes.map(type => (
-              <LabeledList.Item key={type.type} label={type.label}>
-                <ProgressBar
-                  value={patient[type.type] / patient.maxHealth}
-                  color="bad">
-                  <AnimatedNumber value={patient[type.type]} />
-                </ProgressBar>
-              </LabeledList.Item>
-            ))}
           </LabeledList>
         ) || (
           'No Patient Detected'

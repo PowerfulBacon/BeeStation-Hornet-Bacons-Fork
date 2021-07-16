@@ -83,7 +83,7 @@
 	if(!istype(L))
 		return
 
-	var/obj/item/bodypart/bodypart = L.get_bodypart(check_zone(def_zone))
+	var/obj/item/nbodypart/bodypart = L.body.get_bodypart_in_zone(check_zone(def_zone))
 
 	var/list/equipment_items = list()
 	if(iscarbon(L))
@@ -98,7 +98,7 @@
 			continue
 
 		var/obj/item/I = bp
-		if(I.body_parts_covered & bodypart.body_part)
+		if(I.body_parts_covered & bodypart.cover_zone)
 			return TRUE
 	return FALSE
 

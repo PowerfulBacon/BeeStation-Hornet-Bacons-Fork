@@ -39,8 +39,7 @@ const jobToColor = jobId => {
   return COLORS.department.other;
 };
 
-const healthToColor = (oxy, tox, burn, brute) => {
-  const healthSum = oxy + tox + burn + brute;
+const healthToColor = (healthSum) => {
   const level = Math.min(Math.max(Math.ceil(healthSum / 25), 0), 5);
   return HEALTH_COLOR_BY_LEVEL[level];
 };
@@ -104,21 +103,12 @@ const CrewTable = (props, context) => {
           <Table.Cell collapsing textAlign="center">
             <ColorBox
               color={healthToColor(
-                sensor.oxydam,
-                sensor.toxdam,
-                sensor.burndam,
-                sensor.brutedam)} />
+                sensor.damage)} />
           </Table.Cell>
           <Table.Cell collapsing textAlign="center">
             {sensor.oxydam !== null ? (
               <Box inline>
-                <HealthStat type="oxy" value={sensor.oxydam} />
-                {'/'}
-                <HealthStat type="toxin" value={sensor.toxdam} />
-                {'/'}
-                <HealthStat type="burn" value={sensor.burndam} />
-                {'/'}
-                <HealthStat type="brute" value={sensor.brutedam} />
+                <HealthStat type="brute" value={sensor.damage} />
               </Box>
             ) : (
               sensor.life_status ? 'Alive' : 'Dead'

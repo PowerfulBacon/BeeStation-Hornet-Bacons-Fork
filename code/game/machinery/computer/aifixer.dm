@@ -42,7 +42,7 @@
 		data["AI_present"] = TRUE
 		data["name"] = occupier.name
 		data["restoring"] = restoring
-		data["health"] = (occupier.health + 100) / 2
+		data["damage"] = (occupier.body.get_damage() + 100) / 2
 		data["isDead"] = occupier.stat == DEAD
 		data["laws"] = occupier.laws.get_law_list(include_zeroth = 1)
 
@@ -56,7 +56,7 @@
 
 	switch(action)
 		if("PRG_beginReconstruction")
-			if(occupier?.health < 100)
+			if(occupier?.body.get_damage())
 				to_chat(usr, "<span class='notice'>Reconstruction in progress. This will take several minutes.</span>")
 				playsound(src, 'sound/machines/terminal_prompt_confirm.ogg', 25, FALSE)
 				restoring = TRUE
@@ -65,17 +65,17 @@
 
 /obj/machinery/computer/aifixer/proc/Fix()
 	use_power(1000)
+	//TODO
+	occupier.body.heal_total_damage(10, BODYPART_ROBOTIC)
 	occupier.adjustOxyLoss(-5, 0)
-	occupier.adjustFireLoss(-5, 0)
 	occupier.adjustToxLoss(-5, 0)
-	occupier.adjustBruteLoss(-5, 0)
 	occupier.updatehealth()
-	if(occupier.health >= 0 && occupier.stat == DEAD)
+	if(occupier.body.can_revive() && occupier.stat == DEAD)
 		occupier.revive(full_heal = FALSE, admin_revive = FALSE)
 		if(!occupier.radio_enabled)
 			occupier.radio_enabled = TRUE
 			to_chat(occupier, "<span class='warning'>Your Subspace Transceiver has been enabled!</span>")
-	return occupier.health < 100
+	return occupier.body.get_damage() > 0
 
 /obj/machinery/computer/aifixer/process()
 	if(..())

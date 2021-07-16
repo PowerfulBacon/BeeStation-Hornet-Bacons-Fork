@@ -113,7 +113,7 @@
 
 	var/mob/living/living_pawn = controller.pawn
 
-	if(living_pawn.health >= MONKEY_FLEE_HEALTH)
+	if(living_pawn.body.get_damage() < MONKEY_FLEE_DAMAGE)
 		finish_action(controller, TRUE) //we're back in bussiness
 
 	var/mob/living/target = null
@@ -219,7 +219,7 @@
 	if(target.pulledby != living_pawn && !HAS_AI_CONTROLLER_TYPE(target.pulledby, /datum/ai_controller/monkey)) //Dont steal from my fellow monkeys.
 		if(living_pawn.Adjacent(target) && isturf(target.loc))
 			living_pawn.a_intent = INTENT_GRAB
-			target.grabbedby(living_pawn)
+			living_pawn.grab_act(target)
 		return //Do the rest next turn
 
 	var/obj/machinery/disposal/disposal = controller.blackboard[BB_MONKEY_TARGET_DISPOSAL]

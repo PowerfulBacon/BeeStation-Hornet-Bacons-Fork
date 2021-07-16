@@ -114,7 +114,8 @@
 	D.visible_message("<span class='warning'>[A] karate chops [D]'s neck!</span>", \
 				  	"<span class='userdanger'>[A] karate chops your neck, rendering you unable to speak!</span>", null, COMBAT_MESSAGE_RANGE)
 	playsound(get_turf(A), 'sound/effects/hit_punch.ogg', 50, 1, -1)
-	D.apply_damage(5, A.dna.species.attack_type)
+	var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+	D.apply_damage(arm.punch_damage - 2, NECK, arm.punch_damage_type, arm)
 	if(D.silent <= 10)
 		D.silent = CLAMP(D.silent + 10, 0, 10)
 	log_combat(A, D, "neck chopped")
@@ -130,14 +131,21 @@
 	if(check_streak(A,D))
 		return 1
 	log_combat(A, D, "punched")
-	var/obj/item/bodypart/affecting = D.get_bodypart(ran_zone(A.zone_selected))
-	var/armor_block = D.run_armor_check(affecting, "melee")
 	var/picked_hit_type = pick("punched", "kicked")
 	var/bonus_damage = 0
+	var/damage_type = BLUNT
+	var/damage_source = null
 	if(!(D.mobility_flags & MOBILITY_STAND))
+		damage_source = A.body.get_bodypart_in_zone(pick(list(ARM_LEFT, ARM_RIGHT)))
 		bonus_damage += 5
 		picked_hit_type = "stomped"
-	D.apply_damage(rand(5,10) + bonus_damage, A.dna.species.attack_type, affecting, armor_block)
+	else
+		var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+		if(arm)
+			damage_source = arm
+			damage_type = arm.punch_damage_type
+			bonus_damage = arm.punch_damage - 7
+	D.apply_damage(rand(5,10) + bonus_damage, A.zone_selected, damage_type, damage_source)
 	if(picked_hit_type == "kicked" || picked_hit_type == "stomped")
 		A.do_attack_animation(D, ATTACK_EFFECT_KICK)
 		playsound(get_turf(D), 'sound/effects/hit_kick.ogg', 50, 1, -1)
@@ -152,8 +160,6 @@
 /datum/martial_art/krav_maga/disarm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 	if(check_streak(A,D))
 		return 1
-	var/obj/item/bodypart/affecting = D.get_bodypart(ran_zone(A.zone_selected))
-	var/armor_block = D.run_armor_check(affecting, "melee")
 	if((D.mobility_flags & MOBILITY_STAND))
 		D.visible_message("<span class='danger'>[A] reprimands [D]!</span>", \
 					"<span class='userdanger'>You're slapped by [A]!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, A)

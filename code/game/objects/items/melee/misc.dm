@@ -246,11 +246,7 @@
 		user.adjustStaminaLoss(stamina_damage)
 
 		additional_effects_carbon(user) // user is the target here
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
+		user.apply_damage(2*force, BODY_ZONE_HEAD, BLUNT, src)
 		return
 	if(iscyborg(target))
 		// We don't stun if we're on harm.
@@ -258,7 +254,7 @@
 			if (affect_silicon)
 				var/list/desc = get_silicon_stun_description(target, user)
 
-				target.flash_act(affect_silicon = TRUE)
+				target.body.flash_act(FLASH_LIGHT)
 				target.Paralyze(stun_time_silicon)
 				additional_effects_silicon(target, user)
 
@@ -295,7 +291,7 @@
 			playsound(get_turf(src), on_stun_sound, 75, 1, -1)
 			additional_effects_carbon(target, user)
 			if((user.zone_selected == BODY_ZONE_HEAD) || (user.zone_selected == BODY_ZONE_CHEST))
-				target.apply_damage(stamina_damage, STAMINA, BODY_ZONE_CHEST, def_check)
+				target.apply_damage(stamina_damage, BODY_ZONE_CHEST, STAMINA, src)
 				log_combat(user, target, "stunned", src)
 				target.visible_message(desc["visiblestun"], desc["localstun"])
 			if((user.zone_selected == BODY_ZONE_R_LEG) || (user.zone_selected == BODY_ZONE_L_LEG))
@@ -303,11 +299,11 @@
 				log_combat(user, target, "tripped", src)
 				target.visible_message(desc["visibletrip"], desc["localtrip"])
 			if(user.zone_selected == BODY_ZONE_L_ARM)
-				target.apply_damage(50, STAMINA, BODY_ZONE_L_ARM, def_check)
+				target.apply_damage(50, BODY_ZONE_L_ARM, STAMINA, src)
 				log_combat(user, target, "disarmed", src)
 				target.visible_message(desc["visibledisarm"], desc["localdisarm"])
 			if(user.zone_selected == BODY_ZONE_R_ARM)
-				target.apply_damage(50, STAMINA, BODY_ZONE_R_ARM, def_check)
+				target.apply_damage(50, BODY_ZONE_R_ARM, STAMINA, src)
 				log_combat(user, target, "disarmed", src)
 				target.visible_message(desc["visibledisarm"], desc["localdisarm"])
 
@@ -480,11 +476,7 @@
 		user.adjustStaminaLoss(stamina_damage)
 
 		additional_effects_carbon(user) // user is the target here
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
+		user.apply_damage(2*force, BODY_ZONE_HEAD, BLUNT, src)
 		return
 	if(iscyborg(target))
 		// We don't stun if we're on harm.

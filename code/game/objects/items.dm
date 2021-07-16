@@ -656,13 +656,6 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 /obj/item/proc/eyestab(mob/living/carbon/M, mob/living/carbon/user)
 
-	var/is_human_victim
-	var/obj/item/bodypart/affecting = M.get_bodypart(BODY_ZONE_HEAD)
-	if(ishuman(M))
-		if(!affecting) //no head!
-			return
-		is_human_victim = TRUE
-
 	if(M.is_eyes_covered())
 		// you can't stab someone in the eyes wearing a mask!
 		to_chat(user, "<span class='danger'>You're going to need to remove [M.p_their()] eye protection first!</span>")
@@ -690,32 +683,13 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 			"<span class='danger'>[user] has stabbed [user.p_them()]self in the eyes with [src]!</span>", \
 			"<span class='userdanger'>You stab yourself in the eyes with [src]!</span>" \
 		)
-	if(is_human_victim)
-		var/mob/living/carbon/human/U = M
-		U.apply_damage(7, BRUTE, affecting)
-
-	else
-		M.take_bodypart_damage(7)
 
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "eye_stab", /datum/mood_event/eye_stab)
 
 	log_combat(user, M, "attacked", "[src.name]", "(INTENT: [uppertext(user.a_intent)])")
 
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if (!eyes)
-		return
 	M.adjust_blurriness(3)
-	eyes.applyOrganDamage(3)
-	if(eyes.damage >= 10)
-		M.adjust_blurriness(15)
-		if(M.stat != DEAD)
-			to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
-		if(!(HAS_TRAIT(M, TRAIT_BLIND) || HAS_TRAIT(M, TRAIT_NEARSIGHT)))
-			to_chat(M, "<span class='danger'>You become nearsighted!</span>")
-		M.become_nearsighted(EYE_DAMAGE)
-		if (eyes.damage >= 60)
-			M.become_blind(EYE_DAMAGE)
-			to_chat(M, "<span class='danger'>You go blind!</span>")
+	M.apply_damage_to(3, pick(list(LEFT_EYE, RIGHT_EYE)), SHARP, src)
 
 /obj/item/singularity_pull(S, current_size)
 	..()
@@ -1036,15 +1010,15 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	if(QDELETED(src))
 		return
 	if(target == src)
-		take_damage(INFINITY, BRUTE, "bomb", 0)
+		take_damage(INFINITY, BURN, "bomb", 0)
 		return
 	switch(severity)
 		if(1)
-			take_damage(250, BRUTE, "bomb", 0)
+			take_damage(250, BURN, "bomb", 0)
 		if(2)
-			take_damage(75, BRUTE, "bomb", 0)
+			take_damage(75, BURN, "bomb", 0)
 		if(3)
-			take_damage(20, BRUTE, "bomb", 0)
+			take_damage(20, BURN, "bomb", 0)
 
 /obj/item/proc/get_armor_rating(d_type, mob/wearer)
 	return armor.getRating(d_type)

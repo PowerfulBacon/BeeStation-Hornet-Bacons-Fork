@@ -260,9 +260,9 @@
 		update_icon()
 		if(occupant)
 			if(uv_super || (obj_flags & EMAGGED))
-				mob_occupant.adjustFireLoss(rand(20, 36))
+				mob_occupant.apply_damage_randomly(rand(20, 36), BURN, "Radiation")
 			else
-				mob_occupant.adjustFireLoss(rand(10, 16))
+				mob_occupant.apply_damage_randomly(rand(10, 16), BURN, "Radiation")
 			mob_occupant.emote("scream")
 		addtimer(CALLBACK(src, .proc/cook), 50)
 	else

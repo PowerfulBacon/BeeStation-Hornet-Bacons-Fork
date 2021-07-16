@@ -754,7 +754,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 
 /obj/machinery/newscaster/play_attack_sound(damage, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
-		if(BRUTE)
+		if(BLUNT || SHARP || BITE || BULLET)
 			if(stat & BROKEN)
 				playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 			else

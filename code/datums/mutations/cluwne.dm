@@ -11,10 +11,11 @@
 		return
 	owner.dna.add_mutation(CLOWNMUT)
 	owner.dna.add_mutation(EPILEPSY)
+	//TODO
 	owner.setOrganLoss(ORGAN_SLOT_BRAIN, 199)
-	
+
 	var/mob/living/carbon/human/H = owner
-	
+
 	playsound(H.loc, 'sound/misc/bikehorn_creepy.ogg', 50, 1)
 	if(!istype(H.wear_mask, /obj/item/clothing/mask/cluwne))
 		if(!H.doUnEquip(H.wear_mask))
@@ -34,6 +35,7 @@
 
 /datum/mutation/human/cluwne/on_life(mob/living/carbon/human/owner)
 	if((prob(15) && owner.IsUnconscious()))
+		//TODO
 		owner.setOrganLoss(ORGAN_SLOT_BRAIN, 199)
 		switch(rand(1, 6))
 			if(1)
@@ -56,7 +58,7 @@
 	regenerate_icons()
 	visible_message("<span class='danger'>[src]'s body glows green, the glow dissipating only to leave behind a cluwne formerly known as [src]!</span>", \
 					"<span class='danger'>Your brain feels like it's being torn apart, there is only the honkmother now.</span>")
-	flash_act()
+	flash_act(FLASH_LIGHT)
 
 	if (client)
 		SSmedals.UnlockMedal(MEDAL_GET_CLUWNED,client)

@@ -80,7 +80,7 @@
 		surgery["desc"] = initial(S.desc)
 		surgeries += list(surgery)
 	data["surgeries"] = surgeries
-	
+
 	//If there's no patient just hop to it yeah?
 	if(!table && !sbed)
 		data["patient"] = null
@@ -119,14 +119,8 @@
 		if(DEAD)
 			data["patient"]["stat"] = "Dead"
 			data["patient"]["statstate"] = "bad"
-	data["patient"]["health"] = patient.health
+	data["patient"]["damage"] = patient.body.get_damage()
 	data["patient"]["blood_type"] = patient.dna.blood_type
-	data["patient"]["maxHealth"] = patient.maxHealth
-	data["patient"]["minHealth"] = HEALTH_THRESHOLD_DEAD
-	data["patient"]["bruteLoss"] = patient.getBruteLoss()
-	data["patient"]["fireLoss"] = patient.getFireLoss()
-	data["patient"]["toxLoss"] = patient.getToxLoss()
-	data["patient"]["oxyLoss"] = patient.getOxyLoss()
 	data["procedures"] = list()
 	if(patient.surgeries.len)
 		for(var/datum/surgery/procedure in patient.surgeries)

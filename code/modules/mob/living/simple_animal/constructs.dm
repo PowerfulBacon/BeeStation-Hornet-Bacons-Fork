@@ -76,7 +76,7 @@
 /mob/living/simple_animal/hostile/construct/Destroy()
 	QDEL_NULL(our_rune)
 	return ..()
-	
+
 /mob/living/simple_animal/hostile/construct/Login()
 	..()
 	to_chat(src, playstyle_string)
@@ -161,7 +161,7 @@
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 		var/reflectchance = 40 - round(P.damage/3)
 		if(prob(reflectchance))
-			apply_damage(P.damage * 0.5, P.damage_type)
+			apply_damage(P.damage * 0.5, BODY_ZONE_CHEST, P.damage_type, P)
 			visible_message("<span class='danger'>The [P.name] is reflected by [src]'s armored shell!</span>", \
 							"<span class='userdanger'>The [P.name] is reflected by your armored shell!</span>")
 

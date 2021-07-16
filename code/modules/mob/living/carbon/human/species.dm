@@ -1284,7 +1284,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to grab [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(rand(15, 25), BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.apply_damage(rand(15, 25), pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), CRUSH))
 		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s grab attempt!</span>", \
@@ -1312,7 +1312,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to hit [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(rand(15, 25), BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.apply_damage(rand(15, 25), pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), CRUSH))
 		return FALSE
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
@@ -1341,7 +1341,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		var/damage = user.dna.species.punchdamage
 
-		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
+		var/affecting = ran_zone(user.zone_selected)
 
 		if(!damage || !affecting)//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, 1, -1)
@@ -1349,8 +1349,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			"<span class='userdanger'>[user]'s [atk_verb] misses you!</span>", null, COMBAT_MESSAGE_RANGE)
 			log_combat(user, target, "attempted to punch")
 			return FALSE
-
-		var/armor_block = target.run_armor_check(affecting, "melee")
 
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
 
@@ -1362,14 +1360,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		user.dna.species.spec_unarmedattacked(user, target)
 
 		if(user.limb_destroyer)
-			target.dismembering_strike(user, affecting.body_zone)
+			target.dismembering_strike(user, affecting)
 
 		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.5x raw damage
-			target.apply_damage(damage*1.5, attack_type, affecting, armor_block)
+			target.apply_damage(damage*1.5, affecting, attack_type, user.body.get_random_leg())
 			log_combat(user, target, "kicked")
 		else//other attacks deal full raw damage + 1.5x in stamina damage
-			target.apply_damage(damage, attack_type, affecting, armor_block)
-			target.apply_damage(damage*1.5, STAMINA, affecting, armor_block)
+			target.apply_damage(damage, affecting, attack_type, user.body.get_active_hand())
+			target.apply_damage(damage*1.5, affecting, STAMINA, user.body.get_active_hand())
 			log_combat(user, target, "punched")
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -1378,7 +1376,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/disarm(mob/living/carbon/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to shove [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(15, BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.apply_damage(15, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), CRUSH))
 		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s shoving attempt!</span>", \
@@ -1548,7 +1546,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	hit_area = affecting.name
 	var/def_zone = affecting.body_zone
 
-	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>Your armor has protected your [hit_area]!</span>", "<span class='warning'>Your armor has softened a hit to your [hit_area]!</span>",I.armour_penetration)
+	var/armor_block = H.get_armour(affecting, "melee")
 	armor_block = min(90,armor_block) //cap damage reduction at 90%
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 

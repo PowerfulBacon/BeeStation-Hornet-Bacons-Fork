@@ -26,7 +26,7 @@
 
 /datum/component/embedded
 	dupe_mode = COMPONENT_DUPE_ALLOWED
-	var/obj/item/bodypart/limb
+	var/obj/item/nbodypart/limb
 	var/obj/item/weapon
 
 	// all of this stuff is explained in _DEFINES/combat.dm
@@ -46,7 +46,7 @@
 
 /datum/component/embedded/Initialize(obj/item/I,
 			datum/thrownthing/throwingdatum,
-			obj/item/bodypart/part,
+			obj/item/nbodypart/part,
 			embed_chance = EMBED_CHANCE,
 			fall_chance = EMBEDDED_ITEM_FALLOUT,
 			pain_chance = EMBEDDED_PAIN_CHANCE,

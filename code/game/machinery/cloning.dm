@@ -265,6 +265,7 @@
 			var/datum/brain_trauma/BT = t
 			var/datum/brain_trauma/cloned_trauma = BT.on_clone()
 			if(cloned_trauma)
+				//TODO
 				H.gain_trauma(cloned_trauma, BT.resilience)
 
 		H.set_cloned_appearance()

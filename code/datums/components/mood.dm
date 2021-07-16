@@ -239,6 +239,7 @@
 			sanity_level = 1
 	update_mood_icon()
 
+//TODO HANDLE THIS ON THE BRAIN
 /datum/component/mood/proc/setInsanityEffect(newval)
 	if(newval == insanity_effect)
 		return

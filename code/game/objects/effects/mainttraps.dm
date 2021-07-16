@@ -251,6 +251,7 @@
 	stat_attack = CONSCIOUS
 	mobchatspan = "chaplain"
 
+//TODO Give them their own weaker organs.
 /mob/living/simple_animal/hostile/alien/hugbox
 	health = 60 //they go down easy, to lull the player into a sense of false security
 	maxHealth = 60

@@ -164,17 +164,10 @@
 /obj/effect/anomaly/flux/proc/mobShock(mob/living/M)
 	if(canshock && istype(M))
 		canshock = 0 //Just so you don't instakill yourself if you slam into the anomaly five times in a second.
-		if(iscarbon(M))
-			if(ishuman(M))
-				M.electrocute_act(shockdamage, "[name]", safety=1)
-				return
-			M.electrocute_act(shockdamage, "[name]")
-			return
-		else
-			M.adjustFireLoss(shockdamage)
-			M.visible_message("<span class='danger'>[M] was shocked by \the [name]!</span>", \
-		"<span class='userdanger'>You feel a powerful shock coursing through your body!</span>", \
-		"<span class='italics'>You hear a heavy electrical crack.</span>")
+		M.electrocute_act(shockdamage, "[name]")
+		M.visible_message("<span class='danger'>[M] was shocked by \the [name]!</span>", \
+			"<span class='userdanger'>You feel a powerful shock coursing through your body!</span>", \
+			"<span class='italics'>You hear a heavy electrical crack.</span>")
 
 /obj/effect/anomaly/flux/detonate()
 	if(explosive)
@@ -225,7 +218,7 @@
 
 			var/list/flashers = list()
 			for(var/mob/living/carbon/C in viewers(TO))
-				if(C.flash_act())
+				if(C.body.flash_act(FLASH_MEDIUM))
 					flashers += C
 
 			var/y_distance = TO.y - FROM.y

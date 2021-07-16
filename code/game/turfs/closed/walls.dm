@@ -113,7 +113,7 @@
 /turf/closed/wall/mech_melee_attack(obj/mecha/M)
 	M.do_attack_animation(src)
 	switch(M.damtype)
-		if(BRUTE)
+		if(BLUNT)
 			playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
 			M.visible_message("<span class='danger'>[M.name] hits [src]!</span>", \
 							"<span class='danger'>You hit [src]!</span>", null, COMBAT_MESSAGE_RANGE)
@@ -124,7 +124,7 @@
 				add_dent(WALL_DENT_HIT)
 		if(BURN)
 			playsound(src, 'sound/items/welder.ogg', 100, 1)
-		if(TOX)
+		if(MECH_DAM_TOX)
 			playsound(src, 'sound/effects/spray2.ogg', 100, 1)
 			return FALSE
 

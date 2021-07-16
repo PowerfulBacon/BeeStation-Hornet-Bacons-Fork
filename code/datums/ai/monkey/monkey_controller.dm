@@ -74,7 +74,7 @@ have ways of interacting with a specific mob and control it.
 			break
 		if(selected_enemy)
 			if(!selected_enemy.stat) //He's up, get him!
-				if(living_pawn.health < MONKEY_FLEE_HEALTH) //Time to skeddadle
+				if(living_pawn.body.get_damage() > MONKEY_FLEE_DAMAGE) //Time to skeddadle
 					blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET] = selected_enemy
 					current_behaviors += GET_AI_BEHAVIOR(/datum/ai_behavior/monkey_flee)
 					return //I'm running fuck you guys
@@ -167,17 +167,16 @@ have ways of interacting with a specific mob and control it.
 	SIGNAL_HANDLER
 	var/mob/living/living_pawn = pawn
 	if(istype(Proj , /obj/item/projectile/beam)||istype(Proj, /obj/item/projectile/bullet))
-		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
-			if(!Proj.nodamage && Proj.damage < living_pawn.health && isliving(Proj.firer))
-				retaliate(Proj.firer)
+		if(!Proj.nodamage && isliving(Proj.firer))
+			retaliate(Proj.firer)
 
 /datum/ai_controller/monkey/proc/on_hitby(datum/source, atom/movable/AM, skipcatch = FALSE, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	SIGNAL_HANDLER
 	if(istype(AM, /obj/item))
 		var/mob/living/living_pawn = pawn
 		var/obj/item/I = AM
-		if(I.throwforce < living_pawn.health && ishuman(I.thrownby))
-			var/mob/living/carbon/human/H = I.thrownby
+		if(isliving(I.thrownby))
+			var/mob/living/H = I.thrownby
 			retaliate(H)
 
 /datum/ai_controller/monkey/proc/on_Crossed(datum/source, atom/movable/AM)

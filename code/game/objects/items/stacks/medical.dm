@@ -118,17 +118,6 @@
 	user.visible_message("<span class='suicide'>[user] is bludgeoning [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (BRUTELOSS)
 
-/obj/item/stack/medical/gauze
-	name = "medical gauze"
-	desc = "A roll of elastic cloth that is extremely effective at stopping bleeding, heals minor bruising."
-	gender = PLURAL
-	singular_name = "medical gauze"
-	icon_state = "gauze"
-	stop_bleeding = 1800
-	heal_brute = 5 //Reminder that you can not stack healing thus you wait out the 1800 timer.
-	self_delay = 20
-	max_amount = 12
-
 /obj/item/stack/medical/gauze/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WIRECUTTER || I.is_sharp())
 		if(get_amount() < 2)

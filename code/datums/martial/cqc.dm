@@ -50,20 +50,18 @@
 	return FALSE
 
 /datum/martial_art/cqc/proc/Slam(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_CHEST, "melee")
 	if(!can_use(A))
 		return FALSE
 	if(D.mobility_flags & MOBILITY_STAND)
 		D.visible_message("<span class='warning'>[A] slams [D] into the ground!</span>", \
 						  	"<span class='userdanger'>[A] slams you into the ground!</span>")
 		playsound(get_turf(A), 'sound/weapons/slam.ogg', 50, 1, -1)
-		D.apply_damage(10, BRUTE, blocked = def_check)
+		D.apply_damage(10, BODY_ZONE_CHEST, BLUNT, "Falling")
 		D.Paralyze(120)
 		log_combat(A, D, "slammed (CQC)")
 	return TRUE
 
 /datum/martial_art/cqc/proc/Kick(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_CHEST, "melee")
 	if(!can_use(A))
 		return FALSE
 	if(!D.stat || !D.IsParalyzed())
@@ -72,7 +70,7 @@
 		playsound(get_turf(A), 'sound/weapons/cqchit1.ogg', 50, 1, -1)
 		var/atom/throw_target = get_edge_target_turf(D, A.dir)
 		D.throw_at(throw_target, 1, 14, A)
-		D.apply_damage(10, A.dna.species.attack_type, blocked = def_check)
+		D.apply_damage(10, BODY_ZONE_CHEST, BLUNT, A.body.get_bodypart(pick(list(LEG_LEFT, LEG_RIGHT))))
 		log_combat(A, D, "kicked (CQC)")
 	if(D.IsParalyzed() && !D.stat)
 		log_combat(A, D, "knocked out (Head kick)(CQC)")
@@ -121,7 +119,8 @@
 		if(I && D.temporarilyRemoveItemFromInventory(I))
 			A.put_in_hands(I)
 		D.adjustStaminaLoss(50)
-		D.apply_damage(25, A.dna.species.attack_type, blocked = def_check)
+		var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+		D.apply_damage(18 + arm?.damage, BODY_ZONE_CHEST, A.dna.species.attack_type, blocked = def_check)
 	return TRUE
 
 /datum/martial_art/cqc/grab_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
@@ -145,7 +144,6 @@
 	return TRUE
 
 /datum/martial_art/cqc/harm_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_CHEST, "melee")
 	if(!can_use(A))
 		return FALSE
 	add_to_streak("H",D)
@@ -154,11 +152,21 @@
 	log_combat(A, D, "attacked (CQC)")
 	A.do_attack_animation(D)
 	var/picked_hit_type = pick("CQC'd", "Big Bossed")
-	var/bonus_damage = 13
+
+	var/bonus_damage = 6
+	var/dam_type = BLUNT
+	var/attack_source = null
 	if(!(D.mobility_flags & MOBILITY_STAND))
-		bonus_damage += 5
+		bonus_damage += 12
 		picked_hit_type = "stomps on"
-	D.apply_damage(bonus_damage, BRUTE, blocked = def_check)
+		attack_source = A.get_bodypart(pick(LEG_LEFT, LEG_RIGHT))
+	else
+		var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+		if(arm)
+			attack_source = arm
+			dam_type = arm.punch_damage_type
+			bonus_damage += arm.punch_damage
+	D.apply_damage(bonus_damage, BODY_ZONE_CHEST, dam_type, attack_source)
 	if(picked_hit_type == "kicks" || picked_hit_type == "stomps on")
 		playsound(get_turf(D), 'sound/weapons/cqchit2.ogg', 50, 1, -1)
 	else
@@ -170,7 +178,9 @@
 		D.visible_message("<span class='warning'>[A] leg sweeps [D]!", \
 							"<span class='userdanger'>[A] leg sweeps you!</span>")
 		playsound(get_turf(A), 'sound/effects/hit_kick.ogg', 50, 1, -1)
-		D.apply_damage(10, BRUTE, blocked = def_check)
+		var/leg = A.get_bodypart(pick(LEG_LEFT, LEG_RIGHT))
+		if(leg)
+			D.apply_damage(10, pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG), BLUNT, leg)
 		D.Paralyze(60)
 		log_combat(A, D, "sweeped (CQC)")
 	return TRUE
@@ -192,7 +202,8 @@
 			if(I && D.temporarilyRemoveItemFromInventory(I))
 				A.put_in_hands(I)
 			D.Jitter(2)
-			D.apply_damage(5, A.dna.species.attack_type, blocked = def_check)
+			var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+			D.apply_damage(arm.punch_damage - 2, BODY_ZONE_CHEST, arm.punch_damage_type, arm)
 	else
 		D.visible_message("<span class='danger'>[A] fails to disarm [D]!</span>", \
 							"<span class='userdanger'>[A] fails to disarm you!</span>", null, COMBAT_MESSAGE_RANGE)

@@ -30,7 +30,6 @@
 
 //Floor Stomp - brute and stamina damage if target isn't standing
 /datum/martial_art/karate/proc/floorKick(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_HEAD, "melee")
 	if(!can_use(A))
 		return FALSE
 	if(!(D.mobility_flags & MOBILITY_STAND))
@@ -39,7 +38,9 @@
 							"<span class='userdanger'>[A] stomped you in the head!</span>", null, COMBAT_MESSAGE_RANGE)
 		playsound(get_turf(D), 'sound/weapons/punch1.ogg', 75, 1, -1)
 		A.do_attack_animation(D, ATTACK_EFFECT_KICK)
-		D.apply_damage(20, A.dna.species.attack_type, BODY_ZONE_HEAD, def_check)
+
+		var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+		D.apply_damage(arm.punch_damage + 13, BODY_ZONE_HEAD, arm.punch_damage_type, arm)
 		D.apply_damage(10, STAMINA, BODY_ZONE_HEAD, def_check)
 		return 1
 	return basic_hit(A,D)

@@ -116,4 +116,4 @@
 				return  "<span class='warning'>It's falling apart!</span>"
 
 /obj/structure/rust_heretic_act()
-	take_damage(500, BRUTE, "melee", 1)
+	take_damage(500, BLUNT, "melee", 1)

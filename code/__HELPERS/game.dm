@@ -203,21 +203,21 @@
 	var/list/processing_list = list(O)
 	var/list/processed_list = list()
 	var/index = 1
-	var/obj/item/organ/found_organ
+	var/obj/item/nbodypart/found_organ
 
 	while(index <= length(processing_list))
 
 		var/atom/A = processing_list[index]
 
-		if(istype(A, /obj/item/organ))
+		if(istype(A, /obj/item/nbodypart))
 			found_organ = A
-			found_organ.organ_flags ^= ORGAN_FROZEN
+			found_organ.bodypart_flags ^= ORGAN_FROZEN
 
-		else if(istype(A, /mob/living/carbon))
-			var/mob/living/carbon/Q = A
-			for(var/organ in Q.internal_organs)
+		else if(istype(A, /mob/living))
+			var/mob/living/Q = A
+			for(var/organ in Q.body.get_bodyparts())
 				found_organ = organ
-				found_organ.organ_flags ^= ORGAN_FROZEN
+				found_organ.bodypart_flags ^= FROZEN
 
 		for(var/atom/B in A)	//objects held within other objects are added to the processing list, unless that object is something that can hold organs safely
 			if(!processed_list[B] && !istype(B, /obj/structure/closet/crate/freezer) && !istype(B, /obj/structure/closet/secure_closet/freezer))

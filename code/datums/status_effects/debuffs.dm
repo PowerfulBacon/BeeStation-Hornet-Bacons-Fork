@@ -397,7 +397,7 @@
 		for(var/d in GLOB.alldirs)
 			new /obj/effect/temp_visual/dir_setting/bloodsplatter(T, d)
 		playsound(T, "desecration", 200, 1, -1)
-		owner.adjustBruteLoss(bleed_damage)
+		owner.apply_damage_randomly(bleed_damage, SHARP)
 	else
 		new /obj/effect/temp_visual/bleed(get_turf(owner))
 
@@ -468,7 +468,7 @@
 		wasting_effect.alpha = 255
 		animate(wasting_effect, alpha = 0, time = 32)
 		playsound(owner, 'sound/effects/curse5.ogg', 20, 1, -1)
-		owner.adjustFireLoss(0.75)
+		owner.apply_damage_randomly(0.75, BURN)
 	if(effect_last_activation <= world.time)
 		effect_last_activation = world.time + effect_cooldown
 		if(curse_flags & CURSE_SPAWNING)
@@ -572,6 +572,7 @@
 	if(hearing_args[HEARING_SPEAKER] == owner)
 		return
 	var/mob/living/carbon/C = owner
+	//TODO : brain traumas
 	C.cure_trauma_type(/datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_SURGERY) //clear previous hypnosis
 	addtimer(CALLBACK(C, /mob/living/carbon.proc/gain_trauma, /datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_SURGERY, hearing_args[HEARING_RAW_MESSAGE]), 10)
 	addtimer(CALLBACK(C, /mob/living.proc/Stun, 60, TRUE, TRUE), 15) //Take some time to think about it
@@ -836,8 +837,9 @@
 /datum/status_effect/eldritch/ash/on_effect()
 	if(iscarbon(owner))
 		var/mob/living/carbon/carbon_owner = owner
+		//TODO
 		carbon_owner.adjustStaminaLoss(10 * repetitions)
-		carbon_owner.adjustFireLoss(5 * repetitions)
+		carbon_owner.apply_damage_randomly(5 * repetitions, BURN)
 		for(var/mob/living/carbon/victim in ohearers(1,carbon_owner))
 			if(IS_HERETIC(victim))
 				continue

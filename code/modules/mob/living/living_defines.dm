@@ -122,3 +122,6 @@
 	//is mob player controllable
 	var/playable = FALSE
 	var/flavor_text = FLAVOR_TEXT_NONE
+
+	var/list/ownedSoullinks //soullinks we are the owner of
+	var/list/sharedSoullinks //soullinks we are a/the sharer of

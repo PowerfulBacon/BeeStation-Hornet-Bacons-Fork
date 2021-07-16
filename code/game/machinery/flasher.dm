@@ -117,7 +117,7 @@
 	use_power(1000)
 
 	for (var/mob/living/L in hearers(range, src))
-		if(L.flash_act(affect_silicon = 1))
+		if(L.body.flash_act())
 			L.Paralyze(strength)
 
 	return 1

@@ -1,15 +1,20 @@
 /*ALL DEFINES RELATED TO COMBAT GO HERE*/
 
 //Damage and status effect defines
+#define BLUNT "blunt"	//Blunt impact.
+#define SHARP "sharp"	//Sharp weapons
+#define BITE "bite"		//Bites from animals
+#define BULLET "bullet"	//Bullet impacts
+#define BURN "burn"		//Burns
+#define FROSTBITE "forstbite"	//For cold damage.
+#define SLIT "slit"		//Intense bleeding caused by careful slitting. Applied to mobs only.
+#define BURST "burst"	//Burst skin. Applied to mobs only.
+#define CRUSH "crush"	//Crushed. Ouch. Applied to mobs only.
+#define SOUND "sound"	//Sound based damage for ears.
+#define EXPLOSION "explosion"	//Explosive force
+#define STAMINA "stamina"
 
-//Damage defines //TODO: merge these down to reduce on defines
-#define BRUTE		"brute"
-#define BURN		"fire"
-#define TOX			"tox"
-#define OXY			"oxy"
-#define CLONE		"clone"
-#define STAMINA 	"stamina"
-#define BRAIN		"brain"
+#define MECH_DAM_TOX "tox"
 
 //bitflag damage defines used for suicide_act
 #define BRUTELOSS 	            	(1<<0)

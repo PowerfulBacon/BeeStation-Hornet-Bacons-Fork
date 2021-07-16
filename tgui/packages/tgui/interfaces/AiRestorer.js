@@ -23,7 +23,7 @@ export const AiRestorerContent = (props, context) => {
     laws,
     isDead,
     restoring,
-    health,
+    damage,
     ejectable,
   } = data;
   return (
@@ -53,15 +53,15 @@ export const AiRestorerContent = (props, context) => {
             </Box>
           )}>
           <LabeledList>
-            <LabeledList.Item label="Integrity">
+            <LabeledList.Item label="Corruption">
               <ProgressBar
-                value={health}
+                value={damage}
                 minValue={0}
                 maxValue={100}
                 ranges={{
-                  good: [70, Infinity],
+                  bad: [70, Infinity],
                   average: [50, 70],
-                  bad: [-Infinity, 50],
+                  good: [-Infinity, 50],
                 }} />
             </LabeledList.Item>
           </LabeledList>

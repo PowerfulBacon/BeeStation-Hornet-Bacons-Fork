@@ -115,7 +115,7 @@
 	target.visible_message("<span class='danger'>[chassis] is drilling [target] with [src]!</span>", \
 						"<span class='userdanger'>[chassis] is drilling you with [src]!</span>")
 	log_combat(user, target, "drilled", "[name]", "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
-	if(target.stat == DEAD && target.getBruteLoss() >= 200)
+	if(target.stat == DEAD && target.body.get_damage_from_injury_types(list(/datum/injury/bruise, /datum/injury/cut)) >= 200)
 		log_combat(user, target, "gibbed", name)
 		if(LAZYLEN(target.butcher_results) || LAZYLEN(target.guaranteed_butcher_results))
 			var/datum/component/butchering/butchering = src.GetComponent(/datum/component/butchering)
@@ -124,8 +124,7 @@
 			target.gib()
 	else
 		//drill makes a hole
-		var/obj/item/bodypart/target_part = target.get_bodypart(ran_zone(BODY_ZONE_CHEST))
-		target.apply_damage(10, BRUTE, BODY_ZONE_CHEST, target.run_armor_check(target_part, "melee"))
+		target.apply_damage(10, BODY_ZONE_CHEST, SHARP, src)
 
 		//blood splatters
 		var/splatter_dir = get_dir(chassis, target)

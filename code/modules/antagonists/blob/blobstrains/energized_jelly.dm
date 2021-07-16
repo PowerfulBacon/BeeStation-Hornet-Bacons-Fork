@@ -30,5 +30,6 @@
 	reac_volume = ..()
 	M.losebreath += round(0.2*reac_volume)
 	M.adjustStaminaLoss(reac_volume)
+	//TODO
 	if(M)
 		M.apply_damage(0.6*reac_volume, OXY)

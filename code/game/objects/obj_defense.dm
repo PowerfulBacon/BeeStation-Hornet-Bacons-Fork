@@ -24,8 +24,7 @@
 //returns the damage value of the attack after processing the obj's various armor protections
 /obj/proc/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir, armour_penetration = 0)
 	switch(damage_type)
-		if(BRUTE)
-		if(BURN)
+		if(BLUNT || SHARP || BITE || BULLET || BURN)
 		else
 			return 0
 	var/armor_protection = 0
@@ -38,7 +37,7 @@
 //the sound played when the obj is damaged.
 /obj/proc/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
-		if(BRUTE)
+		if(BLUNT || SHARP || BITE || BULLET)
 			if(damage_amount)
 				playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 			else
@@ -48,7 +47,7 @@
 
 /obj/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..()
-	take_damage(AM.throwforce, BRUTE, "melee", 1, get_dir(src, AM))
+	take_damage(AM.throwforce, BLUNT, "melee", 1, get_dir(src, AM))
 
 /obj/ex_act(severity, target)
 	if(resistance_flags & INDESTRUCTIBLE)
@@ -57,15 +56,15 @@
 	if(QDELETED(src))
 		return
 	if(target == src)
-		take_damage(INFINITY, BRUTE, "bomb", 0)
+		take_damage(INFINITY, BLUNT, "bomb", 0)
 		return
 	switch(severity)
 		if(1)
-			take_damage(INFINITY, BRUTE, "bomb", 0)
+			take_damage(INFINITY, BLUNT, "bomb", 0)
 		if(2)
-			take_damage(rand(100, 250), BRUTE, "bomb", 0)
+			take_damage(rand(100, 250), BLUNT, "bomb", 0)
 		if(3)
-			take_damage(rand(10, 90), BRUTE, "bomb", 0)
+			take_damage(rand(10, 90), BLUNT, "bomb", 0)
 
 /obj/bullet_act(obj/item/projectile/P)
 	. = ..()
@@ -87,7 +86,7 @@
 			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced="hulk")
 		else
 			playsound(src, 'sound/effects/bang.ogg', 50, 1)
-		take_damage(hulk_damage(), BRUTE, "melee", 0, get_dir(src, user))
+		take_damage(hulk_damage(), BLUNT, "melee", 0, get_dir(src, user))
 		return 1
 	return 0
 
@@ -96,15 +95,15 @@
 		var/turf/T = loc
 		if(T.intact && level == 1) //the blob doesn't destroy thing below the floor
 			return
-	take_damage(400, BRUTE, "melee", 0, get_dir(src, B))
+	take_damage(400, BLUNT, "melee", 0, get_dir(src, B))
 
-/obj/proc/attack_generic(mob/user, damage_amount = 0, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, armor_penetration = 0) //used by attack_alien, attack_animal, and attack_slime
+/obj/proc/attack_generic(mob/user, damage_amount = 0, damage_type = BLUNT, damage_flag = 0, sound_effect = 1, armor_penetration = 0) //used by attack_alien, attack_animal, and attack_slime
 	user.do_attack_animation(src)
 	user.changeNext_move(CLICK_CD_MELEE)
 	return take_damage(damage_amount, damage_type, damage_flag, sound_effect, get_dir(src, user), armor_penetration)
 
 /obj/attack_alien(mob/living/carbon/alien/humanoid/user)
-	if(attack_generic(user, 60, BRUTE, "melee", 0))
+	if(attack_generic(user, 60, BLUNT, "melee", 0))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 
 /obj/attack_animal(mob/living/simple_animal/M)
@@ -131,7 +130,7 @@
 
 /obj/proc/collision_damage(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
 	var/amt = max(0, ((force - (move_resist * MOVE_FORCE_CRUSH_RATIO)) / (move_resist * MOVE_FORCE_CRUSH_RATIO)) * 10)
-	take_damage(amt, BRUTE)
+	take_damage(amt, BLUNT)
 
 /obj/attack_slime(mob/living/simple_animal/slime/M)
 	if(!M.is_adult)
@@ -150,11 +149,11 @@
 		play_soundeffect = 1
 	else
 		switch(M.damtype)
-			if(BRUTE)
+			if(BLUNT)
 				playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
 			if(BURN)
 				playsound(src, 'sound/items/welder.ogg', 50, 1)
-			if(TOX)
+			if(MECH_DAM_TOX)
 				playsound(src, 'sound/effects/spray2.ogg', 50, 1)
 				return 0
 			else

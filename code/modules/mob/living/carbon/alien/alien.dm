@@ -70,14 +70,14 @@
 		throw_alert("alien_fire", /atom/movable/screen/alert/alien_fire)
 		switch(bodytemperature)
 			if(360 to 400)
-				apply_damage(HEAT_DAMAGE_LEVEL_1, BURN)
+				apply_damage_randomly(HEAT_DAMAGE_LEVEL_1, BURN, "Atmosphere")
 			if(400 to 460)
-				apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
+				apply_damage_randomly(HEAT_DAMAGE_LEVEL_2, BURN, "Atmosphere")
 			if(460 to INFINITY)
 				if(on_fire)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN)
+					apply_damage_randomly(HEAT_DAMAGE_LEVEL_3, BURN, "Atmosphere")
 				else
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
+					apply_damage_randomly(HEAT_DAMAGE_LEVEL_2, BURN, "Atmosphere")
 	else
 		clear_alert("alien_fire")
 

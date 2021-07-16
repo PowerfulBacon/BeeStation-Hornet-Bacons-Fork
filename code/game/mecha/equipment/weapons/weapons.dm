@@ -202,7 +202,8 @@
 		to_chat(M, "<font color='red' size='7'>HONK</font>")
 		M.SetSleeping(0)
 		M.stuttering += 20
-		M.adjustEarDamage(0, 30)
+		M.apply_damage_to(15, LEFT_EAR, SOUND, src)
+		M.apply_damage_to(15, RIGHT_EAR, SOUND, src)
 		M.Paralyze(60)
 		if(prob(30))
 			M.Stun(200)

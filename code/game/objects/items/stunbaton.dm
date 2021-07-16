@@ -172,10 +172,8 @@
 		if(!deductcharge(hitcost))
 			return FALSE
 
-	var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
-	var/armor_block = target.run_armor_check(affecting, "stamina")
 	// L.adjustStaminaLoss(stunforce)
-	target.apply_damage(stunforce, STAMINA, affecting, armor_block)
+	target.apply_damage(stunforce, ran_zone(user.zone_selected), STAMINA, src)
 	target.apply_effect(EFFECT_STUTTER, stunforce)
 	SEND_SIGNAL(target, COMSIG_LIVING_MINOR_SHOCK)
 	if(user)

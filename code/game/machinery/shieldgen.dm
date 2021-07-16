@@ -29,14 +29,10 @@
 		if(1)
 			qdel(src)
 		if(2)
-			take_damage(50, BRUTE, "energy", 0)
+			take_damage(50, BURN, "energy", 0)
 
 /obj/structure/emergency_shield/play_attack_sound(damage, damage_type = BRUTE, damage_flag = 0)
-	switch(damage_type)
-		if(BURN)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, 1)
-		if(BRUTE)
-			playsound(loc, 'sound/effects/empulse.ogg', 75, 1)
+	playsound(loc, 'sound/effects/empulse.ogg', 75, 1)
 
 /obj/structure/emergency_shield/take_damage(damage, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
@@ -445,7 +441,7 @@
 //the shield wall is immune to damage but it drains the stored power of the generators.
 /obj/machinery/shieldwall/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
-	if(damage_type == BRUTE || damage_type == BURN)
+	if(damage_type != STAMINA)
 		drain_power(damage_amount)
 
 /obj/machinery/shieldwall/proc/drain_power(drain_amount)

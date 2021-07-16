@@ -26,6 +26,8 @@
 
 
 /datum/weather/acid_rain/weather_act(mob/living/L)
-	var/resist = L.getarmor(null, "acid")
+	var/bodyarmour = L.get_armour(BODY_ZONE_CHEST, "acid")
+	var/headarmor = L.get_armour(BODY_ZONE_HEAD, "acid")
+	var/resist = min(bodyarmour, headarmour)
 	if(prob(max(0,100-resist)))
 		L.acid_act(20,20)

@@ -367,7 +367,7 @@
 
 /obj/item/teleporter/proc/telefrag(turf/fragging_location, mob/user)
 	for(var/mob/living/M in fragging_location)//Hit everything in the turf
-		M.apply_damage(20, BRUTE)
+		M.apply_damage(20, BODY_ZONE_CHEST, BRUTE, "Impact")
 		M.Paralyze(30)
 		to_chat(M, "<span class='userdanger'>[user] teleports into you, knocking you to the floor with the bluespace wave!</span>")
 

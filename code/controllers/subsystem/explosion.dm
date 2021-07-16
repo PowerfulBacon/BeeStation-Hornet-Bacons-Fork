@@ -297,7 +297,7 @@ SUBSYSTEM_DEF(explosions)
 	//flash mobs
 	if(flash_range)
 		for(var/mob/living/L in viewers(flash_range, epicenter))
-			L.flash_act()
+			L.body.flash_act(FLASH_INTENSE)
 
 	var/list/affected_turfs = GatherSpiralTurfs(max_range, epicenter)
 

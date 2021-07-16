@@ -7,7 +7,7 @@
 	difficulty = 16
 	text_gain_indication = "<span class='notice'>Your muscles hurt!</span>"
 	species_allowed = list("human") //no skeleton/lizard hulk
-	health_req = 25
+	requires_consciousness = TRUE
 	instability = 40
 	locked = TRUE
 
@@ -29,7 +29,7 @@
 		return target.attack_hulk(owner)
 
 /datum/mutation/human/hulk/on_life()
-	if(owner.health < 0)
+	if(owner.stat)
 		on_losing(owner)
 		to_chat(owner, "<span class='danger'>You suddenly feel very weak.</span>")
 

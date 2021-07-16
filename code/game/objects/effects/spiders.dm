@@ -19,7 +19,7 @@
 		switch(damage_type)
 			if(BURN)
 				damage_amount *= 2
-			if(BRUTE)
+			if(BLUNT || SHARP || BITE || BULLET)
 				damage_amount *= 0.25
 	. = ..()
 

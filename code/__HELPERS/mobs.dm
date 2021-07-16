@@ -249,12 +249,12 @@ GLOBAL_LIST_EMPTY(species_list)
 		return FALSE
 	return TRUE
 
-//pass a list in the format list("health" = mob's health var) to check health during this
+//pass a list in the format list("damage" = mob's damage var) to check health during this
 /mob/living/break_do_after_checks(list/checked_health, check_clicks)
 	if(islist(checked_health))
-		if(health < checked_health["health"])
+		if(body.get_damage() > checked_health["damage"])
 			return FALSE
-		checked_health["health"] = health
+		checked_health["damage"] = body.get_damage()
 	return ..()
 
 /proc/do_after(mob/user, var/delay, needhand = 1, atom/target = null, progress = 1, datum/callback/extra_checks = null)
@@ -329,7 +329,7 @@ GLOBAL_LIST_EMPTY(species_list)
 				break
 	if (progress)
 		qdel(progbar)
-	
+
 	if(!QDELETED(target))
 		LAZYREMOVE(user.do_afters, target)
 		LAZYREMOVE(target.targeted_by, user)

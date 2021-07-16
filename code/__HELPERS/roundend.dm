@@ -27,7 +27,7 @@
 				escaped = "ghosts"
 			else if(isliving(m))
 				var/mob/living/L = m
-				mob_data += list("location" = get_area(L), "health" = L.health)
+				mob_data += list("location" = get_area(L), "damage" = L.body.get_damage())
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L
 					category = "humans"

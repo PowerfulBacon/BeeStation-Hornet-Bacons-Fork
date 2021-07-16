@@ -166,6 +166,7 @@
 				owner.Sleeping(300)
 				owner.visible_message("<span class ='danger'>[owner] faints in fear!.</span>", "<span class ='userdanger'>It's too much! you faint!</span>")
 				if(prob(stress * 3))
+					//TODO
 					owner.set_heartattack(TRUE)
 					to_chat(owner, "<span class='userdanger'>Your heart stops!</span>")
 				stress++

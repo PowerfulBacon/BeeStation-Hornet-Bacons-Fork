@@ -482,7 +482,7 @@
 	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/organ_action/IsAvailable()
-	var/obj/item/organ/I = target
+	var/obj/item/nbodypart/I = target
 	if(!I.owner)
 		return 0
 	return ..()
@@ -524,7 +524,7 @@
 		owner.put_in_hands(I)
 		I.attack_self(owner)
 	else
-		if (owner.get_num_arms() <= 0)
+		if (!length(owner.body.get_arms()))
 			to_chat(owner, "<span class='warning'>You dont have any usable hands!</span>")
 		else
 			to_chat(owner, "<span class='warning'>Your hands are full!</span>")

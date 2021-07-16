@@ -69,7 +69,7 @@
 /obj/mecha/attack_alien(mob/living/user)
 	log_message("Attack by alien. Attacker - [user].", LOG_MECHA, color="red")
 	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	attack_generic(user, 15, BRUTE, "melee", 0)
+	attack_generic(user, 15, SHARP, "melee", 0)
 
 /obj/mecha/attack_animal(mob/living/simple_animal/user)
 	log_message("Attack by simple animal. Attacker - [user].", LOG_MECHA, color="red")
@@ -101,7 +101,7 @@
 
 /obj/mecha/blob_act(obj/structure/blob/B)
 	log_message("Attack by blob. Attacker - [B].", LOG_MECHA, color="red")
-	take_damage(30, BRUTE, "melee", 0, get_dir(src, B))
+	take_damage(30, BLUNT, "melee", 0, get_dir(src, B))
 
 /obj/mecha/attack_tk()
 	return
@@ -324,7 +324,7 @@
 	if(!has_charge(melee_energy_drain))
 		return 0
 	use_power(melee_energy_drain)
-	if(M.damtype == BRUTE || M.damtype == BURN)
+	if(M.damtype != STAMINA)
 		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
 		. = ..()
 
@@ -354,7 +354,7 @@
 			visual_effect_icon = ATTACK_EFFECT_SMASH
 			if(damtype == BURN)
 				visual_effect_icon = ATTACK_EFFECT_MECHFIRE
-			else if(damtype == TOX)
+			else if(damtype == MECH_DAM_TOX)
 				visual_effect_icon = ATTACK_EFFECT_MECHTOXIN
 	..()
 

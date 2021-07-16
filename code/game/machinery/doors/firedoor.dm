@@ -431,7 +431,7 @@
 
 /obj/machinery/door/firedoor/window/attack_alien(mob/living/carbon/alien/humanoid/user)
 	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	return attack_generic(user, 60, BRUTE, "melee", 0)
+	return attack_generic(user, 60, SHARP, "melee", 0)
 
 /obj/item/electronics/firelock
 	name = "firelock circuitry"

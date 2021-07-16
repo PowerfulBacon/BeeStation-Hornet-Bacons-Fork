@@ -301,7 +301,7 @@
 				close_trap()
 				L.visible_message("<span class='danger'>[L] triggers \the [src].</span>", \
 						"<span class='userdanger'>You trigger \the [src]!</span>")
-				L.apply_damage(trap_damage, BRUTE, def_zone)
+				L.apply_damage(trap_damage, def_zone, BRUTE, src)
 	..()
 
 /obj/item/restraints/legcuffs/beartrap/energy
@@ -365,7 +365,7 @@
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		to_chat(C, "<span class='userdanger'>\The [src] ensnares you!</span>")
 		if(knockdown)
-			C.Paralyze(knockdown)	
+			C.Paralyze(knockdown)
 		playsound(src, 'sound/effects/snap.ogg', 50, TRUE)
 
 /obj/item/restraints/legcuffs/bola/tactical//traitor variant

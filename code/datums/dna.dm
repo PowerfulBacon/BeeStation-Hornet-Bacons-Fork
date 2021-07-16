@@ -593,6 +593,7 @@
 				to_chat(src, "<span class='notice'>Oh, I actually feel quite alright!</span>")
 				ForceContractDisease(new/datum/disease/decloning()) //slow acting, non-viral clone damage based GBS
 			if(8)
+				//TODO Organ removal
 				var/list/elligible_organs = list()
 				for(var/obj/item/organ/O in internal_organs) //make sure we dont get an implant or cavity item
 					elligible_organs += O
@@ -640,6 +641,7 @@
 
 
 /mob/living/carbon/human/proc/something_horrible_mindmelt()
+	//TODO Eyes
 	if(!HAS_TRAIT(src, TRAIT_BLIND))
 		var/obj/item/organ/eyes/eyes = locate(/obj/item/organ/eyes) in internal_organs
 		if(!eyes)

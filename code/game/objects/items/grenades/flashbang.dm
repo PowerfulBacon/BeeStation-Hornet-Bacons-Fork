@@ -92,8 +92,11 @@
 		M.Paralyze(20)
 		M.Knockdown(200)
 		M.soundbang_act(1, 200, 10, 15)
-		if(M.apply_damages(10, 10))
-			to_chat(M, "<span class='userdanger'>The blast from \the [src] bruises and burns you!</span>")
+		M.apply_damage_to(4, BURN, LEFT_EYE, src)
+		M.apply_damage_to(4, BURN, RIGHT_EYE, src)
+		M.apply_damage_to(7, SOUND, LEFT_EAR, src)
+		M.apply_damage_to(7, SOUND, RIGHT_EAR, src)
+		to_chat(M, "<span class='userdanger'>The blast from \the [src] bruises and burns you!</span>")
 
 	// only checking if they're on top of the tile, cause being one tile over will be its own punishment
 

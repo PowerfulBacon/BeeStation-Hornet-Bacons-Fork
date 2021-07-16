@@ -22,7 +22,7 @@
 			if(world.time > next_damage_warning)
 				to_chat(owner, "<span class='warning'><b>The light burns you!</b></span>")
 				next_damage_warning = world.time + 100 //Avoid spamming
-			owner.take_overall_damage(0,3)
+			owner.apply_damage_to(3, CHEST, BURN, "Light")
 
 /datum/brain_trauma/magic/poltergeist
 	name = "Poltergeist"
@@ -94,7 +94,7 @@
 	if(get_dist(owner, stalker) <= 1)
 		playsound(owner, 'sound/magic/demon_attack1.ogg', 50)
 		owner.visible_message("<span class='warning'>[owner] is torn apart by invisible claws!</span>", "<span class='userdanger'>Ghostly claws tear your body apart!</span>")
-		owner.take_bodypart_damage(rand(20, 45))
+		owner.apply_damage_randomly(rand(20, 45), SHARP, "Demon Claws")
 	else if(prob(50))
 		stalker.forceMove(get_step_towards(stalker, owner))
 	if(get_dist(owner, stalker) <= 8)

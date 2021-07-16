@@ -5,7 +5,7 @@
 	quality = POSITIVE
 	difficulty = 18
 	text_gain_indication = "<span class='notice'>You feel smarter!</span>"
-	limb_req = BODY_ZONE_HEAD
+	limb_req = list(BRAIN)
 	instability = 30
 
 /datum/mutation/human/telekinesis/New(class_ = MUT_OTHER, timer, datum/mutation/human/copymut)

@@ -110,27 +110,27 @@
 /mob/living/split_personality
 	name = "split personality"
 	real_name = "unknown conscience"
-	var/mob/living/carbon/body
+	var/mob/living/original
 	var/datum/brain_trauma/severe/split_personality/trauma
 
 /mob/living/split_personality/Initialize(mapload, _trauma)
 	if(iscarbon(loc))
-		body = loc
-		name = body.real_name
-		real_name = body.real_name
+		original = loc
+		name = original.real_name
+		real_name = original.real_name
 		trauma = _trauma
 	return ..()
 
 /mob/living/split_personality/Life()
-	if(QDELETED(body))
+	if(QDELETED(original))
 		qdel(src) //in case trauma deletion doesn't already do it
 
-	if((body.stat == DEAD && trauma.owner_backseat == src))
+	if((original.stat == DEAD && trauma.owner_backseat == src))
 		trauma.switch_personalities()
 		qdel(trauma)
 
 	//if one of the two ghosts, the other one stays permanently
-	if(!body.client && trauma.initialized)
+	if(!original.client && trauma.initialized)
 		trauma.switch_personalities()
 		qdel(trauma)
 

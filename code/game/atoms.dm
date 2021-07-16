@@ -1217,7 +1217,7 @@
 	var/starget = key_name(target)
 
 	var/mob/living/living_target = target
-	var/hp = istype(living_target) ? " (NEWHP: [living_target.health]) " : ""
+	var/hp = istype(living_target) ? " (NEWDAMAGE: [living_target.body.get_damage()]) " : ""
 
 	var/sobject = ""
 	if(object)

@@ -59,6 +59,7 @@
 	var/where = "at your feet"
 
 /datum/quirk/brainproblems/on_process()
+	//TODO
 	quirk_holder.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.2)
 
 /datum/quirk/brainproblems/on_spawn()
@@ -396,6 +397,7 @@
 	var/mob/living/carbon/human/H = quirk_holder
 	var/obj/item/bodypart/old_part = H.get_bodypart(limb_slot)
 	var/obj/item/bodypart/prosthetic
+	//TODO
 	switch(limb_slot)
 		if(BODY_ZONE_L_ARM)
 			prosthetic = new/obj/item/bodypart/l_arm/robot/surplus(quirk_holder)

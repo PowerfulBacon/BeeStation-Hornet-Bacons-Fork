@@ -65,14 +65,14 @@
 			"<span class='warning'>\"As you pick up [src] your arms ignite, reminding you of all your past sins.\"</span>")
 		if(ishuman(U))
 			var/mob/living/carbon/human/H = U
-			H.apply_damage(rand(force/2, force), BURN, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+			H.apply_damage(rand(force/2, force), pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), BURN, src)
 		else
 			U.adjustFireLoss(rand(force/2,force))
 
 /obj/item/pitchfork/demonic/attack(mob/target, mob/living/carbon/human/user)
 	if(user.mind && user.owns_soul() && !is_devil(user))
 		to_chat(user, "<span class='warning'>[src] burns in your hands.</span>")
-		user.apply_damage(rand(force/2, force), BURN, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+		user.apply_damage(rand(force/2, force), pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), BURN, src)
 	..()
 
 /obj/item/pitchfork/demonic/ascended/afterattack(atom/target, mob/user, proximity)

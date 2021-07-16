@@ -531,6 +531,7 @@
 
 	R.fields["traumas"] = list()
 	if(ishuman(mob_occupant))
+		//TODO
 		R.fields["traumas"] = C.get_traumas()
 	if(isbrain(mob_occupant))
 		R.fields["traumas"] = B.get_traumas()

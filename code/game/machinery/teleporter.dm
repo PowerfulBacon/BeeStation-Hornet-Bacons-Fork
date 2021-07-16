@@ -80,7 +80,7 @@
 					if(human.dna && human.dna.species.id == "human")
 						to_chat(M, "<span class='italics'>You hear a buzzing in your ears.</span>")
 						human.set_species(/datum/species/fly)
-
+					//TODO
 					human.apply_effect((rand(120 - accuracy * 40, 180 - accuracy * 60)), EFFECT_IRRADIATE, 0)
 			calibrated = 0
 	return

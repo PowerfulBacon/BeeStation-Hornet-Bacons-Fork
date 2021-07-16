@@ -120,10 +120,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 	var/ijob
 	var/name
 	var/assignment
-	var/oxydam
-	var/toxdam
-	var/burndam
-	var/brutedam
+	var/damage
 	var/area
 	var/pos_x
 	var/pos_y
@@ -167,15 +164,9 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 					life_status = null
 
 				if (nanite_sensors || U.sensor_mode >= SENSOR_VITALS)
-					oxydam = round(H.getOxyLoss(),1)
-					toxdam = round(H.getToxLoss(),1)
-					burndam = round(H.getFireLoss(),1)
-					brutedam = round(H.getBruteLoss(),1)
+					damage = round(H.body.get_damage(),1)
 				else
-					oxydam = null
-					toxdam = null
-					burndam = null
-					brutedam = null
+					damage = null
 
 				if (nanite_sensors || U.sensor_mode >= SENSOR_COORDS)
 					if (!pos)
@@ -188,7 +179,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 					pos_x = null
 					pos_y = null
 
-				results[++results.len] = list("name" = name, "assignment" = assignment, "ijob" = ijob, "life_status" = life_status, "oxydam" = oxydam, "toxdam" = toxdam, "burndam" = burndam, "brutedam" = brutedam, "area" = area, "pos_x" = pos_x, "pos_y" = pos_y, "can_track" = H.can_track(null))
+				results[++results.len] = list("name" = name, "assignment" = assignment, "ijob" = ijob, "life_status" = life_status, "damage" = damage, "area" = area, "pos_x" = pos_x, "pos_y" = pos_y, "can_track" = H.can_track(null))
 
 	data_by_z["[z]"] = sortTim(results,/proc/sensor_compare)
 	last_update["[z]"] = world.time

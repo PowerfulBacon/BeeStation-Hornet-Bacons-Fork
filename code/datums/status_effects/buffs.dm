@@ -16,8 +16,7 @@
 	return ..()
 
 /datum/status_effect/shadow_mend/tick()
-	owner.adjustBruteLoss(-15)
-	owner.adjustFireLoss(-15)
+	owner.body.heal_total_damage(30)
 
 /datum/status_effect/shadow_mend/on_remove()
 	owner.visible_message("<span class='warning'>The violet light around [owner] glows black!</span>", "<span class='warning'>The tendrils around you cinch tightly and reap their toll...</span>")
@@ -38,7 +37,7 @@
 
 /datum/status_effect/void_price/tick()
 	SEND_SOUND(owner, sound('sound/magic/summon_karp.ogg', volume = 25))
-	owner.adjustBruteLoss(3)
+	owner.apply_damage_randomly(3, SHARP, "Brambles")
 
 /datum/status_effect/cyborg_power_regen
 	id = "power_regen"
@@ -103,8 +102,8 @@
 		qdel(src)
 		return
 	var/grace_heal = bloodlust * 0.05
-	owner.adjustBruteLoss(-grace_heal)
-	owner.adjustFireLoss(-grace_heal)
+	owner.body.heal_total_damage(grace_heal * 2)
+	//TODO
 	owner.adjustToxLoss(-grace_heal, TRUE, TRUE)
 	owner.adjustOxyLoss(-(grace_heal * 2))
 	owner.adjustCloneLoss(-grace_heal)
@@ -181,6 +180,7 @@
 	desc = "You are drunk on blood! Your pulse thunders in your ears! Nothing can harm you!" //not true, and the item description mentions its actual effect
 	icon_state = "blooddrunk"
 
+//TODO
 /datum/status_effect/blooddrunk/on_apply()
 	. = ..()
 	if(.)
@@ -331,8 +331,8 @@
 		return
 	else
 		linked_alert.icon_state = "fleshmend"
-	owner.adjustBruteLoss(-2.5, FALSE)
-	owner.adjustFireLoss(-2.5, FALSE)
+	owner.body.heal_total_damage(5)
+	//TODO
 	owner.adjustOxyLoss(-2.5)
 	owner.adjustCloneLoss(-2.5)
 	owner.adjustToxLoss(-2.5, FALSE, TRUE)
@@ -379,6 +379,7 @@
 	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	H.remove_hud_from(owner)
 
+//TODO: Replace the arm with the oath by using the new medical system that allows arms to be anything
 /datum/status_effect/hippocraticOath/tick()
 	if(owner.stat == DEAD)
 		if(deathTick < 4)
@@ -419,8 +420,8 @@
 			//Because a servant of medicines stops at nothing to help others, lets keep them on their toes and give them an additional boost.
 			if(itemUser.health < itemUser.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(itemUser), "#375637")
-			itemUser.adjustBruteLoss(-1.5)
-			itemUser.adjustFireLoss(-1.5)
+			itemUser.body.heal_total_damage(3)
+			//TODO
 			itemUser.adjustToxLoss(-1.5, forced = TRUE) //Because Slime People are people too
 			itemUser.adjustOxyLoss(-1.5)
 			itemUser.adjustStaminaLoss(-1.5)
@@ -428,22 +429,15 @@
 			itemUser.adjustCloneLoss(-0.5) //Becasue apparently clone damage is the bastion of all health
 		//Heal all those around you, unbiased
 		for(var/mob/living/L in hearers(7, owner))
-			if(L.health < L.maxHealth)
+			if(L.body.get_damage())
 				new /obj/effect/temp_visual/heal(get_turf(L), "#375637")
-			if(iscarbon(L))
-				L.adjustBruteLoss(-3.5)
-				L.adjustFireLoss(-3.5)
-				L.adjustToxLoss(-3.5, FALSE, TRUE) //Because Slime People are people too
-				L.adjustOxyLoss(-3.5)
-				L.adjustStaminaLoss(-3.5)
-				L.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3.5)
-				L.adjustCloneLoss(-1) //Becasue apparently clone damage is the bastion of all health
-			else if(issilicon(L))
-				L.adjustBruteLoss(-3.5)
-				L.adjustFireLoss(-3.5)
-			else if(isanimal(L))
-				var/mob/living/simple_animal/SM = L
-				SM.adjustHealth(-3.5, forced = TRUE)
+			L.body.heal_total_damage(6)
+			//TODO
+			L.adjustToxLoss(-3.5, FALSE, TRUE) //Because Slime People are people too
+			L.adjustOxyLoss(-3.5)
+			L.adjustStaminaLoss(-3.5)
+			L.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3.5)
+			L.adjustCloneLoss(-1) //Becasue apparently clone damage is the bastion of all health
 
 /atom/movable/screen/alert/status_effect/regenerative_core
 	name = "Blessing of the Necropolis"
@@ -468,8 +462,7 @@
 	ADD_TRAIT(owner, TRAIT_NECROPOLIS_INFECTED, "legion_core_trait")
 	if(owner.z == 5)
 		power = 2
-	owner.adjustBruteLoss(-50 * power)
-	owner.adjustFireLoss(-50 * power)
+	owner.body.heal_total_damage(100 * power)
 	owner.cure_nearsighted()
 	owner.ExtinguishMob()
 	owner.fire_stacks = 0

@@ -17,10 +17,11 @@
 		else
 			T.break_tile()
 
-	if(target.health <= 1)
+	if(!target.body.is_concious())
 		target.gib(1, 1)
 	else
-		target.adjustBruteLoss(min(99,(target.health - 1)))
+		for(var/i in 1 to 5)
+			target.apply_damage_randomly(15, BURN, "Explosion")
 		target.Paralyze(400)
 		target.stuttering = 20
 

@@ -62,7 +62,7 @@ GLOBAL_LIST_EMPTY(clockwork_marauders)
 
 /mob/living/simple_animal/clockwork_marauder/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/nullrod))
-		apply_damage(15, BURN)
+		apply_damage(15, BODY_ZONE_CHEST, BURN, I)
 		if(shield_health > 0)
 			damage_shield()
 		playsound(src,'sound/hallucinations/veryfar_noise.ogg',40,1)

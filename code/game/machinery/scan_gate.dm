@@ -145,7 +145,7 @@
 				if(is_species(H, scan_species))
 					beep = TRUE
 				if(detect_species == SCANGATE_ZOMBIE) //Can detect dormant zombies
-					if(H.getorganslot(ORGAN_SLOT_ZOMBIE))
+					if(H.body.get_bodypart(ZOMBIETUMOUR))
 						beep = TRUE
 		if(SCANGATE_GUNS)
 			for(var/I in M.get_contents())

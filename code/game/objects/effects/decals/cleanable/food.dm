@@ -30,6 +30,7 @@
 	desc = "A sizable pile of table salt. Someone must be upset."
 	icon_state = "salt_pile"
 
+//TODO Refactor this
 /obj/effect/decal/cleanable/food/salt/Crossed(mob/living/L)
 	if(is_species(L, /datum/species/snail) || is_species(L, /datum/species/squid))
 		while(L.loc == src.loc)

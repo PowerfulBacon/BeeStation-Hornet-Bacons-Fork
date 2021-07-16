@@ -107,6 +107,7 @@
 /datum/quirk/multilingual/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
 	if(H.job != "Curator")
+		//TODO
 		var/obj/item/organ/tongue/T = H.getorganslot(ORGAN_SLOT_TONGUE)
 		var/list/languages_possible = T.languages_possible
 		languages_possible = languages_possible - typecacheof(/datum/language/codespeak) - typecacheof(/datum/language/narsie) - typecacheof(/datum/language/ratvar)
@@ -128,6 +129,7 @@
 
 /datum/quirk/night_vision/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
+	//TODO
 	var/obj/item/organ/eyes/eyes = H.getorgan(/obj/item/organ/eyes)
 	if(!eyes || eyes.lighting_alpha)
 		return

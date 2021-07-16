@@ -214,7 +214,7 @@ const DnaScannerContent = (props, context) => {
     subjectName,
     isScannerConnected,
     isViableSubject,
-    subjectHealth,
+    subjectDamage,
     subjectRads,
     subjectStatus,
   } = data;
@@ -242,18 +242,17 @@ const DnaScannerContent = (props, context) => {
           name="long-arrow-alt-right" />
         <SubjectStatus status={subjectStatus} />
       </LabeledList.Item>
-      <LabeledList.Item label="Health">
+      <LabeledList.Item label="Damage">
         <ProgressBar
-          value={subjectHealth}
+          value={subjectDamage}
           minValue={0}
           maxValue={100}
           ranges={{
-            olive: [101, Infinity],
-            good: [70, 101],
+            bad: [70, Infinity],
             average: [30, 70],
-            bad: [-Infinity, 30],
+            good: [-Infinity, 30],
           }}>
-          {subjectHealth}%
+          {subjectDamage}%
         </ProgressBar>
       </LabeledList.Item>
       <LabeledList.Item label="Radiation">

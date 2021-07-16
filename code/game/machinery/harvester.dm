@@ -111,6 +111,7 @@
 	if(!target)
 		target = get_turf(src)
 	for(var/obj/item/bodypart/BP in operation_order) //first we do non-essential limbs
+		//TODO
 		BP.drop_limb()
 		C.emote("scream")
 		if(BP.body_zone != "chest")

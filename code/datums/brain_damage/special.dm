@@ -15,7 +15,7 @@
 	if(prob(4))
 		if(prob(33) && (owner.IsStun() || owner.IsParalyzed() || owner.IsUnconscious()))
 			speak("unstun", TRUE)
-		else if(prob(60) && owner.health <= owner.crit_threshold)
+		else if(prob(60) && !owner.is_concious())
 			speak("heal", TRUE)
 		else if(prob(30) && owner.a_intent == INTENT_HARM)
 			speak("aggressive")
@@ -228,6 +228,7 @@
 	if(get_dist(owner, beepsky) <= 1)
 		owner.playsound_local(owner, 'sound/weapons/egloves.ogg', 50)
 		owner.visible_message("<span class='warning'>[owner]'s body jerks as if it was shocked.</span>", "<span class='userdanger'>You feel the fist of the LAW.</span>")
+		//TODO
 		owner.take_bodypart_damage(0,0,rand(40, 70))
 		QDEL_NULL(beepsky)
 	if(prob(20) && get_dist(owner, beepsky) <= 8)

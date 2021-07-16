@@ -67,9 +67,10 @@
 		if(M.stat == DEAD)
 			return
 		if(chassis.occupant.a_intent == INTENT_HARM)
-			M.take_overall_damage(dam_force)
+			M.apply_damage_to(dam_force, CHEST, CRUSH, src)
 			if(!M)
 				return
+			//TODO~
 			M.adjustOxyLoss(round(dam_force/2))
 			M.updatehealth()
 			target.visible_message("<span class='danger'>[chassis] squeezes [target]!</span>", \

@@ -87,7 +87,7 @@
 	if(!in_range(user, src) || user.stat || user.restrained() || !iscarbon(M))
 		return FALSE
 
-	if (!M.get_bodypart("head"))
+	if (!M.body.get_bodypart(HEAD))
 		to_chat(user, "<span class='warning'>[M] has no head!</span>")
 		return FALSE
 
@@ -127,7 +127,7 @@
 			animate(src, pixel_x = 3, time = 45, easing = ELASTIC_EASING)
 			animate(m, pixel_x = 3, time = 45, easing = ELASTIC_EASING)
 		if(buckled_mob.has_gravity())
-			if(buckled_mob.get_bodypart("head"))
+			if(buckled_mob.body.get_bodypart(HEAD))
 				if(buckled_mob.stat != DEAD)
 					if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
 						buckled_mob.adjustOxyLoss(5)

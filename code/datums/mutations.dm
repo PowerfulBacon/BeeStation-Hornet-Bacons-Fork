@@ -15,8 +15,8 @@
 	var/obj/effect/proc_holder/spell/power
 	var/layer_used = MUTATIONS_LAYER //which mutation layer to use
 	var/list/species_allowed = list() //to restrict mutation to only certain species
-	var/health_req //minimum health required to acquire the mutation
-	var/limb_req //required limbs to acquire this mutation
+	var/requires_consciousness = FALSE //minimum health required to acquire the mutation
+	var/list/limb_req //required limbs to acquire this mutation
 	var/time_coeff = 1 //coefficient for timed mutations
 	var/datum/dna/dna
 	var/mob/living/carbon/human/owner
@@ -60,10 +60,12 @@
 		return TRUE
 	if(species_allowed.len && !species_allowed.Find(H.dna.species.id))
 		return TRUE
-	if(health_req && H.health < health_req)
+	if(requires_consciousness && !H.body.is_concious())
 		return TRUE
-	if(limb_req && !H.get_bodypart(limb_req))
-		return TRUE
+	if(limb_req)
+		for(var/limb in limb_req)
+			if(!H.body.get_bodypart(limb))
+				return TRUE
 	for(var/M in H.dna.mutations)//check for conflicting powers
 		var/datum/mutation/human/mewtayshun = M
 		if(!(mewtayshun.type in conflicts) && !(type in mewtayshun.conflicts))

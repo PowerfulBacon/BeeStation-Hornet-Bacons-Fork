@@ -296,11 +296,13 @@
 
 			switch(rand(1,3))
 				if (2)
-					D.adjustBruteLoss(rand(20,30))
+					D.apply_damage_randomly(rand(10, 20), BLUNT, "Explosion")
+					D.apply_damage_randomly(rand(10, 20), BURN, "Explosion")
 				if (3)
 					D.ex_act(EXPLODE_LIGHT)
 				else
-					D.adjustBruteLoss(rand(10,20))
+					D.apply_damage_randomly(rand(5, 10), BLUNT, "Explosion")
+					D.apply_damage_randomly(rand(5, 10), BURN, "Explosion")
 		else
 			D.ex_act(EXPLODE_LIGHT)
 
@@ -333,7 +335,7 @@
 
 		D.visible_message("<span class='danger'><B>[A] headbutts [D]!</B></span>", \
 						"<span class='userdanger'>[A] headbutts you!</span>", null, COMBAT_MESSAGE_RANGE)
-		D.adjustBruteLoss(rand(10,20))
+		D.apply_damage_randomly(rand(10,20), BLUNT, A.body.get_bodypart(HEAD))
 		playsound(A.loc, "swing_hit", 50, 1)
 		D.Unconscious(20)
 	log_combat(A, D, "headbutted")
@@ -348,7 +350,7 @@
 	D.visible_message("<span class='danger'><B>[A] roundhouse-kicks [D]!</B></span>", \
 					"<span class='userdanger'>[A] roundhouse-kicks you!</span>", null, COMBAT_MESSAGE_RANGE)
 	playsound(A.loc, "swing_hit", 50, 1)
-	D.adjustBruteLoss(rand(10,20))
+	D.apply_damage_randomly(rand(10,20), BLUNT, A.body.get_bodypart(pick(list(LEG_LEFT, LEG_RIGHT))))
 
 	var/turf/T = get_edge_target_turf(A, get_dir(A, get_step_away(D, A)))
 	if (T && isturf(T))
@@ -390,7 +392,7 @@
 			if (falling == 1)
 				A.visible_message("<span class='danger'><B>...and dives head-first into the ground, ouch!</B></span>", \
 								"<span class='userdanger'>...and dive head-first into the ground, ouch!</span>")
-				A.adjustBruteLoss(rand(10,20))
+				A.apply_damage_randomly(rand(10,20), BLUNT, "Falling")
 				A.Paralyze(60)
 			to_chat(A, "[D] is too far away!")
 			return 0
@@ -417,9 +419,9 @@
 			if (prob(33) || D.stat)
 				D.ex_act(EXPLODE_LIGHT)
 			else
-				D.adjustBruteLoss(rand(20,30))
+				D.apply_damage_randomly(rand(20,30), BLUNT, "Falling")
 		else
-			D.adjustBruteLoss(rand(20,30))
+			D.apply_damage_randomly(rand(20,30), BLUNT, "Falling")
 
 		D.Paralyze(40)
 

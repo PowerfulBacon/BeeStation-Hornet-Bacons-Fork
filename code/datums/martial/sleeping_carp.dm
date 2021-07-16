@@ -46,10 +46,10 @@
 		playsound(get_turf(A), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		D.emote("scream")
 		D.dropItemToGround(D.get_active_held_item())
-		D.apply_damage(5, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+		D.apply_damage(5, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), BLUNT, A.body.get_active_hand())
 		D.Stun(60)
 		return 1
-	
+
 	return basic_hit(A,D)
 
 /datum/martial_art/the_sleeping_carp/proc/backKick(mob/living/carbon/human/A, mob/living/carbon/human/D)
@@ -83,13 +83,13 @@
 	return basic_hit(A,D)
 
 /datum/martial_art/the_sleeping_carp/proc/headKick(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_HEAD, "melee")
 	if(!D.stat && !D.IsParalyzed())
 		log_combat(A, D, "head kicked (Sleeping Carp)")
 		A.do_attack_animation(D, ATTACK_EFFECT_KICK)
 		D.visible_message("<span class='warning'>[A] kicks [D] in the head!</span>", \
 						  "<span class='userdanger'>[A] kicks you in the jaw!</span>")
-		D.apply_damage(20, A.dna.species.attack_type, BODY_ZONE_HEAD, blocked = def_check)
+		var/obj/item/bodypart/leg/leg = A.body.get_random_leg()
+		D.apply_damage(20, BODY_ZONE_HEAD, BLUNT, leg)
 		D.drop_all_held_items()
 		playsound(get_turf(D), 'sound/weapons/punch1.ogg', 50, 1, -1)
 		D.Stun(80)
@@ -97,7 +97,6 @@
 	return basic_hit(A,D)
 
 /datum/martial_art/the_sleeping_carp/proc/elbowDrop(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_CHEST, "melee")
 	if(!(D.mobility_flags & MOBILITY_STAND))
 		log_combat(A, D, "elbow dropped (Sleeping Carp)")
 		A.do_attack_animation(D, ATTACK_EFFECT_PUNCH)
@@ -105,7 +104,7 @@
 							"<span class='userdanger'>[A] piledrives you with their elbow!</span>")
 		if(D.stat)
 			D.death() //FINISH HIM!
-		D.apply_damage(50, A.dna.species.attack_type, BODY_ZONE_CHEST, blocked = def_check)
+		D.apply_damage(50, BODY_ZONE_CHEST, BLUNT, A.body.get_active_hand())
 		playsound(get_turf(D), 'sound/weapons/punch1.ogg', 75, 1, -1)
 		return 1
 	return basic_hit(A,D)
@@ -117,7 +116,7 @@
 		add_to_streak("G",D)
 		if(check_streak(A,D)) //doing combos is prioritized over upgrading grabs
 			return 1
-		D.grabbedby(A, 1)
+		A.grab_act(D, 1)
 		if(A.grab_state == GRAB_PASSIVE)
 			D.drop_all_held_items()
 			A.setGrabState(GRAB_AGGRESSIVE) //Instant agressive grab if on grab intent
@@ -125,11 +124,10 @@
 			D.visible_message("<span class='warning'>[A] violently grabs [D]!</span>", \
 								"<span class='userdanger'>[A] violently grabs you!</span>")
 	else
-		D.grabbedby(A, 1)
+		A.grab_act(D, 1)
 	return 1
 
 /datum/martial_art/the_sleeping_carp/harm_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
-	var/def_check = D.getarmor(BODY_ZONE_CHEST, "melee")
 	add_to_streak("H",D)
 	if(check_streak(A,D))
 		return 1
@@ -137,7 +135,8 @@
 	var/atk_verb = pick("punches", "kicks", "chops", "hits", "slams")
 	D.visible_message("<span class='danger'>[A] [atk_verb] [D]!</span>", \
 					  "<span class='userdanger'>[A] [atk_verb] you!</span>")
-	D.apply_damage(15, BRUTE, blocked = def_check)
+	var/obj/item/nbodypart/arm/arm = A.body.get_active_hand()
+	D.apply_damage(9 + arm.punch_damage, BODY_ZONE_CHEST, arm.punch_damage_type, arm)
 	playsound(get_turf(D), 'sound/weapons/punch1.ogg', 25, 1, -1)
 	log_combat(A, D, "[atk_verb] (Sleeping Carp)")
 	return 1
@@ -192,11 +191,7 @@
 	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
 		to_chat(user, "<span class ='warning'>You club yourself over the head with [src].</span>")
 		user.Paralyze(60)
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
+		user.apply_damage(2*force, BODY_ZONE_HEAD, BLUNT, src)
 		return
 	if(iscyborg(target))
 		return ..()

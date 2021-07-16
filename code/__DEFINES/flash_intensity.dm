@@ -1,0 +1,3 @@
+#define FLASH_LIGHT 1
+#define FLASH_MEDIUM 2
+#define FLASH_INTENSE 3

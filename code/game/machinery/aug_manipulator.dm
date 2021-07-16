@@ -58,9 +58,9 @@
 		return
 
 	else if(istype(O, /obj/item/bodypart))
-		var/obj/item/bodypart/B = O
-		if(B.status != BODYPART_ROBOTIC)
-			to_chat(user, "<span class='warning'>The machine only accepts cybernetics!</span>")
+		var/obj/item/nbodypart/B = O
+		if(!(B.bodypart_flags & RECOLOURABLE))
+			to_chat(user, "<span class='warning'>[B] does not fit in the machine!</span>")
 			return
 		if(storedpart)
 			to_chat(user, "<span class='warning'>There is already something inside!</span>")

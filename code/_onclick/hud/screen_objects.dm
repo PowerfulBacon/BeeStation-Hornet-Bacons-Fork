@@ -682,9 +682,9 @@
 	screen_loc = ui_healthdoll
 
 /atom/movable/screen/healthdoll/Click()
-	if (iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		C.check_self_for_injuries()
+	if (isliving(usr))
+		var/mob/living/C = usr
+		C.check_injuries(C)
 
 /atom/movable/screen/mood
 	name = "mood"

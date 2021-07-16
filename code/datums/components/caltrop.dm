@@ -50,7 +50,7 @@
 			damage *= 0.5
 		if(is_species(H, /datum/species/squid))
 			damage *= 1.3
-		H.apply_damage(damage, BRUTE, picked_def_zone)
+		H.apply_damage(damage, picked_def_zone, BRUTE, parent)
 
 		if(COOLDOWN_FINISHED(src, caltrop_cooldown))
 			COOLDOWN_START(src, caltrop_cooldown, 1 SECONDS) //cooldown to avoid message spam.

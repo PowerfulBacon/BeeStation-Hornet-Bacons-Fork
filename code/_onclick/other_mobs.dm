@@ -136,16 +136,12 @@
 		return
 	if(is_muzzled())
 		return
-	var/mob/living/carbon/ML = A
+	var/mob/living/ML = A
 	if(istype(ML))
 		var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-		var/obj/item/bodypart/affecting = null
-		if(ishuman(ML))
-			var/mob/living/carbon/human/H = ML
-			affecting = H.get_bodypart(ran_zone(dam_zone))
-		var/armor = ML.run_armor_check(affecting, "melee")
+		var/armor = ML.get_armour(ran_zone(dam_zone), "melee")
 		if(prob(75))
-			ML.apply_damage(rand(1,3), BRUTE, affecting, armor)
+			ML.apply_damage(rand(1,3), BITE, affecting, armor)
 			ML.visible_message("<span class='danger'>[name] bites [ML]!</span>", \
 							"<span class='userdanger'>[name] bites you!</span>", null, COMBAT_MESSAGE_RANGE)
 			if(armor >= 2)

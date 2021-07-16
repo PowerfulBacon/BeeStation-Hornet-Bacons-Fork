@@ -69,7 +69,7 @@
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/obj/item/bodypart/affecting = user.zone_selected //Find what the player is aiming at
+	var/affecting = user.zone_selected //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armor values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
@@ -92,13 +92,13 @@
 
 	else
 		//Only humans can have armor, right?
-		armor_block = target.run_armor_check(affecting, "melee")
+		armor_block = target.get_armour(affecting, "melee")
 		if(affecting == BODY_ZONE_HEAD)
 			armor_duration = bottle_knockdown_duration + force
 
 	//Apply the damage!
 	armor_block = min(90,armor_block)
-	target.apply_damage(force, BRUTE, affecting, armor_block)
+	target.apply_damage(force, affecting, BLUNT, src)
 
 	// You are going to knock someone down for longer if they are not wearing a helmet.
 	var/head_attack_message = ""

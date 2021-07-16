@@ -113,7 +113,7 @@
 	send_item_attack_message(I, user)
 	if(I.force)
 		apply_damage(I.force, I.damtype)
-		if(I.damtype == BRUTE)
+		if(I.damtype == SHARP)
 			if(prob(33))
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)

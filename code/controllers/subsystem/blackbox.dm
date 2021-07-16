@@ -319,12 +319,13 @@ Versioning
 		if(L.mind.assigned_role)
 			first_death["role"] = L.mind.assigned_role
 		first_death["area"] = "[AREACOORD(L)]"
-		first_death["damage"] = "<font color='#FF5555'>[L.getBruteLoss()]</font>/<font color='orange'>[L.getFireLoss()]</font>/<font color='lightgreen'>[L.getToxLoss()]</font>/<font color='lightblue'>[L.getOxyLoss()]</font>/<font color='pink'>[L.getCloneLoss()]</font>"
+		first_death["damage"] = "<font color='#FF5555'>[L.body.get_damage()]</font></font>"
 		first_death["last_words"] = L.last_words
 
 	if(!SSdbcore.Connect())
 		return
 
+	//TODO: Something with this?
 	var/datum/DBQuery/query_report_death = SSdbcore.NewQuery({"
 		INSERT INTO [format_table_name("death")] (pod, x_coord, y_coord, z_coord, mapname, server_name, server_ip, server_port, round_id, tod, job, special, name, byondkey, laname, lakey, bruteloss, fireloss, brainloss, oxyloss, toxloss, cloneloss, staminaloss, last_words, suicide)
 		VALUES (:pod, :x_coord, :y_coord, :z_coord, :map, :server_name, INET_ATON(:internet_address), :port, :round_id, :time, :job, :special, :name, :key, :laname, :lakey, :brute, :fire, :brain, :oxy, :tox, :clone, :stamina, :last_words, :suicide)
@@ -336,13 +337,13 @@ Versioning
 		"pod" = get_area_name(L, TRUE),
 		"laname" = L.lastattacker,
 		"lakey" = L.lastattackerckey,
-		"brute" = L.getBruteLoss(),
-		"fire" = L.getFireLoss(),
-		"brain" = L.getOrganLoss(ORGAN_SLOT_BRAIN) || BRAIN_DAMAGE_DEATH, //getOrganLoss returns null without a brain but a value is required for this column
-		"oxy" = L.getOxyLoss(),
-		"tox" = L.getToxLoss(),
-		"clone" = L.getCloneLoss(),
-		"stamina" = L.getStaminaLoss(),
+		"brute" = L.body.get_damage(),
+		"fire" = 0,
+		"brain" = 0,
+		"oxy" = 0,
+		"tox" = 0,
+		"clone" = 0,
+		"stamina" = 0,
 		"x_coord" = L.x,
 		"y_coord" = L.y,
 		"z_coord" = L.z,

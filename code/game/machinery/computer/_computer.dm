@@ -82,9 +82,9 @@
 	return TRUE
 
 
-/obj/machinery/computer/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
+/obj/machinery/computer/play_attack_sound(damage_amount, damage_type = BLUNT, damage_flag = 0)
 	switch(damage_type)
-		if(BRUTE)
+		if(BLUNT || SHARP || BITE || BULLET)
 			if(stat & BROKEN)
 				playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 			else
