@@ -17,7 +17,7 @@
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	throwforce = 10
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
-	light_source_type = FANCY_LIGHTING
+
 
 	var/lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 	var/datum/mind/mind
@@ -195,7 +195,7 @@
 	var/list/progressbars = null	//for stacking do_after bars
 
 	///For storing what do_after's someone has, in case we want to restrict them to only one of a certain do_after at a time
-	var/list/do_afters	
+	var/list/do_afters
 
 	var/list/mousemove_intercept_objects
 

@@ -15,7 +15,7 @@
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	visor_flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	light_mask_type = /atom/movable/lighting_mask/conical
-	light_source_type = FANCY_LIGHTING
+
 	clothing_flags = NOTCONSUMABLE | STOPSPRESSUREDAMAGE | THICKMATERIAL | SHOWEROKAY | SNUG_FIT
 	var/current_tick_amount = 0
 	var/radiation_count = 0
