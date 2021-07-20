@@ -5,14 +5,18 @@
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
+	//TODO REMOVE
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 	speak_emote = list("barks", "woofs")
 	emote_hear = list("barks!", "woofs!", "yaps.","pants.")
 	emote_see = list("shakes its head.", "chases its tail.","shivers.")
+	//TODO END
 	faction = list("neutral")
 	see_in_dark = 5
+	//TODO REMOVE
 	speak_chance = 1
 	turns_per_move = 10
+	//TODO END
 	can_be_held = TRUE
 	chat_color = "#ECDA88"
 	mobchatspan = "corgi"
@@ -359,8 +363,6 @@
 	real_name = "Ian"	//Intended to hold the name without altering it.
 	gender = MALE
 	desc = "It's the HoP's beloved corgi."
-	var/turns_since_scan = 0
-	var/obj/movement_target
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
@@ -444,63 +446,6 @@
 		file_data["saved_head"] = null
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))
-
-/mob/living/simple_animal/pet/dog/corgi/Ian/Life()
-	..()
-
-	//Feeding, chasing food, FOOOOODDDD
-	if(is_concious() && !resting && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 5)
-			turns_since_scan = 0
-			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
-				movement_target = null
-				stop_automated_movement = 0
-			if(!movement_target || !(src in viewers(3, movement_target.loc)))
-				movement_target = null
-				stop_automated_movement = 0
-				for(var/obj/item/reagent_containers/food/snacks/S in oview(3, src))
-					if(isturf(S.loc) || ishuman(S.loc))
-						movement_target = S
-						break
-			if(movement_target)
-				stop_automated_movement = 1
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
-
-				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
-					var/turf/T = get_turf(movement_target)
-					if(!T)
-						return
-					if (T.x < src.x)
-						setDir(WEST)
-					else if (T.x > src.x)
-						setDir(EAST)
-					else if (T.y < src.y)
-						setDir(SOUTH)
-					else if (T.y > src.y)
-						setDir(NORTH)
-					else
-						setDir(SOUTH)
-
-					if(!Adjacent(movement_target)) //can't reach food through windows.
-						return
-
-					if(isturf(movement_target.loc) )
-						movement_target.attack_animal(src)
-					else if(ishuman(movement_target.loc) )
-						if(prob(20))
-							INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, "stares at [movement_target.loc]'s [movement_target] with a sad puppy-face")
-
-		if(prob(1))
-			INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, pick("dances around.","chases its tail!"))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					setDir(i)
-					sleep(1)
 
 /mob/living/simple_animal/pet/dog/corgi/Ian/narsie_act()
 	playsound(src, 'sound/magic/demon_dies.ogg', 75, TRUE)
@@ -663,6 +608,7 @@
 		return
 	..()
 
+//TODO
 /mob/living/simple_animal/pet/dog/corgi/Lisa/Life()
 	..()
 
@@ -677,6 +623,7 @@
 					setDir(i)
 					sleep(1)
 
+//TODO
 /mob/living/simple_animal/pet/dog/pug/Life()
 	..()
 

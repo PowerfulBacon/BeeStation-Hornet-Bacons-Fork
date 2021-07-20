@@ -29,6 +29,7 @@ SUBSYSTEM_DEF(npcpool)
 			continue
 
 		if(!SA.ckey && !SA.notransform)
+			//TODO get brain
 			if(SA.is_alive())
 				SA.handle_automated_movement()
 			if(SA.is_alive())
