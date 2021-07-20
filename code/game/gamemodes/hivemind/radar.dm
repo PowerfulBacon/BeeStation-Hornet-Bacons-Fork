@@ -32,7 +32,7 @@
 	for(var/mob/living/carbon/C in GLOB.alive_mob_list)
 		if(C == owner)
 			continue
-		var/datum/status_effect/hive_track/mark = C.has_status_effect(STATUS_EFFECT_HIVE_TRACKER)
+		var/datum/status_effect/hive_track/mark = C.body.has_status_effect(STATUS_EFFECT_HIVE_TRACKER)
 		if(mark && mark.tracked_by == owner)
 			trackable_targets_exist = TRUE
 			var/their_loc = get_turf(C)
@@ -51,7 +51,7 @@
 		scan_target = null
 	if(!trackable_targets_exist)
 		to_chat(owner, "<span class='assimilator'>The psychic energies eminating from afar have died down... for now.</span>")
-		owner.remove_status_effect(STATUS_EFFECT_HIVE_RADAR)
+		owner.body.remove_status_effect(STATUS_EFFECT_HIVE_RADAR)
 
 //"Trackable" status effect
 /datum/status_effect/hive_track

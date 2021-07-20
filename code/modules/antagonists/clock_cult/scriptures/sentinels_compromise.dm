@@ -26,7 +26,7 @@
 			end_invokation()
 
 /datum/clockcult/scripture/slab/sentinelscompromise/apply_effects(mob/living/M)
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		return FALSE
 	var/total_damage = (M.getBruteLoss() + M.getFireLoss() + M.getOxyLoss() + M.getCloneLoss()) * 0.6
 	M.adjustBruteLoss(-M.getBruteLoss() * 0.6, FALSE)

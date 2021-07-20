@@ -127,7 +127,7 @@
 	. = ..()
 	if(proximity_flag && isanimal(target))
 		var/mob/living/simple_animal/A = target
-		if(A.buffed || (A.type in banned_mobs) || A.stat)
+		if(A.buffed || (A.type in banned_mobs) || A.is_unconcious())
 			to_chat(user, "<span class='warning'>Something's interfering with [src]'s effects. It's no use.</span>")
 			return
 		A.buffed++

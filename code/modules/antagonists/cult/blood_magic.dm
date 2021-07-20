@@ -686,7 +686,7 @@
 				to_chat(user,"<span class='warning'>Blood rites do not work on species with no blood!</span>")
 				return
 			if(iscultist(H))
-				if(H.stat == DEAD)
+				if(H.is_dead())
 					to_chat(user,"<span class='warning'>Only a revive rune can bring back the dead!</span>")
 					return
 				if(H.blood_volume < BLOOD_VOLUME_SAFE)
@@ -726,7 +726,7 @@
 					new /obj/effect/temp_visual/cult/sparks(get_turf(H))
 					user.Beam(H,icon_state="sendbeam",time=15)
 			else
-				if(H.stat == DEAD)
+				if(H.is_dead())
 					to_chat(user,"<span class='warning'>[H.p_their(TRUE)] blood has stopped flowing, you'll have to find another way to extract it.</span>")
 					return
 				if(H.cultslurring)

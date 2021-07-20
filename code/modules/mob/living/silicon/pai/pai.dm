@@ -172,7 +172,7 @@
 
 /mob/living/silicon/pai/get_stat_tab_status()
 	var/list/tab_data = ..()
-	if(!stat)
+	if(is_concious())
 		tab_data["Emitter Integrity"] = GENERATE_STAT_TEXT("[emitterhealth * (100/emittermaxhealth)]")
 	else
 		tab_data["Systems"] = GENERATE_STAT_TEXT("nonfunctional")
@@ -270,7 +270,7 @@
 	. += "A personal AI in holochassis mode. Its master ID string seems to be [master]."
 
 /mob/living/silicon/pai/Life()
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	if(cable)
 		if(get_dist(src, cable) > 1)

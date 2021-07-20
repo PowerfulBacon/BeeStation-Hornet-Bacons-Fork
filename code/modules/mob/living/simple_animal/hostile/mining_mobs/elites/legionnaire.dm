@@ -148,7 +148,7 @@
 		newhead.GiveTarget(target)
 		newhead.faction = faction.Copy()
 		myhead = newhead
-		myhead.body = src
+		myhead.mainbody = src
 		if(health < maxHealth * 0.25)
 			myhead.melee_damage = 30
 		else if(health < maxHealth * 0.5)
@@ -160,7 +160,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/elite/legionnaire/proc/regain_head()
 	has_head = TRUE
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	icon_state = "legionnaire"
 	icon_living = "legionnaire"
@@ -228,12 +228,12 @@
 	deathmessage = "crumbles away!"
 	faction = list()
 	ranged = FALSE
-	var/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/body = null
+	var/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/mainbody = null
 
 /mob/living/simple_animal/hostile/asteroid/elite/legionnairehead/death()
 	. = ..()
-	if(body)
-		body.onHeadDeath()
+	if(mainbody)
+		mainbody.onHeadDeath()
 
 //The legionnaire's bonfire, which can be swapped positions with.  Also sets flammable living beings on fire when they walk over it.
 /obj/structure/legionnaire_bonfire
@@ -285,7 +285,7 @@
 	return "mark detonation to have a <b>[bonus_value]%</b> chance to summon a loyal legion skull"
 
 /obj/item/crusher_trophy/legionnaire_spine/on_mark_detonation(mob/living/target, mob/living/user)
-	if(!rand(1, 100) <= bonus_value || target.stat == DEAD)
+	if(!rand(1, 100) <= bonus_value || target.is_dead())
 		return
 	var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/A = new /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion(user.loc)
 	A.flags_1 |= (flags_1 & ADMIN_SPAWNED_1)

@@ -17,7 +17,7 @@
 
 /obj/machinery/abductor/experiment/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/L = user
-	if(user.stat || (isliving(user) && (!(L.mobility_flags & MOBILITY_STAND) || !(L.mobility_flags & MOBILITY_UI))) || !Adjacent(user) || !target.Adjacent(user) || !ishuman(target))
+	if(user.is_unconcious() || (isliving(user) && (!(L.mobility_flags & MOBILITY_STAND) || !(L.mobility_flags & MOBILITY_UI))) || !Adjacent(user) || !target.Adjacent(user) || !ishuman(target))
 		return
 	if(isabductor(target))
 		return
@@ -35,7 +35,7 @@
 		..(target)
 
 /obj/machinery/abductor/experiment/relaymove(mob/living/user, direction)
-	if(user.stat != CONSCIOUS)
+	if(user.is_unconcious())
 		return
 	if(message_cooldown <= world.time)
 		message_cooldown = world.time + 50
@@ -48,7 +48,7 @@
 		"<span class='notice'>You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
 		"<span class='italics'>You hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
-		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open)
+		if(!user || user.body.stat != CONSCIOUS || user.loc != src || state_open)
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
 			"<span class='notice'>You successfully break out of [src]!</span>")
@@ -78,7 +78,7 @@
 	if(occupant)
 		var/mob/living/mob_occupant = occupant
 		data["occupant_name"] = mob_occupant.name
-		data["occupant_status"] = mob_occupant.stat
+		data["occupant_status"] = mob_occupant.body.stat
 	return data
 
 /obj/machinery/abductor/experiment/ui_act(action, list/params)
@@ -98,7 +98,7 @@
 			if(!occupant)
 				return
 			var/mob/living/mob_occupant = occupant
-			if(mob_occupant.stat == DEAD)
+			if(mob_occupant.is_dead())
 				return
 			flash = experiment(mob_occupant, params["experiment_type"], usr)
 			return TRUE
@@ -124,7 +124,7 @@
 		return "Invalid or missing specimen."
 	if(H in history)
 		return "Specimen already in database."
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		say("Specimen deceased - please provide fresh sample.")
 		return "Specimen deceased."
 	var/obj/item/organ/heart/gland/GlandTest = locate() in H.internal_organs

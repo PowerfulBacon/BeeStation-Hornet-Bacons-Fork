@@ -47,13 +47,13 @@
 				if(hive.hivemembers.Find(target.mind))
 					var/mob/living/carbon/C = hive.owner.current.get_real_hivehost()
 					if(C)
-						C.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, target, woke?TRACKER_AWAKENED_TIME:TRACKER_MINDSHIELD_TIME)
-						target.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, C, TRACKER_DEFAULT_TIME)
+						C.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, target, woke?TRACKER_AWAKENED_TIME:TRACKER_MINDSHIELD_TIME)
+						target.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, C, TRACKER_DEFAULT_TIME)
 						if(C.mind) //If you were using mind control, too bad
-							C.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+							C.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
 							to_chat(C, "<span class='assimilator'>We detect a surge of psionic energy from a far away vessel before they disappear from the hive. Whatever happened, there's a good chance they're after us now.</span>")
 			to_chat(target, "<span class='assimilator'>You hear supernatural wailing echo throughout your mind as you are finally set free. Deep down, you can feel the lingering presence of those who enslaved you... as can they!</span>")
-			target.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+			target.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
 			remove_hivemember(target)
 
 		if(woke)
@@ -79,7 +79,7 @@
 			var/mob/living/L = target
 			REMOVE_TRAIT(L, TRAIT_MINDSHIELD, "implant")
 			L.sec_hud_set_implants()
-		if(target.stat != DEAD && !silent)
+		if(target.is_alive() && !silent)
 			to_chat(target, "<span class='boldnotice'>Your mind suddenly feels terribly vulnerable. You are no longer safe from brainwashing.</span>")
 		return 1
 	return 0

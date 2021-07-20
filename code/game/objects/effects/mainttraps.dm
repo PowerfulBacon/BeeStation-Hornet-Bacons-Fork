@@ -341,7 +341,7 @@
 /obj/effect/rune/cluwne/can_invoke(user) //this is actually used to get "sacrifices", which can include the user
 	var/list/invokers = list() //people eligible to invoke the rune
 	for(var/mob/living/carbon/human/L in range(1, src))
-		if(!L.mind || L.stat)
+		if(!L.mind || L.is_unconcious())
 			continue
 		invokers += L
 	return invokers
@@ -361,7 +361,7 @@
 	log_game("A dangerous cluwne rune was invoked at [AREACOORD(src)][ADMIN_COORDJMP(src)]")
 	stoplag(315)
 	for(var/mob/living/carbon/human/H in invokers)
-		if(H.stat == DEAD)
+		if(H.is_dead())
 			continue
 		H.blind_eyes(10)
 		if(prob(10))

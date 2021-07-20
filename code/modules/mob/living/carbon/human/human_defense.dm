@@ -230,7 +230,7 @@
 	if(can_inject(M, 1, affecting))//Thick suits can stop monkey bites.
 		if(..()) //successful monkey bite, this handles disease contraction.
 			var/damage = rand(1, 3)
-			if(stat != DEAD)
+			if(body.stat != DEAD)
 				apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, "melee"))
 		return 1
 
@@ -276,7 +276,7 @@
 		var/damage = rand(1, 3)
 		if(check_shields(L, damage, "the [L.name]"))
 			return 0
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			L.amount_grown = min(L.amount_grown + damage, L.max_grown)
 			var/obj/item/bodypart/affecting = get_bodypart(ran_zone(L.zone_selected))
 			if(!affecting)
@@ -435,7 +435,7 @@
 
 
 /mob/living/carbon/human/blob_act(obj/structure/blob/B)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	show_message("<span class='userdanger'>The blob attacks you!</span>")
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -472,7 +472,7 @@
 		if(shock_damage * siemens_coeff >= 1 && prob(25))
 			var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 			heart.beating = TRUE
-			if(stat == CONSCIOUS)
+			if(body.stat == CONSCIOUS)
 				to_chat(src, "<span class='notice'>You feel your heart beating again!</span>")
 	siemens_coeff *= physiology.siemens_coeff
 
@@ -671,11 +671,11 @@
 		return
 
 	if(src == M)
-		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
+		if(body.has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
 			to_chat(src, "<span class='notice'>You attempt to remove the durathread strand from around your neck.</span>")
 			if(do_after(src, 35, null, src))
 				to_chat(src, "<span class='notice'>You succesfuly remove the durathread strand.</span>")
-				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+				body.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 			return
 		visible_message("[src] examines [p_them()]self.", \
 			"<span class='notice'>You check yourself for injuries.</span>")
@@ -691,7 +691,7 @@
 		..()
 
 /mob/living/carbon/human/check_self_for_injuries()
-	if(stat == DEAD || stat == UNCONSCIOUS)
+	if(body.stat == DEAD || body.stat == UNCONSCIOUS)
 		return
 
 	visible_message("[src] examines [p_them()]self.", \

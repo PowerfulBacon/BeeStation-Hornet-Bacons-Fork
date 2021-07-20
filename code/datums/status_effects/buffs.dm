@@ -22,7 +22,7 @@
 /datum/status_effect/shadow_mend/on_remove()
 	owner.visible_message("<span class='warning'>The violet light around [owner] glows black!</span>", "<span class='warning'>The tendrils around you cinch tightly and reap their toll...</span>")
 	playsound(owner, 'sound/magic/teleport_diss.ogg', 50, 1)
-	owner.apply_status_effect(STATUS_EFFECT_VOID_PRICE)
+	owner.body.apply_status_effect(STATUS_EFFECT_VOID_PRICE)
 
 
 /datum/status_effect/void_price
@@ -99,7 +99,7 @@
 		if(HG.awakened)
 			graces++
 	if(!graces)
-		owner.apply_status_effect(STATUS_EFFECT_HISWRATH)
+		owner.body.apply_status_effect(STATUS_EFFECT_HISWRATH)
 		qdel(src)
 		return
 	var/grace_heal = bloodlust * 0.05
@@ -152,10 +152,10 @@
 			to_chat(M, "<span class='cultlarge'>The Cult's Master, [owner], has fallen in \the [A]!</span>")
 
 /datum/status_effect/cult_master/tick()
-	if(owner.stat != DEAD && !alive)
+	if(owner.is_alive() && !alive)
 		alive = TRUE
 		return
-	if(owner.stat == DEAD && alive)
+	if(owner.is_dead() && alive)
 		alive = FALSE
 		deathrattle()
 
@@ -380,7 +380,7 @@
 	H.remove_hud_from(owner)
 
 /datum/status_effect/hippocraticOath/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		if(deathTick < 4)
 			deathTick += 1
 		else

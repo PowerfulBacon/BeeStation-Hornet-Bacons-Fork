@@ -195,7 +195,7 @@ GLOBAL_LIST_INIT(abstraction_crystals, list())
 	. = ..()
 
 /obj/structure/destructible/clockwork/abstraction_crystal/process()
-	if(QDELETED(active_hologram) || QDELETED(activator) || activator.stat)
+	if(QDELETED(active_hologram) || QDELETED(activator) || activator.is_unconcious())
 		clear_ghost_items()
 		return
 	for(var/obj/I as anything in tracked_items)

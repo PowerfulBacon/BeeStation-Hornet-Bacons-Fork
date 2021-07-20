@@ -17,7 +17,7 @@
 	if(iscyborg(user))
 		return FALSE //robots cannot be creative
 						//(also this surgery shouldn't be consistently successful, and cyborgs have a 100% success rate on surgery)
-	if(target.stat != DEAD)
+	if(target.is_alive())
 		return FALSE
 
 /datum/surgery_step/dissection

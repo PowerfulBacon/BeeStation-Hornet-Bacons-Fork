@@ -13,12 +13,12 @@
 		undeploy()
 
 /mob/living/silicon/robot/proc/handle_robot_cell()
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		if(low_power_mode)
 			if(cell?.charge)
 				low_power_mode = 0
 				update_headlamp()
-		else if(stat == CONSCIOUS)
+		else if(body.stat == CONSCIOUS)
 			use_power()
 
 /mob/living/silicon/robot/proc/use_power()
@@ -43,7 +43,7 @@
 	if(!client || !hud_used)
 		return
 	if(hud_used.healths)
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			if(health >= maxHealth)
 				hud_used.healths.icon_state = "health0"
 			else if(health > maxHealth*0.6)
@@ -98,7 +98,7 @@
 		cut_overlay(fire_overlay)
 
 /mob/living/silicon/robot/update_mobility()
-	if(stat || buckled || lockcharge)
+	if(body.stat || buckled || lockcharge)
 		mobility_flags &= ~MOBILITY_MOVE
 	else
 		mobility_flags = MOBILITY_FLAGS_DEFAULT

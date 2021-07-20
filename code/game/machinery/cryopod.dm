@@ -215,7 +215,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 	if((isnull(user) || istype(user)) && state_open && !panel_open)
 		..(user)
 		var/mob/living/mob_occupant = occupant
-		if(mob_occupant && mob_occupant.stat != DEAD)
+		if(mob_occupant && mob_occupant.is_alive())
 			to_chat(occupant, "<span class='boldnotice'>You feel cool air surround you. You go numb as your senses turn inward.</span>")
 		if(mob_occupant.client)//if they're logged in
 			despawn_world_time = world.time + (time_till_despawn * 0.1) // This gives them 30 seconds
@@ -234,7 +234,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		"<span class='notice'>You climb out of [src]!</span>")
 	open_machine()
 
-/obj/machinery/cryopod/relaymove(mob/user)
+/obj/machinery/cryopod/relaymove(mob/living/user)
 	container_resist(user)
 
 /obj/machinery/cryopod/process()
@@ -244,13 +244,13 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 	var/mob/living/mob_occupant = occupant
 	if(mob_occupant)
 		// Eject dead people
-		if(mob_occupant.stat == DEAD)
+		if(mob_occupant.is_dead())
 			open_machine()
 
 		if(!(world.time > despawn_world_time))
 			return
 
-		if(!mob_occupant.client && mob_occupant.stat < 2) //Occupant is living and has no client.
+		if(!mob_occupant.client && mob_occupant.body.stat < 2) //Occupant is living and has no client.
 			if(!control_computer)
 				find_control_computer(urgent = TRUE)//better hope you found it this time
 
@@ -390,7 +390,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		to_chat(user, "<span class='boldnotice'>The cryo pod is already occupied!</span>")
 		return
 
-	if(target.stat == DEAD)
+	if(target.is_dead())
 		to_chat(user, "<span class='notice'>Dead people can not be put into cryo.</span>")
 		return
 

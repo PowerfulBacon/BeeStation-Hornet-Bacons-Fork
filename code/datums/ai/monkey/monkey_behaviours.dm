@@ -120,7 +120,7 @@
 
 	// flee from anyone who attacked us and we didn't beat down
 	for(var/mob/living/L in view(living_pawn, MONKEY_FLEE_VISION))
-		if(controller.blackboard[BB_MONKEY_ENEMIES][L] && L.stat == CONSCIOUS)
+		if(controller.blackboard[BB_MONKEY_ENEMIES][L] && L.body.stat == CONSCIOUS)
 			target = L
 			break
 
@@ -138,7 +138,7 @@
 	var/mob/living/target = controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET]
 	var/mob/living/living_pawn = controller.pawn
 
-	if(!target || target.stat != CONSCIOUS)
+	if(!target || target.body.stat != CONSCIOUS)
 		finish_action(controller, TRUE) //Target == owned
 
 	if(living_pawn.Adjacent(target) && isturf(target.loc) && !living_pawn.incapacitated())	// if right next to perp

@@ -290,7 +290,7 @@
 	AOE_flash()
 
 /obj/item/assembly/flash/proc/terrible_conversion_proc(mob/living/carbon/H, mob/user)
-	if(istype(H) && H.stat != DEAD)
+	if(istype(H) && H.is_alive())
 		if(user.mind)
 			var/datum/antagonist/rev/head/converter = user.mind.has_antag_datum(/datum/antagonist/rev/head)
 			if(!converter)
@@ -298,7 +298,7 @@
 			if(!H.client)
 				to_chat(user, "<span class='warning'>This mind is so vacant that it is not susceptible to influence!</span>")
 				return
-			if(H.stat != CONSCIOUS)
+			if(H.body.stat != CONSCIOUS)
 				to_chat(user, "<span class='warning'>They must be conscious before you can convert [H.p_them()]!</span>")
 				return
 			if(!converter.add_revolutionary(H.mind))
@@ -397,13 +397,13 @@
 				user.visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>", "<span class='danger'>You hypno-flash [M]!</span>")
 
 			if(M.hypnosis_vulnerable())
-				M.apply_status_effect(/datum/status_effect/trance, 200, TRUE)
+				M.body.apply_status_effect(/datum/status_effect/trance, 200, TRUE)
 			else
 				to_chat(M, "<span class='notice'>The light makes you feel oddly relaxed...</span>")
 				M.confused += min(M.confused + 10, 20)
 				M.dizziness += min(M.dizziness + 10, 20)
 				M.drowsyness += min(M.drowsyness + 10, 20)
-				M.apply_status_effect(STATUS_EFFECT_PACIFY, 100)
+				M.body.apply_status_effect(STATUS_EFFECT_PACIFY, 100)
 
 
 
@@ -417,7 +417,7 @@
 		M.confused += min(M.confused + 4, 20)
 		M.dizziness += min(M.dizziness + 4, 20)
 		M.drowsyness += min(M.drowsyness + 4, 20)
-		M.apply_status_effect(STATUS_EFFECT_PACIFY, 40)
+		M.body.apply_status_effect(STATUS_EFFECT_PACIFY, 40)
 
 #undef FLASH_USE
 #undef FLASH_USE_BURNOUT

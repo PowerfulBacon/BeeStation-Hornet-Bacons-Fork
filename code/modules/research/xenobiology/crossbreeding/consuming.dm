@@ -106,7 +106,7 @@ Consuming extracts:
 	taste = "cinnamon and burning"
 
 /obj/item/slime_cookie/orange/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/firecookie)
+	M.body.apply_status_effect(/datum/status_effect/firecookie)
 
 /obj/item/slimecross/consuming/purple
 	colour = "purple"
@@ -139,7 +139,7 @@ Consuming extracts:
 	taste = /datum/reagent/water
 
 /obj/item/slime_cookie/blue/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/watercookie)
+	M.body.apply_status_effect(/datum/status_effect/watercookie)
 
 /obj/item/slimecross/consuming/metal
 	colour = "metal"
@@ -153,7 +153,7 @@ Consuming extracts:
 	taste = /datum/reagent/copper
 
 /obj/item/slime_cookie/metal/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/metalcookie)
+	M.body.apply_status_effect(/datum/status_effect/metalcookie)
 
 /obj/item/slimecross/consuming/yellow
 	colour = "yellow"
@@ -167,7 +167,7 @@ Consuming extracts:
 	taste = "lemon cake and rubber gloves"
 
 /obj/item/slime_cookie/yellow/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/sparkcookie)
+	M.body.apply_status_effect(/datum/status_effect/sparkcookie)
 
 /obj/item/slimecross/consuming/darkpurple
 	colour = "dark purple"
@@ -181,7 +181,7 @@ Consuming extracts:
 	taste = "slime jelly and toxins"
 
 /obj/item/slime_cookie/darkpurple/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/toxincookie)
+	M.body.apply_status_effect(/datum/status_effect/toxincookie)
 
 /obj/item/slimecross/consuming/darkblue
 	colour = "dark blue"
@@ -261,7 +261,7 @@ Consuming extracts:
 	taste = "brown sugar and a metronome"
 
 /obj/item/slime_cookie/sepia/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/timecookie)
+	M.body.apply_status_effect(/datum/status_effect/timecookie)
 
 /obj/item/slimecross/consuming/cerulean
 	colour = "cerulean"
@@ -370,7 +370,7 @@ Consuming extracts:
 	taste = "love and hugs"
 
 /obj/item/slime_cookie/pink/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/lovecookie)
+	M.body.apply_status_effect(/datum/status_effect/lovecookie)
 
 /obj/item/slimecross/consuming/gold
 	colour = "gold"
@@ -403,7 +403,7 @@ Consuming extracts:
 	taste = "rich molten chocolate and tar"
 
 /obj/item/slime_cookie/oil/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/tarcookie)
+	M.body.apply_status_effect(/datum/status_effect/tarcookie)
 
 /obj/item/slimecross/consuming/black
 	colour = "black"
@@ -417,7 +417,7 @@ Consuming extracts:
 	taste = "ghosts and stuff"
 
 /obj/item/slime_cookie/black/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/spookcookie)
+	M.body.apply_status_effect(/datum/status_effect/spookcookie)
 
 /obj/item/slimecross/consuming/lightpink
 	colour = "light pink"
@@ -431,7 +431,7 @@ Consuming extracts:
 	taste = "strawberry icing and P.L.U.R" //Literal candy raver.
 
 /obj/item/slime_cookie/lightpink/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/peacecookie)
+	M.body.apply_status_effect(/datum/status_effect/peacecookie)
 
 /obj/item/slimecross/consuming/adamantine
 	colour = "adamantine"
@@ -445,7 +445,7 @@ Consuming extracts:
 	taste = "crystalline sugar and metal"
 
 /obj/item/slime_cookie/adamantine/do_effect(mob/living/M, mob/user)
-	M.apply_status_effect(/datum/status_effect/adamantinecookie)
+	M.body.apply_status_effect(/datum/status_effect/adamantinecookie)
 
 /obj/item/slimecross/consuming/rainbow
 	colour = "rainbow"

@@ -30,7 +30,7 @@
 			remove_gravity(C)
 
 /datum/guardian_ability/major/gravity/AltClickOn(atom/A)
-	if(isopenturf(A) && guardian.is_deployed() && guardian.stat != DEAD && in_range(guardian, A) && !guardian.incapacitated())
+	if(isopenturf(A) && guardian.is_deployed() && guardian.is_alive() && in_range(guardian, A) && !guardian.incapacitated())
 		var/turf/T = A
 		if(isspaceturf(T))
 			to_chat(guardian, "<span class='warning'>You cannot add gravity to space!</span>")

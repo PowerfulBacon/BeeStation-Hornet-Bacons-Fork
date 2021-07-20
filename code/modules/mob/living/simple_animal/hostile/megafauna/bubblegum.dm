@@ -193,7 +193,7 @@ Difficulty: Hard
 	. = list()
 	for(var/mob/living/L in targets)
 		var/list/bloodpool = get_pools(get_turf(L), 0)
-		if(bloodpool.len && (!faction_check_mob(L) || L.stat == DEAD))
+		if(bloodpool.len && (!faction_check_mob(L) || L.is_dead()))
 			. += L
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/proc/try_bloodattack()
@@ -210,7 +210,7 @@ Difficulty: Hard
 	if(targets.len)
 		target_two = pick_n_take(targets)
 		var/turf/target_two_turf = get_turf(target_two)
-		if(target_two.stat != CONSCIOUS || prob(10))
+		if(target_two.body.stat != CONSCIOUS || prob(10))
 			bloodgrab(target_two_turf, handedness)
 		else
 			bloodsmack(target_two_turf, handedness)
@@ -220,7 +220,7 @@ Difficulty: Hard
 		if(pools.len)
 			target_one_turf = get_turf(target_one)
 			if(target_one_turf)
-				if(target_one.stat != CONSCIOUS || prob(10))
+				if(target_one.body.stat != CONSCIOUS || prob(10))
 					bloodgrab(target_one_turf, !handedness)
 				else
 					bloodsmack(target_one_turf, !handedness)
@@ -230,7 +230,7 @@ Difficulty: Hard
 		if(poolstwo.len)
 			target_one_turf = get_turf(target_one)
 			if(target_one_turf)
-				if(target_one.stat != CONSCIOUS || prob(10))
+				if(target_one.body.stat != CONSCIOUS || prob(10))
 					bloodgrab(target_one_turf, handedness)
 				else
 					bloodsmack(target_one_turf, handedness)
@@ -259,7 +259,7 @@ Difficulty: Hard
 	SLEEP_CHECK_DEATH(6)
 	for(var/mob/living/L in T)
 		if(!faction_check_mob(L))
-			if(L.stat != CONSCIOUS)
+			if(L.body.stat != CONSCIOUS)
 				to_chat(L, "<span class='userdanger'>[src] drags you through the blood!</span>")
 				playsound(T, 'sound/magic/enter_blood.ogg', 100, 1, -1)
 				var/turf/targetturf = get_step(src, dir)
@@ -311,7 +311,7 @@ Difficulty: Hard
 		return TRUE
 	if(isliving(target))
 		var/mob/living/livingtarget = target
-		return (livingtarget.stat != CONSCIOUS || !(livingtarget.mobility_flags & MOBILITY_STAND))
+		return (livingtarget.body.stat != CONSCIOUS || !(livingtarget.mobility_flags & MOBILITY_STAND))
 	return FALSE
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/proc/get_retreat_distance()

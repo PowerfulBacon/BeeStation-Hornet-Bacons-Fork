@@ -82,7 +82,7 @@
 				traitor_data.contractor_hub.contract_TC_to_redeem += contract.payout
 				traitor_data.contractor_hub.contracts_completed += 1
 
-				if (M.stat != DEAD)
+				if (M.is_alive())
 					traitor_data.contractor_hub.contract_TC_to_redeem += contract.payout_bonus
 
 				status = CONTRACT_STATUS_COMPLETE
@@ -163,7 +163,7 @@
 	// Even if they weren't the target, we're still treating them the same.
 	addtimer(CALLBACK(src, .proc/returnVictim, M), (60 * 10) * 4)
 
-	if (M.stat != DEAD)
+	if (M.is_alive())
 		// Heal them up - gets them out of crit/soft crit. If omnizine is removed in the future, this needs to be replaced with a
 		// method of healing them, consequence free, to a reasonable amount of health.
 		M.reagents.add_reagent(/datum/reagent/medicine/omnizine, 20)

@@ -135,7 +135,7 @@
 /mob/living/simple_animal/hostile/jungle/seedling/proc/SolarBeamStartup(mob/living/living_target)//It's more like requiem than final spark
 	if(combatant_state == SEEDLING_STATE_WARMUP && target)
 		combatant_state = SEEDLING_STATE_ACTIVE
-		living_target.apply_status_effect(/datum/status_effect/seedling_beam_indicator, src)
+		living_target.body.apply_status_effect(/datum/status_effect/seedling_beam_indicator, src)
 		beam_debuff_target = living_target
 		playsound(src,'sound/effects/seedling_chargeup.ogg', 100, 0)
 		if(get_dist(src,living_target) > 7)
@@ -175,7 +175,7 @@
 		addtimer(CALLBACK(src, .proc/AttackRecovery), 14)
 
 /mob/living/simple_animal/hostile/jungle/seedling/proc/InaccurateShot()
-	if(!QDELETED(target) && combatant_state == SEEDLING_STATE_ACTIVE && !stat)
+	if(!QDELETED(target) && combatant_state == SEEDLING_STATE_ACTIVE && is_concious())
 		if(get_dist(src,target) <= 3)//If they're close enough just aim straight at them so we don't miss at point blank ranges
 			Shoot(target)
 			return
@@ -196,21 +196,21 @@
 
 /mob/living/simple_animal/hostile/jungle/seedling/proc/ResetNeutral()
 	combatant_state = SEEDLING_STATE_NEUTRAL
-	if(target && !stat)
+	if(target && is_concious())
 		update_icons()
 		Goto(target, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/jungle/seedling/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(combatant_state == SEEDLING_STATE_ACTIVE && beam_debuff_target)
-		beam_debuff_target.remove_status_effect(/datum/status_effect/seedling_beam_indicator)
+		beam_debuff_target.body.remove_status_effect(/datum/status_effect/seedling_beam_indicator)
 		beam_debuff_target = null
 		solar_beam_identifier = 0
 		AttackRecovery()
 
 /mob/living/simple_animal/hostile/jungle/seedling/update_icons()
 	. = ..()
-	if(!stat)
+	if(is_concious())
 		switch(combatant_state)
 			if(SEEDLING_STATE_NEUTRAL)
 				icon_state = "seedling"

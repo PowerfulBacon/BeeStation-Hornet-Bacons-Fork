@@ -126,7 +126,7 @@
 
 //When the alien queen dies, all aliens suffer a penalty as punishment for failing to protect her.
 /obj/item/organ/alien/hivenode/proc/queen_death()
-	if(!owner|| owner.stat == DEAD)
+	if(!owner|| owner.is_dead())
 		return
 	if(isalien(owner)) //Different effects for aliens than humans
 		to_chat(owner, "<span class='userdanger'>Your Queen has been struck down!</span>")

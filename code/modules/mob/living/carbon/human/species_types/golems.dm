@@ -274,7 +274,7 @@
 
 //Regenerates because self-repairing super-advanced alien tech
 /datum/species/golem/alloy/spec_life(mob/living/carbon/human/H)
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		return
 	H.heal_overall_damage(2,2, 0, BODYPART_ORGANIC)
 	H.adjustToxLoss(-2)
@@ -299,7 +299,7 @@
 	inherent_factions = list("plants", "vines")
 
 /datum/species/golem/wood/spec_life(mob/living/carbon/human/H)
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		return
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(H.loc)) //else, there's considered to be no light
@@ -868,7 +868,7 @@
 /datum/species/golem/bronze/proc/gong(mob/living/carbon/human/H)
 	last_gong_time = world.time
 	for(var/mob/living/M in hearers(7,H))
-		if(M.stat == DEAD)	//F
+		if(M.is_dead())	//F
 			return
 		if(M == H)
 			H.show_message("<span class='narsiesmall'>You cringe with pain as your body rings around you!</span>", MSG_AUDIBLE)
@@ -965,7 +965,7 @@
 
 /datum/species/golem/durathread/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	. = ..()
-	target.apply_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+	target.body.apply_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 
 /datum/species/golem/bone
 	name = "Bone Golem"
@@ -1044,7 +1044,7 @@
 			return //Do not affect our brothers
 
 		to_chat(L, "<span class='cultlarge'>A spine-chilling sound chills you to the bone!</span>")
-		L.apply_status_effect(/datum/status_effect/bonechill)
+		L.body.apply_status_effect(/datum/status_effect/bonechill)
 		SEND_SIGNAL(L, COMSIG_ADD_MOOD_EVENT, "spooked", /datum/mood_event/spooked)
 
 /datum/species/golem/snow

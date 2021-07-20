@@ -19,7 +19,7 @@
 	forge_objectives()
 	if(isliving(owner))
 		var/mob/living/L = owner
-		L.apply_status_effect(STATUS_EFFECT_INLOVE, date)
+		L.body.apply_status_effect(STATUS_EFFECT_INLOVE, date)
 		//Faction assignation
 		L.faction |= "[REF(date.current)]"
 		L.faction |= date.current.faction
@@ -33,7 +33,7 @@
 	. = ..()
 	if(isliving(owner))
 		var/mob/living/L = owner
-		L.remove_status_effect(STATUS_EFFECT_INLOVE)
+		L.body.remove_status_effect(STATUS_EFFECT_INLOVE)
 		L.faction -= "[REF(date.current)]"
 
 /datum/antagonist/valentine/greet()

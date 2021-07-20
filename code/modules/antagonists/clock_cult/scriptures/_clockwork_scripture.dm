@@ -57,7 +57,7 @@
 	var/invokers_left = invokers_required
 	if(invokers_left > 1)
 		for(var/mob/living/M in viewers(invoker))
-			if(M.stat)
+			if(M.is_unconcious())
 				continue
 			if(!invokers_left)
 				break
@@ -80,7 +80,7 @@
 		return FALSE
 	var/invokers
 	for(var/mob/living/M in viewers(invoker))
-		if(M.stat)
+		if(M.is_unconcious())
 			continue
 		if(is_servant_of_ratvar(M))
 			invokers++

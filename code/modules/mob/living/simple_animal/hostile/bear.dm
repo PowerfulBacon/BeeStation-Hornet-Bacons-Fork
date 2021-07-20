@@ -115,14 +115,14 @@
 	attacktext = "slaps"
 
 /mob/living/simple_animal/hostile/bear/butter/Life() //Heals butter bear really fast when he takes damage.
-	if(stat)
+	if(is_unconcious())
 		return
 	if(health < maxHealth)
 		heal_overall_damage(10) //Fast life regen, makes it hard for you to get eaten to death.
 
 /mob/living/simple_animal/hostile/bear/butter/attack_hand(mob/living/L) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
 	..()
-	if(L.a_intent == INTENT_HARM && L.reagents && !stat)
+	if(L.a_intent == INTENT_HARM && L.reagents && is_concious())
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment, 1)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.1)
 

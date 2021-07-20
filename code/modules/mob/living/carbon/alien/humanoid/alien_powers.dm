@@ -41,7 +41,7 @@ Doesn't work on other aliens/AI.*/
 		return "[plasma_cost]"
 
 /obj/effect/proc_holder/alien/proc/cost_check(check_turf = FALSE, mob/living/carbon/user, silent = FALSE)
-	if(user.stat)
+	if(user.is_concious())
 		if(!silent)
 			to_chat(user, "<span class='noticealien'>You must be conscious to do this.</span>")
 		return FALSE
@@ -201,7 +201,7 @@ Doesn't work on other aliens/AI.*/
 	if(..())
 		return
 	var/p_cost = 30
-	if(!iscarbon(ranged_ability_user) || ranged_ability_user.stat)
+	if(!iscarbon(ranged_ability_user) || ranged_ability_user.is_concious())
 		remove_ranged_ability()
 		return
 

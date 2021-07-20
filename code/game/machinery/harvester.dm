@@ -73,7 +73,7 @@
 		say("Subject is not organic.")
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 30, 1)
 		return
-	if(!allow_living && !(C.stat == DEAD || HAS_TRAIT(C, TRAIT_FAKEDEATH)))     //I mean, the machines scanners arent advanced enough to tell you're alive
+	if(!allow_living && !(C.is_dead() || HAS_TRAIT(C, TRAIT_FAKEDEATH)))     //I mean, the machines scanners arent advanced enough to tell you're alive
 		say("Subject is still alive.")
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 30, 1)
 		return
@@ -176,7 +176,7 @@
 	if (!state_open && user == occupant)
 		container_resist(user)
 
-/obj/machinery/harvester/relaymove(mob/user)
+/obj/machinery/harvester/relaymove(mob/living/user)
 	if (!state_open)
 		container_resist(user)
 

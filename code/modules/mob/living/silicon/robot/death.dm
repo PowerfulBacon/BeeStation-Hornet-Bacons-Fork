@@ -14,7 +14,7 @@
 	new /obj/effect/temp_visual/dust_animation(loc, "dust-r")
 
 /mob/living/silicon/robot/death(gibbed)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 
 	. = ..()

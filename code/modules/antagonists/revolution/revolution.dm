@@ -235,7 +235,7 @@
 		return
 
 	if((ishuman(owner.current)))
-		if(owner.current.stat != DEAD)
+		if(owner.current.is_alive())
 			owner.current.visible_message("<span class='deconversion_message'>[owner.current] looks like [owner.current.p_theyve()] just remembered [owner.current.p_their()] real allegiance!</span>", null, null, null, owner.current)
 			to_chat(owner, "<span class ='deconversion_message bold'>You have given up your cause of overthrowing the command staff. You are no longer a Head Revolutionary.</span>")
 		else
@@ -342,7 +342,7 @@
 			var/list/datum/mind/promotable = list()
 			var/list/datum/mind/nonhuman_promotable = list()
 			for(var/datum/mind/khrushchev in non_heads)
-				if(khrushchev.current && !khrushchev.current.incapacitated() && !khrushchev.current.restrained() && khrushchev.current.client && khrushchev.current.stat != DEAD)
+				if(khrushchev.current && !khrushchev.current.incapacitated() && !khrushchev.current.restrained() && khrushchev.current.client && khrushchev.current.is_alive())
 					if(ROLE_REV in khrushchev.current.client.prefs.be_special)
 						if(ishuman(khrushchev.current))
 							promotable += khrushchev
@@ -404,7 +404,7 @@
 		for (var/_rev_head_mind in ex_revs)
 			var/datum/mind/rev_head_mind = _rev_head_mind
 			var/mob/living/carbon/rev_head_body = rev_head_mind.current
-			if(istype(rev_head_body) && rev_head_body.stat == DEAD)
+			if(istype(rev_head_body) && rev_head_body.is_dead())
 				rev_head_body.makeUncloneable()
 
 		priority_announce("It appears the mutiny has been quelled. Please return yourself and your incapacitated colleagues to work. \
@@ -427,7 +427,7 @@
 			if (!istype(target_body))
 				continue
 
-			if (target_body.stat == DEAD)
+			if (target_body.is_dead())
 				target_body.makeUncloneable()
 			else
 				mind.announce_objectives()
@@ -537,7 +537,7 @@
 	for(var/datum/mind/N in SSjob.get_living_heads())
 		var/mob/M = N.current
 		if(M)
-			heads_report += "<tr><td><a href='?_src_=holder;[HrefToken()];adminplayeropts=[REF(M)]'>[M.real_name]</a>[M.client ? "" : " <i>(No Client)</i>"][M.stat == DEAD ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+			heads_report += "<tr><td><a href='?_src_=holder;[HrefToken()];adminplayeropts=[REF(M)]'>[M.real_name]</a>[M.client ? "" : " <i>(No Client)</i>"][M.is_dead() ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
 			heads_report += "<td><A href='?priv_msg=[M.ckey]'>PM</A></td>"
 			heads_report += "<td><A href='?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(M)]'>FLW</a></td>"
 			var/turf/mob_loc = get_turf(M)

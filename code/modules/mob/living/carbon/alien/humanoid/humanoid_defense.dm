@@ -24,7 +24,7 @@
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='danger'>[M] punches [src]!</span>", \
 							"<span class='userdanger'>[M] punches you!</span>", null, COMBAT_MESSAGE_RANGE)
-					if ((stat != DEAD) && (damage > 9 || prob(5)))//Regular humans have a very small chance of knocking an alien down.
+					if ((body.stat != DEAD) && (damage > 9 || prob(5)))//Regular humans have a very small chance of knocking an alien down.
 						Unconscious(40)
 						visible_message("<span class='danger'>[M] knocks [src] down!</span>", \
 								"<span class='userdanger'>[M] knocks you down!</span>")

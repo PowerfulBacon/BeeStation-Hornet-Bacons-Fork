@@ -138,7 +138,7 @@
 
 /obj/structure/constructshell/examine(mob/user)
 	. = ..()
-	if(iscultist(user) || iswizard(user) || user.stat == DEAD)
+	if(iscultist(user) || iswizard(user) || user.is_dead())
 		. += "<span class='cult'>A construct shell, used to house bound souls from a soulstone.\n"+\
 		"Placing a soulstone with a soul into this shell allows you to produce your choice of the following:\n"+\
 		"An <b>Artificer</b>, which can produce <b>more shells and soulstones</b>, as well as fortifications.\n"+\
@@ -192,7 +192,7 @@
 			if(contents.len)
 				to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soulstone is full! Free an existing soul to make room.")
 			else
-				if((!old_shard && T.stat != CONSCIOUS) || (old_shard && T.stat == DEAD))
+				if((!old_shard && T.body.stat != CONSCIOUS) || (old_shard && T.is_dead()))
 					if(T.client == null)
 						to_chat(user, "<span class='userdanger'>Capture failed!</span>: The soul has already fled its mortal frame. You attempt to bring it back...")
 						getCultGhost(T,user)

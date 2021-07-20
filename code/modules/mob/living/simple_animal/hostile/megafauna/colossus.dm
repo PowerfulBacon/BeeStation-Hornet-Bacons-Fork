@@ -233,7 +233,7 @@ Difficulty: Very Hard
 	INVOKE_ASYNC(src, /atom/movable/proc/orbit, target, 0, FALSE, 0, 0, FALSE, TRUE)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/bullet_act(obj/item/projectile/P)
-	if(!stat)
+	if(is_concious())
 		var/obj/effect/temp_visual/at_shield/AT = new /obj/effect/temp_visual/at_shield(loc, src)
 		var/random_x = rand(-32, 32)
 		AT.pixel_x += random_x
@@ -586,7 +586,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 				continue
 			if(ishuman(i))
 				var/mob/living/carbon/human/H = i
-				if(H.stat == DEAD)
+				if(H.is_dead())
 					H.set_species(/datum/species/shadow, 1)
 					H.regenerate_limbs()
 					H.regenerate_organs()
@@ -678,7 +678,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 	. = ..()
 	if(isliving(target) && target != src)
 		var/mob/living/L = target
-		if(L.stat != DEAD)
+		if(L.is_alive())
 			L.heal_overall_damage(heal_power, heal_power)
 			new /obj/effect/temp_visual/heal(get_turf(target), "#80F5FF")
 
@@ -721,7 +721,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 		if(ishuman(user))
 			var/mobcheck = FALSE
 			for(var/mob/living/simple_animal/A in viewers(1, src))
-				if(A.melee_damage > 5 || A.mob_size >= MOB_SIZE_LARGE || A.ckey || A.stat)
+				if(A.melee_damage > 5 || A.mob_size >= MOB_SIZE_LARGE || A.ckey || A.is_unconcious())
 					break
 				var/obj/structure/closet/stasis/S = new /obj/structure/closet/stasis(A)
 				user.forceMove(S)
@@ -741,7 +741,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 
 /obj/structure/closet/stasis/process()
 	if(holder_animal)
-		if(holder_animal.stat == DEAD)
+		if(holder_animal.is_dead())
 			dump_contents()
 			holder_animal.gib()
 			return

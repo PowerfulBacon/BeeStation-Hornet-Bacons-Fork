@@ -17,7 +17,7 @@
 				return
 	L.adjustCloneLoss(1)
 	L.alpha = ((L.health-HEALTH_THRESHOLD_DEAD) / (L.maxHealth - HEALTH_THRESHOLD_DEAD)) * 255
-	if(L.stat == DEAD)
+	if(L.is_dead())
 		L.visible_message("<span class='warning'>[L] dissolves into the pool!</span>")
 		var/obj/item/organ/brain = L.getorgan(/obj/item/organ/brain)
 		brain.Remove(L)	//Maybe making them completely unrecoverable is too far

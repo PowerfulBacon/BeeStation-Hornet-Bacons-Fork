@@ -133,7 +133,7 @@
 		addtimer(CALLBACK(src, /obj/singularity/wizard.proc/deranged, C), 100)
 
 /obj/singularity/wizard/proc/deranged(mob/living/carbon/C)
-	if(!C || C.stat == DEAD)
+	if(!C || C.is_dead())
 		return
 	C.vomit(0, TRUE, TRUE, 3, TRUE)
 	C.spew_organ(3, 2)
@@ -215,7 +215,7 @@
 	if(!istype(user) || !user.canUseTopic(M, BE_CLOSE))
 		return
 
-	if(M.stat != DEAD)
+	if(M.is_alive())
 		to_chat(user, "<span class='warning'>This artifact can only affect the dead!</span>")
 		return
 
@@ -252,7 +252,7 @@
 			spooky_scaries.Remove(X)
 			continue
 		var/mob/living/carbon/human/H = X
-		if(H.stat == DEAD)
+		if(H.is_dead())
 			H.dust(TRUE)
 			spooky_scaries.Remove(X)
 			continue

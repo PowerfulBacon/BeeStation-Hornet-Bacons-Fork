@@ -40,7 +40,7 @@
 	if(. && !egg_lain && iscarbon(target) && !ismonkey(target))
 		// Changeling egg can survive in aliens!
 		var/mob/living/carbon/C = target
-		if(C.stat >= UNCONSCIOUS)
+		if(C.body.stat >= UNCONSCIOUS)
 			if(HAS_TRAIT(C, TRAIT_XENO_HOST))
 				to_chat(src, "<span class='userdanger'>A foreign presence repels us from this body. Perhaps we should try to infest another?</span>")
 				return
@@ -71,7 +71,7 @@
 	for(var/obj/item/organ/I in src)
 		I.Insert(M, 1)
 
-	if(origin && (origin.current ? (origin.current.stat == DEAD) : origin.get_ghost()))
+	if(origin && (origin.current ? (origin.current.is_dead()) : origin.get_ghost()))
 		origin.transfer_to(M)
 		var/datum/antagonist/changeling/C = origin.has_antag_datum(/datum/antagonist/changeling)
 		if(!C)

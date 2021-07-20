@@ -57,4 +57,4 @@
 		if(inflict_status)
 			var/list/stat_args = status_params.Copy()
 			stat_args.Insert(1,inflict_status)
-			target.apply_status_effect(arglist(stat_args))
+			target.body.apply_status_effect(arglist(stat_args))

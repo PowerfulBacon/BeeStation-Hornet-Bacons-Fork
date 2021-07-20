@@ -148,7 +148,7 @@
 	if(mess)
 		. += "It's filled with blood and viscera. You swear you can see it moving..."
 	if(is_operational() && istype(mob_occupant))
-		if(mob_occupant.stat != DEAD)
+		if(mob_occupant.is_alive())
 			. += "Current clone cycle is [round(get_completion())]% complete."
 
 /obj/machinery/clonepod/return_air()
@@ -186,7 +186,7 @@
 		if(clonemind.last_death != last_death) //The soul has advanced, the record has not.
 			return NONE
 		if(!QDELETED(clonemind.current))
-			if(clonemind.current.stat != DEAD)	//mind is associated with a non-dead body
+			if(clonemind.current.is_alive())	//mind is associated with a non-dead body
 				return NONE
 			if(clonemind.current.suiciding) // Mind is associated with a body that is suiciding.
 				return NONE
@@ -308,7 +308,7 @@
 				var/datum/bank_account/D = SSeconomy.get_dep_account(payment_department)
 				if(D)
 					D.adjust_money(fair_market_price)
-		if(mob_occupant && (mob_occupant.stat == DEAD) || (mob_occupant.suiciding) || mob_occupant.hellbound)  //Autoeject corpses and suiciding dudes.
+		if(mob_occupant && (mob_occupant.is_dead()) || (mob_occupant.suiciding) || mob_occupant.hellbound)  //Autoeject corpses and suiciding dudes.
 			connected_message("Clone Rejected: Deceased.")
 			if(internal_radio)
 				SPEAK("The cloning of [mob_occupant.real_name] has been \
@@ -513,11 +513,11 @@
 		log_cloning("[key_name(mob_occupant)] destroyed within [src] at [AREACOORD(src)] due to malfunction.")
 		QDEL_IN(mob_occupant, 40)
 
-/obj/machinery/clonepod/relaymove(mob/user)
+/obj/machinery/clonepod/relaymove(mob/living/user)
 	container_resist(user)
 
 /obj/machinery/clonepod/container_resist(mob/living/user)
-	if(user.stat == CONSCIOUS)
+	if(user.body.stat == CONSCIOUS)
 		go_out()
 
 /obj/machinery/clonepod/emp_act(severity)

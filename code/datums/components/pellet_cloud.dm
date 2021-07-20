@@ -178,7 +178,7 @@
 		radius -= magnitude_absorbed
 		pellet_delta -= round(pellets_absorbed * 0.5)
 
-		if(martyr.stat != DEAD && martyr.client)
+		if(martyr.is_alive() && martyr.client)
 			RegisterSignal(martyr, COMSIG_PARENT_QDELETING, .proc/on_target_qdel, override=TRUE)
 
 		for(var/i in 1 to round(pellets_absorbed * 0.5))

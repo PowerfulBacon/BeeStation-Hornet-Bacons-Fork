@@ -37,7 +37,7 @@
 	log_combat(A, D, "punched (boxing) ")
 	if(D.getStaminaLoss() > 50 && istype(D.mind?.martial_art, /datum/martial_art/boxing))
 		var/knockout_prob = D.getStaminaLoss() + rand(-15,15)
-		if((D.stat != DEAD) && prob(knockout_prob))
+		if((D.is_alive()) && prob(knockout_prob))
 			D.visible_message("<span class='danger'>[A] knocks [D] out with a haymaker!</span>", \
 								"<span class='userdanger'>[A] knocks you out with a haymaker!</span>")
 			D.apply_effect(200,EFFECT_KNOCKDOWN,armor_block)

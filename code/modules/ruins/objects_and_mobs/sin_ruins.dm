@@ -21,7 +21,7 @@
 		user.adjustCloneLoss(20)
 	obj_flags |= IN_USE
 
-	if(user.stat)
+	if(user.is_concious())
 		to_chat(user, "<span class='userdanger'>No... just one more try...</span>")
 		user.gib()
 	else

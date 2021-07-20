@@ -289,13 +289,13 @@
 	if(!ckey)
 		var/list/candidates = list()
 		for(var/mob/M in GLOB.player_list)
-			if(M.stat != DEAD)
+			if(M.is_alive())
 				continue	//we are not dead!
 			if(!(ROLE_ALIEN in M.client.prefs.be_special))
 				continue	//we don't want to be an alium
 			if(M.client.is_afk())
 				continue	//we are afk
-			if(M.mind?.current && M.mind.current.stat != DEAD)
+			if(M.mind?.current && M.mind.current.is_alive())
 				continue	//we have a live body we are tied to
 			candidates += M.ckey
 		if(candidates.len)

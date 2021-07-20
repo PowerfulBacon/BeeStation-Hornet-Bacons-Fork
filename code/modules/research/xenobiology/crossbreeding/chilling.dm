@@ -123,7 +123,7 @@ Chilling extracts:
 	if(isliving(user))
 		user.visible_message("<span class='notice'>[src] freezes over [user]'s entire body!</span>")
 		var/mob/living/M = user
-		M.apply_status_effect(/datum/status_effect/frozenstasis)
+		M.body.apply_status_effect(/datum/status_effect/frozenstasis)
 	..()
 
 /obj/item/slimecross/chilling/silver
@@ -161,20 +161,20 @@ Chilling extracts:
 	to_chat(user, "<span class='notice'>You feel [src] pulse as it begins charging bluespace energies...</span>")
 	active = TRUE
 	for(var/mob/living/M in allies)
-		var/datum/status_effect/slimerecall/S = M.apply_status_effect(/datum/status_effect/slimerecall)
+		var/datum/status_effect/slimerecall/S = M.body.apply_status_effect(/datum/status_effect/slimerecall)
 		S.target = user
 	if(do_after(user, 100, target=src))
 		to_chat(user, "<span class='notice'>[src] shatters as it tears a hole in reality, snatching the linked individuals from the void!</span>")
 		for(var/mob/living/M in allies)
-			var/datum/status_effect/slimerecall/S = M.has_status_effect(/datum/status_effect/slimerecall)
-			M.remove_status_effect(S)
+			var/datum/status_effect/slimerecall/S = M.body.has_status_effect(/datum/status_effect/slimerecall)
+			M.body.remove_status_effect(S)
 	else
 		to_chat(user, "<span class='warning'>[src] falls dark, dissolving into nothing as the energies fade away.</span>")
 		for(var/mob/living/M in allies)
-			var/datum/status_effect/slimerecall/S = M.has_status_effect(/datum/status_effect/slimerecall)
+			var/datum/status_effect/slimerecall/S = M.body.has_status_effect(/datum/status_effect/slimerecall)
 			if(istype(S))
 				S.interrupted = TRUE
-				M.remove_status_effect(S)
+				M.body.remove_status_effect(S)
 	..()
 
 /obj/item/slimecross/chilling/sepia
@@ -207,7 +207,7 @@ Chilling extracts:
 	if(isliving(user))
 		user.visible_message("<span class='warning'>[src] creaks and shifts into a clone of [user]!</span>")
 		var/mob/living/M = user
-		M.apply_status_effect(/datum/status_effect/slime_clone)
+		M.body.apply_status_effect(/datum/status_effect/slime_clone)
 	..()
 
 /obj/item/slimecross/chilling/pyrite

@@ -107,7 +107,7 @@
 
 /obj/item/clothing/suit/space/chronos/proc/chronowalk(atom/location)
 	var/mob/living/carbon/human/user = src.loc
-	if(activated && !teleporting && user && istype(user) && location && user.loc && location.loc && user.wear_suit == src && user.stat == CONSCIOUS)
+	if(activated && !teleporting && user && istype(user) && location && user.loc && location.loc && user.wear_suit == src && user.body.stat == CONSCIOUS)
 		teleporting = 1
 		var/turf/from_turf = get_turf(user)
 		var/turf/to_turf = get_turf(location)

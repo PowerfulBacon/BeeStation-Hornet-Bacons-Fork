@@ -45,7 +45,7 @@
 
 /datum/species/oozeling/spec_life(mob/living/carbon/human/H)
 	..()
-	if(H.stat == DEAD) //can't farm slime jelly from a dead slime/jelly person indefinitely
+	if(H.is_dead()) //can't farm slime jelly from a dead slime/jelly person indefinitely
 		return
 	if(!H.blood_volume)
 		H.blood_volume += 5

@@ -44,7 +44,7 @@
 			continue
 		if(!H.client)
 			continue
-		if(H.stat == DEAD)
+		if(H.is_dead())
 			continue
 		if(HAS_TRAIT(H, TRAIT_VIRUSIMMUNE)) //Don't pick someone who's virus immune, only for it to not do anything.
 			continue

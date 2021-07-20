@@ -16,11 +16,11 @@
 /datum/objective/crew/petsplosion/check_completion()
 	var/petcount = target_amount
 	for(var/mob/living/simple_animal/pet/P in GLOB.mob_list)
-		if(!(P.stat == DEAD))
+		if(!(P.is_dead()))
 			if((P.z in SSmapping.levels_by_trait(ZTRAIT_STATION)) || SSshuttle.emergency.shuttle_areas[get_area(P)])
 				petcount--
 	for(var/mob/living/carbon/human/H in GLOB.mob_list)
-		if(!(H.stat == DEAD))
+		if(!(H.is_dead()))
 			if((H.z in SSmapping.levels_by_trait(ZTRAIT_STATION)) || SSshuttle.emergency.shuttle_areas[get_area(H)])
 				if(istype(H.wear_neck, /obj/item/clothing/neck/petcollar))
 					petcount--
@@ -54,7 +54,7 @@
 
 /datum/objective/crew/bubblegum/check_completion()
 	for(var/mob/living/simple_animal/hostile/megafauna/bubblegum/B in GLOB.mob_list)
-		if(!(B.stat == DEAD))
+		if(!(B.is_dead()))
 			return FALSE
 	return TRUE
 

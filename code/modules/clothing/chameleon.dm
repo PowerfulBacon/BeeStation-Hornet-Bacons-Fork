@@ -204,7 +204,7 @@
 /datum/action/item_action/chameleon/change/proc/update_look(mob/user, obj/item/picked_item)
 	if(isliving(user))
 		var/mob/living/C = user
-		if(C.stat != CONSCIOUS)
+		if(C.body.stat != CONSCIOUS)
 			return
 
 		update_item(picked_item)

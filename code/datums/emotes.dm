@@ -73,7 +73,7 @@
 		if(!M.client || isnewplayer(M))
 			continue
 		var/T = get_turf(user)
-		if(M.stat == DEAD && M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
+		if(M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
 			M.show_message("[FOLLOW_LINK(M, user)] [dchatmsg]")
 
 	if(emote_type == EMOTE_AUDIBLE)
@@ -124,10 +124,14 @@
 	if(is_type_in_typecache(user, mob_type_blacklist_typecache))
 		return FALSE
 	if(status_check && !is_type_in_typecache(user, mob_type_ignore_stat_typecache))
-		if(user.stat > stat_allowed)
+		var/stat = DEAD
+		if(isliving(user))
+			var/mob/living/L = user
+			stat = L.body.stat
+		if(stat > stat_allowed)
 			if(!intentional)
 				return FALSE
-			switch(user.stat)
+			switch(stat)
 				if(SOFT_CRIT)
 					to_chat(user, "<span class='notice'>You cannot [key] while in a critical condition.</span>")
 				if(UNCONSCIOUS)

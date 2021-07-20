@@ -38,7 +38,7 @@
 	return tab_data
 
 /mob/living/carbon/alien/larva/adjustPlasma(amount)
-	if(stat != DEAD && amount > 0)
+	if(body.stat != DEAD && amount > 0)
 		amount_grown = min(amount_grown + 1, max_grown)
 	..(amount)
 

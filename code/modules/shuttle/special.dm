@@ -84,7 +84,7 @@
 	var/turf/T = get_turf(src)
 	var/list/found = list()
 	for(var/mob/living/carbon/C in T)
-		if(C.stat != DEAD)
+		if(C.is_alive())
 			found += C
 
 	// New sleepers

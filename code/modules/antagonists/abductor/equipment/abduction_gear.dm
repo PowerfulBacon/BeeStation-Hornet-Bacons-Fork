@@ -359,13 +359,13 @@
 /obj/item/abductor/mind_device/proc/mind_message(atom/target, mob/living/user)
 	if(isliving(target))
 		var/mob/living/L = target
-		if(L.stat == DEAD)
+		if(L.is_dead())
 			to_chat(user, "<span class='warning'>Your target is dead!</span>")
 			return
 		var/message = stripped_input(user, "Write a message to send to your target's brain.","Enter message")
 		if(!message)
 			return
-		if(QDELETED(L) || L.stat == DEAD)
+		if(QDELETED(L) || L.is_dead())
 			return
 
 		to_chat(L, "<span class='italics'>You hear a voice in your head saying: </span><span class='abductor'>[message]</span>")

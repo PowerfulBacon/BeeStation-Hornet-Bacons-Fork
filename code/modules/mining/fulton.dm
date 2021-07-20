@@ -175,12 +175,12 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 /obj/item/extraction_pack/proc/check_for_living_mobs(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
-		if(L.stat != DEAD)
+		if(L.is_alive())
 			return 1
 	for(var/thing in A.GetAllContents())
 		if(isliving(A))
 			var/mob/living/L = A
-			if(L.stat != DEAD)
+			if(L.is_alive())
 				return 1
 	return 0
 

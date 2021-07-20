@@ -44,7 +44,7 @@
 
 /mob/living/simple_animal/pet/cat/update_mobility()
 	..()
-	if(client && stat != DEAD)
+	if(client && is_dead())
 		if (resting)
 			icon_state = "[icon_living]_rest"
 			collar_type = "[initial(collar_type)]_rest"
@@ -113,7 +113,7 @@
 /mob/living/simple_animal/pet/cat/Runtime/Life()
 	if(!cats_deployed && SSticker.current_state >= GAME_STATE_SETTING_UP)
 		Deploy_The_Cats()
-	if(!stat && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
+	if(is_concious() && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
 		Write_Memory()
 		memory_saved = TRUE
 	..()
@@ -149,7 +149,7 @@
 	family = list()
 	if(!dead)
 		for(var/mob/living/simple_animal/pet/cat/kitten/C in children)
-			if(istype(C,type) || C.stat || !C.z || !C.butcher_results) //That last one is a work around for hologram cats
+			if(istype(C,type) || C.body.stat || !C.z || !C.butcher_results) //That last one is a work around for hologram cats
 				continue
 			if(C.type in family)
 				family[C.type] += 1
@@ -175,11 +175,11 @@
 /mob/living/simple_animal/pet/cat/Move()
 	. = ..()
 	if(.)
-		if(stat || resting || buckled)
+		if(is_unconcious() || resting || buckled)
 			return .
 
 		for(var/mob/living/simple_animal/mouse/M in get_turf(src))
-			if(!M.stat)
+			if(M.is_concious())
 				INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, "splats \the [M]!")
 				M.splat()
 				movement_target = null
@@ -197,7 +197,7 @@
 		collar_type = "[initial(collar_type)]"
 
 /mob/living/simple_animal/pet/cat/Life()
-	if(!stat && !buckled && !client)
+	if(is_concious() && !buckled && !client)
 		if(prob(3))
 			switch(rand(1, 3))
 				if (1)
@@ -223,7 +223,7 @@
 	if(next_scan_time <= world.time)
 		make_babies()
 
-	if(!stat && !resting && !buckled)
+	if(is_concious() && !resting && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 5)
 			walk_to(src,0)
@@ -235,7 +235,7 @@
 				movement_target = null
 				stop_automated_movement = 0
 				for(var/mob/living/simple_animal/mouse/snack in oview(3, src))
-					if(!snack.stat)
+					if(snack.is_concious())
 						movement_target = snack
 						break
 			if(movement_target)
@@ -252,14 +252,14 @@
 
 /mob/living/simple_animal/pet/cat/proc/wuv(change, mob/M)
 	if(change)
-		if(M && stat != DEAD)
+		if(M && is_dead())
 			new /obj/effect/temp_visual/heart(loc)
 			emote("me", 1, "purrs!")
 			if(flags_1 & HOLOGRAM_1)
 				return
 			SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, src, /datum/mood_event/pet_animal, src)
 	else
-		if(M && stat != DEAD)
+		if(M && is_dead())
 			emote("me", 1, "hisses!")
 
 /mob/living/simple_animal/pet/cat/cak //I told you I'd do it, Remie
@@ -296,21 +296,21 @@
 
 /mob/living/simple_animal/pet/cat/cak/Life()
 	..()
-	if(stat)
+	if(is_unconcious())
 		return
 	if(health < maxHealth)
 		adjustBruteLoss(-8) //Fast life regen
 
 /mob/living/simple_animal/pet/cat/cak/Move()
 	. = ..()
-	if(. && !stat)
+	if(. && is_concious())
 		for(var/obj/item/reagent_containers/food/snacks/donut/D in get_turf(src)) //Frosts nearby donuts!
 			if(!D.is_decorated)
 				D.decorate_donut()
 
 /mob/living/simple_animal/pet/cat/cak/attack_hand(mob/living/L)
 	..()
-	if(L.a_intent == INTENT_HARM && L.reagents && !stat)
+	if(L.a_intent == INTENT_HARM && L.reagents && is_concious())
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment, 0.4)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.4)
 

@@ -73,7 +73,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		var/image/holder = hud_list[STATUS_HUD]
 		var/icon/I = icon(icon, icon_state, dir)
 		holder.pixel_y = I.Height() - world.icon_size
-		if(summoner.stat == DEAD)
+		if(summoner.is_dead())
 			holder.icon_state = "huddead"
 		else
 			holder.icon_state = "hudhealthy"
@@ -171,7 +171,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	med_hud_set_health()
 	med_hud_set_status()
 	if(!QDELETED(summoner))
-		if(summoner.stat == DEAD)
+		if(summoner.is_dead())
 			forceMove(summoner.loc)
 			to_chat(src, "<span class='danger'>Your summoner has died!</span>")
 			visible_message("<span class='danger'><B>\The [src] dies along with its user!</B></span>")
@@ -258,7 +258,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		if(amount > 0)
 			to_chat(summoner, "<span class='danger'><B>Your [name] is under attack! You take damage!</span></B>")
 			summoner.visible_message("<span class='danger'><B>Blood sprays from [summoner] as [src] takes damage!</B></span>")
-			if(summoner.stat == UNCONSCIOUS)
+			if(summoner.body.stat == UNCONSCIOUS)
 				to_chat(summoner, "<span class='danger'><B>Your body can't take the strain of sustaining [src] in this condition, it begins to fall apart!</span></B>")
 				summoner.adjustCloneLoss(amount * 0.5) //dying hosts take 50% bonus damage as cloneloss
 		update_health_hud()

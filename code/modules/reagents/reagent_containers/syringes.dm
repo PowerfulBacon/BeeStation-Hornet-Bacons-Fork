@@ -207,7 +207,7 @@
 		M.update_inv_hands()
 
 /obj/item/reagent_containers/syringe/proc/embed(mob/living/carbon/C, injectmult = 1)
-	C.apply_status_effect(STATUS_EFFECT_SYRINGE, src, injectmult)
+	C.body.apply_status_effect(STATUS_EFFECT_SYRINGE, src, injectmult)
 	forceMove(C)
 
 /obj/item/reagent_containers/syringe/used

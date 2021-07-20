@@ -171,7 +171,7 @@
 	extra_settings[NES_DIRECTIVE] = new /datum/nanite_extra_setting/text("...")
 
 /datum/nanite_program/comm/mind_control/on_trigger(comm_message)
-	if(host_mob.stat == DEAD)
+	if(host_mob.is_dead())
 		return
 	var/sent_directive = comm_message
 	if(!comm_message)

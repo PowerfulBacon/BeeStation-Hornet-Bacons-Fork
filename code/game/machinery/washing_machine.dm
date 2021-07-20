@@ -224,7 +224,7 @@
 		desc = "The colors are a bit dodgy."
 
 
-/obj/machinery/washing_machine/relaymove(mob/user)
+/obj/machinery/washing_machine/relaymove(mob/living/user)
 	container_resist(user)
 
 /obj/machinery/washing_machine/container_resist(mob/living/user)

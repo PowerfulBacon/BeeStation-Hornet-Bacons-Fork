@@ -180,7 +180,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		if(!charge_check(user))
 			return FALSE
 
-	if(user.stat && !stat_allowed)
+	if(user.is_unconcious() && !stat_allowed)
 		to_chat(user, "<span class='notice'>Not when you're incapacitated.</span>")
 		return FALSE
 
@@ -575,7 +575,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	if(!charge_check(user,TRUE))
 		return FALSE
 
-	if(user.stat && !stat_allowed)
+	if(user.is_unconcious() && !stat_allowed)
 		return FALSE
 
 	if(!antimagic_allowed && user.anti_magic_check(TRUE, FALSE, major = FALSE, self = TRUE))

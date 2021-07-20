@@ -209,7 +209,7 @@
 /datum/antagonist/changeling/proc/regenerate()//grants the HuD in life.dm
 	var/mob/living/carbon/the_ling = owner.current
 	if(istype(the_ling))
-		if(the_ling.stat == DEAD)
+		if(the_ling.is_dead())
 			chem_charges = min(max(0, chem_charges + chem_recharge_rate - chem_recharge_slowdown), (chem_storage*0.5))
 			geneticdamage = max(LING_DEAD_GENETICDAMAGE_HEAL_CAP,geneticdamage-1)
 		else //not dead? no chem/geneticdamage caps.

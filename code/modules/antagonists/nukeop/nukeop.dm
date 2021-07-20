@@ -297,7 +297,7 @@
 /datum/team/nuclear/proc/operatives_dead()
 	for(var/I in members)
 		var/datum/mind/operative_mind = I
-		if(ishuman(operative_mind.current) && (operative_mind.current.stat != DEAD))
+		if(ishuman(operative_mind.current) && operative_mind.current.is_alive())
 			return FALSE
 	return TRUE
 

@@ -1,5 +1,5 @@
 /mob/living/carbon/death(gibbed)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 
 	silent = FALSE

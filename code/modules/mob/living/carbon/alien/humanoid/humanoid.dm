@@ -101,7 +101,7 @@
 	for(var/mob/living/carbon/alien/humanoid/A in GLOB.alive_mob_list)
 		if(!istype(A, alienpath))
 			continue
-		if(!A.key || A.stat == DEAD) //Only living aliens with a ckey are valid.
+		if(!A.key || A.is_dead()) //Only living aliens with a ckey are valid.
 			continue
 		return A
 	return FALSE

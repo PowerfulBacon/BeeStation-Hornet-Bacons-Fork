@@ -123,7 +123,7 @@
 		return "[mode_name[mode]]"
 
 /mob/living/simple_animal/bot/proc/turn_on()
-	if(stat)
+	if(is_unconcious())
 		return FALSE
 	on = TRUE
 	update_mobility()
@@ -346,7 +346,6 @@
 	if(. & EMP_PROTECT_SELF)
 		return
 	var/was_on = on
-	stat |= EMPED
 	new /obj/effect/temp_visual/emp(loc)
 	if(paicard)
 		paicard.emp_act(severity)
@@ -355,7 +354,6 @@
 	if(on)
 		turn_off()
 	spawn(severity*300)
-		stat &= ~EMPED
 		if(was_on)
 			turn_on()
 
@@ -992,9 +990,9 @@ Pass a positive integer as an argument to override a bot's default speed.
 		. = 1
 
 /mob/living/simple_animal/bot/ghost()
-	if(stat != DEAD) // Only ghost if we're doing this while alive, the pAI probably isn't dead yet.
+	if(is_alive()) // Only ghost if we're doing this while alive, the pAI probably isn't dead yet.
 		..()
-	if(paicard && (!client || stat == DEAD))
+	if(paicard && (!client || is_dead()))
 		ejectpai(0)
 
 /mob/living/simple_animal/bot/sentience_act()

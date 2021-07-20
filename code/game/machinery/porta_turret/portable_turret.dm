@@ -389,7 +389,7 @@
 		if(check_anomalies)//if it's set to check for simple animals
 			if(isanimal(A))
 				var/mob/living/simple_animal/SA = A
-				if(SA.stat || in_faction(SA)) //don't target if dead or in faction
+				if(SA.body.stat || in_faction(SA)) //don't target if dead or in faction
 					continue
 				targets += SA
 				continue
@@ -400,11 +400,11 @@
 			if(ispAI(A))
 				continue
 
-			if(target_cyborgs && sillycone.stat != DEAD && iscyborg(sillycone))
+			if(target_cyborgs && sillycone.is_alive() && iscyborg(sillycone))
 				targets += sillycone
 				continue
 
-			if(sillycone.stat || in_faction(sillycone))
+			if(sillycone.body.stat || in_faction(sillycone))
 				continue
 
 			if(iscyborg(sillycone))
@@ -418,11 +418,11 @@
 		if(iscarbon(A))
 			var/mob/living/carbon/C = A
 			//If not emagged, only target carbons that can use items
-			if(mode != TURRET_LETHAL && (C.stat || C.handcuffed || !(C.mobility_flags & MOBILITY_USE)))
+			if(mode != TURRET_LETHAL && (C.body.stat || C.handcuffed || !(C.mobility_flags & MOBILITY_USE)))
 				continue
 
 			//If emagged, target all but dead carbons
-			if(mode == TURRET_LETHAL && C.stat == DEAD)
+			if(mode == TURRET_LETHAL && C.is_dead())
 				continue
 
 			//if the target is a human and not in our faction, analyze threat level

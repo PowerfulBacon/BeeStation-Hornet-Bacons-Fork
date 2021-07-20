@@ -112,7 +112,7 @@
 	var/image/holder = hud_list[DIAG_STAT_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		holder.icon_state = "huddead2"
 	else if(incapacitated())
 		holder.icon_state = "hudoffline"
@@ -171,7 +171,7 @@
 		. += "It is wearing [head.get_examine_string(user)] on its head."
 
 	//Braindead
-	if(!client && stat != DEAD)
+	if(!client && body.stat != DEAD)
 		. += "Its status LED is blinking at a steady rate."
 
 	//Hacked
@@ -186,7 +186,7 @@
 			. += "<span class='boldwarning'>Its screws are very loose!</span>"
 
 	//Dead
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		if(client)
 			. += "<span class='deadsay'>A message repeatedly flashes on its display: \"REBOOT -- REQUIRED\".</span>"
 		else
@@ -212,7 +212,7 @@
 /mob/living/simple_animal/drone/proc/triggerAlarm(class, area/home, cameras, obj/source)
 	if(source.get_virtual_z_level() != get_virtual_z_level())
 		return
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	var/list/our_sort = alarms[class]
 	for(var/areaname in our_sort)
@@ -232,7 +232,7 @@
 
 
 /mob/living/simple_animal/drone/proc/cancelAlarm(class, area/A, obj/origin)
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		var/list/L = alarms[class]
 		var/cleared = 0
 		for (var/I in L)

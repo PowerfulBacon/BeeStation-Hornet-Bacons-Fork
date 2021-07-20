@@ -334,11 +334,11 @@
 				return 0
 
 
-		if(living_antag_player && living_antag_player.mind && isliving(living_antag_player) && living_antag_player.stat != DEAD && !isnewplayer(living_antag_player) &&!isbrain(living_antag_player) && (living_antag_player.mind.special_role || LAZYLEN(living_antag_player.mind.antag_datums)))
+		if(living_antag_player && living_antag_player.mind && isliving(living_antag_player) && living_antag_player.is_alive() && !isnewplayer(living_antag_player) &&!isbrain(living_antag_player) && (living_antag_player.mind.special_role || LAZYLEN(living_antag_player.mind.antag_datums)))
 			return 0 //A resource saver: once we find someone who has to die for all antags to be dead, we can just keep checking them, cycling over everyone only when we lose our mark.
 
-		for(var/mob/Player in GLOB.alive_mob_list)
-			if(Player.mind && Player.stat != DEAD && !isnewplayer(Player) &&!isbrain(Player) && Player.client && (Player.mind.special_role || LAZYLEN(Player.mind.antag_datums))) //Someone's still antagging but is their antagonist datum important enough to skip mulligan?
+		for(var/mob/living/Player in GLOB.alive_mob_list)
+			if(Player.mind && Player.is_alive() && !isnewplayer(Player) &&!isbrain(Player) && Player.client && (Player.mind.special_role || LAZYLEN(Player.mind.antag_datums))) //Someone's still antagging but is their antagonist datum important enough to skip mulligan?
 				for(var/datum/antagonist/antag_types in Player.mind.antag_datums)
 					if(antag_types.prevent_roundtype_conversion)
 						living_antag_player = Player //they were an important antag, they're our new mark
@@ -587,7 +587,7 @@
 /datum/game_mode/proc/get_living_by_department(var/department)
 	. = list()
 	for(var/mob/living/carbon/human/player in GLOB.mob_list)
-		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in department))
+		if(player.is_alive() && player.mind && (player.mind.assigned_role in department))
 			. |= player.mind
 
 /datum/game_mode/proc/get_all_by_department(var/department)
@@ -602,7 +602,7 @@
 /datum/game_mode/proc/get_living_silicon()
 	. = list()
 	for(var/mob/living/silicon/player in GLOB.mob_list)
-		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in GLOB.nonhuman_positions))
+		if(player.is_alive() && player.mind && (player.mind.assigned_role in GLOB.nonhuman_positions))
 			. |= player.mind
 
 ///////////////////////////////////////
@@ -683,14 +683,14 @@
 			if(L.client.inactivity >= (ROUNDSTART_LOGOUT_REPORT_TIME / 2))	//Connected, but inactive (alt+tabbed or something)
 				msg += "<b>[L.name]</b> ([L.key]), the [L.job] (<font color='#ffcc00'><b>Connected, Inactive</b></font>)\n"
 				failed = TRUE //AFK client
-			if(!failed && L.stat)
+			if(!failed && L.is_concious())
 				if(L.suiciding)	//Suicider
 					msg += "<b>[L.name]</b> ([L.key]), the [L.job] (<span class='boldannounce'>Suicide</span>)\n"
 					failed = TRUE //Disconnected client
-				if(!failed && L.stat == UNCONSCIOUS)
+				if(!failed && L.body.stat == UNCONSCIOUS)
 					msg += "<b>[L.name]</b> ([L.key]), the [L.job] (Dying)\n"
 					failed = TRUE //Unconscious
-				if(!failed && L.stat == DEAD)
+				if(!failed && L.is_dead())
 					msg += "<b>[L.name]</b> ([L.key]), the [L.job] (Dead)\n"
 					failed = TRUE //Dead
 
@@ -706,7 +706,7 @@
 			continue //Happy connected client
 		for(var/mob/dead/observer/D in GLOB.dead_mob_list)
 			if(D.mind && D.mind.current == L)
-				if(L.stat == DEAD)
+				if(L.is_dead())
 					if(L.suiciding)	//Suicider
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<span class='boldannounce'>Suicide</span>)\n"
 						continue //Disconnected client

@@ -47,7 +47,7 @@
 
 /datum/game_mode/wizard/are_special_antags_dead()
 	for(var/datum/mind/wizard in wizards)
-		if(isliving(wizard.current) && wizard.current.stat!=DEAD)
+		if(isliving(wizard.current) && wizard.current.body.stat!=DEAD)
 			return FALSE
 
 	for(var/obj/item/phylactery/P in GLOB.poi_list) //TODO : IsProperlyDead()

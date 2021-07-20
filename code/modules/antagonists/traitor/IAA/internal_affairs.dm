@@ -19,7 +19,7 @@
 
 /datum/antagonist/traitor/internal_affairs/proc/give_pinpointer()
 	if(owner?.current)
-		owner.current.apply_status_effect(/datum/status_effect/agent_pinpointer)
+		owner.current.body.apply_status_effect(/datum/status_effect/agent_pinpointer)
 
 /datum/antagonist/traitor/internal_affairs/apply_innate_effects()
 	.=..() //in case the base is used in future
@@ -29,7 +29,7 @@
 /datum/antagonist/traitor/internal_affairs/remove_innate_effects()
 	.=..()
 	if(owner?.current)
-		owner.current.remove_status_effect(/datum/status_effect/agent_pinpointer)
+		owner.current.body.remove_status_effect(/datum/status_effect/agent_pinpointer)
 
 /datum/antagonist/traitor/internal_affairs/on_gain()
 	START_PROCESSING(SSprocessing, src)
@@ -88,7 +88,7 @@
 					continue
 				var/datum/objective/assassinate/internal/objective = objective_
 				var/mob/current = objective.target.current
-				if(current&&current.stat!=DEAD)
+				if(current&&current.is_alive())
 					scan_target = current
 				break
 
@@ -131,7 +131,7 @@
 	add_objective(escape_objective)
 
 /datum/antagonist/traitor/internal_affairs/proc/steal_targets(datum/mind/victim)
-	if(!owner.current||owner.current.stat==DEAD)
+	if(!owner.current||owner.current.is_dead())
 		return
 	to_chat(owner.current, "<span class='userdanger'> Target eliminated: [victim.name]</span>")
 	for(var/objective_ in victim.get_all_objectives())
@@ -177,7 +177,7 @@
 		replace_escape_objective(owner)
 
 /datum/antagonist/traitor/internal_affairs/proc/iaa_process()
-	if(owner&&owner.current&&owner.current.stat!=DEAD)
+	if(owner&&owner.current&&owner.current.is_alive())
 		for(var/objective_ in objectives)
 			if(!is_internal_objective(objective_))
 				continue

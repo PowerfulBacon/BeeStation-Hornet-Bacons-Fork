@@ -39,8 +39,8 @@ Stabilized extracts:
 		if(initial(S.colour) == colour)
 			effectpath = S
 			break
-	if(!H.has_status_effect(effectpath))
-		var/datum/status_effect/stabilized/S = H.apply_status_effect(effectpath)
+	if(!H.body.has_status_effect(effectpath))
+		var/datum/status_effect/stabilized/S = H.body.apply_status_effect(effectpath)
 		owner = H
 		S.linked_extract = src
 		STOP_PROCESSING(SSobj,src)
@@ -139,8 +139,8 @@ Stabilized extracts:
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.has_status_effect(/datum/status_effect/stabilized/gold))
-			L.remove_status_effect(/datum/status_effect/stabilized/gold)
+		if(L.body.has_status_effect(/datum/status_effect/stabilized/gold))
+			L.body.remove_status_effect(/datum/status_effect/stabilized/gold)
 	if(choice == "Familiar Location")
 		to_chat(user, "<span class='notice'>You prod [src], and it shudders slightly.</span>")
 		START_PROCESSING(SSobj, src)

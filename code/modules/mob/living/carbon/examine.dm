@@ -25,7 +25,7 @@
 	if (back)
 		. += "[t_He] [t_has] [back.get_examine_string(user)] on [t_his] back."
 	var/appears_dead = 0
-	if (stat == DEAD)
+	if (body.stat == DEAD)
 		appears_dead = 1
 		if(getorgan(/obj/item/organ/brain))
 			. += "<span class='deadsay'>[t_He] [t_is] limp and unresponsive, with no signs of life.</span>"
@@ -106,7 +106,7 @@
 	. += msg.Join("")
 
 	if(!appears_dead)
-		if(stat == UNCONSCIOUS)
+		if(body.stat == UNCONSCIOUS)
 			. += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
 		else if(InCritical())
 			. += "[t_His] breathing is shallow and labored."

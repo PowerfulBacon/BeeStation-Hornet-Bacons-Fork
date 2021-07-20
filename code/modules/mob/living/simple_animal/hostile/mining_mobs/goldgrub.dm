@@ -66,7 +66,7 @@
 	visible_message("<span class='notice'>The ore was swallowed whole!</span>")
 
 /mob/living/simple_animal/hostile/asteroid/goldgrub/proc/Burrow()//Begin the chase to kill the goldgrub in time
-	if(!stat)
+	if(is_concious())
 		visible_message("<span class='danger'>The [name] buries into the ground, vanishing from sight!</span>")
 		qdel(src)
 

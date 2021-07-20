@@ -48,7 +48,7 @@
 /obj/effect/proc_holder/spell/targeted/summon_contract/cast(list/targets, mob/user = usr)
 	for(var/mob/living/carbon/C in targets)
 		if(C.mind && user.mind)
-			if(C.stat == DEAD)
+			if(C.is_dead())
 				if(user.dropItemToGround(user.get_active_held_item()))
 					var/obj/item/paper/contract/infernal/revive/contract = new(user.loc, C.mind, user.mind)
 					user.put_in_hands(contract)

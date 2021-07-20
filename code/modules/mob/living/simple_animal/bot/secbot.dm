@@ -379,7 +379,7 @@ Auto Patrol: []"},
 	anchored = FALSE
 	var/judgment_criteria = judgment_criteria()
 	for (var/mob/living/carbon/C in view(7,src)) //Let's find us a criminal
-		if((C.stat) || (C.handcuffed))
+		if((C.is_unconcious()) || (C.handcuffed))
 			continue
 
 		if((C.name == oldtarget_name) && (world.time < last_found + 100))

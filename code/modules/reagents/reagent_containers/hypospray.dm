@@ -112,7 +112,7 @@
 	possible_transfer_amounts = list()
 /*
 /obj/item/reagent_containers/hypospray/supersoldier/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
-	if(iscarbon(M) && M.stat != DEAD)
+	if(iscarbon(M) && M.is_alive())
 		if(!ishumanbasic(M) || reac_volume < 5) // implying xenohumans are holy
 			if(method == INGEST && show_message)
 				to_chat(M, "<span class='notice'><i>You feel nothing, your DNA must not be compatible.</i></span>")

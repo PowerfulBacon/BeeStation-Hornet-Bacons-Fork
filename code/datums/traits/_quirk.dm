@@ -64,7 +64,7 @@
 		quirk_holder = null
 		qdel(src)
 		return
-	if(quirk_holder.stat == DEAD)
+	if(quirk_holder.is_dead())
 		return
 	on_process(delta_time)
 

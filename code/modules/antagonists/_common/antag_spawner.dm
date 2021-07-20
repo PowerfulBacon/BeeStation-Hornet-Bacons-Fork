@@ -45,7 +45,7 @@
 	..()
 	var/mob/living/carbon/human/H = usr
 
-	if(H.stat || H.restrained())
+	if(H.body.stat || H.restrained())
 		return
 	if(!ishuman(H))
 		return 1

@@ -36,7 +36,7 @@
 		return
 	return ..()
 
-/obj/machinery/vr_sleeper/relaymove(mob/user)
+/obj/machinery/vr_sleeper/relaymove(mob/living/user)
 	open_machine()
 
 /obj/machinery/vr_sleeper/container_resist(mob/living/user)
@@ -75,7 +75,7 @@
 /obj/machinery/vr_sleeper/MouseDrop_T(mob/target, mob/living/user)
 	if(!istype(user))
 		return
-	if(user.stat || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !user.IsAdvancedToolUser())
+	if(user.is_unconcious() || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !user.IsAdvancedToolUser())
 		return
 	if(isliving(user))
 		var/mob/living/L = user
@@ -101,7 +101,7 @@
 			var/mob/living/carbon/human/human_occupant = occupant
 			if(human_occupant?.mind && usr == occupant)
 				to_chat(occupant, "<span class='warning'>Transferring to virtual reality...</span>")
-				if(vr_human && vr_human.stat == CONSCIOUS && !vr_human.real_mind)
+				if(vr_human && vr_human.body.stat == CONSCIOUS && !vr_human.real_mind)
 					SStgui.close_user_uis(occupant, src)
 					if(istype(human_occupant, /mob/living/carbon/human/virtual_reality))
 						var/mob/living/carbon/human/virtual_reality/vr_human_occupant = human_occupant
@@ -143,7 +143,7 @@
 	if(vr_human && !QDELETED(vr_human))
 		data["can_delete_avatar"] = TRUE
 		var/status
-		switch(vr_human.stat)
+		switch(vr_human.body.stat)
 			if(CONSCIOUS)
 				status = "Conscious"
 			if(DEAD)
@@ -239,6 +239,6 @@
 		for(var/obj/effect/decal/cleanable/C in vr_area)
 			qdel(C)
 		for (var/mob/living/carbon/human/virtual_reality/H in vr_area)
-			if (H.stat == DEAD && !H.vr_sleeper && !H.real_mind)
+			if (H.is_dead() && !H.vr_sleeper && !H.real_mind)
 				qdel(H)
 		addtimer(CALLBACK(src, .proc/clean_up), 3 MINUTES)

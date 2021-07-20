@@ -177,7 +177,7 @@
 			T = SSmapping.get_turf_below(T)
 			if(!T)
 				break
-		
+
 		if(T && ((ai_user && GLOB.cameranet.checkTurfVis(placeholder)) || (placeholder in seen)))
 			turfs += T
 			for(var/mob/M in T)
@@ -187,7 +187,7 @@
 	for(var/i in mobs)
 		var/mob/M = i
 		mobs_spotted += M
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			dead_spotted += M
 		desc += M.get_photo_description(src)
 

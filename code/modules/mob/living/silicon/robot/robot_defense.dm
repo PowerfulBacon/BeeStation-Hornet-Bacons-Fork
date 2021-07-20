@@ -6,7 +6,7 @@
 			if (user.temporarilyRemoveItemFromInventory(I, TRUE))
 				place_on_head(I)
 		return
-	if(I.force && I.damtype != STAMINA && stat != DEAD) //only sparks if real damage is dealt.
+	if(I.force && I.damtype != STAMINA && body.stat != DEAD) //only sparks if real damage is dealt.
 		spark_system.start()
 	return ..()
 
@@ -151,7 +151,7 @@
 
 
 /mob/living/silicon/robot/blob_act(obj/structure/blob/B)
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		adjustBruteLoss(30)
 	else
 		gib()
@@ -163,11 +163,11 @@
 			gib()
 			return
 		if(2)
-			if (stat != DEAD)
+			if (body.stat != DEAD)
 				adjustBruteLoss(60)
 				adjustFireLoss(60)
 		if(3)
-			if (stat != DEAD)
+			if (body.stat != DEAD)
 				adjustBruteLoss(30)
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj, def_zone)

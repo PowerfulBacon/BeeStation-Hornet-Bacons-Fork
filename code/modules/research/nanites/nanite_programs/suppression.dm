@@ -150,7 +150,7 @@
 		sent_message = sentence.get_value()
 	if(sent_message in blacklist)
 		return
-	if(host_mob.stat == DEAD)
+	if(host_mob.is_dead())
 		return
 	to_chat(host_mob, "<span class='warning'>You feel compelled to speak...</span>")
 	host_mob.say(sent_message, forced = "nanite speech")
@@ -172,7 +172,7 @@
 	if(!comm_message)
 		var/datum/nanite_extra_setting/message_setting = extra_settings[NES_MESSAGE]
 		sent_message = message_setting.get_value()
-	if(host_mob.stat == DEAD)
+	if(host_mob.is_dead())
 		return
 	to_chat(host_mob, "<i>You hear a strange, robotic voice in your head...</i> \"<span class='robot'>[html_encode(sent_message)]</span>\"")
 

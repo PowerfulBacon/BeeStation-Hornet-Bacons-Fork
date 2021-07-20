@@ -59,7 +59,7 @@
 
 	playsound(loc, "punch", 25, 1, -1)
 
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		M.visible_message("<span class='danger'>[user] smacks [M]'s lifeless corpse with [src].</span>", "<span class='userdanger'>[user] smacks your lifeless corpse with [src].</span>", "<span class='italics'>You hear smacking.</span>")
 	else if(M.has_language(/datum/language/codespeak))
 		M.visible_message("<span class='danger'>[user] beats [M] over the head with [src]!</span>", "<span class='userdanger'>[user] beats you over the head with [src]!</span>", "<span class='italics'>You hear smacking.</span>")

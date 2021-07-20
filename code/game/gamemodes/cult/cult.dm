@@ -156,7 +156,7 @@
 /datum/game_mode/cult/proc/check_survive()
 	var/acolytes_survived = 0
 	for(var/datum/mind/cult_mind in cult)
-		if (cult_mind.current && cult_mind.current.stat != DEAD)
+		if (cult_mind.current && cult_mind.current.is_alive())
 			if(cult_mind.current.onCentCom() || cult_mind.current.onSyndieBase())
 				acolytes_survived++
 	if(acolytes_survived>=acolytes_needed)

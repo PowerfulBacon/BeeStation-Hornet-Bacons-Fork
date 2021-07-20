@@ -138,7 +138,7 @@
 /datum/reagent/corgium/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	//If our corgi died :(
-	if(new_corgi.stat)
+	if(new_corgi.is_unconcious())
 		holder.remove_all_type(type)
 
 /datum/reagent/corgium/on_mob_end_metabolize(mob/living/L)

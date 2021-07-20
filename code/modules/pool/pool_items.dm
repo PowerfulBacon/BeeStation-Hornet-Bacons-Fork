@@ -35,7 +35,7 @@
 		if(!istype(get_turf(H), /turf/open/indestructible/sound/pool))
 			return
 		//Make sure they are alive and can pick it up
-		if(H.stat)
+		if(H.is_unconcious())
 			return
 		//Try shove it in their inventory
 		if(H.put_in_active_hand(src))

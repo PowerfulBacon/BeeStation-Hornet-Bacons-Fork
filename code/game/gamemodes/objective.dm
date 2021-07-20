@@ -120,7 +120,7 @@ GLOBAL_LIST_EMPTY(objectives)
 			continue
 		if(!ishuman(possible_target.current))
 			continue
-		if(possible_target.current.stat == DEAD)
+		if(possible_target.current.is_dead())
 			continue
 		if(!is_unique_objective(possible_target,dupe_search_range))
 			continue
@@ -292,7 +292,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	while(A.loc) // Check to see if the brainmob is on our person
 		A = A.loc
 		for(var/datum/mind/M in owners)
-			if(M.current && M.current.stat != DEAD && A == M.current)
+			if(M.current && M.current.is_alive() && A == M.current)
 				return TRUE
 	return FALSE
 
@@ -393,7 +393,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
 		return TRUE
 	for(var/mob/living/player in GLOB.player_list)
-		if(player.mind && player.stat != DEAD && !issilicon(player))
+		if(player.mind && player.is_alive() && !issilicon(player))
 			if(get_area(player) in SSshuttle.emergency.shuttle_areas)
 				return FALSE
 	return TRUE
@@ -407,7 +407,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
 		return TRUE
 	for(var/mob/living/player in GLOB.player_list)
-		if((get_area(player) in SSshuttle.emergency.shuttle_areas) && player.mind && player.stat != DEAD && ishuman(player))
+		if((get_area(player) in SSshuttle.emergency.shuttle_areas) && player.mind && player.is_alive() && ishuman(player))
 			var/mob/living/carbon/human/H = player
 			if(H.dna.species.id != "human")
 				return FALSE
@@ -426,7 +426,7 @@ GLOBAL_LIST_EMPTY(objectives)
 			continue
 		var/mob/living/silicon/ai/A = M.current
 		for(var/mob/living/silicon/robot/R in A.connected_robots)
-			if(R.stat != DEAD)
+			if(R.is_alive())
 				counter++
 	return counter >= 8
 
@@ -707,7 +707,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 			var/mob/M = owner.current			//Yeah if you get morphed and you eat a quantum tech disk with the RD's latest backup good on you soldier.
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
-				if(H && (H.stat != DEAD) && istype(H.wear_suit, /obj/item/clothing/suit/space/space_ninja))
+				if(H && (H.is_alive()) && istype(H.wear_suit, /obj/item/clothing/suit/space/space_ninja))
 					var/obj/item/clothing/suit/space/space_ninja/S = H.wear_suit
 					S.stored_research.copy_research_to(checking)
 			var/list/otherwise = M.GetAllContents()
@@ -737,25 +737,25 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 	var/captured_amount = 0
 	var/area/centcom/holding/A = GLOB.areas_by_type[/area/centcom/holding]
 	for(var/mob/living/carbon/human/M in A)//Humans.
-		if(M.stat == DEAD)//Dead folks are worth less.
+		if(M.is_dead())//Dead folks are worth less.
 			captured_amount+=0.5
 			continue
 		captured_amount+=1
 	for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
 		captured_amount+=0.1
 	for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			captured_amount+=0.5
 			continue
 		captured_amount+=1
 	for(var/mob/living/carbon/alien/humanoid/M in A)//Aliens are worth twice as much as humans.
 		if(istype(M, /mob/living/carbon/alien/humanoid/royal/queen))//Queens are worth three times as much as humans.
-			if(M.stat == DEAD)
+			if(M.is_dead())
 				captured_amount+=1.5
 			else
 				captured_amount+=3
 			continue
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			captured_amount+=1
 			continue
 		captured_amount+=2
@@ -873,7 +873,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 
 /datum/objective/destroy/check_completion()
 	if(target && target.current)
-		return target.current.stat == DEAD || target.current.z > 6 || !target.current.ckey //Borgs/brains/AIs count as dead for traitor objectives.
+		return target.current.is_dead() || target.current.z > 6 || !target.current.ckey //Borgs/brains/AIs count as dead for traitor objectives.
 	return TRUE
 
 /datum/objective/destroy/update_explanation_text()

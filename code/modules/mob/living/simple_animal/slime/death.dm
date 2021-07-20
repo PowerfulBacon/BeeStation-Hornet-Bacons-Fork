@@ -1,5 +1,5 @@
 /mob/living/simple_animal/slime/death(gibbed)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	if(!gibbed)
 		if(is_adult)
@@ -39,7 +39,7 @@
 	for(var/obj/machinery/computer/camera_advanced/xenobio/X in GLOB.machines)
 		if(src in X.stored_slimes)
 			X.stored_slimes -= src
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		GLOB.total_slimes--
 	master = null
 	return ..()

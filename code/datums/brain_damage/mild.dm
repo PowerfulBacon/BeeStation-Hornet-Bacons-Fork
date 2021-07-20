@@ -50,7 +50,7 @@
 	owner.derpspeech = min(owner.derpspeech + 5, 25)
 	if(prob(3))
 		owner.emote("drool")
-	else if(owner.stat == CONSCIOUS && prob(3))
+	else if(owner.body.stat == CONSCIOUS && prob(3))
 		owner.say(pick_list_replacements(BRAIN_DAMAGE_FILE, "brain_damage"), forced = "brain damage")
 	..()
 
@@ -158,11 +158,11 @@
 	lose_text = "<span class='notice'>You feel in control of your muscles again.</span>"
 
 /datum/brain_trauma/mild/muscle_spasms/on_gain()
-	owner.apply_status_effect(STATUS_EFFECT_SPASMS)
+	owner.body.apply_status_effect(STATUS_EFFECT_SPASMS)
 	..()
 
 /datum/brain_trauma/mild/muscle_spasms/on_lose()
-	owner.remove_status_effect(STATUS_EFFECT_SPASMS)
+	owner.body.remove_status_effect(STATUS_EFFECT_SPASMS)
 	..()
 
 /datum/brain_trauma/mild/nervous_cough

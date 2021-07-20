@@ -152,7 +152,7 @@ Difficulty: Hard
 				blink_spam(blink_counter, target_slowness, cross_counter)
 		return
 
-	if(L?.stat == DEAD && !blinking && get_dist(src, L) > 2)
+	if(L?.is_dead() && !blinking && get_dist(src, L) > 2)
 		blink(L)
 		return
 
@@ -253,9 +253,9 @@ Difficulty: Hard
 		var/mob/living/pickedtarget = pick(targets)
 		if(targets.len >= cardinal_copy.len)
 			pickedtarget = pick_n_take(targets)
-		if(!istype(pickedtarget) || pickedtarget.stat == DEAD)
+		if(!istype(pickedtarget) || pickedtarget.is_dead())
 			pickedtarget = target
-			if(QDELETED(pickedtarget) || (istype(pickedtarget) && pickedtarget.stat == DEAD))
+			if(QDELETED(pickedtarget) || (istype(pickedtarget) && pickedtarget.is_dead()))
 				break //main target is dead and we're out of living targets, cancel out
 		var/obj/effect/temp_visual/hierophant/chaser/C = new(loc, src, pickedtarget, chaser_speed, FALSE)
 		C.moving = 3
@@ -294,7 +294,7 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/hierophant/proc/arena_trap(mob/victim) //trap a target in an arena
 	var/turf/T = get_turf(victim)
-	if(!istype(victim) || victim.stat == DEAD || !T || arena_cooldown > world.time)
+	if(!istype(victim) || victim.is_dead() || !T || arena_cooldown > world.time)
 		return
 	if((istype(get_area(T), /area/ruin/unpowered/hierophant) || istype(get_area(src), /area/ruin/unpowered/hierophant)) && victim != src)
 		return
@@ -398,7 +398,7 @@ Difficulty: Hard
 				visible_message("<span class='hierophant'>\"Vitemvw gsqtpixi. Stivexmsrep ijjmgmirgc gsqtvsqmwih.\"</span>")
 
 /mob/living/simple_animal/hostile/megafauna/hierophant/death()
-	if(health > 0 || stat == DEAD)
+	if(health > 0 || is_dead())
 		return
 	else
 		set_stat(DEAD)
@@ -444,7 +444,7 @@ Difficulty: Hard
 	if(!blinking)
 		if(target && isliving(target))
 			var/mob/living/L = target
-			if(L.stat != DEAD)
+			if(L.is_alive())
 				if(ranged_cooldown <= world.time)
 					calculate_rage()
 					ranged_cooldown = world.time + max(5, ranged_cooldown_time - anger_modifier * 0.75)
@@ -468,7 +468,7 @@ Difficulty: Hard
 
 /mob/living/simple_animal/hostile/megafauna/hierophant/Moved(oldLoc, movement_dir)
 	. = ..()
-	if(!stat && .)
+	if(is_concious() && .)
 		var/obj/effect/temp_visual/hierophant/squares/HS = new(oldLoc)
 		HS.setDir(movement_dir)
 		playsound(src, 'sound/mecha/mechmove04.ogg', 150, 1, -4)
@@ -667,7 +667,7 @@ Difficulty: Hard
 		return
 	for(var/mob/living/L in T.contents - hit_things) //find and damage mobs...
 		hit_things += L
-		if((friendly_fire_check && caster && caster.faction_check_mob(L)) || L.stat == DEAD)
+		if((friendly_fire_check && caster && caster.faction_check_mob(L)) || L.is_dead())
 			continue
 		if(L.client)
 			flash_color(L.client, "#660099", 1)
@@ -678,7 +678,7 @@ Difficulty: Hard
 		L.apply_damage(damage, BURN, limb_to_hit, armor)
 		if(ishostile(L))
 			var/mob/living/simple_animal/hostile/H = L //mobs find and damage you...
-			if(H.stat == CONSCIOUS && !H.target && H.AIStatus != AI_OFF && !H.client)
+			if(H.body.stat == CONSCIOUS && !H.target && H.AIStatus != AI_OFF && !H.client)
 				if(!QDELETED(caster))
 					if(get_dist(H, caster) <= H.aggro_vision_range)
 						H.FindTarget(list(caster), 1)

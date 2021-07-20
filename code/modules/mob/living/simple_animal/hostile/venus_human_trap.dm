@@ -81,7 +81,7 @@
 /mob/living/simple_animal/hostile/venus_human_trap/handle_automated_action()
 	if(..())
 		for(var/mob/living/L in grasping)
-			if(L.stat == DEAD)
+			if(L.is_dead())
 				var/datum/beam/B = grasping[L]
 				if(B)
 					B.End()

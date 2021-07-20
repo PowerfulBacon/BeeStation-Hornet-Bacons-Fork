@@ -192,7 +192,7 @@
 			spawned_mobs -= M
 			continue
 		// Anyone in crit, automatically reap
-		if(M.InCritical() || M.stat == DEAD)
+		if(M.InCritical() || M.is_dead())
 			ctf_dust_old(M)
 		else
 			// The changes that you've been hit with no shield but not

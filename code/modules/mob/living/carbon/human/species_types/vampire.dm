@@ -88,7 +88,7 @@
 			if(H.blood_volume >= BLOOD_VOLUME_MAXIMUM)
 				to_chat(H, "<span class='notice'>You're already full!</span>")
 				return
-			if(victim.stat == DEAD)
+			if(victim.is_dead())
 				to_chat(H, "<span class='notice'>You need a living victim!</span>")
 				return
 			if(!victim.blood_volume || (victim.dna && ((NOBLOOD in victim.dna.species.species_traits) || victim.dna.species.exotic_blood)))

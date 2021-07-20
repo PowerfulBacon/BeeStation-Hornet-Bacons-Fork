@@ -431,7 +431,7 @@
 
 /mob/living/simple_animal/hostile/psycho/regular/Life()
 	..()
-	if(Aggro() || stat)
+	if(Aggro() || is_unconcious())
 		return
 	if(prob(20))
 		var/chosen_sound = pick(idle_sounds)
@@ -493,7 +493,7 @@
 
 /mob/living/simple_animal/hostile/psycho/muzzle/Life()
 	..()
-	if(Aggro() || stat)
+	if(Aggro() || is_unconcious())
 		return
 	if(prob(20))
 		var/chosen_sound = pick(idle_sounds)
@@ -527,7 +527,7 @@
 
 /mob/living/simple_animal/hostile/psycho/trap/Life()
 	..()
-	if(Aggro() || stat)
+	if(Aggro() || is_unconcious())
 		return
 	if(prob(20))
 		var/chosen_sound = pick(idle_sounds)

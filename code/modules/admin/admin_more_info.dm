@@ -26,7 +26,7 @@
 	if(isliving(M))
 		var/mob/living/L = M
 		var/status
-		switch (M.stat)
+		switch (L.body.stat)
 			if(CONSCIOUS)
 				status = "Alive"
 			if(SOFT_CRIT)

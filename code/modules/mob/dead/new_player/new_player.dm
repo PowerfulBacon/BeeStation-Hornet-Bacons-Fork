@@ -9,7 +9,6 @@
 	invisibility = INVISIBILITY_ABSTRACT
 
 	density = FALSE
-	stat = DEAD
 
 	var/mob/living/new_character	//for instant transfer once the round is set up
 

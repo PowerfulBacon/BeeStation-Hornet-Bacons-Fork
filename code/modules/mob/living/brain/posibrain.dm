@@ -146,7 +146,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 /obj/item/mmi/posibrain/examine(mob/user)
 	. = ..()
 	if(brainmob && brainmob.key)
-		switch(brainmob.stat)
+		switch(brainmob.is_unconcious())
 			if(CONSCIOUS)
 				if(!brainmob.client)
 					. += "It appears to be in stand-by mode." //afk

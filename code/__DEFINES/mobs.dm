@@ -370,7 +370,7 @@
 /// Wabbacjack staff projectiles
 #define WABBAJACK     (1<<6)
 
-#define SLEEP_CHECK_DEATH(X) sleep(X); if(QDELETED(src) || stat == DEAD) return;
+#define SLEEP_CHECK_DEATH(X) sleep(X); if(QDELETED(src) || body.stat == DEAD) return;
 #define INTERACTING_WITH(X, Y) (Y in X.do_afters)
 
 #define SILENCE_RANGED_MESSAGE (1<<0)

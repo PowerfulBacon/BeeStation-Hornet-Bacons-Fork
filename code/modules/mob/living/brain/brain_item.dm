@@ -33,7 +33,7 @@
 	name = "brain"
 
 	if(C.mind && C.mind.has_antag_datum(/datum/antagonist/changeling) && !no_id_transfer)	//congrats, you're trapped in a body you don't control
-		if(brainmob && !(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_DEATHCOMA))))
+		if(brainmob && !(C.is_dead() || (HAS_TRAIT(C, TRAIT_DEATHCOMA))))
 			to_chat(brainmob, "<span class = danger>You can't feel your body! You're still just a brain!</span>")
 		forceMove(C)
 		C.update_hair()
@@ -197,7 +197,7 @@
 	if(brainmob)
 		QDEL_NULL(brainmob)
 	QDEL_LIST(traumas)
-	
+
 	if(owner?.mind) //You aren't allowed to return to brains that don't exist
 		owner.mind.set_current(null)
 	return ..()
@@ -225,7 +225,7 @@
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE)
 
 	if (owner)
-		if(owner.stat < UNCONSCIOUS) //conscious or soft-crit
+		if(owner.body.stat < UNCONSCIOUS) //conscious or soft-crit
 			var/brain_message
 			if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
 				brain_message = "<span class='warning'>You feel lightheaded.</span>"

@@ -78,7 +78,7 @@
 	ResetNeutral()
 
 /mob/living/simple_animal/hostile/jungle/mook/proc/SlashCombo()
-	if(attack_state == MOOK_ATTACK_WARMUP && !stat)
+	if(attack_state == MOOK_ATTACK_WARMUP && is_concious())
 		attack_state = MOOK_ATTACK_ACTIVE
 		update_icons()
 		SlashAttack()
@@ -87,7 +87,7 @@
 		addtimer(CALLBACK(src, .proc/AttackRecovery), 9)
 
 /mob/living/simple_animal/hostile/jungle/mook/proc/SlashAttack()
-	if(target && !stat && attack_state == MOOK_ATTACK_ACTIVE)
+	if(target && is_concious() && attack_state == MOOK_ATTACK_ACTIVE)
 		melee_damage = 15
 		var/mob_direction = get_dir(src,target)
 		var/atom/target_from = GET_TARGETS_FROM(src)
@@ -102,7 +102,7 @@
 		playsound(src, 'sound/weapons/slashmiss.ogg', 50, 1)
 
 /mob/living/simple_animal/hostile/jungle/mook/proc/LeapAttack()
-	if(target && !stat && attack_state == MOOK_ATTACK_WARMUP)
+	if(target && is_concious() && attack_state == MOOK_ATTACK_WARMUP)
 		attack_state = MOOK_ATTACK_ACTIVE
 		density = FALSE
 		melee_damage = 30
@@ -117,7 +117,7 @@
 	ResetNeutral()
 
 /mob/living/simple_animal/hostile/jungle/mook/proc/AttackRecovery()
-	if(attack_state == MOOK_ATTACK_ACTIVE && !stat)
+	if(attack_state == MOOK_ATTACK_ACTIVE && is_concious())
 		attack_state = MOOK_ATTACK_RECOVERY
 		density = TRUE
 		face_atom(target)
@@ -129,7 +129,7 @@
 			if(target)
 				if(isliving(target))
 					var/mob/living/L = target
-					if(L.incapacitated() && L.stat != DEAD)
+					if(L.incapacitated() && L.is_alive())
 						addtimer(CALLBACK(src, .proc/WarmupAttack, TRUE), ATTACK_INTERMISSION_TIME)
 						return
 			addtimer(CALLBACK(src, .proc/WarmupAttack), ATTACK_INTERMISSION_TIME)
@@ -141,7 +141,7 @@
 		attack_state = MOOK_ATTACK_NEUTRAL
 		ranged_cooldown = world.time + ranged_cooldown_time
 		update_icons()
-		if(target && !stat)
+		if(target && is_concious())
 			update_icons()
 			Goto(target, move_to_delay, minimum_distance)
 
@@ -171,7 +171,7 @@
 				continue
 			if(istype(ML, /mob/living/simple_animal/hostile/jungle/mook) && !mook_under_us)//If we land on the same tile as another mook, spread out so we don't stack our sprite on the same tile
 				var/mob/living/simple_animal/hostile/jungle/mook/M = ML
-				if(!M.stat)
+				if(M.is_concious())
 					mook_under_us = TRUE
 					var/anydir = pick(GLOB.cardinals)
 					Move(get_step(src, anydir), anydir)
@@ -191,7 +191,7 @@
 
 /mob/living/simple_animal/hostile/jungle/mook/update_icons()
 	. = ..()
-	if(!stat)
+	if(is_concious())
 		switch(attack_state)
 			if(MOOK_ATTACK_NEUTRAL)
 				icon_state = "mook"

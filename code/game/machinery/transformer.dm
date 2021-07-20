@@ -78,7 +78,7 @@
 	if(cooldown == 1)
 		return
 
-	if(!transform_dead && H.stat == DEAD)
+	if(!transform_dead && H.is_dead())
 		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return
 

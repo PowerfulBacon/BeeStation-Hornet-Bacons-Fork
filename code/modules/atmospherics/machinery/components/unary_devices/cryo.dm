@@ -201,7 +201,7 @@
 		mob_occupant.ExtinguishMob()
 	if(!check_nap_violations())
 		return
-	if(mob_occupant.stat == DEAD) // We don't bother with dead people.
+	if(mob_occupant.is_dead()) // We don't bother with dead people.
 		return
 
 	if(mob_occupant.health >= mob_occupant.getMaxHealth()) // Don't bother with fully healed people.
@@ -267,7 +267,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/atmospherics/components/unary/cryo_cell/relaymove(mob/user)
+/obj/machinery/atmospherics/components/unary/cryo_cell/relaymove(mob/living/user)
 	if(message_cooldown <= world.time)
 		message_cooldown = world.time + 50
 		to_chat(user, "<span class='warning'>[src]'s door won't budge!</span>")
@@ -297,7 +297,7 @@
 		"<span class='notice'>You struggle inside [src], kicking the release with your foot... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
 		"<span class='italics'>You hear a thump from [src].</span>")
 	if(do_after(user, breakout_time, target = src))
-		if(!user || user.stat != CONSCIOUS || user.loc != src )
+		if(!user || user.body.stat != CONSCIOUS || user.loc != src )
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
 			"<span class='notice'>You successfully break out of [src]!</span>")
@@ -372,7 +372,7 @@
 	if(occupant)
 		var/mob/living/mob_occupant = occupant
 		data["occupant"]["name"] = mob_occupant.name
-		switch(mob_occupant.stat)
+		switch(mob_occupant.body.stat)
 			if(CONSCIOUS)
 				data["occupant"]["stat"] = "Conscious"
 				data["occupant"]["statstate"] = "good"

@@ -230,7 +230,7 @@
 
 /mob/living/silicon/ai/get_stat_tab_status()
 	var/list/tab_data = ..()
-	if(!stat)
+	if(is_concious())
 		tab_data["System integrity"] = GENERATE_STAT_TEXT("[(health+100)/2]%")
 		if(isturf(loc)) //only show if we're "in" a core
 			tab_data["Backup Power"] = GENERATE_STAT_TEXT("[battery/2]%")
@@ -240,7 +240,7 @@
 			var/robot_status = "Nominal"
 			if(R.shell)
 				robot_status = "AI SHELL"
-			else if(R.stat || !R.client)
+			else if(R.body.stat || !R.client)
 				robot_status = "OFFLINE"
 			else if(!R.cell || R.cell.charge <= 0)
 				robot_status = "DEPOWERED"
@@ -338,7 +338,7 @@
 	set category = "OOC"
 	set desc = "Wipe your core. This is functionally equivalent to cryo, freeing up your job slot."
 
-	if(stat)
+	if(is_unconcious())
 		return
 
 	// Guard against misclicks, this isn't the sort of thing we want happening accidentally
@@ -373,7 +373,7 @@
 	set name = "Toggle Floor Bolts"
 	if(!isturf(loc)) // if their location isn't a turf
 		return // stop
-	if(stat)
+	if(is_unconcious())
 		return
 	if(incapacitated())
 		if(battery < 50)
@@ -392,7 +392,7 @@
 	// the message in the [] will change depending whether or not the AI is anchored
 
 /mob/living/silicon/ai/update_mobility() //If the AI dies, mobs won't go through it anymore
-	if(stat != CONSCIOUS)
+	if(body.stat != CONSCIOUS)
 		mobility_flags = NONE
 	else
 		mobility_flags = ALL
@@ -1030,7 +1030,7 @@
 
 	for(var/borgie in GLOB.available_ai_shells)
 		var/mob/living/silicon/robot/R = borgie
-		if(R.shell && !R.deployed && (R.stat != DEAD) && (!R.connected_ai ||(R.connected_ai == src)) || (R.ratvar && !is_servant_of_ratvar(src)))
+		if(R.shell && !R.deployed && (R.is_alive()) && (!R.connected_ai ||(R.connected_ai == src)) || (R.ratvar && !is_servant_of_ratvar(src)))
 			possible += R
 
 	if(!LAZYLEN(possible))
@@ -1039,7 +1039,7 @@
 	if(!target || !(target in possible)) //If the AI is looking for a new shell, or its pre-selected shell is no longer valid
 		target = input(src, "Which body to control?") as null|anything in sortNames(possible)
 
-	if (!target || target.stat || target.deployed || !(!target.connected_ai ||(target.connected_ai == src)) || (target.ratvar && !is_servant_of_ratvar(src)))
+	if (!target || target.body.stat || target.deployed || !(!target.connected_ai ||(target.connected_ai == src)) || (target.ratvar && !is_servant_of_ratvar(src)))
 		return
 
 	if(target.is_jammed())

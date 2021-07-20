@@ -77,9 +77,12 @@
 		view = client_view
 		transform = matrix(actualview[1]/FULLSCREEN_OVERLAY_RESOLUTION_X, 0, 0, 0, actualview[2]/FULLSCREEN_OVERLAY_RESOLUTION_Y, 0)
 
-/atom/movable/screen/fullscreen/proc/should_show_to(mob/mymob)
-	if(!show_when_dead && mymob.stat == DEAD)
-		return FALSE
+/atom/movable/screen/fullscreen/proc/should_show_to(mob/living/mymob)
+	if(!show_when_dead)
+		if(!istype(mymob))
+			return FALSE
+		if(mymob.is_dead())
+			return FALSE
 	return TRUE
 
 /atom/movable/screen/fullscreen/Destroy()

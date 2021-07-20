@@ -759,7 +759,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	else
 		L = get(src, /mob/living/silicon)
 
-	if(L && L.stat != UNCONSCIOUS)
+	if(L && L.body.stat != UNCONSCIOUS)
 		var/reply = "(<a href='byond://?src=[REF(src)];choice=Message;skiprefresh=1;target=[REF(signal.source)]'>Reply</a>)"
 		var/hrefstart
 		var/hrefend
@@ -1121,7 +1121,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 /mob/living/silicon/verb/cmd_toggle_pda_receiver()
 	set category = "AI Commands"
 	set name = "PDA - Toggle Sender/Receiver"
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	if(!isnull(aiPDA))
 		aiPDA.toff = !aiPDA.toff
@@ -1132,7 +1132,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 /mob/living/silicon/verb/cmd_toggle_pda_silent()
 	set category = "AI Commands"
 	set name = "PDA - Toggle Ringer"
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	if(!isnull(aiPDA))
 		//0

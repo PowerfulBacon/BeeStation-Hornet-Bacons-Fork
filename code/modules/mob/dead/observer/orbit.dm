@@ -47,7 +47,7 @@
 		if (istype(M))
 			if (isobserver(M))
 				ghosts += list(serialized)
-			else if (M.stat == DEAD)
+			else if (M.is_dead())
 				dead += list(serialized)
 			else if (M.mind == null)
 				npcs += list(serialized)

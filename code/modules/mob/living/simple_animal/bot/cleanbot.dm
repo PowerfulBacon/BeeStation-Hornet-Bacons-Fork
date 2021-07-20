@@ -87,7 +87,7 @@
 /mob/living/simple_animal/bot/cleanbot/process_scan(atom/A)
 	if(iscarbon(A))
 		var/mob/living/carbon/C = A
-		if(C.stat != DEAD && !(C.mobility_flags & MOBILITY_STAND))
+		if(C.is_alive() && !(C.mobility_flags & MOBILITY_STAND))
 			return C
 	else if(is_type_in_typecache(A, target_types))
 		return A
@@ -228,7 +228,7 @@
 		A.acid_act(75, 10)
 	else if(istype(A, /mob/living/simple_animal/cockroach) || istype(A, /mob/living/simple_animal/mouse))
 		var/mob/living/simple_animal/M = target
-		if(!M.stat)
+		if(is_concious())
 			visible_message("<span class='danger'>[src] smashes [target] with its mop!</span>")
 			M.death()
 		target = null
@@ -236,7 +236,7 @@
 	else if(emagged == 2) //Emag functions
 		if(istype(A, /mob/living/carbon))
 			var/mob/living/carbon/victim = A
-			if(victim.stat == DEAD)//cleanbots always finish the job
+			if(victim.is_dead())//cleanbots always finish the job
 				return
 
 			victim.visible_message("<span class='danger'>[src] sprays hydrofluoric acid at [victim]!</span>", "<span class='userdanger'>[src] sprays you with hydrofluoric acid!</span>")

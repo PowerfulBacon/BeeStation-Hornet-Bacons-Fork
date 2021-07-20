@@ -357,9 +357,9 @@
 			var/mob/living/carbon/human/H
 			if(ishuman(M.current))
 				H = M.current
-			return M.current.stat != DEAD && !issilicon(M.current) && !isbrain(M.current) && (!H || H.dna.species.id != "memezombies" && H.dna.species.id != "memezombiesfast")
+			return M.current.is_alive() && !issilicon(M.current) && !isbrain(M.current) && (!H || H.dna.species.id != "memezombies" && H.dna.species.id != "memezombiesfast")
 		else if(isliving(M.current))
-			return M.current.stat != DEAD
+			return M.current.is_alive()
 	return FALSE
 
 /proc/considered_afk(datum/mind/M)
@@ -400,7 +400,7 @@
 	for(var/i = 1; i <= GLOB.player_list.len; i++)
 		var/mob/M = GLOB.player_list[i]
 		if(M && M.client)
-			if(alive_check && M.stat)
+			if(alive_check && M.is_concious())
 				continue
 			else if(afk_check && M.client.is_afk())
 				continue

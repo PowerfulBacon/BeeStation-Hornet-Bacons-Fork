@@ -69,7 +69,7 @@
 	client?.view_size.setTo(10)
 
 /mob/living/simple_animal/hostile/eldritch/raw_prophet/proc/link_mob(mob/living/mob_linked)
-	if(QDELETED(mob_linked) || mob_linked.stat == DEAD)
+	if(QDELETED(mob_linked) || mob_linked.is_dead())
 		return FALSE
 	if(HAS_TRAIT(mob_linked, TRAIT_MINDSHIELD)) //mindshield implant, no dice
 		return FALSE
@@ -337,7 +337,7 @@
 	playsound(src, 'sound/effects/footstep/rustystep1.ogg', 100, TRUE)
 
 /mob/living/simple_animal/hostile/eldritch/rust_spirit/Life()
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return ..()
 	var/turf/T = get_turf(src)
 	if(istype(T,/turf/open/floor/plating/rust))

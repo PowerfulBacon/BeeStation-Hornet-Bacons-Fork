@@ -110,6 +110,9 @@
   * * LANGUAGE_EXTENSION the language we're trying to use (lots of values here)
   */
 /mob/proc/get_message_mods(message, list/mods)
+	return message
+
+/mob/living/get_message_mods(message, list/mods)
 	for(var/I in 1 to MESSAGE_MODS_LENGTH)
 		var/key = message[1]
 		var/chop_to = 2 //By default we just take off the first char
@@ -117,7 +120,7 @@
 			mods[WHISPER_MODE] = MODE_WHISPER
 		else if(key == "%" && !mods[MODE_SING])
 			mods[MODE_SING] = TRUE
-		else if(key == ";" && !mods[MODE_HEADSET] && stat == CONSCIOUS)
+		else if(key == ";" && !mods[MODE_HEADSET] && body.stat == CONSCIOUS)
 			mods[MODE_HEADSET] = TRUE
 		else if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
 			mods[RADIO_KEY] = lowertext(message[1 + length(key)])

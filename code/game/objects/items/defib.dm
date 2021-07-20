@@ -487,7 +487,7 @@
 	M.adjustStaminaLoss(80)
 	M.Knockdown(75)
 	M.Jitter(50)
-	M.apply_status_effect(STATUS_EFFECT_CONVULSING)
+	M.body.apply_status_effect(STATUS_EFFECT_CONVULSING)
 	playsound(src,  'sound/machines/defib_zap.ogg', 50, TRUE, -1)
 	if(HAS_TRAIT(M,MOB_ORGANIC))
 		M.emote("gasp")
@@ -525,7 +525,7 @@
 				busy = FALSE
 				update_icon()
 				return
-			if(H && H.stat == DEAD)
+			if(H && H.is_dead())
 				to_chat(user, "<span class='warning'>[H] is dead.</span>")
 				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 				busy = FALSE
@@ -537,7 +537,7 @@
 			H.emote("scream")
 			shock_touching(45, H)
 			if(H.can_heartattack() && !H.undergoing_cardiac_arrest())
-				if(!H.stat)
+				if(H.is_concious())
 					H.visible_message("<span class='warning'>[H] thrashes wildly, clutching at [H.p_their()] chest!</span>",
 						"<span class='userdanger'>You feel a horrible agony in your chest!</span>")
 				H.set_heartattack(TRUE)
@@ -577,7 +577,7 @@
 						busy = FALSE
 						update_icon()
 						return
-			if(H.stat == DEAD)
+			if(H.is_dead())
 				H.visible_message("<span class='warning'>[H]'s body convulses a bit.</span>")
 				playsound(src, "bodyfall", 50, 1)
 				playsound(src, 'sound/machines/defib_zap.ogg', 75, 1, -1)

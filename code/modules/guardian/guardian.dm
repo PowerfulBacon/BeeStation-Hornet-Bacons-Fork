@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		var/image/holder = hud_list[STATUS_HUD]
 		var/icon/I = icon(icon, icon_state, dir)
 		holder.pixel_y = I.Height() - world.icon_size
-		if(summoner.current.stat == DEAD)
+		if(summoner.current.is_dead())
 			holder.icon_state = "huddead"
 		else
 			holder.icon_state = "hudhealthy"
@@ -195,10 +195,10 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	update_health_hud() //we need to update all of our health displays to match our summoner and we can't practically give the summoner a hook to do it
 	med_hud_set_health()
 	med_hud_set_status()
-	if(berserk || stat == DEAD)
+	if(berserk || is_dead())
 		return
 	if(!QDELETED(summoner) && !QDELETED(summoner.current))
-		if(summoner.current.stat == DEAD || (HAS_TRAIT(summoner.current, TRAIT_NODEATH) && summoner.current.health <= -100))
+		if(summoner.current.is_dead() || (HAS_TRAIT(summoner.current, TRAIT_NODEATH) && summoner.current.health <= -100))
 			if(transforming)
 				GoBerserk()
 			else
@@ -296,7 +296,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	pixel_x = initial(pixel_x)
 	pixel_y = initial(pixel_y)
 	layer = initial(layer)
-	if(!berserk && (QDELETED(summoner?.current) || summoner.current.stat == DEAD))
+	if(!berserk && (QDELETED(summoner?.current) || summoner.current.is_dead()))
 		nullspace()
 		return
 	if(summoner?.current)
@@ -334,7 +334,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 				new /obj/effect/temp_visual/guardian/phase(loc)
 
 /mob/living/simple_animal/hostile/guardian/proc/nullspace()
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		moveToNullspace()
 
 /mob/living/simple_animal/hostile/guardian/canSuicide()
@@ -401,7 +401,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 
 /mob/living/simple_animal/hostile/guardian/death()
 	. = ..()
-	if(summoner?.current && summoner.current.stat != DEAD)
+	if(summoner?.current && summoner.current.is_alive())
 		to_chat(summoner, "<span class='userdanger'>'No...' you think to yourself as your bones crumple to dust, as you watch your stand somehow die.</span>")
 		summoner.current.dust()
 	ghostize(FALSE)
@@ -428,7 +428,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 			to_chat(summoner.current, "<span class='danger'><B>Your [name] is under attack! You take damage!</span></B>")
 			if(summoner_visible)
 				summoner.current.visible_message("<span class='danger'><B>Blood sprays from [summoner] as [src] takes damage!</B></span>")
-			if(summoner.current.stat == UNCONSCIOUS)
+			if(summoner.current.body.stat == UNCONSCIOUS)
 				to_chat(summoner.current, "<span class='danger'><B>Your body can't take the strain of sustaining [src] in this condition, it begins to fall apart!</span></B>")
 				summoner.current.adjustCloneLoss(amount * 0.5) //dying hosts take 50% bonus damage as cloneloss
 		update_health_hud()
@@ -496,7 +496,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	return FALSE
 
 /mob/living/simple_animal/hostile/guardian/proc/Recall(forced)
-	if(!berserk && (QDELETED(summoner?.current) || summoner.current.stat == DEAD))
+	if(!berserk && (QDELETED(summoner?.current) || summoner.current.is_dead()))
 		nullspace()
 		return
 	if(transforming)
@@ -602,7 +602,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		UnregisterSignal(old_body, COMSIG_MOVABLE_MOVED)
 		UnregisterSignal(old_body, COMSIG_LIVING_REVIVE)
 	if(isliving(new_body))
-		if(new_body.stat == DEAD)
+		if(new_body.is_dead())
 			return
 		forceMove(new_body)
 		Reviveify()

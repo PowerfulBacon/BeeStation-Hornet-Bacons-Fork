@@ -64,7 +64,7 @@
 	desc = "Checks if the host is dead."
 
 /datum/nanite_rule/death/check_rule()
-	if(program.host_mob.stat == DEAD || HAS_TRAIT(program.host_mob, TRAIT_FAKEDEATH))
+	if(program.host_mob.is_dead() || HAS_TRAIT(program.host_mob, TRAIT_FAKEDEATH))
 		return TRUE
 	return FALSE
 

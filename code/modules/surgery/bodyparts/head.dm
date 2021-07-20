@@ -92,7 +92,7 @@
 
 
 /obj/item/bodypart/head/can_dismember(obj/item/I)
-	if(!((owner.stat == DEAD) || owner.InFullCritical()))
+	if(!((owner.is_dead()) || owner.InFullCritical()))
 		return FALSE
 	return ..()
 

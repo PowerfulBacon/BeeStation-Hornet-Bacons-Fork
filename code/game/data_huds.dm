@@ -102,7 +102,7 @@
 
 //helper for getting the appropriate health status
 /proc/RoundHealth(mob/living/M)
-	if(M.stat == DEAD || (HAS_TRAIT(M, TRAIT_FAKEDEATH)))
+	if(M.is_dead() || (HAS_TRAIT(M, TRAIT_FAKEDEATH)))
 		return "health-100" //what's our health? it doesn't matter, we're dead, or faking
 	var/maxi_health = M.maxHealth
 	if(iscarbon(M) && M.health < 0)
@@ -173,7 +173,7 @@
 	var/image/holder = hud_list[STATUS_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
-	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+	if(body.stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		holder.icon_state = "huddead"
 	else
 		holder.icon_state = "hudhealthy"
@@ -185,7 +185,7 @@
 	holder.pixel_y = I.Height() - world.icon_size
 	if(HAS_TRAIT(src, TRAIT_XENO_HOST))
 		holder.icon_state = "hudxeno"
-	else if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+	else if(body.stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		if(tod)
 			var/tdelta = round(world.time - timeofdeath)
 			if(tdelta < (DEFIB_TIME_LIMIT * 10))
@@ -317,7 +317,7 @@
 	var/image/holder = hud_list[DIAG_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		holder.icon_state = "huddiagdead"
 	else
 		holder.icon_state = "huddiag[RoundDiagBar(health/maxHealth)]"
@@ -326,7 +326,7 @@
 	var/image/holder = hud_list[DIAG_STAT_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
-	switch(stat)
+	switch(body.stat)
 		if(CONSCIOUS)
 			holder.icon_state = "hudstat"
 		if(UNCONSCIOUS)
@@ -424,7 +424,7 @@
 	holder.pixel_y = I.Height() - world.icon_size
 	if(on)
 		holder.icon_state = "hudstat"
-	else if(stat) //Generally EMP causes this
+	else if(body.stat) //Generally EMP causes this
 		holder.icon_state = "hudoffline"
 	else //Bot is off
 		holder.icon_state = "huddead2"

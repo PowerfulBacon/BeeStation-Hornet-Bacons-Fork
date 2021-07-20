@@ -59,7 +59,7 @@
 	set category = "Robot Commands"
 	set name = "Power Warning"
 
-	if(stat == CONSCIOUS)
+	if(body.stat == CONSCIOUS)
 		if(!cell || !cell.charge)
 			visible_message("The power warning light on <span class='name'>[src]</span> flashes urgently.",\
 							"You announce you are operating in low power mode.")

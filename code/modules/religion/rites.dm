@@ -173,7 +173,7 @@
 			to_chat(user, "<span class='warning'>Only carbon lifeforms can be properly burned for the sacrifice!</span>")
 			return FALSE
 		chosen_sacrifice = corpse
-		if(chosen_sacrifice.stat != DEAD)
+		if(chosen_sacrifice.is_alive())
 			to_chat(user, "<span class='warning'>You can only sacrifice dead bodies, this one is still alive!</span>")
 			chosen_sacrifice = null
 			return FALSE
@@ -192,7 +192,7 @@
 		to_chat(user, "<span class='warning'>The sacrifice is no longer on fire, it needs to burn until the end of the rite!</span>")
 		chosen_sacrifice = null
 		return FALSE
-	if(chosen_sacrifice.stat != DEAD)
+	if(chosen_sacrifice.is_alive())
 		to_chat(user, "<span class='warning'>The sacrifice has to stay dead for the rite to work!</span>")
 		chosen_sacrifice = null
 		return FALSE

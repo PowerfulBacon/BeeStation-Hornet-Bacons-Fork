@@ -56,7 +56,7 @@
 	var/datum/antagonist/hivemind/hive = user.mind.has_antag_datum(/datum/antagonist/hivemind)
 	var/success = FALSE
 
-	if(target.mind && target.client && target.stat != DEAD)
+	if(target.mind && target.client && target.is_alive())
 		if((!HAS_TRAIT(target, TRAIT_MINDSHIELD) || ignore_mindshield) && !istype(target.get_item_by_slot(ITEM_SLOT_HEAD), /obj/item/clothing/head/foilhat))
 			if(HAS_TRAIT(target, TRAIT_MINDSHIELD) && ignore_mindshield)
 				to_chat(user, "<span class='notice'>We bruteforce our way past the mental barriers of [target.name] and begin linking our minds!</span>")
@@ -135,7 +135,7 @@
 	if(!active)
 		vessel = targets[1]
 		if(vessel)
-			vessel.apply_status_effect(STATUS_EFFECT_BUGGED, user)
+			vessel.body.apply_status_effect(STATUS_EFFECT_BUGGED, user)
 			user.reset_perspective(vessel)
 			active = TRUE
 			host = user
@@ -143,7 +143,7 @@
 			user.overlay_fullscreen("hive_eyes", /atom/movable/screen/fullscreen/hive_eyes)
 		revert_cast()
 	else
-		vessel.remove_status_effect(STATUS_EFFECT_BUGGED)
+		vessel.body.remove_status_effect(STATUS_EFFECT_BUGGED)
 		user.reset_perspective()
 		user.clear_fullscreen("hive_eyes")
 		var/obj/effect/proc_holder/spell/target_hive/hive_control/the_spell = locate(/obj/effect/proc_holder/spell/target_hive/hive_control) in user.mind.spell_list
@@ -159,7 +159,7 @@
 		host.clear_fullscreen("hive_eyes")
 		active = FALSE
 		if(!QDELETED(vessel))
-			vessel.remove_status_effect(STATUS_EFFECT_BUGGED)
+			vessel.body.remove_status_effect(STATUS_EFFECT_BUGGED)
 	..()
 
 /obj/effect/proc_holder/spell/target_hive/hive_see/choose_targets(mob/user = usr)
@@ -227,7 +227,7 @@
 	var/message
 	var/distance
 
-	for(var/datum/status_effect/hive_track/track in user.status_effects)
+	for(var/datum/status_effect/hive_track/track in user.body.get_status_effects())
 		var/mob/living/L = track.tracked_by
 		if(!L)
 			continue
@@ -236,7 +236,7 @@
 			break
 		distance = get_dist(user, L)
 		message = "[(L.is_real_hivehost()) ? "Someone": "A hivemind host"] tracking us"
-		if(user.get_virtual_z_level() != L.get_virtual_z_level() || L.stat == DEAD)
+		if(user.get_virtual_z_level() != L.get_virtual_z_level() || L.is_dead())
 			message += " could not be found."
 		else
 			switch(distance)
@@ -259,7 +259,7 @@
 		var/mob/living/real_enemy = C.get_real_hivehost()
 		distance = get_dist(user, real_enemy)
 		message = "A host that we can track for [(hive.individual_track_bonus[enemy])/10] extra seconds"
-		if(user.get_virtual_z_level() != real_enemy.get_virtual_z_level() || real_enemy.stat == DEAD)
+		if(user.get_virtual_z_level() != real_enemy.get_virtual_z_level() || real_enemy.is_dead())
 			message += " could not be found."
 		else
 			switch(distance)
@@ -456,14 +456,14 @@
 		else if(!is_hivemember(backseat)) //If the vessel is no longer a hive member, return to original bodies
 			to_chat(vessel, "<span class='warning'>Our vessel is one of us no more!</span>")
 			release_control()
-		else if(!QDELETED(original_body) && (!backseat.ckey || vessel.stat == DEAD)) //If the original body exists and the vessel is dead/ghosted, return both to body but not before killing the original
+		else if(!QDELETED(original_body) && (!backseat.ckey || vessel.is_dead())) //If the original body exists and the vessel is dead/ghosted, return both to body but not before killing the original
 			original_body.adjustOrganLoss(ORGAN_SLOT_BRAIN, 200)
 			to_chat(vessel.mind, "<span class='warning'>Our vessel is one of us no more!</span>")
 			release_control()
 		else if(!QDELETED(original_body) && original_body.get_virtual_z_level() != vessel.get_virtual_z_level()) //Return to original bodies
 			release_control()
 			to_chat(original_body, "<span class='warning'>Our vessel is too far away to control!</span>")
-		else if(QDELETED(original_body) || original_body.stat == DEAD) //Return vessel to its body, either return or ghost the original
+		else if(QDELETED(original_body) || original_body.is_dead()) //Return vessel to its body, either return or ghost the original
 			to_chat(vessel, "<span class='userdanger'>Our body has been destroyed, the hive cannot survive without its host!</span>")
 			release_control()
 		else if(!out_of_range && get_dist(starting_spot, vessel) > 14)
@@ -509,7 +509,7 @@
 		to_chat(user, "<span class='notice'>This is a bug. Error:HIVE1</span>")
 		return
 	for(var/mob/living/carbon/human/target in targets)
-		if(target.stat == DEAD)
+		if(target.is_dead())
 			continue
 		target.Jitter(14)
 		target.apply_damage(35 + rand(0,15), STAMINA, target.get_bodypart(BODY_ZONE_HEAD))
@@ -568,7 +568,7 @@
 		return
 	var/list/victims = list()
 	for(var/mob/living/target in targets)
-		if(target.stat == DEAD)
+		if(target.is_dead())
 			continue
 		if(target.is_real_hivehost() || (!iscarbon(target) && !issilicon(target)))
 			continue
@@ -598,7 +598,7 @@
 		target.set_heartattack(TRUE)
 		to_chat(target, "<span class='userdanger'>You feel a sharp pain, and foreign presence in your mind!!</span>")
 		to_chat(user, "<span class='notice'>We have overloaded the vessel's medulla! Without medical attention, they will shortly die.</span>")
-		if(target.stat == CONSCIOUS)
+		if(target.body.stat == CONSCIOUS)
 			target.visible_message("<span class='userdanger'>[target] clutches at [target.p_their()] chest as if [target.p_their()] heart stopped!</span>")
 			deadchat_broadcast("<span class='deadsay'><span class='name'>[target]</span> has suffered a mysterious heart attack!</span>", target)
 	else
@@ -686,10 +686,10 @@
 				var/mob/living/real_enemy = (M.current.get_real_hivehost())
 				enemies += real_enemy
 				enemy.remove_from_hive(target)
-				real_enemy.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, user, hive.get_track_bonus(enemy))
+				real_enemy.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, user, hive.get_track_bonus(enemy))
 				if(M.current.is_real_hivehost()) //If they were using mind control, too bad
-					real_enemy.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
-					target.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_enemy, enemy.get_track_bonus(hive))
+					real_enemy.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+					target.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_enemy, enemy.get_track_bonus(hive))
 					to_chat(real_enemy, "<span class='assimilator'>We detect a surge of psionic energy from a far away vessel before they disappear from the hive. Whatever happened, there's a good chance they're after us now.</span>")
 
 			if(enemy.owner == M && target.is_real_hivehost())
@@ -705,7 +705,7 @@
 			hive.track_bonus += TRACKER_BONUS_SMALL
 			to_chat(user, "<span class='userdanger'>In a moment of clarity, we see all. Another hive. Faces. Our nemesis. They have heard our call. They know we are coming.</span>")
 			to_chat(user, "<span class='assimilator'>This vision has provided us insight on our very nature, improving our sensory abilities, particularly against the hives this vessel belonged to.</span>")
-			user.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+			user.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
 		else
 			to_chat(user, "<span class='notice'>We peer into the inner depths of their mind and see nothing, no enemies lurk inside this mind.</span>")
 	else
@@ -738,7 +738,7 @@
 	for(var/mob/living/carbon/C in targets)
 		if(!is_hivehost(C))
 			continue
-		if(C.InCritical() || (C.stat == DEAD && C?.mind.last_death + 150 >= world.time) )
+		if(C.InCritical() || (C.is_dead() && C?.mind.last_death + 150 >= world.time) )
 			C.gib()
 			hive.track_bonus += TRACKER_BONUS_LARGE
 			hive.size_mod += 5
@@ -787,7 +787,7 @@
 			continue
 		if(is_hivehost(C) || C.is_wokevessel())
 			continue
-		if(C.stat == DEAD || C.InCritical())
+		if(C.is_dead() || C.InCritical())
 			continue
 		valid_targets += C
 
@@ -928,7 +928,7 @@
 			continue
 		if(is_hivehost(C))
 			continue
-		if(C.stat == DEAD)
+		if(C.is_dead())
 			continue
 		C.Jitter(15)
 		C.Unconscious(150)

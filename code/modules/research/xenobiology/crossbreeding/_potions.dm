@@ -40,7 +40,7 @@ Slimecrossing Potions
 	icon_state = "potlightpink"
 
 /obj/item/slimepotion/peacepotion/attack(mob/living/M, mob/user)
-	if(!isliving(M) || M.stat == DEAD)
+	if(!isliving(M) || M.is_dead())
 		to_chat(user, "<span class='warning'>[src] only works on the living.</span>")
 		return ..()
 	if(istype(M, /mob/living/simple_animal/hostile/megafauna))
@@ -74,7 +74,7 @@ Slimecrossing Potions
 	icon_state = "potpink"
 
 /obj/item/slimepotion/lovepotion/attack(mob/living/M, mob/user)
-	if(!isliving(M) || M.stat == DEAD)
+	if(!isliving(M) || M.is_dead())
 		to_chat(user, "<span class='warning'>The love potion only works on living things, sicko!</span>")
 		return ..()
 	if(istype(M, /mob/living/simple_animal/hostile/megafauna))
@@ -83,7 +83,7 @@ Slimecrossing Potions
 	if(user == M)
 		to_chat(user, "<span class='warning'>You can't drink the love potion. What are you, a narcissist?</span>")
 		return ..()
-	if(M.has_status_effect(STATUS_EFFECT_INLOVE))
+	if(M.body.has_status_effect(STATUS_EFFECT_INLOVE))
 		to_chat(user, "<span class='warning'>[M] is already lovestruck!</span>")
 		return ..()
 
@@ -97,7 +97,7 @@ Slimecrossing Potions
 	if(M.mind)
 		M.mind.store_memory("You are in love with [user].")
 	M.faction |= "[REF(user)]"
-	M.apply_status_effect(STATUS_EFFECT_INLOVE, user)
+	M.body.apply_status_effect(STATUS_EFFECT_INLOVE, user)
 	qdel(src)
 
 //Pressure potion - Charged Dark Blue
@@ -183,7 +183,7 @@ Slimecrossing Potions
 	if(!isslime(M))
 		to_chat(user, "<span class='warning'>The potion only works on slimes!</span>")
 		return ..()
-	if(M.stat != DEAD)
+	if(M.is_alive())
 		to_chat(user, "<span class='warning'>The slime is still alive!</span>")
 		return
 	if(M.maxHealth <= 0)
@@ -207,7 +207,7 @@ Slimecrossing Potions
 	if(!isslime(M))
 		to_chat(user, "<span class='warning'>The stabilizer only works on slimes!</span>")
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(M.mutation_chance == 0)

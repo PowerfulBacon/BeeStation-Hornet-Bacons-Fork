@@ -84,7 +84,7 @@
 		add_fingerprint(user)
 
 /obj/structure/chair/noose/user_buckle_mob(mob/living/carbon/human/M, mob/user)
-	if(!in_range(user, src) || user.stat || user.restrained() || !iscarbon(M))
+	if(!in_range(user, src) || user.is_unconcious() || user.restrained() || !iscarbon(M))
 		return FALSE
 
 	if (!M.get_bodypart("head"))
@@ -128,7 +128,7 @@
 			animate(m, pixel_x = 3, time = 45, easing = ELASTIC_EASING)
 		if(buckled_mob.has_gravity())
 			if(buckled_mob.get_bodypart("head"))
-				if(buckled_mob.stat != DEAD)
+				if(buckled_mob.is_alive())
 					if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
 						buckled_mob.adjustOxyLoss(5)
 						if(prob(40))

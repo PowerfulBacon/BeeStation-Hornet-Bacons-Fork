@@ -174,7 +174,7 @@
 			shaved = TRUE
 			icon_living = "[initial(icon_living)]_shaved"
 			icon_dead = "[initial(icon_living)]_shaved_dead"
-			if(stat == CONSCIOUS)
+			if(body.stat == CONSCIOUS)
 				icon_state = icon_living
 			else
 				icon_state = icon_dead
@@ -393,7 +393,7 @@
 		held_state = "old_corgi"
 
 /mob/living/simple_animal/pet/dog/corgi/Ian/Life()
-	if(!stat && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
+	if(is_concious() && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
 		Write_Memory(FALSE)
 		memory_saved = TRUE
 	..()
@@ -449,7 +449,7 @@
 	..()
 
 	//Feeding, chasing food, FOOOOODDDD
-	if(!stat && !resting && !buckled)
+	if(is_concious() && !resting && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 5)
 			turns_since_scan = 0
@@ -669,7 +669,7 @@
 	if(next_scan_time <= world.time)
 		make_babies()
 
-	if(!stat && !resting && !buckled)
+	if(is_concious() && !resting && !buckled)
 		if(prob(1))
 			INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, pick("dances around.","chases her tail."))
 			spawn(0)
@@ -680,7 +680,7 @@
 /mob/living/simple_animal/pet/dog/pug/Life()
 	..()
 
-	if(!stat && !resting && !buckled)
+	if(is_concious() && !resting && !buckled)
 		if(prob(1))
 			INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, pick("chases its tail."))
 			spawn(0)
@@ -698,10 +698,10 @@
 
 /mob/living/simple_animal/pet/dog/proc/wuv(change, mob/M)
 	if(change)
-		if(M && stat != DEAD) // Added check to see if this mob (the dog) is dead to fix issue 2454
+		if(M && is_dead()) // Added check to see if this mob (the dog) is dead to fix issue 2454
 			new /obj/effect/temp_visual/heart(loc)
 			emote("me", 1, "yaps happily!")
 			SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, src, /datum/mood_event/pet_animal, src)
 	else
-		if(M && stat != DEAD) // Same check here, even though emote checks it as well (poor form to check it only in the help case)
+		if(M && is_dead()) // Same check here, even though emote checks it as well (poor form to check it only in the help case)
 			emote("me", 1, "growls!")

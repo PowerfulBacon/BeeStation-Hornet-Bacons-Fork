@@ -62,7 +62,7 @@
 /mob/living/simple_animal/bot/secbot/grievous/stun_attack(mob/living/carbon/C) //Criminals don't deserve to live
 	weapon.attack(C, src)
 	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
-	if(C.stat == DEAD)
+	if(C.is_dead())
 		addtimer(CALLBACK(src, /atom/.proc/update_icon), 2)
 		back_to_idle()
 
@@ -113,7 +113,7 @@
 	anchored = FALSE
 	var/judgment_criteria = judgment_criteria()
 	for (var/mob/living/carbon/C in view(7,src)) //Let's find us a criminal
-		if((C.stat) || (C.handcuffed))
+		if((C.is_unconcious()) || (C.handcuffed))
 			continue
 
 		if((C.name == oldtarget_name) && (world.time < last_found + 100))

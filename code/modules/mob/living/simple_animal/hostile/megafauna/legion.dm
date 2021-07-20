@@ -107,7 +107,7 @@ Difficulty: Medium
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/L = target
-		if(L.stat == UNCONSCIOUS)
+		if(L.body.stat == UNCONSCIOUS)
 			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
 			A.infest(L)
 

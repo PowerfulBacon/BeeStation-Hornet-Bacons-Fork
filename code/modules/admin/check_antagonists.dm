@@ -17,7 +17,7 @@
 	if(!owner.current)
 		return "<font color=red>(Body destroyed)</font>"
 	else
-		if(owner.current.stat == DEAD)
+		if(owner.current.is_dead())
 			return "<font color=red>(DEAD)</font>"
 		else if(!owner.current.client)
 			return "(No client)"
@@ -182,7 +182,7 @@
 			if(isnewplayer(M))
 				lobby_players++
 				continue
-			else if(M.stat != DEAD && M.mind && !isbrain(M))
+			else if(M.is_alive() && M.mind && !isbrain(M))
 				if(isdrone(M))
 					drones++
 					continue
@@ -194,7 +194,7 @@
 					living_players_antagonist++
 				if(M.client)
 					living_players_connected++
-			else if(M.stat == DEAD || isobserver(M))
+			else if(M.is_dead() || isobserver(M))
 				observers++
 				if(M.client)
 					observers_connected++

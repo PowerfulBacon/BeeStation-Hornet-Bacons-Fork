@@ -19,7 +19,7 @@
   */
 /client/verb/drop_item()
 	set hidden = 1
-	if(!iscyborg(mob) && mob.stat == CONSCIOUS)
+	if(!iscyborg(mob) && mob.is_concious())
 		mob.dropItemToGround(mob.get_active_held_item())
 	return
 
@@ -98,7 +98,7 @@
 		return Move_object(direct)
 	if(!isliving(mob))
 		return mob.Move(n, direct)
-	if(mob.stat == DEAD)
+	if(mob.is_dead())
 		mob.ghostize()
 		return FALSE
 	if(mob.force_moving)

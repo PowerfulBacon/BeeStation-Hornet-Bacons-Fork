@@ -69,7 +69,7 @@
 /obj/machinery/door/window/Bumped(atom/movable/AM)
 	if( operating || !density )
 		return
-	if (!( ismob(AM) ))
+	if (!( isliving(AM) ))
 		if(ismecha(AM))
 			var/obj/mecha/mecha = AM
 			if(mecha.occupant && allowed(mecha.occupant))
@@ -79,8 +79,8 @@
 		return
 	if (!( SSticker ))
 		return
-	var/mob/M = AM
-	if(M.restrained() || ((isdrone(M) || iscyborg(M)) && M.stat))
+	var/mob/living/M = AM
+	if(M.restrained() || ((isdrone(M) || iscyborg(M)) && M.is_unconcious()))
 		return
 	bumpopen(M)
 

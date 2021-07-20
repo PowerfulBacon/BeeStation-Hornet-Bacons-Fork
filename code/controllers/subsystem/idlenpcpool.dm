@@ -39,9 +39,9 @@ SUBSYSTEM_DEF(idlenpcpool)
 			continue
 
 		if(!SA.ckey)
-			if(SA.stat != DEAD)
+			if(SA.is_alive())
 				SA.handle_automated_movement()
-			if(SA.stat != DEAD)
+			if(SA.is_alive())
 				SA.consider_wakeup()
 		if (MC_TICK_CHECK)
 			return

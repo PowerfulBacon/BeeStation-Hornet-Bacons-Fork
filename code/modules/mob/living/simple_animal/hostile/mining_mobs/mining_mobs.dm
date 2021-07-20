@@ -30,12 +30,12 @@
 
 /mob/living/simple_animal/hostile/asteroid/LoseAggro()
 	..()
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	icon_state = icon_living
 
 /mob/living/simple_animal/hostile/asteroid/bullet_act(obj/item/projectile/P)//Reduces damage from most projectiles to curb off-screen kills
-	if(!stat)
+	if(is_concious())
 		Aggro()
 	if(P.damage < 30 && P.damage_type != BRUTE)
 		P.damage = (P.damage / 3)
@@ -45,7 +45,7 @@
 /mob/living/simple_animal/hostile/asteroid/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum) //No floor tiling them to death, wiseguy
 	if(istype(AM, /obj/item))
 		var/obj/item/T = AM
-		if(!stat)
+		if(is_concious())
 			Aggro()
 		if(T.throwforce <= 20)
 			visible_message("<span class='notice'>The [T.name] [throw_message] [src.name]!</span>")
@@ -54,7 +54,7 @@
 
 /mob/living/simple_animal/hostile/asteroid/death(gibbed)
 	SSblackbox.record_feedback("tally", "mobs_killed_mining", 1, type)
-	var/datum/status_effect/crusher_damage/C = has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
+	var/datum/status_effect/crusher_damage/C = body.has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
 	if(C && crusher_loot && prob((C.total_damage/maxHealth) * crusher_drop_mod)) //on average, you'll need to kill 4 creatures before getting the item
 		spawn_crusher_loot()
 	..(gibbed)

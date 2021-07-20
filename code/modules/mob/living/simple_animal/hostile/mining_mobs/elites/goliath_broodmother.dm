@@ -197,7 +197,7 @@
 /obj/effect/temp_visual/goliath_tentacle/broodmother/trip()
 	var/latched = FALSE
 	for(var/mob/living/L in loc)
-		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.stat == DEAD)
+		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.is_dead())
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
 		L.Stun(10)
@@ -233,5 +233,5 @@
 	return "mark detonation to have a <b>[bonus_value]%</b> chance to summon a patch of goliath tentacles at the target's location"
 
 /obj/item/crusher_trophy/broodmother_tongue/on_mark_detonation(mob/living/target, mob/living/user)
-	if(rand(1, 100) <= bonus_value && target.stat != DEAD)
+	if(rand(1, 100) <= bonus_value && target.is_alive())
 		new /obj/effect/temp_visual/goliath_tentacle/broodmother/patch(get_turf(target), user)

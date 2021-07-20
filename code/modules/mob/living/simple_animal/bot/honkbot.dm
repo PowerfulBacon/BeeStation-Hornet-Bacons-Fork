@@ -291,7 +291,7 @@ Maintenance panel panel is [open ? "opened" : "closed"]"},
 /mob/living/simple_animal/bot/honkbot/proc/look_for_perp()
 	anchored = FALSE
 	for (var/mob/living/carbon/C in view(7,src))
-		if((C.stat) || (C.handcuffed))
+		if((C.is_unconcious()) || (C.handcuffed))
 			continue
 
 		if((C.name == oldtarget_name) && (world.time < last_found + 100))

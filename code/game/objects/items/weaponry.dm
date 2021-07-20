@@ -143,7 +143,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/claymore/highlander/attack(mob/living/target, mob/living/user)
 	. = ..()
-	if(!QDELETED(target) && iscarbon(target) && target.stat == DEAD && target.mind && target.mind.special_role == "highlander")
+	if(!QDELETED(target) && iscarbon(target) && target.is_dead() && target.mind && target.mind.special_role == "highlander")
 		user.fully_heal() //STEAL THE LIFE OF OUR FALLEN FOES
 		add_notch(user)
 		target.visible_message("<span class='warning'>[target] crumbles to dust beneath [user]'s blows!</span>", "<span class='userdanger'>As you fall, your body crumbles to dust!</span>")
@@ -843,7 +843,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/highfive/attack(mob/target, mob/user)
 	if(target == user)
 		to_chat(user, "<span class='notice'>You can't high-five yourself! Go get a friend!</span>")
-	else if(ishuman(target) && (target.stat == CONSCIOUS) && (istype(target.get_active_held_item(), /obj/item/highfive)) )
+	else if(ishuman(target) && target.is_concious() && (istype(target.get_active_held_item(), /obj/item/highfive)) )
 		var/obj/item/highfive/downlow = target.get_active_held_item()
 		user.visible_message("[user] and [target] high five!", "<span class='notice'>You high five with [target]!</span>", "<span class='italics'>You hear a slap!</span>")
 		user.do_attack_animation(target)

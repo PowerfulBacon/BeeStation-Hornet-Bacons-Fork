@@ -26,7 +26,7 @@
 			give_mind(ghost)
 
 /mob/living/proc/give_mind(mob/user)
-	if(key || !playable || stat)
+	if(key || !playable || is_unconcious())
 		return 0
 	var/question = alert("Do you want to become [name]?", "[name]", "Yes", "No")
 	if(question == "No" || !src || QDELETED(src))

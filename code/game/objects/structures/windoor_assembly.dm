@@ -218,7 +218,7 @@
 				else
 					W.forceMove(drop_location())
 
-			//Adding an electroadaptive pseudocircuit for access. Step 6 complete.		
+			//Adding an electroadaptive pseudocircuit for access. Step 6 complete.
 			else if(istype(W, /obj/item/electroadaptive_pseudocircuit))
 				var/obj/item/electroadaptive_pseudocircuit/EP = W
 				if(EP.adapt_circuit(user, 25))
@@ -361,7 +361,7 @@
 	set name = "Flip Windoor Assembly"
 	set category = "Object"
 	set src in oview(1)
-	if(usr.stat || usr.restrained())
+	if(usr.is_unconcious() || usr.restrained())
 		return
 
 	if(isliving(usr))

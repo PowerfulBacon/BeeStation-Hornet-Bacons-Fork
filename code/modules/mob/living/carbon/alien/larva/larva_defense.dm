@@ -8,7 +8,7 @@
 			log_combat(M, src, "attacked")
 			visible_message("<span class='danger'>[M] kicks [src]!</span>", \
 					"<span class='userdanger'>[M] kicks you!</span>", null, COMBAT_MESSAGE_RANGE)
-			if ((stat != DEAD) && (damage > 4.9))
+			if ((body.stat != DEAD) && (damage > 4.9))
 				Unconscious(rand(100,200))
 
 			var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))

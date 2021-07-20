@@ -292,7 +292,7 @@
 		if(scanner_occupant.transformation_timer)
 			data["subjectStatus"] = STATUS_TRANSFORMING
 		else
-			data["subjectStatus"] = scanner_occupant.stat
+			data["subjectStatus"] = scanner_occupant.body.stat
 		data["subjectHealth"] = scanner_occupant.health
 		data["subjectRads"] = scanner_occupant.radiation/(RAD_MOB_SAFE/100)
 		data["subjectEnzymes"] = scanner_occupant.dna.unique_enzymes

@@ -75,7 +75,7 @@
 		var/mob/M = i
 		if(HAS_TRAIT(user, TRAIT_MUSICIAN) && isliving(M))
 			var/mob/living/L = M
-			L.apply_status_effect(STATUS_EFFECT_GOOD_MUSIC)
+			L.body.apply_status_effect(STATUS_EFFECT_GOOD_MUSIC)
 		if(!M.client || !(M.client.prefs.toggles & SOUND_INSTRUMENTS))
 			continue
 		M.playsound_local(source, null, 100, falloff_exponent = 5, S = music_played)

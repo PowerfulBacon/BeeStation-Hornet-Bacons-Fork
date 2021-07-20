@@ -48,7 +48,7 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 
 /obj/effect/rune/examine(mob/user)
 	. = ..()
-	if(iscultist(user) || user.stat == DEAD) //If they're a cultist or a ghost, tell them the effects
+	if(iscultist(user) || user.is_dead()) //If they're a cultist or a ghost, tell them the effects
 		. += "<b>Name:</b> [cultist_name]\n"+\
 		"<b>Effects:</b> [capitalize(cultist_desc)]\n"+\
 		"<b>Required Acolytes:</b> [req_cultists_text ? "[req_cultists_text]":"[req_cultists]"]"
@@ -127,7 +127,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 					var/mob/living/carbon/human/H = L
 					if((HAS_TRAIT(H, TRAIT_MUTE)) || H.silent)
 						continue
-				if(L.stat)
+				if(L.is_unconcious())
 					continue
 				invokers += L
 	return invokers
@@ -213,7 +213,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/datum/antagonist/cult/C = F.mind.has_antag_datum(/datum/antagonist/cult,TRUE)
 	var/datum/team/cult/Cult_team = C.cult_team
 	var/is_convertable = is_convertable_to_cult(L,C.cult_team)
-	if(L.stat != DEAD && (is_convertable))
+	if(L.is_alive() && (is_convertable))
 		invocation = "Mah'weyh pleggh at e'ntrath!"
 		..()
 		if(is_convertable)
@@ -270,7 +270,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 
 
 	var/big_sac = FALSE
-	if((((ishuman(sacrificial) || iscyborg(sacrificial)) && sacrificial.stat != DEAD) || C.cult_team.is_sacrifice_target(sacrificial.mind)) && invokers.len < 3)
+	if((((ishuman(sacrificial) || iscyborg(sacrificial)) && sacrificial.is_alive()) || C.cult_team.is_sacrifice_target(sacrificial.mind)) && invokers.len < 3)
 		for(var/M in invokers)
 			to_chat(M, "<span class='cult italic'>[sacrificial] is too greatly linked to the world! You need three acolytes!</span>")
 		log_game("Offer rune failed - not enough acolytes and target is living or sac target")
@@ -533,7 +533,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 
 /obj/effect/rune/raise_dead/examine(mob/user)
 	. = ..()
-	if(iscultist(user) || user.stat == DEAD)
+	if(iscultist(user) || user.is_dead())
 		var/revive_number = LAZYLEN(GLOB.sacrificed) - revives_used
 		. += "<b>Revives Remaining:</b> [revive_number]"
 
@@ -546,7 +546,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		return
 	rune_in_use = TRUE
 	for(var/mob/living/M in T.contents)
-		if(iscultist(M) && (M.stat == DEAD || !M.client || M.client.is_afk()))
+		if(iscultist(M) && (M.is_dead() || !M.client || M.client.is_afk()))
 			potential_revive_mobs |= M
 	if(!potential_revive_mobs.len)
 		to_chat(user, "<span class='cult italic'>There are no dead cultists on the rune!</span>")
@@ -565,7 +565,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 	else
 		invocation = initial(invocation)
 	..()
-	if(mob_to_revive.stat == DEAD)
+	if(mob_to_revive.is_dead())
 		var/diff = LAZYLEN(GLOB.sacrificed) - revives_used - SOULS_TO_REVIVE
 		if(diff < 0)
 			to_chat(user, "<span class='warning'>Your cult must carry out [abs(diff)] more sacrifice\s before it can revive another cultist!</span>")
@@ -610,7 +610,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 	..()
 	rune_in_use = FALSE
 	for(var/mob/living/M in hearers(1,src))
-		if(iscultist(M) && M.stat == DEAD)
+		if(iscultist(M) && M.is_dead())
 			M.visible_message("<span class='warning'>[M] twitches.</span>")
 
 //Rite of the Corporeal Shield: When invoked, becomes solid and cannot be passed. Invoke again to undo.
@@ -708,7 +708,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/mob/living/user = invokers[1]
 	var/list/cultists = list()
 	for(var/datum/mind/M in SSticker.mode.cult)
-		if(!(M.current in invokers) && M.current && M.current.stat != DEAD)
+		if(!(M.current in invokers) && M.current && M.current.is_alive())
 			cultists |= M.current
 	var/mob/living/cultist_to_summon = input(user, "Who do you wish to call to [src]?", "Followers of the Geometer") as null|anything in cultists
 	var/held_in_place = FALSE
@@ -723,7 +723,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		fail_invoke()
 		log_game("Summon Cultist rune failed - no target")
 		return
-	if(cultist_to_summon.stat == DEAD)
+	if(cultist_to_summon.is_dead())
 		to_chat(user, "<span class='cult italic'>[cultist_to_summon] has died!</span>")
 		fail_invoke()
 		log_game("Summon Cultist rune failed - target died")
@@ -835,7 +835,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		fail_invoke()
 		log_game("Manifest rune failed - user not standing on rune")
 		return list()
-	if(user.has_status_effect(STATUS_EFFECT_SUMMONEDGHOST))
+	if(user.body.has_status_effect(STATUS_EFFECT_SUMMONEDGHOST))
 		to_chat(user, "<span class='cult italic'>Ghosts can't summon more ghosts!</span>")
 		fail_invoke()
 		log_game("Manifest rune failed - user is a ghost")
@@ -872,7 +872,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		new_human.real_name = ghost_to_spawn.real_name
 		new_human.alpha = 150 //Makes them translucent
 		new_human.equipOutfit(/datum/outfit/ghost_cultist) //give them armor
-		new_human.apply_status_effect(STATUS_EFFECT_SUMMONEDGHOST) //ghosts can't summon more ghosts
+		new_human.body.apply_status_effect(STATUS_EFFECT_SUMMONEDGHOST) //ghosts can't summon more ghosts
 		new_human.see_invisible = SEE_INVISIBLE_OBSERVER
 		ghosts++
 		playsound(src, 'sound/magic/exit_blood.ogg', 50, 1)
@@ -884,7 +884,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		to_chat(new_human, "<span class='cultitalic'><b>You are a servant of the Geometer. You have been made semi-corporeal by the cult of Nar'Sie, and you are to serve them at all costs.</b></span>")
 
 		while(!QDELETED(src) && !QDELETED(user) && !QDELETED(new_human) && (user in T))
-			if(user.stat || new_human.InCritical())
+			if(user.is_unconcious() || new_human.InCritical())
 				break
 			user.apply_damage(0.1, BRUTE)
 			sleep(1)

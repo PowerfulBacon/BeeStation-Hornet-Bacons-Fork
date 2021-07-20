@@ -169,7 +169,7 @@
   * * user The mob starting the biomass processing
   */
 /obj/machinery/biogenerator/proc/activate(mob/user)
-	if(user.stat != CONSCIOUS)
+	if(user.is_unconcious())
 		return
 	if(stat != NONE)
 		return

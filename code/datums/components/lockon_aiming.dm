@@ -153,8 +153,8 @@
 	on_lock.Invoke(locked_weakrefs)
 
 /datum/component/lockon_aiming/proc/can_target(atom/A)
-	var/mob/M = A
-	return is_type_in_typecache(A, target_typecache) && !(ismob(A) && mob_stat_check && M.stat != CONSCIOUS) && !immune_weakrefs[WEAKREF(A)]
+	var/mob/living/M = A
+	return is_type_in_typecache(A, target_typecache) && !(isliving(A) && mob_stat_check && M.body.stat != CONSCIOUS) && !immune_weakrefs[WEAKREF(A)]
 
 /datum/component/lockon_aiming/proc/get_nearest(turf/T, list/typecache, amount, range)
 	current_ranging_id++

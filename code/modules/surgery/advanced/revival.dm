@@ -16,7 +16,7 @@
 /datum/surgery/advanced/revival/can_start(mob/user, mob/living/carbon/target)
 	if(!..())
 		return FALSE
-	if(target.stat != DEAD)
+	if(target.is_alive())
 		return FALSE
 	if(target.suiciding || target.hellbound || HAS_TRAIT(target, TRAIT_HUSK))
 		return FALSE

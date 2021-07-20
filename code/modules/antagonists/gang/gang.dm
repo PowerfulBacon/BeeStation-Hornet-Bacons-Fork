@@ -420,7 +420,7 @@
 /datum/team/gang/proc/check_gangster_swag(var/mob/living/carbon/human/gangster)
 	//Gangster must be alive and on station
 	var/swag = 1
-	if((gangster.stat == DEAD) || !(is_station_level(gangster.z)))
+	if((gangster.is_dead()) || !(is_station_level(gangster.z)))
 		return FALSE
 	if (gangster.w_uniform?.type == outfit)
 		swag *= INFLUENCE_SWAG
@@ -439,7 +439,7 @@
 	for(var/i in gangtools)
 		var/obj/item/device/gangtool/tool = i
 		var/mob/living/mob = get(tool.loc, /mob/living)
-		if(mob && mob.mind && mob.stat == CONSCIOUS)
+		if(mob && mob.mind && mob.body.stat == CONSCIOUS)
 			var/datum/antagonist/gang/gangster = mob.mind.has_antag_datum(/datum/antagonist/gang)
 			if(gangster.gang == src)
 				to_chat(mob, "<span class='warning'>[icon2html(tool, mob)] [message]</span>")

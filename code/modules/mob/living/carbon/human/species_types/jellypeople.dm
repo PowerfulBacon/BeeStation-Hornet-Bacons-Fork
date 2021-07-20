@@ -32,7 +32,7 @@
 		regenerate_limbs.Grant(C)
 
 /datum/species/jelly/spec_life(mob/living/carbon/human/H)
-	if(H.stat == DEAD) //can't farm slime jelly from a dead slime/jelly person indefinitely
+	if(H.is_dead()) //can't farm slime jelly from a dead slime/jelly person indefinitely
 		return
 	if(!H.blood_volume)
 		H.blood_volume += 5
@@ -300,7 +300,7 @@
 		L["htmlcolor"] = "#[body.dna.features["mcolor"]]"
 		L["area"] = get_area_name(body, TRUE)
 		var/stat = "error"
-		switch(body.stat)
+		switch(H.body.stat)
 			if(CONSCIOUS)
 				stat = "Conscious"
 			if(UNCONSCIOUS)
@@ -368,10 +368,10 @@
 		SS.bodies -= dupe
 		return FALSE
 
-	if(dupe.stat == DEAD) 				//Is it alive?
+	if(dupe.is_dead()) 				//Is it alive?
 		return FALSE
 
-	if(dupe.stat != CONSCIOUS) 			//Is it awake?
+	if(dupe.body.stat != CONSCIOUS) 			//Is it awake?
 		return FALSE
 
 	if(dupe.mind && dupe.mind.active) 	//Is it unoccupied?
@@ -385,7 +385,7 @@
 /datum/action/innate/swap_body/proc/swap_to_dupe(datum/mind/M, mob/living/carbon/human/dupe)
 	if(!can_swap(dupe)) //sanity check
 		return
-	if(M.current.stat == CONSCIOUS)
+	if(M.current.body.stat == CONSCIOUS)
 		M.current.visible_message("<span class='notice'>[M.current] \
 			stops moving and starts staring vacantly into space.</span>",
 			"<span class='notice'>You stop moving this body...</span>")
@@ -618,7 +618,7 @@
 	link_mob(C)
 
 /datum/species/jelly/stargazer/proc/link_mob(mob/living/M)
-	if(QDELETED(M) || M.stat == DEAD)
+	if(QDELETED(M) || M.is_dead())
 		return FALSE
 	if(HAS_TRAIT(M, TRAIT_MINDSHIELD)) //mindshield implant, no dice
 		return FALSE
@@ -674,7 +674,7 @@
 		Remove(H)
 		return
 
-	if(QDELETED(H) || H.stat == DEAD)
+	if(QDELETED(H) || H.is_dead())
 		species.unlink_mob(H)
 		return
 
@@ -685,7 +685,7 @@
 		log_directed_talk(H, star_owner, msg, LOG_SAY, "slime link")
 		for(var/X in species.linked_mobs)
 			var/mob/living/M = X
-			if(QDELETED(M) || M.stat == DEAD)
+			if(QDELETED(M) || M.is_dead())
 				species.unlink_mob(M)
 				continue
 			to_chat(M, msg)
@@ -704,7 +704,7 @@
 
 /datum/action/innate/project_thought/Activate()
 	var/mob/living/carbon/human/H = owner
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		return
 	if(!is_species(H, /datum/species/jelly/stargazer))
 		return

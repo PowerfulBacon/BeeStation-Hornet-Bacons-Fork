@@ -85,7 +85,7 @@
 			beat = BEAT_NONE
 
 	if(organ_flags & ORGAN_FAILING)	//heart broke, stopped beating, death imminent
-		if(owner.stat == CONSCIOUS)
+		if(owner.body.stat == CONSCIOUS)
 			owner.visible_message("<span class='userdanger'>[owner] clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!</span>")
 		owner.set_heartattack(TRUE)
 		failed = TRUE
@@ -188,7 +188,7 @@
 
 /obj/item/organ/heart/cybernetic/on_life()
 	. = ..()
-	if(dose_available && owner.stat == UNCONSCIOUS && !owner.reagents.has_reagent(rid))
+	if(dose_available && owner.body.stat == UNCONSCIOUS && !owner.reagents.has_reagent(rid))
 		owner.reagents.add_reagent(rid, ramount)
 		used_dose()
 

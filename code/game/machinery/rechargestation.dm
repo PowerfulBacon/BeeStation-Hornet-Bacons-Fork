@@ -42,8 +42,8 @@
 		process_occupant(delta_time)
 	return 1
 
-/obj/machinery/recharge_station/relaymove(mob/user)
-	if(user.stat)
+/obj/machinery/recharge_station/relaymove(mob/living/user)
+	if(user.is_concious())
 		return
 	open_machine()
 

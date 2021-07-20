@@ -29,7 +29,7 @@
 		return
 
 	if(istype(O, /obj/item/newspaper))
-		if(!stat)
+		if(is_concious())
 			user.visible_message("[user] baps [name] on the nose with the rolled up [O].")
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2))

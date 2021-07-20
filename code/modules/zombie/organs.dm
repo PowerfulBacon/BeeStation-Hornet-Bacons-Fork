@@ -47,7 +47,7 @@
 		return
 	if(!(src in owner.internal_organs))
 		Remove(owner)
-	if (causes_damage && !iszombie(owner) && owner.stat != DEAD)
+	if (causes_damage && !iszombie(owner) && owner.is_alive())
 		owner.adjustToxLoss(0.5 * delta_time)
 		if(DT_PROB(5, delta_time))
 			to_chat(owner, "<span class='danger'>You feel sick...</span>")
@@ -55,7 +55,7 @@
 		return
 	if(owner.suiciding)
 		return
-	if(owner.stat != DEAD && !converts_living)
+	if(owner.is_alive() && !converts_living)
 		return
 	if(!owner.getorgan(/obj/item/organ/brain))
 		return
@@ -70,14 +70,14 @@
 /obj/item/organ/zombie_infection/proc/zombify()
 	timer_id = null
 
-	if(!converts_living && owner.stat != DEAD)
+	if(!converts_living && owner.is_alive())
 		return
 
 	if(!iszombie(owner))
 		old_species = owner.dna.species.type
 		owner.set_species(/datum/species/zombie/infectious)
 
-	var/stand_up = (owner.stat == DEAD) || (owner.stat == UNCONSCIOUS)
+	var/stand_up = (owner.is_dead()) || (owner.body.stat == UNCONSCIOUS)
 
 	//Fully heal the zombie's damage the first time they rise
 	owner.setToxLoss(0, 0)

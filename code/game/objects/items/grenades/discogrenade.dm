@@ -89,7 +89,7 @@
 /obj/item/grenade/discogrenade/subgrenade/proc/forcedance(turf/T , mob/living/carbon/human/M)
 	if(!T)
 		return
-	if(M.stat != CONSCIOUS)	//Only conscious people can dance
+	if(M.body.stat != CONSCIOUS)	//Only conscious people can dance
 		return
 	if(!M || isethereal(M))	//Non humans and non etherals can't dance
 		return

@@ -108,7 +108,7 @@
                 owner.timeofdeath = new_timeofdeath
                 owner.tod = station_time_timestamp(wtime=new_timeofdeath)
                 last_dead_time = null
-        if(owner.stat == DEAD)
+        if(owner.is_dead())
                 last_dead_time = world.time
 
 /datum/status_effect/incapacitating/stasis/on_creation(mob/living/new_owner, set_duration, updating_canmove)
@@ -163,7 +163,7 @@
 		if(isliving(owner))
 			var/mob/living/L = owner
 			to_chat(owner, "<span class='notice'>You succesfuly remove the durathread strand.</span>")
-			L.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+			L.body.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 
 /datum/status_effect/syringe
 	id = "syringe"
@@ -206,7 +206,7 @@
 	var/list/syringes = list()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		for(var/datum/status_effect/syringe/S in C.status_effects)
+		for(var/datum/status_effect/syringe/S in C.body.get_status_effects())
 			syringes += S
 		if(!syringes.len)
 			return
@@ -226,7 +226,7 @@
 				syringe.reagents.trans_to(C, amount)
 				syringe.forceMove(C.loc)
 				qdel(syringestatus)
-		if(!C.has_status_effect(STATUS_EFFECT_SYRINGE))
+		if(!C.body.has_status_effect(STATUS_EFFECT_SYRINGE))
 			C.clear_alert("syringealert")
 
 
@@ -350,7 +350,7 @@
 	return ..()
 
 /datum/status_effect/saw_bleed/on_apply()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		return FALSE
 	bleed_overlay = mutable_appearance('icons/effects/bleed.dmi', "bleed[bleed_amount]")
 	bleed_underlay = mutable_appearance('icons/effects/bleed.dmi', "bleed[bleed_amount]")
@@ -367,7 +367,7 @@
 	return ..()
 
 /datum/status_effect/saw_bleed/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		qdel(src)
 	else
 		add_bleed(-1)
@@ -409,17 +409,17 @@
 
 /datum/status_effect/neck_slice/tick()
 	var/mob/living/carbon/human/H = owner
-	if(H.stat == DEAD || H.bleed_rate <= 8)
-		H.remove_status_effect(/datum/status_effect/neck_slice)
+	if(H.is_dead() || H.bleed_rate <= 8)
+		H.body.remove_status_effect(/datum/status_effect/neck_slice)
 	if(prob(10))
 		H.emote(pick("gasp", "gag", "choke"))
 
 /mob/living/proc/apply_necropolis_curse(set_curse)
-	var/datum/status_effect/necropolis_curse/C = has_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE)
+	var/datum/status_effect/necropolis_curse/C = body.has_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE)
 	if(!set_curse)
 		set_curse = pick(CURSE_BLINDING, CURSE_SPAWNING, CURSE_WASTING, CURSE_GRASPING)
 	if(QDELETED(C))
-		apply_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE, set_curse)
+		body.apply_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE, set_curse)
 	else
 		C.apply_curse(set_curse)
 		C.duration += 3000 //additional curses add 5 minutes
@@ -459,7 +459,7 @@
 	curse_flags &= ~remove_curse
 
 /datum/status_effect/necropolis_curse/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		return
 	if(curse_flags & CURSE_WASTING)
 		wasting_effect.forceMove(owner.loc)
@@ -841,7 +841,7 @@
 		for(var/mob/living/carbon/victim in ohearers(1,carbon_owner))
 			if(IS_HERETIC(victim))
 				continue
-			victim.apply_status_effect(type,repetitions-1)
+			victim.body.apply_status_effect(type,repetitions-1)
 			break
 	return ..()
 

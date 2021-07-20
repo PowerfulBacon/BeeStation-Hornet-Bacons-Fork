@@ -6,7 +6,7 @@
 			to_chat(M, "[link] [msg]")
 	for(var/i in GLOB.drones_list)
 		var/mob/living/simple_animal/drone/D = i
-		if(istype(D) && D.stat != DEAD)
+		if(istype(D) && D.is_alive())
 			if(faction_checked_mob)
 				if(D.faction_check_mob(faction_checked_mob, exact_faction_match))
 					to_chat(D, msg)

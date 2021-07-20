@@ -44,7 +44,7 @@
 
 /mob/living/simple_animal/hostile/mushroom/Life()
 	..()
-	if(!stat)//Mushrooms slowly regenerate if conscious, for people who want to save them from being eaten
+	if(is_concious())//Mushrooms slowly regenerate if conscious, for people who want to save them from being eaten
 		adjustBruteLoss(-2)
 
 /mob/living/simple_animal/hostile/mushroom/Initialize()//Makes every shroom a little unique
@@ -71,7 +71,7 @@
 
 		if (!faction_check_mob(L) && attack_same == 2)
 			return FALSE
-		if(L.stat > stat_attack)
+		if(L.body.stat > stat_attack)
 			return FALSE
 
 		return TRUE
@@ -88,7 +88,7 @@
 	retreat_distance = null
 
 /mob/living/simple_animal/hostile/mushroom/attack_animal(mob/living/L)
-	if(istype(L, /mob/living/simple_animal/hostile/mushroom) && stat == DEAD)
+	if(istype(L, /mob/living/simple_animal/hostile/mushroom) && is_dead())
 		var/mob/living/simple_animal/hostile/mushroom/M = L
 		if(faint_ticker < 2)
 			M.visible_message("[M] chews a bit on [src].")
@@ -143,13 +143,13 @@
 	adjustBruteLoss(-maxHealth) //They'll always heal, even if they don't gain a level, in case you want to keep this shroom around instead of harvesting it
 
 /mob/living/simple_animal/hostile/mushroom/proc/Bruise()
-	if(!bruised && !stat)
+	if(!bruised && is_concious())
 		src.visible_message("The [src.name] was bruised!")
 		bruised = 1
 
 /mob/living/simple_animal/hostile/mushroom/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/grown/mushroom))
-		if(stat == DEAD && !recovery_cooldown)
+		if(is_dead() && !recovery_cooldown)
 			Recover()
 			qdel(I)
 		else

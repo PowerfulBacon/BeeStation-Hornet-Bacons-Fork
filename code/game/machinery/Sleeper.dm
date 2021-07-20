@@ -64,7 +64,7 @@
 	if (!state_open && user == occupant)
 		container_resist(user)
 
-/obj/machinery/sleeper/relaymove(mob/user)
+/obj/machinery/sleeper/relaymove(mob/living/user)
 	if (!state_open)
 		container_resist(user)
 
@@ -78,7 +78,7 @@
 		flick("[initial(icon_state)]-anim", src)
 		..(user)
 		var/mob/living/mob_occupant = occupant
-		if(mob_occupant && mob_occupant.stat != DEAD)
+		if(mob_occupant && mob_occupant.is_alive())
 			to_chat(occupant, "[enter_message]")
 
 /obj/machinery/sleeper/emp_act(severity)
@@ -89,7 +89,7 @@
 		open_machine()
 
 /obj/machinery/sleeper/MouseDrop_T(mob/target, mob/user)
-	if(user.stat || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !user.IsAdvancedToolUser())
+	if(user.is_unconcious() || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !user.IsAdvancedToolUser())
 		return
 	if(isliving(user))
 		var/mob/living/L = user
@@ -173,7 +173,7 @@
 	var/mob/living/mob_occupant = occupant
 	if(mob_occupant)
 		data["occupant"]["name"] = mob_occupant.name
-		switch(mob_occupant.stat)
+		switch(mob_occupant.body.stat)
 			if(CONSCIOUS)
 				data["occupant"]["stat"] = "Conscious"
 				data["occupant"]["statstate"] = "good"

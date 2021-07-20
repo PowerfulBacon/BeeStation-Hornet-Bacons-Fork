@@ -138,7 +138,7 @@
 
 	var/mob/living/carbon/human/M = AM
 
-	if(M.stat != DEAD && M.ckey)
+	if(M.is_alive() && M.ckey)
 		visible_message("<span class='warning'>[M] triggered [src]!</span>")
 		triggered = 1
 
@@ -155,11 +155,11 @@
 	set name = "Resurrection"
 
 	var/mob/living/carbon/C = usr
-	if(!C.stat)
+	if(C.is_concious())
 		to_chat(C, "<span class='notice'>You're not dead yet!</span>")
 		return
-	if(C.has_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT))
+	if(C.body.has_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT))
 		to_chat(C, "<span class='warning'>You're already resurrecting!</span>")
 		return
-	C.apply_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT)
+	C.body.apply_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT)
 	return 1

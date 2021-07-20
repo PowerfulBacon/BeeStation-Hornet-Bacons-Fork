@@ -15,12 +15,12 @@
 	.=..()
 	var/mob/living/carbon/C = user
 	to_chat(user, "<span class='warning'>We search for the scent of any nearby changelings.</span>")
-	C.apply_status_effect(/datum/status_effect/agent_pinpointer/changeling)
+	C.body.apply_status_effect(/datum/status_effect/agent_pinpointer/changeling)
 
 /datum/action/changeling/pheromone_receptors/Remove(mob/user)
 	.=..()
 	var/mob/living/carbon/C = user
-	C.remove_status_effect(/datum/status_effect/agent_pinpointer/changeling)
+	C.body.remove_status_effect(/datum/status_effect/agent_pinpointer/changeling)
 
 //Modified IA pinpointer - Points to the NEAREST changeling, but will only get you within a few tiles of the target.
 //You'll still have to rely on intuition and observation to make the identification.  Lings can 'hide' in public places.

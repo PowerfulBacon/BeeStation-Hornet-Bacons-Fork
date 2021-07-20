@@ -127,4 +127,4 @@ Slimecrossing Weapons
 /obj/item/projectile/magic/bloodchill/on_hit(mob/living/target)
 	. = ..()
 	if(isliving(target))
-		target.apply_status_effect(/datum/status_effect/bloodchill)
+		target.body.apply_status_effect(/datum/status_effect/bloodchill)

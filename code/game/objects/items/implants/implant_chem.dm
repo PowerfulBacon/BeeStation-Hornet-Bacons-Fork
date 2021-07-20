@@ -31,7 +31,7 @@
 
 /obj/item/implant/chem/trigger(emote, mob/living/source)
 	if(emote == "deathgasp")
-		if(istype(source) && !(source.stat == DEAD))
+		if(istype(source) && !(source.is_dead()))
 			return
 		activate(reagents.total_volume)
 

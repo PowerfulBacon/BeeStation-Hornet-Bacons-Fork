@@ -47,7 +47,7 @@
 	for(var/mob/living/carbon/alien/humanoid/royal/queen/Q in GLOB.carbon_list)
 		if(Q == src)
 			continue
-		if(Q.stat == DEAD)
+		if(Q.is_dead())
 			continue
 		if(Q.client)
 			name = "alien princess ([rand(1, 999)])"	//if this is too cutesy feel free to change it/remove it.
@@ -69,7 +69,7 @@
 	..()
 
 /mob/living/carbon/alien/humanoid/royal/queen/proc/game_end()
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		SSshuttle.clearHostileEnvironment(src)
 		if(EMERGENCY_IDLE_OR_RECALLED)
 			priority_announce("Xenomorph infestation detected: crisis shuttle protocols activated - jamming recall signals across all frequencies.", SSstation.announcer.get_rand_alert_sound())
@@ -153,7 +153,7 @@
 		return
 
 	var/mob/living/carbon/alien/humanoid/A = M
-	if(A.stat == CONSCIOUS && A.mind && A.key)
+	if(A.body.stat == CONSCIOUS && A.mind && A.key)
 		if(!user.usePlasma(500))
 			to_chat(user, "<span class='noticealien'>You must have 500 plasma stored to use this!</span>")
 			return

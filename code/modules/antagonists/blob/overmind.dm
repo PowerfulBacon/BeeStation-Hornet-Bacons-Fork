@@ -227,7 +227,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
-	if (stat)
+	if (is_unconcious())
 		return
 
 	blob_talk(message)

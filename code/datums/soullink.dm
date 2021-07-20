@@ -152,7 +152,7 @@
 		var/list/souls = shuffle(soulsharers.Copy())
 		for(var/l in souls)
 			var/mob/living/L = l
-			if(L.stat != DEAD && L.mind)
+			if(L.is_alive() && L.mind)
 				L.mind.transfer_to(soulowner)
 				soulowner.revive(TRUE, TRUE)
 				L.death(FALSE)

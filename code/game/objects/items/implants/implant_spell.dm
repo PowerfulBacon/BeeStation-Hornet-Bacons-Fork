@@ -29,7 +29,7 @@
 	. = ..()
 	if (.)
 		target.RemoveSpell(spell)
-		if(target.stat != DEAD && !silent)
+		if(target.is_alive() && !silent)
 			to_chat(target, "<span class='boldnotice'>The knowledge of how to cast [spell] slips out from your mind.</span>")
 
 /obj/item/implanter/spell

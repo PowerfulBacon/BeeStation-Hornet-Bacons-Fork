@@ -19,11 +19,11 @@
 			standing = TRUE
 			break
 	if(!standing)
-		if(stat != DEAD)
+		if(is_alive())
 			icon_state = "crawling"
 			speed = 1
 		return ..()
-	if(stat != DEAD)
+	if(is_alive())
 		icon_state = "standing"
 		speed = 3 // Gorillas are slow when standing up.
 

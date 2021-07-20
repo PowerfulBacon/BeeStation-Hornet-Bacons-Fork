@@ -238,7 +238,7 @@
 		if(!busy && prob(30))	//30% chance to stop wandering and do something
 			//first, check for potential food nearby to cocoon
 			for(var/mob/living/C in can_see)
-				if(C.stat && !istype(C, /mob/living/simple_animal/hostile/poison/giant_spider) && !C.anchored)
+				if(C.body.stat && !istype(C, /mob/living/simple_animal/hostile/poison/giant_spider) && !C.anchored)
 					cocoon_target = C
 					busy = MOVING_TO_TARGET
 					Goto(C, move_to_delay)
@@ -278,7 +278,7 @@
 		stop_automated_movement = FALSE
 
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/proc/cocoon()
-	if(stat != DEAD && cocoon_target && !cocoon_target.anchored)
+	if(is_alive() && cocoon_target && !cocoon_target.anchored)
 		if(cocoon_target == src)
 			to_chat(src, "<span class='warning'>You can't wrap yourself!</span>")
 			return
@@ -300,7 +300,7 @@
 				var/obj/structure/spider/cocoon/C = new(cocoon_target.loc)
 				if(isliving(cocoon_target))
 					var/mob/living/L = cocoon_target
-					if(L.blood_volume && (L.stat != DEAD || !consumed_mobs[L.tag])) //if they're not dead, you can consume them anyway
+					if(L.blood_volume && (L.is_alive() || !consumed_mobs[L.tag])) //if they're not dead, you can consume them anyway
 						consumed_mobs[L.tag] = TRUE
 						fed++
 						health = maxHealth //heal up from feeding.

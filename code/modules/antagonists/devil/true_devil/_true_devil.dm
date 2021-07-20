@@ -73,11 +73,11 @@
 			. += "It is holding [I.get_examine_string(user)] in its [get_held_index_name(get_held_index_of_item(I))]."
 
 	//Braindead
-	if(!client && stat != DEAD)
+	if(!client && body.stat != DEAD)
 		. += "The devil seems to be in deep contemplation."
 
 	//Damaged
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		. += "<span class='deadsay'>The hellfire seems to have been extinguished, for now at least.</span>"
 	else if(health < (maxHealth/10))
 		. += "<span class='warning'>You can see hellfire inside its gaping wounds.</span>"

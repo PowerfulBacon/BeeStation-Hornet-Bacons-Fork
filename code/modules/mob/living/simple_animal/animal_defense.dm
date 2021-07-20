@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/attack_paw(mob/living/carbon/monkey/M)
 	if(..()) //successful monkey bite.
-		if(stat != DEAD)
+		if(is_alive())
 			var/damage = rand(1, 3)
 			attack_threshold_check(damage)
 			return 1
@@ -68,7 +68,7 @@
 
 /mob/living/simple_animal/attack_larva(mob/living/carbon/alien/larva/L)
 	. = ..()
-	if(. && stat != DEAD) //successful larva bite
+	if(. && is_dead()) //successful larva bite
 		var/damage = rand(5, 10)
 		. = attack_threshold_check(damage)
 		if(.)

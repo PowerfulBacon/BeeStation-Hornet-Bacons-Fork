@@ -56,7 +56,7 @@
 
 /obj/item/organ/cyberimp/chest/reviver/on_life()
 	if(reviving)
-		if(owner.stat == UNCONSCIOUS)
+		if(owner.body.stat == UNCONSCIOUS)
 			addtimer(CALLBACK(src, .proc/heal), 30)
 		else
 			cooldown = revive_cost + world.time
@@ -66,7 +66,7 @@
 
 	if(cooldown > world.time)
 		return
-	if(owner.stat != UNCONSCIOUS)
+	if(owner.body.stat != UNCONSCIOUS)
 		return
 	if(owner.suiciding)
 		return
@@ -101,7 +101,7 @@
 
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.stat != DEAD && prob(50 / severity) && H.can_heartattack())
+		if(H.is_alive() && prob(50 / severity) && H.can_heartattack())
 			H.set_heartattack(TRUE)
 			to_chat(H, "<span class='userdanger'>You feel a horrible agony in your chest!</span>")
 			addtimer(CALLBACK(src, .proc/undo_heart_attack), 600 / severity)
@@ -111,7 +111,7 @@
 	if(!istype(H))
 		return
 	H.set_heartattack(FALSE)
-	if(H.stat == CONSCIOUS)
+	if(H.body.stat == CONSCIOUS)
 		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
 
 

@@ -11,7 +11,7 @@
 	for(var/mob/living/carbon/human/H in shuffle(GLOB.alive_mob_list))
 		if(!H.client)
 			continue
-		if(H.stat == DEAD) // What are you doing in this list
+		if(H.is_dead()) // What are you doing in this list
 			continue
 		if(!H.getorgan(/obj/item/organ/brain)) // If only I had a brain
 			continue

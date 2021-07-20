@@ -488,7 +488,7 @@
 		return
 	var/mob/living/carbon/human/human_user = user
 	for(var/mob/living/carbon/target in ohearers(7,user))
-		if(target.stat == DEAD || !target.on_fire)
+		if(target.is_dead() || !target.on_fire)
 			continue
 		//This is essentially a death mark, use this to finish your opponent quicker.
 		if(target.InCritical())
@@ -525,7 +525,7 @@
 		var/mob/living/simple_animal/hostile/eldritch/armsy/prime/outside = new(user.loc,TRUE,segment_length)
 		target.mind.transfer_to(outside, TRUE)
 		target.forceMove(outside)
-		target.apply_status_effect(STATUS_EFFECT_STASIS,STASIS_ASCENSION_EFFECT)
+		target.body.apply_status_effect(STATUS_EFFECT_STASIS,STASIS_ASCENSION_EFFECT)
 		for(var/mob/living/carbon/human/humie in (viewers(9,outside)-target))
 			if(IS_HERETIC(humie) || IS_HERETIC_MONSTER(humie))
 				continue
@@ -538,7 +538,7 @@
 
 	if(iscarbon(mob_inside))
 		var/mob/living/simple_animal/hostile/eldritch/armsy/prime/armsy = target
-		if(mob_inside.remove_status_effect(STATUS_EFFECT_STASIS,STASIS_ASCENSION_EFFECT))
+		if(mob_inside.body.remove_status_effect(STATUS_EFFECT_STASIS,STASIS_ASCENSION_EFFECT))
 			mob_inside.forceMove(armsy.loc)
 		armsy.mind.transfer_to(mob_inside, TRUE)
 		segment_length = armsy.get_length()

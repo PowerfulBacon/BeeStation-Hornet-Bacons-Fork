@@ -54,7 +54,7 @@
 	extra_settings[NES_SCAN_TYPE] = new /datum/nanite_extra_setting/type("Medical", list("Medical", "Chemical", "Nanite"))
 
 /datum/nanite_program/self_scan/on_trigger(comm_message)
-	if(host_mob.stat == DEAD)
+	if(host_mob.is_dead())
 		return
 	var/datum/nanite_extra_setting/NS = extra_settings[NES_SCAN_TYPE]
 	switch(NS.get_value())

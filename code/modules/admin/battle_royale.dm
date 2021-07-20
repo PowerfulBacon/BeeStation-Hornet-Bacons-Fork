@@ -220,7 +220,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 		if(QDELETED(M))
 			players -= M
 			continue
-		if(M.stat == DEAD)	//We aren't going to remove them from the list in case they somehow revive.
+		if(M.is_dead())	//We aren't going to remove them from the list in case they somehow revive.
 			continue
 		var/turf/T = get_turf(M)
 		if(T.x > 128 + radius || T.x < 128 - radius || T.y > 128 + radius || T.y < 128 - radius)

@@ -364,7 +364,7 @@ GLOBAL_LIST_INIT(devil_suffix, list(" the Red", " the Soulless", " the Master", 
 	if(SOULVALUE>0)
 		to_chat(owner.current, "<span class='userdanger'>Your body has been damaged to the point that you may no longer use it.  At the cost of some of your power, you will return to life soon.  Remain in your body.</span>")
 		sleep(DEVILRESURRECTTIME)
-		if (!body ||  body.stat == DEAD)
+		if (!body ||  body.is_dead())
 			if(SOULVALUE>0)
 				if(check_banishment(body))
 					to_chat(owner.current, "<span class='userdanger'>Unfortunately, the mortals have finished a ritual that prevents your resurrection.</span>")
@@ -437,7 +437,7 @@ GLOBAL_LIST_INIT(devil_suffix, list(" the Red", " the Soulless", " the Master", 
 			var/mob/living/carbon/true_devil/D = body
 			if(D.oldform)
 				D.oldform.revive(1,0) // Heal the old body too, so the devil doesn't resurrect, then immediately regress into a dead body.
-		if(body.stat == DEAD)
+		if(body.is_dead())
 			create_new_body()
 	else
 		create_new_body()

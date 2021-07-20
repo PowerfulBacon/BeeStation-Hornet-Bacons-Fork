@@ -257,7 +257,8 @@
 	plane = HUD_PLANE
 
 /atom/movable/screen/drop/Click()
-	if(usr.stat == CONSCIOUS)
+	var/mob/living/L = usr
+	if(istype(L) && L.body.stat == CONSCIOUS)
 		usr.dropItemToGround(usr.get_active_held_item())
 
 /atom/movable/screen/act_intent

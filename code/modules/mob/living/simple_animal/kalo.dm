@@ -40,7 +40,7 @@
 /mob/living/simple_animal/kalo/Life() //This code is absolute trash but I'm too sleepy to rewrite it.
 	..()
 
-	if(!stat && !resting && !buckled)
+	if(is_concious() && !resting && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 20)
 			turns_since_scan = 0

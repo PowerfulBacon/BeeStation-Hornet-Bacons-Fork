@@ -83,7 +83,7 @@
 		if(!L.can_speak_vocal())
 			return FALSE
 	if(check_flags & AB_CHECK_CONSCIOUS)
-		if(owner.stat)
+		if(owner.is_unconcious())
 			return FALSE
 	return TRUE
 
@@ -126,7 +126,7 @@
 /proc/voice_of_god(message, mob/living/user, list/span_list, base_multiplier = 1, include_speaker = FALSE, message_admins = TRUE)
 	var/cooldown = 0
 
-	if(!user || !user.can_speak() || user.stat)
+	if(!user || !user.can_speak() || user.is_concious())
 		return 0 //no cooldown
 
 	var/log_message = uppertext(message)
@@ -141,7 +141,7 @@
 	message = lowertext(message)
 	var/list/mob/living/listeners = list()
 	for(var/mob/living/L in hearers(8, get_turf(user)))
-		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.stat != DEAD)
+		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.is_alive())
 
 			if(L == user && !include_speaker)
 				continue

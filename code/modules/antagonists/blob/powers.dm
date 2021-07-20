@@ -270,7 +270,7 @@
 		for(var/mob/living/L in T)
 			if(ROLE_BLOB in L.faction) //no friendly/dead fire
 				continue
-			if(L.stat != DEAD)
+			if(L.is_alive())
 				attacksuccess = TRUE
 			blobstrain.attack_living(L)
 		var/obj/structure/blob/B = locate() in T
@@ -336,7 +336,7 @@
 		to_chat(src, "You broadcast with your minions, <B>[speak_text]</B>")
 	for(var/BLO in blob_mobs)
 		var/mob/living/simple_animal/hostile/blob/BM = BLO
-		if(BM.stat == CONSCIOUS)
+		if(BM.body.stat == CONSCIOUS)
 			BM.say(speak_text)
 
 /mob/camera/blob/verb/strain_reroll()

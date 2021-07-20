@@ -63,7 +63,7 @@
 	else if(inert)
 		to_chat(owner, "<span class='notice'>[src] breaks down as it tries to activate.</span>")
 	else
-		owner.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
+		owner.body.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 	qdel(src)
 
 /obj/item/organ/regenerative_core/on_life()
@@ -79,7 +79,7 @@
 			to_chat(user, "<span class='notice'>[src] has decayed and can no longer be used to heal.</span>")
 			return
 		else
-			if(H.stat == DEAD)
+			if(H.is_dead())
 				to_chat(user, "<span class='notice'>[src] are useless on the dead.</span>")
 				return
 			if(H != user)
@@ -96,7 +96,7 @@
 			if(HAS_TRAIT(H, TRAIT_NECROPOLIS_INFECTED))
 				H.ForceContractDisease(new /datum/disease/transformation/legion())
 				to_chat(H, "<span class='userdanger'>You feel the necropolis strengthen its grip on your heart and soul... You're powerless to resist for much longer...</span>")
-			H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
+			H.body.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "core", /datum/mood_event/healsbadman) //Now THIS is a miner buff (fixed - nerf)
 			qdel(src)
 

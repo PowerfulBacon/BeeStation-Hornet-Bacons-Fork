@@ -380,7 +380,7 @@
 	var/hijacker_count = 0
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.mind)
-			if(player.stat != DEAD)
+			if(player.is_alive())
 				if(issilicon(player)) //Borgs are technically dead anyways
 					continue
 				if(isanimal(player)) //animals don't count

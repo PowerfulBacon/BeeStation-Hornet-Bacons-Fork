@@ -53,7 +53,7 @@
 
 //Mobs with objects
 /mob/living/simple_animal/turtle/attackby(obj/item/O, mob/living/user, params)
-	if(!stat && !client && !istype(O, /obj/item/stack/medical))
+	if(is_concious() && !client && !istype(O, /obj/item/stack/medical))
 		if(O.force)
 			if(icon_state == icon_hiding)
 				turtle_hide_dur = turtle_hide_max //Reset its hiding timer
@@ -63,7 +63,7 @@
 
 //Bullets
 /mob/living/simple_animal/turtle/bullet_act(obj/item/projectile/Proj)
-	if(!stat && !client)
+	if(is_concious() && !client)
 		if(icon_state == icon_hiding)
 			turtle_hide_dur = turtle_hide_max //Reset its hiding timer
 			return BULLET_ACT_FORCE_PIERCE // Shots fly over its shell when hiding

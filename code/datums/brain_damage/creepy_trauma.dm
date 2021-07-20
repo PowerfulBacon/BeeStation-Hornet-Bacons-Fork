@@ -35,7 +35,7 @@
 	antagonist.greet()
 
 /datum/brain_trauma/special/obsessed/on_life()
-	if(!obsession || obsession.stat == DEAD)
+	if(!obsession || obsession.is_dead())
 		viewing = FALSE//important, makes sure you no longer stutter when happy if you murdered them while viewing
 		return
 	if(get_dist(get_turf(owner), get_turf(obsession)) > 7)
@@ -105,8 +105,8 @@
 	var/chosen_victim
 	var/list/possible_targets = list()
 	var/list/viable_minds = list()
-	for(var/mob/Player in GLOB.player_list)//prevents crewmembers falling in love with nuke ops they never met, and other annoying hijinks
-		if(Player.mind && Player.stat != DEAD && !isnewplayer(Player) && !isbrain(Player) && Player.client && Player != owner && SSjob.GetJob(Player.mind.assigned_role))
+	for(var/mob/living/Player in GLOB.player_list)//prevents crewmembers falling in love with nuke ops they never met, and other annoying hijinks
+		if(Player.mind && Player.is_alive() && !isbrain(Player) && Player.client && Player != owner && SSjob.GetJob(Player.mind.assigned_role))
 			viable_minds += Player.mind
 	for(var/datum/mind/possible_target in viable_minds)
 		if(possible_target != owner && ishuman(possible_target.current))

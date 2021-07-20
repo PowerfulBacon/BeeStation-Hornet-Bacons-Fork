@@ -2,7 +2,7 @@
 	set category = "Robot Commands"
 	set name = "Show Laws"
 
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	show_laws()
 
@@ -21,7 +21,7 @@
 		who = src
 	if(lawupdate)
 		if (connected_ai)
-			if(connected_ai.stat || connected_ai.control_disabled)
+			if(connected_ai.body.stat || connected_ai.control_disabled)
 				to_chat(src, "<b>AI signal lost, unable to sync laws.</b>")
 
 			else

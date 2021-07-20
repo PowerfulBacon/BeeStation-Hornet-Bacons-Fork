@@ -283,7 +283,7 @@ Difficulty: Medium
 		sleep(1.5)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/swoop_attack(lava_arena = FALSE, atom/movable/manual_target, var/swoop_cooldown = 30)
-	if(stat || swooping)
+	if(is_unconcious() || swooping)
 		return
 	if(manual_target)
 		GiveTarget(manual_target)
@@ -312,9 +312,9 @@ Difficulty: Medium
 	animate(src, alpha = 204, transform = matrix()*0.9, time = 3, easing = BOUNCE_EASING)
 	for(var/i in 1 to 3)
 		sleep(1)
-		if(QDELETED(src) || stat == DEAD) //we got hit and died, rip us
+		if(QDELETED(src) || is_dead()) //we got hit and died, rip us
 			qdel(F)
-			if(stat == DEAD)
+			if(body.stat == DEAD)
 				swooping &= ~SWOOP_DAMAGEABLE
 				animate(src, alpha = 255, transform = oldtransform, time = 0, flags = ANIMATION_END_NOW) //reset immediately
 			return
@@ -350,7 +350,7 @@ Difficulty: Medium
 	icon_state = "dragon"
 	playsound(loc, 'sound/effects/meteorimpact.ogg', 200, 1)
 	for(var/mob/living/L in orange(1, src))
-		if(L.stat)
+		if(L.is_unconcious())
 			visible_message("<span class='warning'>[src] slams down on [L], crushing [L.p_them()]!</span>")
 			L.gib()
 		else

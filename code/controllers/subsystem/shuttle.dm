@@ -136,8 +136,8 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/alive = 0
 	for(var/I in GLOB.player_list)
-		var/mob/M = I
-		if(M.stat != DEAD)
+		var/mob/living/M = I
+		if(istype(M) && M.is_alive())
 			++alive
 
 	var/total = GLOB.joined_player_list.len
@@ -311,7 +311,7 @@ SUBSYSTEM_DEF(shuttle)
 			var/mob/living/silicon/ai/AI = thing
 			if(AI.deployed_shell && !AI.deployed_shell.client)
 				continue
-			if(AI.stat || !AI.client)
+			if(AI.body.stat || !AI.client)
 				continue
 		else if(istype(thing, /obj/machinery/computer/communications))
 			var/obj/machinery/computer/communications/C = thing

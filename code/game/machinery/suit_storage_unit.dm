@@ -212,7 +212,7 @@
 	qdel(src)
 
 /obj/machinery/suit_storage_unit/MouseDrop_T(atom/A, mob/living/user)
-	if(!istype(user) || user.stat || !Adjacent(user) || !Adjacent(A) || !isliving(A))
+	if(!istype(user) || user.is_unconcious() || !Adjacent(user) || !Adjacent(A) || !isliving(A))
 		return
 	if(isliving(user))
 		var/mob/living/L = user
@@ -327,7 +327,7 @@
 		if(electrocute_mob(user, src, src, 1, TRUE))
 			return 1
 
-/obj/machinery/suit_storage_unit/relaymove(mob/user)
+/obj/machinery/suit_storage_unit/relaymove(mob/living/user)
 	if(locked)
 		if(message_cooldown <= world.time)
 			message_cooldown = world.time + 50
@@ -347,7 +347,7 @@
 		"<span class='notice'>You start kicking against the doors... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
 		"<span class='hear'>You hear a thump from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
-		if(!user || user.stat != CONSCIOUS || user.loc != src )
+		if(!user || user.body.stat != CONSCIOUS || user.loc != src )
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
 			"<span class='notice'>You successfully break out of [src]!</span>")
@@ -364,7 +364,7 @@
 		dump_contents()
 
 /obj/machinery/suit_storage_unit/proc/resist_open(mob/user)
-	if(!state_open && occupant && (user in src) && user.stat == 0) // Check they're still here.
+	if(!state_open && occupant && (user in src) && user.is_concious()) // Check they're still here.
 		visible_message("<span class='notice'>You see [user] burst out of [src]!</span>", \
 			"<span class='notice'>You escape the cramped confines of [src]!</span>")
 		open_machine()
@@ -498,7 +498,7 @@
 			else
 				if(occupant)
 					var/mob/living/mob_occupant = occupant
-					to_chat(mob_occupant, "<span class='userdanger'>[src]'s confines grow warm, then hot, then scorching. You're being burned [!mob_occupant.stat ? "alive" : "away"]!</span>")
+					to_chat(mob_occupant, "<span class='userdanger'>[src]'s confines grow warm, then hot, then scorching. You're being burned [!mob_occupant.body.stat ? "alive" : "away"]!</span>")
 				cook()
 				. = TRUE
 		if("dispense")

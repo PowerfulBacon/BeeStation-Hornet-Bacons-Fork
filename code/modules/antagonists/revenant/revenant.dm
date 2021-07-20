@@ -463,7 +463,7 @@
 	if(!isrevenant(owner.current))
 		return FALSE
 	var/mob/living/simple_animal/revenant/R = owner.current
-	if(!R || R.stat == DEAD)
+	if(!R || R.is_dead())
 		return FALSE
 	var/essence_stolen = R.essence_accumulated
 	if(essence_stolen < targetAmount)

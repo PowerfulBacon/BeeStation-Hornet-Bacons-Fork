@@ -27,7 +27,7 @@
 			else
 				to_chat(user,"<span class='warning'>[target.real_name] is far away from you. They are to the [dir2text(dir)] of you!</span>")
 
-	if(target.stat == DEAD)
+	if(target.is_dead())
 		to_chat(user,"<span class='warning'>[target.real_name] is dead. Bring them to a transmutation rune!</span>")
 
 /datum/action/innate/heretic_shatter

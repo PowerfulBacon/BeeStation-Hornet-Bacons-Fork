@@ -56,7 +56,7 @@
 		return
 
 	var/mob/living/shell = parent.shell
-	if(!istype(shell) || shell.stat)
+	if(!istype(shell) || shell.is_unconcious())
 		return
 
 	var/direction

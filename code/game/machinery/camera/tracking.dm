@@ -33,7 +33,7 @@
 	track.humans.Cut()
 	track.others.Cut()
 
-	if(usr.stat == DEAD)
+	if(body.stat == DEAD)
 		return list()
 
 	for(var/i in GLOB.mob_living_list)

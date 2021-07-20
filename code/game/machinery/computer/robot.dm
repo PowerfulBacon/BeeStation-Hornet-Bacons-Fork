@@ -53,7 +53,7 @@
 		var/list/cyborg_data = list(
 			name = R.name,
 			locked_down = R.lockcharge,
-			status = R.stat,
+			status = R.body.stat,
 			charge = R.cell ? round(R.cell.percent()) : null,
 			module = R.module ? "[R.module.name] Module" : "No Module Detected",
 			synchronization = R.connected_ai,
@@ -70,7 +70,7 @@
 			continue
 		var/list/drone_data = list(
 			name = D.name,
-			status = D.stat,
+			status = D.body.stat,
 			ref = REF(D)
 		)
 		data["drones"] += list(drone_data)

@@ -238,7 +238,7 @@ Auto Patrol[]"},
 		targets += C
 	if(targets.len>0)
 		var/mob/living/carbon/t = pick(targets)
-		if(t.stat != DEAD && (t.mobility_flags & MOBILITY_STAND) && !t.handcuffed) //we don't shoot people who are dead, cuffed or lying down.
+		if(t.is_alive() && (t.mobility_flags & MOBILITY_STAND) && !t.handcuffed) //we don't shoot people who are dead, cuffed or lying down.
 			shootAt(t)
 	switch(mode)
 
@@ -345,7 +345,7 @@ Auto Patrol[]"},
 	threatlevel = 0
 	var/judgment_criteria = judgment_criteria()
 	for (var/mob/living/carbon/C in view(7,src)) //Let's find us a criminal
-		if((C.stat) || (C.handcuffed))
+		if((C.is_unconcious()) || (C.handcuffed))
 			continue
 
 		if((C.name == oldtarget_name) && (world.time < last_found + 100))
@@ -471,7 +471,7 @@ Auto Patrol[]"},
 		new /obj/effect/temp_visual/emp(loc)
 		var/list/mob/living/carbon/targets = new
 		for(var/mob/living/carbon/C in view(12,src))
-			if(C.stat==DEAD)
+			if(is_dead())
 				continue
 			targets += C
 		if(targets.len)

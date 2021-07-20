@@ -166,7 +166,9 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
 	if(!mode)
 		return FALSE
-	if(CONFIG_GET(flag/no_dead_vote) && (usr.stat == DEAD && !isnewplayer(usr)) && !usr.client.holder && mode != "map")
+	var/mob/living/L = usr
+
+	if(CONFIG_GET(flag/no_dead_vote) && (!istype(L) || L.is_dead()) && !usr.client.holder && mode != "map")
 		return FALSE
 	if(!(vote && 1<=vote && vote<=choices.len))
 		return FALSE

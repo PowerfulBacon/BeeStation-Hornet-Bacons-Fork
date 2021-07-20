@@ -56,7 +56,7 @@
 		copy_mutation(copymut)
 
 /datum/mutation/human/proc/on_acquiring(mob/living/carbon/human/H)
-	if(!H || !istype(H) || H.stat == DEAD || (src in H.dna.mutations))
+	if(!H || !istype(H) || H.is_dead() || (src in H.dna.mutations))
 		return TRUE
 	if(species_allowed.len && !species_allowed.Find(H.dna.species.id))
 		return TRUE
@@ -104,7 +104,7 @@
 
 /datum/mutation/human/proc/on_losing(mob/living/carbon/human/owner)
 	if(owner && istype(owner) && (owner.dna.mutations.Remove(src)))
-		if(text_lose_indication && owner.stat != DEAD)
+		if(text_lose_indication && owner.is_alive())
 			to_chat(owner, text_lose_indication)
 		if(visual_indicators.len)
 			var/list/mut_overlay = list()

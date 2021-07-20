@@ -2,7 +2,7 @@
 /mob/living/silicon/ai/proc/show_laws_verb()
 	set category = "AI Commands"
 	set name = "Show Laws"
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	src.show_laws()
 

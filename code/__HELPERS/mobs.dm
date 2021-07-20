@@ -261,6 +261,10 @@ GLOBAL_LIST_EMPTY(species_list)
 	if(!user)
 		return 0
 	var/atom/Tloc = null
+	var/stat = CONSCIOUS
+	if(isliving(user))
+		var/mob/living/L = user
+		stat = L.body.stat
 	if(target && !isturf(target))
 		Tloc = target.loc
 
@@ -298,7 +302,7 @@ GLOBAL_LIST_EMPTY(species_list)
 			drifting = 0
 			Uloc = user.loc
 
-		if(QDELETED(user) || user.stat || (!drifting && user.loc != Uloc) || (extra_checks && !extra_checks.Invoke()))
+		if(QDELETED(user) || stat || (!drifting && user.loc != Uloc) || (extra_checks && !extra_checks.Invoke()))
 			. = 0
 			break
 
@@ -329,7 +333,7 @@ GLOBAL_LIST_EMPTY(species_list)
 				break
 	if (progress)
 		qdel(progbar)
-	
+
 	if(!QDELETED(target))
 		LAZYREMOVE(user.do_afters, target)
 		LAZYREMOVE(target.targeted_by, user)
@@ -457,7 +461,6 @@ GLOBAL_LIST_EMPTY(species_list)
 			toggles = prefs.toggles
 			ignoring = prefs.ignoring
 
-
 		var/override = FALSE
 		if(M?.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
@@ -467,7 +470,7 @@ GLOBAL_LIST_EMPTY(species_list)
 			override = TRUE
 		if(isnewplayer(M) && !override)
 			continue
-		if(M.stat != DEAD && !override)
+		if(M.is_alive() && !override)
 			continue
 		if(speaker_key && (speaker_key in ignoring))
 			continue
@@ -540,28 +543,28 @@ GLOBAL_LIST_EMPTY(species_list)
 /proc/get_sentient_mobs()
 	. = list()
 	for(var/mob/living/player in GLOB.mob_living_list)
-		if(player.stat != DEAD && player.mind && !is_centcom_level(player.z) && !isnewplayer(player) && !isbrain(player))
+		if(player.is_alive() && player.mind && !is_centcom_level(player.z) && !isnewplayer(player) && !isbrain(player))
 			. |= player
 
 //Gets all sentient humans that are alive
 /proc/get_living_crew()
 	. = list()
 	for(var/mob/living/carbon/human/player in GLOB.mob_living_list)
-		if(player.stat != DEAD && player.mind)
+		if(player.is_alive() && player.mind)
 			. |= player
 
 //Gets all sentient humans that are on the station
 /proc/get_living_station_crew()
 	. = list()
 	for(var/mob/living/carbon/human/player in GLOB.mob_living_list)
-		if(player.stat != DEAD && player.mind && is_station_level(player.z))
+		if(player.is_alive() && player.mind && is_station_level(player.z))
 			. |= player
 
 //Gets all the minds of humans that are on station
 /proc/get_living_station_minds()
 	. = list()
 	for(var/mob/living/carbon/human/player in GLOB.mob_living_list)
-		if(player.stat != DEAD && player.mind && is_station_level(player.z))
+		if(player.is_alive() && player.mind && is_station_level(player.z))
 			. |= player.mind
 
 /// Gets the client of the mob, allowing for mocking of the client.

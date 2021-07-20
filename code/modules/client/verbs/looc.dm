@@ -32,7 +32,7 @@ GLOBAL_VAR_INIT(looc_allowed, 1)
         if(!CONFIG_GET(flag/looc_enabled))
             to_chat(src, "<span class='danger'>LOOC is disabled.</span>")
             return
-        if(!GLOB.dooc_allowed && (mob.stat == DEAD))
+        if(!GLOB.dooc_allowed && (mob.is_dead()))
             to_chat(usr, "<span class='danger'>LOOC for dead mobs has been turned off.</span>")
             return
         if(prefs.muted & MUTE_OOC)
@@ -44,7 +44,7 @@ GLOBAL_VAR_INIT(looc_allowed, 1)
             to_chat(src, "<B>Advertising other servers is not allowed.</B>")
             log_admin("[key_name(src)] has attempted to advertise in LOOC: [msg]")
             return
-        if(mob.stat)
+        if(mob.is_unconcious())
             to_chat(src, "<span class='danger'>You cannot salt in LOOC while unconscious or dead.</span>")
             return
         if(istype(mob, /mob/dead))

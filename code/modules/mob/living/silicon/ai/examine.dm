@@ -1,6 +1,6 @@
 /mob/living/silicon/ai/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] <EM>[src]</EM>!")
-	if (stat == DEAD)
+	if (body.stat == DEAD)
 		. += "<span class='deadsay'>It appears to be powered-down.</span>"
 	else
 		if (getBruteLoss())

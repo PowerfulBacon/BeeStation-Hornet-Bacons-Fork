@@ -114,7 +114,7 @@
 /obj/docking_port/mobile/arrivals/proc/PersonCheck()
 	for(var/V in GLOB.player_list)
 		var/mob/M = V
-		if((get_area(M) in areas) && M.stat != DEAD)
+		if((get_area(M) in areas) && M.is_alive())
 			if(!iscameramob(M))
 				return TRUE
 			var/mob/camera/C = M

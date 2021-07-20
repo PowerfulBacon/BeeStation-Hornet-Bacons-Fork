@@ -44,7 +44,7 @@
 	listclearnulls(hivemembers)
 	var/temp = 0
 	for(var/datum/mind/M in hivemembers)
-		if(M.current && M.current.stat != DEAD)
+		if(M.current && M.current.is_alive())
 			temp++
 	if(hive_size != temp)
 		hive_size = temp
@@ -151,12 +151,12 @@
 	if(!hive_C || !hive_C2)
 		return
 	if(C == real_C) //Mind control check
-		real_C2.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_C, hive_C.get_track_bonus(hive_C2))
-		real_C.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+		real_C2.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_C, hive_C.get_track_bonus(hive_C2))
+		real_C.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
 		to_chat(real_C2, "<span class='assimilator'>We detect a surge of psionic energy from a far away vessel before they disappear from the hive. Whatever happened, there's a good chance they're after us now.</span>")
 	if(C2 == real_C2)
-		real_C.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_C2, hive_C2.get_track_bonus(hive_C))
-		real_C2.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
+		real_C.body.apply_status_effect(STATUS_EFFECT_HIVE_TRACKER, real_C2, hive_C2.get_track_bonus(hive_C))
+		real_C2.body.apply_status_effect(STATUS_EFFECT_HIVE_RADAR)
 		user_warning += " and we've managed to pinpoint their location"
 	to_chat(real_C, "<span class='userdanger'>[user_warning]!</span>")
 

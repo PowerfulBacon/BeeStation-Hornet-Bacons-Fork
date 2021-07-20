@@ -134,7 +134,7 @@
 				continue
 			else
 				var/mob/living/M = I.loc
-				if(M.stat == DEAD)
+				if(M.is_dead())
 					if(M.timeofdeath + I.lifespan_postmortem < world.time)
 						continue
 				if(is_eligible(I))

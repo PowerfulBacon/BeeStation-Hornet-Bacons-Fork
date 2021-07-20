@@ -388,7 +388,7 @@
 
 
 /obj/effect/mob_spawn/human/demonic_friend/special(mob/living/L)
-	if(!QDELETED(owner.current) && owner.current.stat != DEAD)
+	if(!QDELETED(owner.current) && owner.current.is_alive())
 		L.fully_replace_character_name(null,"[owner.name]'s best friend")
 		soullink(/datum/soullink/oneway, owner.current, L)
 		spell.friend = L

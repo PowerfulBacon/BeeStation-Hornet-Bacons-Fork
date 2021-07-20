@@ -106,7 +106,7 @@
 		else
 			data["patient"] = null
 			return data
-	switch(patient.stat)
+	switch(patient.is_concious())
 		if(CONSCIOUS)
 			data["patient"]["stat"] = "Conscious"
 			data["patient"]["statstate"] = "good"

@@ -11,11 +11,11 @@
 
 /datum/guardian_ability/major/predator/Apply()
 	. = ..()
-	guardian.apply_status_effect(/datum/status_effect/agent_pinpointer/predator)
+	guardian.body.apply_status_effect(/datum/status_effect/agent_pinpointer/predator)
 
 /datum/guardian_ability/major/predator/Remove()
 	. = ..()
-	guardian.remove_status_effect(/datum/status_effect/agent_pinpointer/predator)
+	guardian.body.remove_status_effect(/datum/status_effect/agent_pinpointer/predator)
 
 /datum/guardian_ability/major/predator/Attack(atom/target)
 	if(mode)
@@ -79,7 +79,7 @@
 		return
 	to_chat(G, "<span class='notice'>We begin to track <B>[prey.real_name]</B>.[get_final_z(prey) == get_final_z(G) ? "" : " They are far away from here[G.stats.potential >= 4 ? ", on z-level [get_final_z(prey)]." : "."]"]</span>")
 	log_game("[key_name(G)] began to track [key_name(prey)] using Predator.") // why log this? Simple. Some idiot will eventually cry metacomms because someone used this ability to track them to their autistic maint base or random-ass locker.
-	for(var/datum/status_effect/agent_pinpointer/predator/status in G.status_effects)
+	for(var/datum/status_effect/agent_pinpointer/predator/status in G.body.get_status_effects())
 		status.scan_target = prey
 		status.point_to_target()
 

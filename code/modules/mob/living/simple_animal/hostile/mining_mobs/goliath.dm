@@ -43,7 +43,7 @@
 /mob/living/simple_animal/hostile/asteroid/goliath/proc/handle_preattack()
 	if(ranged_cooldown <= world.time + ranged_cooldown_time*0.25 && !pre_attack)
 		pre_attack++
-	if(!pre_attack || stat || AIStatus == AI_IDLE)
+	if(!pre_attack || is_unconcious() || AIStatus == AI_IDLE)
 		return
 	icon_state = pre_attack_icon
 
@@ -184,7 +184,7 @@
 /obj/effect/temp_visual/goliath_tentacle/proc/trip()
 	var/latched = FALSE
 	for(var/mob/living/L in loc)
-		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.stat == DEAD)
+		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.is_dead())
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
 		L.Stun(100)

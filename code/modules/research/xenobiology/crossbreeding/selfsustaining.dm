@@ -36,7 +36,7 @@ Self-sustaining extracts:
 	var/amount = 5
 	var/secondary
 
-	if ((user.get_active_held_item() != src || user.stat || user.restrained()))
+	if ((user.get_active_held_item() != src || user.is_unconcious() || user.restrained()))
 		return
 	if(!reagentselect)
 		return

@@ -16,7 +16,7 @@
 	if(..())
 		if(buckled)
 			handle_feeding()
-		if(!stat) // Slimes in stasis don't lose nutrition, don't change mood and don't respond to speech
+		if(is_concious()) // Slimes in stasis don't lose nutrition, don't change mood and don't respond to speech
 			handle_nutrition()
 			if(QDELETED(src)) // Stop if the slime split during handle_nutrition()
 				return
@@ -28,12 +28,12 @@
 
 // Unlike most of the simple animals, slimes support UNCONSCIOUS
 /mob/living/simple_animal/slime/update_stat()
-	if(stat == UNCONSCIOUS && health > 0)
+	if(body.stat == UNCONSCIOUS && health > 0)
 		return
 	..()
 
 /mob/living/simple_animal/slime/process()
-	if(stat == DEAD || !Target || client || buckled)
+	if(body.stat == DEAD || !Target || client || buckled)
 		return
 	special_process = FALSE
 
@@ -87,7 +87,7 @@
 			else
 				adjustBruteLoss(round(sqrt(bodytemperature)) * 2)
 
-	if(stat != DEAD)
+	if(is_alive())
 		var/bz_percentage = environment.total_moles() ? (environment.get_moles(/datum/gas/bz) / environment.total_moles()) : 0
 		var/stasis = (bz_percentage >= 0.05 && bodytemperature < (T0C + 100)) || force_stasis
 		if(transformeffects & SLIME_EFFECT_DARK_PURPLE)
@@ -97,14 +97,14 @@
 			environment.adjust_moles(/datum/gas/oxygen, plas_amt)
 			adjustBruteLoss(plas_amt ? -2 : 0)
 
-		if(stat == CONSCIOUS && stasis)
+		if(body.stat == CONSCIOUS && stasis)
 			to_chat(src, "<span class='danger'>Nerve gas in the air has put you in stasis!</span>")
 			set_stat(UNCONSCIOUS)
 			powerlevel = 0
 			rabid = 0
 			update_mobility()
 			regenerate_icons()
-		else if(stat == UNCONSCIOUS && !stasis)
+		else if(body.stat  == UNCONSCIOUS && !stasis)
 			to_chat(src, "<span class='notice'>You wake up from the stasis.</span>")
 			set_stat(CONSCIOUS)
 			update_mobility()
@@ -132,7 +132,8 @@
 	temp_change = (temperature - current)
 	return temp_change
 
-/mob/living/simple_animal/slime/handle_status_effects()
+//TODO: Convert to damn status effects
+/*/mob/living/simple_animal/slime/handle_status_effects()
 	..()
 	if(prob(30) && !stat)
 		var/heal = 1
@@ -140,7 +141,7 @@
 			heal += 0.5
 		adjustBruteLoss(-heal)
 	if((transformeffects & SLIME_EFFECT_RAINBOW) && prob(5))
-		random_colour()
+		random_colour()*/
 
 /mob/living/simple_animal/slime/proc/handle_feeding()
 	if(!isliving(buckled))
@@ -151,7 +152,7 @@
 		var/datum/reagent/fuel/fuel = new
 		fuel.reaction_mob(buckled,TOUCH,20)
 		qdel(fuel)
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		if(client)
 			to_chat(src, "<i>This subject does not have a strong enough life energy anymore...</i>")
 		else if(!rabid && !attacked)
@@ -267,7 +268,7 @@
 	if(!Target)
 		if(will_hunt() && hungry || attacked || rabid)
 			for(var/mob/living/L in view(7,src))
-				if(isslime(L) || L.stat == DEAD)
+				if(isslime(L) || L.is_dead())
 					continue
 
 				if(L in Friends)
@@ -443,7 +444,7 @@
 		for (var/mob/living/L in oview(7,src))
 			if(isslime(L))
 				++slimes_near
-				if (L.stat == DEAD)
+				if (L.is_dead())
 					++dead_slimes
 			if(L in Friends)
 				t += 20
@@ -507,7 +508,7 @@
 				phrases += "[M]... friend..."
 				if (nutrition < get_hunger_nutrition())
 					phrases += "[M]... feed me..."
-			if(!stat)
+			if(is_concious())
 				INVOKE_ASYNC(src, /atom/movable/proc/say, pick(phrases))
 
 /mob/living/simple_animal/slime/proc/get_max_nutrition() // Can't go above it

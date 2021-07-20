@@ -53,7 +53,7 @@
 			clear_enemies()
 			LoseTarget()
 			src.visible_message("<span class='notice'>[src] calms down.</span>")
-	if(stat == CONSCIOUS)
+	if(body.stat == CONSCIOUS)
 		udder.generateMilk()
 		eat_plants()
 		if(!pulledby)
@@ -69,7 +69,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/Move()
 	. = ..()
-	if(!stat)
+	if(is_concious())
 		eat_plants()
 
 /mob/living/simple_animal/hostile/retaliate/goat/proc/eat_plants()
@@ -88,7 +88,7 @@
 		INVOKE_ASYNC(src, /atom/movable/proc/say, "Nom")
 
 /mob/living/simple_animal/hostile/retaliate/goat/attackby(obj/item/O, mob/user, params)
-	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
+	if(body.stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		return 1
 	else
@@ -146,7 +146,7 @@
 	return ..()
 
 /mob/living/simple_animal/cow/attackby(obj/item/O, mob/user, params)
-	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
+	if(body.stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		return 1
 	else
@@ -154,18 +154,18 @@
 
 /mob/living/simple_animal/cow/Life()
 	. = ..()
-	if(stat == CONSCIOUS)
+	if(body.stat == CONSCIOUS)
 		udder.generateMilk()
 
 /mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M)
-	if(!stat && M.a_intent == INTENT_DISARM && icon_state != icon_dead)
+	if(is_concious() && M.a_intent == INTENT_DISARM && icon_state != icon_dead)
 		M.visible_message("<span class='warning'>[M] tips over [src].</span>",
 			"<span class='notice'>You tip over [src].</span>")
 		to_chat(src, "<span class='userdanger'>You are tipped over by [M]!</span>")
 		Paralyze(60, ignore_canstun = TRUE)
 		icon_state = icon_dead
 		spawn(rand(20,50))
-			if(!stat && M)
+			if(is_concious() && M)
 				icon_state = icon_living
 				var/external
 				var/internal
@@ -228,7 +228,7 @@
 	. =..()
 	if(!.)
 		return
-	if(!stat && !ckey)
+	if(is_concious() && !ckey)
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
 			new /mob/living/simple_animal/chicken(src.loc)
@@ -239,7 +239,7 @@
 	..()
 
 /mob/living/simple_animal/chick/Destroy()
-	if(stat != DEAD)
+	if(is_alive())
 		GLOB.total_chickens--
 	return ..()
 
@@ -308,13 +308,13 @@
 	..()
 
 /mob/living/simple_animal/chicken/Destroy()
-	if(stat != DEAD)
+	if(is_alive())
 		GLOB.total_chickens--
 	return ..()
 
 /mob/living/simple_animal/chicken/attackby(obj/item/O, mob/user, params)
 	if(istype(O, food_type)) //feedin' dem chickens
-		if(!stat && eggsleft < 8)
+		if(is_concious() && eggsleft < 8)
 			var/feedmsg = "[user] feeds [O] to [name]! [pick(feedMessages)]"
 			user.visible_message(feedmsg)
 			qdel(O)
@@ -328,7 +328,7 @@
 	. =..()
 	if(!.)
 		return
-	if((!stat && prob(3) && eggsleft > 0) && egg_type && GLOB.total_chickens < CONFIG_GET(number/max_chickens))
+	if((is_concious() && prob(3) && eggsleft > 0) && egg_type && GLOB.total_chickens < CONFIG_GET(number/max_chickens))
 		visible_message("[src] [pick(layMessage)]")
 		eggsleft--
 		var/obj/item/E = new egg_type(get_turf(src))

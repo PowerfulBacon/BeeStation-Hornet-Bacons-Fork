@@ -37,7 +37,7 @@
 /datum/objective/crew/ian/check_completion()
 	if(owner?.current)
 		for(var/mob/living/simple_animal/pet/dog/corgi/Ian/goodboy in GLOB.mob_list)
-			if(goodboy.stat != DEAD && SSshuttle.emergency.shuttle_areas[get_area(goodboy)])
+			if(goodboy.is_alive() && SSshuttle.emergency.shuttle_areas[get_area(goodboy)])
 				return TRUE
 		return FALSE
 	return FALSE

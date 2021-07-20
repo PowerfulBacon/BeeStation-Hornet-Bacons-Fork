@@ -42,7 +42,7 @@
 	for(var/atom/atom_in_range as() in range(1, src))
 		if(isliving(atom_in_range))
 			var/mob/living/living_in_range = atom_in_range
-			if(living_in_range.stat != DEAD || living_in_range == user) // we only accept corpses, no living beings allowed.
+			if(living_in_range.is_alive() || living_in_range == user) // we only accept corpses, no living beings allowed.
 				continue
 		atoms_in_range += atom_in_range
 	for(var/X in knowledge)

@@ -124,7 +124,7 @@
 		qdel(src)
 		return
 
-	if(victim.stat == DEAD)
+	if(victim.is_dead())
 		return
 
 	var/damage = weapon.w_class * pain_mult

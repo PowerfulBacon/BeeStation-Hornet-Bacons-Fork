@@ -193,7 +193,7 @@
 	attached = 0
 
 /obj/item/clothing/mask/facehugger/proc/Impregnate(mob/living/target)
-	if(!target || target.stat == DEAD) //was taken off or something
+	if(!target || target.is_dead()) //was taken off or something
 		return
 
 	if(iscarbon(target))
@@ -247,7 +247,7 @@
 /proc/CanHug(mob/living/M)
 	if(!istype(M))
 		return 0
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		return 0
 	if(M.getorgan(/obj/item/organ/alien/hivenode))
 		return 0

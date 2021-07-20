@@ -75,7 +75,7 @@
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_CREATED, src)
 	mob_properties = list()
 	add_to_mob_list()
-	if(stat == DEAD)
+	if(is_dead())
 		add_to_dead_mob_list()
 	else
 		add_to_alive_mob_list()
@@ -172,13 +172,23 @@
 				type = alt_type
 				if(type & MSG_VISUAL && eye_blind)
 					return
+	to_chat(src, msg)
+
+/mob/living/show_message(msg, type, alt_msg, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+	if(type)
+		if(type & MSG_VISUAL && eye_blind )//Vision related
+			if(alt_msg)
+				type = alt_type
+
+		if(type & MSG_AUDIBLE && !can_hear())//Hearing related
+			if(alt_msg)
+				type = alt_type
 	// voice muffling
-	if(stat == UNCONSCIOUS)
+	if(body.stat == UNCONSCIOUS)
 		if(type & MSG_AUDIBLE) //audio
 			to_chat(src, "<I>... You can almost hear something ...</I>")
 		return
-	to_chat(src, msg)
-
+	return ..()
 
 /atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, visible_message_flags = NONE)
 	var/turf/T = get_turf(src)
@@ -667,7 +677,7 @@
 
 	if (CONFIG_GET(flag/norespawn))
 		return
-	if ((stat != DEAD || !( SSticker )))
+	if ((is_alive() || !( SSticker )))
 		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
 		return
 
@@ -833,8 +843,6 @@
 /mob/proc/canface()
 	if(world.time < client.last_turn)
 		return FALSE
-	if(stat == DEAD || stat == UNCONSCIOUS)
-		return FALSE
 	if(anchored)
 		return FALSE
 	if(notransform)
@@ -845,6 +853,8 @@
 
 ///Checks mobility move as well as parent checks
 /mob/living/canface()
+	if(body.stat >= UNCONSCIOUS)
+		return FALSE
 	if(!(mobility_flags & MOBILITY_MOVE))
 		return FALSE
 	return ..()
@@ -1293,11 +1303,14 @@
 	return TRUE
 
 /mob/proc/set_stat(new_stat)
-	if(new_stat == stat)
+	return
+
+/mob/living/set_stat(new_stat)
+	if(new_stat == body.stat)
 		return
 	SEND_SIGNAL(src, COMSIG_MOB_STATCHANGE, new_stat)
-	. = stat
-	stat = new_stat
+	. = body.stat
+	body.stat = new_stat
 
 /mob/proc/set_active_storage(new_active_storage)
 	if(active_storage)
@@ -1316,3 +1329,27 @@
 		client.movingmob.client_mobs_in_contents -= src
 		UNSETEMPTY(client.movingmob.client_mobs_in_contents)
 		client.movingmob = null
+
+/mob/proc/is_concious()
+	return FALSE
+
+/mob/living/is_concious()
+	return body.stat == CONSCIOUS
+
+/mob/proc/is_unconcious()
+	return TRUE
+
+/mob/living/is_unconcious()
+	return body.stat != CONSCIOUS
+
+/mob/proc/is_alive()
+	return FALSE
+
+/mob/living/is_alive()
+	return body.stat != DEAD
+
+/mob/proc/is_dead()
+	return TRUE
+
+/mob/living/is_dead()
+	return body.stat == DEAD

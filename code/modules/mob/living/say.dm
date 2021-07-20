@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(!message)
 		return
 
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		say_dead(original_message)
 		return
 
@@ -114,7 +114,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 				break
 		if(end)
 			return
-	else if(stat == UNCONSCIOUS)
+	else if(body.stat  == UNCONSCIOUS)
 		var/end = TRUE
 		for(var/index in message_mods)
 			if(unconscious_allowed_modes[index])
@@ -226,7 +226,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/flags = message_mods.Find(MODE_RADIO_MESSAGE) ? RADIO_MESSAGE : NONE
 
 	// Create map text prior to modifying message for goonchat
-	if(client?.prefs.chat_on_map && stat != UNCONSCIOUS && (client.prefs.see_chat_non_mob || ismob(speaker)) && can_hear())
+	if(client?.prefs.chat_on_map && is_concious() && (client.prefs.see_chat_non_mob || ismob(speaker)) && can_hear())
 		create_chat_message(speaker, message_language, raw_message, spans, runechat_flags = flags)
 
 	// Recompose message for AI hrefs, language incomprehension.
@@ -245,7 +245,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	for(var/mob/M as() in GLOB.player_list)
 		if(!M)				//yogs
 			continue		//yogs | null in player_list for whatever reason :shrug:
-		if(M.stat != DEAD) //not dead, not important
+		if(M.is_alive()) //not dead, not important
 			continue
 		if(!M.client || !client) //client is so that ghosts don't have to listen to mice
 			continue

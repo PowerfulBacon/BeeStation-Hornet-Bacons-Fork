@@ -176,7 +176,7 @@
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/Life()
 	if(isturf(loc))
 		for(var/mob/living/carbon/human/H in viewers(1, src)) //Only for corpse right next to/on same tile
-			if(H.stat == UNCONSCIOUS || (can_infest_dead && H.stat == DEAD))
+			if(H.body.stat == UNCONSCIOUS || (can_infest_dead && H.is_dead()))
 				infest(H)
 	..()
 

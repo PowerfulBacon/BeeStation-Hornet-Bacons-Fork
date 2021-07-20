@@ -251,7 +251,7 @@
 		message_admins("[key_name(src)] (job: [src.job ? "[src.job]" : "None"]) committed suicide at [AREACOORD(src)].")
 
 /mob/living/proc/canSuicide()
-	switch(stat)
+	switch(body.stat)
 		if(CONSCIOUS)
 			return TRUE
 		if(SOFT_CRIT)

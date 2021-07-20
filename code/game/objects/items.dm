@@ -274,7 +274,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	set category = "Object"
 	set src in oview(1)
 
-	if(!isturf(loc) || usr.stat || usr.restrained())
+	if(!isturf(loc) || usr.is_unconcious() || usr.restrained())
 		return
 
 	if(isliving(usr))
@@ -467,7 +467,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	var/relative_dir = (dir2angle(get_dir(hitby, owner)) - dir2angle(owner.dir)) //shamelessly stolen from mech code
 	var/final_block_level = block_level
 	var/obj/item/bodypart/blockhand = null
-	if(owner.stat) //can't block if you're dead
+	if(owner.is_unconcious()) //can't block if you're dead
 		return 0
 	if(HAS_TRAIT(owner, TRAIT_NOBLOCK) && istype(src, /obj/item/shield)) //shields can always block, because they break instead of using stamina damage
 		return 0
@@ -708,7 +708,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	eyes.applyOrganDamage(3)
 	if(eyes.damage >= 10)
 		M.adjust_blurriness(15)
-		if(M.stat != DEAD)
+		if(M.is_alive())
 			to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
 		if(!(HAS_TRAIT(M, TRAIT_BLIND) || HAS_TRAIT(M, TRAIT_NEARSIGHT)))
 			to_chat(M, "<span class='danger'>You become nearsighted!</span>")

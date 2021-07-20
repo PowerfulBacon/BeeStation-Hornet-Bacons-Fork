@@ -143,7 +143,7 @@
 			. = TRUE
 		update_icon()
 
-/obj/machinery/disposal/relaymove(mob/user)
+/obj/machinery/disposal/relaymove(mob/living/user)
 	attempt_escape(user)
 
 // resist to escape the bin
@@ -429,7 +429,7 @@
 	return
 
 /obj/machinery/disposal/bin/get_remote_view_fullscreens(mob/user)
-	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
+	if(user.is_dead() || !(user.sight & (SEEOBJS|SEEMOBS)))
 		user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 2)
 
 //Delivery Chute

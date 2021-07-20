@@ -13,7 +13,7 @@ transformative extracts:
 	if(!proximity || !isslime(target))
 		return FALSE
 	var/mob/living/simple_animal/slime/S = target
-	if(S.stat)
+	if(S.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 	if(S.transformeffects & effect_applied)
 		to_chat(user,"<span class='warning'>This slime already has the [colour] transformative effect applied!</span>")

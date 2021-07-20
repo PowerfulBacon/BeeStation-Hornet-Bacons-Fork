@@ -30,7 +30,7 @@
 /obj/structure/destructible/clockwork/sigil/vitality/can_affect(mob/living/M)
 	if(is_servant_of_ratvar(M))
 		return TRUE
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		return FALSE
 	var/amc = M.anti_magic_check()
 	if(amc)
@@ -45,7 +45,7 @@
 	if(!..())
 		return FALSE
 	if(is_servant_of_ratvar(M))
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			var/damage_healed = 20 + ((M.maxHealth - M.health) * 0.6)
 			if(GLOB.clockcult_vitality >= damage_healed)
 				GLOB.clockcult_vitality -= damage_healed
@@ -86,7 +86,7 @@
 			visible_message("<span class='neovgre'>\The [src] fails to siphon [M]'s spirit!</span>")
 			return
 		playsound(loc, 'sound/magic/clockwork/ratvar_attack.ogg', 40)
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			M.become_husk()
 			M.death()
 			playsound(loc, 'sound/magic/exit_blood.ogg', 60)

@@ -99,7 +99,7 @@
 
 //Throwing stuff
 /mob/living/carbon/proc/toggle_throw_mode()
-	if(stat)
+	if(is_unconcious())
 		return
 	if(in_throw_mode)
 		throw_mode_off()
@@ -540,10 +540,10 @@
 	staminaloss = round(total_stamina, DAMAGE_PRECISION)
 	update_stat()
 	update_mobility()
-	if(((maxHealth - total_burn) < HEALTH_THRESHOLD_DEAD*2) && stat == DEAD )
+	if(((maxHealth - total_burn) < HEALTH_THRESHOLD_DEAD*2) && body.stat == DEAD )
 		become_husk("burn")
 	med_hud_set_health()
-	if(stat == SOFT_CRIT)
+	if(body.stat == SOFT_CRIT)
 		add_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE, multiplicative_slowdown = SOFTCRIT_ADD_SLOWDOWN)
 	else
 		remove_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE)
@@ -551,7 +551,7 @@
 
 /mob/living/carbon/update_stamina(extend_stam_crit = FALSE)
 	var/stam = getStaminaLoss()
-	if(stam > DAMAGE_PRECISION && (maxHealth - stam) <= crit_threshold && !stat && !HAS_TRAIT(src, TRAIT_NOSTAMCRIT))
+	if(stam > DAMAGE_PRECISION && (maxHealth - stam) <= crit_threshold && is_concious() && !HAS_TRAIT(src, TRAIT_NOSTAMCRIT))
 		if(extend_stam_crit || !stam_paralyzed)
 			enter_stamcrit()
 	else if(stam_paralyzed)
@@ -563,7 +563,7 @@
 /mob/living/carbon/update_sight()
 	if(!client)
 		return
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		sight = (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_OBSERVER
@@ -738,7 +738,7 @@
 	if(!client || !hud_used)
 		return
 	if(hud_used.healths)
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			. = 1
 			if(shown_health_amount == null)
 				shown_health_amount = health
@@ -766,7 +766,7 @@
 /mob/living/carbon/update_stat()
 	if(status_flags & GODMODE)
 		return
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
 			death()
 			return

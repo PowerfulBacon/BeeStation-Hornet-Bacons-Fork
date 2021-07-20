@@ -171,7 +171,7 @@
 		if(T)
 			mmi.forceMove(T)
 		if(mmi.brainmob)
-			if(mmi.brainmob.stat == DEAD)
+			if(mmi.brainmob.is_dead())
 				mmi.brainmob.set_stat(CONSCIOUS)
 				mmi.brainmob.remove_from_dead_mob_list()
 				mmi.brainmob.add_to_alive_mob_list()
@@ -255,7 +255,7 @@
 /mob/living/silicon/robot/verb/cmd_robot_alerts()
 	set category = "Robot Commands"
 	set name = "Show Alerts"
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		to_chat(src, "<span class='userdanger'>Alert: You are dead.</span>")
 		return //won't work if dead
 	robot_alerts()
@@ -334,7 +334,7 @@
 /mob/living/silicon/robot/triggerAlarm(class, area/home, cameras, obj/source)
 	if(source.get_virtual_z_level() != get_virtual_z_level())
 		return
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return TRUE
 	var/list/our_sort = alarms[class]
 	for(var/areaname in our_sort)
@@ -594,7 +594,7 @@
 	set category = "Robot Commands"
 	set name = "Unlock Cover"
 	set desc = "Unlocks your own cover if it is locked. You can not lock it again. A human will have to lock it for you."
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return //won't work if dead
 	if(locked)
 		switch(alert("You cannot lock your cover again, are you sure?\n      (You can still ask for a human to lock it)", "Unlock Own Cover", "Yes", "No"))
@@ -643,7 +643,7 @@
 /mob/living/silicon/robot/update_icons()
 	cut_overlays()
 	icon_state = module.cyborg_base_icon
-	if(stat != DEAD && !(IsUnconscious() || IsStun() || IsParalyzed() || low_power_mode)) //Not dead, not stunned.
+	if(body.stat != DEAD && !(IsUnconscious() || IsStun() || IsParalyzed() || low_power_mode)) //Not dead, not stunned.
 		if(!eye_lights)
 			eye_lights = new()
 		if(lamp_intensity > 2)
@@ -739,7 +739,7 @@
 	set category = "Robot Commands"
 	set name = "State Laws"
 
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	checklaws()
 
@@ -748,12 +748,12 @@
 	set desc = "Modify the default radio setting for stating your laws."
 	set category = "Robot Commands"
 
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return //won't work if dead
 	set_autosay()
 
 /mob/living/silicon/robot/proc/control_headlamp()
-	if(stat || lamp_cooldown > world.time || low_power_mode)
+	if(body.stat || lamp_cooldown > world.time || low_power_mode)
 		to_chat(src, "<span class='danger'>This function is currently offline.</span>")
 		return
 
@@ -765,7 +765,7 @@
 /mob/living/silicon/robot/proc/update_headlamp(var/turn_off = 0, var/cooldown = 100)
 	set_light(0)
 
-	if(lamp_intensity && (turn_off || stat || low_power_mode))
+	if(lamp_intensity && (turn_off || body.stat || low_power_mode))
 		to_chat(src, "<span class='danger'>Your headlamp has been deactivated.</span>")
 		lamp_intensity = 0
 		lamp_cooldown = world.time + cooldown
@@ -924,7 +924,7 @@
 			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - Remote telemetry lost with [name].</span><br>")
 
 /mob/living/silicon/robot/canUseTopic(atom/movable/M, be_close=FALSE, no_dextery=FALSE, no_tk=FALSE)
-	if(stat || lockcharge || low_power_mode)
+	if(body.stat || lockcharge || low_power_mode)
 		to_chat(src, "<span class='warning'>You can't do that right now!</span>")
 		return FALSE
 	if(be_close && !in_range(M, src))
@@ -953,7 +953,7 @@
 /mob/living/silicon/robot/update_sight()
 	if(!client)
 		return
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		sight = (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_OBSERVER
@@ -996,18 +996,18 @@
 /mob/living/silicon/robot/update_stat()
 	if(status_flags & GODMODE)
 		return
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		if(health <= -maxHealth) //die only once
 			death()
 			return
 		if(IsUnconscious() || IsStun() || IsKnockdown() || IsParalyzed() || getOxyLoss() > maxHealth*0.5)
-			if(stat == CONSCIOUS)
+			if(body.stat == CONSCIOUS)
 				set_stat(UNCONSCIOUS)
 				blind_eyes(1)
 				update_mobility()
 				update_headlamp()
 		else
-			if(stat == UNCONSCIOUS)
+			if(body.stat == UNCONSCIOUS)
 				set_stat(CONSCIOUS)
 				adjust_blindness(-1)
 				update_mobility()
@@ -1204,7 +1204,7 @@
 			return
 		if(M in buckled_mobs)
 			return
-	if(stat)
+	if(is_unconcious())
 		return
 	if(incapacitated())
 		return

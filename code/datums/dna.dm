@@ -235,7 +235,7 @@
 				if(-INFINITY to 0)
 					message = "<span class='boldwarning'>You can feel your DNA exploding, we need to do something fast!</span>"
 		if(stability <= 0)
-			holder.apply_status_effect(STATUS_EFFECT_DNA_MELT)
+			holder.body.apply_status_effect(STATUS_EFFECT_DNA_MELT)
 		if(message)
 			to_chat(holder, message)
 
@@ -588,7 +588,7 @@
 				to_chat(src, "<span class='notice'>Oh, I actually feel quite alright!</span>")
 				reagents.add_reagent(/datum/reagent/aslimetoxin, 10)
 			if(6)
-				apply_status_effect(STATUS_EFFECT_GO_AWAY)
+				body.apply_status_effect(STATUS_EFFECT_GO_AWAY)
 			if(7)
 				to_chat(src, "<span class='notice'>Oh, I actually feel quite alright!</span>")
 				ForceContractDisease(new/datum/disease/decloning()) //slow acting, non-viral clone damage based GBS

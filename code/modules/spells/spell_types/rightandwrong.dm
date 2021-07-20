@@ -106,7 +106,7 @@ GLOBAL_VAR_INIT(summon_guns_triggered, FALSE)
 GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 
 /proc/give_guns(mob/living/carbon/human/H)
-	if(H.stat == DEAD || !(H.client))
+	if(H.is_dead() || !(H.client))
 		return
 	if(H.mind)
 		if(iswizard(H) || H.mind.has_antag_datum(/datum/antagonist/survivalist/guns))
@@ -129,7 +129,7 @@ GLOBAL_VAR_INIT(summon_magic_triggered, FALSE)
 	to_chat(H, "<span class='warning'>\A [G] appears [in_hand ? "in your hand" : "at your feet"]!</span>")
 
 /proc/give_magic(mob/living/carbon/human/H)
-	if(H.stat == DEAD || !(H.client))
+	if(H.is_dead() || !(H.client))
 		return
 	if(H.mind)
 		if(iswizard(H) || H.mind.has_antag_datum(/datum/antagonist/survivalist/magic))

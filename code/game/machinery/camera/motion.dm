@@ -18,8 +18,8 @@
 			triggerAlarm()
 	else if (detectTime == -1)
 		for (var/datum/weakref/targetref in getTargetList())
-			var/mob/target = targetref.resolve()
-			if(QDELETED(target) || target.stat == DEAD || (!area_motion && !in_range(src, target)))
+			var/mob/living/target = targetref.resolve()
+			if(QDELETED(target) || target.is_dead() || (!area_motion && !in_range(src, target)))
 				//If not part of a monitored area and the camera is not in range or the target is dead
 				lostTargetRef(targetref)
 
@@ -100,8 +100,8 @@
 		return
 
 	for (var/datum/weakref/targetref in localMotionTargets)
-		var/mob/target = targetref.resolve()
-		if(QDELETED(target) || target.stat == DEAD || get_dist(src, target) > 7 || get_area(src) != get_area(target))
+		var/mob/living/target = targetref.resolve()
+		if(QDELETED(target) || target.is_dead() || get_dist(src, target) > 7 || get_area(src) != get_area(target))
 			localMotionTargets -= targetref
 
 	if (localMotionTargets.len)

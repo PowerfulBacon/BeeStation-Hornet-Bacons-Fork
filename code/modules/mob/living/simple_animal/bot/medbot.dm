@@ -212,7 +212,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 			oldpatient = user
 
 /mob/living/simple_animal/bot/medbot/process_scan(mob/living/carbon/human/H)
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		return
 
 	if((H == oldpatient) && (world.time < last_found + 200))
@@ -304,7 +304,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 /mob/living/simple_animal/bot/medbot/proc/assess_patient(mob/living/carbon/C)
 	. = FALSE
 	//Time to see if they need medical help!
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
+	if(C.is_dead() || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
 		return FALSE	//welp too late for them!
 
 	var/can_inject = FALSE
@@ -379,7 +379,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 		soft_reset()
 		return
 
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
+	if(C.is_dead() || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
 		var/list/messagevoice = list("No! Stay with me!" = 'sound/voice/medbot/no.ogg',"Live, damnit! LIVE!" = 'sound/voice/medbot/live.ogg',"I...I've never lost a patient before. Not today, I mean." = 'sound/voice/medbot/lost.ogg')
 		var/message = pick(messagevoice)
 		speak(message)

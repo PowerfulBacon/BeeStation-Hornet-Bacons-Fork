@@ -57,7 +57,7 @@
 /obj/item/slime_extract/attack(mob/living/simple_animal/slime/M, mob/user)
 	if(!isslime(M))
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(!M.is_adult)
@@ -664,7 +664,7 @@
 	if(!isslime(M))
 		to_chat(user, "<span class='warning'>The potion only works on slimes!</span>")
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(M.rabid) //Stops being rabid, but doesn't become truly docile.
@@ -700,7 +700,7 @@
 	if(!isanimal(M) || M.ckey) //only works on animals that aren't player controlled
 		to_chat(user, "<span class='warning'>[M] is already too intelligent for this to work!</span>")
 		return
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>[M] is dead!</span>")
 		return
 	var/mob/living/simple_animal/SM = M
@@ -758,7 +758,7 @@
 	if(!isanimal(M) || M.ckey) //much like sentience, these will not work on something that is already player controlled
 		to_chat(user, "<span class='warning'>[M] already has a higher consciousness!</span>")
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>[M] is dead!</span>")
 		return ..()
 	var/mob/living/simple_animal/SM = M
@@ -803,7 +803,7 @@
 	if(M.is_adult) //Can't steroidify adults
 		to_chat(user, "<span class='warning'>Only baby slimes can use the steroid!</span>")
 		return
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(M.cores >= 5)
@@ -830,7 +830,7 @@
 	if(!isslime(M))
 		to_chat(user, "<span class='warning'>The stabilizer only works on slimes!</span>")
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(M.mutation_chance == 0)
@@ -851,7 +851,7 @@
 	if(!isslime(M))
 		to_chat(user, "<span class='warning'>The mutator only works on slimes!</span>")
 		return ..()
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>The slime is dead!</span>")
 		return
 	if(M.mutator_used)
@@ -938,7 +938,7 @@
 	icon_state = "potlightpink"
 
 /obj/item/slimepotion/genderchange/attack(mob/living/L, mob/user)
-	if(!istype(L) || L.stat == DEAD)
+	if(!istype(L) || L.is_dead())
 		to_chat(user, "<span class='warning'>The potion can only be used on living things!</span>")
 		return
 
@@ -951,9 +951,9 @@
 
 	if(!do_after(user, 50, target = L))
 		return
-	
+
 	to_chat(user, "<span class='notice'>You feed [L] the gender change potion!</span>")
-	
+
 	if(L.gender == MALE)
 		L.gender = FEMALE
 		L.visible_message("<span class='boldnotice'>[L] suddenly looks more feminine!</span>", "<span class='boldwarning'>You suddenly feel more feminine!</span>")
@@ -1009,7 +1009,7 @@
 	if(!isanimal(M))
 		to_chat(user, "<span class='warning'>[M] is too complex for the potion!</span>")
 		return
-	if(M.stat)
+	if(M.is_unconcious())
 		to_chat(user, "<span class='warning'>[M] is dead!</span>")
 		return
 

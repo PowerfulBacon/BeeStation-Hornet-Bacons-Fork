@@ -1139,7 +1139,7 @@
 /obj/machinery/power/apc/proc/malfvacate(forced)
 	if(!occupier)
 		return
-	if(occupier.parent && occupier.parent.stat != DEAD)
+	if(occupier.parent && occupier.parent.is_alive())
 		occupier.mind.transfer_to(occupier.parent)
 		occupier.parent.shunted = 0
 		occupier.parent.setOxyLoss(occupier.getOxyLoss())
@@ -1166,13 +1166,13 @@
 	if(!occupier.mind || !occupier.client)
 		to_chat(user, "<span class='warning'>[occupier] is either inactive or destroyed!</span>")
 		return
-	if(!occupier.parent.stat)
+	if(occupier.parent.is_concious())
 		to_chat(user, "<span class='warning'>[occupier] is refusing all attempts at transfer!</span>" )
 		return
 	if(transfer_in_progress)
 		to_chat(user, "<span class='warning'>There's already a transfer in progress!</span>")
 		return
-	if(interaction != AI_TRANS_TO_CARD || occupier.stat)
+	if(interaction != AI_TRANS_TO_CARD || occupier.is_unconcious())
 		return
 	var/turf/T = get_turf(user)
 	if(!T)

@@ -15,7 +15,7 @@
 	. = ..()
 	if(linked_implants.len)
 		var/input = stripped_input(imp_in, "Enter a message to communicate to your blood brother(s).", "Radio Implant", "")
-		if(!input || imp_in.stat == DEAD)
+		if(!input || imp_in.is_dead())
 			return
 		if(CHAT_FILTER_CHECK(input))
 			to_chat(imp_in, "<span class='warning'>The message contains prohibited words!</span>")

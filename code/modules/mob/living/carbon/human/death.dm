@@ -37,7 +37,7 @@
 				new /obj/effect/decal/remains/robot(loc)
 
 /mob/living/carbon/human/death(gibbed)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)

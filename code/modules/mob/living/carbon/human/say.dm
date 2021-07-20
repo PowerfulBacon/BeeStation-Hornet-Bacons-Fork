@@ -45,7 +45,7 @@
 	return special_voice
 
 /mob/living/carbon/human/binarycheck()
-	if(stat >= SOFT_CRIT || !ears)
+	if(body.stat >= SOFT_CRIT || !ears)
 		return FALSE
 	var/obj/item/radio/headset/dongle = ears
 	if(!istype(dongle))
@@ -73,7 +73,7 @@
 		return " (as [get_id_name("Unknown")])"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri
-	if(stat == CONSCIOUS)
+	if(body.stat == CONSCIOUS)
 		if(client)
 			var/temp = winget(client, "input", "text")
 			var/say_starter = "Say \"" //"

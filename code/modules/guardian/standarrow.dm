@@ -30,7 +30,7 @@
 	if(!iscarbon(M) && !isguardian(M))
 		to_chat("<span class='italics warning'>You can't stab [M], it won't work!</span>")
 		return
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		to_chat("<span class='italics warning'>You can't stab [M], they're already dead!</span>")
 		return
 	var/mob/living/carbon/H = M

@@ -193,7 +193,7 @@
 	return FALSE
 
 /mob/living/simple_animal/hostile/morph/ShiftClickOn(atom/movable/A)
-	if(morph_time <= world.time && !stat)
+	if(morph_time <= world.time && is_concious())
 		if(A == src)
 			restore()
 			return
@@ -309,8 +309,8 @@
 		return
 	if(isliving(target)) //Eat living beings to store them for a snack, or other uses
 		var/mob/living/L = target
-		if(L.stat)
-			if(L.stat == DEAD)
+		if(L.is_unconcious())
+			if(L.is_dead())
 				eat(L)
 			else if(do_after(src, 30, target = L)) //Don't Return after this, it's important that the morph can attack softcrit targets to bring them into hardcrit
 				eat(L)

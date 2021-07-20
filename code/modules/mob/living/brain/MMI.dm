@@ -24,7 +24,7 @@
 	else
 		icon_state = "mmi_brain"
 		braintype = "Cyborg"
-	if(brainmob && brainmob.stat != DEAD)
+	if(brainmob && brainmob.is_alive())
 		add_overlay("mmi_alive")
 	else
 		add_overlay("mmi_dead")
@@ -151,7 +151,7 @@
 	set src = usr.loc
 	set popup_menu = FALSE
 
-	if(brainmob.stat)
+	if(brainmob.is_unconcious())
 		to_chat(brainmob, "<span class='warning'>Can't do that while incapacitated or dead!</span>")
 	if(!radio.on)
 		to_chat(brainmob, "<span class='warning'>Your radio is disabled!</span>")
@@ -203,7 +203,7 @@
 	. += "<span class='notice'>There is a switch to toggle the radio system [radio.on ? "off" : "on"].[brain ? " It is currently being covered by [brain]." : null]</span>"
 	if(brainmob)
 		var/mob/living/brain/B = brainmob
-		if(!B.key || !B.mind || B.stat == DEAD)
+		if(!B.key || !B.mind || B.is_dead())
 			. += "<span class='warning'>The MMI indicates the brain is completely unresponsive.</span>"
 
 		else if(!B.client)
@@ -212,7 +212,7 @@
 		else
 			. += "<span class='notice'>The MMI indicates the brain is active.</span>"
 
-/obj/item/mmi/relaymove(mob/user)
+/obj/item/mmi/relaymove(mob/living/user)
 	return //so that the MMI won't get a warning about not being able to move if it tries to move
 
 /obj/item/mmi/syndie

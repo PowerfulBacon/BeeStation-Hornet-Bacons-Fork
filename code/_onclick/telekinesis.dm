@@ -12,34 +12,34 @@
 
 #define TK_MAXRANGE 15
 
-/atom/proc/attack_tk(mob/user)
-	if(user.stat || !tkMaxRangeCheck(user, src))
+/atom/proc/attack_tk(mob/living/user)
+	if(user.is_unconcious() || !tkMaxRangeCheck(user, src))
 		return
 	new /obj/effect/temp_visual/telekinesis(get_turf(src))
 	user.UnarmedAttack(src,0) // attack_hand, attack_paw, etc
 	add_hiddenprint(user)
 	return
 
-/obj/attack_tk(mob/user)
-	if(user.stat)
+/obj/attack_tk(mob/living/user)
+	if(user.is_concious())
 		return
 	if(anchored)
 		return ..()
 	attack_tk_grab(user)
 
-/obj/item/attack_tk(mob/user)
-	if(user.stat)
+/obj/item/attack_tk(mob/living/user)
+	if(user.is_concious())
 		return
 	attack_tk_grab(user)
 
-/obj/proc/attack_tk_grab(mob/user)
+/obj/proc/attack_tk_grab(mob/living/user)
 	var/obj/item/tk_grab/O = new(src)
 	O.tk_user = user
 	if(O.focus_object(src))
 		user.put_in_active_hand(O)
 		add_hiddenprint(user)
 
-/mob/attack_tk(mob/user)
+/mob/attack_tk(mob/living/user)
 	return
 
 /*

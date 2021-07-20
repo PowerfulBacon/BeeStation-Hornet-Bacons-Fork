@@ -322,7 +322,7 @@
 /obj/machinery/computer/arena/proc/trophy_for_last_man_standing()
 	var/arena_turfs = get_arena_turfs()
 	for(var/mob/living/L in GLOB.mob_living_list)
-		if(L.stat != DEAD && (get_turf(L) in arena_turfs))
+		if(L.is_alive() && (get_turf(L) in arena_turfs))
 			var/obj/item/reagent_containers/food/drinks/trophy/gold_cup/G = new(get_turf(L))
 			G.name = "[L.real_name]'s Trophy"
 
@@ -342,7 +342,11 @@
 				if(isobserver(M))
 					player_status = "Ghosted"
 				else
-					player_status = M.stat == DEAD ? "Dead" : "Alive"
+					var/stat = DEAD
+					if(isliving(M))
+						var/mob/living/L = M
+						stat = L.body.stat
+					player_status = stat == DEAD ? "Dead" : "Alive"
 				dat += "<li>[ckey] - [player_status] - "
 				dat += "<a href='?_src_=holder;[HrefToken(TRUE)];adminplayerobservefollow=[REF(M)]'>FLW</a>"
 				dat += "<a href='?src=[REF(src)];member_action=remove;team=[team];ckey=[ckey]'>Remove</a>"

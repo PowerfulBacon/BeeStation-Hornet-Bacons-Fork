@@ -65,7 +65,7 @@
 			var/mob/living/L = cult_mind.current
 			L.narsie_act()
 	for(var/mob/living/player in GLOB.player_list)
-		if(player.stat != DEAD && player.loc && is_station_level(player.loc.z) && !iscultist(player) && !isanimal(player))
+		if(player.is_alive() && player.loc && is_station_level(player.loc.z) && !iscultist(player) && !isanimal(player))
 			souls_needed[player] = TRUE
 	soul_goal = round(1 + LAZYLEN(souls_needed) * 0.75)
 	INVOKE_ASYNC(src, .proc/begin_the_end)
@@ -149,7 +149,7 @@
 
 /obj/singularity/narsie/mezzer()
 	for(var/mob/living/carbon/M in hearers(consume_range, src))
-		if(M.stat || iscultist(M))
+		if(M.body.stat || iscultist(M))
 			continue
 		to_chat(M, "<span class='cultsmall'>You feel conscious thought crumble away in an instant as you gaze upon [src.name].</span>")
 		M.apply_effect(60, EFFECT_STUN)

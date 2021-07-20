@@ -73,7 +73,7 @@ have ways of interacting with a specific mob and control it.
 			selected_enemy = possible_enemy
 			break
 		if(selected_enemy)
-			if(!selected_enemy.stat) //He's up, get him!
+			if(!selected_enemy.is_concious()) //He's up, get him!
 				if(living_pawn.health < MONKEY_FLEE_HEALTH) //Time to skeddadle
 					blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET] = selected_enemy
 					current_behaviors += GET_AI_BEHAVIOR(/datum/ai_behavior/monkey_flee)

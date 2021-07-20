@@ -135,7 +135,7 @@
 
 /datum/objective_item/steal/functionalai/check_special_completion(obj/item/aicard/C)
 	for(var/mob/living/silicon/ai/A in C)
-		if(isAI(A) && A.stat != DEAD) //See if any AI's are alive inside that card.
+		if(isAI(A) && A.is_alive()) //See if any AI's are alive inside that card.
 			return 1
 	return 0
 

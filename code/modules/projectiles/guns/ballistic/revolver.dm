@@ -38,7 +38,7 @@
 
 	var/mob/M = usr
 
-	if(M.stat || !in_range(M,src))
+	if(M.is_unconcious() || !in_range(M,src))
 		return
 
 	if (recent_spin > world.time)

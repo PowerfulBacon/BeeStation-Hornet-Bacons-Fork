@@ -129,7 +129,7 @@
 
 /mob/living/simple_animal/examine(mob/user)
 	. = ..()
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		. += "<span class='deadsay'>Upon closer examination, [p_they()] appear[p_s()] to be dead.</span>"
 
 /mob/living/simple_animal/initialize_footstep()
@@ -143,23 +143,19 @@
 /mob/living/simple_animal/update_stat()
 	if(status_flags & GODMODE)
 		return
-	if(stat != DEAD)
+	if(is_alive())
 		if(health <= 0)
 			death()
 		else
 			set_stat(CONSCIOUS)
 	med_hud_set_status()
 
-
-/mob/living/simple_animal/handle_status_effects()
-	..()
-	if(stuttering)
-		stuttering = 0
-
+//TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_action()
 	set waitfor = FALSE
 	return
 
+//TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_movement()
 	set waitfor = FALSE
 	if(!stop_automated_movement && wander)
@@ -173,6 +169,7 @@
 						turns_since_move = 0
 			return 1
 
+//TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_speech(var/override)
 	set waitfor = FALSE
 	if(speak_chance)
@@ -311,7 +308,7 @@
 	. = ..()
 
 /mob/living/simple_animal/emote(act, m_type=1, message = null, intentional = FALSE)
-	if(stat)
+	if(is_unconcious())
 		return
 	. = ..()
 
@@ -371,7 +368,7 @@
 			return FALSE
 	if (isliving(the_target))
 		var/mob/living/L = the_target
-		if(L.stat != CONSCIOUS)
+		if(L.body.stat != CONSCIOUS)
 			return FALSE
 	if (ismecha(the_target))
 		var/obj/mecha/M = the_target
@@ -400,13 +397,13 @@
 
 /mob/living/simple_animal/proc/make_babies() // <3 <3 <3
 	set waitfor = 0
-	if(gender != FEMALE || stat || next_scan_time > world.time || !childtype || !animal_species || !SSticker.IsRoundInProgress())
+	if(gender != FEMALE || is_unconcious() || next_scan_time > world.time || !childtype || !animal_species || !SSticker.IsRoundInProgress())
 		return
 	next_scan_time = world.time + (5 MINUTES)
 	var/mob/living/simple_animal/partner
 	var/children = 0
 	for(var/mob/living/M in ohearers(7, src))
-		if(M.stat) //Check if it's conscious FIRST.
+		if(M.is_unconcious()) //Check if it's conscious FIRST.
 			continue
 		else if(is_type_in_list(M, childtype)) //Check for children SECOND.
 			children++
@@ -449,7 +446,7 @@
 		..()
 
 /mob/living/simple_animal/update_mobility(value_otherwise = TRUE)
-	if(IsUnconscious() || IsParalyzed() || IsStun() || IsKnockdown() || IsParalyzed() || stat || resting)
+	if(IsUnconscious() || IsParalyzed() || IsStun() || IsKnockdown() || IsParalyzed() || is_unconcious() || resting)
 		drop_all_held_items()
 		mobility_flags = NONE
 	else if(buckled)
@@ -484,7 +481,7 @@
 /mob/living/simple_animal/update_sight()
 	if(!client)
 		return
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		sight = (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_OBSERVER
@@ -608,7 +605,7 @@
 
 /mob/living/simple_animal/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
-	if(!ckey && !stat)//Not unconscious
+	if(!ckey && is_concious())//Not unconscious
 		if(AIStatus == AI_IDLE)
 			toggle_ai(AI_ON)
 

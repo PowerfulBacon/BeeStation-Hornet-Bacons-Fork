@@ -455,7 +455,7 @@
 	var/obj/item/cavity_item
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
-	if(!((owner.stat == DEAD) || owner.InFullCritical()))
+	if(!((owner.is_dead()) || owner.InFullCritical()))
 		return FALSE
 	return ..()
 
@@ -526,14 +526,14 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
+		if(owner.body.stat < UNCONSCIOUS)
 			owner.emote("scream")
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
@@ -594,14 +594,14 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
+		if(owner.body.stat < UNCONSCIOUS)
 			owner.emote("scream")
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
@@ -659,12 +659,12 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
+		if(owner.body.stat < UNCONSCIOUS)
 			owner.emote("scream")
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
 
 /obj/item/bodypart/l_leg/digitigrade
@@ -721,12 +721,12 @@
 	if(!.)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE)
-		if(owner.stat < UNCONSCIOUS)
+		if(owner.body.stat < UNCONSCIOUS)
 			owner.emote("scream")
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
-		if(owner.stat < DEAD)
+		if(owner.body.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
 
 /obj/item/bodypart/r_leg/digitigrade

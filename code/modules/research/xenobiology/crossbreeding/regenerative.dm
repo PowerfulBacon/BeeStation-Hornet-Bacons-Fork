@@ -19,7 +19,7 @@ Regenerative extracts:
 	if(!prox || !isliving(target))
 		return
 	var/mob/living/H = target
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		to_chat(user, "<span class='warning'>[src] will not work on the dead!</span>")
 		return
 	if(H != user)
@@ -268,11 +268,11 @@ Regenerative extracts:
 	effect_desc = "Fully heals the target and boosts their armor."
 
 /obj/item/slimecross/regenerative/adamantine/core_effect(mob/living/target, mob/user) //WIP - Find out why this doesn't work.
-	target.apply_status_effect(STATUS_EFFECT_SLIMESKIN)
+	target.body.apply_status_effect(STATUS_EFFECT_SLIMESKIN)
 
 /obj/item/slimecross/regenerative/rainbow
 	colour = "rainbow"
 	effect_desc = "Fully heals the target and temporarily makes them immortal, but pacifistic."
 
 /obj/item/slimecross/regenerative/rainbow/core_effect(mob/living/target, mob/user)
-	target.apply_status_effect(STATUS_EFFECT_RAINBOWPROTECTION)
+	target.body.apply_status_effect(STATUS_EFFECT_RAINBOWPROTECTION)

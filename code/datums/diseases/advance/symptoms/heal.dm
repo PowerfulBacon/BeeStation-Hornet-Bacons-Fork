@@ -119,9 +119,9 @@
 		ADD_TRAIT(M, TRAIT_NOCRITDAMAGE, DISEASE_TRAIT)
 	if(HAS_TRAIT(M, TRAIT_DEATHCOMA))
 		return power
-	else if(M.IsUnconscious() || M.stat == UNCONSCIOUS)
+	else if(M.IsUnconscious() || M.body.stat == UNCONSCIOUS)
 		return power * 0.9
-	else if(M.stat == SOFT_CRIT)
+	else if(M.body.stat == SOFT_CRIT)
 		return power * 0.5
 	else if(M.IsSleeping())
 		return power * 0.25
@@ -542,7 +542,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 								if(Z == BODY_ZONE_HEAD) //if we regenerate the head, make sure the mob still owns us
 									if(isliving(ownermind.current))
 										var/mob/living/owner = ownermind.current
-										if(owner.stat != DEAD)//if they have a new mob, forget they exist
+										if(owner.is_alive())//if they have a new mob, forget they exist
 											ownermind = null
 											break
 										if(owner == M) //they're already in control of this body, probably because their brain isn't in the head!

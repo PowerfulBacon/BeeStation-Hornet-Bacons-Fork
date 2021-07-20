@@ -81,7 +81,7 @@
 		if(!A.owner)
 			continue
 		fugitives_counted += A
-		if(A.owner.current.stat == DEAD)
+		if(A.owner.current.is_dead())
 			fugitives_dead += A
 		if(A.is_captured)
 			fugitives_captured += A
@@ -91,7 +91,7 @@
 	var/dead_boys = 0
 	for(var/I in members)
 		var/datum/mind/hunter_mind = I
-		if(!(ishuman(hunter_mind.current) || (hunter_mind.current.stat == DEAD)))
+		if(!(ishuman(hunter_mind.current) || (hunter_mind.current.is_dead())))
 			dead_boys++
 	return dead_boys >= members.len
 

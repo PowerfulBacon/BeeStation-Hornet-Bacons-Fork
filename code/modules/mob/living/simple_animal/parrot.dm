@@ -125,7 +125,7 @@
 
 /mob/living/simple_animal/parrot/examine(mob/user)
 	. = ..()
-	if(stat)
+	if(is_unconcious())
 		. += pick("This parrot is no more.", "This is a late parrot.", "This is an ex-parrot.")
 
 /mob/living/simple_animal/parrot/death(gibbed)
@@ -201,7 +201,7 @@
 				if(!ears)
 					to_chat(usr, "<span class='warning'>There is nothing to remove from its [remove_from]!</span>")
 					return
-				if(!stat)
+				if(is_concious())
 					say("[available_channels.len ? "[pick(available_channels)] " : null]BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 				ears.forceMove(drop_location())
 				ears = null
@@ -268,7 +268,7 @@
 	..()
 	if(client)
 		return
-	if(!stat && M.a_intent == INTENT_HARM)
+	if(is_concious() && M.a_intent == INTENT_HARM)
 
 		icon_state = icon_living //It is going to be flying regardless of whether it flees or attacks
 
@@ -283,7 +283,7 @@
 		else
 			parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
 			drop_held_item(0)
-	if(stat != DEAD && M.a_intent == INTENT_HELP)
+	if(is_alive() && M.a_intent == INTENT_HELP)
 		handle_automated_speech(1) //assured speak/emote
 	return
 
@@ -303,14 +303,14 @@
 	if(parrot_state == PARROT_PERCH)
 		parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 
-	if(M.melee_damage > 0 && !stat)
+	if(M.melee_damage > 0 && is_concious())
 		parrot_interest = M
 		parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
 		icon_state = icon_living
 
 //Mobs with objects
 /mob/living/simple_animal/parrot/attackby(obj/item/O, mob/living/user, params)
-	if(!stat && !client && !istype(O, /obj/item/stack/medical) && !istype(O, /obj/item/reagent_containers/food/snacks/cracker))
+	if(is_concious() && !client && !istype(O, /obj/item/stack/medical) && !istype(O, /obj/item/reagent_containers/food/snacks/cracker))
 		if(O.force)
 			if(parrot_state == PARROT_PERCH)
 				parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
@@ -336,7 +336,7 @@
 //Bullets
 /mob/living/simple_animal/parrot/bullet_act(obj/item/projectile/Proj)
 	. = ..()
-	if(!stat && !client)
+	if(is_concious() && !client)
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 
@@ -353,7 +353,7 @@
 	..()
 
 	//Sprite update for when a parrot gets pulled
-	if(pulledby && !stat && parrot_state != PARROT_WANDER)
+	if(pulledby && is_concious() && parrot_state != PARROT_WANDER)
 		if(buckled)
 			buckled.unbuckle_mob(src, TRUE)
 			buckled = null
@@ -381,7 +381,7 @@
 	if(!isturf(src.loc) || !(mobility_flags & MOBILITY_MOVE) || buckled)
 		return //If it can't move, dont let it move. (The buckled check probably isn't necessary thanks to canmove)
 
-	if(client && stat == CONSCIOUS && parrot_state != icon_living)
+	if(client && is_concious() && parrot_state != icon_living)
 		icon_state = icon_living
 		//Because the most appropriate place to set icon_state is movement_delay(), clearly
 
@@ -560,7 +560,7 @@
 		if(Adjacent(parrot_interest))
 
 			//If the mob we've been chasing/attacking dies or falls into crit, check for loot!
-			if(L.stat)
+			if(L.is_unconcious())
 				parrot_interest = null
 				if(!held_item)
 					held_item = steal_from_ground()
@@ -670,7 +670,7 @@
 	set category = "Parrot"
 	set desc = "Grabs a nearby item."
 
-	if(stat)
+	if(is_unconcious())
 		return -1
 
 	if(held_item)
@@ -698,7 +698,7 @@
 	set category = "Parrot"
 	set desc = "Steals an item right out of a person's hand!"
 
-	if(stat)
+	if(is_unconcious())
 		return -1
 
 	if(held_item)
@@ -727,7 +727,7 @@
 	set category = "Parrot"
 	set desc = "Drop the item you're holding."
 
-	if(stat)
+	if(is_unconcious())
 		return
 
 	src.drop_held_item()
@@ -739,7 +739,7 @@
 	set category = "Parrot"
 	set desc = "Drop the item you're holding."
 
-	if(stat)
+	if(is_unconcious())
 		return -1
 
 	if(!held_item)
@@ -778,7 +778,7 @@
 	set category = "Parrot"
 	set desc = "Sit on a nice comfy perch."
 
-	if(stat || !client)
+	if(is_unconcious() || !client)
 		return
 
 	if(icon_state == icon_living)
@@ -794,7 +794,7 @@
 
 /mob/living/simple_animal/parrot/Moved(oldLoc, dir)
 	. = ..()
-	if(. && !stat && client && parrot_state == PARROT_PERCH)
+	if(. && is_concious() && client && parrot_state == PARROT_PERCH)
 		parrot_state = PARROT_WANDER
 		icon_state = icon_living
 		pixel_x = initial(pixel_x)
@@ -805,7 +805,7 @@
 	set category = "Parrot"
 	set desc = "Sit on a nice comfy human being!"
 
-	if(stat || !client)
+	if(is_unconcious() || !client)
 		return
 
 	if(!buckled)
@@ -844,7 +844,7 @@
 	set category = "Parrot"
 	set desc = "Time to bear those claws!"
 
-	if(stat || !client)
+	if(is_unconcious() || !client)
 		return
 
 	if(a_intent != INTENT_HELP)
@@ -892,7 +892,7 @@
 	. = ..()
 
 /mob/living/simple_animal/parrot/Poly/Life()
-	if(!stat && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
+	if(is_concious() && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
 		Write_Memory(FALSE)
 		memory_saved = TRUE
 	..()

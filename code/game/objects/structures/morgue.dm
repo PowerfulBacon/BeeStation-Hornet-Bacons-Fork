@@ -48,8 +48,8 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 /obj/structure/bodycontainer/update_icon()
 	return
 
-/obj/structure/bodycontainer/relaymove(mob/user)
-	if(user.stat || !isturf(loc))
+/obj/structure/bodycontainer/relaymove(mob/living/user)
+	if(user.is_unconcious() || !isturf(loc))
 		return
 	if(locked)
 		if(message_cooldown <= world.time)
@@ -116,7 +116,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 		"<span class='notice'>You lean on the back of [src] and start pushing the tray open... (this will take about [DisplayTimeText(breakout_time)].)</span>", \
 		"<span class='italics'>You hear a metallic creaking from [src].</span>")
 	if(do_after(user,(breakout_time), target = src))
-		if(!user || user.stat != CONSCIOUS || user.loc != src )
+		if(!user || user.body.stat != CONSCIOUS || user.loc != src )
 			return
 		user.visible_message("<span class='warning'>[user] successfully broke out of [src]!</span>", \
 			"<span class='notice'>You successfully break out of [src]!</span>")
@@ -145,7 +145,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 	update_icon()
 
 /obj/structure/bodycontainer/get_remote_view_fullscreens(mob/user)
-	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
+	if(user.is_dead() || !(user.sight & (SEEOBJS|SEEMOBS)))
 		user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 2)
 /*
  * Morgue
@@ -191,7 +191,7 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 				var/mob/living/mob_occupant = get_mob_or_brainmob(M)
 				if(mob_occupant.client && !mob_occupant.suiciding && !(HAS_TRAIT(mob_occupant, TRAIT_BADDNA)) && !mob_occupant.hellbound)
 					icon_state = "morgue4" // Cloneable
-					if(mob_occupant.stat == DEAD && beeper)
+					if(mob_occupant.is_dead() && beeper)
 						if(world.time > next_beep)
 							playsound(src, 'sound/weapons/smg_empty_alarm.ogg', 50, 0) //Clone them you blind fucks
 							next_beep = world.time + beep_cooldown
@@ -267,7 +267,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 				conts -= O
 
 		for(var/mob/living/M in conts)
-			if (M.stat != DEAD)
+			if (M.is_alive())
 				M.emote("scream")
 			if(user)
 				log_combat(user, M, "cremated")

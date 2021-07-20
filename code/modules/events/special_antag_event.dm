@@ -44,7 +44,7 @@
 			continue
 		if(is_banned_from(H, list(preference_type)))
 			continue
-		if(H.stat == DEAD)
+		if(H.is_dead())
 			continue
 		if(!SSjob.GetJob(H.mind.assigned_role) || (H.mind.assigned_role in GLOB.nonhuman_positions)) //only station jobs sans nonhuman roles, prevents ashwalkers trying to stalk with crewmembers they never met
 			continue

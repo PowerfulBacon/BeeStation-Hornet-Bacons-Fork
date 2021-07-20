@@ -23,7 +23,7 @@
 
 /datum/brain_trauma/severe/split_personality/proc/get_ghost()
 	set waitfor = FALSE
-	if(owner.stat == DEAD || !owner.mind)
+	if(owner.is_dead() || !owner.mind)
 		qdel(src)
 		return
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as [owner]'s split personality?", ROLE_PAI, null, null, 75, stranger_backseat, POLL_IGNORE_SPLITPERSONALITY)
@@ -36,7 +36,7 @@
 		qdel(src)
 
 /datum/brain_trauma/severe/split_personality/on_life()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		if(current_controller != OWNER)
 			switch_personalities()
 		qdel(src)
@@ -52,7 +52,7 @@
 	..()
 
 /datum/brain_trauma/severe/split_personality/proc/switch_personalities()
-	if(QDELETED(owner) || owner.stat == DEAD || QDELETED(stranger_backseat) || QDELETED(owner_backseat))
+	if(QDELETED(owner) || owner.is_dead() || QDELETED(stranger_backseat) || QDELETED(owner_backseat))
 		return
 
 	var/mob/living/split_personality/current_backseat
@@ -110,27 +110,27 @@
 /mob/living/split_personality
 	name = "split personality"
 	real_name = "unknown conscience"
-	var/mob/living/carbon/body
+	var/mob/living/carbon/realbody
 	var/datum/brain_trauma/severe/split_personality/trauma
 
 /mob/living/split_personality/Initialize(mapload, _trauma)
 	if(iscarbon(loc))
-		body = loc
-		name = body.real_name
-		real_name = body.real_name
+		realbody = loc
+		name = realbody.real_name
+		real_name = realbody.real_name
 		trauma = _trauma
 	return ..()
 
 /mob/living/split_personality/Life()
-	if(QDELETED(body))
+	if(QDELETED(realbody))
 		qdel(src) //in case trauma deletion doesn't already do it
 
-	if((body.stat == DEAD && trauma.owner_backseat == src))
+	if((realbody.is_dead() && trauma.owner_backseat == src))
 		trauma.switch_personalities()
 		qdel(trauma)
 
 	//if one of the two ghosts, the other one stays permanently
-	if(!body.client && trauma.initialized)
+	if(!realbody.client && trauma.initialized)
 		trauma.switch_personalities()
 		qdel(trauma)
 

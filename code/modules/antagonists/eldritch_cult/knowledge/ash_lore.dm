@@ -42,7 +42,7 @@
 	if(!iscarbon(target))
 		return
 	var/mob/living/carbon/C = target
-	var/datum/status_effect/eldritch/E = C.has_status_effect(/datum/status_effect/eldritch/rust) || C.has_status_effect(/datum/status_effect/eldritch/ash) || C.has_status_effect(/datum/status_effect/eldritch/flesh)
+	var/datum/status_effect/eldritch/E = C.body.has_status_effect(/datum/status_effect/eldritch/rust) || C.body.has_status_effect(/datum/status_effect/eldritch/ash) || C.body.has_status_effect(/datum/status_effect/eldritch/flesh)
 	if(E)
 		E.on_effect()
 		for(var/X in user.mind.spell_list)
@@ -64,7 +64,7 @@
 	. = ..()
 	if(isliving(target))
 		var/mob/living/living_target = target
-		living_target.apply_status_effect(/datum/status_effect/eldritch/ash,5)
+		living_target.body.apply_status_effect(/datum/status_effect/eldritch/ash,5)
 
 /datum/eldritch_knowledge/mad_mask
 	name = "Mask of Madness"

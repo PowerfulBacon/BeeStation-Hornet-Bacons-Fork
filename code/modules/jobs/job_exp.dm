@@ -148,7 +148,7 @@ GLOBAL_PROTECT(exp_to_update)
 	var/list/play_records = list()
 
 	if(isliving(mob))
-		if(mob.stat != DEAD)
+		if(mob.is_alive())
 			var/rolefound = FALSE
 			play_records[EXP_TYPE_LIVING] += minutes
 

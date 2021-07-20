@@ -296,7 +296,7 @@
 /obj/structure/puzzle_element/prison
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 50, "bomb" = 50, "bio" = 50, "rad" = 50, "fire" = 50, "acid" = 50, "stamina" = 0)
 
-/obj/structure/puzzle_element/prison/relaymove(mob/user)
+/obj/structure/puzzle_element/prison/relaymove(mob/living/user)
 	return
 
 /obj/item/prisoncube
@@ -312,7 +312,7 @@
 	var/mob/living/victim = target
 	var/mob/living/carbon/carbon_victim = victim
 	//Handcuffed or unconcious
-	if(istype(carbon_victim) && carbon_victim.handcuffed || victim.stat != CONSCIOUS)
+	if(istype(carbon_victim) && carbon_victim.handcuffed || victim.body.stat != CONSCIOUS)
 		if(!puzzle_imprison(target))
 			to_chat(user,"<span class='warning'>[src] does nothing.</span>")
 			return

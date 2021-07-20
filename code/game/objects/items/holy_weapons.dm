@@ -279,7 +279,7 @@
 			display_names[initial(rodtype.name)] = rodtype
 
 	var/choice = input(M,"What theme would you like for your holy weapon?","Holy Weapon Theme") as null|anything in sortList(display_names, /proc/cmp_typepaths_asc)
-	if(QDELETED(src) || !choice || M.stat || !in_range(M, src) || M.incapacitated() || reskinned)
+	if(QDELETED(src) || !choice || M.is_unconcious() || !in_range(M, src) || M.incapacitated() || reskinned)
 		return
 
 	var/A = display_names[choice] // This needs to be on a separate var as list member access is not allowed for new
@@ -498,7 +498,7 @@
 	hitsound = 'sound/weapons/rapierhit.ogg'
 	var/possessed = FALSE
 
-/obj/item/nullrod/scythe/talking/relaymove(mob/user)
+/obj/item/nullrod/scythe/talking/relaymove(mob/living/user)
 	return //stops buckled message spam for the ghost.
 
 /obj/item/nullrod/scythe/talking/attack_self(mob/living/user)

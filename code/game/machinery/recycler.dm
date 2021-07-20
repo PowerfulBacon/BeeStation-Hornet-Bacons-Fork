@@ -175,7 +175,7 @@
 		playsound(src, 'sound/effects/splat.ogg', 50, 1)
 
 	if(iscarbon(L))
-		if(L.stat == CONSCIOUS)
+		if(L.body.stat == CONSCIOUS)
 			L.say("ARRRRRRRRRRRGH!!!", forced="recycler grinding")
 		add_mob_blood(L)
 
@@ -192,7 +192,7 @@
 	// Instantly lie down, also go unconscious from the pain, before you die.
 	L.Unconscious(100)
 	L.adjustBruteLoss(crush_damage)
-	if(L.stat == DEAD && (L.butcher_results || L.guaranteed_butcher_results))
+	if(L.is_dead() && (L.butcher_results || L.guaranteed_butcher_results))
 		var/datum/component/butchering/butchering = GetComponent(/datum/component/butchering)
 		butchering.Butcher(src,L)
 

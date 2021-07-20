@@ -37,7 +37,7 @@
 		var/list/cyborg_data = list(
 			name = R.name,
 			locked_down = R.lockcharge,
-			status = R.stat,
+			status = R.body.stat,
 			shell_discon = shell,
 			charge = R.cell ? round(R.cell.percent()) : null,
 			module = R.module ? "[R.module.name] Module" : "No Module Detected",

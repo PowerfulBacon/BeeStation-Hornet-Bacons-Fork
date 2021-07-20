@@ -257,7 +257,7 @@
 
 /obj/item/restraints/legcuffs/beartrap/attack_self(mob/user)
 	..()
-	if(ishuman(user) && !user.stat && !user.restrained())
+	if(ishuman(user) && user.is_concious() && !user.restrained())
 		armed = !armed
 		update_icon()
 		to_chat(user, "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>")
@@ -365,7 +365,7 @@
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		to_chat(C, "<span class='userdanger'>\The [src] ensnares you!</span>")
 		if(knockdown)
-			C.Paralyze(knockdown)	
+			C.Paralyze(knockdown)
 		playsound(src, 'sound/effects/snap.ogg', 50, TRUE)
 
 /obj/item/restraints/legcuffs/bola/tactical//traitor variant
@@ -408,7 +408,7 @@
 
 /obj/item/restraints/legcuffs/bola/gonbola/ensnare(mob/living/carbon/C)
 	. = ..()
-	effectReference = C.apply_status_effect(STATUS_EFFECT_GONBOLAPACIFY)
+	effectReference = C.body.apply_status_effect(STATUS_EFFECT_GONBOLAPACIFY)
 
 /obj/item/restraints/legcuffs/bola/gonbola/dropped(mob/user)
 	. = ..()

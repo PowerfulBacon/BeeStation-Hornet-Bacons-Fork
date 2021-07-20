@@ -21,12 +21,12 @@
 
 /////////////////////////////////// EYE_BLIND ////////////////////////////////////
 
-/mob/proc/blind_eyes(amount)
+/mob/living/proc/blind_eyes(amount)
 	if(amount>0)
 		var/old_eye_blind = eye_blind
 		eye_blind = max(eye_blind, amount)
 		if(!old_eye_blind)
-			if(stat == CONSCIOUS || stat == SOFT_CRIT)
+			if(body.stat <= SOFT_CRIT)
 				throw_alert("blind", /atom/movable/screen/alert/blind)
 			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
 
@@ -35,17 +35,17 @@
   *
   * Will apply the blind alerts if needed
   */
-/mob/proc/adjust_blindness(amount)
+/mob/living/proc/adjust_blindness(amount)
 	if(amount>0)
 		var/old_eye_blind = eye_blind
 		eye_blind += amount
 		if(!old_eye_blind)
-			if(stat == CONSCIOUS || stat == SOFT_CRIT)
+			if(body.stat <= SOFT_CRIT)
 				throw_alert("blind", /atom/movable/screen/alert/blind)
 			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
 	else if(eye_blind)
 		var/blind_minimum = 0
-		if((stat != CONSCIOUS && stat != SOFT_CRIT))
+		if((body.stat != CONSCIOUS && body.stat != SOFT_CRIT))
 			blind_minimum = 1
 		if(isliving(src))
 			var/mob/living/L = src
@@ -58,17 +58,17 @@
 /**
   * Force set the blindness of a mob to some level
   */
-/mob/proc/set_blindness(amount)
+/mob/living/proc/set_blindness(amount)
 	if(amount>0)
 		var/old_eye_blind = eye_blind
 		eye_blind = amount
 		if(client && !old_eye_blind)
-			if(stat == CONSCIOUS || stat == SOFT_CRIT)
+			if(body.stat == CONSCIOUS || body.stat == SOFT_CRIT)
 				throw_alert("blind", /atom/movable/screen/alert/blind)
 			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
 	else if(eye_blind)
 		var/blind_minimum = 0
-		if(stat != CONSCIOUS && stat != SOFT_CRIT)
+		if(body.stat != CONSCIOUS && body.stat != SOFT_CRIT)
 			blind_minimum = 1
 		if(isliving(src))
 			var/mob/living/L = src

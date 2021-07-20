@@ -14,7 +14,7 @@
 		return .
 
 	for(var/mob/living/carbon/alien/A in GLOB.player_list)
-		if(A.stat != DEAD)
+		if(A.is_alive())
 			return FALSE
 
 /datum/round_event/ghost_role/alien_infestation
@@ -36,7 +36,7 @@
 /datum/round_event/ghost_role/alien_infestation/announce(fake)
 	var/living_aliens = FALSE
 	for(var/mob/living/carbon/alien/A in GLOB.player_list)
-		if(A.stat != DEAD)
+		if(A.is_alive())
 			living_aliens = TRUE
 
 	if(living_aliens || fake)

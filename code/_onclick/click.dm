@@ -23,7 +23,7 @@
 /mob/living/changeNext_move(num)
 	var/mod = next_move_modifier
 	var/adj = next_move_adjust
-	for(var/i in status_effects)
+	for(var/i in body.get_status_effects())
 		var/datum/status_effect/S = i
 		mod *= S.nextmove_modifier()
 		adj += S.nextmove_adjust()
@@ -288,7 +288,7 @@
 	return
 
 /mob/living/carbon/MiddleClickOn(atom/A)
-	if(!stat && mind && iscarbon(A) && A != src)
+	if(is_concious() && mind && iscarbon(A) && A != src)
 		var/datum/antagonist/changeling/C = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(C?.chosen_sting)
 			C.chosen_sting.try_to_sting(src,A)
@@ -352,7 +352,7 @@
 	return
 
 /mob/living/carbon/AltClickOn(atom/A)
-	if(!stat && mind && iscarbon(A) && A != src)
+	if(is_concious() && mind && iscarbon(A) && A != src)
 		var/datum/antagonist/changeling/C = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(C && C.chosen_sting)
 			C.chosen_sting.try_to_sting(src,A)
@@ -417,7 +417,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(atom/A)
-	if( buckled || stat != CONSCIOUS || !A || !x || !y || !A.x || !A.y )
+	if(buckled || !A || !x || !y || !A.x || !A.y )
 		return
 	var/dx = A.x - x
 	var/dy = A.y - y
@@ -442,6 +442,11 @@
 			setDir(EAST)
 		else
 			setDir(WEST)
+
+/mob/living/face_atom(atom/A)
+	if(body.stat != CONSCIOUS)
+		return
+	return ..()
 
 //debug
 /atom/movable/screen/proc/scale_to(x1,y1)

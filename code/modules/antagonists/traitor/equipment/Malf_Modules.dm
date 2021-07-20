@@ -150,7 +150,7 @@ GLOBAL_LIST_INIT(blacklisted_malf_machines, typecacheof(list(
 		return
 	var/mob/living/silicon/ai/A = usr
 
-	if(A.stat == DEAD)
+	if(A.is_dead())
 		to_chat(A, "<span class='warning'>You are already dead!</span>")
 		return
 

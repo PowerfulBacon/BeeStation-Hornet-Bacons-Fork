@@ -63,15 +63,14 @@
 	// Close UIs if mindless.
 	if(!client)
 		return UI_CLOSE
-	// Disable UIs if unconcious.
-	else if(stat)
-		return UI_DISABLED
 	// Update UIs if incapicitated but concious.
 	else if(incapacitated())
 		return UI_UPDATE
 	return UI_INTERACTIVE
 
 /mob/living/shared_ui_interaction(src_object)
+	if(is_unconcious())
+		return UI_DISABLED
 	. = ..()
 	if(!(mobility_flags & MOBILITY_UI) && . == UI_INTERACTIVE)
 		return UI_UPDATE

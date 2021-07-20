@@ -53,25 +53,25 @@
 /mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget()
 	if(ishuman(target))
 		var/mob/living/carbon/human/L = target
-		if(!L.getorgan(/obj/item/organ/ears/cat) && L.stat) //target doesnt have cat ears
+		if(!L.getorgan(/obj/item/organ/ears/cat) && L.is_unconcious()) //target doesnt have cat ears
 			visible_message("[src] slices off [L]'s ears, and replaces them with cat ears!", "<span class='notice'>You replace [L]'s ears with cat ears'.</span>")
 			var/obj/item/organ/ears/cat/newears = new
 			newears.Insert(L)
-		else if(!L.getorgan(/obj/item/organ/tail/cat) && L.stat)
+		else if(!L.getorgan(/obj/item/organ/tail/cat) && L.is_unconcious())
 			visible_message("[src] attaches a cat tail to [L]!", "<span class='notice'>You attach a tail to [L].</span>")
 			var/obj/item/organ/tail/cat/newtail = new
 			newtail.Insert(L)
 			return
 		else if(!L.has_trauma_type(/datum/brain_trauma/severe/pacifism) && L.getorgan(/obj/item/organ/ears/cat) && L.getorgan(/obj/item/organ/tail/cat)) //still does damage. This also lacks a Stat check- felinids beware.
 			visible_message("[src] drills a hole in [L]'s skull!", "<span class='notice'>You pacify [L]. Another successful creation.</span>")
-			if(L.stat)
+			if(L.is_unconcious())
 				L.emote("scream")
 			if(victims.Find(L) || !L.mind)//this is mostly to avoid neurine-filled catgirls from giving him many free instant heals
 				L.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_SURGERY)
 			else
 				L.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_BASIC)
 			newvictim(L)
-		else if(L.stat) //quickly heal them up and move on to our next target!
+		else if(L.is_unconcious()) //quickly heal them up and move on to our next target!
 			healvictim(L)
 			return
 	return ..()
@@ -130,7 +130,7 @@
 	if(iscarbon(target))
 		var/mob/living/carbon/human/C = target
 		if(C.getorgan(/obj/item/organ/ears/cat) && C.getorgan(/obj/item/organ/tail/cat) && C.has_trauma_type(/datum/brain_trauma/severe/pacifism))//he wont attack his creations
-			if(C.stat && (!HAS_TRAIT(C, TRAIT_NOMETABOLISM) || !isipc(C))) //unless they need healing
+			if(C.body.stat && (!HAS_TRAIT(C, TRAIT_NOMETABOLISM) || !isipc(C))) //unless they need healing
 				return ..()
 			return FALSE
 	return ..()
@@ -139,7 +139,7 @@
 	if(target)
 		if(ishuman(target))
 			var/mob/living/carbon/human/L = target
-			if(L.health <=30 || L.stat || !L.can_inject(null, FALSE)) // base health to move in to attack is 30, not 40, as it accounts for armor somewhat
+			if(L.health <=30 || L.body.stat || !L.can_inject(null, FALSE)) // base health to move in to attack is 30, not 40, as it accounts for armor somewhat
 				retreat_distance = 0
 			else
 				retreat_distance = 3 //spam chems if they aren't low and can be injected
@@ -164,10 +164,10 @@
 			if(!CanAttack(H))
 				Targets -= H
 				continue
-			if(H.stat == DEAD)
+			if(H.is_dead())
 				Targets -= H
 				continue
-			if(H.stat)
+			if(H.is_unconcious())
 				Targets[H] = 20
 				continue
 			else

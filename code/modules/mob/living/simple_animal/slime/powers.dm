@@ -20,7 +20,7 @@
 	set category = "Slime"
 	set desc = "This will let you feed on any valid creature in the surrounding area. This should also be used to halt the feeding process."
 
-	if(stat)
+	if(is_unconcious())
 		return 0
 
 	var/list/choices = list()
@@ -84,13 +84,13 @@
 		to_chat(src, "<span class='notice'><i>I'm not hungry anymore...</i></span>")
 		return FALSE
 
-	if(stat)
+	if(is_unconcious())
 		if(silent)
 			return FALSE
 		to_chat(src, "<span class='warning'><i>I must be conscious to do this...</i></span>")
 		return FALSE
 
-	if(M.stat == DEAD)
+	if(M.is_dead())
 		if(silent)
 			return FALSE
 		to_chat(src, "<span class='warning'><i>This subject does not have a strong enough life energy...</i></span>")
@@ -131,7 +131,7 @@
 	set category = "Slime"
 	set desc = "This will let you evolve from baby to adult slime."
 
-	if(stat)
+	if(is_unconcious())
 		to_chat(src, "<i>I must be conscious to do this...</i>")
 		return
 	if(!is_adult)
@@ -166,13 +166,13 @@
 	set category = "Slime"
 	set desc = "This will make you split into four Slimes."
 
-	if(stat)
+	if(is_unconcious())
 		to_chat(src, "<i>I must be conscious to do this...</i>")
 		return
 
 	if(is_adult)
 		if(amount_grown >= SLIME_EVOLUTION_THRESHOLD)
-			if(stat)
+			if(is_unconcious())
 				to_chat(src, "<i>I must be conscious to do this...</i>")
 				return
 			if(GLOB.total_slimes >= CONFIG_GET(number/max_slimes))

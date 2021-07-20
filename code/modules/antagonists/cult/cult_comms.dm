@@ -166,7 +166,7 @@
 			return
 		if(do_after(owner, 30, target = owner))
 			for(var/datum/mind/B in antag.cult_team.members)
-				if(B.current && B.current.stat != DEAD)
+				if(B.current && B.current.is_alive())
 					var/turf/mobloc = get_turf(B.current)
 					switch(i)
 						if(1)
@@ -279,7 +279,7 @@
 		C.cult_team.blood_target_image.pixel_x = -target.pixel_x
 		C.cult_team.blood_target_image.pixel_y = -target.pixel_y
 		for(var/datum/mind/B in SSticker.mode.cult)
-			if(B.current && B.current.stat != DEAD && B.current.client)
+			if(B.current && B.current.is_alive() && B.current.client)
 				to_chat(B.current, "<span class='cultlarge'><b>[ranged_ability_user] has marked [C.cult_team.blood_target] in the [A.name] as the cult's top priority, get there immediately!</b></span>")
 				SEND_SOUND(B.current, sound(pick('sound/hallucinations/over_here2.ogg','sound/hallucinations/over_here3.ogg'),0,1,75))
 				B.current.client.images += C.cult_team.blood_target_image
@@ -291,7 +291,7 @@
 
 /proc/reset_blood_target(datum/team/cult/team)
 	for(var/datum/mind/B in team.members)
-		if(B.current && B.current.stat != DEAD && B.current.client)
+		if(B.current && B.current.is_alive() && B.current.client)
 			if(team.blood_target)
 				to_chat(B.current,"<span class='cultlarge'><b>The blood mark has expired!</b></span>")
 			B.current.client.images -= team.blood_target_image
@@ -360,7 +360,7 @@
 	SEND_SOUND(owner, sound(pick('sound/hallucinations/over_here2.ogg','sound/hallucinations/over_here3.ogg'),0,1,75))
 	owner.client.images += C.cult_team.blood_target_image
 	for(var/datum/mind/B in SSticker.mode.cult)
-		if(B.current && B.current.stat != DEAD && B.current.client)
+		if(B.current && B.current.is_alive() && B.current.client)
 			to_chat(B.current, "<span class='cultlarge'><b>[owner] has marked [C.cult_team.blood_target] in the [A.name] as the cult's top priority, get there immediately!</b></span>")
 			SEND_SOUND(B.current, sound(pick('sound/hallucinations/over_here2.ogg','sound/hallucinations/over_here3.ogg'),0,1,75))
 			B.current.client.images += C.cult_team.blood_target_image

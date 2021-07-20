@@ -78,7 +78,7 @@
 	set category ="Robot Commands"
 	set name = "Print Image"
 	set src in usr
-	if(usr.stat == DEAD)
+	if(usr.is_dead())
 		return
 	borgprint(usr)
 

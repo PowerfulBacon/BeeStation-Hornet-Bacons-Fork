@@ -153,7 +153,7 @@
 		shoot_projectile(get_turf(src), i, FALSE)
 
 /mob/living/simple_animal/hostile/asteroid/elite/herald/proc/unenrage()
-	if(stat == DEAD || is_mirror)
+	if(is_dead() || is_mirror)
 		return
 	icon_state = "herald"
 

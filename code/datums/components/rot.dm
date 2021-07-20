@@ -40,7 +40,7 @@
 	if(C == null) //can't delete what doesnt exist
 		return
 
-	if(C.stat != DEAD)
+	if(C.is_alive())
 		qdel(src)
 		return
 

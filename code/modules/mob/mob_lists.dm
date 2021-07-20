@@ -46,27 +46,26 @@
 
 
 ///Adds the cliented mob reference to the list of all player-mobs, besides to either the of dead or alive player-mob lists, as appropriate. Called on Login().
-/mob/proc/add_to_player_list()
+/mob/proc/add_to_player_list(living_mob = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	GLOB.player_list |= src
 	if(!SSticker?.mode)
-		return
-	if(stat == DEAD)
+		return FALSE
+	if(is_dead())
 		add_to_current_dead_players()
 	else
 		add_to_current_living_players()
 
 ///Removes the mob reference from the list of all player-mobs, besides from either the of dead or alive player-mob lists, as appropriate. Called on Logout().
-/mob/proc/remove_from_player_list()
+/mob/proc/remove_from_player_list(living_mob = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	GLOB.player_list -= src
 	if(!SSticker?.mode)
 		return
-	if(stat == DEAD)
+	if(is_dead())
 		remove_from_current_dead_players()
 	else
 		remove_from_current_living_players()
-
 
 ///Adds the cliented mob reference to either the list of dead player-mobs or to the list of observers, depending on how they joined the game.
 /mob/proc/add_to_current_dead_players()

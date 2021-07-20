@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(monkey_recyclers)
 /obj/machinery/monkey_recycler/proc/stuff_monkey_in(mob/living/carbon/monkey/target, mob/living/user)
 	if(!istype(target))
 		return
-	if(target.stat == CONSCIOUS)
+	if(target.body.stat == CONSCIOUS)
 		to_chat(user, "<span class='warning'>The monkey is struggling far too much to put it in the recycler.</span>")
 		return
 	if(target.buckled || target.has_buckled_mobs())

@@ -814,7 +814,7 @@
 				return
 			if(AI.deployed_shell) //Recall AI if shelled so it can be checked for a client
 				AI.disconnect_shell()
-			if(AI.stat || !AI.client)
+			if(AI.body.stat || !AI.client)
 				to_chat(user, "<span class='warning'>[AI.name] is currently unresponsive, and cannot be uploaded.</span>")
 				return
 			if(occupant || dna_lock) //Normal AIs cannot steal mechs!
@@ -977,7 +977,7 @@
 	if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
 		to_chat(user, "<span class='warning'>Consciousness matrix not detected!</span>")
 		return FALSE
-	else if(mmi_as_oc.brainmob.stat)
+	else if(mmi_as_oc.brainmob.is_unconcious())
 		to_chat(user, "<span class='warning'>Beta-rhythm below acceptable level!</span>")
 		return FALSE
 	else if(occupant)
@@ -1004,7 +1004,7 @@
 	if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
 		to_chat(user, "<span class='notice'>Consciousness matrix not detected!</span>")
 		return FALSE
-	else if(mmi_as_oc.brainmob.stat)
+	else if(mmi_as_oc.brainmob.is_unconcious())
 		to_chat(user, "<span class='warning'>Beta-rhythm below acceptable level!</span>")
 		return FALSE
 	if(!user.transferItemToLoc(mmi_as_oc, src))

@@ -65,7 +65,7 @@
 
 /datum/species/ethereal/spec_updatehealth(mob/living/carbon/human/H)
 	.=..()
-	if(H.stat != DEAD && !EMPeffect)
+	if(H.is_alive() && !EMPeffect)
 		var/healthpercent = max(H.health, 0) / 100
 		if(!emageffect)
 			current_color = rgb(r2 + ((r1-r2)*healthpercent), g2 + ((g1-g2)*healthpercent), b2 + ((b1-b2)*healthpercent))

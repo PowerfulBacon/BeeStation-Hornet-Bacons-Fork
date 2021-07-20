@@ -44,7 +44,7 @@
 		INVOKE_ASYNC(src, .proc/awaken, user)
 
 /obj/item/his_grace/attack(mob/living/M, mob/user)
-	if(awakened && M.stat)
+	if(awakened && M.is_unconcious())
 		consume(M)
 	else
 		..()
@@ -91,13 +91,13 @@
 				master.visible_message("<span class='boldwarning'>[src] turns on [master]!</span>", "<span class='his_grace big bold'>[src] turns on you!</span>")
 				do_attack_animation(master, null, src)
 				master.emote("scream")
-				master.remove_status_effect(STATUS_EFFECT_HISGRACE)
+				master.body.remove_status_effect(STATUS_EFFECT_HISGRACE)
 				REMOVE_TRAIT(src, TRAIT_NODROP, HIS_GRACE_TRAIT)
 				master.Paralyze(60)
 				master.adjustBruteLoss(master.maxHealth)
 				playsound(master, 'sound/effects/splat.ogg', 100, 0)
 			else
-				master.apply_status_effect(STATUS_EFFECT_HISGRACE)
+				master.body.apply_status_effect(STATUS_EFFECT_HISGRACE)
 		return
 	forceMove(get_turf(src)) //no you can't put His Grace in a locker you just have to deal with Him
 	if(bloodthirst < HIS_GRACE_CONSUME_OWNER)
@@ -113,7 +113,7 @@
 	var/mob/living/L = pick(targets)
 	step_to(src, L)
 	if(Adjacent(L))
-		if(!L.stat)
+		if(L.is_concious())
 			L.visible_message("<span class='warning'>[src] lunges at [L]!</span>", "<span class='his_grace big bold'>[src] lunges at you!</span>")
 			do_attack_animation(L, null, src)
 			playsound(L, 'sound/weapons/smash.ogg', 50, 1)

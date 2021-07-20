@@ -58,7 +58,7 @@
 
 		if(faction_check_mob(L) && !attack_same)
 			return FALSE
-		if(L.stat > stat_attack || L.stat != stat_attack && stat_exclusive)
+		if(L.body.stat > stat_attack || L.body.stat != stat_attack && stat_exclusive)
 			return FALSE
 
 		return TRUE
@@ -79,7 +79,7 @@
 	..()
 
 /mob/living/simple_animal/hostile/asteroid/gutlunch/attackby(obj/item/O, mob/user, params)
-	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
+	if(body.stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		regenerate_icons()
 	else

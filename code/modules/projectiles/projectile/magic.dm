@@ -45,7 +45,7 @@
 		if(target.revive(full_heal = 1))
 			target.grab_ghost(force = TRUE) // even suicides
 			to_chat(target, "<span class='notice'>You rise with a start, you're alive!!!</span>")
-		else if(target.stat != DEAD)
+		else if(target.is_alive())
 			to_chat(target, "<span class='notice'>You feel great!</span>")
 
 /obj/item/projectile/magic/teleport
@@ -153,7 +153,7 @@
 	qdel(src)
 
 /proc/wabbajack(mob/living/M)
-	if(!istype(M) || M.stat == DEAD || M.notransform || (GODMODE & M.status_flags))
+	if(!istype(M) || M.is_dead() || M.notransform || (GODMODE & M.status_flags))
 		return
 
 	M.notransform = TRUE
@@ -487,7 +487,7 @@
 		if(L.anti_magic_check() || !firer)
 			L.visible_message("<span class='warning'>[src] vanishes on contact with [target]!</span>")
 			return BULLET_ACT_BLOCK
-		L.apply_status_effect(STATUS_EFFECT_BOUNTY, firer)
+		L.body.apply_status_effect(STATUS_EFFECT_BOUNTY, firer)
 
 /obj/item/projectile/magic/antimagic
 	name = "bolt of antimagic"
@@ -501,7 +501,7 @@
 		if(L.anti_magic_check())
 			L.visible_message("<span class='warning'>[src] vanishes on contact with [target]!</span>")
 			return BULLET_ACT_BLOCK
-		L.apply_status_effect(STATUS_EFFECT_ANTIMAGIC)
+		L.body.apply_status_effect(STATUS_EFFECT_ANTIMAGIC)
 
 /obj/item/projectile/magic/fetch
 	name = "bolt of fetching"
@@ -587,7 +587,7 @@
 		if(A)
 			poll_message = "[poll_message] Status:[A.name]."
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob(poll_message, ROLE_PAI, null, FALSE, 100, M)
-	if(M.stat == DEAD)//boo.
+	if(M.is_dead())//boo.
 		return
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
@@ -613,7 +613,7 @@
 /obj/item/projectile/magic/aoe/Range()
 	if(proxdet)
 		for(var/mob/living/L in range(1, get_turf(src)))
-			if(L.stat != DEAD && L != firer && !L.anti_magic_check())
+			if(L.is_alive() && L != firer && !L.anti_magic_check())
 				return Bump(L)
 	..()
 

@@ -108,7 +108,7 @@
 			. += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>"
 
 	var/appears_dead = 0
-	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+	if(body.stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = 1
 		if(suiciding)
 			. += "<span class='warning'>[t_He] appear[p_s()] to have committed suicide. There is no hope of recovery.</span>"
@@ -283,7 +283,7 @@
 		SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "religious_comfort", /datum/mood_event/religiously_comforted)
 
 	if(!appears_dead)
-		if(stat == UNCONSCIOUS)
+		if(body.stat == UNCONSCIOUS)
 			msg += "[t_He] [t_is]n't responding to anything around [t_him] and seem[p_s()] to be asleep.\n"
 		else
 			if(HAS_TRAIT(src, TRAIT_DUMB))
@@ -334,7 +334,7 @@
 				. += "<span class='info'>Detected physiological traits:\n[traitstring]"
 
 		if(HAS_TRAIT(user, TRAIT_SECURITY_HUD))
-			if(!user.stat && user != src)
+			if(user.is_concious()&& user != src)
 			//|| !user.canmove || user.restrained()) Fluff: Sechuds have eye-tracking technology and sets 'arrest' to people that the wearer looks and blinks at.
 				var/criminal = "None"
 
@@ -356,7 +356,7 @@
 	var/list/dat = list()
 	if(!pronoun_replacement)
 		pronoun_replacement = p_they(TRUE)
-	for(var/V in status_effects)
+	for(var/V in body.get_status_effects())
 		var/datum/status_effect/E = V
 		if(E.examine_text)
 			var/new_text = replacetext(E.examine_text, "SUBJECTPRONOUN", pronoun_replacement)

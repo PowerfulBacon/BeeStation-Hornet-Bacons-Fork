@@ -338,7 +338,7 @@
 			research_value *= 0.8
 	if(!host_mob.client)
 		research_value *= 0.5
-	if(host_mob.stat == DEAD)
+	if(host_mob.is_dead())
 		research_value *= 0.75
 	SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_NANITES = research_value))
 

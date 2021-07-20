@@ -585,7 +585,7 @@
 	if(!z)
 		return
 	for(var/mob/M in GLOB.mob_list)
-		if(M.stat != DEAD && M.get_virtual_z_level() == z)
+		if(M.is_alive() && M.get_virtual_z_level() == z)
 			M.gib()
 
 /*

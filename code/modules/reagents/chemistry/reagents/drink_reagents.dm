@@ -799,7 +799,7 @@
 	glass_desc = "Tastes naturally minty, and imparts a very mild numbing sensation."
 
 /datum/reagent/consumable/menthol/on_mob_life(mob/living/L)
-	L.apply_status_effect(/datum/status_effect/throat_soothed)
+	L.body.apply_status_effect(/datum/status_effect/throat_soothed)
 	..()
 
 /datum/reagent/consumable/grenadine

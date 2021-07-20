@@ -7,7 +7,7 @@
 	ignore_clothes = TRUE
 
 /datum/surgery/core_removal/can_start(mob/user, mob/living/target)
-	if(target.stat == DEAD)
+	if(target.is_dead())
 		return 1
 	return 0
 

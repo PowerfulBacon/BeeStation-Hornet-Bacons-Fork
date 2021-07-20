@@ -33,7 +33,7 @@
 	if(cell && cell.charge <= 0)
 		. += "<span class='warning'>Its battery indicator is blinking red!</span>"
 
-	switch(stat)
+	switch(body.stat)
 		if(CONSCIOUS)
 			if(shell)
 				. += "It appears to be an [deployed ? "active" : "empty"] AI shell."

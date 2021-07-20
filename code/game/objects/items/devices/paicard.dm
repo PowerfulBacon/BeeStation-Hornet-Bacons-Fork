@@ -63,7 +63,7 @@
 
 /obj/item/paicard/Topic(href, href_list)
 
-	if(!usr || usr.stat)
+	if(!usr || usr.is_unconcious())
 		return
 
 	if(href_list["request"])

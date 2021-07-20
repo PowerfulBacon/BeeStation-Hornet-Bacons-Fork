@@ -78,7 +78,7 @@
 	SIGNAL_HANDLER
 
 	interrupted = TRUE
-	owner.remove_status_effect(src)
+	owner.body.remove_status_effect(src)
 /datum/status_effect/slimerecall/on_remove()
 	UnregisterSignal(owner, COMSIG_LIVING_RESIST)
 	owner.cut_overlay(bluespace)
@@ -109,12 +109,12 @@
 
 /datum/status_effect/frozenstasis/tick()
 	if(!cube || owner.loc != cube)
-		owner.remove_status_effect(src)
+		owner.body.remove_status_effect(src)
 
 /datum/status_effect/frozenstasis/proc/breakCube()
 	SIGNAL_HANDLER
 
-	owner.remove_status_effect(src)
+	owner.body.remove_status_effect(src)
 
 /datum/status_effect/frozenstasis/on_remove()
 	if(cube)
@@ -142,12 +142,12 @@
 	if(owner.mind)
 		originalmind = owner.mind
 		owner.mind.transfer_to(clone)
-	clone.apply_status_effect(/datum/status_effect/slime_clone_decay)
+	clone.body.apply_status_effect(/datum/status_effect/slime_clone_decay)
 	return ..()
 
 /datum/status_effect/slime_clone/tick()
-	if(!istype(clone) || clone.stat != CONSCIOUS)
-		owner.remove_status_effect(src)
+	if(!istype(clone) || clone.body.stat != CONSCIOUS)
+		owner.body.remove_status_effect(src)
 
 /datum/status_effect/slime_clone/on_remove()
 	if(clone && clone.mind && owner)
@@ -344,7 +344,7 @@
 	duration = 300
 
 /datum/status_effect/lovecookie/tick()
-	if(owner.stat != CONSCIOUS)
+	if(owner.body.stat != CONSCIOUS)
 		return
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
@@ -365,7 +365,7 @@
 
 /datum/status_effect/tarcookie/tick()
 	for(var/mob/living/carbon/human/L in oviewers(1, owner))
-		L.apply_status_effect(/datum/status_effect/tarfoot)
+		L.body.apply_status_effect(/datum/status_effect/tarfoot)
 
 /datum/status_effect/tarfoot
 	id = "tarfoot"
@@ -403,7 +403,7 @@
 
 /datum/status_effect/peacecookie/tick()
 	for(var/mob/living/L in viewers(1, owner))
-		L.apply_status_effect(/datum/status_effect/plur)
+		L.body.apply_status_effect(/datum/status_effect/plur)
 
 /datum/status_effect/plur
 	id = "plur"
@@ -663,7 +663,7 @@
 	var/healthcheck
 
 /datum/status_effect/stabilized/bluespace/tick()
-	if(owner.has_status_effect(/datum/status_effect/bluespacestabilization))
+	if(owner.body.has_status_effect(/datum/status_effect/bluespacestabilization))
 		linked_alert.desc = "The stabilized bluespace extract is still aligning you with the bluespace axis."
 		linked_alert.icon_state = "slime_bluespace_off"
 		return ..()
@@ -682,7 +682,7 @@
 		if(do_teleport(owner, F, range, channel = TELEPORT_CHANNEL_BLUESPACE))
 			to_chat(owner, "<span class='notice'>[linked_extract] will take some time to re-align you on the bluespace axis.</span>")
 			do_sparks(5,FALSE,owner)
-			owner.apply_status_effect(/datum/status_effect/bluespacestabilization)
+			owner.body.apply_status_effect(/datum/status_effect/bluespacestabilization)
 	healthcheck = owner.health
 	return ..()
 
@@ -721,15 +721,15 @@
 	return ..()
 
 /datum/status_effect/stabilized/cerulean/tick()
-	if(owner.stat == DEAD)
-		if(clone && clone.stat != DEAD)
+	if(owner.is_dead())
+		if(clone && clone.is_alive())
 			owner.visible_message("<span class='warning'>[owner] blazes with brilliant light, [linked_extract] whisking [owner.p_their()] soul away.</span>",
 				"<span class='notice'>You feel a warm glow from [linked_extract], and you open your eyes... elsewhere.</span>")
 			if(owner.mind)
 				owner.mind.transfer_to(clone)
 			clone = null
 			qdel(linked_extract)
-		if(!clone || clone.stat == DEAD)
+		if(!clone || clone.is_dead())
 			to_chat(owner, "<span class='notice'>[linked_extract] desperately tries to move your soul to a living body, but can't find one!</span>")
 			qdel(linked_extract)
 	..()
@@ -829,26 +829,26 @@
 	for(var/mob/living/simple_animal/M in view(7,get_turf(owner)))
 		if(!(M in mobs))
 			mobs += M
-			M.apply_status_effect(/datum/status_effect/pinkdamagetracker)
+			M.body.apply_status_effect(/datum/status_effect/pinkdamagetracker)
 			M.faction |= faction_name
 	for(var/mob/living/simple_animal/M in mobs)
 		if(!(M in hearers(7,get_turf(owner))))
 			M.faction -= faction_name
-			M.remove_status_effect(/datum/status_effect/pinkdamagetracker)
+			M.body.remove_status_effect(/datum/status_effect/pinkdamagetracker)
 			mobs -= M
-		var/datum/status_effect/pinkdamagetracker/C = M.has_status_effect(/datum/status_effect/pinkdamagetracker)
+		var/datum/status_effect/pinkdamagetracker/C = M.body.has_status_effect(/datum/status_effect/pinkdamagetracker)
 		if(istype(C) && C.damage > 0)
 			C.damage = 0
-			owner.apply_status_effect(/datum/status_effect/brokenpeace)
+			owner.body.apply_status_effect(/datum/status_effect/brokenpeace)
 	var/HasFaction = FALSE
 	for(var/i in owner.faction)
 		if(i == faction_name)
 			HasFaction = TRUE
 
-	if(HasFaction && owner.has_status_effect(/datum/status_effect/brokenpeace))
+	if(HasFaction && owner.body.has_status_effect(/datum/status_effect/brokenpeace))
 		owner.faction -= faction_name
 		to_chat(owner, "<span class='userdanger'>The peace has been broken! Hostile creatures will now react to you!</span>")
-	if(!HasFaction && !owner.has_status_effect(/datum/status_effect/brokenpeace))
+	if(!HasFaction && !owner.body.has_status_effect(/datum/status_effect/brokenpeace))
 		to_chat(owner, "<span class='notice'>[linked_extract] pulses, generating a fragile aura of peace.</span>")
 		owner.faction |= faction_name
 	return ..()
@@ -856,7 +856,7 @@
 /datum/status_effect/stabilized/pink/on_remove()
 	for(var/mob/living/simple_animal/M in mobs)
 		M.faction -= faction_name
-		M.remove_status_effect(/datum/status_effect/pinkdamagetracker)
+		M.body.remove_status_effect(/datum/status_effect/pinkdamagetracker)
 	for(var/i in owner.faction)
 		if(i == faction_name)
 			owner.faction -= faction_name
@@ -867,7 +867,7 @@
 	examine_text = "<span class='warning'>SUBJECTPRONOUN smells of sulfer and oil!</span>"
 
 /datum/status_effect/stabilized/oil/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		explosion(get_turf(owner),1,2,4,flame_range = 5)
 	return ..()
 
@@ -880,7 +880,7 @@
 /datum/status_effect/stabilized/black/tick()
 	if(owner.pulling && isliving(owner.pulling) && owner.grab_state == GRAB_KILL)
 		var/mob/living/M = owner.pulling
-		if(M.stat == DEAD)
+		if(M.is_dead())
 			return
 		if(!messagedelivered)
 			to_chat(owner,"<span class='notice'>You feel your hands melt around [M]'s neck and start to drain [M.p_them()] of life.</span>")
@@ -916,7 +916,7 @@
 
 /datum/status_effect/stabilized/lightpink/tick()
 	for(var/mob/living/carbon/human/H in ohearers(1, owner))
-		if(H.stat != DEAD && H.health <= 0 && !H.reagents.has_reagent(/datum/reagent/medicine/epinephrine))
+		if(H.is_alive() && H.health <= 0 && !H.reagents.has_reagent(/datum/reagent/medicine/epinephrine))
 			to_chat(owner, "[linked_extract] pulses in sync with [H]'s heartbeat, trying to keep [H.p_them()] alive.")
 			H.reagents.add_reagent(/datum/reagent/medicine/epinephrine,5)
 	return ..()

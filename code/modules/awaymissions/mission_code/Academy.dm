@@ -107,11 +107,11 @@
 	if(next_check < world.time)
 		if(!current_wizard)
 			for(var/mob/living/L in GLOB.player_list)
-				if(L.get_virtual_z_level() == src.get_virtual_z_level() && L.stat != DEAD && !(faction in L.faction))
+				if(L.get_virtual_z_level() == src.get_virtual_z_level() && L.is_alive() && !(faction in L.faction))
 					summon_wizard()
 					break
 		else
-			if(current_wizard.stat == DEAD)
+			if(current_wizard.is_dead())
 				current_wizard = null
 				summon_wizard()
 			if(!current_wizard.client)

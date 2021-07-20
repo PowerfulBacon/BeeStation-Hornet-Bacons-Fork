@@ -43,7 +43,7 @@
 		data["name"] = occupier.name
 		data["restoring"] = restoring
 		data["health"] = (occupier.health + 100) / 2
-		data["isDead"] = occupier.stat == DEAD
+		data["isDead"] = occupier.is_dead()
 		data["laws"] = occupier.laws.get_law_list(include_zeroth = 1)
 
 	return data
@@ -70,7 +70,7 @@
 	occupier.adjustToxLoss(-5, 0)
 	occupier.adjustBruteLoss(-5, 0)
 	occupier.updatehealth()
-	if(occupier.health >= 0 && occupier.stat == DEAD)
+	if(occupier.health >= 0 && occupier.is_dead())
 		occupier.revive(full_heal = FALSE, admin_revive = FALSE)
 		if(!occupier.radio_enabled)
 			occupier.radio_enabled = TRUE
@@ -80,9 +80,9 @@
 /obj/machinery/computer/aifixer/process()
 	if(..())
 		if(restoring)
-			var/oldstat = occupier.stat
+			var/oldstat = occupier.body.stat
 			restoring = Fix()
-			if(oldstat != occupier.stat)
+			if(oldstat != occupier.is_concious())
 				update_icon()
 
 /obj/machinery/computer/aifixer/update_icon()
@@ -92,7 +92,7 @@
 	if(restoring)
 		add_overlay("ai-fixer-on")
 	if (occupier)
-		switch (occupier.stat)
+		switch (occupier.is_concious())
 			if (CONSCIOUS)
 				add_overlay("ai-fixer-full")
 			if (UNCONSCIOUS)

@@ -13,14 +13,14 @@
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		if(M.limb_destroyer)
 			dismembering_strike(M, affecting.body_zone)
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			var/dmg = rand(1, 5)
 			apply_damage(dmg, BRUTE, affecting)
 
 /mob/living/carbon/monkey/attack_larva(mob/living/carbon/alien/larva/L)
 	if(..()) //successful larva bite.
 		var/damage = rand(1, 3)
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			L.amount_grown = min(L.amount_grown + damage, L.max_grown)
 			var/obj/item/bodypart/affecting = get_bodypart(ran_zone(L.zone_selected))
 			if(!affecting)

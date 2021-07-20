@@ -236,9 +236,9 @@ While using this makes the system rely on OnFire, it still gives options for tim
 		addtimer(CALLBACK(src, .proc/arena_checks), 50)
 
 /obj/structure/elite_tumor/proc/fighters_check()
-	if(activator != null && activator.stat == DEAD || activity == TUMOR_ACTIVE && QDELETED(activator))
+	if(activator != null && activator.is_dead() || activity == TUMOR_ACTIVE && QDELETED(activator))
 		onEliteWon()
-	if(mychild != null && mychild.stat == DEAD || activity == TUMOR_ACTIVE && QDELETED(mychild))
+	if(mychild != null && mychild.is_dead() || activity == TUMOR_ACTIVE && QDELETED(mychild))
 		onEliteLoss()
 
 /obj/structure/elite_tumor/proc/arena_trap()
@@ -312,7 +312,7 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	. = ..()
 	if(istype(target, /mob/living/simple_animal/hostile/asteroid/elite) && proximity_flag)
 		var/mob/living/simple_animal/hostile/asteroid/elite/E = target
-		if(E.stat != DEAD || E.sentience_type != SENTIENCE_BOSS || !E.key)
+		if(E.is_alive() || E.sentience_type != SENTIENCE_BOSS || !E.key)
 			user.visible_message("<span class='notice'>It appears [E] is unable to be revived right now.  Perhaps try again later.</span>")
 			return
 		E.faction = list("neutral")

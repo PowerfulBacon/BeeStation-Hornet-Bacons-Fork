@@ -41,7 +41,7 @@
 	var/has_role_loyalties = LAZYLEN(role_loyalties)
 	inspired += user //The user is always inspired, regardless of loyalties
 	for(var/mob/living/carbon/human/H in viewers(4, get_turf(src)))
-		if(H.stat == DEAD || H == user)
+		if(H.is_dead() || H == user)
 			continue
 		if(H.mind && (has_job_loyalties || has_role_loyalties))
 			if(has_job_loyalties && (H.mind.assigned_role in job_loyalties))
@@ -109,7 +109,7 @@
 	inspiration_available = FALSE
 
 /obj/item/banner/medical/check_inspiration(mob/living/carbon/human/H)
-	return H.stat //Meditopia is moved to help those in need
+	return H.body.stat //Meditopia is moved to help those in need
 
 /datum/crafting_recipe/medical_banner
 	name = "Meditopia Banner"

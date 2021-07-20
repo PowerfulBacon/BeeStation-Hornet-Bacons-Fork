@@ -131,7 +131,7 @@
 	set category = "Object"
 	set name = "Eject Contents"
 	set src in oview(1)
-	if(usr.stat || usr.restrained())
+	if(usr.is_unconcious() || usr.restrained())
 		return
 	if(isliving(usr))
 		var/mob/living/L = usr
@@ -178,7 +178,7 @@
 		return
 	var/mob/living/simple_animal/slime/picked_slime
 	for(var/mob/living/simple_animal/slime/slime in ohearers(1,src))
-		if(slime.stat)
+		if(slime.is_unconcious())
 			picked_slime = slime
 			break
 	if(!picked_slime)
@@ -194,7 +194,7 @@
 	var/mob/living/simple_animal/slime/S = what
 	if (istype(S))
 		var/C = S.cores
-		if(S.stat != DEAD)
+		if(S.is_alive())
 			S.forceMove(drop_location())
 			S.visible_message("<span class='notice'>[C] crawls free of the processor!</span>")
 			return

@@ -253,7 +253,7 @@
 
 /mob/living/simple_animal/hostile/jungle/leaper/update_icons()
 	. = ..()
-	if(stat)
+	if(is_unconcious())
 		icon_state = "leaper_dead"
 		return
 	if(ranged_cooldown <= world.time)

@@ -27,7 +27,7 @@
 
 /datum/eldritch_knowledge/flesh_ghoul/on_finished_recipe(mob/living/user,list/atoms,loc)
 	var/mob/living/carbon/human/humie = locate() in atoms
-	if(QDELETED(humie) || humie.stat != DEAD)
+	if(QDELETED(humie) || humie.is_alive())
 		return
 
 	if(length(ghouls) >= max_amt)
@@ -60,7 +60,7 @@
 	humie.health = MUTE_MAX_HEALTH // Voiceless dead are much tougher than ghouls
 	humie.become_husk()
 	humie.faction |= "heretics"
-	humie.apply_status_effect(/datum/status_effect/ghoul)
+	humie.body.apply_status_effect(/datum/status_effect/ghoul)
 
 	var/datum/antagonist/heretic_monster/heretic_monster = humie.mind.add_antag_datum(/datum/antagonist/heretic_monster)
 	var/datum/antagonist/heretic/master = user.mind.has_antag_datum(/datum/antagonist/heretic)
@@ -75,7 +75,7 @@
 	var/mob/living/carbon/human/humie = source
 	ghouls -= humie
 	humie.setMaxHealth(ORIGINAL_MAX_HEALTH)
-	humie.remove_status_effect(/datum/status_effect/ghoul)
+	humie.body.remove_status_effect(/datum/status_effect/ghoul)
 	humie.mind.remove_antag_datum(/datum/antagonist/heretic_monster)
 	UnregisterSignal(source,COMSIG_MOB_DEATH)
 
@@ -95,7 +95,7 @@
 		return
 	var/mob/living/carbon/human/human_target = target
 
-	if(QDELETED(human_target) || human_target.stat != DEAD)
+	if(QDELETED(human_target) || human_target.is_alive())
 		return
 
 	human_target.grab_ghost()
@@ -123,7 +123,7 @@
 	human_target.setMaxHealth(GHOUL_MAX_HEALTH)
 	human_target.health = GHOUL_MAX_HEALTH
 	human_target.become_husk()
-	human_target.apply_status_effect(/datum/status_effect/ghoul)
+	human_target.body.apply_status_effect(/datum/status_effect/ghoul)
 	human_target.faction |= "heretics"
 	var/datum/antagonist/heretic_monster/heretic_monster = human_target.mind.add_antag_datum(/datum/antagonist/heretic_monster)
 	var/datum/antagonist/heretic/master = user.mind.has_antag_datum(/datum/antagonist/heretic)
@@ -135,7 +135,7 @@
 	var/mob/living/carbon/human/humie = source
 	spooky_scaries -= humie
 	humie.setMaxHealth(ORIGINAL_MAX_HEALTH)
-	humie.remove_status_effect(/datum/status_effect/ghoul)
+	humie.body.remove_status_effect(/datum/status_effect/ghoul)
 	humie.mind.remove_antag_datum(/datum/antagonist/heretic_monster)
 	UnregisterSignal(source, COMSIG_MOB_DEATH)
 
@@ -144,7 +144,7 @@
 	if(!ishuman(target))
 		return
 	var/mob/living/carbon/C = target
-	var/datum/status_effect/eldritch/E = C.has_status_effect(/datum/status_effect/eldritch/rust) || C.has_status_effect(/datum/status_effect/eldritch/ash) || C.has_status_effect(/datum/status_effect/eldritch/flesh)
+	var/datum/status_effect/eldritch/E = C.body.has_status_effect(/datum/status_effect/eldritch/rust) || C.body.has_status_effect(/datum/status_effect/eldritch/ash) || C.body.has_status_effect(/datum/status_effect/eldritch/flesh)
 	if(E)
 		E.on_effect()
 
@@ -161,7 +161,7 @@
 	. = ..()
 	if(isliving(target))
 		var/mob/living/living_target = target
-		living_target.apply_status_effect(/datum/status_effect/eldritch/flesh)
+		living_target.body.apply_status_effect(/datum/status_effect/eldritch/flesh)
 
 /datum/eldritch_knowledge/flesh_blade_upgrade
 	name = "Bleeding Steel"

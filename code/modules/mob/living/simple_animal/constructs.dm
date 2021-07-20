@@ -76,7 +76,7 @@
 /mob/living/simple_animal/hostile/construct/Destroy()
 	QDEL_NULL(our_rune)
 	return ..()
-	
+
 /mob/living/simple_animal/hostile/construct/Login()
 	..()
 	to_chat(src, playstyle_string)
@@ -221,18 +221,18 @@
 	var/prev_stat
 	if(isliving(target) && !iscultist(target))
 		var/mob/living/L = target
-		prev_stat = L.stat
+		prev_stat = L.body.stat
 
 	. = ..()
 
 	if(. && isnum_safe(prev_stat))
 		var/mob/living/L = target
 		var/refund = 0
-		if(QDELETED(L) || (L.stat == DEAD && prev_stat != DEAD)) //they're dead, you killed them
+		if(QDELETED(L) || (L.is_dead() && prev_stat != DEAD)) //they're dead, you killed them
 			refund += kill_refund
 		else if(L.InCritical() && prev_stat == CONSCIOUS) //you knocked them into critical
 			refund += crit_refund
-		if(L.stat != DEAD && prev_stat != DEAD)
+		if(L.is_alive() && prev_stat != DEAD)
 			refund += attack_refund
 		for(var/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift/S in mob_spell_list)
 			S.charge_counter = min(S.charge_counter + refund, S.charge_max)

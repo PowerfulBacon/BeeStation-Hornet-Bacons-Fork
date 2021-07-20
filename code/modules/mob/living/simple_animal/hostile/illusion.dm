@@ -51,7 +51,7 @@
 	. = ..()
 	if(. && isliving(target) && prob(multiply_chance))
 		var/mob/living/L = target
-		if(L.stat == DEAD)
+		if(L.is_dead())
 			return
 		var/mob/living/simple_animal/hostile/illusion/M = new(loc)
 		M.faction = faction.Copy()

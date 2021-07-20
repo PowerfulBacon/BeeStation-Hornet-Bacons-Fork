@@ -4,7 +4,7 @@
 /mob/living/simple_animal/hostile/retaliate/Found(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
-		if(!L.stat)
+		if(L.is_concious())
 			return L
 		else
 			remove_enemy(L)
@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
-	if(. > 0 && stat == CONSCIOUS)
+	if(. > 0 && is_concious())
 		Retaliate()
 
 /mob/living/simple_animal/hostile/retaliate/proc/add_enemy(new_enemy)

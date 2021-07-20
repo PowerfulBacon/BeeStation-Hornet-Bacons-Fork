@@ -34,7 +34,7 @@
 			for(var/datum/mutation/human/HM in dna.mutations)
 				HM.on_life()
 
-		if(stat != DEAD && undergoing_cardiac_arrest())
+		if(body.stat != DEAD && undergoing_cardiac_arrest())
 			//heart attack stuff
 			var/we_breath = !HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT)
 
@@ -44,7 +44,7 @@
 			// Tissues die without blood circulation
 			adjustBruteLoss(2)
 
-		if(stat != DEAD)
+		if(body.stat != DEAD)
 			//Handle hygiene
 			if(HAS_TRAIT(src, TRAIT_ALWAYS_CLEAN))
 				set_hygiene(HYGIENE_LEVEL_CLEAN)
@@ -80,7 +80,7 @@
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		return 1
 
 
@@ -308,7 +308,7 @@
 
 /mob/living/carbon/human/handle_random_events()
 	//Puke if toxloss is too high
-	if(!stat)
+	if(is_concious())
 		if(getToxLoss() >= 45 && nutrition > 20)
 			lastpuke += prob(50)
 			if(lastpuke >= 50) // about 25 second delay I guess

@@ -7,7 +7,7 @@
 	var/stat_allowed = DEAD //if owner's stat is below this, will remove itself
 
 /datum/status_effect/sigil_mark/tick()
-	if(owner.stat < stat_allowed)
+	if(owner.body.stat < stat_allowed)
 		qdel(src)
 
 /datum/status_effect/crusher_damage //tracks the damage dealt to this mob by kinetic crushers
@@ -32,7 +32,7 @@
 		reward_target = new_reward_target
 
 /datum/status_effect/syphon_mark/on_apply()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		return FALSE
 	return ..()
 
@@ -41,7 +41,7 @@
 		reward_target.get_kill(owner)
 
 /datum/status_effect/syphon_mark/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		get_kill()
 		qdel(src)
 
@@ -104,12 +104,12 @@
 	return ..()
 
 /datum/status_effect/bounty/tick()
-	if(owner.stat == DEAD)
+	if(owner.is_dead())
 		rewards()
 		qdel(src)
 
 /datum/status_effect/bounty/proc/rewards()
-	if(rewarded && rewarded.mind && rewarded.stat != DEAD)
+	if(rewarded && rewarded.mind && rewarded.is_alive())
 		to_chat(owner, "<span class='boldnotice'>You hear something behind you talking...</span> <span class='notice'>Bounty claimed.</span>")
 		playsound(owner, 'sound/weapons/shotgunshot.ogg', 75, 0)
 		to_chat(rewarded, "<span class='greentext'>You feel a surge of mana flow into you!</span>")

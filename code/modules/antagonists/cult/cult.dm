@@ -211,7 +211,7 @@
 	bloodmark.Grant(current)
 	throwing.Grant(current)
 	current.update_action_buttons_icon()
-	current.apply_status_effect(/datum/status_effect/cult_master)
+	current.body.apply_status_effect(/datum/status_effect/cult_master)
 	if(cult_team.cult_risen)
 		cult_team.rise(current)
 		if(cult_team.cult_ascendent)
@@ -226,7 +226,7 @@
 	bloodmark.Remove(current)
 	throwing.Remove(current)
 	current.update_action_buttons_icon()
-	current.remove_status_effect(/datum/status_effect/cult_master)
+	current.body.remove_status_effect(/datum/status_effect/cult_master)
 
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
@@ -256,7 +256,7 @@
 	var/cultplayers = 0
 	for(var/I in GLOB.player_list)
 		var/mob/M = I
-		if(M.stat != DEAD)
+		if(M.is_alive())
 			if(iscultist(M))
 				++cultplayers
 			else
@@ -312,12 +312,12 @@
 	var/datum/team/cult/C = team
 	var/list/target_candidates = list()
 	for(var/mob/living/carbon/human/player in GLOB.player_list)
-		if(player.mind && !player.mind.has_antag_datum(/datum/antagonist/cult) && !is_convertable_to_cult(player) && player.stat != DEAD)
+		if(player.mind && !player.mind.has_antag_datum(/datum/antagonist/cult) && !is_convertable_to_cult(player) && player.is_alive())
 			target_candidates += player.mind
 	if(target_candidates.len == 0)
 		message_admins("Cult Sacrifice: Could not find unconvertible target, checking for convertible target.")
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
-			if(player.mind && !player.mind.has_antag_datum(/datum/antagonist/cult) && player.stat != DEAD)
+			if(player.mind && !player.mind.has_antag_datum(/datum/antagonist/cult) && player.is_alive())
 				target_candidates += player.mind
 	listclearnulls(target_candidates)
 	if(LAZYLEN(target_candidates))

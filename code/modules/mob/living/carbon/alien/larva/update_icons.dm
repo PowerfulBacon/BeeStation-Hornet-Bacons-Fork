@@ -10,7 +10,7 @@
 	else if(amount_grown > 50)
 		state = 1
 
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		icon_state = "larva[state]_dead"
 	else if(handcuffed || legcuffed) //This should be an overlay. Who made this an icon_state?
 		icon_state = "larva[state]_cuff"

@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(tendrils, list())
 	if(last_tendril && !(flags_1 & ADMIN_SPAWNED_1))
 		if(SSmedals.hub_enabled)
 			for(var/mob/living/L in hearers(7,src))
-				if(L.stat || !L.client)
+				if(L.body.stat || !L.client)
 					continue
 				SSmedals.UnlockMedal("[BOSS_MEDAL_TENDRIL] [ALL_KILL_MEDAL]", L.client)
 				SSmedals.SetScore(TENDRIL_CLEAR_SCORE, L.client, 1)

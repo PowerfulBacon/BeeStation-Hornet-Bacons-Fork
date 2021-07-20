@@ -1,5 +1,5 @@
 /mob/living/silicon/ai/death(gibbed)
-	if(stat == DEAD)
+	if(body.stat == DEAD)
 		return
 
 	. = ..()

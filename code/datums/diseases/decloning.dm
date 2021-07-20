@@ -15,7 +15,7 @@
 
 /datum/disease/decloning/stage_act()
 	..()
-	if(affected_mob.stat == DEAD)
+	if(affected_mob.is_dead())
 		cure()
 		return
 	switch(stage)

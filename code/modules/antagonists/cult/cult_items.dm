@@ -184,7 +184,7 @@
 	if(proximity)
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
-			if(H.stat != CONSCIOUS)
+			if(H.body.stat != CONSCIOUS)
 				var/obj/item/soulstone/SS = new /obj/item/soulstone(src)
 				SS.attack(H, user)
 				if(!LAZYLEN(SS.contents))
@@ -237,7 +237,7 @@
 /datum/action/innate/cult/spin2win/Activate()
 	cooldown = world.time + sword.spin_cooldown
 	holder.changeNext_move(50)
-	holder.apply_status_effect(/datum/status_effect/sword_spin)
+	holder.body.apply_status_effect(/datum/status_effect/sword_spin)
 	sword.spinning = TRUE
 	sword.block_level = 4
 	sword.slowdown += 1.5
@@ -598,7 +598,7 @@
 
 		var/list/cultists = list()
 		for(var/datum/mind/M in SSticker.mode.cult)
-			if(M.current && M.current.stat != DEAD)
+			if(M.current && M.current.is_alive())
 				cultists |= M.current
 		var/mob/living/cultist_to_receive = input(user, "Who do you wish to call to [src]?", "Followers of the Geometer") as null|anything in (cultists - user)
 		if(!Adjacent(user) || !src || QDELETED(src) || user.incapacitated())
@@ -607,7 +607,7 @@
 			to_chat(user, "<span class='cult italic'>You require a destination!</span>")
 			log_game("Void torch failed - no target")
 			return
-		if(cultist_to_receive.stat == DEAD)
+		if(cultist_to_receive.is_dead())
 			to_chat(user, "<span class='cult italic'>[cultist_to_receive] has died!</span>")
 			log_game("Void torch failed  - target died")
 			return
@@ -765,7 +765,7 @@
 	if(iscultist(target))
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
-			if(H.stat != DEAD)
+			if(H.is_alive())
 				H.reagents.add_reagent(/datum/reagent/fuel/unholywater, 4)
 		if(isshade(target) || isconstruct(target))
 			var/mob/living/simple_animal/M = target
@@ -868,7 +868,7 @@
 					new /obj/effect/temp_visual/cult/sparks(T)
 					if(ishuman(target))
 						var/mob/living/carbon/human/H = target
-						if(H.stat != DEAD)
+						if(H.is_alive())
 							H.reagents.add_reagent(/datum/reagent/fuel/unholywater, 7)
 					if(isshade(target) || isconstruct(target))
 						var/mob/living/simple_animal/M = target

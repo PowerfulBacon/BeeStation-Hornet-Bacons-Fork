@@ -106,7 +106,7 @@
 			dismemberthreshold -= 50
 		if(I.is_sharp())
 			dismemberthreshold = min(((affecting.max_damage * 2) - affecting.get_damage()), dismemberthreshold) //makes it so limbs wont become immune to being dismembered if the item is sharp
-			if(stat == DEAD)
+			if(body.stat == DEAD)
 				dismemberthreshold = dismemberthreshold / 3
 		if(I.force >= dismemberthreshold && I.force >= 10)
 			if(affecting.dismember(I.damtype))
@@ -206,7 +206,7 @@
 
 
 /mob/living/carbon/blob_act(obj/structure/blob/B)
-	if (stat == DEAD)
+	if (body.stat == DEAD)
 		return
 	else
 		show_message("<span class='userdanger'>The blob attacks!</span>")
@@ -311,7 +311,7 @@
 
 /// Check ourselves to see if we've got any shrapnel, return true if we do. This is a much simpler version of what humans do, we only indicate we're checking ourselves if there's actually shrapnel
 /mob/living/carbon/proc/check_self_for_injuries()
-	if(stat == DEAD || stat == UNCONSCIOUS)
+	if(body.stat == DEAD || body.stat == UNCONSCIOUS)
 		return
 
 	var/embeds = FALSE

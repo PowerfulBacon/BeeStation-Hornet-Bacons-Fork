@@ -61,7 +61,7 @@
 	var/urhealedamt_brute = brutehealing
 	var/urhealedamt_burn = burnhealing
 	if(missinghpbonus)
-		if(target.stat != DEAD)
+		if(target.is_alive())
 			urhealedamt_brute += round((target.getBruteLoss()/ missinghpbonus),0.1)
 			urhealedamt_burn += round((target.getFireLoss()/ missinghpbonus),0.1)
 		else //less healing bonus for the dead since they're expected to have lots of damage to begin with (to make TW into defib not TOO simple)

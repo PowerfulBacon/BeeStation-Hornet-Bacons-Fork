@@ -140,9 +140,9 @@
 	cut_overlays()
 	var/icon_text = "[colour] [is_adult ? "adult" : "baby"] slime"
 	icon_dead = "[icon_text] dead"
-	if(stat != DEAD)
+	if(is_alive())
 		icon_state = icon_text
-		if(mood && !stat)
+		if(mood && is_concious())
 			add_overlay("aslime-[mood]")
 	else
 		icon_state = icon_dead
@@ -248,7 +248,7 @@
 		else
 			tab_data["Slime Status"] = GENERATE_STAT_TEXT("You can evolve!")
 
-	if(stat == UNCONSCIOUS)
+	if(body.stat  == UNCONSCIOUS)
 		tab_data["Unconscious"] = GENERATE_STAT_TEXT("You are knocked out by high levels of BZ!")
 	else
 		tab_data["Power Level"] = GENERATE_STAT_TEXT("[powerlevel]")
@@ -342,7 +342,7 @@
 
 			discipline_slime(M)
 	else
-		if(stat == DEAD && surgeries.len)
+		if(is_dead() && surgeries.len)
 			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
 				for(var/datum/surgery/S in surgeries)
 					if(S.next_step(M,M.a_intent))
@@ -357,12 +357,12 @@
 
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
-	if(stat == DEAD && surgeries.len)
+	if(is_dead() && surgeries.len)
 		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
 				if(S.next_step(user,user.a_intent))
 					return 1
-	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
+	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && is_concious()) //Let's you feed slimes plasma.
 		add_friendship(user, 1)
 		to_chat(user, "<span class='notice'>You feed the slime the plasma. It chirps happily.</span>")
 		var/obj/item/stack/sheet/mineral/plasma/S = W
@@ -440,10 +440,10 @@
 
 /mob/living/simple_animal/slime/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
-	if (stat == DEAD)
+	if (is_dead())
 		. += "<span class='deadsay'>It is limp and unresponsive.</span>"
 	else
-		if (stat == UNCONSCIOUS) // Slime stasis
+		if (body.stat  == UNCONSCIOUS) // Slime stasis
 			. += "<span class='deadsay'>It appears to be alive but unresponsive.</span>"
 		if (getBruteLoss())
 			. += "<span class='warning'>"
@@ -469,7 +469,7 @@
 	. += "*---------*</span>"
 
 /mob/living/simple_animal/slime/proc/discipline_slime(mob/user)
-	if(stat)
+	if(is_unconcious())
 		return
 
 	if(prob(80) && !client)

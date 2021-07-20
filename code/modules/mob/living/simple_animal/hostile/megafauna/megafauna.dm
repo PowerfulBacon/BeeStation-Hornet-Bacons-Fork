@@ -69,7 +69,7 @@
 	if(health > 0)
 		return
 	else
-		var/datum/status_effect/crusher_damage/C = has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
+		var/datum/status_effect/crusher_damage/C = body.has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
 		var/crusher_kill = FALSE
 		if(C && crusher_loot && C.total_damage >= maxHealth * 0.6)
 			spawn_crusher_loot()
@@ -104,7 +104,7 @@
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target
-		if(L.stat != DEAD)
+		if(L.is_alive())
 			if(!client && ranged && ranged_cooldown <= world.time)
 				OpenFire()
 
@@ -146,7 +146,7 @@
 		for(var/mob/living/L in oviewers(7,src))
 			grant_achievement += L
 	for(var/mob/living/L in grant_achievement)
-		if(L.stat || !L.client)
+		if(L.body.stat || !L.client)
 			continue
 		var/client/C = L.client
 		SSmedals.UnlockMedal("Boss [BOSS_KILL_MEDAL]", C)

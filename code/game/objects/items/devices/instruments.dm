@@ -39,7 +39,7 @@
 	ui_interact(user)
 
 /obj/item/instrument/ui_interact(mob/living/user)
-	if(!isliving(user) || user.stat || user.restrained() || !(user.mobility_flags & MOBILITY_STAND))
+	if(!isliving(user) || user.is_unconcious() || user.restrained() || !(user.mobility_flags & MOBILITY_STAND))
 		return
 
 	user.set_machine(src)

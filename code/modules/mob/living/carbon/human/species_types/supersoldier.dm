@@ -8,7 +8,7 @@
 	changesource_flags = MIRROR_BADMIN | ERT_SPAWN
 
 /datum/species/human/supersoldier/spec_life(mob/living/carbon/human/H)
-	if(H.stat == DEAD)
+	if(H.is_dead())
 		return
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(H.loc)) //else, there's considered to be no light

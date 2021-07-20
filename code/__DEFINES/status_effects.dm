@@ -128,4 +128,4 @@
 
 #define STASIS_ASCENSION_EFFECT "heretic_ascension"
 
-#define IS_IN_STASIS(mob) (mob.has_status_effect(STATUS_EFFECT_STASIS))
+#define IS_IN_STASIS(mob) (mob.body.has_status_effect(STATUS_EFFECT_STASIS))

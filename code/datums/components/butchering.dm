@@ -25,13 +25,13 @@
 /datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/M, mob/living/user)
 	SIGNAL_HANDLER
 
-	if(user.a_intent == INTENT_HARM && M.stat == DEAD && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
+	if(user.a_intent == INTENT_HARM && M.is_dead() && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
 		if(butchering_enabled && (can_be_blunt || source.is_sharp()))
 			INVOKE_ASYNC(src, .proc/startButcher, source, M, user)
 			return COMPONENT_ITEM_NO_ATTACK
 	if(user.a_intent == INTENT_GRAB && ishuman(M) && source.is_sharp())
 		var/mob/living/carbon/human/H = M
-		if(H.has_status_effect(/datum/status_effect/neck_slice))
+		if(H.body.has_status_effect(/datum/status_effect/neck_slice))
 			user.show_message("<span class='danger'>[H]'s neck has already been already cut, you can't make the bleeding any worse!", 1, \
 							"<span class='danger'>Their neck has already been already cut, you can't make the bleeding any worse!")
 			return COMPONENT_ITEM_NO_ATTACK
@@ -54,7 +54,7 @@
 
 	playsound(H.loc, butcher_sound, 50, TRUE, -1)
 	if(do_mob(user, H, CLAMP(500 / source.force, 30, 100)) && H.Adjacent(source))
-		if(H.has_status_effect(/datum/status_effect/neck_slice))
+		if(H.body.has_status_effect(/datum/status_effect/neck_slice))
 			user.show_message("<span class='danger'>[H]'s neck has already been already cut, you can't make the bleeding any worse!", 1, \
 							"<span class='danger'>Their neck has already been already cut, you can't make the bleeding any worse!")
 			return
@@ -63,7 +63,7 @@
 					"<span class='userdanger'>[user] slits your throat...</span>")
 		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD)
 		H.bleed_rate = CLAMP(H.bleed_rate + 20, 0, 30)
-		H.apply_status_effect(/datum/status_effect/neck_slice)
+		H.body.apply_status_effect(/datum/status_effect/neck_slice)
 
 /datum/component/butchering/proc/Butcher(mob/living/butcher, mob/living/meat)
 	var/turf/T = meat.drop_location()

@@ -188,7 +188,7 @@
 					if(!M.brainmob)
 						to_chat(user, "<span class='warning'>Sticking an empty [M.name] into the frame would sort of defeat the purpose!</span>")
 						return
-					if(M.brainmob.stat == DEAD)
+					if(M.brainmob.is_dead())
 						to_chat(user, "<span class='warning'>Sticking a dead [M.name] into the frame would sort of defeat the purpose!</span>")
 						return
 

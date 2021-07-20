@@ -68,7 +68,7 @@
 	return (BRUTELOSS)
 
 /obj/item/zombie_hand/proc/check_feast(mob/living/target, mob/living/user)
-	if(target.stat == DEAD)
+	if(target.is_dead())
 		var/hp_gained = target.maxHealth
 		target.gib()
 		// zero as argument for no instant health update

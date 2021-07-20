@@ -40,7 +40,7 @@
 	var/initial_points = base_points
 	if(the_dude)
 		var/datum/antagonist/overthrow/O = the_dude.has_antag_datum(/datum/antagonist/overthrow)
-		if(!the_dude.current || the_dude.current.stat == DEAD)
+		if(!the_dude.current || the_dude.current.is_dead())
 			initial_points *= KILLED
 		else if(!is_station_level(the_dude.current.z) && !is_centcom_level(the_dude.current.z)) // exiled.
 			initial_points *= EXILED

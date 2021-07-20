@@ -276,7 +276,7 @@
 		revert_cast()
 		return
 
-	if(S.stat)
+	if(S.is_unconcious())
 		to_chat(user, "<span class='warning'>[S] is dead!</span>")
 		revert_cast()
 		return
@@ -297,7 +297,7 @@
 	new /obj/effect/temp_visual/cult/sac(get_turf(S))
 
 /obj/effect/proc_holder/spell/targeted/dominate/can_target(mob/living/target)
-	if(!isanimal(target) || target.stat)
+	if(!isanimal(target) || target.is_unconcious())
 		return FALSE
 	if("cult" in target.faction)
 		return FALSE

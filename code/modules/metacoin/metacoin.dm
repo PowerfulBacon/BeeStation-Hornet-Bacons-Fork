@@ -2,7 +2,7 @@
 	if(!mob)	return
 	var/mob/M = mob
 	if(M.mind && !isnewplayer(M))
-		if(M.stat != DEAD && !isbrain(M))
+		if(M.is_alive() && !isbrain(M))
 			if(EMERGENCY_ESCAPED_OR_ENDGAMED)
 				if(!M.onCentCom() && !M.onSyndieBase())
 					inc_metabalance(METACOIN_SURVIVE_REWARD, reason="Survived the shift.")
@@ -36,7 +36,7 @@
 /client/proc/set_metacoin_count(mc_count, ann=TRUE)
 	var/datum/DBQuery/query_set_metacoins = SSdbcore.NewQuery(
 		"UPDATE [format_table_name("player")] SET metacoins = :mc_count WHERE ckey = :ckey",
-		list("mc_count" = mc_count, "ckey" = ckey)	
+		list("mc_count" = mc_count, "ckey" = ckey)
 	)
 	query_set_metacoins.warn_execute()
 	qdel(query_set_metacoins)
@@ -48,7 +48,7 @@
 		return
 	var/datum/DBQuery/query_inc_metacoins = SSdbcore.NewQuery(
 		"UPDATE [format_table_name("player")] SET metacoins = metacoins + :mc_count WHERE ckey = :ckey",
-		list("mc_count" = mc_count, "ckey" = ckey)	
+		list("mc_count" = mc_count, "ckey" = ckey)
 	)
 	query_inc_metacoins.warn_execute()
 	qdel(query_inc_metacoins)

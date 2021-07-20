@@ -10,7 +10,7 @@
 	power_coeff = 1
 
 /datum/mutation/human/epilepsy/on_life()
-	if(prob(1 * GET_MUTATION_SYNCHRONIZER(src)) && owner.stat == CONSCIOUS)
+	if(prob(1 * GET_MUTATION_SYNCHRONIZER(src)) && owner.body.stat == CONSCIOUS)
 		owner.visible_message("<span class='danger'>[owner] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
 		owner.Unconscious(200 * GET_MUTATION_POWER(src))
 		owner.Jitter(1000 * GET_MUTATION_POWER(src))
@@ -58,7 +58,7 @@
 	power_coeff = 1
 
 /datum/mutation/human/cough/on_life()
-	if(prob(5 * GET_MUTATION_SYNCHRONIZER(src)) && owner.stat == CONSCIOUS)
+	if(prob(5 * GET_MUTATION_SYNCHRONIZER(src)) && owner.body.stat == CONSCIOUS)
 		owner.drop_all_held_items()
 		owner.emote("cough")
 		if(GET_MUTATION_POWER(src) > 1)
@@ -74,7 +74,7 @@
 	text_lose_indication = "<span class='notice'>The screaming in your mind fades.</span>"
 
 /datum/mutation/human/paranoia/on_life()
-	if(prob(5) && owner.stat == CONSCIOUS)
+	if(prob(5) && owner.body.stat == CONSCIOUS)
 		owner.emote("scream")
 		if(prob(25))
 			owner.hallucination += 20
@@ -131,7 +131,7 @@
 	synchronizer_coeff = 1
 
 /datum/mutation/human/tourettes/on_life()
-	if(prob(10 * GET_MUTATION_SYNCHRONIZER(src)) && owner.stat == CONSCIOUS && !owner.IsStun())
+	if(prob(10 * GET_MUTATION_SYNCHRONIZER(src)) && owner.body.stat == CONSCIOUS && !owner.IsStun())
 		owner.Stun(20)
 		switch(rand(1, 3))
 			if(1)
@@ -178,7 +178,7 @@
 	. = owner.monkeyize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE | TR_KEEPAI)
 
 /datum/mutation/human/race/on_losing(mob/living/carbon/monkey/owner)
-	if(owner && istype(owner) && owner.stat != DEAD && (owner.dna.mutations.Remove(src)))
+	if(owner && istype(owner) && owner.is_alive() && (owner.dna.mutations.Remove(src)))
 		. = owner.humanize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE | TR_KEEPAI)
 
 /datum/mutation/human/glow
@@ -352,12 +352,12 @@
 /datum/mutation/human/spastic/on_acquiring()
 	if(..())
 		return
-	owner.apply_status_effect(STATUS_EFFECT_SPASMS)
+	owner.body.apply_status_effect(STATUS_EFFECT_SPASMS)
 
 /datum/mutation/human/spastic/on_losing()
 	if(..())
 		return
-	owner.remove_status_effect(STATUS_EFFECT_SPASMS)
+	owner.body.remove_status_effect(STATUS_EFFECT_SPASMS)
 
 /datum/mutation/human/extrastun
 	name = "Two Left Feet"

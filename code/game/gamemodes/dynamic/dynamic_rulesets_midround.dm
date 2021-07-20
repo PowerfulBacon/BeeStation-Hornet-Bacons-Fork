@@ -68,8 +68,8 @@
 	if (!forced)
 		var/job_check = 0
 		if (enemy_roles.len > 0)
-			for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
-				if (M.stat == DEAD || !M.client)
+			for (var/mob/living/M in mode.current_players[CURRENT_LIVING_PLAYERS])
+				if (M.is_dead() || !M.client)
 					continue // Dead/disconnected players cannot count as opponents
 				if (M.mind && M.mind.assigned_role && (M.mind.assigned_role in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role in restricted_roles)))
 					job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
@@ -121,7 +121,8 @@
 		var/mob/applicant = pick(candidates)
 		candidates -= applicant
 		if(!isobserver(applicant))
-			if(applicant.stat == DEAD) // Not an observer? If they're dead, make them one.
+			var/mob/living/L = applicant
+			if(istype(L) && L.is_dead()) // Not an observer? If they're dead, make them one.
 				applicant = applicant.ghostize(FALSE,SENTIENCE_ERASE)
 			else // Not dead? Disregard them, pick a new applicant
 				i--

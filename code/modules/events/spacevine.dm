@@ -148,7 +148,7 @@
 /// Checks mobs on spread-target's turf to see if they should be hit by a damaging proc or not.
 /datum/spacevine_mutation/aggressive_spread/on_spread(obj/structure/spacevine/holder, turf/target, mob/living)
 	for(var/mob/living/M in target)
-		if(!isvineimmune(M) && M.stat != DEAD) // Don't kill immune creatures. Dead check to prevent log spam when a corpse is trapped between vine eaters.
+		if(!isvineimmune(M) && M.is_alive()) // Don't kill immune creatures. Dead check to prevent log spam when a corpse is trapped between vine eaters.
 			aggrospread_act(holder, M)
 
 /datum/spacevine_mutation/aggressive_spread/on_buckle(obj/structure/spacevine/holder, mob/living/buckled)
@@ -529,7 +529,7 @@
 		return
 	for(var/datum/spacevine_mutation/SM in mutations)
 		SM.on_buckle(src, V)
-	if((V.stat != DEAD) && (V.buckled != src)) //not dead or captured
+	if((V.is_alive()) && (V.buckled != src)) //not dead or captured
 		to_chat(V, "<span class='danger'>The vines [pick("wind", "tangle", "tighten")] around you!</span>")
 		buckle_mob(V, 1)
 

@@ -173,7 +173,7 @@
 	return TRUE
 
 /datum/brain_trauma/severe/monophobia/proc/stress_reaction()
-	if(owner.stat != CONSCIOUS)
+	if(owner.body.stat != CONSCIOUS)
 		return
 
 	var/high_stress = (stress > 60) //things get psychosomatic from here on
@@ -256,9 +256,9 @@
 
 /datum/brain_trauma/severe/hypnotic_stupor/on_lose() //hypnosis must be cleared separately, but brain surgery should get rid of both anyway
 	..()
-	owner.remove_status_effect(/datum/status_effect/trance)
+	owner.body.remove_status_effect(/datum/status_effect/trance)
 
 /datum/brain_trauma/severe/hypnotic_stupor/on_life()
 	..()
-	if(prob(1) && !owner.has_status_effect(/datum/status_effect/trance))
-		owner.apply_status_effect(/datum/status_effect/trance, rand(100,300), FALSE)
+	if(prob(1) && !owner.body.has_status_effect(/datum/status_effect/trance))
+		owner.body.apply_status_effect(/datum/status_effect/trance, rand(100,300), FALSE)

@@ -194,7 +194,7 @@
 
 //In case admins delete them before they die
 /mob/living/carbon/monkey/cube/Destroy()
-	if(stat != DEAD)
+	if(body.stat != DEAD)
 		GLOB.total_cube_monkeys--
 	return ..()
 

@@ -72,7 +72,7 @@
 	var/mob/living/victim = pullee
 	var/kidnapped = FALSE
 
-	if(victim.stat == CONSCIOUS)
+	if(victim.body.stat == CONSCIOUS)
 		src.visible_message("<span class='warning'>[victim] kicks free of the blood pool just before entering it!</span>", null, "<span class='notice'>You hear splashing and struggling.</span>")
 	else if(victim.reagents && victim.reagents.has_reagent(/datum/reagent/consumable/ethanol/demonsblood, needs_metabolizing = TRUE))
 		visible_message("<span class='warning'>Something prevents [victim] from entering the pool!</span>", "<span class='warning'>A strange force is blocking [victim] from entering!</span>", "<span class='notice'>You hear a splash and a thud.</span>")
