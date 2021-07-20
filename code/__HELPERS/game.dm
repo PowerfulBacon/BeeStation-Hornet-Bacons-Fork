@@ -211,7 +211,7 @@
 
 		if(istype(A, /obj/item/nbodypart))
 			found_organ = A
-			found_organ.bodypart_flags ^= ORGAN_FROZEN
+			found_organ.bodypart_flags ^= FROZEN
 
 		else if(istype(A, /mob/living))
 			var/mob/living/Q = A

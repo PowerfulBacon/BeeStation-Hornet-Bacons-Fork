@@ -72,6 +72,8 @@
 				part.dismember(TRUE)
 				//Move the part inside of us
 				contents += part
+	//Move to the ground
+	forceMove(body.owner.loc)
 	//You just lost this.
 	body.bodyparts[bodyslot] = null
 	body = null

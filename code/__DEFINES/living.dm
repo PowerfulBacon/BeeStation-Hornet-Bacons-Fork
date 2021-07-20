@@ -16,6 +16,7 @@
 #define CRITICAL (1 << 3)		//Mob will die if this organ is destroyed
 #define FROZEN (1 << 4)			//Frozen
 #define RECOLOURABLE (1 << 5)	//Recolourable in an augment manip
+#define REMOVABLE (1 << 6)		//The bodypart can be removed
 
 //Bodypart slots (Specific)
 

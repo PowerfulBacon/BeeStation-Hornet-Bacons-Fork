@@ -4,11 +4,14 @@
 	//Heart is in the bodyzone chest etc.
 	var/list/accepted_bodyslots = list()
 
-	//List calculated on creation of body. Assoc list containing a list of every bodypart in the def_zone
+	//List calculated on creation of body. Assoc list containing a list of every bodyslot in the def_zone
 	var/bodyslots_in_zone
 
 	//A list of all bodyparts in this mob. Assoc list (key = bodyslot (Body, head etc.))
 	var/list/bodyparts = list()
+
+	//The mob that has this body
+	var/mob/living/owner
 
 	//===============
 	// Total Damage
@@ -53,8 +56,9 @@
 	//How effective a mob is at moving. Default 100. Below 40 prevents walking. Below 20 prevents crawling.
 	var/movement = 100
 
-/datum/body/New()
+/datum/body/New(mob/living/parent)
 	. = ..()
+	owner = parent
 	calculate_bodyparts()
 
 /datum/body/proc/get_bodypart(bodyslot)
@@ -72,12 +76,38 @@
 /datum/body/proc/get_arms()
 	return list()
 
-/datum/body/proc/get_bodypart_in_zone(def_zone, allow_organs = FALSE)
+/*
+ * Returns a random bodypart in the def_zone.
+ */
+/datum/body/proc/get_bodypart_in_zone(def_zone, allow_organs = FALSE, removable_only = FALSE)
 	//TODO: Weighting
+	return pick(get_bodyparts_in_zone(def_zone, allow_organs))
+
+/*
+ * Returns a list of bodyparts that are in the set zone.
+ * Doesn't return organs unless allow_organs is true.
+ * If removable only is TRUE then organs that cannot be removed will not be returned.
+ */
+/datum/body/proc/get_bodyparts_in_zone(def_zone, allow_organs = FALSE, removable_only = FALSE)
+	var/list/valid_slots = list()
 	if(islist(bodyslots_in_zone[def_zone]))
-		return pick(bodyslots_in_zone[def_zone])
-	//Default to chest, all mobs must have a chest.
-	return pick(bodyslots_in_zone[BODY_ZONE_CHEST])
+		valid_slots = bodyslots_in_zone[def_zone]
+	else
+		//Default to chest, all mobs must have a chest.
+		valid_slots = bodyslots_in_zone[BODY_ZONE_CHEST]
+	. = list()
+	for(var/bodyslot in valid_slots)
+		var/obj/item/nbodypart/part = bodyparts[bodyslot]
+		if(!part)
+			continue
+		if(removable_only && !(part.bodypart_flags & REMOVABLE))
+			continue
+		if(!allow_organs && (part.bodypart_flags & ORGAN))
+			continue
+		. += part
+
+/datum/body/proc/get_bodyslots_in_zone(def_zone)
+	return bodyslots_in_zone[def_zone] || list()
 
 //TODO
 /datum/body/proc/get_active_hand()
@@ -103,9 +133,11 @@
 			if(injury.type in injury_types)
 				. += injury.damage
 
+//Returns the brain
 /datum/body/proc/get_brain()
 	return bodyparts[BRAIN] || null
 
+//Updates conciousness and the stats associated to it.
 /datum/body/proc/update_conciousness(var/old_conciousness)
 	manipulation += (old_conciousness - conciousness) * CONCIOUSNESS_MANIPULATION_MULTIPLIER
 	movement += (old_conciousness - conciousness) * CONCIOUSNESS_MOVEMENT_MULTIPLIER

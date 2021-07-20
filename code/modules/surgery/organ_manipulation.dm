@@ -73,62 +73,46 @@
 	implements = list(/obj/item/organ = 100, /obj/item/reagent_containers/food/snacks/organ = 0, /obj/item/organ_storage = 100)
 	var/implements_extract = list(TOOL_HEMOSTAT = 100, TOOL_CROWBAR = 55)
 	var/current_type
-	var/obj/item/organ/I = null
+	var/obj/item/nbodypart/I = null
 
 /datum/surgery_step/manipulate_organs/New()
 	..()
 	implements = implements + implements_extract
 
-/datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	I = null
 	if(istype(tool, /obj/item/organ_storage))
 		if(!tool.contents.len)
 			to_chat(user, "<span class='notice'>There is nothing inside [tool]!</span>")
 			return -1
 		I = tool.contents[1]
-		if(!isorgan(I))
+		if(!isbodypart(I))
 			to_chat(user, "<span class='notice'>You cannot put [I] into [target]'s [parse_zone(target_zone)]!</span>")
 			return -1
 		tool = I
-	if(isorgan(tool))
+	if(isbodypart(tool))
 		current_type = "insert"
 		I = tool
-		if(target_zone != I.zone || target.getorganslot(I.slot))
+		if(!target.body.bodyslots_in_zone[target_zone])
+			to_chat(user, "<span class='notice'>[target] does not have a [parse_zone(target_zone)]!</span>")
+			return -1
+		if(!(I.bodyslot in target.body.bodyslots_in_zone[target_zone]))
+			to_chat(user, "<span class='notice'>[target]'s body cannot support [I]!</span>")
+			return -1
+		if(target.body.bodyparts[I.bodyslot])
 			to_chat(user, "<span class='notice'>There is no room for [I] in [target]'s [parse_zone(target_zone)]!</span>")
 			return -1
-	if(istype(tool, /obj/item/organ/brain/positron))
-		var/obj/item/bodypart/affected = target.get_bodypart(check_zone(target_zone))
-		if(!affected)
-			return -1
-		if(affected.status != ORGAN_ROBOTIC)
-			to_chat(user, "<span class='notice'>You can't put [tool] into a meat enclosure!</span>")
-			return -1
-		if(!isipc(target))
-			to_chat(user, "<span class='notice'>[target] does not have the proper connectors to interface with [tool].</span>")
-			return -1
-		if(target_zone != "chest")
-			to_chat(user, "<span class='notice'>You have to install [tool] in [target]'s chest!</span>")
-		if(target.internal_organs_slot["brain"])
-			to_chat(user, "<span class='notice'>[target] already has a brain! You'd rather not find out what would happen with two in there.</span>")
-			return -1
-		user.visible_message("<span class='notice'>[user] begins to insert [tool] into [target]'s [parse_zone(target_zone)].</span>",
-			"<span class='notice'>You begin to insert [tool] into [target]'s [parse_zone(target_zone)]...</span>")
-
-		display_results(user, target, "<span class='notice'>You begin to insert [tool] into [target]'s [parse_zone(target_zone)]...</span>",
-			"[user] begins to insert [tool] into [target]'s [parse_zone(target_zone)].",
-			"[user] begins to insert something into [target]'s [parse_zone(target_zone)].")
 
 	else if(implement_type in implements_extract)
 		current_type = "extract"
-		var/list/organs = target.getorganszone(target_zone)
+		var/list/organs = target.body.get_bodyparts_in_zone(target_zone, TRUE, TRUE)
 		if(!organs.len)
 			to_chat(user, "<span class='notice'>There are no removable organs in [target]'s [parse_zone(target_zone)]!</span>")
 			return -1
 		else
-			for(var/obj/item/organ/O in organs)
-				O.on_find(user)
-				organs -= O
-				organs[O.name] = O
+			for(var/obj/item/nbodypart/bodypart as() in organs)
+				organs -= bodypart
+				organs[bodypart.name] = bodypart
 
 			I = input("Remove which organ?", "Surgery", null, null) as null|anything in sortList(organs)
 			if(I && user && target && user.Adjacent(target) && user.get_active_held_item() == tool)
@@ -140,10 +124,6 @@
 					"[user] begins to extract something from [target]'s [parse_zone(target_zone)].")
 			else
 				return -1
-
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/organ))
-		to_chat(user, "<span class='warning'>[tool] was bitten by someone! It's too damaged to use!</span>")
-		return -1
 
 /datum/surgery_step/manipulate_organs/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(current_type == "insert")
