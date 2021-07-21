@@ -53,6 +53,9 @@
 		minimum_distance = 1
 		allow_movement_on_non_turfs = FALSE
 		ai_autowalk_ignore_walls = FALSE
+	//Go harm intent
+	if(L.a_intent != INTENT_HARM)
+		L.a_intent_change(INTENT_HARM)
 	//Do normal stuff
 	. = ..()
 
