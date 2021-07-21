@@ -47,7 +47,7 @@
 		return ..()
 
 
-/mob/living/simple_animal/hostile/illusion/AttackingTarget()
+/mob/living/simple_animal/hostile/illusion/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && isliving(target) && prob(multiply_chance))
 		var/mob/living/L = target
@@ -69,5 +69,5 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 
 
-/mob/living/simple_animal/hostile/illusion/escape/AttackingTarget()
+/mob/living/simple_animal/hostile/illusion/escape/AttackingTarget(mob/living/clicked_on)
 	return FALSE

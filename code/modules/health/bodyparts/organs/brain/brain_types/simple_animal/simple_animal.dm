@@ -1,7 +1,7 @@
 
 /obj/item/nbodypart/organ/brain/simple_animal
 	is_ai_brain = TRUE
-	
+
 	//Automated Speaking
 	var/list/speak = list()
 	var/list/speak_emote = list()//	Emotes while speaking IE: Ian [emote], [text] -- Ian barks, "WOOF!". Spoken text is generated from the speak variable.
@@ -10,13 +10,14 @@
 	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
 
 	//Automated Movement
+	var/allow_movement_on_non_turfs = FALSE
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = TRUE	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
 
-/obj/item/nbodypart/organ/brain/simple_animal/handle_automated_movement()
+/obj/item/nbodypart/organ/brain/simple_animal/handle_automated_movement(mob/living/L)
 	if(!stop_automated_movement && wander)
 		if((isturf(L.loc) || allow_movement_on_non_turfs) && (L.mobility_flags & MOBILITY_MOVE))		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++

@@ -5,21 +5,13 @@
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
-	//TODO REMOVE
-	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-	speak_emote = list("barks", "woofs")
-	emote_hear = list("barks!", "woofs!", "yaps.","pants.")
-	emote_see = list("shakes its head.", "chases its tail.","shivers.")
-	//TODO END
 	faction = list("neutral")
 	see_in_dark = 5
-	//TODO REMOVE
-	speak_chance = 1
-	turns_per_move = 10
-	//TODO END
 	can_be_held = TRUE
 	chat_color = "#ECDA88"
 	mobchatspan = "corgi"
+
+	body_type = /datum/body/dog
 
 	do_footstep = TRUE
 
@@ -98,7 +90,7 @@
 	desc = "Nar'sie and rat'var are nothing compared to the might of this monstertruck loving dog."
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
-	speak = list("barks!", "woofs!", "Walter", "firetrucks", "monstertrucks")
+	body_type = /datum/body/dog/walter
 
 /mob/living/simple_animal/pet/dog/corgi/exoticcorgi
 	name = "Exotic Corgi"
@@ -373,7 +365,7 @@
 	var/memory_saved = FALSE
 	var/saved_head //path
 	worn_slot_flags = ITEM_SLOT_HEAD
-
+	body_type = /datum/body/dog/ian
 
 /mob/living/simple_animal/pet/dog/corgi/Ian/Initialize()
 	. = ..()
@@ -562,7 +554,8 @@
 	real_name = "Ian"
 	gender = MALE
 	desc = "It's the HoP's beloved corgi puppy."
-
+	//Take Ian's brain
+	body_type = /datum/body/dog/ian
 
 /mob/living/simple_animal/pet/dog/corgi/puppy/void		//Tribute to the corgis born in nullspace
 	name = "\improper void puppy"

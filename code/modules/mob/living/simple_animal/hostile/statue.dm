@@ -89,7 +89,7 @@
 				LoseTarget()
 				GiveTarget(watching)
 
-/mob/living/simple_animal/hostile/statue/AttackingTarget()
+/mob/living/simple_animal/hostile/statue/AttackingTarget(mob/living/clicked_on)
 	if(can_be_seen(get_turf(loc)))
 		if(client)
 			to_chat(src, "<span class='warning'>You cannot attack, there are eyes on you!</span>")
@@ -124,7 +124,7 @@
 	// This loop will, at most, loop twice.
 	for(var/atom/check in check_list)
 		for(var/mob/living/M in viewers(getexpandedview(world.view, 1, 1), check))
-			if(M != src && M.client && CanAttack(M) && !M.has_unlimited_silicon_privilege && !M.eye_blind)
+			if(M != src && M.client && CanAiAttack(M) && !M.has_unlimited_silicon_privilege && !M.eye_blind)
 				return M
 		for(var/obj/mecha/M in view(getexpandedview(world.view, 1, 1), check)) //assuming if you can see them they can see you
 			if(M.occupant?.client && !M.occupant.eye_blind)
@@ -144,7 +144,7 @@
 
 // Stop attacking clientless mobs
 
-/mob/living/simple_animal/hostile/statue/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/statue/CanAiAttack(atom/the_target)
 	if(isliving(the_target))
 		var/mob/living/L = the_target
 		if(!L.client && !L.ckey)

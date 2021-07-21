@@ -98,7 +98,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/AttackingTarget(mob/living/clicked_on)
 	if(recovery_time >= world.time)
 		return
 	. = ..()

@@ -103,7 +103,7 @@ Difficulty: Medium
 		GLOB.necropolis_gate.toggle_the_gate(null, TRUE) //very clever.
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/legion/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/legion/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/L = target

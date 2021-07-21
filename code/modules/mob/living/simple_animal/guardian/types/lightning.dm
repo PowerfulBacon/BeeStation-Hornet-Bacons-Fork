@@ -19,7 +19,7 @@
 	var/list/enemychains = list()
 	var/successfulshocks = 0
 
-/mob/living/simple_animal/hostile/guardian/beam/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/beam/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && isliving(target) && target != src && target != summoner)
 		cleardeletedchains()

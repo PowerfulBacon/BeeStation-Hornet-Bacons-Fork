@@ -217,7 +217,7 @@
 	var/crit_refund = 50 //5 seconds when putting a target into critical
 	var/kill_refund = 250 //full refund on kills
 
-/mob/living/simple_animal/hostile/construct/wraith/AttackingTarget() //refund jaunt cooldown when attacking living targets
+/mob/living/simple_animal/hostile/construct/wraith/AttackingTarget(mob/living/clicked_on) //refund jaunt cooldown when attacking living targets
 	var/prev_stat
 	if(isliving(target) && !iscultist(target))
 		var/mob/living/L = target
@@ -291,7 +291,7 @@
 	else
 		return 0
 
-/mob/living/simple_animal/hostile/construct/builder/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/construct/builder/CanAiAttack(atom/the_target)
 	if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
 		return 0
 	if(Found(the_target) || ..()) //If we Found it or Can_Attack it normally, we Can_Attack it as long as it wasn't invisible
@@ -373,7 +373,7 @@
 		if(stored_pulling)
 			start_pulling(stored_pulling, supress_message = TRUE) //drag anything we're pulling through the wall with us by magic
 
-/mob/living/simple_animal/hostile/construct/harvester/AttackingTarget()
+/mob/living/simple_animal/hostile/construct/harvester/AttackingTarget(mob/living/clicked_on)
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		if(HAS_TRAIT(C, TRAIT_NODISMEMBER))

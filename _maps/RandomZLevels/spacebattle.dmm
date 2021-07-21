@@ -2521,7 +2521,7 @@
 /turf/open/floor/plasteel,
 /area/awaymission/spacebattle/cruiser)
 "jz" = (
-/mob/living/simple_animal/hostile/syndicate/mecha_pilot{
+/mob/living/carbon/human/mecha_pilot{
 	spawn_mecha_type = /obj/mecha/combat/gygax/dark/loaded
 	},
 /turf/open/floor/plasteel,
@@ -2658,13 +2658,13 @@
 /turf/open/floor/plasteel/airless,
 /area/awaymission/spacebattle/cruiser)
 "jV" = (
-/mob/living/simple_animal/hostile/syndicate/mecha_pilot{
+/mob/living/carbon/human/mecha_pilot{
 	spawn_mecha_type = /obj/mecha/combat/gygax/dark/loaded
 	},
 /turf/open/floor/plating/airless,
 /area/awaymission/spacebattle/cruiser)
 "jW" = (
-/mob/living/simple_animal/hostile/syndicate/mecha_pilot{
+/mob/living/carbon/human/mecha_pilot{
 	spawn_mecha_type = /obj/mecha/combat/gygax/dark/loaded
 	},
 /turf/open/floor/plasteel/airless,

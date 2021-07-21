@@ -225,7 +225,7 @@
 /mob/living/simple_animal/hostile/retaliate/clown/insane/MoveToTarget()
 	stalk(target)
 
-/mob/living/simple_animal/hostile/retaliate/clown/insane/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/clown/insane/AttackingTarget(mob/living/clicked_on)
 	return
 
 /mob/living/simple_animal/hostile/retaliate/clown/insane/adjustHealth(amount, updating_health = TRUE, forced = FALSE)

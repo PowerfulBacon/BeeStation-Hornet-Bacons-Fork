@@ -1,6 +1,6 @@
 /mob/living/Initialize()
-	. = ..()
 	body = new body_type(src)
+	. = ..()
 	if(unique_name)
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name

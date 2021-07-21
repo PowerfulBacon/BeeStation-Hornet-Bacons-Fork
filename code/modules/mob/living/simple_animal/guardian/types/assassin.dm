@@ -30,7 +30,7 @@
 	if(stealthcooldown >= world.time)
 		tab_data["Stealth Cooldown Remaining"] = GENERATE_STAT_TEXT("[DisplayTimeText(stealthcooldown - world.time)]")
 
-/mob/living/simple_animal/hostile/guardian/assassin/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/assassin/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(.)
 		if(toggle && (isliving(target) || istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)))

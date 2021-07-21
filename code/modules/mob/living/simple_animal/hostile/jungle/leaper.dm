@@ -147,7 +147,7 @@
 	if(hop_cooldown <= world.time)
 		Hop(player_hop = TRUE)
 
-/mob/living/simple_animal/hostile/jungle/leaper/AttackingTarget()
+/mob/living/simple_animal/hostile/jungle/leaper/AttackingTarget(mob/living/clicked_on)
 	if(isliving(target))
 		return
 	return ..()

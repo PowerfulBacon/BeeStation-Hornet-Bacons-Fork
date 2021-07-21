@@ -38,7 +38,7 @@
 		i--
 
 /mob/living/simple_animal/hostile/asteroid/goldgrub/GiveTarget(new_target)
-	add_target(new_target)
+	//add_target(new_target)
 	if(target != null)
 		if(istype(target, /obj/item/stack/ore) && loot.len < 10)
 			visible_message("<span class='notice'>The [name] looks at [target.name] with hungry eyes.</span>")
@@ -50,7 +50,7 @@
 			if(will_burrow)
 				addtimer(CALLBACK(src, .proc/Burrow), chase_time)
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/AttackingTarget()
+/mob/living/simple_animal/hostile/asteroid/goldgrub/AttackingTarget(mob/living/clicked_on)
 	if(istype(target, /obj/item/stack/ore))
 		EatOre(target)
 		return

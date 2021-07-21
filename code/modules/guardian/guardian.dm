@@ -372,7 +372,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/guardian/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/AttackingTarget(mob/living/clicked_on)
 	if(transforming)
 		to_chat(src, "<span class='holoparasite italics'>No... no... you can't!</span>")
 		return FALSE

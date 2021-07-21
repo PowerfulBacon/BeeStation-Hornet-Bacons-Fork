@@ -26,7 +26,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 	minimum_distance = 2
 	move_to_delay = 1
 	environment_smash = FALSE
-	lose_patience_timeout = FALSE
+	//lose_patience_timeout = FALSE
 	pixel_y = 8
 	pressure_resistance = 200
 	minbodytemp = 0
@@ -139,11 +139,11 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 	return current_victim
 
 
-/mob/living/simple_animal/hostile/floor_cluwne/CanAttack(atom/the_target)//you will not escape
+/mob/living/simple_animal/hostile/floor_cluwne/CanAiAttack(atom/the_target)//you will not escape
 	return TRUE
 
 
-/mob/living/simple_animal/hostile/floor_cluwne/AttackingTarget()
+/mob/living/simple_animal/hostile/floor_cluwne/AttackingTarget(mob/living/clicked_on)
 	return
 
 

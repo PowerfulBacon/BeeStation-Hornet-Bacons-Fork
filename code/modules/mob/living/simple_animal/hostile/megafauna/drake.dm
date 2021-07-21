@@ -390,7 +390,7 @@ Difficulty: Medium
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/dragon/AttackingTarget(mob/living/clicked_on)
 	if(!swooping)
 		return ..()
 

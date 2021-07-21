@@ -55,7 +55,7 @@
 						parts += BP
 			return parts
 
-/mob/living/simple_animal/hostile/gorilla/AttackingTarget()
+/mob/living/simple_animal/hostile/gorilla/AttackingTarget(mob/living/clicked_on)
 	if(client)
 		oogaooga()
 	var/list/parts = target_bodyparts(target)
@@ -79,7 +79,7 @@
 			L.Unconscious(20)
 			visible_message("<span class='danger'>[src] knocks [L] out!</span>")
 
-/mob/living/simple_animal/hostile/gorilla/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/gorilla/CanAiAttack(atom/the_target)
 	var/list/parts = target_bodyparts(target)
 	return ..() && !istype(the_target, /mob/living/carbon/monkey) && (!parts  || parts.len > 3)
 

@@ -285,7 +285,7 @@
 	if(hud_used)
 		hud_used.healths.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#e36600'>[round((health / maxHealth) * 100, 0.5)]%</font></div>")
 
-/mob/living/simple_animal/hostile/blob/blobbernaut/AttackingTarget()
+/mob/living/simple_animal/hostile/blob/blobbernaut/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && isliving(target) && overmind)
 		overmind.blobstrain.blobbernaut_attack(target)

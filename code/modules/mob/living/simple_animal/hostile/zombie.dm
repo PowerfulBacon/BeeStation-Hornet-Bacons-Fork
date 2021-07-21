@@ -46,7 +46,7 @@
 	corpse.mob_species = /datum/species/zombie
 	corpse.mob_name = name
 
-/mob/living/simple_animal/hostile/zombie/AttackingTarget()
+/mob/living/simple_animal/hostile/zombie/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && ishuman(target) && prob(infection_chance))
 		try_to_zombie_infect(target)

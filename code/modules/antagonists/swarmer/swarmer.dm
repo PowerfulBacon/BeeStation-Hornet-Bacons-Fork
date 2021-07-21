@@ -144,7 +144,7 @@
 	..()
 
 ////CTRL CLICK FOR SWARMERS AND SWARMER_ACT()'S////
-/mob/living/simple_animal/hostile/swarmer/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/AttackingTarget(mob/living/clicked_on)
 	if(!isliving(target))
 		return target.swarmer_act(src)
 	else

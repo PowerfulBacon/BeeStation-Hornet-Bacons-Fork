@@ -6,10 +6,23 @@
 	pressure_resistance = 10
 	chat_color = "#CCCCCC"	//The say color of the mob, for when ID say isn't available (simplemobs that are not /mob/living/carbon/human)
 
+	//TODO: Remove
+	var/special_process = FALSE
 
 	var/resize = 1 //Badminnery resize
 	var/lastattacker = null
 	var/lastattackerckey = null
+
+	//Stupid AI Stuff moved from simple mob:
+	//TODO: Review this bacon.
+	var/search_objects = 0 //If we want to consider objects when searching around, set this to 1. If you want to search for objects while also ignoring mobs until hurt, set it to 2. To completely ignore mobs, even when attacked, set it to 3
+	var/rapid_melee = 1			 //Number of melee attacks between each npc pool tick. Spread evenly.
+	var/move_to_delay = 3 //delay for the automated movement.
+	var/melee_queue_distance = 4 //If target is close enough start preparing to hit them if we have rapid_melee enabled
+	//Use GET_TARGETS_FROM(mob) to access this
+	//Attempting to call GET_TARGETS_FROM(mob) when this var is null will just return mob as a base
+	//TODO: Get this out of here for fucks sake.
+	var/datum/weakref/targets_from //all range/attack/etc. calculations should be done from the atom this weakrefs, useful for Vehicles and such.
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.

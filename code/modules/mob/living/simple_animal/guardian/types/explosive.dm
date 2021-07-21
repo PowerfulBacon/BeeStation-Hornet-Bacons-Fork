@@ -22,7 +22,7 @@
 	if(bomb_cooldown >= world.time)
 		tab_data["Bomb Cooldown Remaining"] = GENERATE_STAT_TEXT("[DisplayTimeText(bomb_cooldown - world.time)]")
 
-/mob/living/simple_animal/hostile/guardian/bomb/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/bomb/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && prob(40) && isliving(target))
 		var/mob/living/M = target

@@ -64,7 +64,7 @@
 	if(.)
 		trigger()
 
-/mob/living/simple_animal/hostile/mimic/crate/AttackingTarget()
+/mob/living/simple_animal/hostile/mimic/crate/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(.)
 		cut_overlays()
@@ -171,7 +171,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 	if(destroy_objects)
 		..()
 
-/mob/living/simple_animal/hostile/mimic/copy/AttackingTarget()
+/mob/living/simple_animal/hostile/mimic/copy/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(knockdown_people && . && prob(15) && iscarbon(target))
 		var/mob/living/carbon/C = target
@@ -184,7 +184,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 				 "My logic is undeniable.", "One of us.", "FLESH IS WEAK", "THIS ISN'T WAR, THIS IS EXTERMINATION!")
 	speak_chance = 7
 
-/mob/living/simple_animal/hostile/mimic/copy/machine/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/mimic/copy/machine/CanAiAttack(atom/the_target)
 	if(the_target == creator) // Don't attack our creator AI.
 		return 0
 	if(iscyborg(the_target))

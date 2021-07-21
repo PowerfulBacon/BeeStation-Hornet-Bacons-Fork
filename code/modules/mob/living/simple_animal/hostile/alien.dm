@@ -169,7 +169,7 @@
 	. = ..()
 	AddElement(/datum/element/cleaning)
 
-/mob/living/simple_animal/hostile/alien/maid/AttackingTarget()
+/mob/living/simple_animal/hostile/alien/maid/AttackingTarget(mob/living/clicked_on)
 	if(ismovableatom(target))
 		if(istype(target, /obj/effect/decal/cleanable))
 			visible_message("[src] cleans up \the [target].")

@@ -43,7 +43,7 @@
 	desc = "A deceased primitive. Upon closer inspection, it was suffering from severe cellular degeneration and its garments are machine made..."//Can you guess the twist
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/AttackingTarget()
+/mob/living/simple_animal/hostile/jungle/mook/AttackingTarget(mob/living/clicked_on)
 	if(isliving(target))
 		if(ranged_cooldown <= world.time && attack_state == MOOK_ATTACK_NEUTRAL)
 			var/mob/living/L = target
@@ -149,7 +149,7 @@
 	. = ..()
 	if(isliving(hit_atom) && attack_state == MOOK_ATTACK_ACTIVE)
 		var/mob/living/L = hit_atom
-		if(CanAttack(L))
+		if(CanAiAttack(L))
 			L.attack_animal(src)
 			struck_target_leap = TRUE
 			density = TRUE
@@ -162,7 +162,7 @@
 			continue
 		if(isliving(A))
 			var/mob/living/ML = A
-			if(!struck_target_leap && CanAttack(ML))//Check if some joker is attempting to use rest to evade us
+			if(!struck_target_leap && CanAiAttack(ML))//Check if some joker is attempting to use rest to evade us
 				struck_target_leap = TRUE
 				ML.attack_animal(src)
 				density = TRUE

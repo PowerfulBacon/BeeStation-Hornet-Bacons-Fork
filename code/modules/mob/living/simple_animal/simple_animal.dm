@@ -24,6 +24,9 @@
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = TRUE	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
+
+	var/AIStatus = AI_OFF
+	var/can_have_ai = FALSE
 	//TODO: Remove end
 
 	//Interaction
@@ -76,17 +79,11 @@
 	var/del_on_death = FALSE //causes mob to be deleted on death, useful for mobs that spawn lootable corpses
 	var/deathmessage = ""
 
-	var/allow_movement_on_non_turfs = FALSE
-
 	var/attacked_sound = "punch" //Played when someone punches the creature
 
 	var/dextrous = FALSE //If the creature has, and can use, hands
 	var/dextrous_hud_type = /datum/hud/dextrous
 
-	var/AIStatus = AI_ON //The Status of our AI, can be changed via toggle_ai(togglestatus) to AI_ON (On, usual processing), AI_IDLE (Will not process, but will return to AI_ON if an enemy comes near), AI_OFF (Off, Not processing ever), AI_Z_OFF (Temporarily off due to nonpresence of players)
-	var/can_have_ai = TRUE //once we have become sentient, we can never go back
-
-	var/shouldwakeup = FALSE //convenience var for forcibly waking up an idling AI on next check.
 
 	//domestication
 	var/tame = 0
@@ -97,11 +94,8 @@
 	///Generic flags
 	var/simple_mob_flags = NONE
 
-	var/special_process = FALSE
-
 /mob/living/simple_animal/Initialize()
 	. = ..()
-	GLOB.simple_animals[AIStatus] += src
 	if(gender == PLURAL)
 		gender = pick(MALE,FEMALE)
 	if(!real_name)
@@ -113,17 +107,9 @@
 		AddComponent(/datum/component/personal_crafting)
 
 /mob/living/simple_animal/Destroy()
-	GLOB.simple_animals[AIStatus] -= src
-	if (SSnpcpool.state == SS_PAUSED && LAZYLEN(SSnpcpool.currentrun))
-		SSnpcpool.currentrun -= src
-
 	if(nest)
 		nest.spawned_mobs -= src
 		nest = null
-
-	var/turf/T = get_turf(src)
-	if (T && AIStatus == AI_Z_OFF)
-		SSidlenpcpool.idle_mobs_by_zlevel[T.z] -= src
 
 	//Walking counts as a reference, putting this here because most things don't walk, clean this up once walk() procs are dead
 	walk(src, 0)
@@ -159,17 +145,7 @@
 
 //TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_movement()
-	set waitfor = FALSE
-	if(!stop_automated_movement && wander)
-		if((isturf(loc) || allow_movement_on_non_turfs) && (mobility_flags & MOBILITY_MOVE))		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_move++
-			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Some animals don't move when pulled
-					var/anydir = pick(GLOB.cardinals)
-					if(Process_Spacemove(anydir))
-						Move(get_step(src, anydir), anydir)
-						turns_since_move = 0
-			return 1
+	return
 
 //TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_speech(var/override)
@@ -361,7 +337,8 @@
 		density = FALSE
 		..()
 
-/mob/living/simple_animal/proc/CanAttack(atom/the_target)
+//TODO: Move to living.
+/mob/living/proc/CanAiAttack(atom/the_target)
 	if(see_invisible < the_target.invisibility)
 		return FALSE
 	if(ismob(the_target))
@@ -584,26 +561,13 @@
 	. = ..()
 	LoadComponent(/datum/component/riding)
 
+//TODO REMOVE
 /mob/living/simple_animal/proc/toggle_ai(togglestatus)
-	if(!can_have_ai && (togglestatus != AI_OFF))
-		return
-	if (AIStatus != togglestatus)
-		if (togglestatus > 0 && togglestatus < 5)
-			if (togglestatus == AI_Z_OFF || AIStatus == AI_Z_OFF)
-				var/turf/T = get_turf(src)
-				if (AIStatus == AI_Z_OFF)
-					SSidlenpcpool.idle_mobs_by_zlevel[T.z] -= src
-				else
-					SSidlenpcpool.idle_mobs_by_zlevel[T.z] += src
-			GLOB.simple_animals[AIStatus] -= src
-			GLOB.simple_animals[togglestatus] += src
-			AIStatus = togglestatus
-		else
-			stack_trace("Something attempted to set simple animals AI to an invalid state: [togglestatus]")
+	return
 
+//TODO REMOVE
 /mob/living/simple_animal/proc/consider_wakeup()
-	if (pulledby || shouldwakeup)
-		toggle_ai(AI_ON)
+	return FALSE
 
 /mob/living/simple_animal/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()

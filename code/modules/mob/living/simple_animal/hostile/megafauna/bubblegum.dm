@@ -417,7 +417,7 @@ Difficulty: Hard
 	if(!charging)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/bubblegum/AttackingTarget(mob/living/clicked_on)
 	if(!charging)
 		. = ..()
 		if(.)
@@ -551,7 +551,7 @@ Difficulty: Hard
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/OpenFire()
 	return
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/AttackingTarget(mob/living/clicked_on)
 	return
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/try_bloodattack()

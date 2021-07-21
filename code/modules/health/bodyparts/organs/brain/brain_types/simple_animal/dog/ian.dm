@@ -23,11 +23,13 @@
 						break
 			if(movement_target)
 				stop_automated_movement = 1
-				L.step_to(L,movement_target,1)
+				//Going to go on a big assumption and do a simple step here
+				//This assumes Ian will never has his brain in a human and that human will never get in a mech somehow.
+				step_to(L,movement_target,1)
 				sleep(3)
-				L.step_to(L,movement_target,1)
+				step_to(L,movement_target,1)
 				sleep(3)
-				L.step_to(L,movement_target,1)
+				step_to(L,movement_target,1)
 
 				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 					var/turf/T = get_turf(movement_target)
@@ -44,14 +46,20 @@
 					else
 						L.setDir(SOUTH)
 
-					if(!Adjacent(movement_target)) //can't reach food through windows.
+					if(!L.Adjacent(movement_target)) //can't reach food through windows.
 						return
 
 					if(isturf(movement_target.loc) )
-						movement_target.attack_animal(L)
+						//Drop our held items first
+						if(L.get_active_held_item())
+							L.drop_all_held_items()
+						//Click on the object.
+						L.ClickOn(movement_target)
+					else if(movement_target.loc == L)
+						//Click on ourself, assuming its in our hand
+						L.ClickOn(L)
 					else if(ishuman(movement_target.loc) )
-						if(prob(20))
-							INVOKE_ASYNC(L, /mob.proc/emote, "me", 1, "stares at [movement_target.loc]'s [movement_target] with a sad puppy-face")
+						INVOKE_ASYNC(L, /mob.proc/emote, "me", 1, "stares at [movement_target.loc]'s [movement_target] with a sad puppy-face")
 
 		if(prob(1))
 			INVOKE_ASYNC(L, /mob.proc/emote, "me", 1, pick("dances around.","chases its tail!"))

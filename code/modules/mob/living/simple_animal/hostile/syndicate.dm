@@ -44,7 +44,7 @@
 	check_friendly_fire = 1
 	status_flags = CANPUSH
 	del_on_death = TRUE
-	dodging = TRUE
+	//dodging = TRUE
 	rapid_melee = 2
 	do_footstep = TRUE
 	mobchatspan = "syndmob"
@@ -166,7 +166,7 @@
 	casingtype = /obj/item/ammo_casing/c10mm
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	loot = list(/obj/effect/gibspawner/human)
-	dodging = FALSE
+	//dodging = FALSE
 	rapid_melee = 1
 
 /mob/living/simple_animal/hostile/syndicate/ranged/infiltrator //shuttle loan event

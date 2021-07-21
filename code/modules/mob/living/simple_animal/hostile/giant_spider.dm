@@ -9,7 +9,7 @@
 	var/poison_per_bite = 5
 	var/poison_type = /datum/reagent/toxin
 
-/mob/living/simple_animal/hostile/poison/AttackingTarget()
+/mob/living/simple_animal/hostile/poison/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target

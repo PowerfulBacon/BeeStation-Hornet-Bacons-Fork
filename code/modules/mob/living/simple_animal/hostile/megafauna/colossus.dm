@@ -674,7 +674,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.add_hud_to(src)
 
-/mob/living/simple_animal/hostile/lightgeist/AttackingTarget()
+/mob/living/simple_animal/hostile/lightgeist/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(isliving(target) && target != src)
 		var/mob/living/L = target

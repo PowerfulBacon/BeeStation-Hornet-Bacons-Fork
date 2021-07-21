@@ -295,10 +295,10 @@
 	icon_state = "nanotrasenrangedlmg"
 	icon_living = "nanotrasenrangedlmg"
 	projectilesound = 'sound/weapons/rifleshot.ogg'
-	sidestep_per_cycle = 0
+	//sidestep_per_cycle = 0
 	check_friendly_fire = 1
 	minimum_distance = 6
-	approaching_target = FALSE
+	//approaching_target = FALSE
 	rapid = 8
 	rapid_fire_delay = 2
 	casingtype = /obj/item/ammo_casing/mm712x82
@@ -346,10 +346,10 @@
 	icon_living = "fsniper"
 	ranged = TRUE
 	speed = 1
-	dodge_prob = 40
+	//dodge_prob = 40
 	ranged_cooldown_time = 40
 	check_friendly_fire = 1
-	sidestep_per_cycle = 3
+	//sidestep_per_cycle = 3
 	minimum_distance = 4
 	turns_per_move = 6
 	melee_queue_distance = 2
@@ -411,14 +411,14 @@
 	faction = list("psycho")
 	move_to_delay = 3
 	rapid_melee = 2
-	in_melee = TRUE
-	approaching_target = TRUE
+	//in_melee = TRUE
+	//approaching_target = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	obj_damage = 5
-	sidestep_per_cycle = 0
+	//sidestep_per_cycle = 0
 	stat_attack = UNCONSCIOUS
 	melee_damage = 15
-	lose_patience_timeout = 350
+	//lose_patience_timeout = 350
 	loot = list(/obj/effect/mob_spawn/human/corpse/psychost)
 
 /mob/living/simple_animal/hostile/psycho/regular
@@ -487,7 +487,7 @@
 		cooldown = world.time + 300
 		playsound(get_turf(src), chosen_sound, 70, TRUE, 0)
 
-/mob/living/simple_animal/hostile/psycho/muzzle/AttackingTarget()
+/mob/living/simple_animal/hostile/psycho/muzzle/AttackingTarget(mob/living/clicked_on)
 	..()
 	playsound(get_turf(src), 'sound/creatures/psychattack1.ogg', 70, TRUE, 0)
 
@@ -536,7 +536,7 @@
 		playsound(src, 'sound/machines/beep.ogg', 80, FALSE)
 		addtimer(CALLBACK(src, .proc/death), 200)
 
-/mob/living/simple_animal/hostile/psycho/trap/AttackingTarget()
+/mob/living/simple_animal/hostile/psycho/trap/AttackingTarget(mob/living/clicked_on)
 	var/list/possible_sounds = list('sound/creatures/psychhead.ogg','sound/creatures/psychhead2.ogg')
 	var/chosen_sound = pick(possible_sounds)
 	playsound(get_turf(src), chosen_sound, 100, TRUE, 0)
@@ -556,9 +556,9 @@
 	desc = "They didn't get that backpack for nothing."
 	icon_state = "Heavy"
 	icon_living = "Heavy"
-	sidestep_per_cycle = 0
+	//sidestep_per_cycle = 0
 	minimum_distance = 5
-	approaching_target = TRUE
+	//approaching_target = TRUE
 	ranged = TRUE
 	rapid = 65
 	rapid_fire_delay = 0.5
@@ -652,7 +652,7 @@
 		cooldown = world.time + 300
 		playsound(get_turf(src), chosen_sound, 50, TRUE, 0)
 
-/mob/living/simple_animal/hostile/zombie_suicide/AttackingTarget()
+/mob/living/simple_animal/hostile/zombie_suicide/AttackingTarget(mob/living/clicked_on)
 	if(!active)
 		active = TRUE
 		playsound(src, 'sound/weapons/armbomb.ogg', 100, TRUE)
@@ -691,7 +691,7 @@
 	search_objects = 1
 	minbodytemp = 0
 	speak = null
-	dodging = FALSE
+	//dodging = FALSE
 	mob_biotypes = list(MOB_ROBOTIC)
 	obj_damage = 100
 	move_force = MOVE_FORCE_EXTREMELY_STRONG
@@ -703,7 +703,7 @@
 	move_to_delay = 3
 	ranged = TRUE
 	hud_possible = list(ANTAG_HUD)
-	approaching_target = TRUE
+	//approaching_target = TRUE
 	ranged_ignores_vision = TRUE
 	environment_smash = ENVIRONMENT_SMASH_RWALLS
 	ranged_cooldown_time = 30
@@ -711,7 +711,7 @@
 	turns_per_move = 2
 	spacewalk = TRUE
 	rapid_melee = 0
-	lose_patience_timeout = 400
+	//lose_patience_timeout = 400
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 0
 	attack_sound = 'sound/weapons/sonic_jackhammer.ogg'

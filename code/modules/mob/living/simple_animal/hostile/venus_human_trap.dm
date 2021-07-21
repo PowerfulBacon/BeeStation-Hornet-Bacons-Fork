@@ -126,7 +126,7 @@
 	the_target.attack_animal(src)
 
 
-/mob/living/simple_animal/hostile/venus_human_trap/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/venus_human_trap/CanAiAttack(atom/the_target)
 	. = ..()
 	if(.)
 		if(the_target in grasping)

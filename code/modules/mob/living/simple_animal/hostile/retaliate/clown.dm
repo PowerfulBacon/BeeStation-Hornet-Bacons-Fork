@@ -60,7 +60,7 @@
 		new banana_type(pick(adjacent))
 		banana_time = world.time + rand(30,60)
 
-/mob/living/simple_animal/hostile/retaliate/clown/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/clown/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(attack_reagent && . && isliving(target))
 		var/mob/living/L = target

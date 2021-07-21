@@ -25,7 +25,7 @@
 	if(beacon_cooldown >= world.time)
 		tab_data["Beacon Cooldown Remaining"] = GENERATE_STAT_TEXT("[DisplayTimeText(beacon_cooldown - world.time)]")
 
-/mob/living/simple_animal/hostile/guardian/healer/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/healer/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(is_deployed() && toggle && iscarbon(target))
 		var/mob/living/carbon/C = target

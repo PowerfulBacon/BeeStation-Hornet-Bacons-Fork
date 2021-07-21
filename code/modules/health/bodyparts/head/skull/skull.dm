@@ -1,8 +1,8 @@
 /obj/item/nbodypart/skull
 	bodyslot = BP_SKULL
 
-/obj/item/nbodypart/skull/human/Initialize()
-	. = ..()
+//Organic generic skull
+/obj/item/nbodypart/skull/organic/initialize_contents()
 	held_bodyparts = list(
-		BP_BRAIN = new /obj/item/nbodypart/organ/brain/human(src),
+		BP_BRAIN = BP_EMPTY,	//Brain gets created by the body
 	)

@@ -95,7 +95,7 @@
 		return ..()
 
 
-/mob/living/simple_animal/hostile/retaliate/goat/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/goat/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/carbon/human/H = target

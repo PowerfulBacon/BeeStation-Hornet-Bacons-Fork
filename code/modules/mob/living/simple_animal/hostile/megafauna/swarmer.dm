@@ -164,14 +164,14 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 /mob/living/simple_animal/hostile/swarmer/ai/resource
 	search_objects = 1
 	attack_all_objects = TRUE //attempt to nibble everything
-	lose_patience_timeout = 150
+	//lose_patience_timeout = 150
 	var/static/list/sharedWanted = typecacheof(list(/turf/closed/mineral, /turf/closed/wall)) //eat rocks and walls
 	var/static/list/sharedIgnore = list()
 
 //This handles viable things to eat/attack
 //Place specific cases of AI derpiness here
 //Most can be left to the automatic Gain/LosePatience() system
-/mob/living/simple_animal/hostile/swarmer/ai/resource/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/swarmer/ai/resource/CanAiAttack(atom/the_target)
 
 	//SPECIFIC CASES:
 	//Smash fulltile windows before grilles
@@ -195,7 +195,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 		..()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/ai/resource/AttackingTarget(mob/living/clicked_on)
 	if(target.swarmer_act(src))
 		add_type_to_wanted(target.type)
 		return TRUE
@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	summon_backup(15, TRUE)
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/AttackingTarget(mob/living/clicked_on)
 	if(isliving(target))
 		if(prob(35))
 			StartAction(30)

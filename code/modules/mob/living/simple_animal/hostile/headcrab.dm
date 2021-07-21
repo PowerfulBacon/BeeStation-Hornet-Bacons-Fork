@@ -35,7 +35,7 @@
 					"<span class='danger'>We inject our egg into [victim]'s body!</span>")
 	egg_lain = 1
 
-/mob/living/simple_animal/hostile/headcrab/AttackingTarget()
+/mob/living/simple_animal/hostile/headcrab/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && !egg_lain && iscarbon(target) && !ismonkey(target))
 		// Changeling egg can survive in aliens!

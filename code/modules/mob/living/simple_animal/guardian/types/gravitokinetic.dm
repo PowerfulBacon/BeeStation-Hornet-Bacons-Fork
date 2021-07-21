@@ -15,7 +15,7 @@
 	. = ..()
 	distance_check = CALLBACK(src, .proc/__distance_check)
 
-/mob/living/simple_animal/hostile/guardian/gravitokinetic/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/gravitokinetic/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(isliving(target) && target != src)
 		to_chat(src, "<span class='danger'><B>Your punch has applied heavy gravity to [target]!</span></B>")

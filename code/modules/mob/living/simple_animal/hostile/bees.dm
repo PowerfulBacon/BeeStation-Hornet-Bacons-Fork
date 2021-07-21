@@ -84,7 +84,7 @@
 	if(!beehome)
 		. += "<span class='warning'>This bee is homeless!</span>"
 
-/mob/living/simple_animal/hostile/poison/bees/ListTargets() // Bee processing is expessive, so we override them finding targets here.
+/*/mob/living/simple_animal/hostile/poison/bees/ListTargets() // Bee processing is expessive, so we override them finding targets here.
 	if(!search_objects) //In case we want to have purely hostile bees
 		return ..()
 	else
@@ -94,7 +94,7 @@
 		for(var/obj/A in searched_for)
 			. += A
 		for(var/mob/A in searched_for)
-			. += A
+			. += A*/
 
 /mob/living/simple_animal/hostile/poison/bees/proc/generate_bee_visuals()
 	cut_overlays()
@@ -116,7 +116,7 @@
 
 
 //We don't attack beekeepers/people dressed as bees//Todo: bee costume
-/mob/living/simple_animal/hostile/poison/bees/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/poison/bees/CanAiAttack(atom/the_target)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -137,7 +137,7 @@
 	return FALSE
 
 
-/mob/living/simple_animal/hostile/poison/bees/AttackingTarget()
+/mob/living/simple_animal/hostile/poison/bees/AttackingTarget(mob/living/clicked_on)
  	//Pollinate
 	if(istype(target, /obj/machinery/hydroponics))
 		var/obj/machinery/hydroponics/Hydro = target
@@ -236,7 +236,7 @@
 
 
 //leave pollination for the peasent bees
-/mob/living/simple_animal/hostile/poison/bees/queen/AttackingTarget()
+/mob/living/simple_animal/hostile/poison/bees/queen/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && beegent && isliving(target))
 		var/mob/living/L = target

@@ -9,8 +9,8 @@ SUBSYSTEM_DEF(idlenpcpool)
 	var/static/list/idle_mobs_by_zlevel[][]
 
 /datum/controller/subsystem/idlenpcpool/stat_entry()
-	var/list/idlelist = GLOB.simple_animals[AI_IDLE]
-	var/list/zlist = GLOB.simple_animals[AI_Z_OFF]
+	var/list/idlelist = GLOB.npc_brains[AI_IDLE]
+	var/list/zlist = GLOB.npc_brains[AI_Z_OFF]
 	. = ..("IdleNPCS:[idlelist.len]|Z:[zlist.len]")
 
 /datum/controller/subsystem/idlenpcpool/proc/MaxZChanged()
@@ -23,25 +23,26 @@ SUBSYSTEM_DEF(idlenpcpool)
 /datum/controller/subsystem/idlenpcpool/fire(resumed = FALSE)
 
 	if (!resumed)
-		var/list/idlelist = GLOB.simple_animals[AI_IDLE]
+		var/list/idlelist = GLOB.npc_brains[AI_IDLE]
 		src.currentrun = idlelist.Copy()
 
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
 	while(currentrun.len)
-		var/mob/living/simple_animal/SA = currentrun[currentrun.len]
+		var/obj/item/nbodypart/organ/brain/brain = currentrun[currentrun.len]
+		var/mob/living/brain_mob = brain.owner_body?.owner
 		--currentrun.len
 
-		if(!SA)
-			stack_trace("Null entry found at GLOB.simple_animals\[AI_IDLE\]. Null entries will be purged. Yell at coderbus. Subsystem will try to continue.")
-			removeNullsFromList(GLOB.simple_animals[AI_IDLE])
+		if(!brain_mob)
 			continue
 
-		if(!SA.ckey)
-			if(SA.is_alive())
-				SA.handle_automated_movement()
-			if(SA.is_alive())
-				SA.consider_wakeup()
+		if(!brain)
+			stack_trace("Null entry found at GLOB.npc_brains\[AI_IDLE\]. Null entries will be purged. Yell at coderbus. Subsystem will try to continue.")
+			removeNullsFromList(GLOB.npc_brains[AI_IDLE])
+			continue
+
+		if(!brain_mob.ckey)
+			INVOKE_ASYNC(brain, /obj/item/nbodypart/organ/brain.proc/handle_ai, brain_mob)
 		if (MC_TICK_CHECK)
 			return

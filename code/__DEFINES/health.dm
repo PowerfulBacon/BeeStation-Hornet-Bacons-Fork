@@ -1,6 +1,8 @@
 
 //Bodypart position flags
 
+#define BP_EMPTY "empty"
+
 //====Head====
 
 #define BP_HEAD "head"

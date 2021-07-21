@@ -35,7 +35,7 @@
 /mob/living/simple_animal/hostile/retaliate/dolphin/Process_Spacemove(movement_dir = 0)
 	return TRUE
 
-/mob/living/simple_animal/hostile/retaliate/dolphin/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/dolphin/AttackingTarget(mob/living/clicked_on)
 	..()
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target

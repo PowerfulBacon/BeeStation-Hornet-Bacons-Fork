@@ -288,6 +288,7 @@
 /mob/living/simple_animal/hostile/morph/LoseAggro()
 	vision_range = initial(vision_range)
 
+/*
 /mob/living/simple_animal/hostile/morph/AIShouldSleep(var/list/possible_targets)
 	. = ..()
 	if(.)
@@ -296,14 +297,14 @@
 			if(allowed(A))
 				things += A
 		var/atom/movable/T = pick(things)
-		assume(T)
+		assume(T)*/
 
 /mob/living/simple_animal/hostile/morph/can_track(mob/living/user)
 	if(morphed)
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/morph/AttackingTarget()
+/mob/living/simple_animal/hostile/morph/AttackingTarget(mob/living/clicked_on)
 	if(morphed && !melee_damage_disguised)
 		to_chat(src, "<span class='warning'>You can not attack while disguised!</span>")
 		return

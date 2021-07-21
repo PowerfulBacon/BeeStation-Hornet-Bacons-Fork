@@ -28,7 +28,7 @@
 	var/datum/disease/basedisease = null
 	var/list/infections = list()
 
-/mob/living/simple_animal/hostile/macrophage/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/macrophage/CanAiAttack(atom/the_target)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -55,7 +55,7 @@
 	 				 "<span class='danger'>You stab [src] with [E]'s probe, destroying it!</span>")
 	return TRUE
 
-/mob/living/simple_animal/hostile/macrophage/AttackingTarget()
+/mob/living/simple_animal/hostile/macrophage/AttackingTarget(mob/living/clicked_on)
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/M = target

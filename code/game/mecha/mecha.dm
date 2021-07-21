@@ -624,7 +624,7 @@
 	var/oldloc = loc
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
 		move_result = mechsteprand()
-	else if(dir != direction && (!strafe || occupant.client.keys_held["Alt"]))
+	else if(dir != direction && (!strafe || occupant.client?.keys_held["Alt"]))
 		move_result = mechturn(direction)
 	else
 		move_result = mechstep(direction)
@@ -850,28 +850,6 @@
 	else
 		GrantActions(AI, !AI.can_dominate_mechs)
 
-
-//An actual AI (simple_animal mecha pilot) entering the mech
-/obj/mecha/proc/aimob_enter_mech(mob/living/simple_animal/hostile/syndicate/mecha_pilot/pilot_mob)
-	if(pilot_mob && pilot_mob.Adjacent(src))
-		if(occupant)
-			return
-		icon_state = initial(icon_state)
-		occupant = pilot_mob
-		pilot_mob.mecha = src
-		pilot_mob.forceMove(src)
-		GrantActions(pilot_mob)//needed for checks, and incase a badmin puts somebody in the mob
-
-/obj/mecha/proc/aimob_exit_mech(mob/living/simple_animal/hostile/syndicate/mecha_pilot/pilot_mob)
-	if(occupant == pilot_mob)
-		occupant = null
-	if(pilot_mob.mecha == src)
-		pilot_mob.mecha = null
-	icon_state = "[initial(icon_state)]-open"
-	pilot_mob.forceMove(get_turf(src))
-	RemoveActions(pilot_mob)
-
-
 /////////////////////////////////////
 ////////  Atmospheric stuff  ////////
 /////////////////////////////////////
@@ -956,7 +934,7 @@
 	return
 
 /obj/mecha/proc/moved_inside(mob/living/carbon/human/H)
-	if(H?.client && get_dist(H, src) <= 1)
+	if(H && get_dist(H, src) <= 1)
 		occupant = H
 		H.forceMove(src)
 		H.update_mouse_pointer()

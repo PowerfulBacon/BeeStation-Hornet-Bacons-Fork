@@ -421,7 +421,7 @@ Difficulty: Hard
 	adjustHealth(-L.maxHealth*0.5)
 	L.dust()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/megafauna/hierophant/CanAiAttack(atom/the_target)
 	. = ..()
 	if(istype(the_target, /mob/living/simple_animal/hostile/asteroid/hivelordbrood)) //ignore temporary targets in favor of more permanent targets
 		return FALSE
@@ -440,7 +440,7 @@ Difficulty: Hard
 		wander = TRUE
 		did_reset = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/AttackingTarget()
+/mob/living/simple_animal/hostile/megafauna/hierophant/AttackingTarget(mob/living/clicked_on)
 	if(!blinking)
 		if(target && isliving(target))
 			var/mob/living/L = target

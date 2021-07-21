@@ -28,7 +28,7 @@
 	gold_core_spawnable = HOSTILE_SPAWN
 	var/frenzythreshold = 5 //how many tomatoes can this tomato see on screen before going berserk
 
-/mob/living/simple_animal/hostile/killertomato/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/killertomato/CanAiAttack(atom/the_target)
 	var/tomatosseen = 0
 	for(var/mob/living/simple_animal/hostile/killertomato/T in oview(7, src))
 		tomatosseen += 1

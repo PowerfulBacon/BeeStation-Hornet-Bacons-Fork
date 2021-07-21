@@ -35,11 +35,11 @@
 	status_flags = CANPUSH
 	del_on_death = TRUE
 	hardattacks = TRUE
-	dodging = TRUE
+	//dodging = TRUE
 	move_force = MOVE_FORCE_VERY_STRONG
 	move_resist = MOVE_FORCE_VERY_STRONG
 	pull_force = MOVE_FORCE_VERY_STRONG
-	lose_patience_timeout = 50//very impatient, moves from target to target frequently
+	//lose_patience_timeout = 50//very impatient, moves from target to target frequently
 	var/list/victims = list()
 
 //heal himself when not in combat
@@ -50,7 +50,7 @@
 		visible_message("[src] medicates themself.", "<span class='notice'>You medicate yourself.</span>")
 
 //attacking/catifying code
-/mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget()
+/mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget(mob/living/clicked_on)
 	if(ishuman(target))
 		var/mob/living/carbon/human/L = target
 		if(!L.getorgan(/obj/item/organ/ears/cat) && L.is_unconcious()) //target doesnt have cat ears
@@ -126,7 +126,7 @@
 	adjustHealth(-(maxHealth))
 
 //cat butcher ai shit
-/mob/living/simple_animal/hostile/cat_butcherer/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/cat_butcherer/CanAiAttack(atom/the_target)
 	if(iscarbon(target))
 		var/mob/living/carbon/human/C = target
 		if(C.getorgan(/obj/item/organ/ears/cat) && C.getorgan(/obj/item/organ/tail/cat) && C.has_trauma_type(/datum/brain_trauma/severe/pacifism))//he wont attack his creations
@@ -161,7 +161,7 @@
 		Targets[pos_targ] = 1
 		if(ishuman(pos_targ))
 			var/mob/living/carbon/human/H = pos_targ
-			if(!CanAttack(H))
+			if(!CanAiAttack(H))
 				Targets -= H
 				continue
 			if(H.is_dead())
