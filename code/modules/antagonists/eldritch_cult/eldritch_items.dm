@@ -140,13 +140,14 @@
 
 /obj/item/clothing/neck/eldritch_amulet/equipped(mob/user, slot)
 	. = ..()
-	if(ishuman(user) && user.mind && slot == ITEM_SLOT_NECK && IS_HERETIC(user) )
+	if(ishuman(user) && trait && user.mind && slot == ITEM_SLOT_NECK && IS_HERETIC(user) )
 		ADD_TRAIT(user, trait, CLOTHING_TRAIT)
 		user.update_sight()
 
 /obj/item/clothing/neck/eldritch_amulet/dropped(mob/user)
 	. = ..()
-	REMOVE_TRAIT(user, trait, CLOTHING_TRAIT)
+	if(trait)
+		REMOVE_TRAIT(user, trait, CLOTHING_TRAIT)
 	user.update_sight()
 
 /obj/item/clothing/neck/eldritch_amulet/piercing
@@ -156,9 +157,18 @@
 
 /obj/item/clothing/neck/eldritch_amulet/guise
 	name = "guise of Istasha"
-	desc = "An odd amulet formed out of multiple floating parts, strung togethere by forces from another world."
+	desc = "An odd amulet formed out of multiple floating parts, strung together by forces from another world."
 	icon_state = "eye_medalion"
-	trait = TRAIT_DIGINVIS
+	trait = null
+
+/obj/item/clothing/neck/eldritch_amulet/guise/equipped(mob/living/user, slot)
+	. = ..()
+	if(ishuman(user) && user.mind && slot == ITEM_SLOT_NECK && IS_HERETIC(user) )
+		user.apply_ai_digital_invisibility(CLOTHING_TRAIT)
+
+/obj/item/clothing/neck/eldritch_amulet/guise/dropped(mob/living/user)
+	. = ..()
+	user.unapply_ai_digital_invisibility(CLOTHING_TRAIT)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch
 	name = "ominous hood"

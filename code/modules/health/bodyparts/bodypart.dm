@@ -2,8 +2,17 @@
 	//The body that we are inside of. (If we are inside of a body)
 	var/datum/body/owner_body
 
+	//Destroy
+	var/is_destroyed = FALSE
+	//Health
+	var/maxhealth
+	var/health
+
 	//Bodyslot key
 	var/bodyslot
+
+	//Bodypart flags
+	var/bodypart_flags
 
 	//Any bodyparts we hold
 	//ASSOC
@@ -11,9 +20,13 @@
 	//Value: Bodypart object
 	var/list/held_bodyparts = list()
 
+	//A list of injuries on this bodypart
+	var/list/injuries = list()
+
 /obj/item/nbodypart/Initialize()
 	. = ..()
 	initialize_contents()
+	health = maxhealth
 
 /obj/item/nbodypart/proc/initialize_contents()
 	return
@@ -31,6 +44,19 @@
 		if(thing == BP_EMPTY)
 			owner_body.bodypart_slot_holders[bodypart_held] = bodyslot
 			owner_body.bodypart_by_slot[bodypart_held] = BP_EMPTY
+
+/obj/item/nbodypart/proc/destroy()
+	//Bodypart is destroyed.
+	is_destroyed = TRUE
+	//Just in case, force health to 0.
+	update_health(0)
+
+/obj/item/nbodypart/proc/update_health(new_health)
+	//Cannot effect destroyed parts.
+	if(is_destroyed)
+		return
+	//Update health
+	health = new_health
 
 /obj/item/nbodypart/proc/removed()
 	owner_body.bodypart_by_slot[bodyslot] = BP_EMPTY

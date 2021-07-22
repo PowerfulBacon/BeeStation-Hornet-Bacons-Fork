@@ -25,6 +25,13 @@
 	update_move_intent_slowdown()
 	return ..()
 
+//Update movement delay.
+/mob/living/movement_delay()
+	. = ..()
+	if(body.movement == 0)
+		return . * 100
+	. /= (body.movement * 0.01)
+
 /mob/living/proc/update_move_intent_slowdown()
 	var/mod = 0
 	if(m_intent == MOVE_INTENT_WALK)

@@ -1,5 +1,8 @@
 /obj/item/nbodypart/organ/brain
+	name = "Brain"
 	bodyslot = BP_BRAIN
+	maxhealth = 15
+	bodypart_flags = BP_FLAG_CRITICAL | BP_FLAG_REMOVABLE
 
 	//Does the brain have AI?
 	var/is_ai_brain = FALSE

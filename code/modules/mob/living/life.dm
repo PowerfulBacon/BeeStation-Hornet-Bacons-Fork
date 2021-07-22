@@ -4,13 +4,6 @@
 
 	body.life(seconds, times_fired)
 
-	if(HAS_TRAIT(src,TRAIT_DIGINVIS)) //AI unable to see mob
-		if(!digitaldisguise)
-			src.digitaldisguise = image(loc = src)
-		src.digitaldisguise.override = 1
-		for(var/mob/living/silicon/ai/AI in GLOB.ai_list)
-			AI.client?.images |= src.digitaldisguise
-
 	if((movement_type & FLYING) && !(movement_type & FLOATING))	//TODO: Better floating
 		float(on = TRUE)
 
@@ -63,6 +56,24 @@
 
 	if(is_alive())
 		return 1
+
+/mob/living/proc/apply_ai_digital_invisibility(invis_source)
+	if(HAS_TRAIT(src,TRAIT_DIGINVIS)) //AI unable to see mob
+		ADD_TRAIT(src, TRAIT_DIGINVIS, invis_source)
+		return
+	ADD_TRAIT(src, TRAIT_DIGINVIS, invis_source)
+	if(!digitaldisguise)
+		digitaldisguise = image(loc = src)
+	digitaldisguise.override = TRUE
+	for(var/mob/living/silicon/ai/AI in GLOB.ai_list)
+		AI.client?.images |= digitaldisguise
+
+/mob/living/proc/unapply_ai_digital_invisibility(invis_source)
+	REMOVE_TRAIT(src, TRAIT_DIGINVIS, invis_source)
+	if(!HAS_TRAIT(src, TRAIT_DIGINVIS))
+		for(var/mob/living/silicon/ai/AI in GLOB.ai_list)
+			AI.client?.images -= digitaldisguise
+		digitaldisguise = null
 
 /mob/living/proc/handle_breathing(times_fired)
 	return

@@ -4,6 +4,15 @@
 	//Owner of the body
 	var/mob/living/owner
 
+	//STATS!
+	//Only things that will be affected by a lot is here.
+	//I.E. Conciousness affects all of these while breathing is handled solely by the lungs.
+	var/conciousness = 100
+	var/manipulation = 100
+	var/movement = 100
+	var/sight = 100
+	var/hearing = 100
+
 	//Mob stat
 	var/stat = CONSCIOUS
 
@@ -121,6 +130,13 @@
 
 /datum/body/proc/handle_status_effects()
 	//TODO Handle stuff like drunkness on the brain.
+	var/obj/item/nbodypart/organ/brain/brain = get_bodypart(BP_BRAIN)
+	if(brain)
+		brain.handle_status_effects()
+
+//Returns a bodypart in the BP slot.
+/datum/body/proc/get_bodypart(bp_slot)
+	return bodypart_by_slot[bp_slot]
 
 //=============
 //Life of the mob.

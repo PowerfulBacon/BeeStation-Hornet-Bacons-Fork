@@ -159,6 +159,11 @@
 		/mob/living/silicon/ai/proc/botcall, /mob/living/silicon/ai/proc/control_integrated_radio, \
 		/mob/living/silicon/ai/proc/set_automatic_say_channel))
 
+	//Get AI invisibility
+	for(var/mob/living/invismob in GLOB.mob_living_list)
+		if(HAS_TRAIT(invismob, TRAIT_DIGINVIS))
+			client?.images |= invismob.digitaldisguise
+
 	GLOB.ai_list += src
 	GLOB.shuttle_caller_list += src
 

@@ -1,5 +1,7 @@
 /obj/item/nbodypart/head
 	bodyslot = BP_HEAD
+	bodypart_flags = BP_FLAG_CRITICAL
+	maxhealth = 60
 
 /obj/item/nbodypart/head/organic/initialize_contents()
 	held_bodyparts = list(
