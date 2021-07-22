@@ -268,17 +268,19 @@
 	//Only humans can enter mechs
 	if(!ishuman(L))
 		return FALSE
+	//Don't get in a locked mech.
 	if(M.dna_lock)
 		var/mob/living/carbon/C = L
 		if(!C.has_dna())
 			return FALSE
 		if(C.dna.unique_enzymes != M.dna_lock)
 			return FALSE
+	//Don't get in a mech we can't enter
 	if(!M.operation_allowed(L))
 		return FALSE
-	if(M.mecha.internal_damage & MECHA_INT_FIRE)
+	//Don't get in a burning mech.
+	if(M.internal_damage & MECHA_INT_FIRE)
 		return FALSE
-	//Repair mech
 	if(!M.has_charge(required_mecha_charge))
 		return FALSE
 	if(M.obj_integrity < M.max_integrity*0.5)

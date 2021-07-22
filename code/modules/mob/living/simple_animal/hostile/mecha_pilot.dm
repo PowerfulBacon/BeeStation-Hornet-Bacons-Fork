@@ -20,6 +20,7 @@
 
 /mob/living/carbon/human/mecha_pilot
 	body_type = /datum/body/human/mecha_pilot
+	faction = list("syndicate")
 	var/spawn_mecha_type = /obj/mecha/combat/marauder/mauler/loaded
 
 /mob/living/carbon/human/mecha_pilot/Initialize()
@@ -32,6 +33,9 @@
 		var/obj/mecha/M = new spawn_mecha_type (get_turf(src))
 		//Force enter
 		M.moved_inside(src)
+
+/mob/living/carbon/human/mecha_pilot/no_mech
+	spawn_mecha_type = null
 
 /*
 /mob/living/carbon/human/mecha_pilot/no_mech

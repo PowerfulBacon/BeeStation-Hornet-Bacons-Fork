@@ -351,7 +351,7 @@
 			return FALSE
 	if (ismecha(the_target))
 		var/obj/mecha/M = the_target
-		if (M.occupant)
+		if (!M.occupant)
 			return FALSE
 	return TRUE
 
