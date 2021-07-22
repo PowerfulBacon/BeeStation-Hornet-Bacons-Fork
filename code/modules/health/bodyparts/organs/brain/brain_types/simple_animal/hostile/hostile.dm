@@ -45,6 +45,10 @@
 /obj/item/nbodypart/organ/brain/simple_animal/hostile/handle_automated_action(mob/living/L)
 	var/list/possible_targets = ListTargets(L) //we look around for potential targets and make it a list for later use.
 
+	//Go harm intent, for maximum harming.
+	if(L.a_intent != INTENT_HARM)
+		L.a_intent_change(INTENT_HARM)
+
 	if(environment_smash)
 		EscapeConfinement(L)
 
@@ -81,7 +85,7 @@
 		var/target_distance = get_dist(target_from,target)
 		if(is_ranged_mob) //We ranged? Shoot at em
 			if(!target.Adjacent(target_from)) //But make sure they're not in range for a melee attack and our range attack is off cooldown
-				L.ClickOn(target)
+				RangedAction(L)
 		if(!L.Process_Spacemove()) //Drifting
 			ai_walk_to(L,0)
 			return 1
@@ -105,7 +109,7 @@
 		if(target.loc != null && get_dist(target_from, target.loc) <= owner_body.get_ai_vision_range()) //We can't see our target, but he's in our vision range still
 			if(ranged_ignores_vision) //we can't see our target... but we can fire at them!
 				//Try and shoot at the target by clicking on them.
-				L.ClickOn(target)
+				RangedAction(L)
 			if((environment_smash & ENVIRONMENT_SMASH_WALLS) || (environment_smash & ENVIRONMENT_SMASH_RWALLS)) //If we're capable of smashing through walls, forget about vision completely after finding our target
 				Goto(target,L.move_to_delay,minimum_distance)
 				FindHidden(L)
@@ -168,11 +172,14 @@
 	if(!L.search_objects)
 		var/static/target_list = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha)) //mobs are handled via ismob(A)
 		. = list()
-		for(var/atom/A as() in dview(owner_body.get_ai_vision_range(), get_turf(target_from), SEE_INVISIBLE_MINIMUM))
+		for(var/atom/A as() in get_vision(owner_body.get_ai_vision_range(), get_turf(target_from)))
 			if((ismob(A) && A != L) || target_list[A.type])
 				. += A
 	else
-		. = oview(owner_body.get_ai_vision_range(), target_from)
+		. = get_vision(owner_body.get_ai_vision_range(), target_from)
+
+/obj/item/nbodypart/organ/brain/simple_animal/hostile/proc/get_vision(range, source)
+	return oview(range, source)
 
 /obj/item/nbodypart/organ/brain/simple_animal/hostile/proc/PickTarget(mob/living/L, list/Targets)//Step 3, pick among us the possible, attackable targets
 	if(target != null)//If we already have a target, but are told to pick again, calculate the lowest distance between all possible, and pick from the lowest distance targets
@@ -263,6 +270,9 @@
 //===============
 // AI Mob Actions
 //===============
+
+/obj/item/nbodypart/organ/brain/simple_animal/hostile/proc/RangedAction(mob/living/L)
+	L.ClickOn(target)
 
 //Combat
 /obj/item/nbodypart/organ/brain/simple_animal/hostile/proc/MeleeAction(mob/living/L, patience = TRUE)

@@ -98,7 +98,7 @@
 		//Handle finding paths while in mechas and lockers etc.
 		if(!isturf(L.loc))
 			our_pos = L.loc
-		var/step_pos = get_step_to(our_pos, get_turf(Target), Min)
+		var/step_pos
 		if(!ai_autowalk_ignore_walls)
 			//avoid walls
 			step_pos = get_step_to(our_pos, get_turf(Target), Min)
@@ -107,20 +107,15 @@
 			step_pos = get_step_towards(our_pos, get_turf(Target))
 		if(step_pos)
 			ai_move(L, step_pos, get_dir(L, step_pos))
-		else
-			message_admins("no step pos")
 		sleep(max(Lag, 1))
 
 //Emulates client move closely to prevent AI cheating.
 /obj/item/nbodypart/organ/brain/proc/ai_move(mob/living/L, newloc, direction)
 	if(!L || !L.loc)
-		message_admins("Invalid mob / loc")
 		return
 	if(L.notransform)
-		message_admins("Cannot be transformed")
 		return
 	if(L.force_moving)
-		message_admins("Fmoving")
 		return
 	//Why would we remove control something?
 	if(L.remote_control)
@@ -131,16 +126,13 @@
 		return L.buckled.relaymove(L, direction)
 	//Can we even move?
 	if(!(L.mobility_flags & MOBILITY_MOVE))
-		message_admins("Cannot move")
 		return FALSE
 	//Handle mech and moving things we are inside
 	if(isobj(L.loc) || ismob(L.loc))
 		var/atom/O = L.loc
-		message_admins("Relaying movement")
 		return O.relaymove(L, direction)
 	//Process space drifting
 	if(!L.Process_Spacemove(direction))
 		return FALSE
 	//Standard mob move.
 	L.Move(newloc, direction)
-	message_admins("movement")
