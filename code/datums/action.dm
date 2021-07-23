@@ -482,8 +482,8 @@
 	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/organ_action/IsAvailable()
-	var/obj/item/organ/I = target
-	if(!I.owner)
+	var/obj/item/nbodypart/I = target
+	if(!I?.owner_body?.owner)
 		return 0
 	return ..()
 

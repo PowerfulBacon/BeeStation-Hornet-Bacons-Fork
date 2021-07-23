@@ -517,7 +517,7 @@ GLOBAL_DATUM_INIT(admin_secrets, /datum/admin_secrets, new)
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Mass Braindamage"))
 			for(var/mob/living/carbon/human/H in GLOB.player_list)
 				to_chat(H, "<span class='boldannounce'>You suddenly feel stupid.</span>")
-				H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60, 80)
+				H.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 6, 8)
 			message_admins("[key_name_admin(usr)] gave everybody intellectual disability")
 
 		if("aussify") //for rimjobtide

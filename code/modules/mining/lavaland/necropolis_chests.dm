@@ -41,7 +41,7 @@
 		if(10)
 			new /obj/item/shared_storage/red(src)
 		if(11)
-			new /obj/item/clothing/glasses/godeye(src)
+			new /obj/item/nbodypart/organ/eye/god(src)
 		if(12)
 			new /obj/item/reagent_containers/glass/bottle/potion/flight(src)
 		if(13)

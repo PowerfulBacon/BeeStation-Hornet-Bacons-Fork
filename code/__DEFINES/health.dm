@@ -37,5 +37,6 @@
 #define BP_STOMACH "stomach"
 
 //Bodypart flags
-#define BP_FLAG_REMOVABLE (1 << 1)	//If set the bodypart can be removed via surgery / dismemberment.
-#define BP_FLAG_CRITICAL (1 << 2)	//If set the bodypart will cause the owner to instantly die if destroyed / removed.
+#define BP_FLAG_REMOVABLE (1 << 1)	//If set, the bodypart can be removed via surgery / dismemberment.
+#define BP_FLAG_CRITICAL (1 << 2)	//If set, the bodypart will cause the owner to instantly die if destroyed / removed.
+#define BP_FLAG_PROCESSING (1 << 3)	//If set, the bodypart will have its life() called on life.

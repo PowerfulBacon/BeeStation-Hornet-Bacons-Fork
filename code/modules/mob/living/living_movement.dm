@@ -28,9 +28,9 @@
 //Update movement delay.
 /mob/living/movement_delay()
 	. = ..()
-	if(body.movement == 0)
+	if(body.get_movement() == 0)
 		return . * 100
-	. /= (body.movement * 0.01)
+	. /= body.get_movement()
 
 /mob/living/proc/update_move_intent_slowdown()
 	var/mod = 0

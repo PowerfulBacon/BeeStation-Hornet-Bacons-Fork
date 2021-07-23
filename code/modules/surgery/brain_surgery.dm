@@ -43,7 +43,7 @@
 		display_results(user, target, "<span class='warning'>You screw up, causing more damage!</span>",
 			"<span class='warning'>[user] screws up, causing brain damage!</span>",
 			"[user] completes the surgery on [target]'s brain.")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60)
+		target.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 6)
 		target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 	else
 		user.visible_message("<span class='warning'>[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore.", "<span class='warning'>You suddenly notice that the brain you were working on is not there anymore.</span>")

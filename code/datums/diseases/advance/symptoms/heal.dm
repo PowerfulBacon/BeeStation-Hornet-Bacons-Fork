@@ -135,7 +135,7 @@
 		M.fakedeath(TRAIT_REGEN_COMA)
 	else
 		M.Unconscious(300, TRUE, TRUE)
-	M.update_stat()
+	M.body.update_stat()
 	M.update_mobility()
 	addtimer(CALLBACK(src, .proc/uncoma, M), 300)
 
@@ -147,7 +147,7 @@
 		M.cure_fakedeath(TRAIT_REGEN_COMA)
 	else
 		M.SetUnconscious(0)
-	M.update_stat()
+	M.body.update_stat()
 	M.update_mobility()
 
 /datum/symptom/heal/coma/Heal(mob/living/carbon/M, datum/disease/advance/A, actual_power)

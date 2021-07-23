@@ -37,6 +37,8 @@
 	if(buckled)
 		buckled.unbuckle_mob(src,force=1)
 
+	//Goodbye body. You will be missed.
+	qdel(body)
 	remove_from_all_data_huds()
 	GLOB.mob_living_list -= src
 	QDEL_LIST(diseases)
@@ -537,7 +539,7 @@
 		return
 	health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss()
 	staminaloss = getStaminaLoss()
-	update_stat()
+	body.update_stat()
 	med_hud_set_health()
 	med_hud_set_status()
 
@@ -1397,3 +1399,32 @@
 	if(is_servant_of_ratvar(src) && !iseminence(src))
 		eminence.selected_mob = src
 		to_chat(eminence, "<span class='brass'>You select [src].</span>")
+
+//to recalculate and update the mob's total tint from tinted equipment it's wearing.
+/mob/living/proc/update_tint()
+	if(!GLOB.tinted_weldhelh)
+		return
+	tinttotal = get_total_tint()
+	if(tinttotal >= TINT_BLIND)
+		become_blind(EYES_COVERED)
+	else if(tinttotal >= TINT_DARKENED)
+		cure_blind(EYES_COVERED)
+		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
+	else
+		cure_blind(EYES_COVERED)
+		clear_fullscreen("tint", 0)
+
+/mob/living/proc/get_total_tint()
+	. = 0
+
+	var/obj/item/nbodypart/organ/eye/left_eye = body.get_bodypart(BP_LEFT_EYE)
+	var/obj/item/nbodypart/organ/eye/right_eye = body.get_bodypart(BP_RIGHT_EYE)
+
+	if(left_eye)
+		. += left_eye.tint
+
+	if(right_eye)
+		. += right_eye.tint
+
+	if(!left_eye && !right_eye)
+		. += INFINITY

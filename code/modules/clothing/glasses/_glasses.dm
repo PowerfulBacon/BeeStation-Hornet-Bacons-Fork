@@ -441,35 +441,6 @@
 	item_state = "redglasses"
 	glass_colour_type = /datum/client_colour/glass_colour/red
 
-/obj/item/clothing/glasses/godeye
-	name = "eye of god"
-	desc = "A strange eye, said to have been torn from an omniscient creature that used to roam the wastes."
-	icon_state = "godeye"
-	item_state = "godeye"
-	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
-	darkness_view = 8
-	clothing_flags = SCAN_REAGENTS
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-	resistance_flags = LAVA_PROOF | FIRE_PROOF
-
-/obj/item/clothing/glasses/godeye/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, EYE_OF_GOD_TRAIT)
-
-/obj/item/clothing/glasses/godeye/attackby(obj/item/W as obj, mob/user as mob, params)
-	if(istype(W, src) && W != src && W.loc == user)
-		if(W.icon_state == "godeye")
-			W.icon_state = "doublegodeye"
-			W.item_state = "doublegodeye"
-			W.desc = "A pair of strange eyes, said to have been torn from an omniscient creature that used to roam the wastes. There's no real reason to have two, but that isn't stopping you."
-			if(iscarbon(user))
-				var/mob/living/carbon/C = user
-				C.update_inv_wear_mask()
-		else
-			to_chat(user, "<span class='notice'>The eye winks at you and vanishes into the abyss, you feel really unlucky.</span>")
-		qdel(src)
-	..()
-
 /obj/item/clothing/glasses/AltClick(mob/user)
 	if(glass_colour_type && ishuman(user))
 		var/mob/living/carbon/human/H = user

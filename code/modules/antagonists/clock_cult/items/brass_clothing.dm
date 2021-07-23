@@ -114,13 +114,12 @@
 		to_chat(user, "<span class='nezbere'>You suddenly see so much more, but your eyes begin to faulter...</span>")
 
 /obj/item/clothing/glasses/clockwork/wraith_spectacles/process(delta_time)
-	. = ..()
 	if(!wearer)
 		STOP_PROCESSING(SSobj, src)
 		return
-	//~1 damage every 2 seconds, maximum of 70 after 140 seconds
-	wearer.adjustOrganLoss(ORGAN_SLOT_EYES, 0.5*delta_time, 70)
-	applied_eye_damage = min(applied_eye_damage + 1, 70)
+	//~0.1 damage every 2 seconds. Standard eyes have 10 health so they will be destroyed after 200 seconds.
+	wearer.body.apply_injury(list(BP_LEFT_EYE, BP_RIGHT_EYE), /datum/injury/organ_damage, 0.1)
+	applied_eye_damage = applied_eye_damage + 0.1
 
 /obj/item/clothing/glasses/clockwork/wraith_spectacles/dropped(mob/user)
 	. = ..()

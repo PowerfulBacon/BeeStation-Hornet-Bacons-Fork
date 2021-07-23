@@ -101,7 +101,8 @@
 					L.adjustOxyLoss(amount)
 					newamt = L.getOxyLoss()
 				if("brain")
-					L.adjustOrganLoss(ORGAN_SLOT_BRAIN, amount)
+					//TODO: Negative damage!!!!
+					L.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, amount)
 					newamt = L.getOrganLoss(ORGAN_SLOT_BRAIN)
 				if("clone")
 					L.adjustCloneLoss(amount)

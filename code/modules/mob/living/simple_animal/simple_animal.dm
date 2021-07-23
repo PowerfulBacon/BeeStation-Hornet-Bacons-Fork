@@ -127,7 +127,8 @@
 /mob/living/simple_animal/updatehealth()
 	..()
 	health = CLAMP(health, 0, maxHealth)
-
+/*
+TODO
 /mob/living/simple_animal/update_stat()
 	if(status_flags & GODMODE)
 		return
@@ -137,7 +138,7 @@
 		else
 			set_stat(CONSCIOUS)
 	med_hud_set_status()
-
+*/
 //TODO REMOVE
 /mob/living/simple_animal/proc/handle_automated_action()
 	set waitfor = FALSE

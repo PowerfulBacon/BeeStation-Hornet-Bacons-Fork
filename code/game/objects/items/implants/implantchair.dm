@@ -199,7 +199,7 @@
 		var/mob/living/carbon/human/H = C
 		if(istype(H.get_item_by_slot(ITEM_SLOT_HEAD), /obj/item/clothing/head/foilhat))
 			to_chat(H, "<span class ='userdanger'>Your trusty tinfoil hat shorts out the implant as it plunges into your skull!</span>")
-			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 75)
+			H.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 7.5)
 			H.emote("scream")
 			return TRUE
 	brainwash(C, objective)

@@ -658,7 +658,7 @@
 		. = 1
 	if(prob(20))
 		M.losebreath += 4
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM, 150)
+		M.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 0.2 * REM, 12)
 		M.adjustToxLoss(3*REM,0)
 		M.adjustStaminaLoss(10*REM,0)
 		M.blur_eyes(5)

@@ -248,7 +248,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 	if(drunkness >= 91)
 		owner_mob.adjustToxLoss(1)
-		owner_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.4)
+		owner_mob.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 0.1)
 		if(prob(20) && owner_mob.is_concious())
 			if(SSshuttle.emergency.mode == SHUTTLE_DOCKED && is_station_level(owner_mob.z)) //QoL mainly
 				to_chat(owner_mob, "<span class='warning'>You're so tired, but you can't miss that shuttle.</span>")

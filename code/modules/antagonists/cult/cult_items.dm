@@ -60,7 +60,7 @@
 		user.visible_message("<span class='warning'>[user] cringes as they strike [target]!</span>", \
 							 "<span class='userdanger'>Your arm throbs and your brain hurts!</span>")
 		user.adjustStaminaLoss(rand(force/2,force))
-		user.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(force/10,force/2))
+		user.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, CEILING(rand(force/100,force/20), 0.1))
 	..()
 
 /obj/item/melee/cultblade/ghost

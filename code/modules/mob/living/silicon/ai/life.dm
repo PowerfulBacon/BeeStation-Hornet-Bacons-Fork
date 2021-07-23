@@ -61,10 +61,11 @@
 	if(status_flags & GODMODE)
 		return
 	health = maxHealth - getOxyLoss() - getToxLoss() - getBruteLoss() - getFireLoss()
-	update_stat()
+	body.update_stat()
 	diag_hud_set_health()
 	disconnect_shell()
-
+/*
+TODO
 /mob/living/silicon/ai/update_stat()
 	if(status_flags & GODMODE)
 		return
@@ -76,7 +77,7 @@
 			set_stat(CONSCIOUS)
 			adjust_blindness(-1)
 	diag_hud_set_status()
-
+*/
 /mob/living/silicon/ai/update_sight()
 	see_invisible = initial(see_invisible)
 	see_in_dark = initial(see_in_dark)

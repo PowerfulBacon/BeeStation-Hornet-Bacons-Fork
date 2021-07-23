@@ -122,16 +122,16 @@
 	name = "Night Vision"
 	desc = "You can see slightly more clearly in full darkness than most people."
 	value = 1
-	mob_trait = TRAIT_NIGHT_VISION
 	gain_text = "<span class='notice'>The shadows seem a little less dark.</span>"
 	lose_text = "<span class='danger'>Everything seems a little darker.</span>"
 
 /datum/quirk/night_vision/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
-	var/obj/item/organ/eyes/eyes = H.getorgan(/obj/item/organ/eyes)
-	if(!eyes || eyes.lighting_alpha)
-		return
-	eyes.Insert(H) //refresh their eyesight and vision
+	//Give them new eyes
+	H.body.remove_part_in_slot(BP_LEFT_EYE)
+	H.body.remove_part_in_slot(BP_RIGHT_EYE)
+	H.body.insert_part(new /obj/item/nbodypart/organ/eye/nvtrait/left)
+	H.body.insert_part(new /obj/item/nbodypart/organ/eye/nvtrait/right)
 
 /datum/quirk/photographer
 	name = "Photographer"

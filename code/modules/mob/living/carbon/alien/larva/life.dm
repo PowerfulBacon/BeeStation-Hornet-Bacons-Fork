@@ -10,7 +10,8 @@
 			amount_grown++
 			update_icons()
 
-
+/*
+TODO
 /mob/living/carbon/alien/larva/update_stat()
 	if(status_flags & GODMODE)
 		return
@@ -30,3 +31,4 @@
 				adjust_blindness(-1)
 	update_damage_hud()
 	update_health_hud()
+*/

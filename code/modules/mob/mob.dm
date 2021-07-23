@@ -1117,9 +1117,6 @@
 					break
 				search_pda = 0
 
-/mob/proc/update_stat()
-	return
-
 /mob/proc/update_health_hud()
 	return
 

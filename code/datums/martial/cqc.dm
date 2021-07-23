@@ -80,7 +80,7 @@
 					  		"<span class='userdanger'>[A] kicks your head, knocking you out!</span>")
 		playsound(get_turf(A), 'sound/weapons/genhit1.ogg', 50, 1, -1)
 		D.SetSleeping(300)
-		D.adjustOrganLoss(ORGAN_SLOT_BRAIN, 15, 150)
+		D.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 1.5, 10)
 	return TRUE
 
 /datum/martial_art/cqc/proc/Pressure(mob/living/carbon/human/A, mob/living/carbon/human/D)

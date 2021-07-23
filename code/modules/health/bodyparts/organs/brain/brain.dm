@@ -4,6 +4,10 @@
 	maxhealth = 15
 	bodypart_flags = BP_FLAG_CRITICAL | BP_FLAG_REMOVABLE
 
+	//100% of conciousness is in the brain.
+	//Lose 70% of brain efficiency, lose 70% of conciousness.
+	conciousness_factor = 100
+
 	//Does the brain have AI?
 	var/is_ai_brain = FALSE
 

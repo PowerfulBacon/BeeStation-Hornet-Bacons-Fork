@@ -59,7 +59,9 @@
 	var/where = "at your feet"
 
 /datum/quirk/brainproblems/on_process()
-	quirk_holder.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.2)
+	if(prob(10))
+		//0.01 damage per second on average
+		quirk_holder.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 0.1, 14)
 
 /datum/quirk/brainproblems/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder

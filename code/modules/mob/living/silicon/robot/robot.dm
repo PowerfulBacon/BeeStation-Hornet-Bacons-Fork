@@ -992,7 +992,8 @@
 	if(see_override)
 		see_invisible = see_override
 	sync_lighting_plane_alpha()
-
+/*
+TODO
 /mob/living/silicon/robot/update_stat()
 	if(status_flags & GODMODE)
 		return
@@ -1016,7 +1017,7 @@
 	diag_hud_set_health()
 	diag_hud_set_aishell()
 	update_health_hud()
-
+*/
 /mob/living/silicon/robot/revive(full_heal = 0, admin_revive = 0)
 	if(..()) //successfully ressuscitated from death
 		if(!QDELETED(builtInCamera) && !wires.is_cut(WIRE_CAMERA))

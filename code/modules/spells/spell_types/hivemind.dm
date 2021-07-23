@@ -310,7 +310,7 @@
 		if(!target)
 			to_chat(user, "<span class='warning'>We have run out of vessels to drain.</span>")
 			break
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5)
+		target.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 0.5)
 		if(user.getBruteLoss() > user.getFireLoss())
 			user.heal_ordered_damage(5, list(CLONE, BRUTE, BURN))
 		else
@@ -451,13 +451,13 @@
 /obj/effect/proc_holder/spell/target_hive/hive_control/process()
 	if(active)
 		if(QDELETED(vessel)) //If we've been gibbed or otherwise deleted, ghost both of them and kill the original
-			original_body.adjustOrganLoss(ORGAN_SLOT_BRAIN, 200)
+			original_body.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 200)
 			release_control()
 		else if(!is_hivemember(backseat)) //If the vessel is no longer a hive member, return to original bodies
 			to_chat(vessel, "<span class='warning'>Our vessel is one of us no more!</span>")
 			release_control()
 		else if(!QDELETED(original_body) && (!backseat.ckey || vessel.is_dead())) //If the original body exists and the vessel is dead/ghosted, return both to body but not before killing the original
-			original_body.adjustOrganLoss(ORGAN_SLOT_BRAIN, 200)
+			original_body.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 200)
 			to_chat(vessel.mind, "<span class='warning'>Our vessel is one of us no more!</span>")
 			release_control()
 		else if(!QDELETED(original_body) && original_body.get_virtual_z_level() != vessel.get_virtual_z_level()) //Return to original bodies

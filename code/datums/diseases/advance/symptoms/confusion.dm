@@ -60,7 +60,7 @@ Bonus
 			to_chat(M, "<span class='userdanger'>You can't think straight!</span>")
 			M.confused = min(100 * power, M.confused + 8)
 			if(brain_damage)
-				M.adjustOrganLoss(ORGAN_SLOT_BRAIN,3 * power, 80)
+				M.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 0.3 * power, 8)
 				M.updatehealth()
 
 	return

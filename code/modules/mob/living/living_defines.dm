@@ -49,6 +49,8 @@
 
 	var/confused = 0	//Makes the mob move in random directions.
 
+	var/tinttotal = 0	// Total level of visualy impairing items
+
 	var/hallucination = 0 //Directly affects how long a mob will hallucinate for
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.

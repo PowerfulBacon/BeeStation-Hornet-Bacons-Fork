@@ -285,7 +285,7 @@
 	if(status_flags & GODMODE)
 		return
 	health = maxHealth - getBruteLoss() - getFireLoss()
-	update_stat()
+	body.update_stat()
 
 /mob/living/silicon/pai/process(delta_time)
 	emitterhealth = CLAMP((emitterhealth + (emitterregen * delta_time)), -50, emittermaxhealth)

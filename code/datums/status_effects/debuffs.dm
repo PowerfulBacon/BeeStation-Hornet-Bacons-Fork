@@ -14,12 +14,12 @@
 		if(updating_canmove)
 			owner.update_mobility()
 			if(needs_update_stat || issilicon(owner))
-				owner.update_stat()
+				owner.body.update_stat()
 
 /datum/status_effect/incapacitating/on_remove()
 	owner.update_mobility()
 	if(needs_update_stat || issilicon(owner)) //silicons need stat updates in addition to normal canmove updates
-		owner.update_stat()
+		owner.body.update_stat()
 
 //STUN
 /datum/status_effect/incapacitating/stun
@@ -897,7 +897,7 @@
 			H.SetKnockdown(10)
 			message = "<span class='warning'>Your feel a terrible pain in your abdomen.</span>"
 		if(85 to 89)
-			H.adjustOrganLoss(ORGAN_SLOT_EYES,15)
+			H.body.apply_injury(list(BP_LEFT_EYE, BP_RIGHT_EYE), /datum/injury/organ_damage, 4)
 			message = "<span class='warning'>Your eyes sting.</span>"
 		else
 			H.adjustOrganLoss(ORGAN_SLOT_EARS,15)

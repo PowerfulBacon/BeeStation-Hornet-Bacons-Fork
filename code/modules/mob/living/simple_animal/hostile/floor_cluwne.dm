@@ -396,7 +396,7 @@ GLOBAL_VAR_INIT(floor_cluwnes, 0)
 		else
 			H.cluwneify()
 			H.adjustBruteLoss(30)
-			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 100)
+			H.body.apply_injury(BP_BRAIN, /datum/injury/organ_damage, 10)
 			H.cure_blind()
 			H.layer = initial(H.layer)
 			H.invisibility = initial(H.invisibility)

@@ -538,7 +538,7 @@
 		total_stamina += (BP.stamina_dam * BP.stam_damage_coeff)
 	health = round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION)
 	staminaloss = round(total_stamina, DAMAGE_PRECISION)
-	update_stat()
+	body.update_stat()
 	update_mobility()
 	if(((maxHealth - total_burn) < HEALTH_THRESHOLD_DEAD*2) && body.stat == DEAD )
 		become_husk("burn")
@@ -560,6 +560,7 @@
 		return
 	update_health_hud()
 
+//TODO
 /mob/living/carbon/update_sight()
 	if(!client)
 		return
@@ -609,35 +610,13 @@
 		see_invisible = see_override
 	. = ..()
 
-
-//to recalculate and update the mob's total tint from tinted equipment it's wearing.
-/mob/living/carbon/proc/update_tint()
-	if(!GLOB.tinted_weldhelh)
-		return
-	tinttotal = get_total_tint()
-	if(tinttotal >= TINT_BLIND)
-		become_blind(EYES_COVERED)
-	else if(tinttotal >= TINT_DARKENED)
-		cure_blind(EYES_COVERED)
-		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
-	else
-		cure_blind(EYES_COVERED)
-		clear_fullscreen("tint", 0)
-
-/mob/living/carbon/proc/get_total_tint()
-	. = 0
+/mob/living/carbon/get_total_tint()
+	. = ..()
 	if(istype(head, /obj/item/clothing/head))
 		var/obj/item/clothing/head/HT = head
 		. += HT.tint
 	if(wear_mask)
 		. += wear_mask.tint
-
-	var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-	if(E)
-		. += E.tint
-
-	else
-		. += INFINITY
 
 //this handles hud updates
 /mob/living/carbon/update_damage_hud()
@@ -741,18 +720,18 @@
 		if(body.stat != DEAD)
 			. = 1
 			if(shown_health_amount == null)
-				shown_health_amount = health
-			if(shown_health_amount >= maxHealth)
+				shown_health_amount = body.get_conciousness()
+			if(shown_health_amount >= 1)
 				hud_used.healths.icon_state = "health0"
-			else if(shown_health_amount > maxHealth*0.8)
+			else if(shown_health_amount > 0.8)
 				hud_used.healths.icon_state = "health1"
-			else if(shown_health_amount > maxHealth*0.6)
+			else if(shown_health_amount > 0.7)
 				hud_used.healths.icon_state = "health2"
-			else if(shown_health_amount > maxHealth*0.4)
+			else if(shown_health_amount > 0.6)
 				hud_used.healths.icon_state = "health3"
-			else if(shown_health_amount > maxHealth*0.2)
+			else if(shown_health_amount > 0.5)
 				hud_used.healths.icon_state = "health4"
-			else if(shown_health_amount > 0)
+			else if(shown_health_amount > 0.4)
 				hud_used.healths.icon_state = "health5"
 			else
 				hud_used.healths.icon_state = "health6"
@@ -762,32 +741,6 @@
 /mob/living/carbon/proc/update_internals_hud_icon(internal_state = 0)
 	if(hud_used && hud_used.internals)
 		hud_used.internals.icon_state = "internal[internal_state]"
-
-/mob/living/carbon/update_stat()
-	if(status_flags & GODMODE)
-		return
-	if(body.stat != DEAD)
-		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
-			death()
-			return
-		if(IsUnconscious() || IsSleeping() || getOxyLoss() > 50 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)) || (health <= HEALTH_THRESHOLD_FULLCRIT && !HAS_TRAIT(src, TRAIT_NOHARDCRIT)))
-			set_stat(UNCONSCIOUS)
-			blind_eyes(1)
-			if(CONFIG_GET(flag/near_death_experience) && health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
-				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
-			else
-				REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
-		else
-			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
-				set_stat(SOFT_CRIT)
-			else
-				set_stat(CONSCIOUS)
-			adjust_blindness(-1)
-			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
-		update_mobility()
-	update_damage_hud()
-	update_health_hud()
-	med_hud_set_status()
 
 //called when we get cuffed/uncuffed
 /mob/living/carbon/proc/update_handcuffed()

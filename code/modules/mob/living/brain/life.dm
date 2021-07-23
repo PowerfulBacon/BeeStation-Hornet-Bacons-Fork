@@ -8,6 +8,8 @@
 	. = ..()
 	handle_emp_damage()
 
+/*
+TODO
 /mob/living/brain/update_stat()
 	if(status_flags & GODMODE)
 		return
@@ -21,6 +23,7 @@
 			BR = loc
 		if(BR)
 			BR.brain_death = TRUE //beaten to a pulp
+*/
 
 /mob/living/brain/proc/handle_emp_damage()
 	if(emp_damage)

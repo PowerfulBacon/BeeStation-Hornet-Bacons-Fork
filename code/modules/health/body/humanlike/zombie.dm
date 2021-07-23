@@ -1,0 +1,2 @@
+
+/datum/body/humanlike/zombie

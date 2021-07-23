@@ -27,11 +27,13 @@
 				handle_speech()
 
 // Unlike most of the simple animals, slimes support UNCONSCIOUS
+/*
+TODO
 /mob/living/simple_animal/slime/update_stat()
 	if(body.stat == UNCONSCIOUS && health > 0)
 		return
 	..()
-
+*/
 /mob/living/simple_animal/slime/process()
 	if(body.stat == DEAD || !Target || client || buckled)
 		return
