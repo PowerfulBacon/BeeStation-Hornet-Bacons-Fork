@@ -193,8 +193,8 @@
 	DO_SOMETHING_IF_DEBUGGING_SHADOWS(var/MA_vars_time = 0)
 	DO_SOMETHING_IF_DEBUGGING_SHADOWS(var/overlays_add_time = 0)
 
-	filters = list()
-	var/num = 0
+	var/list/overlays_to_add = list()
+	overlays.Cut()
 
 	for(var/group in grouped_atoms)
 		DO_SOMETHING_IF_DEBUGGING_SHADOWS(temp_timer = TICK_USAGE)
@@ -236,15 +236,21 @@
 			DO_SOMETHING_IF_DEBUGGING_SHADOWS(MA_vars_time += TICK_USAGE_TO_MS(temp_timer))
 			DO_SOMETHING_IF_DEBUGGING_SHADOWS(temp_timer = TICK_USAGE)
 
-			filters += filter(type="layer", icon = icon(LIGHTING_ICON_BIG, "triangle"), color = "#000", transform = M)
-			num ++
+			var/mutable_appearance/shadow = new()
+
+			shadow.icon = LIGHTING_ICON_BIG
+			shadow.icon_state = "triangle"
+			shadow.color = "#000"
+			shadow.transform = M
+			shadow.blend_mode = BLEND_OVERLAY
+
+			LAZYADD(shadows, shadow)
+			overlays_to_add += shadow
 
 			DO_SOMETHING_IF_DEBUGGING_SHADOWS(overlays_add_time += TICK_USAGE_TO_MS(temp_timer))
 			DO_SOMETHING_IF_DEBUGGING_SHADOWS(temp_timer = TICK_USAGE)
 
-	if(num >= 50)
-		message_admins("WARNING: [attached_atom] has [num] filters attached to it! [ADMIN_COORDJMP(attached_atom)]")
-		return
+	overlays += overlays_to_add //batch appearance generation for free lag(tm)
 
 	DO_SOMETHING_IF_DEBUGGING_SHADOWS(log_game("total_coordgroup_time: [total_coordgroup_time]ms"))
 	DO_SOMETHING_IF_DEBUGGING_SHADOWS(log_game("total_cornergroup_time: [total_cornergroup_time]ms"))

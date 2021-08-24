@@ -14,9 +14,11 @@
 	invisibility     = INVISIBILITY_LIGHTING
 	blend_mode		 = BLEND_ADD
 
-	appearance_flags = KEEP_TOGETHER
+	appearance_flags = KEEP_TOGETHER | TILE_BOUND
 
 	move_resist = INFINITY
+
+	infra_luminosity = 14
 
 	//The radius of the mask
 	var/radius = 0

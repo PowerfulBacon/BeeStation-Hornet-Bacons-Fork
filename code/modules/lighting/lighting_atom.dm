@@ -9,7 +9,7 @@
 	 * Fancy lighting can use a lot of CPU when processing a lot, so should generally be used for static light sources that
 	 * update infrequently.
 	 */
-	var/light_source_type = QUICK_LIGHTING
+	var/light_source_type = FANCY_LIGHTING
 
 	//Values should avoid being close to -16, 16, -48, 48 etc.
 	//Best keep them within 10 units of a multiple of 32, as when the light is closer to a wall, the probability
