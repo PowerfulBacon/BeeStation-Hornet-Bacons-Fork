@@ -2,6 +2,10 @@
 // These are the main datums that emit light.
 
 /datum/light_source
+	var/x
+	var/y
+	var/z
+
 	var/atom/source_atom     // The atom that we belong to.
 	var/atom/movable/contained_atom		//The atom that the source atom is contained inside
 	var/atom/cached_loc	//The loc where we were
@@ -15,7 +19,8 @@
 	var/applied = FALSE // Whether we have applied our light yet or not.
 
 	var/mask_type
-	var/obj/effect/lighting_mask_holder/mask_holder
+	//OUR LIGHTING MASK
+	//EXISTS IN NULLSPACE, USED AS AN IMAGE FOR CLIENTS
 	var/atom/movable/lighting_mask/our_mask
 
 /datum/light_source/New(var/atom/movable/owner, mask_type)
@@ -33,9 +38,7 @@
 		else
 			mask_type = /atom/movable/lighting_mask
 	src.mask_type = mask_type
-	mask_holder = new(source_turf)
 	our_mask = new mask_type
-	mask_holder.assign_mask(our_mask)
 	our_mask.attached_atom = owner
 
 	//Set light vars
@@ -47,14 +50,21 @@
 	//Set direction
 	our_mask.holder_turned(contained_atom.dir)
 
+	//Get the position of the light source
+	x = source_turf.x
+	y = source_turf.y
+	z = source_turf.z
+
 	SSlighting.light_sources += src
+	SSlighting.light_source_grid[z][x][y] += src
 
 /datum/light_source/Destroy(...)
 	SSlighting.light_sources -= src
+	SSlighting.light_source_grid[z][x][y] -= src
 	//Remove references to ourself.
 	LAZYREMOVE(source_atom?.light_sources, src)
 	LAZYREMOVE(contained_atom?.light_sources, src)
-	qdel(mask_holder)
+	qdel(our_mask)
 	. = ..()
 
 /datum/light_source/proc/find_containing_atom()
@@ -93,5 +103,16 @@
 		our_mask.set_colour(l_color)
 
 /datum/light_source/proc/update_position()
-	mask_holder?.forceMove(get_turf(source_atom))
+	var/turf/new_turf = get_turf(source_atom)
+
+	//Remove old source
+	SSlighting.light_source_grid[z][x][y] -= src
+
+	//Add new
+	x = new_turf.x
+	y = new_turf.y
+	z = new_turf.z
+	SSlighting.light_source_grid[z][x][y] += src
+
+	//Find our containing atom.
 	find_containing_atom()

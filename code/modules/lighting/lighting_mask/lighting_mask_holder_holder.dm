@@ -28,6 +28,10 @@
 	. = ..()
 	//Step 1:
 	//Translate all contained images.
+	//Step 2:
+	//Remove any light masks that have moved out of range
+	//Step 3:
+	//Add any light masks that have moved into range.
 
 /obj/effect/lighting_mask_holder_holder_holder/proc/display_light_mask(obj/effect/lighting_mask_holder/held_mask)
 	//So we make the holder and put it on the turf of the holder's holder's holder

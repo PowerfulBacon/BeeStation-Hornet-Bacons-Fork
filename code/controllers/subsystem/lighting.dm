@@ -15,6 +15,10 @@ SUBSYSTEM_DEF(lighting)
 	var/list/sources_that_need_updating = list()
 	var/list/light_sources = list()
 
+	//3 dimensional array containing lists of light sources.
+	//light_source_grid[z][x][y] = list()
+	var/list/light_source_grid
+
 /client/verb/get_lighting_speed()
 	set name = "light speed"
 	set category = "lighting"
@@ -33,6 +37,8 @@ SUBSYSTEM_DEF(lighting)
 		for(var/atom/movable/lighting_mask/mask as() in sources_that_need_updating)
 			mask.calculate_lighting_shadows()
 		sources_that_need_updating = null
+		//Build the array
+		setup_initial_sources()
 		to_chat(world, "<span class='boldannounce'>Initial lighting conditions built successfully in [TICK_USAGE_TO_MS(timer)]ms.</span>")
 		initialized = TRUE
 	fire(FALSE, TRUE)
@@ -45,6 +51,35 @@ SUBSYSTEM_DEF(lighting)
 /datum/controller/subsystem/lighting/Recover()
 	initialized = SSlighting.initialized
 	..()
+
+//===============
+// Light source rendering
+//===============
+
+/datum/controller/subsystem/lighting/proc/setup_initial_sources()
+	for(var/z in 1 to world.maxz)
+		var/list/x_things = list()
+		for(var/x in 1 to world.maxx)
+			var/list/y_things
+			for(var/y in 1 to world.maxy)
+				//Add an empty list
+				y_things += list(list())
+			x_things += list(y_things)
+		light_source_grid += list(x_things)
+
+/datum/controller/subsystem/lighting/proc/add_new_z()
+	var/list/x_things = list()
+	for(var/x in 1 to world.maxx)
+		var/list/y_things
+		for(var/y in 1 to world.maxy)
+			//Add an empty list
+			y_things += list(list())
+		x_things += list(y_things)
+	light_source_grid += list(x_things)
+
+//===============
+// Shadow building
+//===============
 
 /datum/controller/subsystem/lighting/proc/build_shadows()
 	var/timer = TICK_USAGE
@@ -60,6 +95,11 @@ SUBSYSTEM_DEF(lighting)
 	for(var/atom/movable/lighting_mask/mask as() in queued_shadow_updates)
 		mask.calculate_lighting_shadows(TRUE)
 	LAZYCLEARLIST(queued_shadow_updates)
+
+
+//===============
+// Stat Entry
+//===============
 
 /datum/controller/subsystem/lighting/stat_entry()
 	. = ..("Sources: [light_sources.len], ShCalcs: [total_shadow_calculations]")
