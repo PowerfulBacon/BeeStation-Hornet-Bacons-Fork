@@ -1,3 +1,8 @@
+//The index of light sources in the big world list
+#define LIGHT_SOURCE "source"
+//The index of light viewers
+#define LIGHT_VIEWER "viewer"
+
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
 	wait = 2
@@ -15,8 +20,12 @@ SUBSYSTEM_DEF(lighting)
 	var/list/sources_that_need_updating = list()
 	var/list/light_sources = list()
 
+	//A list of all light mask holders
+	var/list/light_mask_holders = list()
+
 	//3 dimensional array containing lists of light sources.
-	//light_source_grid[z][x][y] = list()
+	//light_source_grid[z][x][y][LIGHT_SOURCE] = list()
+	//light_source_grid[z][x][y][LIGHT_VIEWER] = list()
 	var/list/light_source_grid
 
 /client/verb/get_lighting_speed()
@@ -63,7 +72,7 @@ SUBSYSTEM_DEF(lighting)
 			var/list/y_things
 			for(var/y in 1 to world.maxy)
 				//Add an empty list
-				y_things += list(list())
+				y_things += list(list(LIGHT_SOURCE = list(), LIGHT_VIEWER = list()))
 			x_things += list(y_things)
 		light_source_grid += list(x_things)
 
@@ -73,7 +82,7 @@ SUBSYSTEM_DEF(lighting)
 		var/list/y_things
 		for(var/y in 1 to world.maxy)
 			//Add an empty list
-			y_things += list(list())
+			y_things += list(list(LIGHT_SOURCE = list(), LIGHT_VIEWER = list()))
 		x_things += list(y_things)
 	light_source_grid += list(x_things)
 

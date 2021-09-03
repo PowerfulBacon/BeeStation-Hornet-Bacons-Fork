@@ -22,6 +22,8 @@
 	//OUR LIGHTING MASK
 	//EXISTS IN NULLSPACE, USED AS AN IMAGE FOR CLIENTS
 	var/atom/movable/lighting_mask/our_mask
+	//Light mask holders we inside
+	var/list/lighting_mask_holders = list()
 
 /datum/light_source/New(var/atom/movable/owner, mask_type)
 	source_atom = owner // Set our new owner.
@@ -56,14 +58,21 @@
 	z = source_turf.z
 
 	SSlighting.light_sources += src
-	SSlighting.light_source_grid[z][x][y] += src
+	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] += src
+
+	//Create initial light
+	for(var/obj/effect/lighting_mask_holder/holder in SSlighting.light_mask_holders)
+		holder.check_new_sources()
 
 /datum/light_source/Destroy(...)
 	SSlighting.light_sources -= src
-	SSlighting.light_source_grid[z][x][y] -= src
+	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] -= src
 	//Remove references to ourself.
 	LAZYREMOVE(source_atom?.light_sources, src)
 	LAZYREMOVE(contained_atom?.light_sources, src)
+	for(var/obj/effect/lighting_mask_holder/mask_holder in lighting_mask_holders)
+		mask_holder.vis_contents -= our_mask
+	lighting_mask_holders.Cut()
 	qdel(our_mask)
 	. = ..()
 
@@ -106,13 +115,13 @@
 	var/turf/new_turf = get_turf(source_atom)
 
 	//Remove old source
-	SSlighting.light_source_grid[z][x][y] -= src
+	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] -= src
 
 	//Add new
 	x = new_turf.x
 	y = new_turf.y
 	z = new_turf.z
-	SSlighting.light_source_grid[z][x][y] += src
+	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] += src
 
 	//Find our containing atom.
 	find_containing_atom()

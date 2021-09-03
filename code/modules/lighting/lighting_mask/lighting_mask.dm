@@ -26,15 +26,10 @@
 	//The atom that we are attached to
 	var/atom/attached_atom = null
 
-	//Tracker var for the holder
-	var/datum/weakref/holder = null
-
 	//Tracker var for tracking init dupe requests
 	var/awaiting_update = FALSE
 
 /atom/movable/lighting_mask/Destroy()
-	//Delete the holder object
-	holder = null
 	//Remove reference to the atom we are attached to
 	attached_atom = null
 	//Remove from subsystem
