@@ -61,7 +61,6 @@
 	ambience_index = AMBIENCE_NONE
 	sound_environment = SOUND_ENVIRONMENT_DRUGGED
 	teleport_restriction = TELEPORT_ALLOW_NONE
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 
 /area/tear_in_reality/Initialize()
 	. = ..()
@@ -405,7 +404,7 @@ GLOBAL_LIST_EMPTY(destabliization_exits)
 	if(world.time < next_world_time)
 		return
 	var/turf/T = get_turf(source_object)
-	for(var/datum/light_source/light_source in T.affecting_lights)
+	for(var/datum/light_source/light_source in T.lights_affecting)
 		var/atom/movable/AM = light_source.source_atom
 		//Starts at light but gets stronger the longer it is in light.
 		AM.lighteater_act()

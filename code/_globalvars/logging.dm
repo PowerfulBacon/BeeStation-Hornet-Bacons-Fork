@@ -46,6 +46,8 @@ GLOBAL_VAR(href_exploit_attempt_log)
 GLOBAL_PROTECT(href_exploit_attempt_log)
 GLOBAL_VAR(tgui_log)
 GLOBAL_PROTECT(tgui_log)
+GLOBAL_VAR(lighting_log)
+GLOBAL_PROTECT(lighting_log)
 
 GLOBAL_LIST_EMPTY(bombers)
 GLOBAL_PROTECT(bombers)

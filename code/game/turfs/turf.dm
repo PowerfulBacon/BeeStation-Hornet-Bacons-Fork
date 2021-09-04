@@ -98,9 +98,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 	ComponentInitialize()
 
-	//Bright bright bright
-	add_overlay(/obj/effect/fullbright)
-
 	if(isopenturf(src))
 		var/turf/open/O = src
 		__auxtools_update_turf_temp_info(isspaceturf(get_z_base_turf()) && !O.planetary_atmos)

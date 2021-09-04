@@ -109,12 +109,15 @@
 #define EMISSIVE_UNBLOCKABLE_LAYER 14
 #define EMISSIVE_UNBLOCKABLE_RENDER_TARGET "*EMISSIVE_UNBLOCKABLE_PLANE"
 
+#define LIGHTING_BACKPLANE_LAYER 14.5
 #define LIGHTING_PLANE 15
 #define LIGHTING_PRIMARY_LAYER 15	//The layer for the main lights of the station
 #define LIGHTING_PRIMARY_DIMMER_LAYER 15.1	//The layer that dims the main lights of the station
 #define LIGHTING_SECONDARY_LAYER 15.5	//The colourful, usually small lights that go on top
 #define LIGHTING_SHADOW_LAYER 16
 #define LIGHTING_RENDER_TARGET "LIGHT_PLANE"
+
+#define LIGHTING_IMAGE_LAYER 16.5
 
 #define ABOVE_LIGHTING_PLANE 17
 #define ABOVE_LIGHTING_LAYER 17

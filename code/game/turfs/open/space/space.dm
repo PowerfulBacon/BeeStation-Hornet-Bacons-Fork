@@ -43,9 +43,7 @@
 		stack_trace("Warning: [src]([type]) initialized multiple times!")
 	flags_1 |= INITIALIZED_1
 
-	var/area/A = loc
-	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
-		add_overlay(/obj/effect/fullbright)
+	add_overlay(/obj/effect/fullbright)
 
 	if (light_power && light_range)
 		update_light()

@@ -64,19 +64,19 @@
 	z = source_turf.z
 
 	SSlighting.light_sources += src
-	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] += src
+	LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
 
-	//Create initial light
-	for(var/obj/effect/lighting_mask_holder/holder in SSlighting.light_mask_holders)
-		holder.check_new_sources()
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NEW_LIGHT_SOURCE, src)
+
+	log_lighting("Lighting source created at [x], [y], [z] with radius of [light_range]")
 
 /datum/light_source/Destroy(...)
 	SSlighting.light_sources -= src
-	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] -= src
+	LAZYREMOVE(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
 	//Remove references to ourself.
 	LAZYREMOVE(source_atom?.light_sources, src)
 	LAZYREMOVE(contained_atom?.light_sources, src)
-	for(var/obj/effect/lighting_mask_holder/mask_holder in lighting_mask_holders)
+	for(var/atom/movable/lighting_mask_holder/mask_holder in lighting_mask_holders)
 		mask_holder.vis_contents -= our_mask
 	lighting_mask_holders.Cut()
 	qdel(our_mask)
@@ -121,14 +121,27 @@
 /datum/light_source/proc/update_position()
 	var/turf/new_turf = get_turf(source_atom)
 
+	if(x == new_turf.x && y == new_turf.y && z == new_turf.z)
+		return
+
+	var/old_x = x
+	var/old_y = y
+	var/old_z = z
+
 	//Remove old source
-	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] -= src
+	LAZYREMOVE(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
 
 	//Add new
 	x = new_turf.x
 	y = new_turf.y
 	z = new_turf.z
-	SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE] += src
+	LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
 
 	//Find our containing atom.
 	find_containing_atom()
+
+	//Calculate shadows when moved
+	our_mask.calculate_lighting_shadows()
+
+	//Tell all viewers to move the light
+	SEND_SIGNAL(src, COMSIG_LIGHT_SOURCE_MOVED, old_x, old_y, old_z)

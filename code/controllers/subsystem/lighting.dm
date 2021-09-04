@@ -1,7 +1,7 @@
 //The index of light sources in the big world list
-#define LIGHT_SOURCE "source"
+#define LIGHT_SOURCE 1
 //The index of light viewers
-#define LIGHT_VIEWER "viewer"
+#define LIGHT_VIEWER 2
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
@@ -17,12 +17,14 @@ SUBSYSTEM_DEF(lighting)
 	var/total_calculations = list()
 	var/total_time_spent_processing = list()
 
+	//Assoc list
+	//Key = holder
+	//Value = client
+	var/list/deferred_viewer_inits = list()
+
 	var/started = FALSE
 	var/list/sources_that_need_updating = list()
 	var/list/light_sources = list()
-
-	//A list of all light mask holders
-	var/list/light_mask_holders = list()
 
 	//4 dimensional array containing lists of light sources.
 	//light_source_grid[z][x][y][LIGHT_SOURCE] = list()
@@ -35,7 +37,6 @@ SUBSYSTEM_DEF(lighting)
 	cust["total_shadow_calculations"] = total_shadow_calculations
 	cust["sources_that_need_updating"] = length(sources_that_need_updating)
 	cust["light_sources"] = length(light_sources)
-	cust["light_mask_holders"] = length(light_mask_holders)
 	cust["queued_shadow_updates"] = length(queued_shadow_updates)
 	.["custom"] = cust
 
@@ -52,6 +53,10 @@ SUBSYSTEM_DEF(lighting)
 		setup_initial_sources()
 		to_chat(world, "<span class='boldannounce'>Initial lighting conditions built successfully in [TICK_USAGE_TO_MS(timer)]ms.</span>")
 		initialized = TRUE
+		for(var/atom/movable/lighting_mask_holder/holder as() in deferred_viewer_inits)
+			var/client/C = deferred_viewer_inits[holder]
+			holder.assign(C)
+		deferred_viewer_inits = null
 	fire(FALSE, TRUE)
 	. = ..()
 
@@ -62,7 +67,6 @@ SUBSYSTEM_DEF(lighting)
 /datum/controller/subsystem/lighting/Recover()
 	initialized = SSlighting.initialized
 	light_source_grid = SSlighting.light_source_grid
-	light_mask_holders = SSlighting.light_mask_holders
 	..()
 
 //===============
@@ -76,7 +80,7 @@ SUBSYSTEM_DEF(lighting)
 			var/list/y_things
 			for(var/y in 1 to world.maxy)
 				//Add an empty list
-				y_things += list(list(LIGHT_SOURCE = list(), LIGHT_VIEWER = list()))
+				y_things += list(list(LIGHT_SOURCE = null, LIGHT_VIEWER = null))
 			x_things += list(y_things)
 		light_source_grid += list(x_things)
 
@@ -86,7 +90,7 @@ SUBSYSTEM_DEF(lighting)
 		var/list/y_things
 		for(var/y in 1 to world.maxy)
 			//Add an empty list
-			y_things += list(list(LIGHT_SOURCE = list(), LIGHT_VIEWER = list()))
+			y_things += list(list(LIGHT_SOURCE = null, LIGHT_VIEWER = null))
 		x_things += list(y_things)
 	light_source_grid += list(x_things)
 

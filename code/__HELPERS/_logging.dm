@@ -185,6 +185,9 @@
 /proc/log_query_debug(text)
 	WRITE_LOG(GLOB.query_debug_log, "SQL: [text]")
 
+/proc/log_lighting(text)
+	WRITE_LOG(GLOB.lighting_log, text)
+
 /proc/log_job_debug(text)
 	if (CONFIG_GET(flag/log_job_debug))
 		WRITE_LOG(GLOB.world_job_debug_log, "JOB: [text]")

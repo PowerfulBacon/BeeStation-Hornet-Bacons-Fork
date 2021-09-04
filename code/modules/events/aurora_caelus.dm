@@ -24,7 +24,6 @@
 /datum/round_event/aurora_caelus/start()
 	for(var/area/space/nearstation/area in GLOB.sortedAreas)
 		var/area/A = area
-		var/number = 0
 		for(var/turf/open/space/S in A)
 			S.set_light(7, S.light_power * 0.5, aurora_colors[1])
 			CHECK_TICK
@@ -34,7 +33,7 @@
 		aurora_progress++
 		var/aurora_color = aurora_colors[aurora_progress]
 		for(var/area/space/nearstation/area in GLOB.sortedAreas)
-			for(var/turf/open/space/S in A)
+			for(var/turf/open/space/S in area)
 				if(S.light_range)
 					S.fade_light(aurora_color, 50)
 				CHECK_TICK

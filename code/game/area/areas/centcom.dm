@@ -35,7 +35,6 @@
 /area/centcom/supplypod
 	name = "Supplypod Facility"
 	icon_state = "supplypod"
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /area/centcom/supplypod/podStorage
 	name = "Supplypod Storage"
@@ -87,12 +86,10 @@
 /area/tdome/arena
 	name = "Thunderdome Arena"
 	icon_state = "thunder"
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /area/tdome/arena_source
 	name = "Thunderdome Arena Template"
 	icon_state = "thunder"
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /area/tdome/tdome1
 	name = "Thunderdome (Team 1)"

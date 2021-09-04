@@ -16,6 +16,7 @@
 #define COMSIG_GLOB_PRE_RANDOM_EVENT "!pre_random_event"
 	/// Do not allow this random event to continue.
 	#define CANCEL_PRE_RANDOM_EVENT (1<<0)
+#define COMSIG_GLOB_NEW_LIGHT_SOURCE "!new_source"				//! A new light source was created: (datum/light_source)
 
 /// Signifies that this proc is used to handle signals.
 /// Every proc you pass to RegisterSignal must have this.
@@ -36,6 +37,8 @@
 /// fires on the target datum when an element is attached to it  (/datum/element)
 #define COMSIG_ELEMENT_DETACH "element_detach"
 
+// /datum/light_source signals
+#define COMSIG_LIGHT_SOURCE_MOVED "lightsource_moved"			//! Called when a light source is moved (/datum/light_source, x, y, z)
 
 // /atom signals
 #define COMSIG_ATOM_CREATED "atom_created"						///from base of atom/proc/Initialize(): sent any time a new atom is created

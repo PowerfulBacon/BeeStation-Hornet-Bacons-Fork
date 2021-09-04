@@ -4,7 +4,6 @@
 	name = "Snowdin"
 	icon_state = "awaycontent1"
 	requires_power = FALSE
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /area/awaymission/snowdin/outside
 	name = "Snowdin Tundra Plains"
@@ -16,7 +15,6 @@
 	name = "Snowdin Outpost"
 	icon_state = "awaycontent2"
 	requires_power = TRUE
-	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 
 /area/awaymission/snowdin/post/medbay
 	name = "Snowdin Outpost - Medbay"
@@ -98,12 +96,10 @@
 /area/awaymission/snowdin/igloo
 	name = "Snowdin Igloos"
 	icon_state = "awaycontent14"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 
 /area/awaymission/snowdin/cave
 	name = "Snowdin Caves"
 	icon_state = "awaycontent15"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 
 /area/awaymission/snowdin/cave/cavern
 	name = "Snowdin Depths"
@@ -122,7 +118,6 @@
 /area/awaymission/snowdin/dungeon1
 	name = "Snowdin Depths"
 	icon_state = "awaycontent17"
-	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 
 /area/awaymission/snowdin/sekret
 	name = "Snowdin Operations"

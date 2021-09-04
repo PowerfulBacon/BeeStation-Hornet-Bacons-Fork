@@ -4,42 +4,236 @@
  * This holds images that contain light masks in their vis contents.
  * This allows light masks to be rendered even when out of view, without using the laggy render calculation that comes with disabling TILE_BOUND
  * This simple trick makes the entire lighting feasable, without it, it would be a laggy mess.
+ *
+ * REFERENCE DIRECTORY:
+ * Client > Lighting Mask Holder > Source > Mask
+ *          Lighting Mask Holder > Mask
+ *          Lighting Mask Holder > Client
+ * Masks can never be deleted unless the source is deleted.
+ * Upon source deletion, we need to clear the mask from our referenced things to avoid hard dels.
  */
 
-/obj/effect/lighting_mask_holder
+/atom/movable/lighting_mask_holder
 	name = "light mask holder lol"
 	anchored = TRUE
 	appearance_flags = TILE_BOUND
 	glide_size = INFINITY
+	//Current position of this viewing object
+	var/mask_x
+	var/mask_y
+	var/mask_z
+	//The client that owns this
 	var/client/owner
-	var/list/contained_images = list()
-	var/list/referenced_masks = list()
-	var/atom/movable/contained_atom
+	//The top level atom we are contained within
 	var/atom/containing_atom
+	//The images we are holding
+	//Assoc list
+	//Key = source
+	//Value = Image
+	var/list/sources_visible = list()
 
-/obj/effect/lighting_mask_holder/Initialize(loc, client/owner)
-	. = ..()
-	if(owner == null)
-		CRASH("Lighting mask holder initialized with no client.")
-	SSlighting.light_mask_holders += src
-	src.owner = owner
+/atom/movable/lighting_mask_holder/proc/assign(client/C)
+	if(!SSlighting.initialized)
+		//Defer initialization
+		SSlighting.deferred_viewer_inits[src] = C
+		log_lighting("Deferred initialization of [C]'s holder until SSlighting initialization.")
+		return
+	if(!C)
+		log_lighting("lighting mask holder initialized without a client!")
+		message_admins("lighting mask holder initialized without a client!")
+		CRASH("lighting mask holder initialized without a client!")
+	//Set position
+	var/turf/T = get_turf(src)
+	if(T)
+		mask_x = T.x
+		mask_y = T.y
+		mask_z = T.z
+	//Owner
+	owner = C
+	//Get contained atom
 	containing_atom = get_containing_atom()
 	change_contained_atom(null, containing_atom)
-	//Add any light masks that are initialy in range
-	//TODO: Add when a light source is created
-	var/list/L = get_sources_in_range()
-	for(var/a in L)
-		if(!(a in referenced_masks))
-			display_light_mask(a)
+	//Register global light created signal
+	RegisterSignal(SSdcs, COMSIG_GLOB_NEW_LIGHT_SOURCE, .proc/light_source_created)
+	//Initialize a post-login callback for tracking the new mobs
+	owner.player_details.post_login_callbacks += CALLBACK(src, .proc/client_mob_changed)
+	//Add ourselves to the light viewer list
+	if(mask_x && mask_y && mask_z)
+		LAZYADD(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
+		log_lighting("New lighting viewer ([owner]) created at [mask_x], [mask_y], [mask_z]")
+	else
+		log_lighting("New lighting viewer ([owner]) created in nullspace.")
 
-/obj/effect/lighting_mask_holder/Destroy(force)
-	for(var/image/I as() in contained_images)
+/atom/movable/lighting_mask_holder/Destroy(force)
+	log_lighting("Lighting viewer beloning to [owner] destroyed.")
+	owner = null
+	containing_atom = null
+	for(var/source in sources_visible)
+		var/image/I = sources_visible[source]
+		//Cut the vis contents of images
 		I.vis_contents.Cut()
-	//TODO: harddels lol
-	SSlighting.light_mask_holders -= src
+	//Cut the list of visible sources
+	sources_visible.Cut()
+	//Remove ourself from the light viewer list
+	if(mask_x && mask_y && mask_z)
+		LAZYREMOVE(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
 	. = ..()
 
-/obj/effect/lighting_mask_holder/proc/get_containing_atom()
+//=========================
+// Login Callbacks
+//=========================
+
+/atom/movable/lighting_mask_holder/proc/client_mob_changed()
+	var/new_container = get_containing_atom()
+	change_contained_atom(containing_atom, new_container)
+	containing_atom = new_container
+	log_lighting("Client [owner] changed mob. Updating light viewer.")
+
+//=========================
+// SIGNAL HANDLERS
+//=========================
+
+/atom/movable/lighting_mask_holder/proc/light_source_moved(datum/light_source/source, old_x, old_y, old_z)
+	SIGNAL_HANDLER
+	if(old_z != source.z)
+		stop_rendering_source(source)
+		return
+	var/delta_x = (source.x - old_x) * world.icon_size
+	var/delta_y = (source.y - old_y) * world.icon_size
+	var/image/I = sources_visible[source]
+	I.pixel_x += delta_x
+	I.pixel_y += delta_y
+	//If the image moved out of view, stop viewing it.
+	if(!is_source_in_view(source))
+		stop_rendering_source(source)
+
+//Starts rendering a light source
+/atom/movable/lighting_mask_holder/proc/light_source_created(datum/source, datum/light_source/created_source)
+	SIGNAL_HANDLER
+	if(is_source_in_view(created_source))
+		start_rendering_source(created_source)
+
+//Remove a light source from being rendered
+/atom/movable/lighting_mask_holder/proc/light_source_destroyed(datum/light_source/destroyed_source)
+	SIGNAL_HANDLER
+	stop_rendering_source(destroyed_source)
+
+//=========================
+// START/STOP RENDERING
+//=========================
+
+//Starts rendering a light source
+/atom/movable/lighting_mask_holder/proc/start_rendering_source(datum/light_source/rendering_source)
+	if(sources_visible[rendering_source])
+		CRASH("Attempted to start rendering a light source already being rendered.")
+	if(!rendering_source.our_mask)
+		CRASH("Attempted to start rendering a light source with a null mask.")
+	//Create the image that will hold the light source's mask
+	var/image/render_image = image(loc = loc, layer = LIGHTING_IMAGE_LAYER)
+	//We can't put atoms in the clients.images unfortunately.
+	//However we can put the atom in the vis_contents of an image and then stick that image in client.images!
+	render_image.vis_contents += rendering_source.our_mask
+	//Apply a pixel offset so the light renders in the correct position
+	var/delta_x = rendering_source.x - x
+	var/delta_y = rendering_source.y - y
+	//Apply the shift
+	render_image.pixel_x = delta_x * world.icon_size
+	render_image.pixel_y = delta_y * world.icon_size
+	//Apply the image to the client's images
+	owner.images += render_image
+	sources_visible[rendering_source] = render_image
+	//Begin tracking for source deletion
+	RegisterSignal(rendering_source, COMSIG_PARENT_QDELETING, .proc/light_source_destroyed)
+	//Track for light source movements
+	RegisterSignal(rendering_source, COMSIG_LIGHT_SOURCE_MOVED, .proc/light_source_moved)
+	log_lighting("[owner]'s light viewer began rendering light source at [rendering_source.x],[rendering_source.y],[rendering_source.z]")
+
+//Stops rendering a light source
+/atom/movable/lighting_mask_holder/proc/stop_rendering_source(datum/light_source/source)
+	//Stop tracking for deleted light sources.
+	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_LIGHT_SOURCE_MOVED)
+	if(sources_visible[source])
+		//Remove the image from the client
+		var/image/I = sources_visible[source]
+		I.vis_contents.Cut()
+		owner.images -= I
+		//Remove the source from our list
+		sources_visible.Remove(source)
+	log_lighting("[owner]'s light viewer stopped rendering light source at [source.x],[source.y],[source.z]")
+
+//=========================
+// Movement handling
+//=========================
+
+/atom/movable/lighting_mask_holder/Moved(atom/OldLoc, direct)
+	. = ..()
+	//Move the light mask
+	//Remove from the old position
+	if(mask_x && mask_y && mask_z)
+		LAZYREMOVE(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
+	var/old_x = mask_x
+	var/old_y = mask_y
+	var/old_z = mask_z
+	mask_x = loc.x
+	mask_y = loc.y
+	mask_z = loc.z
+	//Add to the new position
+	if(mask_x && mask_y && mask_z)
+		LAZYADD(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
+	//Translate all lights
+	update_contained_images(old_x, old_y, old_z)
+
+//=========================
+// MOVEMENT RENDERING UPDATES
+//=========================
+
+/atom/movable/lighting_mask_holder/proc/is_source_in_view(datum/light_source/source_in_view)
+	//Check for nullspace and to make sure both sources are on the same z-level.
+	if(!mask_z || mask_z != source_in_view.z)
+		return FALSE
+	//TODO: Replace world.view with client.view.
+	var/list/view_size = getviewsize(world.view)
+	//Get the view width and height and floor it to get a view radius.
+	//    v Client
+	//####o####   <- World
+	//432101234   <- Distance from client
+	var/view_width = round(view_size[1] / 2)
+	var/view_height=  round(view_size[2] / 2)
+	//Determine if the source is in view
+	var/delta_x = abs(mask_x - source_in_view.x)
+	var/delta_y = abs(mask_y - source_in_view.y)
+	//Determine range limit
+	var/range_limit_x = view_width + source_in_view.light_range
+	var/range_limit_y = view_height + source_in_view.light_range
+	//Return TRUE if delta x and delta y are smaller than the range limit
+	return delta_x <= range_limit_x && delta_y <= range_limit_y
+
+/atom/movable/lighting_mask_holder/proc/update_contained_images(old_x, old_y, old_z)
+	//Completely recalculate on changed Z
+	if(old_z != mask_z)
+		//Stop rendering all light sources
+		for(var/datum/light_source/source as() in sources_visible)
+			stop_rendering_source(source)
+		//TODO: Render new light sources
+		return
+	var/delta_x = (old_x - mask_x) * world.icon_size
+	var/delta_y = (old_y - mask_y) * world.icon_size
+	for(var/datum/light_source/source as() in sources_visible)
+		var/image/I = sources_visible[source]
+		I.loc = loc
+		I.pixel_x += delta_x
+		I.pixel_y += delta_y
+		//If the image moved out of view, stop viewing it.
+		if(!is_source_in_view(source))
+			stop_rendering_source(source)
+
+//=========================
+// MOVEMENT TRACK HANDLING
+//=========================
+
+//Locate the top level atom that we are contained within.
+/atom/movable/lighting_mask_holder/proc/get_containing_atom()
 	var/sanity = 20
 	var/atom/parent = owner.mob
 	while(sanity && parent?.loc && !isturf(parent.loc))
@@ -47,83 +241,26 @@
 		sanity --
 	return parent
 
-/obj/effect/lighting_mask_holder/proc/loc_changed()
-	if(contained_atom)
-		forceMove(get_turf(contained_atom))
+/atom/movable/lighting_mask_holder/proc/loc_changed()
+	if(containing_atom)
+		forceMove(get_turf(containing_atom))
 	else if(owner)
 		forceMove(get_turf(owner.mob))
 	else
 		CRASH("Lighting mask holder has no client in loc_changed.")
 	//No contained atom, or the contained atom was put inside something
 	var/turf/our_turf = get_turf(src)
-	var/turf/their_turf = contained_atom ? get_turf(contained_atom) : null
-	if(their_turf != our_turf || !isturf(contained_atom.loc))
+	var/turf/their_turf = containing_atom ? get_turf(containing_atom) : null
+	if(their_turf != our_turf || !isturf(containing_atom.loc))
 		var/atom/containing_thing = get_containing_atom()
 		if(containing_thing != containing_atom)
 			change_contained_atom(containing_atom, containing_thing)
 			containing_atom = containing_thing
 
-/obj/effect/lighting_mask_holder/proc/change_contained_atom(atom/oldA, atom/newA)
+//The mob, or the thing containing our mob changed location.
+//Register signal with the new top level atom.
+/atom/movable/lighting_mask_holder/proc/change_contained_atom(atom/oldA, atom/newA)
 	if(oldA)
 		UnregisterSignal(oldA, COMSIG_MOVABLE_MOVED)
-	RegisterSignal(newA, COMSIG_MOVABLE_MOVED, .proc/loc_changed)
-
-//Holds the holder for the holder of the lighting mask.
-/obj/effect/lighting_mask_holder/Moved(atom/OldLoc, Dir)
-	. = ..()
-	//Step 0:
-	check_new_sources()
-	//Step 1:
-	//Translate all contained images.
-	//Remove any light masks that have moved out of range
-	update_contained_images(OldLoc)
-
-/obj/effect/lighting_mask_holder/proc/check_new_sources()
-	//Add any light masks that have moved into range.
-	var/list/L = get_sources_in_range()
-	for(var/a in L)
-		if(!(a in referenced_masks))
-			display_light_mask(a)
-
-/obj/effect/lighting_mask_holder/proc/get_sources_in_range()
-	var/list/check_range = getviewsize(world.view, 0, 0)
-	var/list/all_lighting_sources = list()
-	var/turf/T = get_turf(src)
-	for(var/x in max(T.x - check_range[1], 1) to min(T.x + check_range[1], world.maxx))
-		for(var/y in max(T.y - check_range[2], 1) to min(T.y + check_range[2], world.maxy))
-			//Add all sources
-			all_lighting_sources += SSlighting.light_source_grid[T.z][x][y][LIGHT_SOURCE]
-	return all_lighting_sources
-	//message_admins("Lighting mask holder moved: There are now [all_lighting_sources.len] sources in view.")
-
-/obj/effect/lighting_mask_holder/proc/update_contained_images(atom/OldLoc)
-	var/list/check_range = getviewsize(world.view, 1, 1)
-	var/turf/old_turf = get_turf(OldLoc)
-	var/turf/T = get_turf(src)
-	var/delta_x = (old_turf.x - T.x) * world.icon_size
-	var/delta_y = (old_turf.y - T.y) * world.icon_size
-	for(var/image/I as() in contained_images)
-		I.loc = loc
-		I.pixel_x += delta_x
-		I.pixel_y += delta_y
-		//If the image moved out of view, stop viewing it.
-		if(abs(I.pixel_x) > (check_range[1] * world.icon_size) || abs(I.pixel_y) > (check_range[2] * world.icon_size))
-			contained_images -= I
-			owner.images -= I
-			qdel(I)
-
-/obj/effect/lighting_mask_holder/proc/display_light_mask(datum/light_source/held_mask)
-	//So we make the holder and put it on the turf of the holder's holder's holder
-	//Then we shift it by pixel x and pixel y
-	var/image/light_mask_holder_holder = image(loc = loc, layer = LIGHTING_SHADOW_LAYER)
-	//IMAGES CAN HAVE VIS_CONTENTS WHAT! <-- my reaction when I found this out
-	light_mask_holder_holder.vis_contents += held_mask.our_mask
-	//Shift it accordingly
-	var/turf/whereweat = get_turf(src)
-	var/delta_x = held_mask.x - whereweat.x
-	var/delta_y = held_mask.y - whereweat.y
-	light_mask_holder_holder.pixel_x = delta_x * world.icon_size
-	light_mask_holder_holder.pixel_y = delta_y * world.icon_size
-	contained_images += light_mask_holder_holder
-	owner.images += light_mask_holder_holder
-	referenced_masks += held_mask
+	if(newA)
+		RegisterSignal(newA, COMSIG_MOVABLE_MOVED, .proc/loc_changed)

@@ -15,13 +15,12 @@
 #define LIGHTING_ICON 'icons/effects/lighting_object.dmi' //! icon used for lighting shading effects
 #define LIGHTING_ICON_BIG 'icons/effects/lighting_object_big.dmi' //! icon used for lighting shading effects
 
+#define BULLET_FLASH_POWER MAXIMUM_INTENSITY
+
 #define MAXIMUM_INTENSITY 22
 
 #define BASE_LIGHTING_STARLIGHT 80
 #define BASE_LIGHTING_ALPHA 180
-
-//TODO: Lighting: Remove this
-#define IS_DYNAMIC_LIGHTING(A) 1
 
 #define ALPHA_TO_INTENSITY(alpha) (-(((CLAMP(alpha, 0, 22) - 22) / 6) ** 4) + 255)
 

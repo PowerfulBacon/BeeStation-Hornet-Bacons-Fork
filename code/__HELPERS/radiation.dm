@@ -8,7 +8,6 @@
 		/mob/living/simple_animal/revenant,
 		/obj/effect,
 		/obj/docking_port,
-		/atom/movable/lighting_object,
 		/obj/item/projectile,
 		/obj/structure/chisel_message,
 		/atom/movable/lighting_mask_holder,
