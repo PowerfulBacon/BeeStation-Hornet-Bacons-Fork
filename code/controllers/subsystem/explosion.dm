@@ -211,6 +211,9 @@ SUBSYSTEM_DEF(explosions)
 		flash_range = min(GLOB.MAX_EX_FLASH_RANGE * cap_multiplier, flash_range)
 		flame_range = min(GLOB.MAX_EX_FLAME_RANGE * cap_multiplier, flame_range)
 
+	//Flash Lighting
+	epicenter.flash_lighting_fx(14, 100, LIGHT_COLOR_FIRE, 6)
+
 	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flame_range)
 	var/started_at = REALTIMEOFDAY
 	if(adminlog)

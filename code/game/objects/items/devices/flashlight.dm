@@ -12,6 +12,7 @@
 	slot_flags = ITEM_SLOT_BELT
 	materials = list(/datum/material/iron=50, /datum/material/glass=20)
 	actions_types = list(/datum/action/item_action/toggle_light)
+	light_mask_type = /atom/movable/lighting_mask/conical
 	var/on = FALSE
 	var/brightness_on = 4 //range of light when on
 	var/flashlight_power = 1 //strength of the light when on
@@ -223,6 +224,7 @@
 	flags_1 = CONDUCT_1
 	materials = list()
 	on = TRUE
+	light_mask_type = /atom/movable/lighting_mask
 
 
 // green-shaded desk lamp
@@ -265,6 +267,7 @@
 	heat = 1000
 	light_color = LIGHT_COLOR_FLARE
 	grind_results = list(/datum/reagent/sulfur = 15)
+	light_mask_type = /atom/movable/lighting_mask/flicker
 
 /obj/item/flashlight/flare/Initialize()
 	. = ..()
@@ -345,6 +348,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on
+	light_mask_type = /atom/movable/lighting_mask/flicker
 
 /obj/item/flashlight/lantern/heirloom_moth
 	name = "old lantern"
@@ -438,6 +442,7 @@
 	grind_results = list(/datum/reagent/phenol = 15, /datum/reagent/hydrogen = 10, /datum/reagent/oxygen = 5) //Meth-in-a-stick
 	var/burn_pickup = FALSE	//If true, fuel will only decrease after being picked up or used in hand (Useful for mapping)
 	var/fuel = 0 // How many seconds of fuel we have left
+	light_mask_type = /atom/movable/lighting_mask/flicker
 
 /obj/item/flashlight/glowstick/Initialize()
 	fuel = rand(3200, 4000)
@@ -571,6 +576,7 @@
 	anchored = TRUE
 	var/range = null
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	light_mask_type = /atom/movable/lighting_mask/rotating
 
 /obj/item/flashlight/flashdark
 	name = "flashdark"
@@ -583,7 +589,7 @@
 /obj/item/flashlight/eyelight
 	name = "eyelight"
 	desc = "This shouldn't exist outside of someone's head, how are you seeing this?"
-	brightness_on = 15
+	brightness_on = 8
 	flashlight_power = 1
 	flags_1 = CONDUCT_1
 	item_flags = DROPDEL

@@ -5,6 +5,9 @@
 	desc = "A .357 bullet casing."
 	caliber = "357"
 	projectile_type = /obj/item/projectile/bullet/a357
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 
 /obj/item/ammo_casing/a357/match
 	name = ".357 match bullet casing"
@@ -19,6 +22,9 @@
 	desc = "A 7.62x38mmR bullet casing."
 	caliber = "n762"
 	projectile_type = /obj/item/projectile/bullet/n762
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 
 // .38 (Detective's Gun)
 
@@ -27,6 +33,9 @@
 	desc = "A .38 bullet casing."
 	caliber = "38"
 	projectile_type = /obj/item/projectile/bullet/c38
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 
 /obj/item/ammo_casing/c38/trac
 	name = ".38 TRAC bullet casing"
@@ -70,3 +79,6 @@
 
 /obj/item/ammo_casing/caseless/mime/lethal
 	projectile_type = /obj/item/projectile/bullet/c38/mime_lethal
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE

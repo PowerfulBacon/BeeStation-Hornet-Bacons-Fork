@@ -14,6 +14,7 @@
 	light_power = 0.7
 	light_range = 15
 	light_color = rgb(255, 0, 0)
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	gender = FEMALE
 	var/clashing = FALSE //If Nar'Sie is fighting Ratvar
 	var/next_attack_tick

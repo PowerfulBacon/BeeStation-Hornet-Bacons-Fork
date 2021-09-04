@@ -25,7 +25,6 @@
 /area/awaymission/factory/villageafter
 	name = "The Village"
 	ambientsounds = list('sound/ambience/seag1.ogg', 'sound/ambience/seag2.ogg', 'sound/ambience/seag2.ogg', 'sound/ambience/ambiodd.ogg', 'sound/ambience/ambimystery.ogg', 'sound/ambience/ambiearth.ogg', 'sound/ambience/ambiwind.ogg', 'sound/ambience/ambimine.ogg')
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	requires_power = FALSE
 
 /area/awaymission/factory/villageafter/church
@@ -61,7 +60,6 @@
 	always_unpowered = TRUE
 
 /area/awaymission/factory/clownplanet
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	ambientsounds = list('sound/spookoween/scary_horn3.ogg','sound/spookoween/scary_horn.ogg','sound/spookoween/scary_horn2.ogg','sound/spookoween/scary_clown_appear.ogg')
 	mood_bonus = 3
 	mood_message = "<span class='nicegreen'>I hate this!\n</span>"
@@ -146,7 +144,6 @@
 
 /area/awaymission/factory/villageduring
 	name = "The old village"
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	requires_power = FALSE
 	ambientsounds = list('sound/ambience/ambidanger.ogg','sound/ambience/ambidanger2.ogg','sound/ambience/ambiearthduring.ogg','sound/ambience/ambiwind.ogg','sound/ambience/ambimine.ogg')
 
@@ -181,7 +178,6 @@
 
 /area/awaymission/factory/transition
 	name = "Beyond the time"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	ambientsounds = list('sound/ambience/shipambience.ogg','sound/ambience/ambiatmos.ogg','sound/ambience/antag/malf.ogg','sound/ambience/signal.ogg','sound/ambience/ambimalf.ogg')
 
 //ITEMS//

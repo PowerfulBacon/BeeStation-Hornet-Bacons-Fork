@@ -6,6 +6,9 @@
 	icon_state = "762-casing"
 	caliber = "a762"
 	projectile_type = /obj/item/projectile/bullet/a762
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 
 /obj/item/ammo_casing/a762/enchanted
 	projectile_type = /obj/item/projectile/bullet/a762_enchanted
@@ -17,6 +20,9 @@
 	desc = "A 5.56mm bullet casing."
 	caliber = "a556"
 	projectile_type = /obj/item/projectile/bullet/a556
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 
 // 40mm (Grenade Launcher)
 
@@ -26,3 +32,6 @@
 	caliber = "40mm"
 	icon_state = "40mmHE"
 	projectile_type = /obj/item/projectile/bullet/a40mm
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE

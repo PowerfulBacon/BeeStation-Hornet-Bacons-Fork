@@ -78,10 +78,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	for(var/atom/movable/AM in src)
 		Entered(AM)
 
-	var/area/A = loc
-	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
-		add_overlay(/obj/effect/fullbright)
-
 	if(requires_activation)
 		CALCULATE_ADJACENT_TURFS(src)
 
@@ -101,6 +97,10 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		has_opaque_atom = TRUE
 
 	ComponentInitialize()
+
+	//Bright bright bright
+	add_overlay(/obj/effect/fullbright)
+
 	if(isopenturf(src))
 		var/turf/open/O = src
 		__auxtools_update_turf_temp_info(isspaceturf(get_z_base_turf()) && !O.planetary_atmos)

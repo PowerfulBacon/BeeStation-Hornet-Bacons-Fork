@@ -4,6 +4,9 @@
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	delay = 20
 	e_cost = 25
+	//Plasma flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_PURPLE
 
 /obj/item/ammo_casing/energy/plasma/adv
 	projectile_type = /obj/item/projectile/plasma/adv

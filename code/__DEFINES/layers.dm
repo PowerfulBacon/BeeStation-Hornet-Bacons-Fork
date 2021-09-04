@@ -110,13 +110,14 @@
 #define EMISSIVE_UNBLOCKABLE_RENDER_TARGET "*EMISSIVE_UNBLOCKABLE_PLANE"
 
 #define LIGHTING_PLANE 15
-#define LIGHTING_LAYER 15
+#define LIGHTING_PRIMARY_LAYER 15	//The layer for the main lights of the station
+#define LIGHTING_PRIMARY_DIMMER_LAYER 15.1	//The layer that dims the main lights of the station
+#define LIGHTING_SECONDARY_LAYER 15.5	//The colourful, usually small lights that go on top
+#define LIGHTING_SHADOW_LAYER 16
 #define LIGHTING_RENDER_TARGET "LIGHT_PLANE"
 
-#define RAD_TEXT_LAYER 21
-
-#define ABOVE_LIGHTING_PLANE 16
-#define ABOVE_LIGHTING_LAYER 16
+#define ABOVE_LIGHTING_PLANE 17
+#define ABOVE_LIGHTING_LAYER 17
 #define ABOVE_LIGHTING_RENDER_TARGET "ABOVE_LIGHTING_PLANE"
 
 #define BYOND_LIGHTING_PLANE 18
@@ -134,6 +135,7 @@
 
 //HUD layer defines
 
+#define RAD_TEXT_LAYER 21
 #define FULLSCREEN_PLANE 21
 #define FLASH_LAYER 21
 #define FULLSCREEN_LAYER 21.1

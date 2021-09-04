@@ -9,6 +9,8 @@
 /area/awaymission/snowdin/outside
 	name = "Snowdin Tundra Plains"
 	icon_state = "awaycontent25"
+	base_lighting = "#555b72"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/awaymission/snowdin/post
 	name = "Snowdin Outpost"
@@ -115,7 +117,6 @@
 /area/awaymission/snowdin/base
 	name = "Snowdin Main Base"
 	icon_state = "awaycontent16"
-	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 	requires_power = TRUE
 
 /area/awaymission/snowdin/dungeon1
@@ -126,7 +127,6 @@
 /area/awaymission/snowdin/sekret
 	name = "Snowdin Operations"
 	icon_state = "awaycontent18"
-	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 	requires_power = TRUE
 
 /area/shuttle/snowdin/elevator1

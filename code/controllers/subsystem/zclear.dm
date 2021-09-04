@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(zclear)
 
 /datum/controller/subsystem/zclear/New()
 	. = ..()
-	ignored_atoms = typecacheof(list(/mob/dead, /mob/camera, /mob/dview, /atom/movable/lighting_object, /obj/effect/abstract/mirage_holder))
+	ignored_atoms = typecacheof(list(/mob/dead, /mob/camera, /mob/dview, /atom/movable/lighting_mask_holder, /obj/effect/abstract/mirage_holder))
 
 /datum/controller/subsystem/zclear/fire(resumed)
 	if(times_fired % CHECK_ZLEVEL_TICKS == 0)

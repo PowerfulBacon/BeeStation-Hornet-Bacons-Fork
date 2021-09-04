@@ -17,10 +17,36 @@
 	var/list/icon/current = list() //the current hud icons
 	var/vision_correction = 0 //does wearing these glasses correct some of our vision defects?
 	var/glass_colour_type //colors your vision when worn
+	//Night vision
+	var/night_vision_colour
+	var/night_vision_range
 
 /obj/item/clothing/glasses/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] is stabbing \the [src] into [user.p_their()] eyes! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return BRUTELOSS
+
+/obj/item/clothing/glasses/equipped(mob/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_EYES)
+		create_night_vision(user)
+	else
+		stop_night_vision()
+
+/obj/item/clothing/glasses/dropped(mob/user)
+	. = ..()
+	stop_night_vision()
+
+/obj/item/clothing/glasses/proc/create_night_vision(mob/user)
+	if(night_vision_range && night_vision_colour)
+		set_light(night_vision_range, 10, night_vision_colour, /atom/movable/lighting_mask/personal_light)
+		var/atom/movable/lighting_mask/personal_light/plight = light.our_mask
+		plight.give_owner(user)
+
+/obj/item/clothing/glasses/proc/stop_night_vision()
+	if(!light || !night_vision_range || !night_vision_colour)
+		return
+	var/atom/movable/lighting_mask/personal_light/plight = light.our_mask
+	plight.give_owner(null)
 
 /obj/item/clothing/glasses/examine(mob/user)
 	. = ..()
@@ -74,7 +100,8 @@
 	icon_state = "nvgmeson"
 	item_state = "nvgmeson"
 	darkness_view = 8
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	night_vision_colour = "#00FF00"
+	night_vision_range = 9
 	glass_colour_type = /datum/client_colour/glass_colour/green
 
 /obj/item/clothing/glasses/meson/gar
@@ -122,8 +149,33 @@
 	icon_state = "night"
 	item_state = "glasses"
 	darkness_view = 8
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	night_vision_colour = "#00FF00"
+	night_vision_range = 9
 	glass_colour_type = /datum/client_colour/glass_colour/green
+
+/obj/item/clothing/glasses/night/disco
+	name = "disco night vision glasses"
+	desc = "Bring the party wherever you go."
+	clothing_flags = SCAN_REAGENTS
+
+/obj/item/clothing/glasses/night/disco/equipped(mob/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_EYES)
+		START_PROCESSING(SSobj, src)
+		if(ishuman(user))
+			ADD_TRAIT(user, TRAIT_BOOZE_SLIDER, CLOTHING_TRAIT)
+	else
+		STOP_PROCESSING(SSobj, src)
+		REMOVE_TRAIT(user, TRAIT_BOOZE_SLIDER, CLOTHING_TRAIT)
+
+/obj/item/clothing/glasses/night/disco/dropped(mob/user)
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+	REMOVE_TRAIT(user, TRAIT_BOOZE_SLIDER, CLOTHING_TRAIT)
+
+/obj/item/clothing/glasses/night/disco/process()
+	night_vision_colour = "#[random_color()]"
+	fade_light(night_vision_colour, 10)
 
 /obj/item/clothing/glasses/science/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] is tightening \the [src]'s straps around [user.p_their()] neck! It looks like [user.p_theyre()] trying to commit suicide!</span>")

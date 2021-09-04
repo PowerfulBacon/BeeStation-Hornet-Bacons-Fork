@@ -126,6 +126,8 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	pixel_x = -16
 	light_color = LIGHT_COLOR_RED
 	light_range = 3
+	light_color = LIGHT_COLOR_RED
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	anchored = TRUE
 	density = FALSE
 	var/activity = TUMOR_INACTIVE
@@ -340,6 +342,7 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	color = rgb(255,0,0)
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = LIGHT_COLOR_RED
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	var/mob/living/carbon/human/activator = null
 	var/mob/living/simple_animal/hostile/asteroid/elite/ourelite = null
 

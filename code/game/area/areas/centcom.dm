@@ -4,7 +4,6 @@
 /area/centcom
 	name = "CentCom"
 	icon_state = "centcom"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
 	teleport_restriction = TELEPORT_ALLOW_NONE
@@ -79,10 +78,11 @@
 /area/tdome
 	name = "Thunderdome"
 	icon_state = "yellow"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
+	base_lighting = "#ffffff"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/tdome/arena
 	name = "Thunderdome Arena"
@@ -117,7 +117,6 @@
 /area/wizard_station
 	name = "Wizard's Den"
 	icon_state = "yellow"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
 	teleport_restriction = TELEPORT_ALLOW_NONE
@@ -133,6 +132,8 @@
 	area_flags = VALID_TERRITORY | UNIQUE_AREA
 	has_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
+	base_lighting = "#cc89dd"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 //Syndicates
 /area/syndicate_mothership
@@ -144,15 +145,18 @@
 	area_flags = VALID_TERRITORY | UNIQUE_AREA
 	flags_1 = NONE
 	ambience_index = AMBIENCE_DANGER
+	base_lighting = "#555b72"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/syndicate_mothership/control
 	name = "Syndicate Control Room"
 	icon_state = "syndie-control"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
+	base_lighting_alpha = 0
 
 /area/syndicate_mothership/elite_squad
 	name = "Syndicate Elite Squad"
 	icon_state = "syndie-elite"
+	base_lighting_alpha = 0
 
 //CAPTURE THE FLAG
 
@@ -161,6 +165,8 @@
 	icon_state = "yellow"
 	requires_power = FALSE
 	has_gravity = STANDARD_GRAVITY
+	base_lighting = "#ffffff"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/ctf/control_room
 	name = "Control Room A"
@@ -199,6 +205,8 @@
 	teleport_restriction = TELEPORT_ALLOW_CLOCKWORK
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | HIDDEN_AREA
 	ambience_index = AMBIENCE_REEBE
+	base_lighting = "#eed8c4"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/reebe/city_of_cogs
 	name = "Reebe - City of Cogs"

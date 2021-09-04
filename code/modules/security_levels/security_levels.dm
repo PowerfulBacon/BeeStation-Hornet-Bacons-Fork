@@ -45,6 +45,7 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 					if(is_station_level(FA.z))
 						FA.update_icon()
 			if(SEC_LEVEL_RED)
+				var/lowered = FALSE
 				if(GLOB.security_level < SEC_LEVEL_RED)
 					minor_announce(CONFIG_GET(string/alert_red_upto), "Attention! Code red!",1)
 					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
@@ -54,7 +55,11 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 							SSshuttle.emergency.modTimer(0.5)
 				else
 					minor_announce(CONFIG_GET(string/alert_red_downto), "Attention! Code red!")
+					lowered = TRUE
 				GLOB.security_level = SEC_LEVEL_RED
+
+				if(lowered)
+					update_lights()
 
 				for(var/obj/machinery/firealarm/FA in GLOB.machines)
 					if(is_station_level(FA.z))
@@ -74,6 +79,7 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 						FA.update_icon()
 				for(var/obj/machinery/computer/shuttle_flight/pod/pod in GLOB.machines)
 					pod.admin_controlled = 0
+				update_lights()
 		if(level >= SEC_LEVEL_RED)
 			for(var/obj/machinery/door/D in GLOB.machines)
 				if(D.red_alert_access)
@@ -83,6 +89,12 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 		SSnightshift.check_nightshift()
 	else
 		return
+
+/proc/update_lights()
+	set waitfor = FALSE
+	for(var/obj/machinery/light/light in GLOB.machines)
+		light.update()
+		CHECK_TICK
 
 /proc/get_security_level()
 	switch(GLOB.security_level)

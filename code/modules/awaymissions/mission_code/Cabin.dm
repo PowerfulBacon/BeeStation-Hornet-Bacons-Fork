@@ -11,6 +11,8 @@
 	name = "Snow Forest"
 	icon_state = "away"
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	base_lighting = "#555b72"
+	base_lighting_alpha = BASE_LIGHTING_ALPHA
 
 /area/awaymission/cabin/snowforest/sovietsurface
 	name = "Snow Forest"

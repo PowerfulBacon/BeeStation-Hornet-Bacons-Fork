@@ -672,28 +672,22 @@
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_n")
 			I.appearance_flags |= KEEP_APART
 			I.pixel_y = 32
-			set_light(l_range = 2, l_power = 1)
 			add_overlay(I)
 		if(unres_sides & SOUTH)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_s")
 			I.appearance_flags |= KEEP_APART
 			I.pixel_y = -32
-			set_light(l_range = 2, l_power = 1)
 			add_overlay(I)
 		if(unres_sides & EAST)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_e")
 			I.appearance_flags |= KEEP_APART
 			I.pixel_x = 32
-			set_light(l_range = 2, l_power = 1)
 			add_overlay(I)
 		if(unres_sides & WEST)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_w")
 			I.appearance_flags |= KEEP_APART
 			I.pixel_x = -32
-			set_light(l_range = 2, l_power = 1)
 			add_overlay(I)
-	else
-		set_light(0)
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
@@ -705,6 +699,7 @@
 			if(!stat)
 				update_icon(AIRLOCK_DENY)
 				playsound(src,doorDeni,50,0,3)
+				flash_lighting_fx(1.5, 22, LIGHT_COLOR_RED, 4, _flash_times = 3)
 				sleep(6)
 				update_icon(AIRLOCK_CLOSED)
 
@@ -1321,6 +1316,7 @@
 		return
 	if(!operating && density && hasPower() && !(obj_flags & EMAGGED))
 		operating = TRUE
+		flash_lighting_fx(1.6, 1, LIGHT_COLOR_RED, 6)
 		update_icon(AIRLOCK_EMAG, 1)
 		sleep(6)
 		if(QDELETED(src))

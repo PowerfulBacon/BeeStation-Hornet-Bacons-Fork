@@ -20,6 +20,7 @@
 	var/status = FALSE
 	var/lit = FALSE	//on or off
 	light_color = LIGHT_COLOR_FIRE
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	var/operating = FALSE//cooldown
 	var/obj/item/weldingtool/weldtool = null
 	var/obj/item/assembly/igniter/igniter = null

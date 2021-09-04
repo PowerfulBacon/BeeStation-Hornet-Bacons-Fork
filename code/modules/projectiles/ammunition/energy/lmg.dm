@@ -4,3 +4,6 @@
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
 	e_cost = 20
 	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE

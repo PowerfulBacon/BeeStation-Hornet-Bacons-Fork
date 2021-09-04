@@ -66,6 +66,7 @@ Difficulty: Hard
 							   /datum/action/innate/megafauna_attack/chaser_swarm,
 							   /datum/action/innate/megafauna_attack/cross_blasts,
 							   /datum/action/innate/megafauna_attack/blink_spam)
+	light_color = LIGHT_COLOR_PURPLE
 
 	var/burst_range = 3 //range on burst aoe
 	var/beam_range = 5 //range on cross blast beams
@@ -500,7 +501,8 @@ Difficulty: Hard
 /obj/effect/temp_visual/hierophant/squares
 	icon_state = "hierophant_squares"
 	duration = 3
-	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_color = LIGHT_COLOR_PURPLE
+	light_range = MINIMUM_LIGHT_SHADOW_RADIUS
 	randomdir = FALSE
 
 /obj/effect/temp_visual/hierophant/squares/Initialize(mapload, new_caster)
@@ -513,7 +515,8 @@ Difficulty: Hard
 	name = "vortex wall"
 	icon = 'icons/turf/walls/hierophant_wall_temp.dmi'
 	icon_state = "wall"
-	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_color = LIGHT_COLOR_PURPLE
+	light_range = MINIMUM_LIGHT_SHADOW_RADIUS
 	duration = 100
 	smooth = SMOOTH_TRUE
 
@@ -626,7 +629,9 @@ Difficulty: Hard
 /obj/effect/temp_visual/hierophant/blast
 	icon_state = "hierophant_blast"
 	name = "vortex blast"
-	light_range = 2
+	light_color = LIGHT_COLOR_PURPLE
+	light_range = MINIMUM_LIGHT_SHADOW_RADIUS
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	light_power = 2
 	desc = "Get out of the way!"
 	duration = 9
@@ -705,7 +710,8 @@ Difficulty: Hard
 	desc = "A strange beacon, allowing mass teleportation for those able to use it."
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "hierophant_tele_off"
-	light_range = 2
+	light_range = MINIMUM_LIGHT_SHADOW_RADIUS
+	light_color = LIGHT_COLOR_PURPLE
 	layer = LOW_OBJ_LAYER
 	anchored = TRUE
 

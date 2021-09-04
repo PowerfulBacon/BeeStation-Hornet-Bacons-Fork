@@ -551,6 +551,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	w_class = WEIGHT_CLASS_TINY
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
+	light_mask_type = /atom/movable/lighting_mask/flicker
 	var/lit = 0
 	var/fancy = TRUE
 	var/overlay_state

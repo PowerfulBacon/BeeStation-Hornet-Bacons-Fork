@@ -5,6 +5,9 @@
 	desc = "A .50 bullet casing."
 	caliber = ".50"
 	projectile_type = /obj/item/projectile/bullet/p50
+	//Bullet flash
+	flash_power = BULLET_FLASH_POWER
+	flash_colour = LIGHT_COLOR_FIRE
 	icon_state = ".50"
 
 /obj/item/ammo_casing/p50/soporific

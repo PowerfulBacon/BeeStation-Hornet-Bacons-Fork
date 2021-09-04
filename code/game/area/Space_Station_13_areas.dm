@@ -25,7 +25,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "space"
 	requires_power = TRUE
 	always_unpowered = TRUE
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	power_light = FALSE
 	power_equip = FALSE
 	power_environ = FALSE
@@ -34,6 +33,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	ambientmusic = AMBIENCE_SPACE
 	ambient_buzz = null
 	sound_environment = SOUND_AREA_SPACE
+	base_lighting_alpha = BASE_LIGHTING_STARLIGHT
+	base_lighting = "#f3e7f8"
 
 /area/space/nearstation
 	icon_state = "space_near"
@@ -43,7 +44,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "start area"
 	icon_state = "start"
 	requires_power = FALSE
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	has_gravity = STANDARD_GRAVITY
 	ambient_buzz = null
 
@@ -64,7 +64,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	area_flags = UNIQUE_AREA
 
 /area/asteroid/nearstation
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	ambience_index = AMBIENCE_RUINS
 	always_unpowered = FALSE
 	requires_power = TRUE
@@ -735,11 +734,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/solar
 	requires_power = FALSE
-	dynamic_lighting = DYNAMIC_LIGHTING_IFSTARLIGHT
 	area_flags = UNIQUE_AREA
 	flags_1 = NONE
 	ambience_index = AMBIENCE_ENGI
 	sound_environment = SOUND_AREA_SPACE
+	base_lighting_alpha = BASE_LIGHTING_STARLIGHT
+	base_lighting = "#f3e7f8"
 
 /area/solar/fore
 	name = "Fore Solar Array"

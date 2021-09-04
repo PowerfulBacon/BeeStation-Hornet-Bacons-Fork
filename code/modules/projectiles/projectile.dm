@@ -128,6 +128,8 @@
 	var/hit_stunned_targets = FALSE
 
 /obj/item/projectile/Initialize()
+	//Stop displaying light before it initializes
+	light_range = 0
 	. = ..()
 	permutated = list()
 	decayedRange = range
@@ -414,6 +416,8 @@
 		pixel_move(1, FALSE)
 
 /obj/item/projectile/proc/fire(angle, atom/direct_target)
+	//Start showing light
+	set_light(initial(light_range))
 	if(fired_from)
 		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_BEFORE_FIRE, src, original)
 	//If no angle needs to resolve it from xo/yo!
