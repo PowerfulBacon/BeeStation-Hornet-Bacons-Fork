@@ -2,7 +2,7 @@
 	var/name = "undefined"
 	//Mass of the object in solar masses
 	var/mass = 0
-	//Radius of the object in parsecs
+	//Radius of the object in ~~parsecs~~ arbitary space units
 	var/radius = 1
 	//Position of the object (0,0) is the center of the map.
 	//Position is in kilometers
@@ -21,6 +21,8 @@
 	var/stealth = FALSE
 	//Multiplier for velocity
 	var/velocity_multiplier = 1
+	//Do we ignore gravity?
+	var/ignore_gravity = FALSE
 
 	//Delta time updates
 	//Ship translations are smooth so must use a delta time
@@ -104,7 +106,7 @@
 	// GRAVITATIONAL ATTRACTION
 	//===================================
 	//Gravity is not considered while we have just undocked and are at the center of a massive body.
-	if(!collision_ignored)
+	if(!collision_ignored && !ignore_gravity)
 		//Find relevant gravitational bodies.
 		var/list/gravitational_bodies =parent_map.get_relevnant_bodies(src)
 		//Calculate acceleration vector

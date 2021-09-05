@@ -1,8 +1,7 @@
 
 import { clamp } from 'common/math';
 import { pureComponentHooks } from 'common/react';
-import { Component, createRef } from 'inferno';
-import { AnimatedNumber } from './AnimatedNumber';
+import { Component } from 'inferno';
 
 const FPS = 20;
 
