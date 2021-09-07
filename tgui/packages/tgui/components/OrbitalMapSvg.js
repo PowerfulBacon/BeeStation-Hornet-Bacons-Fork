@@ -4,6 +4,14 @@ import { pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
 
 export class OrbitalMapSvg extends Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      singleInstanceObjects: [],
+    };
+  }
+
   render() {
     // SVG Background Style
     const lineStyle = {
@@ -26,6 +34,10 @@ export class OrbitalMapSvg extends Component {
     };
 
     const {
+      singleInstanceObjects,
+    } = this.state;
+
+    const {
       dragStartEvent,
       scaledXOffset,
       scaledYOffset,
@@ -40,8 +52,20 @@ export class OrbitalMapSvg extends Component {
       shuttleTargetY = 0,
       zoomScale,
       shuttleName,
+      created_objects = [],
+      destroyed_objects = [],
       children,
     } = this.props;
+
+    // Create objects
+    for (const created_object in created_objects)
+    {
+      
+    }
+
+    let instancedObjects = singleInstanceObjects;
+
+    let orbitalObjects = map_objects.concat(instancedObjects);
 
     let svgComponent = (
       <svg
@@ -82,7 +106,7 @@ export class OrbitalMapSvg extends Component {
         </defs>
         <rect x="-50%" y="-50%" width="100%" height="100%"
           fill="url(#grid)" />
-        {map_objects.map(map_object => (
+        {orbitalObjects.map(map_object => (
           <>
             <circle
               cx={Math.max(Math.min((map_object.position_x

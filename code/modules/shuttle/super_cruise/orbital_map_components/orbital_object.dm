@@ -1,5 +1,7 @@
 /datum/orbital_object
 	var/name = "undefined"
+	//Unique ID of the orbital object
+	var/unique_id = ""
 	//Mass of the object in solar masses
 	var/mass = 0
 	//Radius of the object in ~~parsecs~~ arbitary space units
@@ -51,6 +53,14 @@
 	//The collision flags we register with
 	var/collision_flags = NONE
 
+	//Single instanced?
+	//If things are singally instanced, they are only transmitted via ui_data with destroy and creation events.
+	//Their position will never be updated.
+	//This will cause huge inaccuracy if something has its velocity changed, so gravity must be ignored.
+	//Even with no velocity changes it could be inaccurate anyway.
+	//Used for non significant stuff like projectiles
+	var/single_instanced = FALSE
+
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
 		src.orbital_map_index = orbital_map_index
@@ -58,6 +68,8 @@
 		src.position = position
 	if(velocity)
 		src.velocity = velocity
+	var/static/created_amount = 0
+	unique_id = "ObjID[++created_amount]"
 	. = ..()
 	//Calculate relevant grav range
 	relevant_gravity_range = sqrt((mass * GRAVITATIONAL_CONSTANT) / MINIMUM_EFFECTIVE_GRAVITATIONAL_ACCEELRATION)
