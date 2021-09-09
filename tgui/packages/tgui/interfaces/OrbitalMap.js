@@ -382,6 +382,8 @@ export const OrbitalMapDisplay = (props, context) => {
     shuttleTargetY = 0,
     update_index = 0,
     interdictionTime = 0,
+    created_objects = [],
+    destroyed_objects = [],
   } = data;
 
   return (
@@ -477,7 +479,10 @@ export const OrbitalMapDisplay = (props, context) => {
             shuttleTargetY={shuttleTargetY}
             dragStartEvent={e => control.handleDragStart(e)}
             zoomScale={zoomScale}
-            shuttleName={shuttleName}>
+            shuttleName={shuttleName}
+            created_objects={created_objects}
+            destroyed_objects={destroyed_objects}
+            currentUpdateIndex={update_index}>
             {control => (
               control.svgComponent
             )}

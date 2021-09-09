@@ -2,6 +2,8 @@
 	var/name = "undefined"
 	//Unique ID of the orbital object
 	var/unique_id = ""
+	//The tick of SSorbits when this was created
+	var/created_at = 0
 	//Mass of the object in solar masses
 	var/mass = 0
 	//Radius of the object in ~~parsecs~~ arbitary space units
@@ -71,6 +73,8 @@
 	var/static/created_amount = 0
 	unique_id = "ObjID[++created_amount]"
 	. = ..()
+	//Created at time
+	created_at = SSorbits.times_fired
 	//Calculate relevant grav range
 	relevant_gravity_range = sqrt((mass * GRAVITATIONAL_CONSTANT) / MINIMUM_EFFECTIVE_GRAVITATIONAL_ACCEELRATION)
 	//Process this

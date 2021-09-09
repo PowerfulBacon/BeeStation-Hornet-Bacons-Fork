@@ -7,9 +7,72 @@ export class OrbitalMapSvg extends Component {
   constructor(props)
   {
     super(props);
+    // Single instance objects is a dictionary
+    // Key = object ID
+    // Value = Object data
     this.state = {
-      singleInstanceObjects: [],
+      singleInstanceObjects: {},
+      tickIndex: -1,
     };
+  }
+
+  dotick()
+  {
+    const { props, state } = this;
+    // Fetch single instanced objects
+    const {
+      singleInstanceObjects,
+      tickIndex,
+    } = state;
+    // Fetch created and destroyed objects
+    const {
+      created_objects = [],
+      destroyed_objects = [],
+      currentUpdateIndex = -1,
+    } = props;
+    // Don't update if we already updated for this tick
+    if (currentUpdateIndex === tickIndex)
+    {
+      return;
+    }
+    // Clone the dictionary
+    let outputInstances = {};
+    Object.assign(outputInstances, singleInstanceObjects);
+    // Find differences in created objects
+    created_objects.forEach(created_object => {
+      // Ignore already made objects
+      if (!(created_object.id in singleInstanceObjects))
+      {
+        // Create the object
+        outputInstances[created_object.id] = created_object;
+      }
+    });
+    // Find differences in destroyed objects
+    destroyed_objects.forEach(destroyed_object => {
+      // Ignore non-existant objects
+      if (destroyed_object.id in singleInstanceObjects)
+      {
+        // Adios mi amigo
+        delete outputInstances[destroyed_object.id];
+      }
+    });
+    // Update state
+    this.setState({
+      singleInstanceObjects: outputInstances,
+      tickIndex: currentUpdateIndex,
+    });
+  }
+
+  componentDidMount() {
+    // Update frequently to catch props
+    // Updates slightly more than the subsystem to not skip frames if
+    // timing is poor or lag or something idk, its protected against
+    // double updates anyway.
+    this.tickUpdate = setInterval(() => this.dotick(), 50);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.tickUpdate);
   }
 
   render() {
@@ -34,7 +97,8 @@ export class OrbitalMapSvg extends Component {
     };
 
     const {
-      singleInstanceObjects,
+      singleInstanceObjects = {},
+      tickIndex,
     } = this.state;
 
     const {
@@ -52,18 +116,26 @@ export class OrbitalMapSvg extends Component {
       shuttleTargetY = 0,
       zoomScale,
       shuttleName,
-      created_objects = [],
-      destroyed_objects = [],
+      currentUpdateIndex,
       children,
     } = this.props;
 
-    // Create objects
-    for (const created_object in created_objects)
-    {
-      
-    }
+    // Fetch values
+    let instancedObjects = [];
 
-    let instancedObjects = singleInstanceObjects;
+    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
+      let ticksSince = currentUpdateIndex - singleInstance.created_at;
+      instancedObjects.push({
+        name: singleInstance.name,
+        position_x: singleInstance.position_x
+          + ticksSince * singleInstance.velocity_x,
+        position_y: singleInstance.position_y
+          + ticksSince * singleInstance.velocity_y,
+        velocity_x: singleInstance.velocity_x,
+        velocity_y: singleInstance.velocity_y,
+        radius: singleInstance.radius,
+      });
+    }
 
     let orbitalObjects = map_objects.concat(instancedObjects);
 

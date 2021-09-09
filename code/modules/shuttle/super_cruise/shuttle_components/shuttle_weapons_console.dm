@@ -15,6 +15,8 @@
 	var/list/attached_weapon_systems = list()
 	//Selected weapon
 	var/selected_weapon_id = ""
+	//Assoc data
+	var/list/assoc_data = list()
 
 /obj/machinery/computer/weapons/Initialize(mapload, obj/item/circuitboard/C)
 	. = ..()
@@ -57,6 +59,10 @@
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
+		//Store user specific data.
+		assoc_data["[REF(user)]"] = list(
+			"active_single_instances" = list(),
+		)
 		ui = new(user, src, "OrbitalWeaponMap")
 		ui.open()
 	SSorbits.open_orbital_maps |= ui
@@ -64,6 +70,8 @@
 
 /obj/machinery/computer/weapons/ui_close(mob/user, datum/tgui/tgui)
 	SSorbits.open_orbital_maps -= tgui
+	//Clear the data from the user, we don't need it anymore.
+	assoc_data -= "[REF(user)]"
 
 /obj/machinery/computer/weapons/ui_static_data(mob/user)
 	var/list/data = list()
@@ -85,9 +93,23 @@
 
 /obj/machinery/computer/weapons/ui_data(mob/user)
 	var/list/data = list()
+
 	data["update_index"] = SSorbits.times_fired
 	//Add orbital bodies
 	data["map_objects"] = list()
+
+	//Fetch data
+	var/user_ref = "[REF(user)]"
+	if(!assoc_data[user_ref])
+		log_runtime("Orbital map updated UI without reference to [user] in the assoc data list.")
+		assoc_data[user_ref] = list(
+			"active_single_instances" = list(),
+		)
+
+	//Fetch the active single instances
+	var/list/active_single_instances = assoc_data[user_ref]["active_single_instances"]
+	var/list/alive_single_instances = list()
+
 	var/datum/orbital_map/showing_map = SSorbits.orbital_maps[orbital_map_index]
 	for(var/map_key in showing_map.collision_zone_bodies)
 		for(var/datum/orbital_object/object as() in showing_map.collision_zone_bodies[map_key])
@@ -100,6 +122,26 @@
 			else
 				if(object.stealth)
 					continue
+			//Only transmit when necessary
+			if(object.single_instanced)
+				//If the instance wasn't active before, activate it
+				//Send objects for 3 ui updates so we are more sure they got created.
+				if(active_single_instances[object.unique_id] < 3)
+					data["created_objects"] += list(list(
+						"id" = object.unique_id,
+						"name" = object.name,
+						"position_x" = object.position.x,
+						"position_y" = object.position.y,
+						"velocity_x" = object.velocity.x,
+						"velocity_y" = object.velocity.y,
+						"radius" = object.radius,
+						"created_at" = object.created_at,
+					))
+					//Set the instance to be active in the user data list
+					active_single_instances[object.unique_id]++
+				//The instance is alive
+				alive_single_instances[object.unique_id] = TRUE
+				continue
 			//Send to be rendered on the UI
 			data["map_objects"] += list(list(
 				"name" = object.name,
@@ -109,6 +151,22 @@
 				"velocity_y" = object.velocity.y * object.velocity_multiplier,
 				"radius" = object.radius
 			))
+
+	//Calculate destroyed single instances
+	for(var/unique_id in active_single_instances)
+		//If the instance is still alive, continue
+		if(alive_single_instances[unique_id])
+			continue
+		//Destroy instances that are active but not alive.
+		data["destroyed_objects"] += list(list(
+			"id" = unique_id
+		))
+		//Deactivate the instance in the tracking list.
+		active_single_instances -= unique_id
+
+	//Save data about single instances.
+	assoc_data[user_ref]["active_single_instances"] = active_single_instances
+
 	if(!SSshuttle.getShuttle(shuttleId))
 		data["linkedToShuttle"] = FALSE
 		return data

@@ -13,7 +13,7 @@
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		//Store user specific data.
-		assoc_data[user] = list(
+		assoc_data["[REF(user)]"] = list(
 			"open_map" = default_orbital_map,
 			"active_single_instances" = list(),
 		)
@@ -26,7 +26,7 @@
 /datum/orbital_map_tgui/ui_close(mob/user, datum/tgui/tgui)
 	SSorbits.open_orbital_maps -= tgui
 	//Clear the data from the user, we don't need it anymore.
-	assoc_data -= user
+	assoc_data -= "[REF(user)]"
 
 /datum/orbital_map_tgui/ui_data(mob/user)
 	var/list/data = list()
@@ -36,16 +36,17 @@
 	data["destroyed_objects"] = list()
 	//Fetch the user data
 	var/open_orbital_map = default_orbital_map
-	if(assoc_data[user])
-		open_orbital_map = assoc_data[user]["open_map"]
+	var/user_ref = "[REF(user)]"
+	if(assoc_data[user_ref])
+		open_orbital_map = assoc_data[user_ref]["open_map"]
 	else
 		log_runtime("Orbital map updated UI without reference to [user] in the assoc data list.")
-		assoc_data[user] = list(
+		assoc_data[user_ref] = list(
 			"open_map" = default_orbital_map,
 			"active_single_instances" = list(),
 		)
 	//Fetch the active single instances
-	var/list/active_single_instances = assoc_data[user]["active_single_instances"]
+	var/list/active_single_instances = assoc_data[user_ref]["active_single_instances"]
 	var/list/alive_single_instances = list()
 	//Show the correct map to the user
 	var/datum/orbital_map/showing_map = SSorbits.orbital_maps[open_orbital_map]
@@ -63,6 +64,7 @@
 						"velocity_x" = object.velocity.x,
 						"velocity_y" = object.velocity.y,
 						"radius" = object.radius,
+						"created_at" = object.created_at,
 					))
 					//Set the instance to be active in the user data list
 					active_single_instances[object.unique_id] = TRUE
@@ -76,8 +78,7 @@
 				"position_y" = object.position.y,
 				"velocity_x" = object.velocity.x,
 				"velocity_y" = object.velocity.y,
-				"radius" = object.radius,
-				"gravity_range" = object.relevant_gravity_range
+				"radius" = object.radius
 			))
 	//Calculate destroyed single instances
 	for(var/unique_id in active_single_instances)
@@ -91,5 +92,5 @@
 		//Deactivate the instance in the tracking list.
 		active_single_instances -= unique_id
 	//Save data about single instances.
-	assoc_data[user]["active_single_instances"] = active_single_instances
+	assoc_data[user_ref]["active_single_instances"] = active_single_instances
 	return data
