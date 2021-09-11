@@ -118,13 +118,13 @@
 		return
 
 	//Relative velocity to target needs to point towards target.
-	var/distance_to_target = position.Distance(target_pos)
+	var/distance_to_target = position.DistanceTo(target_pos)
 
 	//Cheat and slow down.
 	//Remove this if you make better autopilot logic ever.
 	if(distance_to_target < 100 && velocity.Length() > 25)
-		velocity.Normalize()
-		velocity.Scale(20)
+		velocity.NormalizeSelf()
+		velocity.ScaleSelf(20)
 
 	//If there is an object in the way, we need to fly around it.
 	var/datum/orbital_vector/next_position = target_pos
@@ -132,8 +132,8 @@
 	//Adjust our speed to target to point towards it.
 	var/datum/orbital_vector/desired_velocity = new(next_position.x - position.x, next_position.y - position.y)
 	var/desired_speed = distance_to_target * 0.02 + 10
-	desired_velocity.Normalize()
-	desired_velocity.Scale(desired_speed)
+	desired_velocity.NormalizeSelf()
+	desired_velocity.ScaleSelf(desired_speed)
 
 	//Adjust thrust to make our velocity = desired_velocity
 	var/thrust_dir_x = desired_velocity.x - velocity.x

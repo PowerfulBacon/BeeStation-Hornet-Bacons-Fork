@@ -130,14 +130,14 @@
 		//Calculate gravity
 		for(var/datum/orbital_object/gravitational_body as() in gravitational_bodies)
 			//https://en.wikipedia.org/wiki/Gravitational_acceleration
-			var/distance = position.Distance(gravitational_body.position)
+			var/distance = position.DistanceTo(gravitational_body.position)
 			if(!distance)
 				continue
 			var/acceleration_amount = (GRAVITATIONAL_CONSTANT * gravitational_body.mass) / (distance * distance)
 			//Calculate acceleration direction
 			var/datum/orbital_vector/direction = new (gravitational_body.position.x - position.x, gravitational_body.position.y - position.y)
-			direction.Normalize()
-			direction.Scale(acceleration_amount)
+			direction.NormalizeSelf()
+			direction.ScaleSelf(acceleration_amount)
 			//Add on the gravitational acceleration
 			acceleration_per_second.Add(direction)
 		//Divide acceleration per second by the tick rate
@@ -151,8 +151,8 @@
 		//Velocity should always be perpendicular to the planet
 		var/datum/orbital_vector/perpendicular_vector = new(position.y - target_orbital_body.position.y, target_orbital_body.position.x - position.x)
 		//Calculate the relative velocity we should have
-		perpendicular_vector.Normalize()
-		perpendicular_vector.Scale(relative_velocity_required)
+		perpendicular_vector.NormalizeSelf()
+		perpendicular_vector.ScaleSelf(relative_velocity_required)
 		//Set it because we are a lazy shit
 		velocity = perpendicular_vector.Add(target_orbital_body.velocity)
 
@@ -234,7 +234,7 @@
 			continue
 		if(!((collision_flags & object.collision_type) || (object.collision_flags & collision_type)))
 			continue
-		var/distance = object.position.Distance(position)
+		var/distance = object.position.DistanceTo(position)
 		if(distance < radius + object.radius)
 			//Collision
 			LAZYADD(colliding_with, object)
@@ -288,7 +288,7 @@
 
 //We do a little suvatting
 /datum/orbital_object/proc/accelerate_towards(datum/orbital_vector/acceleration_vector, time)
-	velocity.Add(acceleration_vector.Scale(time))
+	velocity.AddSelf(acceleration_vector.ScaleSelf(time))
 
 //Called when we collide with another orbital object.
 //Make sure to check if(other.collision_ignored || collision_ignored)
@@ -320,8 +320,8 @@
 	velocity.y = target_body.velocity.y + relative_velocity
 	//Set random angle
 	var/random_angle = rand(0, 360)	//Is cos and sin in radians?
-	position.Rotate(random_angle)
-	velocity.Rotate(random_angle)
+	position.RotateSelf(random_angle)
+	velocity.RotateSelf(random_angle)
 	//Update target
 	target_orbital_body = target_body
 	LAZYADD(target_body.orbitting_bodies, src)

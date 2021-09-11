@@ -326,7 +326,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 				//Do this last
 				if(other_shuttle == shuttleObject)
 					continue
-				if(other_shuttle?.position?.Distance(shuttleObject.position) <= interdiction_range && !other_shuttle.stealth)
+				if(other_shuttle?.position?.DistanceTo(shuttleObject.position) <= interdiction_range && !other_shuttle.stealth)
 					interdicted_shuttles += other_shuttle
 			if(!length(interdicted_shuttles))
 				say("No targets to interdict in range.")

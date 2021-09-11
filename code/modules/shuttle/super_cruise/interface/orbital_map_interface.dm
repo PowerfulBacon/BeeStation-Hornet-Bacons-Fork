@@ -86,9 +86,7 @@
 		if(alive_single_instances[unique_id])
 			continue
 		//Destroy instances that are active but not alive.
-		data["destroyed_objects"] += list(list(
-			"id" = unique_id
-		))
+		data["destroyed_objects"] += unique_id
 		//Deactivate the instance in the tracking list.
 		active_single_instances -= unique_id
 	//Save data about single instances.

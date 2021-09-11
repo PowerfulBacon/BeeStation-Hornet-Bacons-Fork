@@ -41,8 +41,10 @@ export const OrbitalMap = (props, context) => {
 
   let trackedObject = null;
   let ourObject = null;
+  let firstObjectName = "null";
   if (map_objects.length > 0 && interdictionTime === 0)
   {
+    firstObjectName = map_objects[0].name;
     // Find the right tracked body
     map_objects.forEach(element => {
       if (element.name === shuttleName)
@@ -83,7 +85,7 @@ export const OrbitalMap = (props, context) => {
             <OrbitalMapDisplay
               dynamicXOffset={dynamicXOffset}
               dynamicYOffset={dynamicYOffset}
-              isTracking={trackedBody !== map_objects[0].name}
+              isTracking={trackedBody !== firstObjectName}
               zoomScale={zoomScale}
               setZoomScale={setZoomScale}
               setTrackedBody={setTrackedBody}
@@ -473,7 +475,6 @@ export const OrbitalMapDisplay = (props, context) => {
             ourObject={ourObject}
             lockedZoomScale={lockedZoomScale}
             map_objects={map_objects}
-            elapsed={control.elapsed}
             interdiction_range={interdiction_range}
             shuttleTargetX={shuttleTargetX}
             shuttleTargetY={shuttleTargetY}

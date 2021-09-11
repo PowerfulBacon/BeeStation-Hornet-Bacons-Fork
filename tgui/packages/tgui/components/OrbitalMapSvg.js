@@ -3,6 +3,8 @@ import { clamp } from 'common/math';
 import { pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
 
+const FPS = 20;
+
 export class OrbitalMapSvg extends Component {
   constructor(props)
   {
@@ -13,6 +15,7 @@ export class OrbitalMapSvg extends Component {
     this.state = {
       singleInstanceObjects: {},
       tickIndex: -1,
+      tickTimer: new Date(),
     };
   }
 
@@ -23,6 +26,7 @@ export class OrbitalMapSvg extends Component {
     const {
       singleInstanceObjects,
       tickIndex,
+      tickTimer,
     } = state;
     // Fetch created and destroyed objects
     const {
@@ -33,11 +37,21 @@ export class OrbitalMapSvg extends Component {
     // Don't update if we already updated for this tick
     if (currentUpdateIndex === tickIndex)
     {
+      this.setState({
+        internalElapsed: (new Date() - tickTimer) / 1000,
+      });
       return;
     }
+
     // Clone the dictionary
     let outputInstances = {};
-    Object.assign(outputInstances, singleInstanceObjects);
+    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
+      if (!(key in destroyed_objects))
+      {
+        outputInstances[key] = singleInstance;
+      }
+    }
+
     // Find differences in created objects
     created_objects.forEach(created_object => {
       // Ignore already made objects
@@ -47,106 +61,37 @@ export class OrbitalMapSvg extends Component {
         outputInstances[created_object.id] = created_object;
       }
     });
-    // Find differences in destroyed objects
-    destroyed_objects.forEach(destroyed_object => {
-      // Ignore non-existant objects
-      if (destroyed_object.id in singleInstanceObjects)
-      {
-        // Adios mi amigo
-        delete outputInstances[destroyed_object.id];
-      }
-    });
+
     // Update state
     this.setState({
       singleInstanceObjects: outputInstances,
       tickIndex: currentUpdateIndex,
+      tickTimer: new Date(),
+      internalElapsed: 0,
     });
   }
 
+  // Begins the tick update.
+  // This makes the UI render at 20 FPS and performs important actions
   componentDidMount() {
-    // Update frequently to catch props
-    // Updates slightly more than the subsystem to not skip frames if
-    // timing is poor or lag or something idk, its protected against
-    // double updates anyway.
-    this.tickUpdate = setInterval(() => this.dotick(), 50);
+    this.tickUpdate = setInterval(() => this.dotick(), 1000 / FPS);
   }
 
+  // Stops doing the tick update when the component unmounts or something
   componentWillUnmount() {
     clearInterval(this.tickUpdate);
   }
 
-  render() {
-    // SVG Background Style
-    const lineStyle = {
-      stroke: '#BBBBBB',
-      strokeWidth: '2',
-    };
-    const blueLineStyle = {
-      stroke: '#8888FF',
-      strokeWidth: '2',
-    };
-    const boxTargetStyle = {
-      "fill-opacity": 0,
-      stroke: '#DDDDDD',
-      strokeWidth: '1',
-    };
-    const lineTargetStyle = {
-      opacity: 0.4,
-      stroke: '#DDDDDD',
-      strokeWidth: '1',
-    };
-
+  // Returns the defs that make up the background grid
+  getGridBackground() {
     const {
-      singleInstanceObjects = {},
-      tickIndex,
-    } = this.state;
-
-    const {
-      dragStartEvent,
       scaledXOffset,
       scaledYOffset,
-      xOffset,
-      yOffset,
-      ourObject,
       lockedZoomScale,
-      map_objects,
-      elapsed,
-      interdiction_range = 0,
-      shuttleTargetX = 0,
-      shuttleTargetY = 0,
-      zoomScale,
-      shuttleName,
-      currentUpdateIndex,
-      children,
     } = this.props;
 
-    // Fetch values
-    let instancedObjects = [];
-
-    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
-      let ticksSince = currentUpdateIndex - singleInstance.created_at;
-      instancedObjects.push({
-        name: singleInstance.name,
-        position_x: singleInstance.position_x
-          + ticksSince * singleInstance.velocity_x,
-        position_y: singleInstance.position_y
-          + ticksSince * singleInstance.velocity_y,
-        velocity_x: singleInstance.velocity_x,
-        velocity_y: singleInstance.velocity_y,
-        radius: singleInstance.radius,
-      });
-    }
-
-    let orbitalObjects = map_objects.concat(instancedObjects);
-
-    let svgComponent = (
-      <svg
-        onMouseDown={e => {
-          dragStartEvent(e);
-        }}
-        viewBox="-250 -250 500 500"
-        position="absolute"
-        overflowY="hidden" >
+    return (
+      <>
         <defs>
           <pattern id="grid" width={100 * lockedZoomScale}
             height={100 * lockedZoomScale}
@@ -178,6 +123,92 @@ export class OrbitalMapSvg extends Component {
         </defs>
         <rect x="-50%" y="-50%" width="100%" height="100%"
           fill="url(#grid)" />
+      </>
+    );
+  }
+
+  // Handles rendering of the orbital map
+  render() {
+    // SVG Background Style
+    const lineStyle = {
+      stroke: '#BBBBBB',
+      strokeWidth: '2',
+    };
+    const blueLineStyle = {
+      stroke: '#8888FF',
+      strokeWidth: '2',
+    };
+    const boxTargetStyle = {
+      "fill-opacity": 0,
+      stroke: '#DDDDDD',
+      strokeWidth: '1',
+    };
+    const lineTargetStyle = {
+      opacity: 0.4,
+      stroke: '#DDDDDD',
+      strokeWidth: '1',
+    };
+
+    const {
+      singleInstanceObjects = {},
+      tickIndex,
+      tickTimer,
+      internalElapsed,
+    } = this.state;
+
+    const {
+      dragStartEvent,
+      xOffset,
+      yOffset,
+      ourObject,
+      lockedZoomScale,
+      map_objects,
+      interdiction_range = 0,
+      shuttleTargetX = 0,
+      shuttleTargetY = 0,
+      zoomScale,
+      shuttleName,
+      currentUpdateIndex,
+      children,
+    } = this.props;
+
+    // Calculate elapsed here to not do a bunch of stupid updates.
+    let elapsed = 0;
+
+    // Calculate an elapsed time
+    if (tickIndex === currentUpdateIndex)
+    {
+      elapsed = internalElapsed;
+    }
+
+    // Fetch values
+    let instancedObjects = [];
+
+    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
+      let ticksSince = currentUpdateIndex - singleInstance.created_at;
+      instancedObjects.push({
+        name: singleInstance.name,
+        position_x: singleInstance.position_x
+          + ticksSince * singleInstance.velocity_x,
+        position_y: singleInstance.position_y
+          + ticksSince * singleInstance.velocity_y,
+        velocity_x: singleInstance.velocity_x,
+        velocity_y: singleInstance.velocity_y,
+        radius: singleInstance.radius,
+      });
+    }
+
+    let orbitalObjects = map_objects.concat(instancedObjects);
+
+    let svgComponent = (
+      <svg
+        onMouseDown={e => {
+          dragStartEvent(e);
+        }}
+        viewBox="-250 -250 500 500"
+        position="absolute"
+        overflowY="hidden" >
+        {this.getGridBackground()}
         {orbitalObjects.map(map_object => (
           <>
             <circle

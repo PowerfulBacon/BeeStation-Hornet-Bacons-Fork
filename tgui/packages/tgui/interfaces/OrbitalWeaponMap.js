@@ -303,7 +303,6 @@ export const OrbitalWeaponMapDisplay = (props, context) => {
             ourObject={ourObject}
             lockedZoomScale={lockedZoomScale}
             map_objects={map_objects}
-            elapsed={control.elapsed}
             dragStartEvent={e => control.handleDragStart(e)}
             zoomScale={zoomScale}
             shuttleName={shuttleName}

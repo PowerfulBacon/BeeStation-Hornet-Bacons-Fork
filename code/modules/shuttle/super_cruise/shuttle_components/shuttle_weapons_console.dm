@@ -1,3 +1,7 @@
+//BACONTODO
+//This could really use inheritance with a base map type
+//If you are spamming the UI or something it doesn't accept data.
+
 /obj/machinery/computer/weapons
 	name = "weapons console"
 	desc = "A high-tech computer console that interfaces with shuttle-based weapon systems."
@@ -153,14 +157,13 @@
 			))
 
 	//Calculate destroyed single instances
+	data["destroyed_objects"] = list()
 	for(var/unique_id in active_single_instances)
 		//If the instance is still alive, continue
 		if(alive_single_instances[unique_id])
 			continue
 		//Destroy instances that are active but not alive.
-		data["destroyed_objects"] += list(list(
-			"id" = unique_id
-		))
+		data["destroyed_objects"] += unique_id
 		//Deactivate the instance in the tracking list.
 		active_single_instances -= unique_id
 
