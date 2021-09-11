@@ -219,16 +219,17 @@
 			continue
 		if(!((collision_flags & object.collision_type) || (object.collision_flags & collision_type)))
 			continue
-		var/distance = object.position.Distance(position)
-		if(distance < radius + object.radius)
-			//Collision
-			LAZYADD(colliding_with, object)
-			collision(object)
-			//Static objects dont check collisions, so call their collision proc for them.
-			if(object.static_object)
-				object.collision(src)
-			colliding = TRUE
-		else if(!object.static_object)
+		if(!delta_x && !delta_y)
+			var/distance = object.position.Distance(position)
+			if(distance < radius + object.radius)
+				//Collision
+				LAZYADD(colliding_with, object)
+				collision(object)
+				//Static objects dont check collisions, so call their collision proc for them.
+				if(object.static_object)
+					object.collision(src)
+				colliding = TRUE
+		else
 			//Vector collision.
 			//Note: We detect collisions that occursed in the current move rather than in the next.
 			//Position - Velocity -> Position
@@ -258,15 +259,26 @@
 			var/vx2 = other_delta_x
 			var/vy2 = other_delta_y
 			//Both must be moving
-			if((vx || vy) && (vx2 || vy2))
-				//Collision between 2 vectors using simultaneous equations.
-				var/mu = (vx * py2 + vy * px - py * vx - vy * px2) / (vy * vx2 - vx * vy2)
-				var/lambda = (px2 + vx2 * mu - px) / vx
-				if(lambda >= 0 && lambda <= 1 && mu >= 0 && mu <= 1)
-					//Collision
-					LAZYADD(colliding_with, object)
-					collision(object)
-					colliding = TRUE
+			//Collision between 2 vectors using simultaneous equations.
+			var/mu = (vx * py2 + vy * px - py * vx - vy * px2) / (vy * vx2 - vx * vy2)
+			var/lambda = (px2 + vx2 * mu - px) / vx
+			//Clamp the values between 0 and 1 (So that the closest point on the 2 lines is actually in the right place)
+			mu = CLAMP01(mu)
+			lambda = CLAMP01(lambda)
+			//closetsp1x = px + mu * vx etc.
+			var/cx1 = px + vx * mu
+			var/cy1 = py + vy * mu
+			var/cx2 = px2 + vx2 * lambda
+			var/cy2 = py2 + vy2 * lambda
+			var/d1 = cx2 - cx1
+			var/d2 = cy2 - cy1
+			var/distance = sqrt(d1 * d1 + d2 * d2)
+			if(distance < radius + object.radius)
+				//Collision
+				LAZYADD(colliding_with, object)
+				collision(object)
+				colliding = TRUE
+				message_admins("2 objects just intersected and thats really cool!")
 	if(!colliding)
 		collision_ignored = FALSE
 
