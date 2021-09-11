@@ -483,7 +483,9 @@ export const OrbitalMapDisplay = (props, context) => {
             shuttleName={shuttleName}
             created_objects={created_objects}
             destroyed_objects={destroyed_objects}
-            currentUpdateIndex={update_index}>
+            currentUpdateIndex={update_index}
+            desired_vel_x={desired_vel_x}
+            desired_vel_y={desired_vel_y}>
             {control => (
               control.svgComponent
             )}

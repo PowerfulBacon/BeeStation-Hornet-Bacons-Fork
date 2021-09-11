@@ -8,6 +8,8 @@
 	var/mass = 0
 	//Radius of the object in ~~parsecs~~ arbitary space units
 	var/radius = 1
+	//What render mode to use
+	var/render_mode = RENDER_MODE_DEFAULT
 	//Position of the object (0,0) is the center of the map.
 	//Position is in kilometers
 	//If this is modified, on_body_move() MUST be called. (Really this should be a helper proc)
@@ -165,7 +167,7 @@
 
 	//Move the gravitational body.
 	var/datum/orbital_vector/vel_new = new(velocity.x * delta_time * velocity_multiplier, velocity.y * delta_time * velocity_multiplier)
-	position.Add(vel_new)
+	position.AddSelf(vel_new)
 
 	//Oh we moved btw
 	parent_map.on_body_move(src, prev_x, prev_y)

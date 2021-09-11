@@ -4,6 +4,8 @@ import { pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
 
 const FPS = 20;
+// Scales the positions to make things on the map appear closer or further away.
+const mapDistanceScale = 1;
 
 export class OrbitalMapSvg extends Component {
   constructor(props)
@@ -13,9 +15,18 @@ export class OrbitalMapSvg extends Component {
     // Key = object ID
     // Value = Object data
     this.state = {
-      singleInstanceObjects: {},
+      singleInstanceObjects: [],
       tickIndex: -1,
       tickTimer: new Date(),
+      renderableObjectTypes: {},
+    };
+    this.renderTypeDict = {
+      "broken": Broken,
+      "default": RenderableObjectType,
+      "planet": PlanettaryBody,
+      "beacon": Beacon,
+      "shuttle": Shuttle,
+      "projectile": Projectile,
     };
   }
 
@@ -27,12 +38,14 @@ export class OrbitalMapSvg extends Component {
       singleInstanceObjects,
       tickIndex,
       tickTimer,
+      renderableObjectTypes,
     } = state;
     // Fetch created and destroyed objects
     const {
       created_objects = [],
       destroyed_objects = [],
       currentUpdateIndex = -1,
+      map_objects = [],
     } = props;
     // Don't update if we already updated for this tick
     if (currentUpdateIndex === tickIndex)
@@ -43,12 +56,34 @@ export class OrbitalMapSvg extends Component {
       return;
     }
 
+    // CREATION OF RENDERABLE OBJECT OBJECTS
+    let newRenderableObjectTypes = {};
+
+    // Boop: Create new map objects and persist old ones
+    map_objects.forEach(mapObject => {
+      newRenderableObjectTypes[mapObject.id]
+        = renderableObjectTypes[mapObject.id]
+        || new this.renderTypeDict[mapObject.render_mode];
+      newRenderableObjectTypes[mapObject.id].onTick(
+        mapObject.name,
+        mapObject.position_x,
+        mapObject.position_y,
+        mapObject.velocity_x,
+        mapObject.velocity_y,
+        mapObject.radius,
+      );
+    });
+
+    // =================================
+    // SINGLE INSTANCE HANDLING
+    // =================================
+
     // Clone the dictionary
-    let outputInstances = {};
-    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
-      if (!(key in destroyed_objects))
+    let outputInstances = [];
+    for (const existingId in singleInstanceObjects) {
+      if (!(existingId in destroyed_objects))
       {
-        outputInstances[key] = singleInstance;
+        outputInstances.push(existingId);
       }
     }
 
@@ -58,16 +93,42 @@ export class OrbitalMapSvg extends Component {
       if (!(created_object.id in singleInstanceObjects))
       {
         // Create the object
-        outputInstances[created_object.id] = created_object;
+        outputInstances.push(created_object.id);
+        // Create the renderable object
+        newRenderableObjectTypes[created_object.id]
+          = new this.renderTypeDict[created_object.render_mode];
+        // Initial variable setup
+        newRenderableObjectTypes[created_object.id].onTick(
+          created_object.name,
+          created_object.position_x,
+          created_object.position_y,
+          created_object.velocity_x,
+          created_object.velocity_y,
+          created_object.radius,
+        );
       }
+    });
+
+    // Tick any single instances still alive
+    outputInstances.forEach(id => {
+      let singleInstanceObject = newRenderableObjectTypes[id];
+      singleInstanceObject.onTick(
+        singleInstanceObject.name,
+        singleInstanceObject.position_x + singleInstanceObject.velocity_x,
+        singleInstanceObject.position_y + singleInstanceObject.velocity_y,
+        singleInstanceObject.velocity_x,
+        singleInstanceObject.velocity_y,
+        singleInstanceObject.radius,
+      );
     });
 
     // Update state
     this.setState({
-      singleInstanceObjects: outputInstances,
       tickIndex: currentUpdateIndex,
       tickTimer: new Date(),
       internalElapsed: 0,
+      singleInstanceObjects: outputInstances,
+      renderableObjectTypes: newRenderableObjectTypes,
     });
   }
 
@@ -150,10 +211,9 @@ export class OrbitalMapSvg extends Component {
     };
 
     const {
-      singleInstanceObjects = {},
       tickIndex,
-      tickTimer,
       internalElapsed,
+      renderableObjectTypes,
     } = this.state;
 
     const {
@@ -161,8 +221,6 @@ export class OrbitalMapSvg extends Component {
       xOffset,
       yOffset,
       ourObject,
-      lockedZoomScale,
-      map_objects,
       interdiction_range = 0,
       shuttleTargetX = 0,
       shuttleTargetY = 0,
@@ -170,6 +228,9 @@ export class OrbitalMapSvg extends Component {
       shuttleName,
       currentUpdateIndex,
       children,
+      desired_vel_x,
+      desired_vel_y,
+      lockedZoomScale,
     } = this.props;
 
     // Calculate elapsed here to not do a bunch of stupid updates.
@@ -181,25 +242,6 @@ export class OrbitalMapSvg extends Component {
       elapsed = internalElapsed;
     }
 
-    // Fetch values
-    let instancedObjects = [];
-
-    for (const [key, singleInstance] of Object.entries(singleInstanceObjects)) {
-      let ticksSince = currentUpdateIndex - singleInstance.created_at;
-      instancedObjects.push({
-        name: singleInstance.name,
-        position_x: singleInstance.position_x
-          + ticksSince * singleInstance.velocity_x,
-        position_y: singleInstance.position_y
-          + ticksSince * singleInstance.velocity_y,
-        velocity_x: singleInstance.velocity_x,
-        velocity_y: singleInstance.velocity_y,
-        radius: singleInstance.radius,
-      });
-    }
-
-    let orbitalObjects = map_objects.concat(instancedObjects);
-
     let svgComponent = (
       <svg
         onMouseDown={e => {
@@ -209,83 +251,37 @@ export class OrbitalMapSvg extends Component {
         position="absolute"
         overflowY="hidden" >
         {this.getGridBackground()}
-        {orbitalObjects.map(map_object => (
+        {Object.values(renderableObjectTypes).map(render_object => (
           <>
-            <circle
-              cx={Math.max(Math.min((map_object.position_x
-                + xOffset
-                + map_object.velocity_x * elapsed)
-                * zoomScale, 250), -250)}
-              cy={Math.max(Math.min((map_object.position_y
-                + yOffset
-                + map_object.velocity_y * elapsed)
-                * zoomScale, 250), -250)}
-              r={((map_object.position_y + yOffset)
-                * zoomScale > 250
-                || (map_object.position_y + yOffset)
-                * zoomScale < -250
-                || (map_object.position_x + xOffset)
-                * zoomScale > 250
-                || (map_object.position_x + xOffset)
-                * zoomScale < -250)
-                ? 5 * zoomScale
-                : Math.max(5 * zoomScale, map_object.radius
-                  * zoomScale)}
-              stroke="#BBBBBB"
-              stroke-width="1"
-              fill="rgba(0,0,0,0)" />
-            <line
-              style={lineStyle}
-              x1={Math.max(Math.min((map_object.position_x
-                + xOffset
-                + map_object.velocity_x * elapsed)
-                * zoomScale, 250), -250)}
-              y1={Math.max(Math.min((map_object.position_y
-                + yOffset
-                + map_object.velocity_y * elapsed)
-                * zoomScale, 250), -250)}
-              x2={Math.max(Math.min((map_object.position_x
-                + xOffset
-                + map_object.velocity_x * 10)
-                * zoomScale, 250), -250)}
-              y2={Math.max(Math.min((map_object.position_y
-                + yOffset
-                + map_object.velocity_y * 10)
-                * zoomScale, 250), -250)} />
-            <text
-              x={Math.max(Math.min((map_object.position_x
-                + xOffset
-                + map_object.velocity_x * elapsed)
-                * zoomScale, 200), -250)}
-              y={Math.max(Math.min((map_object.position_y
-                + yOffset
-                + map_object.velocity_y * elapsed)
-                * zoomScale, 250), -240)}
-              fill="white"
-              fontSize={Math.min(40 * lockedZoomScale, 14)}>
-              {map_object.name}
-            </text>
-            {shuttleName !== map_object.name || (
+            {render_object.generateComponentImage(
+              xOffset,
+              yOffset,
+              elapsed,
+              zoomScale,
+              lockedZoomScale
+            )}
+            {(shuttleName === render_object.name
+              && (desired_vel_x || desired_vel_y)) && (
               <line
                 style={blueLineStyle}
-                x1={Math.max(Math.min((map_object.position_x
+                x1={Math.max(Math.min((render_object.position_x
                   + xOffset
-                  + map_object.velocity_x * elapsed)
-                  * zoomScale, 250), -250)}
-                y1={Math.max(Math.min((map_object.position_y
+                  + render_object.velocity_x * elapsed)
+                  * zoomScale * mapDistanceScale, 250), -250)}
+                y1={Math.max(Math.min((render_object.position_y
                   + yOffset
-                  + map_object.velocity_y * elapsed)
-                  * zoomScale, 250), -250)}
-                x2={Math.max(Math.min((map_object.position_x
+                  + render_object.velocity_y * elapsed)
+                  * zoomScale * mapDistanceScale, 250), -250)}
+                x2={Math.max(Math.min((render_object.position_x
                   + xOffset
-                  + map_object.velocity_x * elapsed
+                  + render_object.velocity_x * elapsed
                   + desired_vel_x * 10)
-                  * zoomScale, 250), -250)}
-                y2={Math.max(Math.min((map_object.position_y
+                  * zoomScale * mapDistanceScale, 250), -250)}
+                y2={Math.max(Math.min((render_object.position_y
                   + yOffset
-                  + map_object.velocity_y * elapsed
+                  + render_object.velocity_y * elapsed
                   + desired_vel_y * 10)
-                  * zoomScale, 250), -250)} />
+                  * zoomScale * mapDistanceScale, 250), -250)} />
             )}
           </>
         ))};
@@ -336,11 +332,11 @@ export class OrbitalMapSvg extends Component {
               x1={Math.max(Math.min((ourObject.position_x
                 + xOffset
                 + ourObject.velocity_x * elapsed)
-                * zoomScale, 250), -250)}
+                * zoomScale * mapDistanceScale, 250), -250)}
               y1={Math.max(Math.min((ourObject.position_y
                 + yOffset
                 + ourObject.velocity_y * elapsed)
-                * zoomScale, 250), -250)}
+                * zoomScale * mapDistanceScale, 250), -250)}
               x2={Math.max(Math.min((shuttleTargetX
                 + xOffset)
                 * zoomScale, 250), -250)}
@@ -352,25 +348,16 @@ export class OrbitalMapSvg extends Component {
         )}
         {ourObject && (
           <circle
-            cx={Math.max(Math.min((ourObject.position_x
+            cx={(ourObject.position_x
               + xOffset
               + ourObject.velocity_x * elapsed)
-              * zoomScale, 250), -250)}
-            cy={Math.max(Math.min((ourObject.position_y
+              * zoomScale * mapDistanceScale}
+            cy={(ourObject.position_y
               + yOffset
               + ourObject.velocity_y * elapsed)
-              * zoomScale, 250), -250)}
-            r={((ourObject.position_y + yOffset)
-              * zoomScale > 250
-              || (ourObject.position_y + yOffset)
-              * zoomScale < -250
-              || (ourObject.position_x + xOffset)
-              * zoomScale > 250
-              || (ourObject.position_x + xOffset)
-              * zoomScale < -250)
-              ? 5 * zoomScale
-              : Math.max(5 * zoomScale, interdiction_range
-                * zoomScale)}
+              * zoomScale * mapDistanceScale}
+            r={Math.max(5 * zoomScale, interdiction_range
+              * zoomScale)}
             stroke="#00FF00"
             stroke-width="1"
             fill="rgba(0,0,0,0)" />
@@ -381,5 +368,437 @@ export class OrbitalMapSvg extends Component {
     return children({
       svgComponent: svgComponent,
     });
+  }
+}
+
+// ===========================
+// RENDER CLASSES
+// ===========================
+
+// DEFAULT TYPE
+class RenderableObjectType {
+  constructor() {
+    this.name;
+    this.position_x;
+    this.position_y;
+    this.velocity_x;
+    this.velocity_y;
+    this.radius;
+    this.outlineColour = "#BBBBBB";
+    this.outlineWidth = 1;
+    this.fill = "rgba(0, 0, 0, 0)";
+    this.textSize = 40;
+    this.minSize = 5;
+    this.fontFill = "white";
+    this.lineStyle = {
+      stroke: '#BBBBBB',
+      strokeWidth: '2',
+    };
+    this.velocityLengthMult = 10;
+    this.inBounds;
+  }
+
+  // Called every second
+  // Updates the data
+  onTick(name, position_x, position_y, velocity_x, velocity_y, radius)
+  {
+    this.name = name;
+    this.position_x = position_x;
+    this.position_y = position_y;
+    this.velocity_x = velocity_x;
+    this.velocity_y = velocity_y;
+    this.radius = radius;
+  }
+
+  // Called on render()
+  generateComponentImage(
+    // Offset of the map
+    xOffset,
+    yOffset,
+    // Elapsed time since last full update
+    elapsed,
+    // Zoom scale of the map
+    zoomScale,
+    lockedZoomScale,
+  )
+  {
+
+    let outputXPosition = (this.position_x
+      + xOffset
+      + this.velocity_x * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputYPosition = (this.position_y
+      + yOffset
+      + this.velocity_y * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputRadius = this.radius * zoomScale;
+
+    this.inBounds = outputXPosition < 250 && outputYPosition < 250
+      && outputXPosition > -250 && outputYPosition > -250;
+
+    if (!this.inBounds)
+    {
+      outputRadius = 5 * zoomScale;
+      outputXPosition = clamp(outputXPosition, -250, 250);
+      outputYPosition = clamp(outputYPosition, -250, 250);
+    }
+
+    let textXPos = clamp(outputXPosition, -250, 200);
+    let textYPos = clamp(outputYPosition, -240, 250);
+
+    return (
+      <>
+        <circle
+          cx={outputXPosition}
+          cy={outputYPosition}
+          r={Math.max(outputRadius, this.minSize * zoomScale)}
+          stroke={this.outlineColour}
+          stroke-width={this.outlineWidth}
+          fill={this.fill} />
+        {this.inBounds && (
+          <line
+            style={this.lineStyle}
+            x1={outputXPosition}
+            y1={outputYPosition}
+            x2={outputXPosition + (this.velocity_x * zoomScale)
+               * this.velocityLengthMult}
+            y2={outputYPosition + (this.velocity_y * zoomScale)
+               * this.velocityLengthMult} />
+        )}
+        <text
+          x={textXPos}
+          y={textYPos}
+          fill={this.fontFill}
+          fontSize={Math.min(this.textSize * lockedZoomScale, 14)}>
+          {this.name}
+        </text>
+      </>
+    );
+  }
+}
+
+// ===========================
+// SUBTYPES
+// ===========================
+
+// Planets
+class PlanettaryBody extends RenderableObjectType {
+  constructor() {
+    super();
+    this.outlineColour = "#BBBBBB";
+    this.outlineWidth = 1;
+    this.fill = "rgba(0, 0, 0, 0)";
+    this.textSize = 40;
+    this.fontFill = "white";
+    this.lineStyle = {
+      stroke: '#BBBBBB',
+      strokeWidth: '2',
+    };
+    this.velocityLengthMult = 10;
+  }
+}
+
+// Beacons
+class Beacon extends RenderableObjectType {
+  constructor() {
+    super();
+    this.outlineColour = "#BBBBBB";
+    this.outlineWidth = 1;
+    this.fill = "rgba(0, 0, 0, 0)";
+    this.textSize = 40;
+    this.fontFill = "white";
+    this.lineStyle = {
+      stroke: '#BBBBBB',
+      strokeWidth: '2',
+    };
+    this.velocityLengthMult = 10;
+    this.beacon_radius = 500;
+    this.beacon_colour = "#f58473";
+    this.random_offset = Math.random();
+  }
+
+  // Called every render
+  generateComponentImage(
+    // Offset of the map
+    xOffset,
+    yOffset,
+    // Elapsed time since last full update
+    elapsed,
+    // Zoom scale of the map
+    zoomScale,
+    lockedZoomScale,
+  )
+  {
+    // Get the base look
+    let baseStuff = RenderableObjectType.prototype.generateComponentImage.call(
+      this, xOffset, yOffset, elapsed, zoomScale, lockedZoomScale);
+
+    let outputXPosition = (this.position_x
+      + xOffset
+      + this.velocity_x * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputYPosition = (this.position_y
+      + yOffset
+      + this.velocity_y * elapsed)
+      * zoomScale * mapDistanceScale;
+
+    let beaconTimer = ((elapsed + this.random_offset) % 1);
+
+    return (
+      <>
+        {baseStuff}
+        <circle
+          cx={outputXPosition}
+          cy={outputYPosition}
+          r={this.beacon_radius * beaconTimer
+            * zoomScale}
+          stroke={this.beacon_colour}
+          stroke-width={this.outlineWidth}
+          fill={this.fill}
+          style={{
+            opacity: 0.8 * (1 - beaconTimer),
+          }} />
+      </>
+    );
+  }
+}
+
+// Shuttles
+class Shuttle extends RenderableObjectType {
+  constructor() {
+    super();
+    this.outlineColour = "#a4eea4";
+    this.fontFill = "#a4eea4";
+    this.lineStyle = {
+      stroke: '#a4eea4',
+      strokeWidth: '2',
+      opacity: 0.5,
+    };
+    this.thinLineStyle = {
+      stroke: '#a4eea4',
+      strokeWidth: '0.5',
+      opacity: 0.5,
+    };
+    // Draw a path line
+    // Circular queue since javascript handles arrays kinda poorly.
+    this.recordedTrack = [
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+    ];
+    this.recordedTrackLength = 20;
+    this.recordedTrackLastIndex = 0;
+    this.recordedTrackStartIndex = 0;
+  }
+
+  // Called every updateTick
+  // Record the path and update variables.
+  onTick(name, position_x, position_y, velocity_x, velocity_y, radius)
+  {
+    // wtf is this
+    RenderableObjectType.prototype.onTick.call(
+      this, name, position_x, position_y, velocity_x, velocity_y, radius);
+    // Set the position
+    this.recordedTrack[this.recordedTrackLastIndex] = {
+      x: this.position_x,
+      y: this.position_y,
+    };
+
+    // Add the new point to the path map
+    if ((this.recordedTrackLastIndex + 1) % this.recordedTrackLength
+      === this.recordedTrackStartIndex)
+    {
+      // End index is 1 before the start index, move both forward 1
+      this.recordedTrackLastIndex = (this.recordedTrackLastIndex + 1)
+        % this.recordedTrackLength;
+      this.recordedTrackStartIndex = (this.recordedTrackStartIndex + 1)
+      % this.recordedTrackLength;
+    }
+    else
+    {
+      // Move just the last position forward
+      this.recordedTrackLastIndex = (this.recordedTrackLastIndex + 1)
+        % this.recordedTrackLength;
+    }
+  }
+
+  // Called every render
+  generateComponentImage(
+    // Offset of the map
+    xOffset,
+    yOffset,
+    // Elapsed time since last full update
+    elapsed,
+    // Zoom scale of the map
+    zoomScale,
+    lockedZoomScale,
+  )
+  {
+
+    let outputXPosition = (this.position_x
+      + xOffset
+      + this.velocity_x * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputYPosition = (this.position_y
+      + yOffset
+      + this.velocity_y * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputRadius = this.radius * zoomScale;
+
+    this.inBounds = outputXPosition < 250 && outputYPosition < 250
+      && outputXPosition > -250 && outputYPosition > -250;
+
+    if (!this.inBounds)
+    {
+      outputRadius = 5 * zoomScale;
+      outputXPosition = clamp(outputXPosition, -250, 250);
+      outputYPosition = clamp(outputYPosition, -250, 250);
+    }
+
+    // Calculate Path
+    let path = [];
+
+    let highestOpacity = 0;
+    let opacityIndex = 0;
+
+    for (let i = (this.recordedTrackStartIndex + 1) % this.recordedTrackLength;
+      i !== this.recordedTrackLastIndex;
+      i = (i + 1) % this.recordedTrackLength)
+    {
+      let firstPoint = this.recordedTrack[(i + this.recordedTrackLength - 1)
+        % this.recordedTrackLength];
+      let secondPoint = this.recordedTrack[i];
+      highestOpacity = (opacityIndex / this.recordedTrackLength) * 0.5;
+      opacityIndex ++;
+      path.push({
+        x1: (firstPoint.x + xOffset) * zoomScale * mapDistanceScale,
+        y1: (firstPoint.y + yOffset) * zoomScale * mapDistanceScale,
+        x2: (secondPoint.x + xOffset) * zoomScale * mapDistanceScale,
+        y2: (secondPoint.y + yOffset) * zoomScale * mapDistanceScale,
+        opacity: highestOpacity,
+      });
+    }
+
+    if (path.length)
+    {
+      path.push({
+        x1: path[path.length - 1].x2,
+        y1: path[path.length - 1].y2,
+        x2: outputXPosition,
+        y2: outputYPosition,
+        opacity: highestOpacity,
+      });
+    }
+
+    if (!this.inBounds)
+    {
+      outputRadius = 5;
+      outputXPosition = clamp(outputXPosition, -250, 250);
+      outputYPosition = clamp(outputYPosition, -250, 250);
+    }
+
+    return (
+      <>
+        <circle
+          cx={outputXPosition}
+          cy={outputYPosition}
+          r={Math.max(outputRadius, this.minSize * zoomScale)}
+          stroke={this.outlineColour}
+          stroke-width={this.outlineWidth}
+          fill={this.fill} />
+        {this.inBounds && (
+          <line
+            style={this.lineStyle}
+            x1={outputXPosition}
+            y1={outputYPosition}
+            x2={outputXPosition + (this.velocity_x * zoomScale)
+               * this.velocityLengthMult}
+            y2={outputYPosition + (this.velocity_y * zoomScale)
+               * this.velocityLengthMult} />
+        )}
+        <text
+          x={clamp(outputXPosition, -250, 200) + 5 * zoomScale}
+          y={clamp(outputYPosition, -240, 250) + 15 * zoomScale}
+          fill={this.fontFill}
+          fontSize={Math.min(this.textSize * lockedZoomScale, 14)}>
+          {this.name}
+        </text>
+        {(this.velocity_x || this.velocity_y) && (
+          <text
+            x={clamp(outputXPosition, -250, 200) + 5 * zoomScale}
+            y={clamp(outputYPosition, -240, 250) + 15 * zoomScale
+              + clamp(this.textSize * zoomScale + 2, 8, 16)}
+            fill={this.fontFill}
+            fontSize={Math.min(this.textSize * lockedZoomScale, 14)}>
+            {Math.round(Math.sqrt(this.velocity_x * this.velocity_x
+              + this.velocity_y * this.velocity_y) * 100) / 100} bkts.
+          </text>
+        )}
+        {path.map(point => (
+          <line
+            key={point.x1}
+            style={{
+              stroke: '#a4eea4',
+              strokeWidth: '0.5',
+              opacity: point.opacity,
+            }}
+            x1={point.x1}
+            y1={point.y1}
+            x2={point.x2}
+            y2={point.y2} />
+        ))}
+      </>
+    );
+  }
+}
+
+// Projectiles
+class Projectile extends RenderableObjectType {
+  constructor() {
+    super();
+    this.outlineColour = "#BBBBBB";
+    this.outlineWidth = 1;
+    this.fill = "rgba(0, 0, 0, 0)";
+    this.textSize = 40;
+    this.fontFill = "white";
+    this.lineStyle = {
+      stroke: '#BBBBBB',
+      strokeWidth: '2',
+    };
+    this.velocityLengthMult = 10;
+  }
+}
+
+// Broken
+class Broken extends RenderableObjectType {
+  constructor() {
+    super();
+    this.outlineColour = "#FF0000";
+    this.outlineWidth = 1;
+    this.fill = "rgba(255, 0, 0, 0)";
+    this.textSize = 40;
+    this.fontFill = "red";
+    this.lineStyle = {
+      stroke: '#FF0000',
+      strokeWidth: '2',
+    };
+    this.velocityLengthMult = 10;
   }
 }

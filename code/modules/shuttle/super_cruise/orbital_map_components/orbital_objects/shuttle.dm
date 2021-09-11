@@ -2,6 +2,7 @@
 	name = "Shuttle"
 	collision_type = COLLISION_SHUTTLES
 	collision_flags = COLLISION_Z_LINKED
+	render_mode = RENDER_MODE_SHUTTLE
 	var/shuttle_port_id
 	//Shuttle data
 	var/max_thrust = 2

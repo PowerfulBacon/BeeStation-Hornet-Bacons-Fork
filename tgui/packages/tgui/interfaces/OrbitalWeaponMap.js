@@ -308,7 +308,9 @@ export const OrbitalWeaponMapDisplay = (props, context) => {
             shuttleName={shuttleName}
             created_objects={created_objects}
             destroyed_objects={destroyed_objects}
-            currentUpdateIndex={update_index}>
+            currentUpdateIndex={update_index}
+            desired_vel_x={0}
+            desired_vel_y={0}>
             {control => (
               control.svgComponent
             )}

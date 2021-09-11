@@ -65,6 +65,7 @@
 						"velocity_y" = object.velocity.y,
 						"radius" = object.radius,
 						"created_at" = object.created_at,
+						"render_mode" = object.render_mode,
 					))
 					//Set the instance to be active in the user data list
 					active_single_instances[object.unique_id] = TRUE
@@ -73,12 +74,14 @@
 				continue
 			//Transmit map data about non single-instanced objects.
 			data["map_objects"] += list(list(
+				"id" = object.unique_id,
 				"name" = object.name,
 				"position_x" = object.position.x,
 				"position_y" = object.position.y,
 				"velocity_x" = object.velocity.x,
 				"velocity_y" = object.velocity.y,
-				"radius" = object.radius
+				"radius" = object.radius,
+				"render_mode" = object.render_mode,
 			))
 	//Calculate destroyed single instances
 	for(var/unique_id in active_single_instances)

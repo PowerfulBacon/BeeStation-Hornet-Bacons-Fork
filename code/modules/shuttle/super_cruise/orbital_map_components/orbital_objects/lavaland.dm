@@ -1,5 +1,6 @@
 /datum/orbital_object/z_linked/lavaland
 	name = "Lavaland"
+	render_mode = RENDER_MODE_PLANET
 	mass = 10000
 	radius = 200
 	forced_docking = TRUE
