@@ -32,6 +32,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	var/orbital_map_index = PRIMARY_ORBITAL_MAP
 
 	//Our orbital body.
+	var/referencedOrbitalObjectVarName = "shuttleObject"
 	var/datum/orbital_object/shuttle/shuttleObject
 
 	//Assoc data
@@ -49,14 +50,15 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 /obj/machinery/computer/shuttle_flight/Destroy()
 	. = ..()
 	SSorbits.open_orbital_maps -= SStgui.get_all_open_uis(src)
-	shuttleObject = null
+	shuttleObject.UnregisterReference(src)
 
 /obj/machinery/computer/shuttle_flight/process()
 	. = ..()
 
-	//Check to see if the shuttleobject was launched by another console.
+	//Check to see if the shuttleObject was launched by another console.
 	if(QDELETED(shuttleObject) && SSorbits.assoc_shuttles.Find(shuttleId))
-		shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+		var/datum/orbital_object/O = SSorbits.assoc_shuttles[shuttleId]
+		O.RegisterReference(src)
 
 	if(recall_docking_port_id && shuttleObject?.docking_target && shuttleObject.autopilot && shuttleObject.shuttleTarget == shuttleObject.docking_target && shuttleObject.controlling_computer == src)
 		//We are at destination, dock.
@@ -241,7 +243,8 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 									return
 							if(shuttleObject.shuttleTarget == z_linked && shuttleObject.controlling_computer == src)
 								return
-							shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+							var/datum/orbital_object/O = SSorbits.assoc_shuttles[shuttleId]
+							O.RegisterReference(src)
 							shuttleObject.shuttleTarget = z_linked
 							shuttleObject.autopilot = TRUE
 							shuttleObject.controlling_computer = src
@@ -438,9 +441,11 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		return
 	if(SSorbits.assoc_shuttles.Find(shuttleId))
 		say("Shuttle is controlled from another location, updating telemetry.")
-		shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+		var/datum/orbital_object/O = SSorbits.assoc_shuttles[shuttleId]
+		O.RegisterReference(src)
 		return shuttleObject
-	shuttleObject = mobile_port.enter_supercruise()
+	var/datum/orbital_object/O = mobile_port.enter_supercruise()
+	O.RegisterReference(src)
 	if(!shuttleObject)
 		say("Failed to enter supercruise due to an unknown error.")
 		return
@@ -529,4 +534,3 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	req_access = list()
 	obj_flags |= EMAGGED
 	to_chat(user, "<span class='notice'>You fried the consoles ID checking system.</span>")
-

@@ -19,7 +19,8 @@
 	kill_time = world.time + survival_time
 	//Translate forward based on the time of our creation
 	var/subticks = (world.time - SSorbits.last_fire) / ORBITAL_UPDATE_RATE
-	position.AddSelf(velocity.Scale(subticks))
+	var/datum/orbital_vector/scaled_velocity = velocity.Scale(subticks)
+	MOVE_ORBITAL_BODY(src, position.x + scaled_velocity.x, position.y + scaled_velocity.y)
 
 /datum/orbital_object/projectile/process()
 	. = ..()

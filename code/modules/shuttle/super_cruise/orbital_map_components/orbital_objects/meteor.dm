@@ -2,6 +2,8 @@
 	name = "Meteor"
 	collision_type = COLLISION_METEOR
 	collision_flags = COLLISION_SHUTTLES | COLLISION_Z_LINKED
+	//Target of the meteor
+	var/referencedOrbitalObjectVarName = "target"
 	var/datum/orbital_object/target
 	var/list/meteor_types
 	var/start_tick
@@ -18,7 +20,7 @@
 	radius = rand(10, 50)
 
 /datum/orbital_object/meteor/Destroy()
-	target = null
+	target.UnregisterReference(src)
 	meteor_types = null
 	. = ..()
 
@@ -31,8 +33,7 @@
 	var/tick_proportion = (current_tick - start_tick) / (end_tick - start_tick)
 	var/current_x = (end_x * tick_proportion) + (start_x * (1 - tick_proportion))
 	var/current_y = (end_y * tick_proportion) + (start_y * (1 - tick_proportion))
-	position.x = current_x
-	position.y = current_y
+	MOVE_ORBITAL_BODY(src, current_x, current_y)
 	if(abs(position.x) > 10000 || abs(position.y) > 10000)
 		qdel(src)
 

@@ -72,6 +72,7 @@ export class OrbitalMapSvg extends Component {
         mapObject.velocity_x,
         mapObject.velocity_y,
         mapObject.radius,
+        mapObject.created_at,
       );
     });
 
@@ -111,22 +112,34 @@ export class OrbitalMapSvg extends Component {
           created_object.velocity_x,
           created_object.velocity_y,
           created_object.radius,
+          created_object.created_at,
         );
       }
     });
+
+    let currentTime = new Date();
 
     // Tick any single instances still alive
     outputInstances.forEach(id => {
       let singleInstanceObject = newRenderableObjectTypes[id];
       if (singleInstanceObject)
       {
+        // Game is at 10 FPS so we get the ticks since we were created
+        // and divide by 10.
+        // This is better than using Date() snice it accounts for byond
+        // lagging.
+        let timeElapsedSinceCreation = (singleInstanceObject.created_at
+          - tickIndex) / 10;
         singleInstanceObject.onTick(
           singleInstanceObject.name,
-          singleInstanceObject.position_x + singleInstanceObject.velocity_x,
-          singleInstanceObject.position_y + singleInstanceObject.velocity_y,
+          singleInstanceObject.position_x
+            + timeElapsedSinceCreation * singleInstanceObject.velocity_x,
+          singleInstanceObject.position_y
+            + timeElapsedSinceCreation * singleInstanceObject.velocity_y,
           singleInstanceObject.velocity_x,
           singleInstanceObject.velocity_y,
           singleInstanceObject.radius,
+          singleInstanceObject.created_at,
         );
       }
     });
@@ -134,7 +147,7 @@ export class OrbitalMapSvg extends Component {
     // Update state
     this.setState({
       tickIndex: currentUpdateIndex,
-      tickTimer: new Date(),
+      tickTimer: currentTime,
       internalElapsed: 0,
       singleInstanceObjects: outputInstances,
       renderableObjectTypes: newRenderableObjectTypes,
@@ -420,6 +433,7 @@ class RenderableObjectType {
     this.velocity_x;
     this.velocity_y;
     this.radius;
+    this.created_at;
     this.outlineColour = "#BBBBBB";
     this.outlineWidth = 1;
     this.fill = "rgba(0, 0, 0, 0)";
@@ -436,7 +450,8 @@ class RenderableObjectType {
 
   // Called every second
   // Updates the data
-  onTick(name, position_x, position_y, velocity_x, velocity_y, radius)
+  onTick(name, position_x, position_y, velocity_x, velocity_y, radius,
+    created_at)
   {
     this.name = name;
     this.position_x = position_x;
@@ -444,6 +459,7 @@ class RenderableObjectType {
     this.velocity_x = velocity_x;
     this.velocity_y = velocity_y;
     this.radius = radius;
+    this.created_at = created_at;
   }
 
   // Called on render()
@@ -648,11 +664,13 @@ class Shuttle extends RenderableObjectType {
 
   // Called every updateTick
   // Record the path and update variables.
-  onTick(name, position_x, position_y, velocity_x, velocity_y, radius)
+  onTick(name, position_x, position_y, velocity_x, velocity_y, radius,
+    created_at)
   {
     // wtf is this
     RenderableObjectType.prototype.onTick.call(
-      this, name, position_x, position_y, velocity_x, velocity_y, radius);
+      this, name, position_x, position_y, velocity_x, velocity_y, radius,
+      created_at);
     // Set the position
     this.recordedTrack[this.recordedTrackLastIndex] = {
       x: this.position_x,
@@ -817,7 +835,6 @@ class Projectile extends RenderableObjectType {
       opacity: 0.8,
     };
     this.velocityLengthMult = 0.2;
-    this.createdAt = new Date();
   }
 
   // Called on render()

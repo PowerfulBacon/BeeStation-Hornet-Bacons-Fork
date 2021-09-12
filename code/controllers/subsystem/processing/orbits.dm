@@ -212,7 +212,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 					active_single_instances[object.unique_id] = TRUE
 				//The instance is alive
 				alive_single_instances[object.unique_id] = TRUE
-				continue
+				//BACONTODO continue
 			//Transmit map data about non single-instanced objects.
 			data["map_objects"] += list(list(
 				"id" = object.unique_id,

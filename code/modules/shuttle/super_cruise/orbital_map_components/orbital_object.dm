@@ -173,9 +173,6 @@
 	//Oh we moved btw
 	parent_map.on_body_move(src, prev_x, prev_y)
 
-	//Oh we moved btw
-	parent_map.on_body_move(src, prev_x, prev_y)
-
 	//===================================
 	// COLLISION CHECKING
 	//===================================
@@ -238,56 +235,88 @@
 	for(var/datum/orbital_object/object as() in valid_objects)
 		if(object == src)
 			continue
-		if(!((collision_flags & object.collision_type) || (object.collision_flags & collision_type)))
+		if(!(object.collision_type & collision_flags))
 			continue
-		var/distance = object.position.DistanceTo(position)
-		if(distance < radius + object.radius)
-			//Collision
-			LAZYADD(colliding_with, object)
-			collision(object)
-			//Static objects dont check collisions, so call their collision proc for them.
-			if(object.static_object)
-				object.collision(src)
-			colliding = TRUE
-		else if(!object.static_object)
-			//Vector collision.
-			//Note: We detect collisions that occursed in the current move rather than in the next.
-			//Position - Velocity -> Position
-			//Detects collisions for when 2 objects pass each other.
-			//Get the intersection point
-			//Must be between 0 and 1
-			var/other_x
-			var/other_y
-			var/other_delta_x = object.velocity.x
-			var/other_delta_y = object.velocity.y
-			if(object.last_update_tick == last_update_tick)
-				//They are on the same tick as us
-				other_x = object.position.x - other_delta_x
-				other_y = object.position.y - other_delta_y
+		//Vector collision.
+		//Note: We detect collisions that occursed in the current move rather than in the next.
+		//Position - Velocity -> Position
+		//Detects collisions for when 2 objects pass each other.
+		//Get the intersection point
+		//Must be between 0 and 1
+		var/other_x
+		var/other_y
+		var/other_delta_x = object.velocity.x * object.velocity_multiplier
+		var/other_delta_y = object.velocity.y * object.velocity_multiplier
+		if(object.last_update_tick == last_update_tick)
+			//They are on the same tick as us
+			other_x = object.position.x - other_delta_x
+			other_y = object.position.y - other_delta_y
+		else
+			//They are still on the previous tick
+			other_x = object.position.x
+			other_y = object.position.y
+		//Reassign variables for ease of read.
+		var/px = prev_x
+		var/py = prev_y
+		var/vx = delta_x
+		var/vy = delta_y
+		var/px2 = other_x
+		var/py2 = other_y
+		var/vx2 = other_delta_x
+		var/vy2 = other_delta_y
+		if(!vx || !vx2 || vy * vx2 - vx * vy2 == 0 || py * vy2 - vx * vy2 == 0)
+			//TODO Closest distance between a point and a vector
+			var/distance = object.position.DistanceTo(position)
+			if(distance < radius + object.radius)
+				//Collision
+				LAZYADD(colliding_with, object)
+				collision(object)
+				//Static objects dont check collisions, so call their collision proc for them.
+				if(object.static_object)
+					object.collision(src)
+				colliding = TRUE
+		else
+			//Calculate mu and lambda independantly
+			var/mu = (vx * py2 + vy * px - py * vx - vy * px2) / (vy * vx2 - vx * vy2)
+			var/lambda = (py2 * vx2 + vy2 * px - px2 * vy2 - py * vx2) / (py * vy2 - vx * vy2)
+			//Calculate lambda respecting clamped mu and mu respecting clamped lambda
+			//Alright so now we have 2 scenarios
+			//One of these values when plugged into the other should return a value between 0 and 1
+			//Whatever one does that is correct. The other is wrong.
+			var/restricted_mu = CLAMP01(mu)
+			var/restricted_lambda = CLAMP01(lambda)
+			var/lambda_2 = (px2 + vx2 * mu - px) / vx
+			var/mu_2 = (px + vx * lambda - px2) / vx2
+			var/correct_lambda
+			var/correct_mu
+			//Calculate the correct lambda and mu values
+			if((restricted_mu == 1 || restricted_mu == 0) && (restricted_lambda == 1 || restricted_lambda == 0))
+				correct_lambda = restricted_lambda
+				correct_mu = restricted_mu
+			else if(lambda_2 >= 0 && lambda_2 <= 1)
+				correct_lambda = lambda_2
+				correct_mu = restricted_mu
+			else if(mu_2 >= 0 && mu_2 <= 1)
+				correct_lambda = restricted_lambda
+				correct_mu = mu_2
 			else
-				//They are still on the previous tick
-				other_x = object.position.x
-				other_y = object.position.y
-			//ALRIGHT LETS DO THE CHECK
-			//Reassign variables for ease of read.
-			var/px = prev_x
-			var/py = prev_y
-			var/vx = delta_x
-			var/vy = delta_y
-			var/px2 = other_x
-			var/py2 = other_y
-			var/vx2 = other_delta_x
-			var/vy2 = other_delta_y
-			//Both must be moving
-			if((vx || vy) && (vx2 || vy2))
-				//Collision between 2 vectors using simultaneous equations.
-				var/mu = (vx * py2 + vy * px - py * vx - vy * px2) / (vy * vx2 - vx * vy2)
-				var/lambda = (px2 + vx2 * mu - px) / vx
-				if(lambda >= 0 && lambda <= 1 && mu >= 0 && mu <= 1)
-					//Collision
-					LAZYADD(colliding_with, object)
-					collision(object)
-					colliding = TRUE
+				message_admins("Failed to calculate")
+			//Calculate the closest distance
+			var/ax = px + vx * correct_lambda
+			var/ay = py + vy * correct_lambda
+			var/bx = px2 + vx2 * correct_mu
+			var/by = py2 + vy2 * correct_mu
+			var/dx = bx - ax
+			var/dy = by - ay
+			if(sqrt(dx * dx + dy * dy) <= radius + object.radius)
+				message_admins("[name] colided with [object.name]")
+				//Collision
+				LAZYADD(colliding_with, object)
+				collision(object)
+				//Static objects dont check collisions, so call their collision proc for them.
+				if(object.static_object)
+					object.collision(src)
+				colliding = TRUE
 	if(!colliding)
 		collision_ignored = FALSE
 
@@ -337,3 +366,15 @@
 
 /datum/orbital_object/proc/post_map_setup()
 	return
+
+//Registers that something references this object, prevents potential hard dels
+//Simple system, variable name must be constant
+//This is super weird but helps prevent hard dels in an easier way that doesn't require
+//repeating register signal code.
+/datum/orbital_object/proc/RegisterReference(datum/source_object)
+	source_object.RegisterSignal(src, COMSIG_PARENT_QDELETING, /datum/orbital_object.proc/UnregisterReference)
+	source_object.vars[source_object["referencedOrbitalObjectVarName"]] = src
+
+/datum/orbital_object/proc/UnregisterReference(datum/source_object)
+	source_object.UnregisterSignal(src, COMSIG_PARENT_QDELETING)
+	source_object.vars[source_object["referencedOrbitalObjectVarName"]] = null
