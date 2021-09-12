@@ -11,6 +11,8 @@
 	var/cooldown = 5 SECONDS
 	var/shots = 5
 	var/shot_cooldown = 4
+	//Inaccuracy in degress
+	var/innacuracy = 1
 	//Projectile type
 	var/projectile_typepath = null	//Typepath of the projectile
 
@@ -44,6 +46,7 @@
 		//Calculate the velocity
 		var/datum/orbital_vector/velocity = new(delta_x, delta_y)
 		velocity.NormalizeSelf()
+		velocity.RotateSelf(rand(-10000, 10000) * innacuracy * 0.0001)
 		velocity.ScaleSelf(initial(projectile_path.projectile_speed))
 		//Create the projectile
 		new projectile_typepath(
