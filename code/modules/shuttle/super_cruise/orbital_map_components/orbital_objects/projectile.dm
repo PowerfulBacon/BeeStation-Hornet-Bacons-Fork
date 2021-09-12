@@ -1,7 +1,7 @@
 /datum/orbital_object/projectile
 	name = "Projectile"
 	collision_type = COLLISION_PROJECTILE
-	collision_flags = COLLISION_SHUTTLES | COLLISION_Z_LINKED
+	collision_flags = COLLISION_SHUTTLES | COLLISION_Z_LINKED | COLLISION_METEOR
 	ignore_gravity = TRUE
 	render_mode = RENDER_MODE_PROJECTILE
 	//Projectiles are a signle instance to stop spamming UIs.
@@ -28,4 +28,6 @@
 		qdel(src)
 
 /datum/orbital_object/projectile/collision(datum/orbital_object/other)
+	if(istype(other, /datum/orbital_object/meteor))
+		qdel(other)
 	qdel(src)
