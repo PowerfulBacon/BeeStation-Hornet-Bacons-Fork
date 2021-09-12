@@ -375,8 +375,6 @@ export const OrbitalMapDisplay = (props, context) => {
   const {
     map_objects = [],
     shuttleName = "",
-    desired_vel_x = 0,
-    desired_vel_y = 0,
     validDockingPorts = [],
     isDocking = false,
     interdiction_range = 150,
@@ -483,9 +481,7 @@ export const OrbitalMapDisplay = (props, context) => {
             shuttleName={shuttleName}
             created_objects={created_objects}
             destroyed_objects={destroyed_objects}
-            currentUpdateIndex={update_index}
-            desired_vel_x={desired_vel_x}
-            desired_vel_y={desired_vel_y}>
+            currentUpdateIndex={update_index}>
             {control => (
               control.svgComponent
             )}

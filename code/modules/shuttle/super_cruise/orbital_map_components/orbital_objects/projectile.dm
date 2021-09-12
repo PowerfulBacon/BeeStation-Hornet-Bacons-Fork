@@ -26,3 +26,6 @@
 	//The time has come, delete the projectile.
 	if(world.time > kill_time)
 		qdel(src)
+
+/datum/orbital_object/projectile/collision(datum/orbital_object/other)
+	qdel(src)

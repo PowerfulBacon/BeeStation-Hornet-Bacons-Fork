@@ -1,7 +1,8 @@
 /datum/orbital_object/shuttle
 	name = "Shuttle"
 	collision_type = COLLISION_SHUTTLES
-	collision_flags = COLLISION_Z_LINKED
+	//Collision is handled by z-linked.
+	collision_flags = NONE
 	render_mode = RENDER_MODE_SHUTTLE
 	var/shuttle_port_id
 	//Shuttle data

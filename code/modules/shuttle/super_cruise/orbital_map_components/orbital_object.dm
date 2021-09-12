@@ -55,6 +55,7 @@
 	//Our collision type
 	var/collision_type = COLLISION_UNDEFINED
 	//The collision flags we register with
+	//Add to this when you want THIS objects collision proc to be called.
 	var/collision_flags = NONE
 
 	//Single instanced?
@@ -141,7 +142,7 @@
 			direction.NormalizeSelf()
 			direction.ScaleSelf(acceleration_amount)
 			//Add on the gravitational acceleration
-			acceleration_per_second.Add(direction)
+			acceleration_per_second.AddSelf(direction)
 		//Divide acceleration per second by the tick rate
 		accelerate_towards(acceleration_per_second, delta_time)
 
@@ -156,7 +157,7 @@
 		perpendicular_vector.NormalizeSelf()
 		perpendicular_vector.ScaleSelf(relative_velocity_required)
 		//Set it because we are a lazy shit
-		velocity = perpendicular_vector.Add(target_orbital_body.velocity)
+		velocity = perpendicular_vector.AddSelf(target_orbital_body.velocity)
 
 	//===================================
 	// MOVEMENT
@@ -315,7 +316,7 @@
 	//Move all orbitting b()odies too.
 	if(orbitting_bodies)
 		for(var/datum/orbital_object/object in orbitting_bodies)
-			object.position.Add(new /datum/orbital_vector(delta_x, delta_y))
+			object.position.AddSelf(new /datum/orbital_vector(delta_x, delta_y))
 	//Set velocity
 	var/relative_velocity = sqrt((GRAVITATIONAL_CONSTANT * (target_body.mass + mass)) / orbit_radius)
 	velocity.x = target_body.velocity.x

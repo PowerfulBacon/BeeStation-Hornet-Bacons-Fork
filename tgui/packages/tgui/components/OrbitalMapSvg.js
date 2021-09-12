@@ -19,6 +19,7 @@ export class OrbitalMapSvg extends Component {
       tickIndex: -1,
       tickTimer: new Date(),
       renderableObjectTypes: {},
+      debugging: false,
     };
     this.renderTypeDict = {
       "broken": Broken,
@@ -80,10 +81,15 @@ export class OrbitalMapSvg extends Component {
 
     // Clone the dictionary
     let outputInstances = [];
-    for (const existingId in singleInstanceObjects) {
-      if (!(existingId in destroyed_objects))
+    for (const existingId of singleInstanceObjects) {
+      if (!destroyed_objects.includes(existingId))
       {
-        outputInstances.push(existingId);
+        if (new Date() - renderableObjectTypes[existingId].createdAt < 15000)
+        {
+          newRenderableObjectTypes[existingId]
+            = renderableObjectTypes[existingId];
+          outputInstances.push(existingId);
+        }
       }
     }
 
@@ -99,7 +105,7 @@ export class OrbitalMapSvg extends Component {
           = new this.renderTypeDict[created_object.render_mode];
         // Initial variable setup
         newRenderableObjectTypes[created_object.id].onTick(
-          created_object.name,
+          created_object.name + " | " + created_object.id,
           created_object.position_x,
           created_object.position_y,
           created_object.velocity_x,
@@ -112,14 +118,17 @@ export class OrbitalMapSvg extends Component {
     // Tick any single instances still alive
     outputInstances.forEach(id => {
       let singleInstanceObject = newRenderableObjectTypes[id];
-      singleInstanceObject.onTick(
-        singleInstanceObject.name,
-        singleInstanceObject.position_x + singleInstanceObject.velocity_x,
-        singleInstanceObject.position_y + singleInstanceObject.velocity_y,
-        singleInstanceObject.velocity_x,
-        singleInstanceObject.velocity_y,
-        singleInstanceObject.radius,
-      );
+      if (singleInstanceObject)
+      {
+        singleInstanceObject.onTick(
+          singleInstanceObject.name,
+          singleInstanceObject.position_x + singleInstanceObject.velocity_x,
+          singleInstanceObject.position_y + singleInstanceObject.velocity_y,
+          singleInstanceObject.velocity_x,
+          singleInstanceObject.velocity_y,
+          singleInstanceObject.radius,
+        );
+      }
     });
 
     // Update state
@@ -154,6 +163,36 @@ export class OrbitalMapSvg extends Component {
     return (
       <>
         <defs>
+          <pattern id="interdictionRange" width={50 * lockedZoomScale}
+            height={100 * lockedZoomScale}
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(40)"
+            x={scaledXOffset}
+            y={scaledYOffset}>
+            <rect width={25 * lockedZoomScale}
+              height={100 * lockedZoomScale}
+              fill="rgba(64, 194, 86, 0.05)" />
+            <rect
+              x={25*lockedZoomScale}
+              width={25 * lockedZoomScale}
+              height={100 * lockedZoomScale}
+              fill="rgba(64, 194, 86, 0.01)" />
+          </pattern>
+          <pattern id="planetfill" width={50 * lockedZoomScale}
+            height={100 * lockedZoomScale}
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(40)"
+            x={scaledXOffset}
+            y={scaledYOffset}>
+            <rect width={25 * lockedZoomScale}
+              height={100 * lockedZoomScale}
+              fill="rgba(252, 166, 53, 0.2)" />
+            <rect
+              x={25*lockedZoomScale}
+              width={25 * lockedZoomScale}
+              height={100 * lockedZoomScale}
+              fill="rgba(252, 166, 53, 0.05)" />
+          </pattern>
           <pattern id="grid" width={100 * lockedZoomScale}
             height={100 * lockedZoomScale}
             patternUnits="userSpaceOnUse"
@@ -214,6 +253,8 @@ export class OrbitalMapSvg extends Component {
       tickIndex,
       internalElapsed,
       renderableObjectTypes,
+      debugging,
+      singleInstanceObjects,
     } = this.state;
 
     const {
@@ -228,19 +269,20 @@ export class OrbitalMapSvg extends Component {
       shuttleName,
       currentUpdateIndex,
       children,
-      desired_vel_x,
-      desired_vel_y,
       lockedZoomScale,
+      created_objects,
     } = this.props;
 
     // Calculate elapsed here to not do a bunch of stupid updates.
-    let elapsed = 0;
+    let elapsed = 1;
 
     // Calculate an elapsed time
     if (tickIndex === currentUpdateIndex)
     {
       elapsed = internalElapsed;
     }
+
+    let ourRenderableObject = ourObject && renderableObjectTypes[ourObject.id];
 
     let svgComponent = (
       <svg
@@ -252,43 +294,37 @@ export class OrbitalMapSvg extends Component {
         overflowY="hidden" >
         {this.getGridBackground()}
         {Object.values(renderableObjectTypes).map(render_object => (
-          <>
-            {render_object.generateComponentImage(
-              xOffset,
-              yOffset,
-              elapsed,
-              zoomScale,
-              lockedZoomScale
-            )}
-            {(shuttleName === render_object.name
-              && (desired_vel_x || desired_vel_y)) && (
-              <line
-                style={blueLineStyle}
-                x1={Math.max(Math.min((render_object.position_x
-                  + xOffset
-                  + render_object.velocity_x * elapsed)
-                  * zoomScale * mapDistanceScale, 250), -250)}
-                y1={Math.max(Math.min((render_object.position_y
-                  + yOffset
-                  + render_object.velocity_y * elapsed)
-                  * zoomScale * mapDistanceScale, 250), -250)}
-                x2={Math.max(Math.min((render_object.position_x
-                  + xOffset
-                  + render_object.velocity_x * elapsed
-                  + desired_vel_x * 10)
-                  * zoomScale * mapDistanceScale, 250), -250)}
-                y2={Math.max(Math.min((render_object.position_y
-                  + yOffset
-                  + render_object.velocity_y * elapsed
-                  + desired_vel_y * 10)
-                  * zoomScale * mapDistanceScale, 250), -250)} />
-            )}
-          </>
+          render_object.generateComponentImage(
+            xOffset,
+            yOffset,
+            elapsed,
+            zoomScale,
+            lockedZoomScale
+          )
         ))};
+        {/*
+          Debugging
+        */}
+        {debugging && (
+          <>
+            <text
+              x={-230}
+              y={-230}
+              fill="white">
+              SIO: {JSON.stringify(singleInstanceObjects)}
+            </text>
+            <text
+              x={-230}
+              y={-210}
+              fill="white">
+              CREATED: {JSON.stringify(created_objects)}
+            </text>
+          </>
+        )}
         {/*
           Shuttle Target Locator
         */}
-        {((shuttleTargetX || shuttleTargetY) && ourObject) && (
+        {((shuttleTargetX || shuttleTargetY) && ourRenderableObject) && (
           <>
             <rect
               x={Math.max(Math.min((shuttleTargetX
@@ -329,13 +365,13 @@ export class OrbitalMapSvg extends Component {
                 * zoomScale, 250), -250) + 25 * zoomScale}
               style={boxTargetStyle} />
             <line
-              x1={Math.max(Math.min((ourObject.position_x
+              x1={Math.max(Math.min((ourRenderableObject.position_x
                 + xOffset
-                + ourObject.velocity_x * elapsed)
+                + ourRenderableObject.velocity_x * elapsed)
                 * zoomScale * mapDistanceScale, 250), -250)}
-              y1={Math.max(Math.min((ourObject.position_y
+              y1={Math.max(Math.min((ourRenderableObject.position_y
                 + yOffset
-                + ourObject.velocity_y * elapsed)
+                + ourRenderableObject.velocity_y * elapsed)
                 * zoomScale * mapDistanceScale, 250), -250)}
               x2={Math.max(Math.min((shuttleTargetX
                 + xOffset)
@@ -346,21 +382,21 @@ export class OrbitalMapSvg extends Component {
               style={lineTargetStyle} />
           </>
         )}
-        {ourObject && (
+        {ourRenderableObject && (
           <circle
-            cx={(ourObject.position_x
+            cx={(ourRenderableObject.position_x
               + xOffset
-              + ourObject.velocity_x * elapsed)
+              + ourRenderableObject.velocity_x * elapsed)
               * zoomScale * mapDistanceScale}
-            cy={(ourObject.position_y
+            cy={(ourRenderableObject.position_y
               + yOffset
-              + ourObject.velocity_y * elapsed)
+              + ourRenderableObject.velocity_y * elapsed)
               * zoomScale * mapDistanceScale}
             r={Math.max(5 * zoomScale, interdiction_range
               * zoomScale)}
-            stroke="#00FF00"
+            stroke="rgba(0, 255, 0, 0.5)"
             stroke-width="1"
-            fill="rgba(0,0,0,0)" />
+            fill="url(#interdictionRange)" />
         )}
       </svg>
     );
@@ -394,7 +430,7 @@ class RenderableObjectType {
       stroke: '#BBBBBB',
       strokeWidth: '2',
     };
-    this.velocityLengthMult = 10;
+    this.velocityLengthMult = 50;
     this.inBounds;
   }
 
@@ -485,13 +521,14 @@ class RenderableObjectType {
 class PlanettaryBody extends RenderableObjectType {
   constructor() {
     super();
-    this.outlineColour = "#BBBBBB";
+    this.outlineColour = "#fca635";
     this.outlineWidth = 1;
-    this.fill = "rgba(0, 0, 0, 0)";
+    this.fill = "url(#planetfill)";
+    // this.fill = "rgba(252, 166, 53, 0.1)";
     this.textSize = 40;
-    this.fontFill = "white";
+    this.fontFill = "#fca635";
     this.lineStyle = {
-      stroke: '#BBBBBB',
+      stroke: '#fca635',
       strokeWidth: '2',
     };
     this.velocityLengthMult = 10;
@@ -502,7 +539,7 @@ class PlanettaryBody extends RenderableObjectType {
 class Beacon extends RenderableObjectType {
   constructor() {
     super();
-    this.outlineColour = "#BBBBBB";
+    this.outlineColour = "rgba(200, 200, 200, 0.3)";
     this.outlineWidth = 1;
     this.fill = "rgba(0, 0, 0, 0)";
     this.textSize = 40;
@@ -579,6 +616,7 @@ class Shuttle extends RenderableObjectType {
       strokeWidth: '0.5',
       opacity: 0.5,
     };
+    this.velocityLengthMult = 10;
     // Draw a path line
     // Circular queue since javascript handles arrays kinda poorly.
     this.recordedTrack = [
@@ -773,17 +811,60 @@ class Shuttle extends RenderableObjectType {
 class Projectile extends RenderableObjectType {
   constructor() {
     super();
-    this.outlineColour = "#BBBBBB";
-    this.outlineWidth = 1;
-    this.fill = "rgba(0, 0, 0, 0)";
-    this.textSize = 40;
-    this.fontFill = "white";
     this.lineStyle = {
-      stroke: '#BBBBBB',
+      stroke: '#FF0000',
       strokeWidth: '2',
+      opacity: 0.8,
     };
-    this.velocityLengthMult = 10;
+    this.velocityLengthMult = 0.2;
+    this.createdAt = new Date();
   }
+
+  // Called on render()
+  generateComponentImage(
+    // Offset of the map
+    xOffset,
+    yOffset,
+    // Elapsed time since last full update
+    elapsed,
+    // Zoom scale of the map
+    zoomScale,
+    lockedZoomScale,
+  )
+  {
+
+    let outputXPosition = (this.position_x
+      + xOffset
+      + this.velocity_x * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputYPosition = (this.position_y
+      + yOffset
+      + this.velocity_y * elapsed)
+      * zoomScale * mapDistanceScale;
+    let outputRadius = this.radius * zoomScale;
+
+    this.inBounds = outputXPosition < 250 && outputYPosition < 250
+      && outputXPosition > -250 && outputYPosition > -250;
+
+    if (!this.inBounds)
+    {
+      outputRadius = 5 * zoomScale;
+      outputXPosition = clamp(outputXPosition, -250, 250);
+      outputYPosition = clamp(outputYPosition, -250, 250);
+    }
+
+    return (
+      <line
+        style={this.lineStyle}
+        x1={outputXPosition}
+        y1={outputYPosition}
+        x2={outputXPosition + (this.velocity_x * zoomScale)
+            * this.velocityLengthMult}
+        y2={outputYPosition + (this.velocity_y * zoomScale)
+            * this.velocityLengthMult} />
+    );
+  }
+
 }
 
 // Broken

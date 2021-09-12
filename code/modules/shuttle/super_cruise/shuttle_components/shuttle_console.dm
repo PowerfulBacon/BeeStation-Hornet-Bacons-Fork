@@ -34,6 +34,9 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	//Our orbital body.
 	var/datum/orbital_object/shuttle/shuttleObject
 
+	//Assoc data
+	var/list/assoc_data = list()
+
 /obj/machinery/computer/shuttle_flight/Initialize(mapload, obj/item/circuitboard/C)
 	. = ..()
 	valid_docks = params2list(possible_destinations)
@@ -80,6 +83,10 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
+		//Store user specific data.
+		assoc_data["[REF(user)]"] = list(
+			"active_single_instances" = list(),
+		)
 		ui = new(user, src, "OrbitalMap")
 		ui.open()
 	SSorbits.open_orbital_maps |= ui
@@ -87,6 +94,8 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 
 /obj/machinery/computer/shuttle_flight/ui_close(mob/user, datum/tgui/tgui)
 	SSorbits.open_orbital_maps -= tgui
+	//Clear the data from the user, we don't need it anymore.
+	assoc_data -= "[REF(user)]"
 
 /obj/machinery/computer/shuttle_flight/ui_static_data(mob/user)
 	var/list/data = list()
@@ -104,33 +113,24 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	return data
 
 /obj/machinery/computer/shuttle_flight/ui_data(mob/user)
-	var/list/data = list()
-	data["update_index"] = SSorbits.times_fired
-	//Add orbital bodies
-	data["map_objects"] = list()
-	var/datum/orbital_map/showing_map = SSorbits.orbital_maps[orbital_map_index]
-	for(var/map_key in showing_map.collision_zone_bodies)
-		for(var/datum/orbital_object/object as() in showing_map.collision_zone_bodies[map_key])
-			if(!object)
-				continue
-			//we can't see it, unless we are stealth too
-			if(shuttleObject)
-				if(object != shuttleObject && (object.stealth && !shuttleObject.stealth))
-					continue
-			else
-				if(object.stealth)
-					continue
-			//Send to be rendered on the UI
-			data["map_objects"] += list(list(
-				"id" = object.unique_id,
-				"name" = object.name,
-				"position_x" = object.position.x,
-				"position_y" = object.position.y,
-				"velocity_x" = object.velocity.x * object.velocity_multiplier,
-				"velocity_y" = object.velocity.y * object.velocity_multiplier,
-				"radius" = object.radius,
-				"render_mode" = object.render_mode,
-			))
+	//Fetch data
+	var/user_ref = "[REF(user)]"
+	if(!assoc_data[user_ref])
+		log_runtime("Orbital map updated UI without reference to [user] in the assoc data list.")
+		assoc_data[user_ref] = list(
+			"active_single_instances" = list(),
+		)
+
+	//Get the base map data
+	var/list/data = SSorbits.get_orbital_map_base_data(
+		SSorbits.orbital_maps[orbital_map_index],
+		assoc_data,
+		user_ref,
+		FALSE,
+		shuttleObject
+	)
+
+	//Send shuttle data
 	if(!SSshuttle.getShuttle(shuttleId))
 		data["linkedToShuttle"] = FALSE
 		return data
@@ -164,8 +164,6 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	data["shuttleAngle"] = shuttleObject.angle
 	data["shuttleThrust"] = shuttleObject.thrust
 	data["autopilot_enabled"] = shuttleObject.autopilot
-	data["desired_vel_x"] = shuttleObject.desired_vel_x
-	data["desired_vel_y"] = shuttleObject.desired_vel_y
 	if(shuttleObject?.shuttleTarget)
 		data["shuttleVelX"] = shuttleObject.velocity.x - shuttleObject.shuttleTarget.velocity.x
 		data["shuttleVelY"] = shuttleObject.velocity.y - shuttleObject.shuttleTarget.velocity.y
