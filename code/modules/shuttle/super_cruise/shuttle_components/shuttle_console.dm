@@ -46,7 +46,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 /obj/machinery/computer/shuttle_flight/Destroy()
 	. = ..()
 	SSorbits.open_orbital_maps -= SStgui.get_all_open_uis(src)
-	shuttleObject = null
+	unreference_shuttle()
 
 /obj/machinery/computer/shuttle_flight/process()
 	. = ..()
@@ -54,6 +54,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	//Check to see if the shuttleobject was launched by another console.
 	if(QDELETED(shuttleObject) && SSorbits.assoc_shuttles.Find(shuttleId))
 		shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+		RegisterSignal(shuttleObject, COMSIG_PARENT_QDELETING, .proc/unreference_shuttle)
 
 	if(recall_docking_port_id && shuttleObject?.docking_target && shuttleObject.autopilot && shuttleObject.shuttleTarget == shuttleObject.docking_target && shuttleObject.controlling_computer == src)
 		//We are at destination, dock.
@@ -242,6 +243,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 							if(shuttleObject.shuttleTarget == z_linked && shuttleObject.controlling_computer == src)
 								return
 							shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+							RegisterSignal(shuttleObject, COMSIG_PARENT_QDELETING, .proc/unreference_shuttle)
 							shuttleObject.shuttleTarget = z_linked
 							shuttleObject.autopilot = TRUE
 							shuttleObject.controlling_computer = src
@@ -439,8 +441,10 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	if(SSorbits.assoc_shuttles.Find(shuttleId))
 		say("Shuttle is controlled from another location, updating telemetry.")
 		shuttleObject = SSorbits.assoc_shuttles[shuttleId]
+		RegisterSignal(shuttleObject, COMSIG_PARENT_QDELETING, .proc/unreference_shuttle)
 		return shuttleObject
 	shuttleObject = mobile_port.enter_supercruise()
+	RegisterSignal(shuttleObject, COMSIG_PARENT_QDELETING, .proc/unreference_shuttle)
 	if(!shuttleObject)
 		say("Failed to enter supercruise due to an unknown error.")
 		return
@@ -522,6 +526,10 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		message_admins("CAUTION: SHUTTLE [shuttleId] REACHED THE GENERATION TIMEOUT OF 3 MINUTES. THE ASSIGNED Z-LEVEL IS STILL MARKED AS GENERATING, BUT WE ARE DOCKING ANYWAY.")
 		log_mapping("CAUTION: SHUTTLE [shuttleId] REACHED THE GENERATION TIMEOUT OF 3 MINUTES. THE ASSIGNED Z-LEVEL IS STILL MARKED AS GENERATING, BUT WE ARE DOCKING ANYWAY.")
 	shuttle_dock.setTimer(20)
+
+/obj/machinery/computer/shuttle_flight/proc/unreference_shuttle()
+	UnregisterSignal(shuttleObject, COMSIG_PARENT_QDELETING)
+	shuttleObject = null
 
 /obj/machinery/computer/shuttle_flight/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
