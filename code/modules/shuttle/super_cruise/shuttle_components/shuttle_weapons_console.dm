@@ -28,8 +28,8 @@
 	//TODO DEBUG:
 	attached_orbital_object = SSorbits.station_instance
 	var/datum/weapon_system/WS = new /datum/weapon_system/debug
-	//TODO ENDDEBUG
 	attached_weapon_systems[WS.weapon_id] = WS
+	//TODO ENDDEBUG
 	//Unlike the attached object when its destroyed.
 	if(attached_orbital_object)
 		RegisterSignal(attached_orbital_object, COMSIG_PARENT_QDELETING, .proc/unlink)
