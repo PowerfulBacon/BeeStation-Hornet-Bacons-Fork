@@ -29,6 +29,7 @@
 #define COLLISION_SHUTTLES (1 << 1)	//Shuttle collision flag
 #define COLLISION_Z_LINKED (1 << 2)	//Z linked collision flag
 #define COLLISION_PROJECTILE (1 << 3) //Projectile collision flag
+#define COLLISION_METEOR (1 << 4) //Meteor collisions
 
 //Render modes
 //These are defined in OrbitalMapSvg.js

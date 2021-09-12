@@ -173,6 +173,9 @@
 	//Oh we moved btw
 	parent_map.on_body_move(src, prev_x, prev_y)
 
+	//Oh we moved btw
+	parent_map.on_body_move(src, prev_x, prev_y)
+
 	//===================================
 	// COLLISION CHECKING
 	//===================================
@@ -285,7 +288,6 @@
 					LAZYADD(colliding_with, object)
 					collision(object)
 					colliding = TRUE
-					message_admins("2 objects just intersected and thats really cool!")
 	if(!colliding)
 		collision_ignored = FALSE
 
