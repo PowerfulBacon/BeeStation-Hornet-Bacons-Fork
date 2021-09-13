@@ -206,10 +206,12 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 		if(istype(cur_area, recorded_shuttle_area))
 			if(istype(curT, /turf/open/space))
 				continue
-			if(length(curT.baseturfs) < 2)
+			//Make sure there is a base turf so when we leave something will be left behind.
+			if(!length(curT.baseturfs))
 				continue
 			//Add the shuttle base shit to the shuttle
-			curT.baseturfs.Insert(3, /turf/baseturf_skipover/shuttle)
+			//Add the shuttle base turf to the end, so that anything underneath that turf will be left behind.
+			curT.baseturfs.Insert(length(curT.baseturfs) + 1, /turf/baseturf_skipover/shuttle)
 			port.shuttle_areas[cur_area] = TRUE
 
 	port.linkup(new_shuttle, stationary_port)
