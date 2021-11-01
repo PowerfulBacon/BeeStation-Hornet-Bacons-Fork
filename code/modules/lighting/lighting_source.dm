@@ -63,19 +63,16 @@
 	y = source_turf.y
 	z = source_turf.z
 
-	SSlighting.light_sources += src
-	LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
-
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NEW_LIGHT_SOURCE, src)
+	SSlighting.create_source(src)
 
 	log_lighting("Lighting source created at [x], [y], [z] with radius of [light_range]")
 
 /datum/light_source/Destroy(...)
-	SSlighting.light_sources -= src
-	LAZYREMOVE(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
+	SSlighting.destroy_source(src)
 	//Remove references to ourself.
 	LAZYREMOVE(source_atom?.light_sources, src)
 	LAZYREMOVE(contained_atom?.light_sources, src)
+	UnregisterSignal(contained_atom, COMSIG_MOVABLE_MOVED)
 	for(var/atom/movable/lighting_mask_holder/mask_holder in lighting_mask_holders)
 		mask_holder.vis_contents -= our_mask
 	lighting_mask_holders.Cut()
@@ -86,8 +83,14 @@
 	//Remove ourselves from the old containing atoms light sources
 	if(contained_atom && contained_atom != source_atom)
 		LAZYREMOVE(contained_atom.light_sources, src)
+
+	//Unreg signals
+	if(contained_atom)
+		UnregisterSignal(contained_atom, COMSIG_MOVABLE_MOVED)
+
 	//Find our new container
 	if(isturf(source_atom) || isarea(source_atom))
+		RegisterSignal(contained_atom, COMSIG_MOVABLE_MOVED, .proc/update_position)
 		contained_atom = source_atom
 		return
 
@@ -96,6 +99,7 @@
 		if(!contained_atom)
 			//Welcome to nullspace my friend.
 			contained_atom = source_atom
+			RegisterSignal(contained_atom, COMSIG_MOVABLE_MOVED, .proc/update_position)
 			return
 		if(istype(contained_atom.loc, /turf))
 			break
@@ -103,6 +107,8 @@
 	//Add ourselves to their light sources
 	if(contained_atom != source_atom)
 		LAZYADD(contained_atom.light_sources, src)
+	//We got it
+	RegisterSignal(contained_atom, COMSIG_MOVABLE_MOVED, .proc/update_position)
 
 //Update light if changed.
 /datum/light_source/proc/set_light(var/l_range, var/l_power, var/l_color = NONSENSICAL_VALUE)
@@ -128,14 +134,13 @@
 	var/old_y = y
 	var/old_z = z
 
-	//Remove old source
-	LAZYREMOVE(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
-
 	//Add new
 	x = new_turf.x
 	y = new_turf.y
 	z = new_turf.z
-	LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_SOURCE], src)
+
+	//Moved
+	SSlighting.move_source(src, locate(old_x, old_y, old_z))
 
 	//Find our containing atom.
 	find_containing_atom()

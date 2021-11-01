@@ -16,7 +16,6 @@
 #define COMSIG_GLOB_PRE_RANDOM_EVENT "!pre_random_event"
 	/// Do not allow this random event to continue.
 	#define CANCEL_PRE_RANDOM_EVENT (1<<0)
-#define COMSIG_GLOB_NEW_LIGHT_SOURCE "!new_source"				//! A new light source was created: (datum/light_source)
 
 /// Signifies that this proc is used to handle signals.
 /// Every proc you pass to RegisterSignal must have this.

@@ -18,10 +18,16 @@
 	anchored = TRUE
 	appearance_flags = TILE_BOUND
 	glide_size = INFINITY
-	//Current position of this viewing object
-	var/mask_x
-	var/mask_y
-	var/mask_z
+
+	//Recorded position in the light source grid
+	var/grid_x = 0
+	var/grid_y = 0
+	var/grid_z = 0
+
+	//Viewer width and height
+	var/viewer_width = 7
+	var/viewer_height = 9
+
 	//The client that owns this
 	var/client/owner
 	//The top level atom we are contained within
@@ -44,23 +50,20 @@
 		CRASH("lighting mask holder initialized without a client!")
 	//Set position
 	var/turf/T = get_turf(src)
-	if(T)
-		mask_x = T.x
-		mask_y = T.y
-		mask_z = T.z
 	//Owner
 	owner = C
 	//Get contained atom
 	containing_atom = get_containing_atom()
 	change_contained_atom(null, containing_atom)
-	//Register global light created signal
-	RegisterSignal(SSdcs, COMSIG_GLOB_NEW_LIGHT_SOURCE, .proc/light_source_created)
 	//Initialize a post-login callback for tracking the new mobs
 	owner.player_details.post_login_callbacks += CALLBACK(src, .proc/client_mob_changed)
 	//Add ourselves to the light viewer list
-	if(mask_x && mask_y && mask_z)
-		LAZYADD(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
-		log_lighting("New lighting viewer ([owner]) created at [mask_x], [mask_y], [mask_z]")
+	if(x && y && z)
+		LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_VIEWER], src)
+		grid_x = x
+		grid_y = y
+		grid_z = z
+		log_lighting("New lighting viewer ([owner]) created at [x], [y], [z]")
 	else
 		log_lighting("New lighting viewer ([owner]) created in nullspace.")
 
@@ -75,8 +78,8 @@
 	//Cut the list of visible sources
 	sources_visible.Cut()
 	//Remove ourself from the light viewer list
-	if(mask_x && mask_y && mask_z)
-		LAZYREMOVE(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
+	if(grid_x && grid_y && grid_z)
+		LAZYREMOVE(SSlighting.light_source_grid[grid_z][grid_x][grid_y][LIGHT_VIEWER], src)
 	. = ..()
 
 //=========================
@@ -107,17 +110,6 @@
 	if(!is_source_in_view(source))
 		stop_rendering_source(source)
 
-//Starts rendering a light source
-/atom/movable/lighting_mask_holder/proc/light_source_created(datum/source, datum/light_source/created_source)
-	SIGNAL_HANDLER
-	if(is_source_in_view(created_source))
-		start_rendering_source(created_source)
-
-//Remove a light source from being rendered
-/atom/movable/lighting_mask_holder/proc/light_source_destroyed(datum/light_source/destroyed_source)
-	SIGNAL_HANDLER
-	stop_rendering_source(destroyed_source)
-
 //=========================
 // START/STOP RENDERING
 //=========================
@@ -134,16 +126,14 @@
 	//However we can put the atom in the vis_contents of an image and then stick that image in client.images!
 	render_image.vis_contents += rendering_source.our_mask
 	//Apply a pixel offset so the light renders in the correct position
-	var/delta_x = rendering_source.x - x
-	var/delta_y = rendering_source.y - y
+	var/delta_x = rendering_source.x - grid_x
+	var/delta_y = rendering_source.y - grid_y
 	//Apply the shift
 	render_image.pixel_x = delta_x * world.icon_size
 	render_image.pixel_y = delta_y * world.icon_size
 	//Apply the image to the client's images
 	owner.images += render_image
 	sources_visible[rendering_source] = render_image
-	//Begin tracking for source deletion
-	RegisterSignal(rendering_source, COMSIG_PARENT_QDELETING, .proc/light_source_destroyed)
 	//Track for light source movements
 	RegisterSignal(rendering_source, COMSIG_LIGHT_SOURCE_MOVED, .proc/light_source_moved)
 	log_lighting("[owner]'s light viewer began rendering light source at [rendering_source.x],[rendering_source.y],[rendering_source.z]")
@@ -168,21 +158,10 @@
 
 /atom/movable/lighting_mask_holder/Moved(atom/OldLoc, direct)
 	. = ..()
-	//Move the light mask
-	//Remove from the old position
-	if(mask_x && mask_y && mask_z)
-		LAZYREMOVE(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
-	var/old_x = mask_x
-	var/old_y = mask_y
-	var/old_z = mask_z
-	mask_x = loc.x
-	mask_y = loc.y
-	mask_z = loc.z
-	//Add to the new position
-	if(mask_x && mask_y && mask_z)
-		LAZYADD(SSlighting.light_source_grid[mask_z][mask_x][mask_y][LIGHT_VIEWER], src)
+	//Move light mask
+	SSlighting.move_viewer(src, OldLoc)
 	//Translate all lights
-	update_contained_images(old_x, old_y, old_z)
+	update_contained_images(OldLoc.x, OldLoc.y, OldLoc.z)
 
 //=========================
 // MOVEMENT RENDERING UPDATES
@@ -190,7 +169,7 @@
 
 /atom/movable/lighting_mask_holder/proc/is_source_in_view(datum/light_source/source_in_view)
 	//Check for nullspace and to make sure both sources are on the same z-level.
-	if(!mask_z || mask_z != source_in_view.z)
+	if(!z || z != source_in_view.z)
 		return FALSE
 	//TODO: Replace world.view with client.view.
 	var/list/view_size = getviewsize(world.view)
@@ -201,8 +180,8 @@
 	var/view_width = round(view_size[1] / 2)
 	var/view_height=  round(view_size[2] / 2)
 	//Determine if the source is in view
-	var/delta_x = abs(mask_x - source_in_view.x)
-	var/delta_y = abs(mask_y - source_in_view.y)
+	var/delta_x = abs(grid_x - source_in_view.x)
+	var/delta_y = abs(grid_y - source_in_view.y)
 	//Determine range limit
 	var/range_limit_x = view_width + source_in_view.light_range
 	var/range_limit_y = view_height + source_in_view.light_range
@@ -211,14 +190,14 @@
 
 /atom/movable/lighting_mask_holder/proc/update_contained_images(old_x, old_y, old_z)
 	//Completely recalculate on changed Z
-	if(old_z != mask_z)
+	if(old_z != z)
 		//Stop rendering all light sources
 		for(var/datum/light_source/source as() in sources_visible)
 			stop_rendering_source(source)
 		//TODO: Render new light sources
 		return
-	var/delta_x = (old_x - mask_x) * world.icon_size
-	var/delta_y = (old_y - mask_y) * world.icon_size
+	var/delta_x = (old_x - grid_x) * world.icon_size
+	var/delta_y = (old_y - grid_y) * world.icon_size
 	for(var/datum/light_source/source as() in sources_visible)
 		var/image/I = sources_visible[source]
 		I.loc = loc
