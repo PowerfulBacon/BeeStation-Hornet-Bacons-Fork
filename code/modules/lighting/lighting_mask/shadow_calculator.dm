@@ -67,6 +67,9 @@
 			if(!LAZYLEN(thing.lights_affecting) && !A.base_lighting_alpha)
 				thing.luminosity = FALSE
 		affecting_turfs = null
+	//Remove the shadows
+	overlays.Cut()
+	shadows = null
 	. = ..()
 
 /atom/movable/lighting_mask/proc/link_turf_to_light(turf/T)

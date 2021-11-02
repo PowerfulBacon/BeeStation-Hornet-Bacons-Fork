@@ -198,13 +198,14 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = AREA_USAGE_LIGHT //Lights are calc'd via area so they dont need to be in the machine list
-	light_pixel_y = -8
+	light_pixel_y = 16				//This causes the shadows to act as if the light source is on the tile in front, making corners less intense
 	var/on = FALSE					// 1 if on, 0 if off
 	var/on_gs = FALSE
 	var/static_power_used = 0
 	var/brightness = 7			// luminosity when on, also used in power calculation
-	var/bulb_power = 1			// basically the alpha of the emitted light source
+	var/bulb_power = 2			// basically the alpha of the emitted light source
 	var/bulb_colour = "#FFF6ED"	// default colour of the light.
+	var/bulb_light_pixel_y = 16
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = FALSE
 	var/light_type = /obj/item/light/tube		// the type of light item
@@ -220,7 +221,7 @@
 	var/nightshift_enabled = FALSE	//Currently in night shift mode?
 	var/nightshift_allowed = TRUE	//Set to FALSE to never let this light get switched to night mode.
 	var/nightshift_brightness = 6
-	var/nightshift_light_power = 0.75
+	var/nightshift_light_power = 1
 	var/nightshift_light_color = "#FFDBB5" //qwerty's more cozy light
 
 	var/emergency_mode = FALSE	// if true, the light is in emergency mode
@@ -229,6 +230,8 @@
 	var/bulb_emergency_colour = "#FF3232"	// determines the colour of the light while it's in emergency mode
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
+	var/bulb_emergency_mask = /atom/movable/lighting_mask
+	var/bulb_emergency_pixel_y = -12
 
 	var/bulb_vacuum_colour = "#4F82FF"	// colour of the light when air alarm is set to severe
 	var/bulb_vacuum_brightness = 4
@@ -248,6 +251,7 @@
 	desc = "A small lighting fixture."
 	bulb_colour = "#FFE6CC" //little less cozy, bit more industrial, but still cozy.. -qwerty
 	light_type = /obj/item/light/bulb
+	bulb_emergency_mask = /atom/movable/lighting_mask/rotating
 
 /obj/machinery/light/small/broken
 	status = LIGHT_BROKEN
@@ -364,6 +368,7 @@
 		var/PO = bulb_power
 		var/CO = bulb_colour
 		var/BM = initial(light_mask_type)
+		light_pixel_y = bulb_light_pixel_y
 		if(color)
 			CO = color
 		var/area/A = get_area(src)
@@ -375,13 +380,14 @@
 			BR = bulb_vacuum_brightness
 		else if (GLOB.security_level == SEC_LEVEL_DELTA)
 			CO = bulb_emergency_colour
-			BM = /atom/movable/lighting_mask/rotating
+			BM = bulb_emergency_mask
+			light_pixel_y = bulb_emergency_pixel_y
 		else if (nightshift_enabled)
 			BR = nightshift_brightness
 			PO = nightshift_light_power
 			if(!color)
 				CO = nightshift_light_color
-		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
+		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color && BM == light.mask_type
 		if(!matching)
 			switchcount++
 			if(rigged)

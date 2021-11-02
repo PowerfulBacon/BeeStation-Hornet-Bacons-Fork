@@ -1,5 +1,4 @@
 //#define FORCE_MAP "_maps/boxstation.json"
-#define FORCE_MAP "_maps/deltastation.json"
 
 SUBSYSTEM_DEF(mapping)
 	name = "Mapping"

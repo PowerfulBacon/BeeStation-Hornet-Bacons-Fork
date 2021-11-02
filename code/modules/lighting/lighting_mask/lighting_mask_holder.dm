@@ -48,8 +48,6 @@
 		log_lighting("lighting mask holder initialized without a client!")
 		message_admins("lighting mask holder initialized without a client!")
 		CRASH("lighting mask holder initialized without a client!")
-	//Set position
-	var/turf/T = get_turf(src)
 	//Owner
 	owner = C
 	//Get contained atom
@@ -96,6 +94,7 @@
 // SIGNAL HANDLERS
 //=========================
 
+//TODO: this is interesting
 /atom/movable/lighting_mask_holder/proc/light_source_moved(datum/light_source/source, old_x, old_y, old_z)
 	SIGNAL_HANDLER
 	if(old_z != source.z)
@@ -117,7 +116,8 @@
 //Starts rendering a light source
 /atom/movable/lighting_mask_holder/proc/start_rendering_source(datum/light_source/rendering_source)
 	if(sources_visible[rendering_source])
-		CRASH("Attempted to start rendering a light source already being rendered.")
+		return	//TODO
+		//CRASH("Attempted to start rendering a light source already being rendered.")
 	if(!rendering_source.our_mask)
 		CRASH("Attempted to start rendering a light source with a null mask.")
 	//Create the image that will hold the light source's mask
@@ -136,12 +136,13 @@
 	sources_visible[rendering_source] = render_image
 	//Track for light source movements
 	RegisterSignal(rendering_source, COMSIG_LIGHT_SOURCE_MOVED, .proc/light_source_moved)
+	RegisterSignal(rendering_source, COMSIG_PARENT_PREQDELETED, .proc/stop_rendering_source)
 	log_lighting("[owner]'s light viewer began rendering light source at [rendering_source.x],[rendering_source.y],[rendering_source.z]")
 
 //Stops rendering a light source
 /atom/movable/lighting_mask_holder/proc/stop_rendering_source(datum/light_source/source)
 	//Stop tracking for deleted light sources.
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_PARENT_PREQDELETED)
 	UnregisterSignal(source, COMSIG_LIGHT_SOURCE_MOVED)
 	if(sources_visible[source])
 		//Remove the image from the client
@@ -230,7 +231,7 @@
 	//No contained atom, or the contained atom was put inside something
 	var/turf/our_turf = get_turf(src)
 	var/turf/their_turf = containing_atom ? get_turf(containing_atom) : null
-	if(their_turf != our_turf || !isturf(containing_atom.loc))
+	if(their_turf != our_turf || !isturf(containing_atom?.loc))
 		var/atom/containing_thing = get_containing_atom()
 		if(containing_thing != containing_atom)
 			change_contained_atom(containing_atom, containing_thing)

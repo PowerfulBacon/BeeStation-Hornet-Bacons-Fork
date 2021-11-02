@@ -23,8 +23,6 @@
 	//OUR LIGHTING MASK
 	//EXISTS IN NULLSPACE, USED AS AN IMAGE FOR CLIENTS
 	var/atom/movable/lighting_mask/our_mask
-	//Light mask holders we inside
-	var/list/lighting_mask_holders = list()
 
 // Thanks to Lohikar for flinging this tiny bit of code at me, increasing my brain cell count from 1 to 2 in the process.
 // This macro will only offset up to 1 tile, but anything with a greater offset is an outlier and probably should handle its own lighting offsets.
@@ -68,15 +66,14 @@
 	log_lighting("Lighting source created at [x], [y], [z] with radius of [light_range]")
 
 /datum/light_source/Destroy(...)
+
 	SSlighting.destroy_source(src)
+	source_atom.light = null
 	//Remove references to ourself.
 	LAZYREMOVE(source_atom?.light_sources, src)
 	LAZYREMOVE(contained_atom?.light_sources, src)
 	UnregisterSignal(contained_atom, COMSIG_MOVABLE_MOVED)
-	for(var/atom/movable/lighting_mask_holder/mask_holder in lighting_mask_holders)
-		mask_holder.vis_contents -= our_mask
-	lighting_mask_holders.Cut()
-	qdel(our_mask)
+	QDEL_NULL(our_mask)
 	return ..()
 
 /datum/light_source/proc/find_containing_atom()
