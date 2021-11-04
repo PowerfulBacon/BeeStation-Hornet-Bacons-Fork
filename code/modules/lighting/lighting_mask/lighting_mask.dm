@@ -35,6 +35,7 @@
 
 /atom/movable/lighting_mask/Initialize(mapload)
 	. = ..()
+	//Blur what is left
 	filters += GAUSSIAN_BLUR(2)
 
 /atom/movable/lighting_mask/Destroy()
