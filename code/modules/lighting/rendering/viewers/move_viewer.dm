@@ -18,8 +18,7 @@
 		//Determine new sources that are now in view
 		//TODO: Optimise by only searching new tiles and not all tiles
 		for(var/datum/light_source/source as() in get_sources_in_viewer_range(viewer))
-			if(!viewer.sources_visible[source])
-				viewer.start_rendering_source(source)
+			viewer.start_rendering_source(source)
 		//Set our positions after rendering sources
 		//so things are in the right place
 		viewer.grid_x = viewer.x

@@ -42,7 +42,11 @@
 /atom/movable/lighting_mask/personal_light
 	var/mob/owner
 
-//TODO:
 //Makes this only show to the owner when assigned in the lighting mask holder.
 /atom/movable/lighting_mask/personal_light/proc/give_owner(mob/_owner)
+	if(owner)
+		owner.client?.lighting_holder.stop_rendering_source(attached_atom.light)
+	owner = _owner
 
+/atom/movable/lighting_mask/personal_light/should_render_to(client/target)
+	return target.mob == owner

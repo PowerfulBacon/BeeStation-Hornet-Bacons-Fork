@@ -55,15 +55,7 @@
 	change_contained_atom(null, containing_atom)
 	//Initialize a post-login callback for tracking the new mobs
 	owner.player_details.post_login_callbacks += CALLBACK(src, .proc/client_mob_changed)
-	//Add ourselves to the light viewer list
-	if(x && y && z)
-		LAZYADD(SSlighting.light_source_grid[z][x][y][LIGHT_VIEWER], src)
-		grid_x = x
-		grid_y = y
-		grid_z = z
-		log_lighting("New lighting viewer ([owner]) created at [x], [y], [z]")
-	else
-		log_lighting("New lighting viewer ([owner]) created in nullspace.")
+	SSlighting.create_viewer(src)
 
 /atom/movable/lighting_mask_holder/Destroy(force)
 	log_lighting("Lighting viewer beloning to [owner] destroyed.")
@@ -89,12 +81,12 @@
 	change_contained_atom(containing_atom, new_container)
 	containing_atom = new_container
 	log_lighting("Client [owner] changed mob. Updating light viewer.")
+	SSlighting.update_viewer(src)
 
 //=========================
 // SIGNAL HANDLERS
 //=========================
 
-//TODO: this is interesting
 /atom/movable/lighting_mask_holder/proc/light_source_moved(datum/light_source/source, old_x, old_y, old_z)
 	SIGNAL_HANDLER
 	if(old_z != source.z)
@@ -116,10 +108,11 @@
 //Starts rendering a light source
 /atom/movable/lighting_mask_holder/proc/start_rendering_source(datum/light_source/rendering_source)
 	if(sources_visible[rendering_source])
-		return	//TODO
-		//CRASH("Attempted to start rendering a light source already being rendered.")
+		return
 	if(!rendering_source.our_mask)
 		CRASH("Attempted to start rendering a light source with a null mask.")
+	if(!rendering_source.our_mask.should_render_to(owner))
+		return
 	//Create the image that will hold the light source's mask
 	var/image/render_image = image(loc = loc, layer = LIGHTING_IMAGE_LAYER)
 	//We can't put atoms in the clients.images unfortunately.

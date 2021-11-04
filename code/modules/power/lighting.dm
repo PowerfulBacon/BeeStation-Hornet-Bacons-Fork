@@ -198,14 +198,14 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = AREA_USAGE_LIGHT //Lights are calc'd via area so they dont need to be in the machine list
-	light_pixel_y = 16				//This causes the shadows to act as if the light source is on the tile in front, making corners less intense
+	light_pixel_y = 12				//This causes the shadows to act as if the light source is on the tile in front, making corners less intense
 	var/on = FALSE					// 1 if on, 0 if off
 	var/on_gs = FALSE
 	var/static_power_used = 0
 	var/brightness = 7			// luminosity when on, also used in power calculation
 	var/bulb_power = 2			// basically the alpha of the emitted light source
 	var/bulb_colour = "#FFF6ED"	// default colour of the light.
-	var/bulb_light_pixel_y = 16
+	var/bulb_light_pixel_y = 12
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = FALSE
 	var/light_type = /obj/item/light/tube		// the type of light item

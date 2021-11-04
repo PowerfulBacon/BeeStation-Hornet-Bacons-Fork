@@ -200,6 +200,7 @@
 
 	var/list/overlays_to_add = list()
 	overlays.Cut()
+	shadows = null
 
 	for(var/group in grouped_atoms)
 		DO_SOMETHING_IF_DEBUGGING_SHADOWS(temp_timer = TICK_USAGE)
@@ -514,8 +515,8 @@
 //Converts the corners into the 3 (or 2) valid points
 //For example if a wall is top right of the source, the bottom left wall corner
 //can be removed otherwise the wall itself will be in the shadow.
-//Input: list(list(x1, y1), list(x2, y2))
-//Output: list(list(list(x, y), list(x, y))) <-- 2 coordinates that form a line
+//Input (block): list(list(x1, y1), list(x2, y2))
+//Output (lines): list(list(list(x, y), list(x, y))) <-- 2 coordinates that form a line
 /atom/movable/lighting_mask/proc/get_corners_from_coords(list/coordgroup)
 	//Get the raw numbers
 	var/xlow = coordgroup[1][1]

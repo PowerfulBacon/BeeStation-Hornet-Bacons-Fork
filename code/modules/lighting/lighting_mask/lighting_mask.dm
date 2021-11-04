@@ -33,6 +33,10 @@
 	var/currentAngle = 0
 	var/desiredAngle = 0
 
+/atom/movable/lighting_mask/Initialize(mapload)
+	. = ..()
+	filters += GAUSSIAN_BLUR(2)
+
 /atom/movable/lighting_mask/Destroy()
 	//Remove reference to the atom we are attached to
 	attached_atom = null
@@ -51,6 +55,9 @@
 	else
 		alpha = ALPHA_TO_INTENSITY(-intensity)
 		blend_mode = BLEND_SUBTRACT
+
+/atom/movable/lighting_mask/proc/should_render_to(client/target)
+	return TRUE
 
 /atom/movable/lighting_mask/proc/set_radius(radius, transform_time = 0)
 	//Update our matrix

@@ -2210,6 +2210,7 @@
 #include "code\modules\lighting\rendering\viewers\move_viewer.dm"
 #include "code\modules\lighting\rendering\viewers\start_viewing_source.dm"
 #include "code\modules\lighting\rendering\viewers\stop_viewing_source.dm"
+#include "code\modules\lighting\rendering\viewers\update_viewer.dm"
 #include "code\modules\mapexporting\mapexporter.dm"
 #include "code\modules\mapping\map_template.dm"
 #include "code\modules\mapping\mapping_helpers.dm"
