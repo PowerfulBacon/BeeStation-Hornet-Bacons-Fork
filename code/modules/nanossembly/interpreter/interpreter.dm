@@ -15,7 +15,7 @@
 
 /datum/nanossembly_interpreter/New(
 		memory_amount = DEFAULT_MEMORY_SIZE,
-		register_amount = MAXIMUM_STACK_SIZE
+		register_amount = REGISTER_COUNT
 		)
 	. = ..()
 	//Initialize the memory
@@ -27,11 +27,11 @@
 	registers[FLAG_REGISTER] = 0
 	registers[PROGRAM_REGISTER] = 1
 	//Create standard registers
-	for(var/i in 1 to register_amount)
+	for(var/i in 0 to register_amount - 1)
 		registers["R[i]"] = 0
 
 /datum/nanossembly_interpreter/proc/reset_comparision_flags()
-	registers[FLAG_REGISTER] &= ~(EQUAL_FLAG & GREATER_FLAG)
+	registers[FLAG_REGISTER] &= ~(EQUAL_FLAG | GREATER_FLAG)
 
 /datum/nanossembly_interpreter/proc/set_equal()
 	registers[FLAG_REGISTER] |= EQUAL_FLAG
@@ -41,6 +41,9 @@
 
 /datum/nanossembly_interpreter/proc/set_error()
 	registers[FLAG_REGISTER] |= ERROR_FLAG
+
+/datum/nanossembly_interpreter/proc/clear_error()
+	registers[FLAG_REGISTER] &= ~ERROR_FLAG
 
 /datum/nanossembly_interpreter/proc/put_in_register(register, value)
 	if(!(register in registers))
@@ -121,5 +124,5 @@
 /datum/nanossembly_interpreter/proc/write_console(message)
 	if(length(console_output) >= 50)
 		console_output.Remove(console_output[1])
-	var/output = copytext(message, 1, min(length(message), MAX_CONSOLE_MESSAGE_LENGTH))
-	console_output.Add(output)
+	var/output = copytext(message, 1, min(length(message), MAX_CONSOLE_MESSAGE_LENGTH) + 1)
+	console_output.Insert(1, output)

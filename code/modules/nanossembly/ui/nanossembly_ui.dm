@@ -46,7 +46,7 @@
 			data["screenData"] = list()
 			for(var/register_name in interpreter.registers)
 				var/register_value = interpreter.registers[register_name]
-				data["screenData"] = "[register_name]: [register_value]"
+				data["screenData"] += "[register_name]: [register_value]"
 		else
 			data["screenData"] = "error"
 
@@ -72,13 +72,15 @@
 			. = TRUE
 		if("step")
 			interpreter.single_step()
+			. = TRUE
 		if("setProgramText")
+			. = TRUE
 			//Create a new program
 			interpreter.program = new
 			//Get the program text
 			var/text = params["text"]
 			//Max program length
-			if(text >= 20000)
+			if(length(text) >= 20000)
 				interpreter.write_console("Program file is too long, max length allowed: 20000!")
 				return
 			//Split into lines
@@ -108,18 +110,20 @@
 				var/list/command_split = splittext(cleaned_line, " ")
 				//If no space was found, set it to the end of the line
 				if(!command_split)
-					command_split = cleaned_line
+					command_split = list(cleaned_line)
 				//Get the command name
-				var/command_path = command_split[1]
+				var/command_path = lowertext(command_split[1])
 				//Remove the command name from params
-				command_split.Remove(command_path)
+				command_split.Remove(command_split[1])
 				//Search for the command
 				var/path = text2path("/datum/nanossembly_line/[command_path]")
-				if(!path)
+				if(isnull(path))
 					interpreter.write_console("ERROR: Unknown command at line [length(interpreter.program.lines) + 1]: [command_path]")
 					return
 				//Check if path exists
 				var/datum/nanossembly_line/created_line = new path()
 				//Create it and set the parameters
 				created_line.operands = command_split
+				//Add it to the program
+				interpreter.program.lines += created_line
 			interpreter.write_console("Successfully created program with [length(interpreter.program.lines)] lines.")

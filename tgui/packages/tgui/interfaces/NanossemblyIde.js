@@ -5,7 +5,7 @@ import { Window } from '../layouts';
 export const NanossemblyIde = (props, context) => {
   const { act, data } = useBackend(context);
   const {
-    screenData = "error",
+    screenData = [],
     lines = [],
     output = [],
   } = data;

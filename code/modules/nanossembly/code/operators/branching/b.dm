@@ -16,5 +16,7 @@
 	if(destination == -1)
 		parent.compiler_error("Branch failed: Could not find destination label (destination label unknown)")
 		return
+	//Store the current program register value in the link register so we can go back
+	parent.put_in_register(LINK_REGISTER, parent.get_value(PROGRAM_REGISTER))
 	//Branch to this position, subtract 1 as completing execution increments the program counter
 	parent.put_in_register(PROGRAM_REGISTER, destination - 1)
