@@ -72,6 +72,7 @@ Memory + Lists / Strings
 // The way these work is as a string, when you put something into memory ascii2text is called to convert the number value provided into a character, which is then inserted at the specified position. When you get something from memory and put it into a register, it is converted to a number using text2ascii.
 
 RESERVE R A - Reserves A sequential elements from memory and stores the pointer to the first element in register R. Can throw an error if unable to reserver the required amount of memory.
+RELEASE A B - Releases B bytes from the memory starting at pointer A.
 FETCH R P - Fetches the value from memory at point P and stores the result in register R
 PUT P A - Puts the value of A into the memory at pointer P
 MEMLEFT R - Puts the amount of memory slots left into register R
@@ -81,11 +82,23 @@ Text
 --------------
 
 CMPTEXT P1 L1 P2 L2 - Forms 2 strings starting at P with length L and compares them. Valid with BEQ and BNE. (Exactly the same as CMPLIST)
+PRINT P L - Prints the string stored at pointer P with length L
 
-Misc
+Misc (Additional Components)
 ===============
+
+NTNet Controller
+---------------
+
+
 
 Radio Controller
 ---------------
 
+GETFREQ R - Gets the incomming frequency and stores it in the provided register.
+GETNAME R1 R2 - Gets the pointer of the first value of the name and stores it in R1 and stores the length of the name in R2
+GETTEXT R1 R2 - Gets the text of the incomming message and stores the pointer to the first character in R1 and the length of the text in R2.
 SETFREQ A - Sets the frequency of the transmission to the value of A
+SETNAME P A - Sets the name of the message to the value of the string at pointer P with length A
+SETTEXT P A - Sets the text of the radio message to the value of the string at pointer P with length A
+BROADCAST - Broadcasts the currently stored message
