@@ -334,7 +334,7 @@
 	to_chat(src, "<span class='warning'>You find yourself unable to emote, you aren't in control of your body!</span>")
 	return
 
-/mob/living/passenger/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mods)
+/mob/living/passenger/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, datum/language/message_language, raw_message, radio_freq, list/spans, message_mods)
 	return
 
 /obj/effect/proc_holder/spell/target_hive/hive_control

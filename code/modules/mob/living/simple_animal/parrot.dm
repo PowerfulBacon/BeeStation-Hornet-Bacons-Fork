@@ -149,7 +149,7 @@
 	tab_data["Mode"] = GENERATE_STAT_TEXT("[a_intent]")
 	return tab_data
 
-/mob/living/simple_animal/parrot/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans, list/message_mods = list())
+/mob/living/simple_animal/parrot/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, message_langs, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(speaker != src && prob(50)) //Dont imitate ourselves
 		if(!radio_freq || prob(10))

@@ -414,7 +414,7 @@ GLOBAL_DATUM(blackbox, /obj/machinery/smartfridge/black_box)
 		. += observer_desc
 		. += "It is activated by [activation_method]."
 
-/obj/machinery/anomalous_crystal/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, spans, list/message_mods = list())
+/obj/machinery/anomalous_crystal/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, message_langs, raw_message, radio_freq, spans, list/message_mods = list())
 	..()
 	if(isliving(speaker))
 		ActivationReaction(speaker, ACTIVATE_SPEECH)

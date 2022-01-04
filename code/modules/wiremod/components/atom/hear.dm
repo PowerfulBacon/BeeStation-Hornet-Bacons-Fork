@@ -33,7 +33,7 @@
 	trigger_port = null
 	return ..()
 
-/obj/item/circuit_component/hear/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods)
+/obj/item/circuit_component/hear/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods)
 	if(speaker == parent?.shell)
 		return
 

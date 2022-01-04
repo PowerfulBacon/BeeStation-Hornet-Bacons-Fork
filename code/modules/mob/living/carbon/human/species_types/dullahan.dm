@@ -120,7 +120,7 @@
 		. = PROCESS_KILL
 		qdel(src)
 
-/obj/item/dullahan_relay/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
+/obj/item/dullahan_relay/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	if(!QDELETED(owner))
 		message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

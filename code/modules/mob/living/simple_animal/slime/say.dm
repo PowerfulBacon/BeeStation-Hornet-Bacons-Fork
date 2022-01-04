@@ -1,4 +1,4 @@
-/mob/living/simple_animal/slime/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, spans, list/message_mods = list())
+/mob/living/simple_animal/slime/Hear(message, atom/movable/speaker, datum/chatmessage/message_image, message_langs, raw_message, radio_freq, spans, list/message_mods = list())
 	. = ..()
 	if(speaker != src && !radio_freq && !stat)
 		if (speaker in Friends)

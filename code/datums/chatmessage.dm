@@ -1,63 +1,15 @@
-/// How long the chat message's spawn-in animation will occur for
-#define CHAT_MESSAGE_SPAWN_TIME		0.2 SECONDS
-/// How long the chat message will exist prior to any exponential decay
-#define CHAT_MESSAGE_LIFESPAN		5.4 SECONDS
-/// How long the chat message's end of life fading animation will occur for
-#define CHAT_MESSAGE_EOL_FADE		0.3 SECONDS
-/// Factor of how much the message index (number of messages) will account to exponential decay
-#define CHAT_MESSAGE_EXP_DECAY		0.7
-/// Factor of how much height will account to exponential decay
-#define CHAT_MESSAGE_HEIGHT_DECAY	0.9
-/// Approximate height in pixels of an 'average' line, used for height decay
-#define CHAT_MESSAGE_APPROX_LHEIGHT	10
-/// Max width of chat message in pixels
-#define CHAT_MESSAGE_WIDTH			128
-/// Max length of chat message in characters
-#define CHAT_MESSAGE_MAX_LENGTH		110
-/// Maximum precision of float before rounding errors occur (in this context)
-#define CHAT_LAYER_Z_STEP			0.0001
-/// The number of z-layer 'slices' usable by the chat message layering
-#define CHAT_LAYER_MAX_Z			(CHAT_LAYER_MAX - CHAT_LAYER) / CHAT_LAYER_Z_STEP
-/// The dimensions of the chat message icons
-#define CHAT_MESSAGE_ICON_SIZE		7
-/// How much the message moves up before fading out.
-#define MESSAGE_FADE_PIXEL_Y 10
-
-// Message types
-#define CHATMESSAGE_CANNOT_HEAR 0
-#define CHATMESSAGE_HEAR 1
-#define CHATMESSAGE_SHOW_LANGUAGE_ICON 2
-
-#define BUCKET_LIMIT (world.time + TICKS2DS(min(BUCKET_LEN - (SSrunechat.practical_offset - DS2TICKS(world.time - SSrunechat.head_offset)) - 1, BUCKET_LEN - 1)))
-#define BALLOON_TEXT_WIDTH 200
-#define BALLOON_TEXT_SPAWN_TIME (0.2 SECONDS)
-#define BALLOON_TEXT_FADE_TIME (0.1 SECONDS)
-#define BALLOON_TEXT_FULLY_VISIBLE_TIME (0.7 SECONDS)
-#define BALLOON_TEXT_TOTAL_LIFETIME(mult) (BALLOON_TEXT_SPAWN_TIME + BALLOON_TEXT_FULLY_VISIBLE_TIME*mult + BALLOON_TEXT_FADE_TIME)
-/// The increase in duration per character in seconds
-#define BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MULT (0.05)
-/// The amount of characters needed before this increase takes into effect
-#define BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MIN 10
-
-#define COLOR_JOB_UNKNOWN "#dda583"
-#define COLOR_PERSON_UNKNOWN "#999999"
-#define COLOR_CHAT_EMOTE "#727272"
-
-//For jobs that aren't roundstart but still need colours
-GLOBAL_LIST_INIT(job_colors_pastel, list(
-	"Prisoner" = 		"#d38a5c",
-	"CentCom" = 		"#90FD6D",
-	"Unknown"=			COLOR_JOB_UNKNOWN,
-))
-
 /**
   * # Chat Message Overlay
   *
   * Datum for generating a message overlay on the map
   */
 /datum/chatmessage
-	/// The visual element of the chat messsage
-	var/image/message
+	/// A list of the visual chat message elements
+	/// Assoc list:
+	/// Key: The key of the message (A flag integer converted to a string)
+	/// Value: The associated chat message image
+	/// All messages in this group contain the same text, but different ways of formatting it
+	var/list/image/messages
 	/// The location in which the message is appearing
 	var/atom/message_loc
 	/// A list of clients who hear this message
@@ -74,6 +26,8 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	var/datum/chatmessage/prev
 	/// The current index used for adjusting the layer of each sequential chat message such that recent messages will overlay older ones
 	var/static/current_z_idx = 0
+	/// Maximum height of all possible messages
+	var/mheight
 	/// Color of the message
 	var/tgt_color
 
@@ -83,15 +37,21 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
   * Arguments:
   * * text - The text content of the overlay
   * * target - The target atom to display the overlay at
-  * * owner - The mob that owns this overlay, only this mob will be able to view it
+  * * hearers - An assoc list of clients that hear the message. Key = client, value = chat message flags (as a string)
+  * * language - The language the message is spoken in
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
-/datum/chatmessage/New(text, atom/target, list/client/hearers, language_icon, list/extra_classes = list(), lifespan = CHAT_MESSAGE_LIFESPAN)
+/datum/chatmessage/New(
+		text, atom/target, list/client/hearers,
+		language, list/extra_classes = list(),
+		lifespan = CHAT_MESSAGE_LIFESPAN
+		)
 	. = ..()
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
-	INVOKE_ASYNC(src, .proc/generate_image, text, target, hearers, language_icon, extra_classes, lifespan)
+	//Trigger image generation
+	INVOKE_ASYNC(src, .proc/generate_images, text, target, hearers, language, extra_classes, lifespan)
 
 /datum/chatmessage/Destroy()
 	if (hearers)
@@ -121,29 +81,28 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
   * Arguments:
   * * text - The text content of the overlay
   * * target - The target atom to display the overlay at
-  * * owner - The mob that owns this overlay, only this mob will be able to view it
   * * language - The language this message was spoken in
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
-/datum/chatmessage/proc/generate_image(text, atom/target, list/client/hearers, datum/language/language, list/extra_classes, lifespan)
+/datum/chatmessage/proc/generate_images(text, atom/target, list/client/hearers, datum/language/language, list/extra_classes, lifespan)
 	/// Cached icons to show what language the user is speaking
 	var/static/list/language_icons
 
-	// Store the hearers
-	src.hearers = hearers
-
-	if(!LAZYLEN(hearers))
+	// Reject whitespace
+	var/static/regex/whitespace = new(@"^\s*$")
+	if (whitespace.Find(text))
+		qdel(src)
 		return
 
-	var/client/first_hearer = hearers[1]
+	src.hearers = hearers
 
-	// Delete when the atom its above gets deleted.
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, .proc/on_parent_qdel)
-
-	for(var/client/C as() in hearers)
-		if(C)
-			RegisterSignal(C, COMSIG_PARENT_QDELETING, .proc/client_deleted)
+	// Get a client to do our measuring
+	var/client/first_hearer
+	if(!LAZYLEN(hearers))
+		first_hearer = GLOB.clients[1]
+	else
+		first_hearer = hearers[1]
 
 	// Remove spans in the message from things like the recorder
 	var/static/regex/span_check = new(@"<\/?span[^>]*>", "gi")
@@ -153,71 +112,55 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	if (length_char(text) > CHAT_MESSAGE_MAX_LENGTH)
 		text = copytext_char(text, 1, CHAT_MESSAGE_MAX_LENGTH + 1) + "..." // BYOND index moment
 
-	//The color of the message.
-
 	// Get the chat color
 	if(!tgt_color)		//in case we have color predefined
-		if(isliving(target))		//target is living, thus we have preset color for him
-			if(ishuman(target))
-				var/mob/living/carbon/human/H = target
-				if(H.wear_id?.GetID())
-					var/obj/item/card/id/idcard = H.wear_id
-					var/datum/job/wearer_job = SSjob.GetJob(idcard.GetJobName())
-					if(wearer_job)
-						tgt_color = wearer_job.chat_color
-					else
-						tgt_color = GLOB.job_colors_pastel[idcard.GetJobName()]
-				else
-					tgt_color = COLOR_PERSON_UNKNOWN
-			else
-				if(!target.chat_color)		//extreme case - mob doesn't have set color
-					stack_trace("Error: Mob did not have a chat_color. The only way this can happen is if you set it to null purposely in the thing. Don't do that please.")
-					target.chat_color = colorize_string(target.name)
-					target.chat_color_name = target.name
-				tgt_color = target.chat_color
-		else		//target is not living, randomizing its color
-			if(!target.chat_color || target.chat_color_name != target.name)
-				target.chat_color = colorize_string(target.name)
-				target.chat_color_name = target.name
-			tgt_color = target.chat_color
+		tgt_color = get_message_colour(target)
 
 	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
 	text = replacetext(text, url_scheme, "")
 
-	// Reject whitespace
-	var/static/regex/whitespace = new(@"^\s*$")
-	if (whitespace.Find(text))
-		qdel(src)
-		return
+	//=======================
+	// Work out maximum possible message length
+	//=======================
 
-	var/list/prefixes
+	//Track the maximum possible prefix length
+	var/list/max_prefixes
 
-	// Append radio icon if from a virtual speaker
-	if (extra_classes.Find("virtual-speaker"))
-		var/image/r_icon = image('icons/UI_Icons/chat/chat_icons.dmi', icon_state = "radio")
-		LAZYADD(prefixes, "\icon[r_icon]")
-	else if (extra_classes.Find("emote"))
-		var/image/r_icon = image('icons/UI_Icons/chat/chat_icons.dmi', icon_state = "emote")
-		LAZYADD(prefixes, "\icon[r_icon]")
-		tgt_color = COLOR_CHAT_EMOTE
+	//Track if this is an emote or not
+	var/is_emote = FALSE
 
-	// Append language icon if the language uses one
+	//Static radio icon prefix
+	var/static/image/r_icon = image('icons/UI_Icons/chat/chat_icons.dmi', icon_state = "radio")
+
+	//Get the language icon
+	//Append the language as a possible prefix
 	var/datum/language/language_instance = GLOB.language_datum_instances[language]
-	if (language_instance?.display_icon(first_hearer.mob))
-		var/icon/language_icon = LAZYACCESS(language_icons, language)
-		if (isnull(language_icon))
-			language_icon = icon(language_instance.icon, icon_state = language_instance.icon_state)
-			language_icon.Scale(CHAT_MESSAGE_ICON_SIZE, CHAT_MESSAGE_ICON_SIZE)
-			LAZYSET(language_icons, language, language_icon)
-		LAZYADD(prefixes, "\icon[language_icon]")
+	var/icon/language_icon = LAZYACCESS(language_icons, language)
+	if (isnull(language_icon))
+		language_icon = icon(language_instance.icon, icon_state = language_instance.icon_state)
+		language_icon.Scale(CHAT_MESSAGE_ICON_SIZE, CHAT_MESSAGE_ICON_SIZE)
+		LAZYSET(language_icons, language, language_icon)
 
-	//Add on the icons.
-	text = "[prefixes?.Join("&nbsp;")][text]"
+	//Work out the max amount of prefixes we can have
+	if (extra_classes.Find("emote"))
+		var/static/image/e_icon = image('icons/UI_Icons/chat/chat_icons.dmi', icon_state = "emote")
+		LAZYADD(max_prefixes, "\icon[e_icon]")
+		tgt_color = COLOR_CHAT_EMOTE
+		is_emote = TRUE
+	else
+		//Append the radio speaker as a possible prefix
+		LAZYADD(max_prefixes, "\icon[r_icon]")
+		//Append the language icon as a possible prefix
+		LAZYADD(max_prefixes, "\icon[language_icon]")
+
+	//=======================
+	// Measure the maximum length of the provided text
+	//=======================
 
 	// Approximate text height
-	var/complete_text = "<span class='center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[text]</span>"
-	var/mheight = WXH_TO_HEIGHT(first_hearer.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH))
+	var/complete_text = "<span class='center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[max_prefixes?.Join("&nbsp;")][text]</span>"
+	mheight = WXH_TO_HEIGHT(first_hearer.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH))
 	approx_lines = max(1, mheight / CHAT_MESSAGE_APPROX_LHEIGHT)
 
 	// Translate any existing messages upwards, apply exponential decay factors to timers
@@ -227,6 +170,9 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		var/combined_height = approx_lines
 		for(var/datum/chatmessage/m as() in message_loc.chat_messages)
 			if(!m?.message)
+				continue
+			//Check for identical vis_index, don't translate them (or us)
+			if(vis_index && m.vis_index == vis_index)
 				continue
 			animate(m.message, pixel_y = m.message.pixel_y + mheight, time = CHAT_MESSAGE_SPAWN_TIME)
 			combined_height += m.approx_lines
@@ -238,6 +184,55 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 				var/remaining_time = (sched_remaining) * (CHAT_MESSAGE_EXP_DECAY ** idx++) * (CHAT_MESSAGE_HEIGHT_DECAY ** CEILING(combined_height, 1))
 				m.enter_subsystem(world.time + remaining_time) // push updated time to runechat SS
 
+	//=======================
+	// Generate messages
+	//=======================
+	if(is_emote)
+		//Emote message only has 1 possible message image
+		messages = list("0" = generate_image(text, max_prefixes, list("italics")))
+	else
+		messages = list()
+		//Generate all possible message images
+		for(var/i in 1 to CHAT_MESSAGE_FLAG_MAXIMUM)
+			var/output_text = text
+			var/prefixes = list()
+			//Check if the text should be scrambled
+			if(i & CHAT_MESSAGE_SCRAMBLED)
+				output_text = language_instance?.scramble(raw_message) || scramble_message_replace_chars(raw_message, 100)
+			//Check if the message should show the language icon
+			if(i & CHAT_MESSAGE_LANGUAGE_ICON)
+				prefixes += "\icon[language_icon]"
+			//Check if the message should show the radio icon
+			if(i & CHAT_MESSAGE_VIRTUAL_SPEAKER)
+				prefixes += "\icon[r_icon]"
+			//Generate the image and store it
+			messages["[i]"] = generate_image(output_text, prefixes, extra_classes)
+
+	LAZYADD(message_loc.chat_messages, src)
+
+	// Register with the runechat SS to handle EOL and destruction
+	scheduled_destruction = world.time + (lifespan - CHAT_MESSAGE_EOL_FADE)
+	enter_subsystem()
+
+/datum/chatmessage/proc/show_chat_message(client/hearer, message_flags)
+	//Get the message image to display
+	var/image/message_image = messages["[message_flags]"]
+	//Throw an error if the message image isn't known
+	if(!message_image)
+		CRASH("Error: Invalid message flags provided for message ([message_flags]). Either message flags are out of bounds, or message is an emote and flags are provided.")
+	
+
+/**
+  * Generates an image containing the maptext of the message.
+  *
+  * Arguments:
+  * * display_text - The text to display
+  * * prefixes (/list) - A list of prefixes to prepend to the message
+  * * extra_classes (/list) - The extra classes to add
+  */
+/datum/chatmessage/proc/generate_image(display_text, list/prefixes, list/extra_classes)
+	var/complete_text = "<span class='center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[prefixes?.Join("&nbsp;")][display_text]</span>"
+
 	// Reset z index if relevant
 	if (current_z_idx >= CHAT_LAYER_MAX_Z)
 		current_z_idx = 0
@@ -248,8 +243,9 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		var/atom/movable/AM = message_loc
 		bound_height = AM.bound_height
 		bound_width = AM.bound_width
+
 	// Build message image
-	message = image(loc = message_loc, layer = CHAT_LAYER + CHAT_LAYER_Z_STEP * current_z_idx++)
+	var/image/message = image(loc = message_loc, layer = CHAT_LAYER + CHAT_LAYER_Z_STEP * current_z_idx++)
 	message.plane = RUNECHAT_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
@@ -261,17 +257,47 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		message.color = "#CCCCCC"
 	message.maptext = MAPTEXT(complete_text)
 
-	// Show the message to clients
-	for(var/client/C as() in hearers)
-		C?.images |= message
 	animate(message, alpha = 255, pixel_y = bound_height, time = CHAT_MESSAGE_SPAWN_TIME)
 
-	LAZYADD(message_loc.chat_messages, src)
+	return message
 
-	// Register with the runechat SS to handle EOL and destruction
-	scheduled_destruction = world.time + (lifespan - CHAT_MESSAGE_EOL_FADE)
-	enter_subsystem()
+/**
+  * Calculates a message colour based on the speaker's name.
+  *
+  * Arguments:
+  * * target (/atom) - The target location of the message, determines the speaker for this message
+  */
+/datum/chatmessage/proc/get_message_colour(atom/target)
+	if(isliving(target))		//target is living, thus we have preset color for him
+		if(ishuman(target))
+			var/mob/living/carbon/human/H = target
+			if(H.wear_id?.GetID())
+				var/obj/item/card/id/idcard = H.wear_id
+				var/datum/job/wearer_job = SSjob.GetJob(idcard.GetJobName())
+				if(wearer_job)
+					//If the job datum was located, use that job's associated chat colour
+					return wearer_job.chat_color
+				//If the job datum wasn't located, use one from the job colours pastel list. (At this point it should be unknown, centcom or prisoner)
+				return GLOB.job_colors_pastel[idcard.GetJobName()]
+			//The speaker has no ID, return unknown
+			return COLOR_PERSON_UNKNOWN
+		else if(!target.chat_color)
+			//Target is not a human, generate a chat colour
+			//extreme case - mob doesn't have set color
+			stack_trace("Error: Mob did not have a chat_color. The only way this can happen is if you set it to null purposely in the thing. Don't do that please.")
+	//The speaker still has no colour, generate one for them
+	if(!target.chat_color || target.chat_color_name != target.name)
+		target.chat_color = colorize_string(target.name)
+		target.chat_color_name = target.name
+	return target.chat_color
 
+/**
+  * Signal handler for client deletion
+  * Derefences the client that got deleted
+  *
+  * Arguments:
+  * * source (/client) - The client that has been deleted
+  */
 /datum/chatmessage/proc/client_deleted(client/source)
 	SIGNAL_HANDLER
 	hearers -= source
@@ -322,6 +348,10 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 		return CHATMESSAGE_CANNOT_HEAR
 	return ..()
 
+/**
+  * Creates and returns a chat message, shown to the provided speakers.
+  * The created chat message can be passed down the chain through hear() and displayed to anyone that hears it
+  */
 /proc/create_chat_message(atom/movable/speaker, datum/language/message_language, list/hearers, raw_message, list/spans, list/message_mods)
 	if(!length(hearers))
 		return
@@ -329,67 +359,29 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	if(!islist(message_mods))
 		message_mods = list()
 
-	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
-	spans = spans ? spans.Copy() : list()
-
-	// Check for virtual speakers (aka hearing a message through a radio)
-	if (istype(speaker, /atom/movable/virtualspeaker))
-		var/atom/movable/virtualspeaker/v = speaker
-		speaker = v.source
-		spans |= "virtual-speaker"
-
-	//If the message has the radio message flag
-	else if (message_mods[MODE_RADIO_MESSAGE])
-		//You are now a virtual speaker
-		spans |= "virtual-speaker"
-		//You are no longer italics
-		spans -= "italics"
-
 	// Display visual above source
 	if(message_mods.Find(CHATMESSAGE_EMOTE))
 		var/list/clients = list()
 		for(var/mob/M as() in hearers)
 			if(M?.should_show_chat_message(speaker, message_language, TRUE))
-				clients += M.client
-		new /datum/chatmessage(raw_message, speaker, clients, message_language, list("emote"))
+				clients[M.client] = 0
+		return new /datum/chatmessage(raw_message, speaker, clients, message_language, list("emote"))
 	else
-		//4 Possible chat message states:
-		//Show Icon, Understand (Most other languages)
-		//Hide Icon, Understand (Normal galactic common)
-		//Show Icon, Don't understand (Most languages you can't understand)
-		//Hide Icon, Don't understand (Not understanding common)
-		var/list/client/show_icon_understand
-		var/list/client/hide_icon_understand
-		var/list/client/show_icon_scrambled
-		var/list/client/hide_icon_scrambled
+		var/list/clients = list()
 		for(var/mob/M as() in hearers)
 			switch(M?.should_show_chat_message(speaker, message_language, FALSE))
 				if(CHATMESSAGE_HEAR)
 					if(!message_language || M.has_language(message_language))
-						LAZYADD(hide_icon_understand, M.client)
+						clients[M.client] = 0
 					else
-						LAZYADD(hide_icon_scrambled, M.client)
+						clients[M.client] = CHAT_MESSAGE_SCRAMBLED
 				if(CHATMESSAGE_SHOW_LANGUAGE_ICON)
 					if(!message_language || M.has_language(message_language))
-						LAZYADD(show_icon_understand, M.client)
+						clients[M.client] = CHAT_MESSAGE_LANGUAGE_ICON
 					else
-						LAZYADD(show_icon_scrambled, M.client)
-		var/scrambled_message
-		var/datum/language/language_instance = message_language ? GLOB.language_datum_instances[message_language] : null
-		if(LAZYLEN(show_icon_scrambled) || LAZYLEN(hide_icon_scrambled))
-			scrambled_message = language_instance?.scramble(raw_message) || scramble_message_replace_chars(raw_message, 100)
-		//Show the correct message to people who should see the icon and understand the language
-		if(LAZYLEN(show_icon_understand))
-			new /datum/chatmessage(raw_message, speaker, show_icon_understand, message_language, spans)
-		//Show the correct message to people who should see the icon but not understand the language
-		if(LAZYLEN(hide_icon_understand))
-			new /datum/chatmessage(raw_message, speaker, hide_icon_understand, message_language, spans)
-		//Show the correct message to people who don't understand the language and should see the icon
-		if(LAZYLEN(show_icon_scrambled))
-			new /datum/chatmessage(scrambled_message, speaker, show_icon_scrambled, message_language, spans)
-		//Show the correct message to people who don't understand the language but no icon should be displayed
-		if(LAZYLEN(hide_icon_scrambled))
-			new /datum/chatmessage(scrambled_message, speaker, hide_icon_scrambled, message_language, spans)
+						clients[M.client] = CHAT_MESSAGE_SCRAMBLED | CHAT_MESSAGE_LANGUAGE_ICON
+
+		return new /datum/chatmessage(raw_message, speaker, clients, message_language, list("emote"))
 
 /**
   * Creates a message overlay at a defined location for a given speaker
@@ -546,25 +538,3 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	// Register with the runechat SS to handle EOL and destruction
 	scheduled_destruction = world.time + BALLOON_TEXT_TOTAL_LIFETIME(duration_mult)
 	enter_subsystem()
-
-
-#undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MIN
-#undef BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MULT
-#undef CHAT_MESSAGE_SPAWN_TIME
-#undef CHAT_MESSAGE_LIFESPAN
-#undef CHAT_MESSAGE_EOL_FADE
-#undef CHAT_MESSAGE_EXP_DECAY
-#undef CHAT_MESSAGE_HEIGHT_DECAY
-#undef CHAT_MESSAGE_APPROX_LHEIGHT
-#undef CHAT_MESSAGE_WIDTH
-#undef CHAT_LAYER_Z_STEP
-#undef CHAT_LAYER_MAX_Z
-#undef CHAT_MESSAGE_ICON_SIZE
-#undef BALLOON_TEXT_FADE_TIME
-#undef BALLOON_TEXT_FULLY_VISIBLE_TIME
-#undef BALLOON_TEXT_SPAWN_TIME
-#undef BALLOON_TEXT_TOTAL_LIFETIME
-#undef BALLOON_TEXT_WIDTH
-#undef CHATMESSAGE_CANNOT_HEAR
-#undef CHATMESSAGE_HEAR
-#undef CHATMESSAGE_SHOW_LANGUAGE_ICON
