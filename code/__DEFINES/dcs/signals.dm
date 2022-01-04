@@ -165,11 +165,12 @@
 #define COMSIG_MOVABLE_HEAR "movable_hear"						//! from base of atom/movable/Hear(): (message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	#define HEARING_MESSAGE 1
 	#define HEARING_SPEAKER 2
-//	#define HEARING_LANGUAGE 3
-	#define HEARING_RAW_MESSAGE 4
-	/* #define HEARING_RADIO_FREQ 5
-	#define HEARING_SPANS 6
-	#define HEARING_MESSAGE_MODE 7 */
+	#define HEARING_IMAGE 3
+//	#define HEARING_LANGUAGE 4
+	#define HEARING_RAW_MESSAGE 5
+	/* #define HEARING_RADIO_FREQ 6
+	#define HEARING_SPANS 7
+	#define HEARING_MESSAGE_MODE 8 */
 #define COMSIG_MOVABLE_DISPOSING "movable_disposing"			//! called when the movable is added to a disposal holder object for disposal movement: (obj/structure/disposalholder/holder, obj/machinery/disposal/source)
 
 // /mob signals
@@ -342,7 +343,7 @@
 
 // /datum/song signals
 #define COMSIG_SONG_START 	"song_start"						//sent to the instrument when a song starts playing
-#define COMSIG_SONG_END		"song_end"	
+#define COMSIG_SONG_END		"song_end"
 
 /*******Component Specific Signals*******/
 //Janitor

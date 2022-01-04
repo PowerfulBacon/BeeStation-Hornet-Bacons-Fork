@@ -4,16 +4,19 @@
   * Datum for generating a message overlay on the map
   */
 /datum/chatmessage
+	/// The message image holder
+	/// All messages exist inside of this message's vis contents
+	var/image/parent_image
 	/// A list of the visual chat message elements
 	/// Assoc list:
 	/// Key: The key of the message (A flag integer converted to a string)
 	/// Value: The associated chat message image
 	/// All messages in this group contain the same text, but different ways of formatting it
-	var/list/image/messages
+	var/list/messages
 	/// The location in which the message is appearing
 	var/atom/message_loc
 	/// A list of clients who hear this message
-	var/list/client/hearers
+	var/list/hearers
 	/// Contains the scheduled destruction time, used for scheduling EOL
 	var/scheduled_destruction
 	/// Contains the time that the EOL for the message will be complete, used for qdel scheduling
@@ -30,6 +33,8 @@
 	var/mheight
 	/// Color of the message
 	var/tgt_color
+	/// The queue of people to show the messages to once they have been generated
+	var/list/client_queue
 
 /**
   * Constructs a chat message overlay
@@ -37,13 +42,12 @@
   * Arguments:
   * * text - The text content of the overlay
   * * target - The target atom to display the overlay at
-  * * hearers - An assoc list of clients that hear the message. Key = client, value = chat message flags (as a string)
   * * language - The language the message is spoken in
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
 /datum/chatmessage/New(
-		text, atom/target, list/client/hearers,
+		text, atom/target,
 		language, list/extra_classes = list(),
 		lifespan = CHAT_MESSAGE_LIFESPAN
 		)
@@ -51,20 +55,23 @@
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
 	//Trigger image generation
-	INVOKE_ASYNC(src, .proc/generate_images, text, target, hearers, language, extra_classes, lifespan)
+	INVOKE_ASYNC(src, .proc/generate_images, text, target, language, extra_classes, lifespan)
 
 /datum/chatmessage/Destroy()
 	if (hearers)
 		for(var/client/C in hearers)
 			if(!C)
 				continue
-			C.images.Remove(message)
+			C.images.Remove(hearers[C])
+			C.images.Remove(parent_image)
 			UnregisterSignal(C, COMSIG_PARENT_QDELETING)
 	if(!QDELETED(message_loc))
 		LAZYREMOVE(message_loc.chat_messages, src)
 	hearers = null
 	message_loc = null
-	message = null
+	parent_image = null
+	messages = null
+	message_admins("messages deleted")
 	leave_subsystem()
 	return ..()
 
@@ -85,7 +92,7 @@
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
-/datum/chatmessage/proc/generate_images(text, atom/target, list/client/hearers, datum/language/language, list/extra_classes, lifespan)
+/datum/chatmessage/proc/generate_images(text, atom/target, datum/language/language, list/extra_classes, lifespan)
 	/// Cached icons to show what language the user is speaking
 	var/static/list/language_icons
 
@@ -95,14 +102,8 @@
 		qdel(src)
 		return
 
-	src.hearers = hearers
-
 	// Get a client to do our measuring
-	var/client/first_hearer
-	if(!LAZYLEN(hearers))
-		first_hearer = GLOB.clients[1]
-	else
-		first_hearer = hearers[1]
+	var/client/first_hearer = GLOB.clients[1]
 
 	// Remove spans in the message from things like the recorder
 	var/static/regex/span_check = new(@"<\/?span[^>]*>", "gi")
@@ -169,12 +170,9 @@
 		var/idx = 1
 		var/combined_height = approx_lines
 		for(var/datum/chatmessage/m as() in message_loc.chat_messages)
-			if(!m?.message)
+			if(!m?.parent_image)
 				continue
-			//Check for identical vis_index, don't translate them (or us)
-			if(vis_index && m.vis_index == vis_index)
-				continue
-			animate(m.message, pixel_y = m.message.pixel_y + mheight, time = CHAT_MESSAGE_SPAWN_TIME)
+			animate(m.parent_image, pixel_y = m.parent_image.pixel_y + mheight, time = CHAT_MESSAGE_SPAWN_TIME)
 			combined_height += m.approx_lines
 
 			// When choosing to update the remaining time we have to be careful not to update the
@@ -187,18 +185,29 @@
 	//=======================
 	// Generate messages
 	//=======================
+	//Create the parent image holder
+	parent_image = image(loc = message_loc)
+
+	var/bound_height = world.icon_size
+	if(ismovableatom(message_loc))
+		var/atom/movable/AM = message_loc
+		bound_height = AM.bound_height
+
+	parent_image.pixel_y = bound_height - MESSAGE_FADE_PIXEL_Y
+	animate(parent_image, alpha = 255, pixel_y = bound_height, time = CHAT_MESSAGE_SPAWN_TIME)
+
 	if(is_emote)
 		//Emote message only has 1 possible message image
-		messages = list("0" = generate_image(text, max_prefixes, list("italics")))
+		messages = list("0" = generate_image(text, max_prefixes, list("italics"), parent_image))
 	else
 		messages = list()
 		//Generate all possible message images
-		for(var/i in 1 to CHAT_MESSAGE_FLAG_MAXIMUM)
+		for(var/i in 0 to CHAT_MESSAGE_FLAG_MAXIMUM)
 			var/output_text = text
 			var/prefixes = list()
 			//Check if the text should be scrambled
 			if(i & CHAT_MESSAGE_SCRAMBLED)
-				output_text = language_instance?.scramble(raw_message) || scramble_message_replace_chars(raw_message, 100)
+				output_text = language_instance?.scramble(text) || scramble_message_replace_chars(text, 100)
 			//Check if the message should show the language icon
 			if(i & CHAT_MESSAGE_LANGUAGE_ICON)
 				prefixes += "\icon[language_icon]"
@@ -206,21 +215,40 @@
 			if(i & CHAT_MESSAGE_VIRTUAL_SPEAKER)
 				prefixes += "\icon[r_icon]"
 			//Generate the image and store it
-			messages["[i]"] = generate_image(output_text, prefixes, extra_classes)
+			messages["[i]"] = generate_image(output_text, prefixes, extra_classes, parent_image)
+
+	message_admins("created chat message [json_encode(messages)]")
 
 	LAZYADD(message_loc.chat_messages, src)
+
+	for(var/client/C in client_queue)
+		var/client_flags = client_queue[C]
+		show_chat_message(C, client_flags)
+	client_queue = null
 
 	// Register with the runechat SS to handle EOL and destruction
 	scheduled_destruction = world.time + (lifespan - CHAT_MESSAGE_EOL_FADE)
 	enter_subsystem()
 
 /datum/chatmessage/proc/show_chat_message(client/hearer, message_flags)
+	//Due to async image creation, the clients are put in a queue
+	if(!messages)
+		if(!client_queue)
+			client_queue = list()
+		client_queue[hearer] = message_flags
+		return
 	//Get the message image to display
 	var/image/message_image = messages["[message_flags]"]
 	//Throw an error if the message image isn't known
 	if(!message_image)
 		CRASH("Error: Invalid message flags provided for message ([message_flags]). Either message flags are out of bounds, or message is an emote and flags are provided.")
-	
+	//Show the message image to the client
+	if(!hearers)
+		hearers = list()
+	hearers[hearer] = message_image
+	hearer.images |= parent_image
+	hearer.images |= message_image
+	RegisterSignal(hearer, COMSIG_PARENT_QDELETING, .proc/on_parent_qdel)
 
 /**
   * Generates an image containing the maptext of the message.
@@ -230,18 +258,16 @@
   * * prefixes (/list) - A list of prefixes to prepend to the message
   * * extra_classes (/list) - The extra classes to add
   */
-/datum/chatmessage/proc/generate_image(display_text, list/prefixes, list/extra_classes)
+/datum/chatmessage/proc/generate_image(display_text, list/prefixes, list/extra_classes, image/parent)
 	var/complete_text = "<span class='center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[prefixes?.Join("&nbsp;")][display_text]</span>"
 
 	// Reset z index if relevant
 	if (current_z_idx >= CHAT_LAYER_MAX_Z)
 		current_z_idx = 0
 
-	var/bound_height = world.icon_size
 	var/bound_width = world.icon_size
 	if(ismovableatom(message_loc))
 		var/atom/movable/AM = message_loc
-		bound_height = AM.bound_height
 		bound_width = AM.bound_width
 
 	// Build message image
@@ -249,15 +275,12 @@
 	message.plane = RUNECHAT_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
-	message.pixel_y = bound_height - MESSAGE_FADE_PIXEL_Y
 	message.maptext_width = CHAT_MESSAGE_WIDTH
 	message.maptext_height = mheight
 	message.maptext_x = (CHAT_MESSAGE_WIDTH - bound_width) * -0.5
 	if(extra_classes.Find("italics"))
 		message.color = "#CCCCCC"
 	message.maptext = MAPTEXT(complete_text)
-
-	animate(message, alpha = 255, pixel_y = bound_height, time = CHAT_MESSAGE_SPAWN_TIME)
 
 	return message
 
@@ -311,7 +334,7 @@
   */
 /datum/chatmessage/proc/end_of_life(fadetime = CHAT_MESSAGE_EOL_FADE)
 	eol_complete = scheduled_destruction + fadetime
-	animate(message, alpha = 0, pixel_y = message.pixel_y + MESSAGE_FADE_PIXEL_Y, time = fadetime, flags = ANIMATION_PARALLEL)
+	animate(parent_image, alpha = 0, pixel_y = parent_image.pixel_y + MESSAGE_FADE_PIXEL_Y, time = fadetime, flags = ANIMATION_PARALLEL)
 	enter_subsystem(eol_complete) // re-enter the runechat SS with the EOL completion time to QDEL self
 
 /mob/proc/should_show_chat_message(atom/movable/speaker, datum/language/message_language, is_emote = FALSE, is_heard = FALSE)
@@ -349,39 +372,37 @@
 	return ..()
 
 /**
+  * Takes in a mob and data about a message and returns the chat message visibility flags
+  * Returns -1 if the message should not be displayed
+  */
+/mob/proc/get_chatmessage_flags(atom/movable/speaker, datum/language/message_language, message_mods)
+	var/should_show_result = should_show_chat_message(speaker, message_language)
+	. = 0
+	//Check for the language icon flag
+	switch(should_show_result)
+		if(CHATMESSAGE_SHOW_LANGUAGE_ICON)
+			. |= CHAT_MESSAGE_LANGUAGE_ICON
+		if(CHATMESSAGE_CANNOT_HEAR)
+			return -1
+	//Check for virtual speakers
+	if(istype(speaker, /atom/movable/virtualspeaker) || message_mods[MODE_RADIO_MESSAGE])
+		. |= CHAT_MESSAGE_VIRTUAL_SPEAKER
+	//Check for scrambling
+	if(message_language && !has_language(message_language))
+		. |= CHAT_MESSAGE_SCRAMBLED
+
+/**
   * Creates and returns a chat message, shown to the provided speakers.
   * The created chat message can be passed down the chain through hear() and displayed to anyone that hears it
   */
-/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, list/hearers, raw_message, list/spans, list/message_mods)
-	if(!length(hearers))
-		return
-
+/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans, list/message_mods)
 	if(!islist(message_mods))
 		message_mods = list()
 
-	// Display visual above source
 	if(message_mods.Find(CHATMESSAGE_EMOTE))
-		var/list/clients = list()
-		for(var/mob/M as() in hearers)
-			if(M?.should_show_chat_message(speaker, message_language, TRUE))
-				clients[M.client] = 0
-		return new /datum/chatmessage(raw_message, speaker, clients, message_language, list("emote"))
+		return new /datum/chatmessage(raw_message, speaker, message_language, list("emote"))
 	else
-		var/list/clients = list()
-		for(var/mob/M as() in hearers)
-			switch(M?.should_show_chat_message(speaker, message_language, FALSE))
-				if(CHATMESSAGE_HEAR)
-					if(!message_language || M.has_language(message_language))
-						clients[M.client] = 0
-					else
-						clients[M.client] = CHAT_MESSAGE_SCRAMBLED
-				if(CHATMESSAGE_SHOW_LANGUAGE_ICON)
-					if(!message_language || M.has_language(message_language))
-						clients[M.client] = CHAT_MESSAGE_LANGUAGE_ICON
-					else
-						clients[M.client] = CHAT_MESSAGE_SCRAMBLED | CHAT_MESSAGE_LANGUAGE_ICON
-
-		return new /datum/chatmessage(raw_message, speaker, clients, message_language, list("emote"))
+		return new /datum/chatmessage(raw_message, speaker, message_language, spans)
 
 /**
   * Creates a message overlay at a defined location for a given speaker
@@ -497,16 +518,16 @@
 		message_loc = get_atom_on_turf(target)
 
 	// Build message image
-	message = image(loc = message_loc, layer = CHAT_LAYER)
-	message.plane = BALLOON_CHAT_PLANE
-	message.alpha = 0
-	message.maptext_width = BALLOON_TEXT_WIDTH
-	message.maptext_height = WXH_TO_HEIGHT(owned_by?.MeasureText(text, null, BALLOON_TEXT_WIDTH))
-	message.maptext_x = (BALLOON_TEXT_WIDTH - bound_width) * -0.5
-	message.maptext = MAPTEXT("<span style='text-align: center; -dm-text-outline: 1px #0005; color: [tgt_color]'>[text]</span>")
+	parent_image = image(loc = message_loc, layer = CHAT_LAYER)
+	parent_image.plane = BALLOON_CHAT_PLANE
+	parent_image.alpha = 0
+	parent_image.maptext_width = BALLOON_TEXT_WIDTH
+	parent_image.maptext_height = WXH_TO_HEIGHT(owned_by?.MeasureText(text, null, BALLOON_TEXT_WIDTH))
+	parent_image.maptext_x = (BALLOON_TEXT_WIDTH - bound_width) * -0.5
+	parent_image.maptext = MAPTEXT("<span style='text-align: center; -dm-text-outline: 1px #0005; color: [tgt_color]'>[text]</span>")
 
 	// View the message
-	owned_by.images += message
+	owned_by.images += parent_image
 
 	var/duration_mult = 1
 	var/duration_length = length(text) - BALLOON_TEXT_CHAR_LIFETIME_INCREASE_MIN
@@ -516,7 +537,7 @@
 
 	// Animate the message
 	animate(
-		message,
+		parent_image,
 		pixel_y = world.icon_size * 1.2,
 		time = BALLOON_TEXT_TOTAL_LIFETIME(1),
 		easing = SINE_EASING | EASE_OUT,

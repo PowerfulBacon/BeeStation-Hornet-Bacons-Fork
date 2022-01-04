@@ -714,7 +714,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		var/image/speech_overlay = image('icons/mob/talk.dmi', person, "default0", layer = ABOVE_MOB_LAYER)
 		INVOKE_ASYNC(GLOBAL_PROC, /proc/flick_overlay, speech_overlay, list(target.client), 30)
 	if (target.client?.prefs.chat_on_map)
-		create_chat_message(person, understood_language, list(target), chosen, spans)
+		var/datum/chatmessage/created_message = create_chat_message(person, understood_language, chosen, spans)
+		created_message.show_chat_message(target.client, 0)
 	to_chat(target, message)
 	qdel(src)
 

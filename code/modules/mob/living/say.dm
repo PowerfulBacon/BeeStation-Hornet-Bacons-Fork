@@ -228,6 +228,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 
+	//Show the overhead chat image
+	message_image.show_chat_message(client, get_chatmessage_flags(speaker, message_language, message_mods))
+
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
 	return message
 
@@ -259,26 +262,14 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		eavesdropping = stars(message)
 		eavesrendered = compose_message(src, message_language, eavesdropping, , spans, message_mods)
 
-	var/list/show_overhead_message_to = list()
-	var/list/show_overhead_message_to_eavesdrop = list()
 	var/rendered = compose_message(src, message_language, message, , spans, message_mods)
+	//Create the chat message
+	var/datum/chatmessage/created_chat_message = create_chat_message(src, message_language, message, spans, message_mods)
 	for(var/atom/movable/AM as() in listening)
 		if(eavesdrop_range && get_dist(source, AM) > message_range && !(the_dead[AM]))
-			if(ismob(AM))
-				var/mob/M = AM
-				if(M.should_show_chat_message(src, message_language, FALSE, is_heard = TRUE))
-					show_overhead_message_to_eavesdrop += M
-			AM.Hear(eavesrendered, src, message_language, eavesdropping, , spans, message_mods)
+			AM.Hear(eavesrendered, src, created_chat_message, message_language, eavesdropping, , spans, message_mods)
 		else
-			if(ismob(AM))
-				var/mob/M = AM
-				if(M.should_show_chat_message(src, message_language, FALSE, is_heard = TRUE))
-					show_overhead_message_to += M
-			AM.Hear(rendered, src, message_language, message, , spans, message_mods)
-	if(length(show_overhead_message_to))
-		create_chat_message(src, message_language, show_overhead_message_to, message, spans)
-	if(length(show_overhead_message_to_eavesdrop))
-		create_chat_message(src, message_language, show_overhead_message_to_eavesdrop, eavesdropping, spans)
+			AM.Hear(rendered, src, created_chat_message, message_language, message, , spans, message_mods)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_LIVING_SAY_SPECIAL, src, message)
 
 	//speech bubble
