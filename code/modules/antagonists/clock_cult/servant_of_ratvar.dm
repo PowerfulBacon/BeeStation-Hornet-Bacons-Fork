@@ -65,6 +65,10 @@
 		var/mob/living/carbon/owner_mob = owner.current
 		forbearance = mutable_appearance('icons/effects/genetics.dmi', "servitude", -MUTATIONS_LAYER)
 		owner_mob.add_overlay(forbearance)
+	//If the owner is a cyborg or AI, give them clockcult access
+	if(issilicon(M))
+		var/mob/living/silicon/S = M
+		S.create_access_card(list(ACCESS_CLOCKCULT))
 	owner.current.throw_alert("clockinfo", /atom/movable/screen/alert/clockwork/clocksense)
 	SSticker.mode.update_clockcult_icons_added(owner)
 	var/datum/language_holder/LH = owner.current.get_language_holder()
@@ -79,6 +83,10 @@
 		var/mob/living/carbon/owner_mob = owner.current
 		owner_mob.remove_overlay(forbearance)
 		qdel(forbearance)
+	//Remove clockcult access
+	if(issilicon(M))
+		var/mob/living/silicon/S = M
+		S.internal_id_card?.access -= ACCESS_CLOCKCULT
 	var/datum/language_holder/LH = owner.current.get_language_holder()
 	LH.remove_language(/datum/language/ratvar, TRUE, TRUE, LANGUAGE_CULTIST)
 	. = ..()
