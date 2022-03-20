@@ -34,7 +34,7 @@ GLOBAL_LIST_EMPTY(objective_computers)
 /obj/machinery/computer/objective/ui_static_data(mob/user)
 	var/list/data = list()
 	data["possible_objectives"] = list()
-	for(var/datum/orbital_objective/objective in SSorbits.possible_objectives)
+	for(var/datum/orbital_objective/objective in SSexploration.possible_objectives)
 		data["possible_objectives"] += list(list(
 			"name" = objective.name,
 			"id" = objective.id,
@@ -42,12 +42,12 @@ GLOBAL_LIST_EMPTY(objective_computers)
 			"description" = objective.get_text()
 		))
 	data["selected_objective"] = null
-	if(SSorbits.current_objective)
+	if(SSexploration.current_objective)
 		data["selected_objective"] = list(
-			"name" = SSorbits.current_objective.name,
-			"id" = SSorbits.current_objective.id,
-			"payout" = SSorbits.current_objective.payout,
-			"description" = SSorbits.current_objective.get_text()
+			"name" = SSexploration.current_objective.name,
+			"id" = SSexploration.current_objective.id,
+			"payout" = SSexploration.current_objective.payout,
+			"description" = SSexploration.current_objective.get_text()
 		)
 	return data
 
@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(objective_computers)
 	if(action != "assign")
 		return
 	var/obj_id = params["id"]
-	for(var/datum/orbital_objective/objective in SSorbits.possible_objectives)
+	for(var/datum/orbital_objective/objective in SSexploration.possible_objectives)
 		if(objective.id == obj_id)
-			say(SSorbits.assign_objective(src, objective))
+			say(SSexploration.assign_objective(src, objective))
 			return

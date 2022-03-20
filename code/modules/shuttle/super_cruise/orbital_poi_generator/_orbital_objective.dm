@@ -40,7 +40,7 @@
 /datum/orbital_objective/proc/complete_objective()
 	if(completed)
 		//Delete
-		QDEL_NULL(SSorbits.current_objective)
+		QDEL_NULL(SSexploration.current_objective)
 		return
 	completed = TRUE
 	//Handle payout
@@ -50,4 +50,4 @@
 	priority_announce("Central Command priority objective completed. [payout] credits have been \
 		distributed across departmental budgets. [payout] points have been distrubted to exploration vendors.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
 	//Delete
-	QDEL_NULL(SSorbits.current_objective)
+	QDEL_NULL(SSexploration.current_objective)

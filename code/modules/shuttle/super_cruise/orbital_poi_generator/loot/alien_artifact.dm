@@ -25,6 +25,7 @@
 
 /obj/item/alienartifact/Initialize(mapload)
 	. = ..()
+	generate_material_samples()
 	effects = list()
 	for(var/i in 1 to pick(1, 500; 2, 70; 3, 20; 1))
 		var/picked_type = pick(subtypesof(/datum/artifact_effect))
