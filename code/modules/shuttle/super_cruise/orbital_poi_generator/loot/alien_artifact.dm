@@ -364,24 +364,6 @@ GLOBAL_LIST_EMPTY(destabliization_exits)
 		next_use_world_time = world.time + 150
 
 //===================
-// Curse
-//===================
-
-/datum/artifact_effect/curse
-	var/used = FALSE
-	effect_act_descs = list("picked up")
-	signal_types = list(COMSIG_ITEM_PICKUP)
-
-/datum/artifact_effect/curse/register_signals(source)
-	RegisterSignal(source, COMSIG_ITEM_PICKUP, .proc/curse)
-
-/datum/artifact_effect/curse/proc/curse(datum/source, mob/taker)
-	var/mob/living/carbon/human/H = taker
-	if(istype(H) && !used)
-		used = TRUE
-		H.gain_trauma(/datum/brain_trauma/magic/stalker, TRAUMA_LIMIT_LOBOTOMY)
-
-//===================
 // Gas ~~Remover~~ Converter
 // Probably one of the most obvious but also the most potentially dangerous.
 //===================
