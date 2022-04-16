@@ -72,6 +72,15 @@
 	category = list("Tool Designs")
 	departmental_flags =  DEPARTMENTAL_FLAG_ENGINEERING
 
+/datum/design/arcd
+	name = "Advanced Rapid Construction Device"
+	desc = "An upgraded variant of the RCD that works faster, can hold more matter and works over long distances."
+	id = "arcd"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = MINERAL_MATERIAL_AMOUNT * 30, /datum/material/diamond = MINERAL_MATERIAL_AMOUNT * 4, /datum/material/uranium = MINERAL_MATERIAL_AMOUNT * 3, /datum/material/bluespace = MINERAL_MATERIAL_AMOUNT * 2)
+	build_path = /obj/item/construction/rcd/arcd
+	category = list("Tool Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/rcd_upgrade/frames
 	name = "RCD frames designs upgrade"

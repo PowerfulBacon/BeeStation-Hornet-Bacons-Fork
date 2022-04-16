@@ -246,6 +246,17 @@
 	export_price = 5000
 	hidden = TRUE
 
+/datum/techweb_node/arcd
+	id = "arcd"
+	tech_tier = 5
+	display_name = "Advanced Rapid Construction Device"
+	description = "Combines the constructive power of the RCD with portable bluespace technology, allowing for the production of a long range construction tool."
+	prereq_ids = list("micro_bluespace")
+	design_ids = list("arcd")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
+	export_price = 5000
+	hidden = TRUE
+
 /datum/techweb_node/wormhole_gun
 	id = "wormholegun"
 	tech_tier = 5
