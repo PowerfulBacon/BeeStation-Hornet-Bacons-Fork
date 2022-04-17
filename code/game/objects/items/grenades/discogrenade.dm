@@ -32,6 +32,12 @@
 	for(var/mob/living/dancer in viewers(dance_range, src))
 		make_dance(dancer)
 
+	//Play a sound
+	//Select a random instrument
+	var/selected_instrument = pick("guitar", "piano", "glockenspiel", "violin")
+	//Since we cannot include [] in paths, we have to get the file from a string instead
+	playsound(src, file("sound/instruments/[selected_instrument]/Cn5.ogg"), 100, TRUE)
+
 	//Delete the object
 	qdel(src)
 
@@ -66,3 +72,26 @@
 			dancer.emote("flip")
 	//Stun the dancer for the stun_time, so that they cannot move
 	dancer.Stun(stun_time)
+
+/obj/item/grenade/discogrenade/spawner
+	var/amount_spawned = 15
+
+/obj/item/grenade/discogrenade/spawner/prime(mob/living/lanced_by)
+	. = ..()
+
+	//If we were a dud, return
+	if(!.)
+		return
+
+	//Get the turf that this item is currently on
+	var/turf/spawn_location = get_turf(src)
+	//Create an ethereal disco ball at the location of this grenade
+	new /obj/structure/etherealball(spawn_location)
+
+	var/list/everything_in_view = view(8, src)
+	//Create subgrenades
+	for(var/i in 1 to amount_spawned)
+		var/obj/item/grenade/discogrenade/subgrenade = new(spawn_location)
+		addtimer(CALLBACK(subgrenade, /obj/item/grenade.proc/prime), rand(5, 50))
+		subgrenade.throw_at(pick(everything_in_view), 8, 3)
+
