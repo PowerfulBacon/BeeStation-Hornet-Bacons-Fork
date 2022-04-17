@@ -1,137 +1,68 @@
-//Ethereal Disco Grenade for Ethereal traitors
-//Does not affect ethereals.
-//Some basic code pieces taken from flashbang, spawner grenade and ethereal disco ball for functionality (basically a combination of the 3).
-
-//////////////////////
-// Primary grenade  //
-//////////////////////
-
 /obj/item/grenade/discogrenade
-	name = "Ethereal Disco Grenade"
-	desc = "An unethical micro-party that will make all non-Ethereal beings dance to its beat!"
+	//Set the name of the item
+	name = "Ethereal disco grenade"
+	//Set the examine description of the item
+	desc = "An unethical grenade that will cause anyone nearby to be forced into a dancing frenzy! \
+		Ethereals may not like this, and may even be slightly offended by this act."
+	//Set the icon of the item (What it looks like on the ground)
 	icon_state = "disco"
-	item_state = "disco"
-	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	var/list/messages = list("This party is great!", "Wooo!!!", "Party!", "Check out these moves!", "Hey, want to dance with me?")
-	var/list/message_social_anxiety = list("I want to go home...", "Where are the toilets?", "I don't like this song.")
+	//Set the item state of the item (What it looks like in a hand)
+	item_state = "flashbang"
+	//The range at which we force people to dance
+	var/dance_range = 4
+	//The time at which we stun for
+	var/stun_time = 5 SECONDS
 
 /obj/item/grenade/discogrenade/prime(mob/living/lanced_by)
 	. = ..()
-	update_mob()
-	var/current_turf = get_turf(src)
-	if(!current_turf)
+
+	//If our parent call returned false, we are a dud!
+	if(!.)
 		return
 
-	playsound(current_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
+	//Store a colour in a local variable
+	//Note that color is a built in byond variable, so using the british spelling for
+	//the local variable colour is a good idea.
+	var/colour = "#[random_color()]"
 
-	new /obj/structure/etherealball(current_turf)
+	//Execute the lighting flash, with a range of 3, power of 6, color of the variable colour and a time of 0.5 SECONDS.
+	flash_lighting_fx(3, 3, colour, 0.5 SECONDS)
 
-	for(var/i in 1 to 6)
-		new /obj/item/grenade/discogrenade/subgrenade(current_turf, TRUE)
+	//Find all people nearby that can see src (src is ourselves)
+	for(var/mob/living/dancer in viewers(dance_range, src))
+		make_dance(dancer)
 
+	//Delete the object
 	qdel(src)
 
-//////////////////////
-//   Sub grenades   //
-//////////////////////
-
-/obj/item/grenade/discogrenade/subgrenade
-	name = "Micro Disco"
-	desc = "A massive disco contained in a tiny package!"
-	icon_state = "disco"
-	item_state = "disco"
-	var/spawn_new = TRUE
-	var/timerID
-	var/lightcolor
-	var/range = 5
-	var/power = 3
-
-/obj/item/grenade/discogrenade/subgrenade/Initialize(mapload, duplicate = FALSE)
-	. = ..()
-	active = TRUE
-	spawn_new = duplicate
-	icon_state = initial(icon_state) + "_active"
-	var/launch_distance = rand(2, 6)
-	for(var/i in 1 to launch_distance)
-		step_away(src, loc)
-	addtimer(CALLBACK(src, .proc/prime), rand(10, 60))
-	randomiseLightColor()
-
-/obj/item/grenade/discogrenade/subgrenade/prime(mob/living/lanced_by)
-	if(dud_flags)
-		active = FALSE
-		update_icon()
-		return FALSE
-	update_mob()
-	var/current_turf = get_turf(src)
-	if(!current_turf)
+/obj/item/grenade/discogrenade/proc/make_dance(mob/living/dancer)
+	//Early return is the dancer has a mindshield
+	if(HAS_TRAIT(dancer, TRAIT_MINDSHIELD))
+		//Send a message to the user to tell them they are protected
+		to_chat(dancer, "<span class='warning>You are protected from the urge to dance!</span>")
+		//Return: This will immediately stop execution of the current proc.
+		//Early returns are prefered to using blocks of if and else as it leads to cleaner code.
 		return
-
-	playsound(current_turf, 'sound/weapons/flashbang.ogg', 30, TRUE, 8, 0.9)
-	playsound(current_turf, pick('sound/instruments/accordion/Dn2.mid', 'sound/instruments/bikehorn/Cn3.ogg', 'sound/instruments/piano/Dn7.ogg', 'sound/instruments/violin/Cn3.mid'), 100, TRUE, 8, 0.9)
-
-	if(spawn_new)
-		for(var/i in 1 to 3)
-			new /obj/item/grenade/discogrenade/subgrenade(current_turf)
-
-	//Create the lights
-	new /obj/effect/dummy/lighting_obj (current_turf, rand_hex_color(), 4, 1, 10)
-
-	for(var/mob/living/carbon/human/M in hearers(4, src))
-		forcedance(get_turf(M), M)
-	qdel(src)
-
-/obj/item/grenade/discogrenade/subgrenade/proc/randomiseLightColor()
-	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
-	lightcolor = random_color()
-	set_light(range, power, lightcolor)
-	add_atom_colour("#[lightcolor]", FIXED_COLOUR_PRIORITY)
-	update_icon()
-	timerID = addtimer(CALLBACK(src, .proc/randomiseLightColor), 2, TIMER_STOPPABLE)
-
-/obj/item/grenade/discogrenade/subgrenade/proc/forcedance(turf/T , mob/living/carbon/human/M)
-	if(!T)
+	//Check if the user has the social anxiety quirk
+	if(dancer.has_quirk(/datum/quirk/social_anxiety))
+		//Send a message to the person with social anxiety
+		to_chat(dancer, "<span class='userdanger'>You really don't like this...</span>")
+		//Paralyze them for 10 seconds (Forces them to fall over)
+		dancer.Paralyze(10 SECONDS)
+		//Drop all their items
+		dancer.drop_all_held_items()
+		//Return from the proc and don't continue execution
 		return
-	if(M.stat != CONSCIOUS)	//Only conscious people can dance
-		return
-	if(!M || isethereal(M))	//Non humans and non etherals can't dance
-		return
-
-	var/distance = max(0,get_dist(get_turf(src),T))
-	if(distance > 2.5)
-		return
-
-	if(M.has_quirk(/datum/quirk/social_anxiety))
-		M.say(pick(message_social_anxiety))
-		if(rand(3) && M.get_ear_protection() == 0)
-			M.drop_all_held_items()
-			M.show_message("<span class='warning'>You cover your ears, the music is just too loud for you.</span>", 2)
-		return
-
-	if(HAS_TRAIT(M, TRAIT_MINDSHIELD))
-		M.show_message("<span class='warning'>You resist your inner urges to break out your best moves.</span>", 2)
-		M.set_drugginess(5)
-		return
-	if(istype(M.get_item_by_slot(ITEM_SLOT_HEAD), /obj/item/clothing/head/foilhat))
-		to_chat(M, "<span class = 'userdanger'>THOSE GLOW-IN-THE-DARK NANOTRASEN LIGHTBULBS WON'T CORRUPT ME WITH THEIR AGENDA!</span>")
-		M.emote("scream")
-		return
-
-	M.set_drugginess(10)
-	M.show_message("<span class='warning'>You feel a strong rythme and your muscles spasm uncontrollably, you begin dancing and cannot move!</span>", 2)
-	M.Immobilize(30)
-
-	//Special actions
-	switch(rand(0, 6))
-		if(0)
-			M.Knockdown(4)
-			M.show_message("<span class='warning'>You [pick("mess", "screw")] up your moves and trip!</span>", 2)
-		if(1 to 3)
-			M.emote("spin")
-		if(3 to 4)
-			M.emote("flip")
-		if(5)
-			M.say(pick(messages))
-		if(6)
-			M.emote("dance")
+	//Trigger a random emote
+	switch(rand(1, 3))
+		if(1)
+			//Trigger the dance emote. (Note: Emotes are predefined)
+			dancer.emote("dance")
+		if(2)
+			//Trigger the spin emote. (Note: Emotes are predefined)
+			dancer.emote("spin")
+		if(3)
+			//Trigger the flip emote. (Note: Emotes are predefined)
+			dancer.emote("flip")
+	//Stun the dancer for the stun_time, so that they cannot move
+	dancer.Stun(stun_time)
