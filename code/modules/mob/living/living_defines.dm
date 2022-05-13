@@ -6,6 +6,9 @@
 	pressure_resistance = 10
 	chat_color = "#CCCCCC"	//The say color of the mob, for when ID say isn't available (simplemobs that are not /mob/living/carbon/human)
 
+	//The mobs body
+	//TODO: Make this not null
+	var/datum/body/body
 
 	var/resize = 1 //Badminnery resize
 	var/lastattacker = null

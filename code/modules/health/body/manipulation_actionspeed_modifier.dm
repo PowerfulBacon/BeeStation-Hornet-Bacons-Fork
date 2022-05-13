@@ -1,0 +1,2 @@
+/datum/actionspeed_modifier/manipulation_actionspeed_modifier
+	id = ACTIONSPEED_ID_MANIPULATION

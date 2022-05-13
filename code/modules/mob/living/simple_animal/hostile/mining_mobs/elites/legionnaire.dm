@@ -228,12 +228,12 @@
 	deathmessage = "crumbles away!"
 	faction = list()
 	ranged = FALSE
-	var/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/body = null
+	var/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/mob_body = null
 
 /mob/living/simple_animal/hostile/asteroid/elite/legionnairehead/death()
 	. = ..()
-	if(body)
-		body.onHeadDeath()
+	if(mob_body)
+		mob_body.onHeadDeath()
 
 //The legionnaire's bonfire, which can be swapped positions with.  Also sets flammable living beings on fire when they walk over it.
 /obj/structure/legionnaire_bonfire
