@@ -921,6 +921,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return 0
 
 /obj/item/burn()
+	if(resistance_flags & INDESTRUCTIBLE)
+		return
 	if(!QDELETED(src))
 		var/turf/T = get_turf(src)
 		var/ash_type = /obj/effect/decal/cleanable/ash
@@ -931,6 +933,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		..()
 
 /obj/item/acid_melt()
+	if(resistance_flags & INDESTRUCTIBLE)
+		return
 	if(!QDELETED(src))
 		var/turf/T = get_turf(src)
 		var/obj/effect/decal/cleanable/molten_object/MO = new(T)

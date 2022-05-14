@@ -1,6 +1,7 @@
 
 /obj/item/camera/siliconcam
 	name = "silicon photo camera"
+	resistance_flags = INDESTRUCTIBLE
 	var/in_camera_mode = FALSE
 	var/list/datum/picture/stored = list()
 
@@ -13,9 +14,6 @@
 		camera_mode_off(user)
 	else
 		camera_mode_on(user)
-
-/obj/item/camera/siliconcam/lighteater_act(obj/item/light_eater/light_eater)
-	return
 
 /obj/item/camera/siliconcam/proc/camera_mode_off(mob/user)
 	in_camera_mode = FALSE
