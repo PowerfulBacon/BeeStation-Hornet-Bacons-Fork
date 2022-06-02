@@ -185,7 +185,7 @@
 	return TRUE
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
-	balloon_alert(user, "[src] clicks.")
+	balloon_alert(user, "\The [name] clicks.")
 	playsound(src, dry_fire_sound, 30, TRUE)
 
 

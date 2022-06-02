@@ -527,6 +527,7 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	message.maptext_height = WXH_TO_HEIGHT(owned_by?.MeasureText(text, null, BALLOON_TEXT_WIDTH))
 	message.maptext_x = (BALLOON_TEXT_WIDTH - bound_width) * -0.5
 	message.maptext = MAPTEXT("<span style='text-align: center; -dm-text-outline: 1px #0005; color: [tgt_color]'>[text]</span>")
+	message.pixel_y = world.icon_size * 1.1
 
 	// View the message
 	owned_by.images += message
@@ -540,7 +541,7 @@ GLOBAL_LIST_INIT(job_colors_pastel, list(
 	// Animate the message
 	animate(
 		message,
-		pixel_y = world.icon_size * 1.2,
+		pixel_y = world.icon_size * 1.5,
 		time = BALLOON_TEXT_TOTAL_LIFETIME(1),
 		easing = SINE_EASING | EASE_OUT,
 	)
