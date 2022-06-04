@@ -523,14 +523,14 @@ GLOBAL_LIST_EMPTY(vending_products)
 							qdel(O)
 							new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
 
-				C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE)
+				C.add_overall_injury(/datum/injury/brute/blunt/crush, max(0, squish_damage - crit_rebate), INJURY_SEVERITY_MAJOR, 80)
 				C.AddElement(/datum/element/squish, 18 SECONDS)
 			else
 				L.visible_message("<span class='danger'>[L] is crushed by [src]!</span>", \
 				"<span class='userdanger'>You are crushed by [src]!</span>")
-				L.apply_damage(squish_damage, forced=TRUE)
+				L.add_overall_injury(/datum/injury/brute/blunt/crush, squish_damage, INJURY_SEVERITY_MAJOR, 80)
 				if(crit_case)
-					L.apply_damage(squish_damage, forced=TRUE)
+					L.add_overall_injury(/datum/injury/brute/blunt/crush, squish_damage, INJURY_SEVERITY_MAJOR, 80)
 
 			L.Paralyze(60)
 			L.emote("scream")

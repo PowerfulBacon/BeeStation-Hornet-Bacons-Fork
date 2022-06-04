@@ -243,11 +243,7 @@
 		user.adjustStaminaLoss(stamina_damage)
 
 		additional_effects_carbon(user) // user is the target here
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
+		user.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/blunt, 2 * force, INJURY_SEVERITY_MINOR, armour_penetration)
 		return
 	if(iscyborg(target))
 		// We don't stun if we're on harm.
@@ -478,11 +474,7 @@
 		user.adjustStaminaLoss(stamina_damage)
 
 		additional_effects_carbon(user) // user is the target here
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
+		user.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/blunt, 2 * force, INJURY_SEVERITY_MINOR, armour_penetration)
 		return
 	if(iscyborg(target))
 		// We don't stun if we're on harm.

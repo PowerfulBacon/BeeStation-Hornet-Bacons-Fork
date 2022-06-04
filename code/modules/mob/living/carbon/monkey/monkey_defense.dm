@@ -15,17 +15,15 @@
 			dismembering_strike(M, affecting.body_zone)
 		if(stat != DEAD)
 			var/dmg = rand(1, 5)
-			apply_damage(dmg, BRUTE, affecting)
+			add_bodypart_injury(dam_zone, /datum/injury/brute/sharp/bite, dmg, INJURY_SEVERITY_MINOR, 10)
+
 
 /mob/living/carbon/monkey/attack_larva(mob/living/carbon/alien/larva/L)
 	if(..()) //successful larva bite.
 		var/damage = rand(1, 3)
 		if(stat != DEAD)
 			L.amount_grown = min(L.amount_grown + damage, L.max_grown)
-			var/obj/item/bodypart/affecting = get_bodypart(ran_zone(L.zone_selected))
-			if(!affecting)
-				affecting = get_bodypart(BODY_ZONE_CHEST)
-			apply_damage(damage, BRUTE, affecting)
+			add_bodypart_injury(dam_zone, /datum/injury/brute/sharp/bite, damage, INJURY_SEVERITY_MINOR, 10)
 
 /mob/living/carbon/monkey/attack_hand(mob/living/carbon/human/M)
 	if(..())	//To allow surgery to return properly.
@@ -42,10 +40,7 @@
 					"<span class='userdanger'>[M] punches you!</span>", null, COMBAT_MESSAGE_RANGE)
 			playsound(loc, "punch", 25, 1, -1)
 			var/damage = M.dna.species.punchdamage
-			var/obj/item/bodypart/affecting = get_bodypart(check_zone(M.zone_selected))
-			if(!affecting)
-				affecting = get_bodypart(BODY_ZONE_CHEST)
-			apply_damage(damage, BRUTE, affecting)
+			add_bodypart_injury(M.zone_selected, M.dna.species.attack_type, damage, INJURY_SEVERITY_MINOR, 0)
 			log_combat(M, src, "attacked")
 		if("disarm")
 			if(!IsUnconscious())
@@ -73,13 +68,14 @@
 					visible_message("<span class='danger'>[M] slashes [name]!</span>", \
 							"<span class='userdanger'>[M] slashes you!</span>", null, COMBAT_MESSAGE_RANGE)
 
-				var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
+				var/selected_zone = ran_zone(M.zone_selected)
+				var/obj/item/bodypart/affecting = get_bodypart(selected_zone)
 				log_combat(M, src, "attacked")
 				if(!affecting)
 					affecting = get_bodypart(BODY_ZONE_CHEST)
 				if(!dismembering_strike(M, affecting.body_zone)) //Dismemberment successful
 					return 1
-				apply_damage(damage, BRUTE, affecting)
+				add_bodypart_injury(selected_zone, /datum/injury/brute/sharp, damage, INJURY_SEVERITY_MINOR, 50)
 
 			else
 				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
@@ -111,10 +107,7 @@
 		var/dam_zone = dismembering_strike(M, pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 		if(!dam_zone) //Dismemberment successful
 			return TRUE
-		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
-		if(!affecting)
-			affecting = get_bodypart(BODY_ZONE_CHEST)
-		apply_damage(damage, M.melee_damage_type, affecting)
+		add_bodypart_injury(ran_zone(dam_zone), M.melee_damage_type, damage, INJURY_SEVERITY_MINOR, M.armour_penetration)
 
 /mob/living/carbon/monkey/attack_slime(mob/living/simple_animal/slime/M)
 	if(..()) //successful slime attack
@@ -126,10 +119,7 @@
 		var/dam_zone = dismembering_strike(M, pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 		if(!dam_zone) //Dismemberment successful
 			return 1
-		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
-		if(!affecting)
-			affecting = get_bodypart(BODY_ZONE_CHEST)
-		apply_damage(damage, BRUTE, affecting)
+		add_overall_injury(ran_zone(dam_zone), /datum/injury/brute/blunt/glomp, damage, 0)
 
 /mob/living/carbon/monkey/acid_act(acidpwr, acid_volume, bodyzone_hit)
 	. = 1

@@ -778,7 +778,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		)
 	if(is_human_victim)
 		var/mob/living/carbon/human/U = M
-		U.apply_damage(7, BRUTE, affecting)
+		U.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/sharp/stab, 7, INJURY_SEVERITY_MINOR, armour_penetration)
 
 	else
 		M.take_bodypart_damage(7)

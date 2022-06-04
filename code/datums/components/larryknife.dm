@@ -23,7 +23,7 @@
 			leg = BODY_ZONE_R_LEG
 		else
 			leg = BODY_ZONE_L_LEG
-		C.apply_damage(knife_damage, BRUTE, leg)
+		C.add_bodypart_injury(leg, /datum/injury/brute/sharp, knife_damage, INJURY_SEVERITY_MINOR, 10)
 		P.visible_message("<span class='warning'>[C.name] is stabbed by [P.name].</span>")
 		playsound(get_turf(P), 'sound/weapons/slice.ogg', 50, 1)
 		TIMER_COOLDOWN_START(src, COOLDOWN_LARRYKNIFE, 2 SECONDS)

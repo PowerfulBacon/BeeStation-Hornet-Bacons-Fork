@@ -62,13 +62,12 @@
 		return 0
 
 	var/obj/item/bodypart/affecting = D.get_bodypart(ran_zone(A.zone_selected))
-	var/armor_block = D.run_armor_check(affecting, "melee")
 
 	playsound(D.loc, A.dna.species.attack_sound, 25, 1, -1)
 	D.visible_message("<span class='danger'>[A] [atk_verb]ed [D]!</span>", \
 			"<span class='userdanger'>[A] [atk_verb]ed you!</span>", null, COMBAT_MESSAGE_RANGE)
 
-	D.apply_damage(damage, A.dna.species.attack_type, affecting, armor_block)
+	D.add_bodypart_injury(affecting, A.dna.species.attack_type, damage, INJURY_SEVERITY_MINOR, 0)
 
 	log_combat(A, D, "punched")
 

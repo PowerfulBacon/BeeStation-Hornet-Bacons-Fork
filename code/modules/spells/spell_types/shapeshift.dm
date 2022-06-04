@@ -107,7 +107,8 @@
 		var/damage_percent = (stored.maxHealth - stored.health)/stored.maxHealth;
 		var/damapply = damage_percent * shape.maxHealth;
 
-		shape.apply_damage(damapply, source.convert_damage_type, forced = TRUE);
+		//BACONTODO: source.convert_damage_type
+		shape.add_overall_injury(source.convert_damage_type, damapply, INJURY_SEVERITY_MINOR, 200)
 
 	slink = soullink(/datum/soullink/shapeshift, stored , shape)
 	slink.source = src
@@ -163,7 +164,7 @@
 		var/damage_percent = (shape.maxHealth - shape.health)/shape.maxHealth;
 		var/damapply = stored.maxHealth * damage_percent
 
-		stored.apply_damage(damapply, source.convert_damage_type, forced = TRUE)
+		stored.add_overall_injury(source.convert_damage_type, damapply, INJURY_SEVERITY_MINOR, 200)
 	qdel(shape)
 	qdel(src)
 

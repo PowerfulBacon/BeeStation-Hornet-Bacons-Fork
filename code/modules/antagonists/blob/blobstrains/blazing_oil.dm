@@ -37,6 +37,6 @@
 	M.adjust_fire_stacks(round(reac_volume/10))
 	M.IgniteMob()
 	if(M)
-		M.apply_damage(0.8*reac_volume, BURN)
+		M.add_overall_injury(/datum/injury/burn, 0.8 * reac_volume, INJURY_SEVERITY_MINOR, 200)
 	if(iscarbon(M))
 		M.emote("scream")

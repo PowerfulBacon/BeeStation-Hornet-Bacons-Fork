@@ -119,6 +119,7 @@
 	var/homing_offset_x = 0
 	var/homing_offset_y = 0
 
+	var/severity = INJURY_SEVERITY_MINOR
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions

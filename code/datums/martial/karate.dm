@@ -39,7 +39,7 @@
 							"<span class='userdanger'>[A] stomped you in the head!</span>", null, COMBAT_MESSAGE_RANGE)
 		playsound(get_turf(D), 'sound/weapons/punch1.ogg', 75, 1, -1)
 		A.do_attack_animation(D, ATTACK_EFFECT_KICK)
-		D.apply_damage(20, A.dna.species.attack_type, BODY_ZONE_HEAD, def_check)
+		D.add_bodypart_injury(A.zone_selected, A.dna.species.attack_type, 20, INJURY_SEVERITY_MINOR, 20)
 		D.apply_damage(10, STAMINA, BODY_ZONE_HEAD, def_check)
 		return 1
 	return basic_hit(A,D)

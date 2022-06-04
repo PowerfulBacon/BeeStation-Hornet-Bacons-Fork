@@ -33,7 +33,7 @@
 				if(hasmatchingsummoner(L)) //if the summoner matches don't hurt them
 					continue
 				if(L != src && L != summoner)
-					L.apply_damage(15, BRUTE)
+					L.add_overall_injury(/datum/injury/burn/explosion, 15, INJURY_SEVERITY_MINOR, 60)
 			new /obj/effect/temp_visual/explosion(get_turf(M))
 
 /mob/living/simple_animal/hostile/guardian/bomb/AltClickOn(atom/movable/A)

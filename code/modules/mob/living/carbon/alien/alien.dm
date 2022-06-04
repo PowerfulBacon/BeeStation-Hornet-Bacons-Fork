@@ -70,14 +70,14 @@
 		throw_alert("alien_fire", /atom/movable/screen/alert/alien_fire)
 		switch(bodytemperature)
 			if(360 to 400)
-				apply_damage(HEAT_DAMAGE_LEVEL_1, BURN)
+				add_overall_injury(/datum/injury/burn, HEAT_DAMAGE_LEVEL_1, INJURY_SEVERITY_MINOR, 0)
 			if(400 to 460)
-				apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
+				add_overall_injury(/datum/injury/burn, HEAT_DAMAGE_LEVEL_2, INJURY_SEVERITY_MINOR, 0)
 			if(460 to INFINITY)
 				if(on_fire)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN)
+					add_overall_injury(/datum/injury/burn, HEAT_DAMAGE_LEVEL_3, INJURY_SEVERITY_MINOR, 0)
 				else
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
+					add_overall_injury(/datum/injury/burn, HEAT_DAMAGE_LEVEL_2, INJURY_SEVERITY_MINOR, 0)
 	else
 		clear_alert("alien_fire")
 

@@ -1,0 +1,5 @@
+
+//Injury severity
+#define INJURY_SEVERITY_MINOR 0
+#define INJURY_SEVERITY_MAJOR 1
+#define INJURY_SEVERITY_CRITICAL 2

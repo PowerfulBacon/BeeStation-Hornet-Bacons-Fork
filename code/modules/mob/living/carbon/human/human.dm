@@ -1099,8 +1099,8 @@
 		src.emote("gasp")
 	else
 		src.emote("scream")
-	src.apply_damage(power, BRUTE, def_zone = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT))
-	src.Paralyze(10 * power)
+	add_bodypart_injury(pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT), /datum/injury/brute/blunt/stub, power, INJURY_SEVERITY_MINOR, 20)
+	Paralyze(10 * power)
 
 /mob/living/carbon/human/monkeybrain
 	ai_controller = /datum/ai_controller/monkey

@@ -162,7 +162,7 @@ God bless America.
 		user.visible_message("<span class = 'danger'>[user] dunks [C]'s face in [src]!</span>")
 		reagents.reaction(C, TOUCH)
 		log_combat(user, C, "fryer slammed")
-		C.apply_damage(min(30, reagents.total_volume), BURN, BODY_ZONE_HEAD)
+		C.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/burn, min(30, reagents.total_volume), INJURY_SEVERITY_MAJOR, 30)
 		reagents.remove_any((reagents.total_volume/2))
 		C.Paralyze(60)
 		user.changeNext_move(CLICK_CD_MELEE)

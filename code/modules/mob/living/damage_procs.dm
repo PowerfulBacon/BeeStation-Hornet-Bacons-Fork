@@ -142,3 +142,11 @@
 	if(updating_health)
 		updatehealth()
 		update_stamina(stamina > DAMAGE_PRECISION)
+
+/mob/living/proc/add_bodypart_injury(zone, injury_type, damage_amount, severity, armour_penetration)
+
+/mob/living/proc/heal_bodypart_injury(zone, injury_type, heal_amount, severity, heal_multiple = FALSE)
+
+/mob/living/proc/add_overall_injury(injury_type, damage_amount, severity, armour_penetration)
+
+/mob/living/proc/heal_overall_injury(injury_type, heal_amount, severity, heal_multiple = FALSE)

@@ -1362,7 +1362,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to grab [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(rand(15, 25), BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.add_bodypart_injury(pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)), /datum/injury/brute/blunt/crush, rand(15, 25), INJURY_SEVERITY_MINOR, 0)
 		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s grab attempt!</span>", \
@@ -1390,7 +1390,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to hit [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(rand(15, 25), BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.add_bodypart_injury(pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)), /datum/injury/brute/blunt/crush, rand(15, 25), INJURY_SEVERITY_MINOR, 0)
 		return FALSE
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
@@ -1428,8 +1428,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
-		var/armor_block = target.run_armor_check(affecting, "melee")
-
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
 
 		target.visible_message("<span class='danger'>[user] [atk_verb]ed [target]!</span>", \
@@ -1443,10 +1441,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			target.dismembering_strike(user, affecting.body_zone)
 
 		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.5x raw damage
-			target.apply_damage(damage*1.5, attack_type, affecting, armor_block)
+			target.add_bodypart_injury(user.zone_selected, attack_type, damage * 1.5, INJURY_SEVERITY_MINOR, 0)
 			log_combat(user, target, "kicked")
 		else//other attacks deal full raw damage + 1.5x in stamina damage
-			target.apply_damage(damage, attack_type, affecting, armor_block)
+			target.add_bodypart_injury(user.zone_selected, attack_type, damage, INJURY_SEVERITY_MINOR, 0)
 			target.apply_damage(damage*1.5, STAMINA, affecting, armor_block)
 			log_combat(user, target, "punched")
 
@@ -1457,7 +1455,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	user.changeNext_move(CLICK_CD_DISARM)
 	if(HAS_TRAIT(target, TRAIT_ONEWAYROAD))
 		user.visible_message("<span class='userdanger'>Your wrist twists unnaturally as you attempt to shove [target]!</span>", "<span class='warning'>[user]'s wrist twists unnaturally away from [target]!</span>")
-		user.apply_damage(15, BRUTE, pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		user.add_bodypart_injury(pick(list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)), /datum/injury/brute/blunt/crush, 15, INJURY_SEVERITY_MINOR, 0)
 		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s shoving attempt!</span>", \
@@ -1829,7 +1827,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		burn_damage = burn_damage * heatmod * H.physiology.heat_mod
 		if (H.stat < UNCONSCIOUS && (prob(burn_damage) * 10) / 4) //40% for level 3 damage on humans
 			H.emote("scream")
-		H.apply_damage(burn_damage, BURN)
+		H.add_overall_injury(/datum/injury/burn, burn_damage, INJURY_SEVERITY_MINOR, 0)
 
 	else if(H.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTCOLD))
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "hot")
@@ -1839,13 +1837,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		switch(H.bodytemperature)
 			if(200 to BODYTEMP_COLD_DAMAGE_LIMIT)
 				H.throw_alert("temp", /atom/movable/screen/alert/cold, 1)
-				H.apply_damage(COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod, BURN)
+				H.add_overall_injury(/datum/injury/burn/freeze, COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod, INJURY_SEVERITY_MINOR, 0)
 			if(120 to 200)
 				H.throw_alert("temp", /atom/movable/screen/alert/cold, 2)
-				H.apply_damage(COLD_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod, BURN)
+				H.add_overall_injury(/datum/injury/burn/freeze, COLD_GAS_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod, INJURY_SEVERITY_MINOR, 0)
 			else
 				H.throw_alert("temp", /atom/movable/screen/alert/cold, 3)
-				H.apply_damage(COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod, BURN)
+				H.add_overall_injury(/datum/injury/burn/freeze, COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod, INJURY_SEVERITY_MINOR, 0)
 
 	else
 		H.clear_alert("temp")

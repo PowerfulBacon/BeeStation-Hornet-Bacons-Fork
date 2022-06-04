@@ -34,7 +34,7 @@
 			target_stabbed = TRUE
 			to_chat(M, "<span class='userdanger'>You are impaled by [src]!</span>")
 			M.emote("scream")
-			M.apply_damage(5, BRUTE, BODY_ZONE_CHEST)
+			M.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/sharp/stab, 15, INJURY_SEVERITY_MAJOR, 70)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(!H.bleed_rate)

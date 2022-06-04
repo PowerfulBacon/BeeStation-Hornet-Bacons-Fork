@@ -721,12 +721,12 @@
 	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
 
 	var/damage = rand(5,15)
-	H.apply_damage(2*damage, BRUTE, BODY_ZONE_HEAD, run_armor_check(BODY_ZONE_HEAD, "melee"))
-	H.apply_damage(2*damage, BRUTE, BODY_ZONE_CHEST, run_armor_check(BODY_ZONE_CHEST, "melee"))
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_L_LEG, run_armor_check(BODY_ZONE_L_LEG, "melee"))
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_R_LEG, run_armor_check(BODY_ZONE_R_LEG, "melee"))
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_L_ARM, run_armor_check(BODY_ZONE_L_ARM, "melee"))
-	H.apply_damage(0.5*damage, BRUTE, BODY_ZONE_R_ARM, run_armor_check(BODY_ZONE_R_ARM, "melee"))
+	H.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/blunt/crush, 2 * damage, INJURY_SEVERITY_MINOR, 30)
+	H.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/blunt/crush, 2 * damage, INJURY_SEVERITY_MINOR, 30)
+	H.add_bodypart_injury(BODY_ZONE_L_LEG, /datum/injury/brute/blunt/crush, 0.5 * damage, INJURY_SEVERITY_MINOR, 30)
+	H.add_bodypart_injury(BODY_ZONE_R_LEG, /datum/injury/brute/blunt/crush, 0.5 * damage, INJURY_SEVERITY_MINOR, 30)
+	H.add_bodypart_injury(BODY_ZONE_L_ARM, /datum/injury/brute/blunt/crush, 0.5 * damage, INJURY_SEVERITY_MINOR, 30)
+	H.add_bodypart_injury(BODY_ZONE_R_ARM, /datum/injury/brute/blunt/crush, 0.5 * damage, INJURY_SEVERITY_MINOR, 30)
 
 	var/turf/T = get_turf(src)
 	T.add_mob_blood(H)

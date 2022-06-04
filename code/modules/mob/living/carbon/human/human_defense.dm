@@ -196,8 +196,7 @@
 		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(user.zone_selected))
 		if(!affecting)
 			affecting = get_bodypart(BODY_ZONE_CHEST)
-		var/armor_block = run_armor_check(affecting, "melee","","",10)
-		apply_damage(20, BRUTE, affecting, armor_block)
+		add_bodypart_injury(affecting, user.dna.species.attack_type, 20, INJURY_SEVERITY_MINOR, 30)
 		return 1
 
 /mob/living/carbon/human/attack_hand(mob/user)
@@ -231,7 +230,7 @@
 		if(..()) //successful monkey bite, this handles disease contraction.
 			var/damage = rand(1, 3)
 			if(stat != DEAD)
-				apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, "melee"))
+				add_bodypart_injury(affecting, /datum/injury/brute/sharp/bite, damage, INJURY_SEVERITY_MINOR, 10)
 		return 1
 
 /mob/living/carbon/human/attack_alien(mob/living/carbon/alien/humanoid/M)
@@ -255,7 +254,7 @@
 			log_combat(M, src, "attacked")
 			if(!dismembering_strike(M, M.zone_selected)) //Dismemberment successful
 				return 1
-			apply_damage(20, BRUTE, affecting, armor_block)
+			add_bodypart_injury(affecting, /datum/injury/brute/sharp/bite, 20, INJURY_SEVERITY_MINOR, 10)
 
 		if(M.a_intent == INTENT_DISARM)
 			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
@@ -282,7 +281,7 @@
 			if(!affecting)
 				affecting = get_bodypart(BODY_ZONE_CHEST)
 			var/armor_block = run_armor_check(affecting, "melee")
-			apply_damage(damage, BRUTE, affecting, armor_block)
+			add_bodypart_injury(affecting, /datum/injury/brute/sharp/bite, damage, INJURY_SEVERITY_MINOR, 10)
 
 
 /mob/living/carbon/human/attack_animal(mob/living/simple_animal/M)
@@ -298,7 +297,7 @@
 		if(!affecting)
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		var/armor = run_armor_check(affecting, "melee", armour_penetration = M.armour_penetration)
-		apply_damage(damage, M.melee_damage_type, affecting, armor)
+		add_bodypart_injury(affecting, M.melee_damage_type, damage, INJURY_SEVERITY_MINOR, 10)
 
 
 /mob/living/carbon/human/attack_slime(mob/living/simple_animal/slime/M)
@@ -321,7 +320,7 @@
 		if(!affecting)
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = run_armor_check(affecting, "melee")
-		apply_damage(damage, BRUTE, affecting, armor_block)
+		add_bodypart_injury(affecting, /datum/injury/brute/blunt/glomp, damage, INJURY_SEVERITY_MINOR, 0)
 
 /mob/living/carbon/human/mech_melee_attack(obj/mecha/M)
 
@@ -372,6 +371,7 @@
 //200 max knockdown for EXPLODE_HEAVY
 //160 max knockdown for EXPLODE_LIGHT
 
+	var/injury_level = INJURY_SEVERITY_MINOR
 
 	switch (severity)
 		if (EXPLODE_DEVASTATE)
@@ -391,6 +391,7 @@
 				var/atom/throw_target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(throw_target, 200, 4)
 				damage_clothes(400 - bomb_armor, BRUTE, "bomb")
+				injury_level = INJURY_SEVERITY_CRITICAL
 
 		if (EXPLODE_HEAVY)
 			brute_loss = 60
@@ -400,6 +401,7 @@
 				adjustEarDamage(30, 120)
 			Unconscious(20)							//short amount of time for follow up attacks against elusive enemies like wizards
 			Knockdown(200 - (bomb_armor * 1.6)) 	//between ~4 and ~20 seconds of knockdown depending on bomb armor
+			injury_level = INJURY_SEVERITY_MAJOR
 
 		if(EXPLODE_LIGHT)
 			brute_loss = 30
@@ -409,8 +411,8 @@
 				adjustEarDamage(15,60)
 			Knockdown(160 - (bomb_armor * 1.6))		//100 bomb armor will prevent knockdown altogether
 
-	apply_damage(brute_loss, BRUTE, blocked = (bomb_armor * 0.6))
-	apply_damage(burn_loss, BURN, blocked = (bomb_armor * 0.6))
+	add_overall_injury(/datum/injury/burn/explosion, burn_loss, injury_level, 0)
+	add_overall_injury(/datum/injury/brute/blunt/crush, brute_loss, injury_level, 60)
 
 	//attempt to dismember bodyparts
 	if(severity >= EXPLODE_HEAVY || !bomb_armor)
@@ -437,8 +439,7 @@
 		return
 	show_message("<span class='userdanger'>The blob attacks you!</span>")
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-	var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
-	apply_damage(5, BRUTE, affecting, run_armor_check(affecting, "melee"))
+	add_bodypart_injury(dam_zone, /datum/injury/brute/blunt/crush, 5, INJURY_SEVERITY_MINOR, 40)
 
 
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.

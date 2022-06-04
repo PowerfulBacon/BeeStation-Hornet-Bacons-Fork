@@ -308,14 +308,14 @@
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.heal_overall_damage(10 * power_multiplier, 10 * power_multiplier)
+			L.heal_overall_injury(/datum/injury, 10 * power_multiplier, INJURY_SEVERITY_MAJOR, TRUE)
 
 	//BRUTE DAMAGE
 	else if((findtext(message, hurt_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.apply_damage(15 * power_multiplier, def_zone = BODY_ZONE_CHEST)
+			L.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/blunt, 15 * power_multiplier, INJURY_SEVERITY_MAJOR, 200)
 
 	//BLEED
 	else if((findtext(message, bleed_words)))

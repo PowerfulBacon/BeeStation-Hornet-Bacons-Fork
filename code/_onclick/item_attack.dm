@@ -84,7 +84,7 @@
 	user.do_attack_animation(M)
 	M.attacked_by(src, user)
 
-	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
+	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(injurytype)])")
 	add_fingerprint(user)
 
 
@@ -112,8 +112,8 @@
 /mob/living/attacked_by(obj/item/I, mob/living/user)
 	send_item_attack_message(I, user)
 	if(I.force)
-		apply_damage(I.force, I.damtype)
-		if(ispath(I.damtype, /datum/injury/brute))
+		add_bodypart_injury(user?.zone_selected, I.injurytype, I.force, I.damage_severity, I.armour_penetration)
+		if(ispath(I.injurytype, /datum/injury/brute))
 			if(prob(33))
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)

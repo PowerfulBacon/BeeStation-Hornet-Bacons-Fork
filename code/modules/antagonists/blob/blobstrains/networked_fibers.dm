@@ -34,6 +34,5 @@
 
 /datum/reagent/blob/networked_fibers/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message, touch_protection, mob/camera/blob/O)
 	reac_volume = ..()
-	M.apply_damage(0.6*reac_volume, BRUTE)
-	if(M)
-		M.apply_damage(0.6*reac_volume, BURN)
+	M.add_overall_injury(/datum/injury/brute/blunt, 0.6 * reac_volume, INJURY_SEVERITY_MINOR, 200)
+	M.add_overall_injury(/datum/injury/burn, 0.6 * reac_volume, INJURY_SEVERITY_MINOR, 200)

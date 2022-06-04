@@ -17,7 +17,7 @@
 			I.add_mob_blood(implantee)
 		lostimplant.do_quick_empty()
 		implantee.visible_message("<span class='warning'>A bluespace pocket opens around [src] as it exits [implantee], spewing out its contents and rupturing the surrounding tissue!</span>")
-		implantee.apply_damage(20, BRUTE, BODY_ZONE_CHEST)
+		implantee.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/blunt/crush, 20, INJURY_SEVERITY_MAJOR, 200)
 		qdel(lostimplant)
 	return ..()
 

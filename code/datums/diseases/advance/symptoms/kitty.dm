@@ -1,5 +1,5 @@
 /datum/symptom/toxoplasmosis //my take on the adminbus disease added a year ago. I wanted to make it an actual symptom instead of a simple idea, and i dont want it to call set_species()
-	name = "Toxoplasmosis Sapiens" 
+	name = "Toxoplasmosis Sapiens"
 	desc = "A parasitic symptom that causes a humanoid host to feel slightly happier around cats and cat people."
 	stealth = 1
 	resistance = -2
@@ -11,7 +11,7 @@
 	symptom_delay_max = 60
 	prefixes = list("Feline ", "Anime ")
 	suffixes = list(" Madness", " Mania") //However, I want this virus to be a bit grimmer than the funny uwu cat disease
-	var/mania = FALSE 
+	var/mania = FALSE
 	var/uwu = FALSE
 	var/dnacounter = 0
 	threshold_desc = "<b>Transmission 4:</b>The symptom mutates the language center of the host's brain, causing them to speak in an infuriating dialect. Known to drive hosts to suicide.<br>\
@@ -53,7 +53,7 @@
 					tail.Remove(M)
 					tail.forceMove(get_turf(M))
 					M.add_splatter_floor(get_turf(M))
-					M.apply_damage(5, BRUTE)
+					M.add_bodypart_injury(BODY_ZONE_PRECISE_GROIN, /datum/injury/brute/sharp, 10, INJURY_SEVERITY_MAJOR, 200)
 					M.emote("laugh")
 					playsound(M, 'sound/misc/desecration-01.ogg', 50, 1)
 			else if(!ears || !tail)
@@ -90,7 +90,7 @@
 		to_chat(H, "<span class='hypnophrase'>You pet [cat]!</span>")
 		cat.visible_message("<span class='warning'>[H] grabs [cat] roughly!</span>", "<span class='userdanger'>[H] roughly grabs you by the neck!</span>")
 		H.emote("laugh")
-		cat.apply_damage(5, BRUTE)
+		cat.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 0)
 		dnacounter += 2 //real cats are purer, scarcer, and all around better
 	else if(H.throw_at(cat, 7, 2))
 		if(get_dist(cat, H) > 1)
@@ -110,7 +110,7 @@
 					targettail.forceMove(get_turf(target))
 					target.emote("scream")
 					target.add_splatter_floor(get_turf(target))
-					target.apply_damage(5, BRUTE)
+					H.add_bodypart_injury(BODY_ZONE_PRECISE_GROIN, /datum/injury/brute/sharp, 10, INJURY_SEVERITY_MAJOR, 200)
 					H.put_in_hands(targettail)
 					dnacounter += 1
 					playsound(target, 'sound/misc/desecration-01.ogg', 50, 1)
@@ -129,7 +129,7 @@
 					targetears.forceMove(get_turf(target))
 					target.emote("scream")
 					target.add_splatter_floor(get_turf(target))
-					target.apply_damage(5, BRUTE)
+					target.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/sharp, 10, INJURY_SEVERITY_MAJOR, 200)
 					H.put_in_hands(targetears)
 					playsound(target, 'sound/misc/desecration-01.ogg', 50, 1)
 				else

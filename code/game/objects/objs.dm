@@ -8,6 +8,7 @@
 
 	var/injurytype = /datum/injury/brute/blunt
 	var/force = 0
+	var/damage_severity
 
 	var/datum/armor/armor
 	/// The integrity the object starts at. Defaults to max_integrity.

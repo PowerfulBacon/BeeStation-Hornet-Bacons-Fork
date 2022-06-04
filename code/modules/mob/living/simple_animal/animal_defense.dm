@@ -105,11 +105,11 @@
 		visible_message("<span class='warning'>[src] looks unharmed.</span>")
 		return FALSE
 	else
-		apply_damage(damage, damagetype, null, getarmor(null, armorcheck))
+		add_overall_injury(damagetype, damage, INJURY_SEVERITY_MINOR, armour_penetration)
 		return TRUE
 
 /mob/living/simple_animal/bullet_act(obj/item/projectile/Proj, def_zone, piercing_hit = FALSE)
-	apply_damage(Proj.damage, Proj.damage_type)
+	add_bodypart_injury(def_zone, Proj.damage_type, Proj.damage, Proj.damage_severity, Proj.armour_penetration)
 	Proj.on_hit(src, 0, piercing_hit)
 	return BULLET_ACT_HIT
 

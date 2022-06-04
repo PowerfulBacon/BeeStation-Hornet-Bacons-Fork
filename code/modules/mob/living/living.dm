@@ -73,7 +73,7 @@
 		if(prob(10))
 			playsound(get_turf(src), "punch", 25, 1, -1)
 			visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [A]!</span>")
-			apply_damage(5, BRUTE)
+			add_bodypart_injury(pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG), /datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 10)
 			Paralyze(40)
 			addtimer(CALLBACK(src, .proc/can_bumpslam), 200)
 		else
@@ -1037,7 +1037,7 @@
 	var/blocked = getarmor(null, "rad")
 
 	if(amount > RAD_BURN_THRESHOLD)
-		apply_damage((amount-RAD_BURN_THRESHOLD)/RAD_BURN_THRESHOLD, BURN, null, blocked)
+		add_overall_injury(/datum/injury/burn/radiation, (amount-RAD_BURN_THRESHOLD)/RAD_BURN_THRESHOLD, INJURY_SEVERITY_MINOR, 0)
 
 	apply_effect((amount*RAD_MOB_COEFFICIENT)/max(1, (radiation**2)*RAD_OVERDOSE_REDUCTION), EFFECT_IRRADIATE, blocked)
 

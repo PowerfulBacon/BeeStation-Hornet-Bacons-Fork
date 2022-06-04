@@ -22,7 +22,7 @@
 		return
 
 	AI = AI_pilot
-	AI.apply_damage(150, BURN) //Give the AI a bit of damage from the "shock" of being suddenly shut down
+	AI.add_overall_injury(/datum/injury/burn/electric, 150, INJURY_SEVERITY_MAJOR, 0)
 	AI.death() //The damage is not enough to kill the AI, but to be 'corrupted files' in need of repair.
 	AI.forceMove(src) //Put the dead AI inside the wreckage for recovery
 	add_overlay(mutable_appearance('icons/obj/projectiles.dmi', "green_laser")) //Overlay for the recovery beacon

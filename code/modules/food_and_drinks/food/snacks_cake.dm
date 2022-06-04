@@ -200,7 +200,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/cake/birthday/energy/proc/energy_bite(mob/living/user)
 	to_chat(user, "<font color='red' size='5'>As you eat the cake, you accidentally hurt yourself on the embedded energy sword!</font>")
-	user.apply_damage(30,BRUTE,BODY_ZONE_HEAD)
+	user.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/burn/energy, 30, INJURY_SEVERITY_MAJOR, armour_penetration)
 	playsound(user, 'sound/weapons/blade1.ogg', 5, TRUE)
 
 /obj/item/reagent_containers/food/snacks/store/cake/birthday/energy/attack(mob/living/M, mob/living/user)
@@ -223,7 +223,7 @@
 
 /obj/item/reagent_containers/food/snacks/cakeslice/birthday/energy/proc/energy_bite(mob/living/user)
 	to_chat(user, "<font color='red' size='5'>As you eat the cake slice, you accidentally hurt yourself on the embedded energy dagger!</font>")
-	user.apply_damage(18,BRUTE,BODY_ZONE_HEAD)
+	user.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/burn/energy, 18, INJURY_SEVERITY_MAJOR, armour_penetration)
 	playsound(user, 'sound/weapons/blade1.ogg', 5, TRUE)
 
 /obj/item/reagent_containers/food/snacks/cakeslice/birthday/energy/attack(mob/living/M, mob/living/user)

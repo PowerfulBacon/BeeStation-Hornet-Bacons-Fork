@@ -35,4 +35,4 @@
 	if(prob(reac_volume*2))
 		M.emp_act(EMP_LIGHT)
 	if(M)
-		M.apply_damage(reac_volume, BURN)
+		M.add_overall_injury(/datum/injury/burn/electric, reac_volume, INJURY_SEVERITY_MINOR, 200)

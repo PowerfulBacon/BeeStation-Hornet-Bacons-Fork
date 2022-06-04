@@ -73,10 +73,7 @@
 		return
 	if(prob(75))
 		fire_casing(get_step(src, user.dir), user, spread = rand(-40, 40))
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			var/obj/item/bodypart/affecting = C.get_holding_bodypart_of_item(src)
-			C.apply_damage(rand(5, 10), BRUTE, affecting)
+		user.add_bodypart_injury(pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), /datum/injury/burn/explosion, rand(5, 10), INJURY_SEVERITY_MINOR, 30)
 	else
 		user.visible_message("<span class='danger'>[user]'s [I] slips!</span>")
 		fire_casing(user, user)

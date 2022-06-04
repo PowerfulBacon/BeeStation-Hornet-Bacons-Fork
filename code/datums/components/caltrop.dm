@@ -62,7 +62,7 @@
 		if(HAS_TRAIT(H, TRAIT_LIGHT_STEP))
 			damage *= 0.5
 
-		H.apply_damage(damage, BRUTE, picked_def_zone)
+		H.add_bodypart_injury(picked_def_zone, /datum/injury/brute/sharp, damage, INJURY_SEVERITY_MINOR, 20)
 
 		if(COOLDOWN_FINISHED(src, caltrop_cooldown))
 			COOLDOWN_START(src, caltrop_cooldown, 1 SECONDS) //cooldown to avoid message spam.

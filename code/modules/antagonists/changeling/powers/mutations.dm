@@ -328,7 +328,7 @@
 		for(var/obj/item/I in H.held_items)
 			if(I.is_sharp())
 				C.visible_message("<span class='danger'>[H] impales [C] with [H.p_their()] [I.name]!</span>", "<span class='userdanger'>[H] impales you with [H.p_their()] [I.name]!</span>")
-				C.apply_damage(I.force, BRUTE, BODY_ZONE_CHEST)
+				C.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/sharp/stab, I.force, INJURY_SEVERITY_MAJOR, I.armour_penetration)
 				H.do_item_attack_animation(C, used_item = I)
 				H.add_mob_blood(C)
 				playsound(get_turf(H),I.hitsound,75,1)

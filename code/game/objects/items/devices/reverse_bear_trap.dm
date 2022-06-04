@@ -110,7 +110,7 @@
 		jill.emote("scream")
 		playsound(src, 'sound/effects/snap.ogg', 75, TRUE, frequency = 0.5)
 		playsound(src, 'sound/effects/splat.ogg', 50, TRUE, frequency = 0.5)
-		jill.apply_damage(9999, BRUTE, BODY_ZONE_HEAD)
+		jill.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute/sharp, 9999, INJURY_SEVERITY_CRITICAL, 200)
 		jill.death() //just in case, for some reason, they're still alive
 		flash_color(jill, flash_color = "#FF0000", flash_time = 100)
 
