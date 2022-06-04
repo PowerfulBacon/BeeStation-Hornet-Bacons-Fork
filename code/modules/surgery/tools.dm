@@ -149,7 +149,7 @@
 	materials = list(/datum/material/iron=4000, /datum/material/glass=1000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	sharpness = IS_SHARP_ACCURATE
+	sharpness = IS_SHARP
 	tool_behaviour = TOOL_SCALPEL
 	toolspeed = 1
 
@@ -172,7 +172,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
 	toolspeed = 0.5
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	sharpness = IS_SHARP_ACCURATE
+	sharpness = IS_SHARP
 
 /obj/item/scalpel/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is slitting [user.p_their()] [pick("wrists", "throat", "stomach")] with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -320,7 +320,7 @@
 	light_system = MOVABLE_LIGHT
 	light_range = 1
 	light_color = LIGHT_COLOR_GREEN
-	sharpness = IS_SHARP_ACCURATE
+	sharpness = IS_SHARP
 
 
 /obj/item/scalpel/advanced/attack_self(mob/user)

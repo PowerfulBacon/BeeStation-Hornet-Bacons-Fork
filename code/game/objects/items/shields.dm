@@ -25,10 +25,10 @@
 		else if(isitem(hitby))
 			var/obj/item/I = hitby
 			attackforce = damage
-			if(!I.damtype == BRUTE)
+			if(!ispath(I.injurytype, /datum/injury/brute))
 				attackforce = (attackforce / 2)
 			attackforce = (attackforce * I.attack_weight)
-			if(I.damtype == STAMINA)//pure stamina damage wont affect blocks
+			if(I.injurytype == STAMINA)//pure stamina damage wont affect blocks
 				attackforce = 0
 		else if(isliving(hitby)) //not putting an anti stamina clause in here. only stamina damage simplemobs i know of are swarmers, and them eating shields makes sense
 			var/mob/living/L = hitby

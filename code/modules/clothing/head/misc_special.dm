@@ -52,7 +52,7 @@
 
 	var/force_on = 12
 	var/throwforce_on = 12
-	var/damtype_on = BURN
+	var/damtype_on = /datum/injury/burn
 	var/hitsound_on = 'sound/weapons/sear.ogg' //so we can differentiate between cakehat and energyhat
 
 /obj/item/clothing/head/hardhat/cakehat/process()
@@ -68,7 +68,7 @@
 /obj/item/clothing/head/hardhat/cakehat/turn_on(mob/living/user)
 	force = force_on
 	throwforce = throwforce_on
-	damtype = damtype_on
+	injurytype = damtype_on
 	hitsound = hitsound_on
 	START_PROCESSING(SSobj, src)
 	return ..()
@@ -76,7 +76,7 @@
 /obj/item/clothing/head/hardhat/cakehat/turn_off(mob/living/user)
 	force = initial(force)
 	throwforce = initial(throwforce)
-	damtype = initial(damtype)
+	injurytype = initial(damtype)
 	hitsound = initial(hitsound)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
@@ -92,7 +92,7 @@
 	hat_type = "energycake"
 	hitsound = 'sound/weapons/tap.ogg'
 	hitsound_on = 'sound/weapons/blade1.ogg'
-	damtype_on = BRUTE
+	damtype_on = /datum/injury/brute
 	force_on = 18 //same as epen (but much more obvious)
 	light_range = 3 //ditto
 	heat = 0

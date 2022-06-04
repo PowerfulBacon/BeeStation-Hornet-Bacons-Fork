@@ -147,21 +147,20 @@
 /obj/mech_melee_attack(obj/mecha/M)
 	M.do_attack_animation(src)
 	var/play_soundeffect = 0
-	var/mech_damtype = M.damtype
+	var/mech_damtype = M.injurytype
 	if(M.selected)
-		mech_damtype = M.selected.damtype
+		mech_damtype = M.selected.injurytype
 		play_soundeffect = 1
 	else
-		switch(M.damtype)
-			if(BRUTE)
-				playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
-			if(BURN)
-				playsound(src, 'sound/items/welder.ogg', 50, 1)
-			if(TOX)
-				playsound(src, 'sound/effects/spray2.ogg', 50, 1)
-				return 0
-			else
-				return 0
+		if(ispath(M.injurytype, /datum/injury/brute))
+			playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
+		else if(ispath(M.injurytype, /datum/injury/burn))
+			playsound(src, 'sound/weapons/welder.ogg', 50, 1)
+		else if(M.injurytype == TOX)
+			playsound(src, 'sound/weapons/spray2.ogg', 50, 1)
+			return 0
+		else
+			return 0
 	M.visible_message("<span class='danger'>[M.name] hits [src]!</span>", "<span class='danger'>You hit [src]!</span>", null, COMBAT_MESSAGE_RANGE)
 	return take_damage(M.force*3, mech_damtype, "melee", play_soundeffect, get_dir(src, M)) // multiplied by 3 so we can hit objs hard but not be overpowered against mobs.
 

@@ -294,7 +294,7 @@
 	item_flags = ABSTRACT | DROPDEL
 	w_class = WEIGHT_CLASS_HUGE
 	hitsound = 'sound/weapons/sear.ogg'
-	damtype = BURN
+	injurytype = /datum/injury/burn
 	attack_verb = list("punched", "cross countered", "pummeled")
 	block_upgrade_walk = 0
 
@@ -754,7 +754,7 @@
 	name = "hypertool"
 	desc = "A tool so powerful even you cannot perfectly use it."
 	armour_penetration = 35
-	damtype = BRAIN
+	injurytype = BRAIN
 	attack_verb = list("pulsed", "mended", "cut")
 	hitsound = 'sound/effects/sparks4.ogg'
 
@@ -768,7 +768,7 @@
 	icon = 'icons/obj/clockwork_objects.dmi'
 	slot_flags = ITEM_SLOT_BELT
 	armour_penetration = 10
-	sharpness = IS_SHARP_ACCURATE
+	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	attack_verb = list("stabbed", "poked", "slashed", "clocked")
 	hitsound = 'sound/weapons/bladeslice.ogg'

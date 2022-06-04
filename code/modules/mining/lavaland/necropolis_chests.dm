@@ -1024,7 +1024,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	force = 25
-	damtype = BURN
+	injurytype = /datum/injury/burn
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	hitsound = 'sound/weapons/sear.ogg'
 	var/turf_type = /turf/open/lava/smooth
@@ -1217,7 +1217,7 @@
 
 /obj/item/hierophant_club/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
-	if(user.mind.martial_art.no_guns) 
+	if(user.mind.martial_art.no_guns)
 		to_chat(user, "<span class='warning'>To use this weapon would bring dishonor to the clan.</span>")
 		return
 	var/turf/T = get_turf(target)

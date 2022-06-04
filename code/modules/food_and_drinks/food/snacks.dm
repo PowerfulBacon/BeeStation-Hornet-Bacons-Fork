@@ -228,17 +228,10 @@ All foods are distributed among various categories. Use common sense.
 		return FALSE
 
 	var/slices_lost = 0
-	if (accuracy >= IS_SHARP_ACCURATE)
-		user.visible_message( \
-			"[user] slices [src].", \
-			"<span class='notice'>You slice [src].</span>" \
-		)
-	else
-		user.visible_message( \
-			"[user] inaccurately slices [src] with [W]!", \
-			"<span class='notice'>You inaccurately slice [src] with your [W]!</span>" \
-		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))
+	user.visible_message( \
+		"[user] slices [src].", \
+		"<span class='notice'>You slice [src].</span>" \
+	)
 
 	var/reagents_per_slice = reagents.total_volume/slices_num
 	for(var/i=1 to (slices_num-slices_lost))

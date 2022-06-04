@@ -112,24 +112,22 @@
 /mob/living/mech_melee_attack(obj/mecha/M)
 	if(M.occupant.a_intent == INTENT_HARM)
 		M.do_attack_animation(src)
-		if(M.damtype == "brute")
+		if(ispath(M.injurytype, /datum/injury/brute))
 			step_away(src,M,15)
-		switch(M.damtype)
-			if(BRUTE)
-				Knockdown(20)
-				take_overall_damage(rand(M.force/2, M.force))
-				playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
-			if(BURN)
-				take_overall_damage(0, rand(M.force/2, M.force))
-				playsound(src, 'sound/items/welder.ogg', 50, 1)
-			if(TOX)
-				M.mech_toxin_damage(src)
-			else
-				return
+			Knockdown(20)
+			take_overall_damage(rand(M.force/2, M.force))
+			playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
+		else if(ispath(M.injurytype, /datum/injury/burn))
+			take_overall_damage(0, rand(M.force/2, M.force))
+			playsound(src, 'sound/items/welder.ogg', 50, 1)
+		else if(M.injurytype == TOX)
+			M.mech_toxin_damage(src)
+		else
+			return
 		updatehealth()
 		visible_message("<span class='danger'>[M.name] hits [src]!</span>", \
 						"<span class='userdanger'>[M.name] hits you!</span>", null, COMBAT_MESSAGE_RANGE)
-		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
+		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.injurytype)])")
 	else
 		step_away(src,M)
 		log_combat(M.occupant, src, "pushed", M)

@@ -125,7 +125,7 @@
 	return 1
 
 /datum/spacevine_mutation/fire_proof/on_hit(obj/structure/spacevine/holder, mob/hitter, obj/item/I, expected_damage)
-	if(I && I.damtype == "fire")
+	if(I && ispath(I.injurytype, /datum/injury/burn))
 		. = 0
 	else
 		. = expected_damage
@@ -366,7 +366,7 @@
 	var/damage_dealt = I.force
 	if(I.is_sharp())
 		damage_dealt *= 4
-	if(I.damtype == BURN)
+	if(ispath(I.injurytype, /datum/injury/burn))
 		damage_dealt *= 4
 
 	for(var/datum/spacevine_mutation/SM in mutations)

@@ -324,9 +324,8 @@
 	if(!has_charge(melee_energy_drain))
 		return 0
 	use_power(melee_energy_drain)
-	if(M.damtype == BRUTE || M.damtype == BURN)
-		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
-		. = ..()
+	log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.injurytype)])")
+	. = ..()
 
 /obj/mecha/proc/full_repair(charge_cell)
 	obj_integrity = max_integrity
@@ -352,9 +351,9 @@
 			used_item = selected
 		else if(!visual_effect_icon)
 			visual_effect_icon = ATTACK_EFFECT_SMASH
-			if(damtype == BURN)
+			if(ispath(injurytype, /datum/injury/burn))
 				visual_effect_icon = ATTACK_EFFECT_MECHFIRE
-			else if(damtype == TOX)
+			else if(injurytype == TOX)
 				visual_effect_icon = ATTACK_EFFECT_MECHTOXIN
 	..()
 

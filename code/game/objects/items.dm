@@ -147,7 +147,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	var/flags_cover = 0
 	/// Used to define how hot it's flame will be when lit. Used it igniters, lighters, flares, candles, etc.
 	var/heat = 0
-	/// IS_BLUNT | IS_SHARP | IS_SHARP_ACCURATE Used to define whether the item is sharp or blunt. IS_SHARP is used if the item is supposed to be able to cut open things. See _DEFINES/combat.dm
+	/// IS_BLUNT | IS_SHARP Used to define whether the item is sharp or blunt. IS_SHARP is used if the item is supposed to be able to cut open things. See _DEFINES/combat.dm
 	var/sharpness = IS_BLUNT
 	//this multiplies an attacks force for secondary effects like attacking blocking implements, dismemberment, and knocking a target silly
 	var/attack_weight = 1
@@ -241,9 +241,9 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		pickup(parent_robot)
 
 	if(!hitsound)
-		if(damtype == "fire")
+		if(ispath(damtype, /datum/injury/burn))
 			hitsound = 'sound/items/welder.ogg'
-		if(damtype == "brute")
+		if(ispath(damtype, /datum/injury/brute))
 			hitsound = "swing_hit"
 
 	if(LAZYLEN(embedding))
@@ -623,10 +623,11 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		attackforce = damage
 		if(I.is_sharp())
 			attackforce = (attackforce / 2)//sharp weapons get much of their force by virtue of being sharp, not physical power
-		if(!I.damtype == BRUTE)
+		//TODO: Refactor into weapon weight
+		if(!ispath(I.injurytype, /datum/injury/brute))
 			attackforce = (attackforce / 2)//as above, burning weapons, or weapons that deal other damage type probably dont get force from physical power
 		attackforce = (attackforce * I.attack_weight)
-		if(I.damtype == STAMINA)//pure stamina damage wont affect blocks
+		if(I.injurytype == STAMINA)//pure stamina damage wont affect blocks
 			attackforce = 0
 	else if(attack_type == UNARMED_ATTACK && isliving(hitby))
 		var/mob/living/L = hitby
@@ -883,7 +884,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return sharpness
 
 /obj/item/proc/get_dismember_sound()
-	if(damtype == BURN)
+	if(ispath(injurytype, /datum/injury/burn))
 		. = 'sound/weapons/sear.ogg'
 	else
 		. = pick('sound/misc/desecration-01.ogg', 'sound/misc/desecration-02.ogg', 'sound/misc/desecration-03.ogg')

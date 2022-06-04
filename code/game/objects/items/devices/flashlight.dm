@@ -289,8 +289,8 @@
 
 /obj/item/flashlight/flare/proc/turn_off()
 	on = FALSE
-	force = initial(src.force)
-	damtype = initial(src.damtype)
+	force = initial(force)
+	injurytype = initial(injurytype)
 	if(ismob(loc))
 		var/mob/U = loc
 		update_brightness(U)
@@ -319,7 +319,7 @@
 	if(.)
 		user.visible_message("<span class='notice'>[user] lights \the [src].</span>", "<span class='notice'>You light \the [src]!</span>")
 		force = on_damage
-		damtype = "fire"
+		injurytype = /datum/injury/burn
 		START_PROCESSING(SSobj, src)
 
 /obj/item/flashlight/flare/is_hot()

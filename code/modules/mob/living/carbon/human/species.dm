@@ -1651,7 +1651,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			playsound(get_turf(H), I.get_dismember_sound(), 80, 1)
 
 	var/bloody = 0
-	if((I.damtype == BRUTE) && (I.force >= max(10, armor_block) || I.is_sharp()))
+	if((ispath(I.injurytype, /datum/injury/brute)) && (I.force >= max(10, armor_block) || I.is_sharp()))
 		if(IS_ORGANIC_LIMB(affecting))
 			I.add_mob_blood(H)	//Make the weapon bloody, not the person.
 			if(prob(I.force * 2))	//blood spatter!

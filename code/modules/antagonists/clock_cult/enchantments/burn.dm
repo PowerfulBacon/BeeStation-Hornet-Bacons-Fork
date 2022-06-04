@@ -4,7 +4,7 @@
 /datum/component/enchantment/burn/apply_effect(obj/item/target)
 	examine_description = "It has been blessed with the power of fire and will set striked targets on fire."
 	target.w_class = WEIGHT_CLASS_TINY
-	target.damtype = BURN
+	target.injurytype = /datum/injury/burn
 	RegisterSignal(target, COMSIG_ITEM_ATTACK, .proc/burn_target)
 
 /datum/component/enchantment/burn/proc/burn_target(datum/source, atom/movable/target, mob/living/user)

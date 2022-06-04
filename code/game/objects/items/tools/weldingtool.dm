@@ -69,7 +69,7 @@
 	switch(welding)
 		if(0)
 			force = 3
-			damtype = "brute"
+			injurytype = /datum/injury/brute
 			update_icon()
 			if(!can_off_process)
 				STOP_PROCESSING(SSobj, src)
@@ -77,7 +77,7 @@
 	//Welders left on now use up fuel, but lets not have them run out quite that fast
 		if(1)
 			force = 15
-			damtype = "fire"
+			injurytype = /datum/injury/burn
 			burned_fuel_for += delta_time
 			if(burned_fuel_for >= WELDER_FUEL_BURN_INTERVAL)
 				use(1)
@@ -211,7 +211,7 @@
 			balloon_alert(user, "You turn [src] on.")
 			playsound(loc, acti_sound, 50, 1)
 			force = 15
-			damtype = "fire"
+			injurytype = /datum/injury/burn
 			hitsound = 'sound/items/welder.ogg'
 			update_icon()
 			START_PROCESSING(SSobj, src)
@@ -228,7 +228,7 @@
 	set_welding(FALSE)
 
 	force = 3
-	damtype = "brute"
+	injurytype = /datum/injury/brute
 	hitsound = "swing_hit"
 	update_icon()
 

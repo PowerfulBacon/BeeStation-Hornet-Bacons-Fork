@@ -327,27 +327,26 @@
 
 	if(M.occupant.a_intent == INTENT_HARM)
 		M.do_attack_animation(src)
-		if(M.damtype == "brute")
+		if(ispath(M.injurytype, /datum/injury/brute))
 			step_away(src,M,15)
 		var/obj/item/bodypart/temp = get_bodypart(pick(BODY_ZONE_CHEST, BODY_ZONE_CHEST, BODY_ZONE_CHEST, BODY_ZONE_HEAD))
 		if(temp)
 			var/update = 0
 			var/dmg = rand(M.force/2, M.force)
-			switch(M.damtype)
-				if("brute")
-					if(M.force > 35) // durand and other heavy mechas
-						Unconscious(20)
-					else if(M.force > 20 && !IsKnockdown()) // lightweight mechas like gygax
-						Knockdown(40)
-					update |= temp.receive_damage(dmg, 0)
-					playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
-				if("fire")
-					update |= temp.receive_damage(0, dmg)
-					playsound(src, 'sound/items/welder.ogg', 50, 1)
-				if("tox")
-					M.mech_toxin_damage(src)
-				else
-					return
+			if(ispath(M.injurytype, /datum/injury/brute))
+				if(M.force > 35) // durand and other heavy mechas
+					Unconscious(20)
+				else if(M.force > 20 && !IsKnockdown()) // lightweight mechas like gygax
+					Knockdown(40)
+				update |= temp.receive_damage(dmg, 0)
+				playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
+			else if(ispath(M.injurytype, /datum/injury/burn))
+				update |= temp.receive_damage(0, dmg)
+				playsound(src, 'sound/items/welder.ogg', 50, 1)
+			else if(M.injurytype == TOX)
+				M.mech_toxin_damage(src)
+			else
+				return
 			if(update)
 				update_damage_overlays()
 			updatehealth()

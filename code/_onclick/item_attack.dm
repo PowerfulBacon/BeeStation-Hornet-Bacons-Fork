@@ -113,7 +113,7 @@
 	send_item_attack_message(I, user)
 	if(I.force)
 		apply_damage(I.force, I.damtype)
-		if(I.damtype == BRUTE)
+		if(ispath(I.damtype, /datum/injury/brute))
 			if(prob(33))
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)
@@ -123,7 +123,7 @@
 		return TRUE //successful attack
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
-	if(I.force < force_threshold || I.damtype == STAMINA)
+	if(I.force < force_threshold || I.injurytype == STAMINA)
 		playsound(loc, 'sound/weapons/tap.ogg', I.get_clamped_volume(), 1, -1)
 	else
 		return ..()

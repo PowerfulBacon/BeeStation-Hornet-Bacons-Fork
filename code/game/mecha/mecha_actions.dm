@@ -228,15 +228,15 @@
 	var/new_damtype
 	switch(chassis.damtype)
 		if("tox")
-			new_damtype = "brute"
+			new_damtype = /datum/injury/brute/blunt
 			chassis.balloon_alert(owner, "Your exosuit's hands form into fists.")
 		if("brute")
-			new_damtype = "fire"
+			new_damtype = /datum/injury/burn
 			chassis.balloon_alert(owner, "A torch tip extends from your exosuit's hand, glowing red.")
 		if("fire")
-			new_damtype = "tox"
+			new_damtype = TOX
 			chassis.balloon_alert(owner,"A bone-chillingly thick plasteel needle protracts from the exosuit's palm.")
-	chassis.damtype = new_damtype
+	chassis.injurytype = new_damtype
 	button_icon_state = "mech_damtype_[new_damtype]"
 	playsound(src, 'sound/mecha/mechmove01.ogg', 50, 1)
 	UpdateButtonIcon()

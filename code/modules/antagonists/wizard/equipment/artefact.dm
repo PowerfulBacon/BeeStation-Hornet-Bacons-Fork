@@ -183,7 +183,7 @@
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 15
-	damtype = BURN
+	injurytype = /datum/injury/burn
 	force = 15
 	hitsound = 'sound/items/welder2.ogg'
 
@@ -271,7 +271,7 @@
 	to_chat(M, "<span class='userdanger'>[user.p_theyre(TRUE)] your master now, assist [user.p_them()] even if it costs you your new life!</span>")
 
 	equip_roman_skeleton(M)
-	
+
 	log_combat(user, M, "used a necromantic stone to reanimate")
 
 	desc = "A shard capable of resurrecting humans as skeleton thralls[unlimited ? "." : ", [spooky_scaries.len]/3 active thralls."]"

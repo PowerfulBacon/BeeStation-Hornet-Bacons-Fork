@@ -79,7 +79,7 @@
 	send_item_attack_message(I, user, parse_zone(affecting.body_zone))
 	if(I.force)
 		apply_damage(I.force, I.damtype, affecting)
-		if(I.damtype == BRUTE && (IS_ORGANIC_LIMB(affecting)))
+		if(ispath(I.damtype, /datum/injury/brute) && (IS_ORGANIC_LIMB(affecting)))
 			if(I.is_sharp() || I.force >= 10)
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)
