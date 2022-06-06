@@ -16,7 +16,7 @@
 
 /mob/living/silicon/ai/blob_act(obj/structure/blob/B)
 	if (stat != DEAD)
-		adjustBruteLoss(60)
+		add_overall_injury(/datum/injury/brute/blunt/crush, 60, INJURY_SEVERITY_MAJOR, 40)
 		updatehealth()
 		return 1
 	return 0
@@ -39,11 +39,11 @@
 			gib()
 		if(2)
 			if (stat != DEAD)
-				adjustBruteLoss(60)
+				add_overall_injury(/datum/injury/burn/explosion, 60, INJURY_SEVERITY_MAJOR, 0)
 				adjustFireLoss(60)
 		if(3)
 			if (stat != DEAD)
-				adjustBruteLoss(30)
+				add_overall_injury(/datum/injury/burn/explosion, 30, INJURY_SEVERITY_MINOR, 0)
 
 
 

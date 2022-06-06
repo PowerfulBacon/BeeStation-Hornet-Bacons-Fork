@@ -136,7 +136,7 @@
 						user.visible_message("<span class='userdanger'>[user] crushes [M]!</span>", \
 								"<span class='danger'>You crush [M]!</span>")
 					playsound(loc, 'sound/weapons/smash.ogg', 50, 1, -1)
-					M.adjustBruteLoss(15)
+					M.add_overall_injury(/datum/injury/brute/blunt/crush, 15, INJURY_SEVERITY_MINOR, 20)
 					user.cell.charge -= 300
 					ccooldown = world.time + 10
 

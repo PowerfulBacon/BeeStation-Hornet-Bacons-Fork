@@ -667,7 +667,7 @@
 		return TRUE
 
 	if(chem.type == /datum/reagent/fuel/unholywater)
-		H.adjustBruteLoss(-4)
+		H.heal_overall_injury(/datum/injury/brute, 4, INJURY_SEVERITY_MAJOR, TRUE)
 		H.adjustFireLoss(-4)
 		H.reagents.remove_reagent(chem.type, chem.metabolization_rate)
 		return TRUE

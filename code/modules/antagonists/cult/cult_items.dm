@@ -885,7 +885,7 @@
 					var/mob/living/L = target
 					if(L.density)
 						L.Paralyze(20)
-						L.adjustBruteLoss(45)
+						L.add_overall_injury(/datum/injury/brute/sharp, 45, INJURY_SEVERITY_MINOR, 60)
 						playsound(L, 'sound/hallucinations/wail.ogg', 50, 1)
 						L.emote("scream")
 		var/datum/beam/current_beam = new(user,temp_target,time=7,beam_icon_state="blood_beam",btype=/obj/effect/ebeam/blood)

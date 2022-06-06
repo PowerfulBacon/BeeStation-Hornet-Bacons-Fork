@@ -256,7 +256,7 @@
 						sleep(1)
 
 		if (effectGib) //effectGib is on, that means whatever's underneath us better be fucking oof'd on
-			target_living.adjustBruteLoss(5000) //THATS A LOT OF DAMAGE (called just in case gib() doesnt work on em)
+			target_living.add_overall_injury(/datum/injury/brute/blunt/crush, 5000, INJURY_SEVERITY_CRITICAL, 200) //THATS A LOT OF DAMAGE (called just in case gib() doesnt work on em)
 			if (!QDELETED(target_living))
 				target_living.gib() //After adjusting the fuck outta that brute loss we finish the job with some satisfying gibs
 		else

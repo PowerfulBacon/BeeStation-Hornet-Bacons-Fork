@@ -355,8 +355,8 @@
 	to_chat(user, "<span class='warning'>[src] explodes!</span>")
 	playsound(src,'sound/effects/explosion1.ogg',40,1)
 	user.flash_act(1, 1)
-	user.adjustBruteLoss(6)
-	user.adjustFireLoss(6)
+	user.add_overall_injury(/datum/injury/brute/blunt, 6, INJURY_SEVERITY_MINOR, 50)
+	user.add_overall_injury(/datum/injury/burn/explosion, 6, INJURY_SEVERITY_MINOR, 50)
 	qdel(src)
 
 /obj/item/book/granter/martial/carp

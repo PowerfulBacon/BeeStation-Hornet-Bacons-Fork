@@ -25,7 +25,7 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src.loc, "swing_hit", 25, 1)
 		swirlie.visible_message("<span class='danger'>[user] slams the toilet seat onto [swirlie]'s head!</span>", "<span class='userdanger'>[user] slams the toilet seat onto your head!</span>", "<span class='italics'>You hear reverberating porcelain.</span>")
-		swirlie.adjustBruteLoss(5)
+		swirlie.add_overall_injury(/datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 10)
 
 	else if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -50,7 +50,7 @@
 				else
 					playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 					GM.visible_message("<span class='danger'>[user] slams [GM.name] into [src]!</span>", "<span class='userdanger'>[user] slams you into [src]!</span>")
-					GM.adjustBruteLoss(5)
+					GM.add_overall_injury(/datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 10)
 		else
 			to_chat(user, "<span class='warning'>You need a tighter grip!</span>")
 
@@ -140,7 +140,7 @@
 				return
 			user.changeNext_move(CLICK_CD_MELEE)
 			user.visible_message("<span class='danger'>[user] slams [GM] into [src]!</span>", "<span class='danger'>You slam [GM] into [src]!</span>")
-			GM.adjustBruteLoss(8)
+			GM.add_overall_injury(/datum/injury/brute/blunt, 8, INJURY_SEVERITY_MINOR, 10)
 		else
 			to_chat(user, "<span class='warning'>You need a tighter grip!</span>")
 

@@ -9,3 +9,9 @@
 
 /datum/injury/brute/blunt/stub
 	name = "Stub"
+
+/datum/injury/brute/blunt/decay
+	name = "Decay"
+
+/datum/injury/brute/blunt/corrosion
+	name = "Corrosion"

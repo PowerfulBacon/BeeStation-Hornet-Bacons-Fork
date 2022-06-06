@@ -29,7 +29,7 @@
 	. = ..()
 	if(is_deployed() && toggle && iscarbon(target))
 		var/mob/living/carbon/C = target
-		C.adjustBruteLoss(-5)
+		C.heal_overall_injury(/datum/injury/brute, 5, INJURY_SEVERITY_CRITICAL, TRUE)
 		C.adjustFireLoss(-5)
 		C.adjustOxyLoss(-5)
 		C.adjustToxLoss(-5, FALSE, FALSE)

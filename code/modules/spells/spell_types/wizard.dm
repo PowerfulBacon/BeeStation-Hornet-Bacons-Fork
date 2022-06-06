@@ -285,7 +285,7 @@
 			if(isliving(AM))
 				var/mob/living/M = AM
 				M.Paralyze(100)
-				M.adjustBruteLoss(5)
+				M.add_overall_injury(/datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 0)	//MASS CONVERTED
 				to_chat(M, "<span class='userdanger'>You're slammed into the floor by [user]!</span>")
 		else
 			new sparkle_path(get_turf(AM), get_dir(user, AM)) //created sparkles will disappear on their own

@@ -81,7 +81,7 @@
 				M.visible_message("[src] bursts out of [M]!</span>")
 			M.emote("scream")
 			M.Knockdown(40)
-			M.adjustBruteLoss(60)
+			M.add_overall_injury(/datum/injury/brute/blunt, 60, INJURY_SEVERITY_MAJOR, 200)
 	return ..()
 
 /obj/item/reagent_containers/food/snacks/pie/berryclafoutis

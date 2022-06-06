@@ -49,7 +49,7 @@
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(!("vines" in L.faction))
-			L.adjustBruteLoss(5)
+			L.add_overall_injury(/datum/injury/brute/sharp/slash, 5, INJURY_SEVERITY_MINOR, 40)
 			to_chat(L, "<span class='alert'>You cut yourself on the thorny vines.</span>")
 
 

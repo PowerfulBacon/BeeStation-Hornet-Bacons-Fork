@@ -424,7 +424,7 @@
 		H.bleed_rate = 5
 		H.gib_animation()
 		sleep(3)
-		H.adjustBruteLoss(1000) //to make the body super-bloody
+		H.add_overall_injury(/datum/injury/burn/explosion, 1000, INJURY_SEVERITY_CRITICAL, 200) //to make the body super-bloody
 		H.spawn_gibs()
 		H.spill_organs()
 		H.spread_bodyparts()

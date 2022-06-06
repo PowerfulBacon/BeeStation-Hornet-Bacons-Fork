@@ -226,7 +226,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 				eyes.forceMove(get_turf(M))
 				to_chat(M, "<span class='userdanger'>You double over in pain as you feel your eyeballs liquify in your head!</span>")
 				M.emote("scream")
-				M.adjustBruteLoss(15)
+				M.add_overall_injury(/datum/injury/brute/blunt, 15, INJURY_SEVERITY_MINOR, 0)	//MASS CONVERTED
 		else
 			to_chat(M, "<span class='userdanger'>You scream in terror as you go blind!</span>")
 			eyes.applyOrganDamage(eyes.maxHealth)
@@ -746,7 +746,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/manly_dorf/on_mob_life(mob/living/carbon/M)
 	if(dorf_mode)
-		M.adjustBruteLoss(-2)
+		M.heal_overall_injury(/datum/injury/brute, 2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		M.adjustFireLoss(-2)
 	return ..()
 
@@ -1644,7 +1644,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(L.health <= 0)
 		heal_points = 20 //heal more if we're in softcrit
 	for(var/i in 1 to min(volume, heal_points)) //only heals 1 point of damage per unit on add, for balance reasons
-		L.adjustBruteLoss(-1)
+		L.heal_overall_injury(/datum/injury/brute, 1, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		L.adjustFireLoss(-1)
 		L.adjustToxLoss(-1)
 		L.adjustOxyLoss(-1)
@@ -1655,7 +1655,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/bastion_bourbon/on_mob_life(mob/living/L)
 	if(L.health > 0)
-		L.adjustBruteLoss(-1)
+		L.heal_overall_injury(/datum/injury/brute, 1, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		L.adjustFireLoss(-1)
 		L.adjustToxLoss(-0.5)
 		L.adjustOxyLoss(-3)
@@ -1817,11 +1817,11 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(L.IsSleeping())
 		if(L.getBruteLoss() && L.getFireLoss()) //If you are damaged by both types, slightly increased healing but it only heals one. The more the merrier wink wink.
 			if(prob(50))
-				L.adjustBruteLoss(-0.25)
+				L.heal_overall_injury(/datum/injury/brute, 0.25, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 			else
 				L.adjustFireLoss(-0.25)
 		else if(L.getBruteLoss()) //If you have only one, it still heals but not as well.
-			L.adjustBruteLoss(-0.2)
+			L.heal_overall_injury(/datum/injury/brute, 0.2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		else if(L.getFireLoss())
 			L.adjustFireLoss(-0.2)
 

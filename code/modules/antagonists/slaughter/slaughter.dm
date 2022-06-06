@@ -157,9 +157,9 @@
 		if(1)
 			death()
 		if(2)
-			adjustBruteLoss(60)
+			add_overall_injury(/datum/injury/burn/explosion, 60, INJURY_SEVERITY_MAJOR, 0)
 		if(3)
-			adjustBruteLoss(30)
+			add_overall_injury(/datum/injury/burn/explosion, 30, INJURY_SEVERITY_MINOR, 0)
 
 /mob/living/simple_animal/slaughter/laughter/proc/release_friends()
 	if(!consumed_mobs)

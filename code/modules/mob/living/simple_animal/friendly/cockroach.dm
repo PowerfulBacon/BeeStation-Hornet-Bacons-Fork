@@ -49,14 +49,14 @@
 			if(A.mob_size > MOB_SIZE_SMALL && !(A.movement_type & FLYING))
 				if(prob(squish_chance))
 					A.visible_message("<span class='notice'>[A] squashed [src].</span>", "<span class='notice'>You squashed [src].</span>")
-					adjustBruteLoss(1) //kills a normal cockroach
+					add_overall_injury(/datum/injury/brute/blunt/crush, 1, INJURY_SEVERITY_MINOR, 0) //kills a normal cockroach
 				else
 					visible_message("<span class='notice'>[src] avoids getting crushed.</span>")
 	else
 		if(isstructure(AM))
 			if(prob(squish_chance))
 				AM.visible_message("<span class='notice'>[src] was crushed under [AM].</span>")
-				adjustBruteLoss(1)
+				add_overall_injury(/datum/injury/brute/blunt/crush, 1, INJURY_SEVERITY_MINOR, 0)
 			else
 				visible_message("<span class='notice'>[src] avoids getting crushed.</span>")
 

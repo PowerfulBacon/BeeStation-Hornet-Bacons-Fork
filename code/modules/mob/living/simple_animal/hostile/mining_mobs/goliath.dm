@@ -188,7 +188,7 @@
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
 		L.Stun(100)
-		L.adjustBruteLoss(rand(10,15))
+		L.add_overall_injury(/datum/injury/brute/blunt/crush, rand(10,15), INJURY_SEVERITY_MINOR, 30)
 		latched = TRUE
 	if(!latched)
 		retract()

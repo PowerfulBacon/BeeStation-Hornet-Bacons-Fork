@@ -116,7 +116,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 /mob/living/simple_animal/hostile/mimic/copy/Life()
 	..()
 	if(idledamage && !target && !ckey) //Objects eventually revert to normal if no one is around to terrorize
-		adjustBruteLoss(1)
+		add_overall_injury(/datum/injury/brute/blunt/decay, 1, INJURY_SEVERITY_MINOR, 200)
 	for(var/mob/living/M in contents) //a fix for animated statues from the flesh to stone spell
 		death()
 

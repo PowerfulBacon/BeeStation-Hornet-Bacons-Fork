@@ -443,7 +443,7 @@
 	return
 
 /mob/living/silicon/rust_heretic_act()
-	adjustBruteLoss(500)
+	add_overall_injury(/datum/injury/brute/blunt/corrosion, 500, INJURY_SEVERITY_MAJOR, 50)
 
 /mob/living/silicon/hears_radio()
 	return FALSE

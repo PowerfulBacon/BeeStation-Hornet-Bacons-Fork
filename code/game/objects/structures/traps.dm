@@ -216,7 +216,7 @@
 /obj/structure/trap/damage/trap_effect(mob/living/L)
 	to_chat(L, "<span class='danger'><B>The ground quakes beneath your feet!</B></span>")
 	L.Paralyze(100)
-	L.adjustBruteLoss(35)
+	L.add_overall_injury(/datum/injury/brute/blunt/crush, 35, INJURY_SEVERITY_MINOR, 80)
 
 /obj/structure/trap/damage/flare()
 	..()

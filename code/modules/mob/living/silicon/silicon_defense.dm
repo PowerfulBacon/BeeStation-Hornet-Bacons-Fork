@@ -57,7 +57,7 @@
 /mob/living/silicon/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
 	if(user.a_intent == INTENT_HARM)
 		..(user, 1)
-		adjustBruteLoss(rand(10, 15))
+		add_overall_injury(/datum/injury/brute/blunt/crush, rand(10, 15), INJURY_SEVERITY_MINOR, 20)
 		playsound(loc, "punch", 25, 1, -1)
 		visible_message("<span class='danger'>[user] punches [src]!</span>", \
 				"<span class='userdanger'>[user] punches you!</span>", null, COMBAT_MESSAGE_RANGE)

@@ -58,4 +58,4 @@
 	display_results(user, target, "<span class='warning'>You screw up, brusing [target]'s chest!</span>",
 		"<span class='warning'>[user] screws up, brusing [target]'s chest!</span>",
 		"<span class='warning'>[user] screws up!</span>")
-	target.adjustBruteLoss(5)
+	target.add_overall_injury(/datum/injury/brute/blunt, 5, INJURY_SEVERITY_MINOR, 0)	//MASS CONVERTED

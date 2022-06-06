@@ -487,7 +487,7 @@
 /datum/status_effect/stabilized/purple/tick()
 	var/is_healing = FALSE
 	if(owner.getBruteLoss() > 0)
-		owner.adjustBruteLoss(-0.2)
+		owner.heal_overall_injury(/datum/injury/brute, 0.2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		is_healing = TRUE
 	if(owner.getFireLoss() > 0)
 		owner.adjustFireLoss(-0.2)

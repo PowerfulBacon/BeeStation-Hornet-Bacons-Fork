@@ -55,7 +55,7 @@
 				continue
 			bodypart_to_break.receive_damage(brute = 15)
 	else
-		batman.adjustBruteLoss(150)
+		batman.add_overall_injury(/datum/injury/brute/blunt/crush, 150, INJURY_SEVERITY_MAJOR, 80)
 
 	finish_action(controller, TRUE, target_key)
 

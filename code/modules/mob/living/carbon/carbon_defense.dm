@@ -207,7 +207,7 @@
 		return
 	else
 		show_message("<span class='userdanger'>The blob attacks!</span>")
-		adjustBruteLoss(10)
+		add_overall_injury(/datum/injury/brute/blunt/glomp, 10, INJURY_SEVERITY_MINOR, 40)
 
 /mob/living/carbon/emp_act(severity)
 	. = ..()

@@ -153,7 +153,7 @@
 
 /mob/living/silicon/robot/blob_act(obj/structure/blob/B)
 	if(stat != DEAD)
-		adjustBruteLoss(30)
+		add_overall_injury(/datum/injury/brute/blunt/crush, 30, INJURY_SEVERITY_MINOR, 40)
 	else
 		gib()
 	return TRUE
@@ -165,11 +165,11 @@
 			return
 		if(2)
 			if (stat != DEAD)
-				adjustBruteLoss(60)
+				add_overall_injury(/datum/injury/burn/explosion, 60, INJURY_SEVERITY_MAJOR, 0)
 				adjustFireLoss(60)
 		if(3)
 			if (stat != DEAD)
-				adjustBruteLoss(30)
+				add_overall_injury(/datum/injury/burn/explosion, 30, INJURY_SEVERITY_MINOR, 0)
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj, def_zone)
 	. = ..()

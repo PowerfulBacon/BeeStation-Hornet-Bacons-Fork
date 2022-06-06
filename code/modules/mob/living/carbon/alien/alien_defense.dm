@@ -40,7 +40,7 @@ In all, this is a lot like the monkey code. /N
 				playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
 				visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
 						"<span class='userdanger'>[M.name] bites you!</span>", null, COMBAT_MESSAGE_RANGE)
-				adjustBruteLoss(1)
+				add_overall_injury(/datum/injury/brute/sharp/bite, 1, INJURY_SEVERITY_MINOR, 30)
 				log_combat(M, src, "attacked")
 				updatehealth()
 			else

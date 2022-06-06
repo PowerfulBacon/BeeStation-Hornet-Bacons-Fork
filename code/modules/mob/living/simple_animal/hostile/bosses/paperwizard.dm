@@ -113,7 +113,7 @@
 		for(var/mob/living/L in ohearers(5,src))
 			if(L == original || istype(L, type))
 				continue
-			L.adjustBruteLoss(50)
+			L.add_overall_injury(/datum/injury/brute/blunt, 50, INJURY_SEVERITY_MINOR, armour_penetration)
 		qdel(src)
 	else
 		. = ..()

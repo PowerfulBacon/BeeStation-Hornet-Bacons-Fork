@@ -57,7 +57,7 @@
 		return
 	if(!H.blood_volume)
 		H.blood_volume += 5
-		H.adjustBruteLoss(5)
+		H.add_overall_injury(/datum/injury/brute/blunt/decay, 5, INJURY_SEVERITY_MINOR, 200)
 		to_chat(H, "<span class='danger'>You feel empty!</span>")
 	if(H.nutrition >= NUTRITION_LEVEL_WELL_FED && H.blood_volume <= 672)
 		if(H.nutrition >= NUTRITION_LEVEL_ALMOST_FULL)

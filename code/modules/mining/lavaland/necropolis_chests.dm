@@ -712,7 +712,7 @@
 					newwings.Insert(H)
 				to_chat(C, "<span class='userdanger'>A terrible pain travels down your back as wings burst out!</span>")
 				playsound(C.loc, 'sound/items/poster_ripped.ogg', 50, TRUE, -1)
-				C.adjustBruteLoss(20)
+				C.add_overall_injury(/datum/injury/brute/sharp, 20, INJURY_SEVERITY_MAJOR, 200)
 				C.emote("scream")
 		if(holycheck)
 			to_chat(C, "<span class='notice'>You feel blessed!</span>")

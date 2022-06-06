@@ -62,7 +62,7 @@
 	return
 
 /obj/item/banner/proc/inspiration(mob/living/carbon/human/H)
-	H.adjustBruteLoss(-15)
+	H.heal_overall_injury(/datum/injury/brute, 15, INJURY_SEVERITY_MAJOR, TRUE)
 	H.adjustFireLoss(-15)
 	H.AdjustStun(-40)
 	H.AdjustKnockdown(-40)

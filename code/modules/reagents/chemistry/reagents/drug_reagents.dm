@@ -88,7 +88,7 @@
 		var/high_message = pick("You feel jittery.", "You feel like you gotta go fast.", "You feel like you need to step it up.")
 		to_chat(M, "<span class='notice'>[high_message]</span>")
 	if(prob(8))
-		M.adjustBruteLoss(rand(1,4))
+		M.add_overall_injury(/datum/injury/brute/blunt, rand(1,4), INJURY_SEVERITY_MINOR, 0) //MASS CONVERTED
 		M.Stun(5, 0)
 		to_chat(M, "<span class='notice'>You stop to furiously scratch at your skin.</span>")
 	M.AdjustStun(-20, FALSE)

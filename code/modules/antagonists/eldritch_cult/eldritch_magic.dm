@@ -70,7 +70,7 @@
 	if(iscarbon(target))
 		use_charge = TRUE
 		var/mob/living/carbon/C = target
-		C.adjustBruteLoss(10)
+		C.add_overall_injury(/datum/injury/brute/blunt, 10, INJURY_SEVERITY_MINOR, 40)
 		C.silent = 3 SECONDS
 		C.AdjustKnockdown(5 SECONDS)
 		C.adjustStaminaLoss(80)
@@ -161,8 +161,8 @@
 	var/mob/living/carbon/human/C2 = user
 	if(isliving(target))
 		var/mob/living/L = target
-		L.adjustBruteLoss(20)
-		C2.adjustBruteLoss(-20)
+		L.add_overall_injury(/datum/injury/brute/sharp, 20, INJURY_SEVERITY_MINOR, 40)
+		C2.heal_overall_injury(/datum/injury/brute, 20, INJURY_SEVERITY_MAJOR, TRUE)
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/C1 = target

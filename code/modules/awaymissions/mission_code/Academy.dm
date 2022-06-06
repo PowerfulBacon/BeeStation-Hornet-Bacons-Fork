@@ -252,7 +252,7 @@
 			//Throw
 			T.visible_message("<span class='userdanger'>Unseen forces throw [user]!</span>")
 			user.Stun(60)
-			user.adjustBruteLoss(50)
+			user.add_overall_injury(/datum/injury/brute/blunt, 50, INJURY_SEVERITY_MAJOR, 40)
 			var/throw_dir = pick(GLOB.cardinals)
 			var/atom/throw_target = get_edge_target_turf(user, throw_dir)
 			user.throw_at(throw_target, 200, 4)

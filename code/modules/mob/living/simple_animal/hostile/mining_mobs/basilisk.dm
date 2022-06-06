@@ -54,9 +54,9 @@
 		if(1)
 			gib()
 		if(2)
-			adjustBruteLoss(140)
+			add_overall_injury(/datum/injury/burn/explosion, 140, INJURY_SEVERITY_MINOR, 0)
 		if(3)
-			adjustBruteLoss(110)
+			add_overall_injury(/datum/injury/burn/explosion, 110, INJURY_SEVERITY_MINOR, 0)
 
 //Watcher
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher

@@ -126,11 +126,11 @@
 	if(!QDELETED(affecting) && affecting.dismemberable && affecting.owner == user && !QDELETED(user))
 		playsound(user, hitsound, 25, 1)
 		affecting.dismember(BRUTE)
-		user.adjustBruteLoss(20)
+		user.add_overall_injury(/datum/injury/brute/sharp/slash, 20, INJURY_SEVERITY_MINOR, armour_penetration)
 
 /obj/item/melee/sabre/proc/manual_suicide(mob/living/user, originally_nodropped)
 	if(!QDELETED(user))
-		user.adjustBruteLoss(200)
+		user.add_overall_injury(/datum/injury/brute/sharp/slash, 200, INJURY_SEVERITY_MAJOR, armour_penetration)
 		user.death(FALSE)
 	REMOVE_TRAIT(src, TRAIT_NODROP, SABRE_SUICIDE_TRAIT)
 

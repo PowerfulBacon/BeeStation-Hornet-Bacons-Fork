@@ -132,13 +132,13 @@
 /mob/living/simple_animal/hostile/megafauna/ex_act(severity, target)
 	switch (severity)
 		if (EXPLODE_DEVASTATE)
-			adjustBruteLoss(250)
+			add_overall_injury(/datum/injury/burn/explosion, 250, INJURY_SEVERITY_MINOR, 0)
 
 		if (EXPLODE_HEAVY)
-			adjustBruteLoss(100)
+			add_overall_injury(/datum/injury/burn/explosion, 100, INJURY_SEVERITY_MINOR, 0)
 
 		if (EXPLODE_LIGHT)
-			adjustBruteLoss(50)
+			add_overall_injury(/datum/injury/burn/explosion, 50, INJURY_SEVERITY_MINOR, 0)
 
 /mob/living/simple_animal/hostile/megafauna/proc/SetRecoveryTime(buffer_time)
 	recovery_time = world.time + buffer_time

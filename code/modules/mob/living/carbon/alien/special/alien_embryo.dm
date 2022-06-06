@@ -111,7 +111,7 @@
 		owner.gib(TRUE)
 	else
 		new_xeno.visible_message("<span class='danger'>[new_xeno] wriggles out of [owner]!</span>", "<span class='userdanger'>You exit [owner], your previous host.</span>")
-		owner.adjustBruteLoss(40)
+		owner.add_overall_injury(/datum/injury/brute/sharp/burst, 40, INJURY_SEVERITY_MAJOR, 200)
 		owner.cut_overlay(overlay)
 	qdel(src)
 

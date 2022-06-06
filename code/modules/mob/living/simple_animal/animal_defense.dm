@@ -34,7 +34,7 @@
 		playsound(loc, "punch", 25, 1, -1)
 		visible_message("<span class='danger'>[user] punches [src]!</span>", \
 			"<span class='userdanger'>[user] punches you!</span>", null, COMBAT_MESSAGE_RANGE)
-		adjustBruteLoss(15)
+		add_overall_injury(/datum/injury/brute/blunt/crush, 15, INJURY_SEVERITY_MINOR, 20)
 		return TRUE
 
 /mob/living/simple_animal/attack_paw(mob/living/carbon/monkey/M)
@@ -123,7 +123,7 @@
 	switch (severity)
 		if (EXPLODE_DEVASTATE)
 			if(prob(bomb_armor))
-				adjustBruteLoss(500)
+				add_overall_injury(/datum/injury/burn/explosion, 500, INJURY_SEVERITY_CRITICAL, 40)
 			else
 				gib()
 				return
@@ -140,7 +140,7 @@
 			adjustBruteLoss(bloss)
 
 /mob/living/simple_animal/blob_act(obj/structure/blob/B)
-	adjustBruteLoss(20)
+	add_overall_injury(/datum/injury/brute/blunt/crush, 20, INJURY_SEVERITY_MINOR, 40)
 	return
 
 /mob/living/simple_animal/do_attack_animation(atom/A, visual_effect_icon, used_item, no_effect)

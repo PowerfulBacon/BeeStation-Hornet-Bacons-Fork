@@ -179,7 +179,7 @@
 		return
 	var/victims = 0
 	meal.visible_message("<span class='warning'>[src] swings open and devours [meal]!</span>", "<span class='his_grace big bold'>[src] consumes you!</span>")
-	meal.adjustBruteLoss(200)
+	meal.add_overall_injury(/datum/injury/brute/sharp/bite, 200, INJURY_SEVERITY_CRITICAL, 200)
 	playsound(meal, 'sound/misc/desecration-02.ogg', 75, 1)
 	playsound(src, 'sound/items/eatfood.ogg', 100, 1)
 	meal.forceMove(src)

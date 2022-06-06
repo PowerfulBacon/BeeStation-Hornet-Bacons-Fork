@@ -355,7 +355,7 @@ Difficulty: Medium
 			visible_message("<span class='warning'>[src] slams down on [L], crushing [L.p_them()]!</span>")
 			L.gib()
 		else
-			L.adjustBruteLoss(75)
+			L.add_overall_injury(/datum/injury/brute/blunt/crush, 75, INJURY_SEVERITY_MAJOR, 50)
 			if(L && !QDELETED(L)) // Some mobs are deleted on death
 				var/throw_dir = get_dir(src, L)
 				if(L.loc == loc)

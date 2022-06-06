@@ -885,7 +885,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 		var/takes_crit_damage = (!HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
 		if((H.health <= H.crit_threshold) && takes_crit_damage)
-			H.adjustBruteLoss(1)
+			H.add_overall_injury(/datum/injury/brute/blunt/decay, 1, INJURY_SEVERITY_MINOR, 200)
 	if(H.getorgan(/obj/item/organ/wings))
 		handle_flight(H)
 

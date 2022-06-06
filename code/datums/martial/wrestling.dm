@@ -297,11 +297,11 @@
 
 			switch(rand(1,3))
 				if (2)
-					D.adjustBruteLoss(rand(20,30))
+					D.add_overall_injury(/datum/injury/brute/blunt, rand(20,30), INJURY_SEVERITY_MINOR, 0)
 				if (3)
 					D.ex_act(EXPLODE_LIGHT)
 				else
-					D.adjustBruteLoss(rand(10,20))
+					D.add_overall_injury(/datum/injury/brute/blunt, rand(10,20), INJURY_SEVERITY_MINOR, 0)
 		else
 			D.ex_act(EXPLODE_LIGHT)
 
@@ -334,7 +334,7 @@
 
 		D.visible_message("<span class='danger'><B>[A] headbutts [D]!</B></span>", \
 						"<span class='userdanger'>[A] headbutts you!</span>", null, COMBAT_MESSAGE_RANGE)
-		D.adjustBruteLoss(rand(10,20))
+		D.add_overall_injury(/datum/injury/brute/blunt, rand(10,20), INJURY_SEVERITY_MINOR, 0)
 		playsound(A.loc, "swing_hit", 50, 1)
 		D.Unconscious(20)
 	log_combat(A, D, "headbutted")
@@ -349,7 +349,7 @@
 	D.visible_message("<span class='danger'><B>[A] roundhouse-kicks [D]!</B></span>", \
 					"<span class='userdanger'>[A] roundhouse-kicks you!</span>", null, COMBAT_MESSAGE_RANGE)
 	playsound(A.loc, "swing_hit", 50, 1)
-	D.adjustBruteLoss(rand(10,20))
+	D.add_overall_injury(/datum/injury/brute/blunt, rand(10,20), INJURY_SEVERITY_MINOR, 0)
 
 	var/turf/T = get_edge_target_turf(A, get_dir(A, get_step_away(D, A)))
 	if (T && isturf(T))
@@ -391,7 +391,7 @@
 			if (falling == 1)
 				A.visible_message("<span class='danger'><B>...and dives head-first into the ground, ouch!</B></span>", \
 								"<span class='userdanger'>...and dive head-first into the ground, ouch!</span>")
-				A.adjustBruteLoss(rand(10,20))
+				A.add_overall_injury(/datum/injury/brute/blunt, rand(10,20), INJURY_SEVERITY_MINOR, 0)
 				A.Paralyze(60)
 			to_chat(A, "[D] is too far away!")
 			return 0
@@ -418,9 +418,9 @@
 			if (prob(33) || D.stat)
 				D.ex_act(EXPLODE_LIGHT)
 			else
-				D.adjustBruteLoss(rand(20,30))
+				D.add_overall_injury(/datum/injury/brute/blunt, rand(20,30), INJURY_SEVERITY_MINOR, 0)
 		else
-			D.adjustBruteLoss(rand(20,30))
+			D.add_overall_injury(/datum/injury/brute/blunt, rand(20,30), INJURY_SEVERITY_MINOR, 0)
 
 		D.Paralyze(40)
 

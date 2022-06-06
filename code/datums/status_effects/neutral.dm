@@ -117,7 +117,7 @@
 			spell.charge_counter = spell.charge_max
 			spell.recharging = FALSE
 			spell.update_icon()
-		rewarded.adjustBruteLoss(-25)
+		rewarded.heal_overall_injury(/datum/injury/brute, 25, INJURY_SEVERITY_CRITICAL, TRUE)
 		rewarded.adjustFireLoss(-25)
 		rewarded.adjustToxLoss(-25, FALSE, TRUE)
 		rewarded.adjustOxyLoss(-25)

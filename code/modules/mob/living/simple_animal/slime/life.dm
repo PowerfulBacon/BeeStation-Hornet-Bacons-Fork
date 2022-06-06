@@ -83,7 +83,7 @@
 
 		if(bodytemperature <= (T0C - 50)) // hurt temperature
 			if(bodytemperature <= 50) // sqrting negative numbers is bad
-				adjustBruteLoss(200)
+				add_overall_injury(/datum/injury/burn/freeze, 200, INJURY_SEVERITY_MINOR, 0)
 			else
 				adjustBruteLoss(round(sqrt(bodytemperature)) * 2)
 
@@ -203,7 +203,7 @@
 
 	if(nutrition <= 0)
 		set_nutrition(0)
-		adjustBruteLoss(1)
+		add_overall_injury(/datum/injury/brute/blunt, 1, INJURY_SEVERITY_MINOR, 0) //MASS CONVERTED
 	else if (nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)
 		adjust_nutrition(-20)
 		amount_grown++

@@ -40,10 +40,10 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/handle_temperature_damage()
 	if(bodytemperature < minbodytemp)
-		adjustBruteLoss(10)
+		add_overall_injury(/datum/injury/burn/freeze, 10, INJURY_SEVERITY_MINOR, 200)
 		throw_alert("temp", /atom/movable/screen/alert/cold, 2)
 	else if(bodytemperature > maxbodytemp)
-		adjustBruteLoss(15)
+		add_overall_injury(/datum/injury/burn, 15, INJURY_SEVERITY_MINOR, 200)
 		throw_alert("temp", /atom/movable/screen/alert/hot, 3)
 	else
 		clear_alert("temp")

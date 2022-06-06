@@ -16,7 +16,7 @@
 	return ..()
 
 /datum/status_effect/shadow_mend/tick()
-	owner.adjustBruteLoss(-15)
+	owner.heal_overall_injury(/datum/injury/brute, 15, INJURY_SEVERITY_MAJOR, TRUE)
 	owner.adjustFireLoss(-15)
 
 /datum/status_effect/shadow_mend/on_remove()
@@ -38,7 +38,7 @@
 
 /datum/status_effect/void_price/tick()
 	SEND_SOUND(owner, sound('sound/magic/summon_karp.ogg', volume = 25))
-	owner.adjustBruteLoss(3)
+	owner.add_overall_injury(/datum/injury/brute/sharp/stab, 3, INJURY_SEVERITY_MINOR, 30)
 
 /datum/status_effect/cyborg_power_regen
 	id = "power_regen"
@@ -510,7 +510,7 @@
 			//Because a servant of medicines stops at nothing to help others, lets keep them on their toes and give them an additional boost.
 			if(itemUser.health < itemUser.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(itemUser), "#375637")
-			itemUser.adjustBruteLoss(-1.5)
+			itemUser.heal_overall_injury(/datum/injury/brute, 1.5, INJURY_SEVERITY_MINOR, TRUE)
 			itemUser.adjustFireLoss(-1.5)
 			itemUser.adjustToxLoss(-1.5, forced = TRUE) //Because Slime People are people too
 			itemUser.adjustOxyLoss(-1.5)
@@ -522,7 +522,7 @@
 			if(L.health < L.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(L), "#375637")
 			if(iscarbon(L))
-				L.adjustBruteLoss(-3.5)
+				L.heal_overall_injury(/datum/injury/brute, 3.5, INJURY_SEVERITY_MINOR, TRUE)
 				L.adjustFireLoss(-3.5)
 				L.adjustToxLoss(-3.5, FALSE, TRUE) //Because Slime People are people too
 				L.adjustOxyLoss(-3.5)
@@ -530,7 +530,7 @@
 				L.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3.5)
 				L.adjustCloneLoss(-1) //Becasue apparently clone damage is the bastion of all health
 			else if(issilicon(L))
-				L.adjustBruteLoss(-3.5)
+				L.heal_overall_injury(/datum/injury/brute, 3.5, INJURY_SEVERITY_MINOR, TRUE)
 				L.adjustFireLoss(-3.5)
 			else if(isanimal(L))
 				var/mob/living/simple_animal/SM = L

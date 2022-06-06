@@ -23,7 +23,7 @@
 				if(buckled_mob.has_gravity())
 					buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 					to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
-					buckled_mob.adjustBruteLoss(10)
+					buckled_mob.add_overall_injury(/datum/injury/brute/blunt, 10, INJURY_SEVERITY_MINOR, 0)
 		var/obj/item/stack/cable_coil/C = new(get_turf(src))
 		C.amount = 25
 		qdel(src)

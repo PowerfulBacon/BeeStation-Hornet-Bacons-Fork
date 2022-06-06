@@ -1066,4 +1066,4 @@ Pass a positive integer as an argument to override a bot's default speed.
 	path.Cut(1, 2)
 
 /mob/living/simple_animal/bot/rust_heretic_act()
-	adjustBruteLoss(400)
+	add_overall_injury(/datum/injury/brute/blunt/corrosion, 400, INJURY_SEVERITY_MAJOR, 0)

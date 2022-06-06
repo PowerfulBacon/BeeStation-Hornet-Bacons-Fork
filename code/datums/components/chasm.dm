@@ -107,7 +107,7 @@
 		if(isliving(AM))
 			var/mob/living/L = AM
 			L.Paralyze(100)
-			L.adjustBruteLoss(30)
+			L.add_overall_injury(/datum/injury/brute/blunt/crush, 30, INJURY_SEVERITY_MINOR, 70)
 		falling_atoms -= falling_ref
 
 	else
