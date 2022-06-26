@@ -154,7 +154,6 @@
 /turf/open/floor/mineral/titanium,
 /area/shuttle/exploration)
 "sz" = (
-/obj/machinery/computer/objective,
 /obj/machinery/light{
 	dir = 8
 	},

@@ -567,7 +567,6 @@
 /area/shuttle/exploration)
 "Zk" = (
 /obj/effect/turf_decal/delivery,
-/obj/machinery/computer/objective,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},

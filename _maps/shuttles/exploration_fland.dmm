@@ -283,9 +283,6 @@
 /turf/open/floor/plasteel,
 /area/shuttle/exploration)
 "qX" = (
-/obj/machinery/computer/objective{
-	dir = 4
-	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/exploration)

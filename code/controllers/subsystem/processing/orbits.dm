@@ -16,10 +16,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 	var/orbits_setup = FALSE
 
-	var/list/datum/orbital_objective/possible_objectives = list()
-
-	var/datum/orbital_objective/current_objective
-
 	var/list/datum/ruin_event/ruin_events = list()
 
 	var/list/runnable_events
@@ -33,8 +29,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//Key = port_id
 	//value = world time of next launch
 	var/list/interdicted_shuttles = list()
-
-	var/next_objective_time = 0
 
 	//Research disks
 	var/list/research_disks = list()
@@ -55,7 +49,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 /datum/controller/subsystem/processing/orbits/Recover()
 	orbital_maps |= SSorbits.orbital_maps
-	possible_objectives |= SSorbits.possible_objectives
 	ruin_events |= SSorbits.ruin_events
 	assoc_shuttles |= SSorbits.assoc_shuttles
 	interdicted_shuttles |= SSorbits.interdicted_shuttles
@@ -64,8 +57,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	runnable_events |= SSorbits.runnable_events
 
 	station_instance = SSorbits.station_instance
-	current_objective = SSorbits.current_objective
-	next_objective_time = SSorbits.next_objective_time
 	ruin_levels = SSorbits.ruin_levels
 	orbital_map_tgui = SSorbits.orbital_map_tgui
 	orbits_setup = SSorbits.orbits_setup
@@ -113,18 +104,9 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 		//Update UIs
 		for(var/datum/tgui/tgui as() in open_orbital_maps)
 			tgui.send_update()
-	//Check creating objectives / missions.
-	if(next_objective_time < world.time && length(possible_objectives) < 6)
-		create_objective()
-		next_objective_time = world.time + rand(30 SECONDS, 5 MINUTES)
 	//Check space ruin count
 	if(ruin_levels < 2 && prob(5))
 		new /datum/orbital_object/z_linked/beacon/ruin/spaceruin()
-	//Check objective
-	if(current_objective)
-		if(current_objective.check_failed())
-			priority_announce("Central Command priority objective failed.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
-			QDEL_NULL(current_objective)
 	//Process events
 	for(var/datum/ruin_event/ruin_event as() in ruin_events)
 		if(!ruin_event.update())
@@ -142,43 +124,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	set name = "View Orbits"
 	set category = "Ghost"
 	SSorbits.orbital_map_tgui.ui_interact(src)
-
-/datum/controller/subsystem/processing/orbits/proc/create_objective()
-	var/static/list/valid_objectives = list(
-		/datum/orbital_objective/recover_blackbox = 3,
-		/datum/orbital_objective/nuclear_bomb = 1,
-		/datum/orbital_objective/assassination = 1,
-		/datum/orbital_objective/artifact = 2,
-		/datum/orbital_objective/vip_recovery = 1
-	)
-	if(!length(possible_objectives))
-		priority_announce("Priority station objective recieved - Details transmitted to all available objective consoles. \
-			[GLOB.station_name] will have funds distributed upon objective completion.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
-	var/chosen = pickweight(valid_objectives)
-	if(!chosen)
-		return
-	var/datum/orbital_objective/objective = new chosen()
-	objective.generate_payout()
-	possible_objectives += objective
-	update_objective_computers()
-
-/datum/controller/subsystem/processing/orbits/proc/assign_objective(objective_computer, datum/orbital_objective/objective)
-	if(!possible_objectives.Find(objective))
-		return "Selected objective is no longer available or has been claimed already."
-	if(current_objective)
-		return "An objective has already been selected and must be completed first."
-	objective.on_assign(objective_computer)
-	objective.generate_attached_beacon()
-	objective.announce()
-	current_objective = objective
-	possible_objectives.Remove(objective)
-	update_objective_computers()
-	return "Objective selected, good luck."
-
-/datum/controller/subsystem/processing/orbits/proc/update_objective_computers()
-	for(var/obj/machinery/computer/objective/computer as() in GLOB.objective_computers)
-		for(var/M in computer.viewing_mobs)
-			computer.update_static_data(M)
 
 /*
  * Returns the base data of what is required for

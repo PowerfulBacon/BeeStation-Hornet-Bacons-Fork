@@ -11,18 +11,17 @@
  * center_z - The z level the ruin is on.
  * border_x - The distance from the edge of the world in which the ruin will be forced to stop.
  * border_y - See above.
- * linked_objective - Will spawn special objective stuff if this is part of an objective.
  * Note: The ruin can generate past the border. The border prevents rooms from attaching past that point,
  * however if a room attachment point is not past the border, the room it generates on that attachment point
  * can go past the border. No attachment points can be generated past the border.
  */
-/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
+/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, forced_decoration, datum/ruin_event/ruin_event)
 	var/datum/space_level/space_level = SSmapping.get_level(center_z)
 	space_level.generating = TRUE
-	_generate_space_ruin(center_x, center_y, center_z, border_x, border_y, linked_objective, forced_decoration, ruin_event)
+	_generate_space_ruin(center_x, center_y, center_z, border_x, border_y, forced_decoration, ruin_event)
 	space_level.generating = FALSE
 
-/proc/_generate_space_ruin(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
+/proc/_generate_space_ruin(center_x, center_y, center_z, border_x, border_y, forced_decoration, datum/ruin_event/ruin_event)
 
 	SSair.pause_z(center_z)
 
@@ -343,27 +342,6 @@
 				break
 
 	CHECK_TICK
-
-	//Generate objective stuff
-	if(linked_objective)
-		var/obj_sanity = 100
-		//Spawn in a sane place.
-		while(obj_sanity > 0)
-			obj_sanity --
-			var/objective_turf = pick(floor_turfs)
-			var/split_loc = splittext(objective_turf, "_")
-			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
-			if(isspaceturf(T))
-				continue
-			if(locate(/obj/structure) in T)
-				continue
-			linked_objective.generate_objective_stuff(T)
-			break
-		if(!obj_sanity)
-			var/objective_turf = pick(floor_turfs)
-			var/split_loc = splittext(objective_turf, "_")
-			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
-			linked_objective.generate_objective_stuff(T)
 
 	//Generate research disks
 	for(var/i in 1 to rand(1, 5))

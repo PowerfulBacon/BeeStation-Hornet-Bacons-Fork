@@ -311,9 +311,6 @@
 /turf/open/floor/mineral/titanium,
 /area/shuttle/exploration)
 "mL" = (
-/obj/machinery/computer/objective{
-	dir = 1
-	},
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
