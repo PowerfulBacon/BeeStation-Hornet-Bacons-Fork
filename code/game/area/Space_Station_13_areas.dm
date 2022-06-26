@@ -1201,11 +1201,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "quart_perch"
 
 /area/quartermaster/exploration_prep
-	name = "Exploration Preparation Room"
+	name = "Research Away Mission Preparation Room"
 	icon_state = "mining"
 
 /area/quartermaster/exploration_dock
-	name = "Exploration Dock"
+	name = "Research Away Mission Dock"
 	icon_state = "mining"
 
 //Service

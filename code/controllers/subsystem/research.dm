@@ -46,9 +46,9 @@ SUBSYSTEM_DEF(research)
 	science_tech = new /datum/techweb/science
 	//Some points to get you started.
 	//Points can be gained by
-	// 1) Exploration team going to ruins
+	// 1) ~~Exploration team going to ruins~~
 	// 2) Scientists using their shuttle to go to ruins
-	// 3) Giving miners a scanner
+	// 3) ~~Giving miners a scanner~~ Miners with their scanner
 	// 4) Scanning station pets
 	// 5) Using the experimentor on maint devices
 	// (probably more added since this comment was written.)

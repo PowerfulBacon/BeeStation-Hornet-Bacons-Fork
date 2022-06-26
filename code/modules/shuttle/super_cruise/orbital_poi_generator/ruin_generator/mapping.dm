@@ -179,6 +179,8 @@
 		/obj/item/ammo_box/magazine/wt550m9/wtic = 1,
 		/obj/item/ammo_box/magazine/pistolm9mm = 4,
 		/obj/item/grenade/exploration = 2,
+		/obj/item/clothing/suit/space/hardsuit/exploration = 1,
+		/obj/item/gun/energy/e_gun/mini/exploration = 6,
 	)
 
 //Important stuff like research disks
@@ -188,5 +190,9 @@
 		/obj/item/disk/tech_disk/research/random = 24,
 		/obj/item/alienartifact = 6,
 		/obj/item/gun/energy/vortex = 3,
-		/obj/item/gun/energy/alien = 1
+		/obj/item/gun/energy/alien = 1,
+		/obj/item/abductor/baton = 1,
+		/obj/item/abductor/gizmo = 1,
+		/obj/item/abductor/silencer = 1,
+		/obj/item/autosurgeon/limited = 1,
 	)

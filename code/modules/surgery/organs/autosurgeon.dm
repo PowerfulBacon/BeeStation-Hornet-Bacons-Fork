@@ -116,3 +116,6 @@
 	desc = "A single use autosurgeon that contains an energy saw arm implant."
 	uses = 1
 	starting_organ = list(/obj/item/organ/cyberimp/arm/esaw)
+
+/obj/item/autosurgeon/limited
+	uses = 4

@@ -65,7 +65,7 @@
 
 /obj/item/clothing/under/rank/cargo/exploration
 	name = "exploration uniform"
-	desc = "A robust uniform used by exploration teams."
+	desc = "A legendary uniform worn by the infamous exploration teams. Their sacrafices are the reason we are here today."
 	icon_state = "curator"
 	item_state = "curator"
 	can_adjust = FALSE

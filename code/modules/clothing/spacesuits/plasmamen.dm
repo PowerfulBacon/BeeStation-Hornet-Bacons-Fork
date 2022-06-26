@@ -134,7 +134,7 @@
 /obj/item/clothing/head/helmet/space/plasmaman/proc/update_button_icons(mob/user)
 	if(!user)
 		return
-	
+
 	//The icon's may look differently due to overlays being applied asynchronously
 	for(var/X in actions)
 		var/datum/action/A=X
@@ -193,7 +193,7 @@
 	update_icon()
 	user.update_inv_head() //So the mob overlay updates
 	update_button_icons(user)
-	
+
 /obj/item/clothing/head/helmet/space/plasmaman/update_overlays()
 	cut_overlays()
 
@@ -201,7 +201,7 @@
 		add_overlay(mutable_appearance('icons/obj/clothing/hats.dmi', visor_state + "_weld"))
 	else if(helmet_on)
 		add_overlay(mutable_appearance('icons/obj/clothing/hats.dmi', visor_state + "_light"))
-	
+
 	return ..()
 
 /obj/item/clothing/head/helmet/space/plasmaman/security
@@ -328,7 +328,7 @@
 
 /obj/item/clothing/head/helmet/space/plasmaman/exploration
 	name = "exploration envirosuit helmet"
-	desc = "A plasmaman envirohelmet designed for the exploration crew, decked out in their iconic garish turquiose."
+	desc = "A plasmaman envirohelmet that used to be used by exploration crews, decked out in their iconic garish turquiose."
 	greyscale_colors = "#CFC7B8#50BA5C#CFC7B8"
 
 //mime and clown
@@ -509,7 +509,7 @@
 
 /obj/item/clothing/head/helmet/space/plasmaman/mark2/exploration
 	name = "mining envirosuit helmet"
-	desc = "A new plasmaman envirohelmet designed for the exploration crew, decked out in their iconic garish turquiose."
+	desc = "A new plasmaman envirohelmet designed for the legendary Nanotrasen exploration crews, decked out in their iconic garish turquiose."
 	greyscale_colors = "#E1D9CA#2BFF92"
 
 /obj/item/clothing/head/helmet/space/plasmaman/mark2/command
@@ -703,7 +703,7 @@
 
 /obj/item/clothing/head/helmet/space/plasmaman/protective/exploration
 	name = "mining protective envirosuit helmet"
-	desc = "A new plasmaman envirohelmet designed for the exploration crew, decked out in their iconic garish turquiose."
+	desc = "A new plasmaman envirohelmet designed for the legendary Nanotrasen exploration crews, decked out in their iconic garish turquiose."
 	greyscale_colors = "#CFC7B8#0CD46C"
 
 /obj/item/clothing/head/helmet/space/plasmaman/protective/command

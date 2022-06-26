@@ -9,7 +9,6 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	RADIO_CHANNEL_CENTCOM = RADIO_TOKEN_CENTCOM,
 	RADIO_CHANNEL_SYNDICATE = RADIO_TOKEN_SYNDICATE,
 	RADIO_CHANNEL_SUPPLY = RADIO_TOKEN_SUPPLY,
-	RADIO_CHANNEL_EXPLORATION = RADIO_TOKEN_EXPLORATION,
 	RADIO_CHANNEL_SERVICE = RADIO_TOKEN_SERVICE,
 	MODE_BINARY = MODE_TOKEN_BINARY,
 	RADIO_CHANNEL_AI_PRIVATE = RADIO_TOKEN_AI_PRIVATE
@@ -233,9 +232,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 /obj/item/radio/headset/headset_exploration
 	name = "exploration radio headset"
-	desc = "A headset used by exploration teams."
+	desc = "An advanced headset that used to be used by Nanotrasen exploration teams. Due to extremely expensive upkeep costs, they have been taken out of service in most modern stations."
 	icon_state = "exploration_headset"
-	keyslot = new /obj/item/encryptionkey/headset_expteam
 
 /obj/item/radio/headset/headset_cargo/mining
 	name = "mining radio headset"
@@ -251,7 +249,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 /obj/item/radio/headset/headset_curator
 	name = "curator radio headset"
-	desc = "Headset used by the curator, which allows for communication with the exploration team."
+	desc = "Headset used by the curator."
 	icon_state = "srv_headset"
 	keyslot = new /obj/item/encryptionkey/headset_curator
 
