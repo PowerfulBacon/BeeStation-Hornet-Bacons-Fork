@@ -27,7 +27,7 @@
 			var/heals = -(master_stats.potential * 0.8 + 3)
 			if(!guardian.is_deployed())
 				heals = min(heals * 0.5, -2)
-			L.adjustBruteLoss(heals)
+			L.heal_overall_injury(/datum/injury/brute, heals, INJURY_SEVERITY_MAJOR, FALSE)
 			L.adjustFireLoss(heals)
 			L.adjustOxyLoss(heals)
 			L.adjustToxLoss(heals)

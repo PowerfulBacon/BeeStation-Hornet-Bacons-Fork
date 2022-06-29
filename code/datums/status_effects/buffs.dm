@@ -103,7 +103,7 @@
 		qdel(src)
 		return
 	var/grace_heal = bloodlust * 0.05
-	owner.adjustBruteLoss(-grace_heal)
+	owner.heal_overall_injury(/datum/injury/brute, -grace_heal, INJURY_SEVERITY_MINOR, TRUE)
 	owner.adjustFireLoss(-grace_heal)
 	owner.adjustToxLoss(-grace_heal, TRUE, TRUE)
 	owner.adjustOxyLoss(-(grace_heal * 2))
@@ -217,7 +217,7 @@
 		var/new_bruteloss = owner.getBruteLoss()
 		if(new_bruteloss < last_bruteloss)
 			var/heal_amount = (new_bruteloss - last_bruteloss) * 10
-			owner.adjustBruteLoss(heal_amount, updating_health = FALSE)
+			owner.heal_overall_injury(/datum/injury/brute, heal_amount, INJURY_SEVERITY_MINOR, TRUE)
 			new_bruteloss = owner.getBruteLoss()
 			needs_health_update = TRUE
 		last_bruteloss = new_bruteloss
@@ -339,7 +339,7 @@
 	else if(ticks_passed == 2)
 		to_chat(owner, "<span class=changeling>We begin to repair our tissue damage...</span>")
 	//Heals 2 brute per second, for a total of 60
-	owner.adjustBruteLoss(-2, FALSE, TRUE)
+	owner.heal_overall_injury(/datum/injury/brute, -2, INJURY_SEVERITY_MINOR, TRUE)
 	//Heals 1 fireloss per second, for a total of 30
 	owner.adjustFireLoss(-1, FALSE, TRUE)
 	//Heals 5 oxyloss per second for a total of 150
@@ -559,7 +559,7 @@
 	ADD_TRAIT(owner, TRAIT_NECROPOLIS_INFECTED, "legion_core_trait")
 	if(owner.z == 5)
 		power = 2
-	owner.adjustBruteLoss(-50 * power)
+	owner.heal_overall_injury(/datum/injury/brute, -50 * power, INJURY_SEVERITY_MINOR, TRUE)
 	owner.adjustFireLoss(-50 * power)
 	owner.cure_nearsighted()
 	owner.ExtinguishMob()

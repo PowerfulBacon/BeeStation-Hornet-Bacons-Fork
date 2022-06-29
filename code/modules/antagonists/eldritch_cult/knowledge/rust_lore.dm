@@ -55,7 +55,7 @@
 	if(!istype(user_loc_turf, /turf/open/floor/plating/rust) || !isliving(user))
 		return
 	var/mob/living/living_user = user
-	living_user.adjustBruteLoss(-2, FALSE)
+	living_user.heal_overall_injury(/datum/injury/brute, 2, INJURY_SEVERITY_MAJOR, TRUE)
 	living_user.adjustFireLoss(-2, FALSE)
 	living_user.adjustToxLoss(-2, FALSE, TRUE)
 	living_user.adjustOxyLoss(-0.5, FALSE)
@@ -128,7 +128,7 @@
 	if(!finished)
 		return
 	var/mob/living/carbon/human/human_user = user
-	human_user.adjustBruteLoss(-4, FALSE)
+	human_user.heal_overall_injury(/datum/injury/brute, 4, INJURY_SEVERITY_MAJOR, TRUE)
 	human_user.adjustFireLoss(-4, FALSE)
 	human_user.adjustToxLoss(-4, FALSE, TRUE)
 	human_user.adjustOxyLoss(-2, FALSE)

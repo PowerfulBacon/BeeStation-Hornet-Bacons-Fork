@@ -451,7 +451,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	for(var/mob/living/M in src)
 		if(M==U)
 			continue//Will not harm U. Since null != M, can be excluded to kill everyone.
-		M.adjustBruteLoss(damage)
+		M.add_overall_injury(/datum/injury/brute/blunt/crush, damage, INJURY_SEVERITY_MINOR, 100)
 		M.Unconscious(damage * 4)
 	for(var/obj/mecha/M in src)
 		M.take_damage(damage*2, BRUTE, "melee", 1)

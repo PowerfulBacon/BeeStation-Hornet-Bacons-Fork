@@ -493,7 +493,7 @@
 
 	if(HAS_TRAIT(mob_occupant, TRAIT_NOCLONELOSS))
 		var/cl_loss = mob_occupant.getCloneLoss()
-		mob_occupant.adjustBruteLoss(cl_loss, FALSE)
+		mob_occupant.add_overall_injury(/datum/injury/brute/blunt, cl_loss, INJURY_SEVERITY_MAJOR, 200)
 		mob_occupant.setCloneLoss(0, FALSE, TRUE)
 
 	current_insurance = null

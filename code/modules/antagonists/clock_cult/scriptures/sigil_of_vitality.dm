@@ -65,7 +65,7 @@
 		if(GLOB.clockcult_vitality >= healing_performed * 0.3)
 			GLOB.clockcult_vitality -= healing_performed * 0.3
 			//Do healing
-			M.adjustBruteLoss(-5, FALSE)
+			M.heal_overall_injury(/datum/injury/brute, 5, INJURY_SEVERITY_CRITICAL, TRUE)
 			M.adjustFireLoss(-5, FALSE)
 			M.adjustOxyLoss(-5, FALSE)
 			M.adjustToxLoss(-5, FALSE, TRUE)

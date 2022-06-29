@@ -260,7 +260,7 @@
 			if (!QDELETED(target_living))
 				target_living.gib() //After adjusting the fuck outta that brute loss we finish the job with some satisfying gibs
 		else
-			target_living.adjustBruteLoss(damage)
+			target_living.add_overall_injury(/datum/injury/brute/blunt/crush, damage, INJURY_SEVERITY_MAJOR, 200)
 	var/explosion_sum = B[1] + B[2] + B[3] + B[4]
 	if (explosion_sum != 0) //If the explosion list isn't all zeroes, call an explosion
 		explosion(turf_underneath, B[1], B[2], B[3], flame_range = B[4], silent = effectQuiet, ignorecap = istype(src, /obj/structure/closet/supplypod/centcompod)) //less advanced equipment than bluespace pod, so larger explosion when landing

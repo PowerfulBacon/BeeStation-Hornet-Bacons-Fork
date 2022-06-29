@@ -98,7 +98,7 @@
 		return
 
 	if(I.use_tool(src, user, 0, volume=40))
-		adjustBruteLoss(-15)
+		heal_overall_injury(/datum/injury/brute, 15, INJURY_SEVERITY_CRITICAL, TRUE)
 		to_chat(user, "<span class='info'>You repair some of the armor on [src].</span>")
 
 /mob/living/simple_animal/hostile/mining_drone/attackby(obj/item/I, mob/user, params)

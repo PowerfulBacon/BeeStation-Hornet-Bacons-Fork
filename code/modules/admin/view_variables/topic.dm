@@ -89,7 +89,7 @@
 			var/newamt
 			switch(Text)
 				if("brute")
-					L.adjustBruteLoss(amount,TRUE,TRUE)
+					L.adjustBruteLoss(amount,TRUE,TRUE)//BACONTODO
 					newamt = L.getBruteLoss()
 				if("fire")
 					L.adjustFireLoss(amount,TRUE,TRUE)

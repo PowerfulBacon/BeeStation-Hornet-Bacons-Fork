@@ -178,7 +178,7 @@
 				continue
 			new /obj/effect/temp_visual/heal(get_turf(src), "#960000")
 			if(ishuman(L))
-				L.adjustBruteLoss(-5*delta_time, 0)
+				L.heal_overall_injury(/datum/injury/brute, 5*delta_time, INJURY_SEVERITY_MINOR, TRUE)
 				L.adjustFireLoss(-5*delta_time, 0)
 				L.updatehealth()
 				if(L.blood_volume < BLOOD_VOLUME_NORMAL)

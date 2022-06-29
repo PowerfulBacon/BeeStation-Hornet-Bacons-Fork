@@ -93,7 +93,7 @@
 				master.remove_status_effect(STATUS_EFFECT_HISGRACE)
 				REMOVE_TRAIT(src, TRAIT_NODROP, HIS_GRACE_TRAIT)
 				master.Paralyze(60)
-				master.adjustBruteLoss(master.maxHealth)
+				master.add_bodypart_injury(BODY_ZONE_HEAD, /datum/injury/brute, master.maxHealth, INJURY_SEVERITY_CRITICAL, 200)
 				playsound(master, 'sound/effects/splat.ogg', 100, 0)
 			else
 				master.apply_status_effect(STATUS_EFFECT_HISGRACE)
@@ -117,7 +117,7 @@
 			do_attack_animation(L, null, src)
 			playsound(L, 'sound/weapons/smash.ogg', 50, 1)
 			playsound(L, 'sound/misc/desecration-01.ogg', 50, 1)
-			L.adjustBruteLoss(force)
+			L.add_bodypart_injury(ran_zone(BODY_ZONE_CHEST, 0), /datum/injury/brute/sharp/bite, force, INJURY_SEVERITY_MAJOR, armour_penetration)
 			adjust_bloodthirst(-5) //Don't stop attacking they're right there!
 		else
 			consume(L)

@@ -191,7 +191,7 @@
 
 	// Instantly lie down, also go unconscious from the pain, before you die.
 	L.Unconscious(100)
-	L.adjustBruteLoss(crush_damage)
+	L.add_overall_injury(/datum/injury/brute/blunt/crush, crush_damage, INJURY_SEVERITY_CRITICAL, 100)
 	if(L.stat == DEAD && (L.butcher_results || L.guaranteed_butcher_results))
 		var/datum/component/butchering/butchering = GetComponent(/datum/component/butchering)
 		butchering.Butcher(src,L)

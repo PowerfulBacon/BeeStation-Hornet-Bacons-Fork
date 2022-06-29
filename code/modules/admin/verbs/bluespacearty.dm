@@ -20,7 +20,7 @@
 	if(target.health <= 1)
 		target.gib(1, 1)
 	else
-		target.adjustBruteLoss(min(99,(target.health - 1)))
+		target.add_overall_injury(/datum/injury/burn/explosion, min(99, target.health - 1), INJURY_SEVERITY_MAJOR, 200)))
 		target.Paralyze(400)
 		target.stuttering = 20
 

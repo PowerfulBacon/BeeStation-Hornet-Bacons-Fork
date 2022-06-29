@@ -74,7 +74,7 @@
 	occupier.adjustOxyLoss(-5, 0)
 	occupier.adjustFireLoss(-5, 0)
 	occupier.adjustToxLoss(-5, 0)
-	occupier.adjustBruteLoss(-5, 0)
+	occupier.heal_overall_injury(/datum/injury/brute, 5, INJURY_SEVERITY_MINOR, TRUE)
 	occupier.updatehealth()
 	if(occupier.health >= 0 && occupier.stat == DEAD)
 		occupier.revive(full_heal = FALSE, admin_revive = FALSE)

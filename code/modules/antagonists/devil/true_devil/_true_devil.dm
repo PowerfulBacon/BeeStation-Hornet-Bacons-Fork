@@ -168,7 +168,7 @@
 				playsound(loc, "punch", 25, 1, -1)
 				visible_message("<span class='danger'>[M] punches [src]!</span>", \
 						"<span class='userdanger'>[M] punches you!</span>")
-				adjustBruteLoss(damage)
+				add_bodypart_injury(M.zone_selected, M.dna?.species?.attack_type || /datum/injury/brute/blunt, damage, INJURY_SEVERITY_MINOR, 0)
 				log_combat(M, src, "attacked")
 				updatehealth()
 			if ("disarm")
@@ -208,7 +208,7 @@
 				b_loss = 30
 		if(has_bane(BANE_LIGHT))
 			b_loss *=2
-		adjustBruteLoss(b_loss)
+		add_bodypart_injury(ran_zone(), /datum/injury/burn/explosion, b_loss, INJURY_SEVERITY_MINOR, 40)
 	return ..()
 
 

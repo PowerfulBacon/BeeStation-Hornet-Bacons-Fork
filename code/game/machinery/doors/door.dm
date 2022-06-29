@@ -355,21 +355,21 @@
 	for(var/mob/living/L in get_turf(src))
 		L.visible_message("<span class='warning'>[src] closes on [L], crushing [L.p_them()]!</span>", "<span class='userdanger'>[src] closes on you and crushes you!</span>")
 		if(isalien(L))  //For xenos
-			L.adjustBruteLoss(DOOR_CRUSH_DAMAGE * 1.5) //Xenos go into crit after aproximately the same amount of crushes as humans.
+			L.add_overall_injury(/datum/injury/brute/blunt/crush, DOOR_CRUSH_DAMAGE * 1.5, INJURY_SEVERITY_MINOR, 100) //Xenos go into crit after aproximately the same amount of crushes as humans.
 			L.emote("roar")
 		else if(ishuman(L)) //For humans
 			var/armour = L.run_armor_check(BODY_ZONE_CHEST, "melee")
 			var/multiplier = CLAMP(1 - (armour * 0.01), 0, 1)
-			L.adjustBruteLoss(multiplier * DOOR_CRUSH_DAMAGE)
+			L.add_overall_injury(/datum/injury/brute, multiplier * DOOR_CRUSH_DAMAGE, INJURY_SEVERITY_MINOR, 100)
 			L.emote("scream")
 			if(!L.IsParalyzed())
 				L.Paralyze(60)
 		else if(ismonkey(L)) //For monkeys
-			L.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
+			L.add_overall_injury(/datum/injury/brute/blunt/crush, DOOR_CRUSH_DAMAGE, INJURY_SEVERITY_MINOR, 100)
 			if(!L.IsParalyzed())
 				L.Paralyze(60)
 		else //for simple_animals & borgs
-			L.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
+			L.add_overall_injury(/datum/injury/brute/blunt/crush, DOOR_CRUSH_DAMAGE, INJURY_SEVERITY_MINOR, 100)
 		var/turf/location = get_turf(src)
 		//add_blood doesn't work for borgs/xenos, but add_blood_floor does.
 		L.add_splatter_floor(location)

@@ -205,7 +205,7 @@
 		else
 			// The changes that you've been hit with no shield but not
 			// instantly critted are low, but have some healing.
-			M.adjustBruteLoss(-2.5 * delta_time)
+			M.heal_overall_injury(/datum/injury/brute, 2.5 * delta_time, INJURY_SEVERITY_CRITICAL, TRUE)
 			M.adjustFireLoss(-2.5 * delta_time)
 
 /obj/machinery/capture_the_flag/red

@@ -25,7 +25,7 @@
 	M.add_overall_injury(/datum/injury/brute/blunt, 0.2 * reac_volume, INJURY_SEVERITY_MINOR, 200)
 
 /datum/reagent/blob/cryogenic_poison/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(0.3*REAGENTS_EFFECT_MULTIPLIER, 0)
+	M.add_bodypart_injury(ran_zone(), /datum/injury/brute/blunt/corrosion, 0.3*REAGENTS_EFFECT_MULTIPLIER, INJURY_SEVERITY_MINOR, 200)
 	M.adjustFireLoss(0.3*REAGENTS_EFFECT_MULTIPLIER, 0)
 	M.adjustToxLoss(0.3*REAGENTS_EFFECT_MULTIPLIER, 0)
 	. = 1

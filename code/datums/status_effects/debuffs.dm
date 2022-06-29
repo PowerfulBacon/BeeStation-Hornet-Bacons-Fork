@@ -76,7 +76,7 @@
 			else
 				if((locate(/obj/structure/table) in owner.loc))
 					healing -= 0.1
-			owner.adjustBruteLoss(healing)
+			owner.heal_overall_injury(/datum/injury/brute, healing, INJURY_SEVERITY_MINOR, TRUE)
 			owner.adjustFireLoss(healing)
 			owner.adjustToxLoss(healing * 0.5, TRUE, TRUE)
 			owner.adjustStaminaLoss(healing)
@@ -279,7 +279,7 @@
 	for(var/obj/item/his_grace/HG in owner.held_items)
 		qdel(src)
 		return
-	owner.adjustBruteLoss(0.1)
+	owner.add_overall_injury(/datum/injury/brute/blunt/decay, 0.1, INJURY_SEVERITY_MINOR, )
 	owner.adjustFireLoss(0.1)
 	owner.adjustToxLoss(0.2, TRUE, TRUE)
 
@@ -397,7 +397,7 @@
 		for(var/d in GLOB.alldirs)
 			new /obj/effect/temp_visual/dir_setting/bloodsplatter(T, d)
 		playsound(T, "desecration", 200, 1, -1)
-		owner.adjustBruteLoss(bleed_damage)
+		owner.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/sharp, bleed_damage, INJURY_SEVERITY_MINOR, 50)
 	else
 		new /obj/effect/temp_visual/bleed(get_turf(owner))
 

@@ -95,7 +95,7 @@
 		M.death(1) //Kills the new mob
 
 	M.adjustOxyLoss(oxy_damage)
-	M.adjustBruteLoss(brute_damage)
+	M.add_overall_injury(/datum/injury/brute/blunt, brute_damage, INJURY_SEVERITY_MAJOR, 200)
 	M.adjustFireLoss(burn_damage)
 	M.color = mob_color
 	equip(M)

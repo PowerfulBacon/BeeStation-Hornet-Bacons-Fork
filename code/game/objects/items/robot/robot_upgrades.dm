@@ -411,7 +411,7 @@
 			else
 				repair_amount = -1
 				powercost = 10
-			cyborg.adjustBruteLoss(repair_amount)
+			cyborg.heal_overall_injury(/datum/injury/brute, repair_amount, INJURY_SEVERITY_MAJOR, TRUE)
 			cyborg.adjustFireLoss(repair_amount)
 			cyborg.updatehealth()
 			cyborg.cell.use(powercost)

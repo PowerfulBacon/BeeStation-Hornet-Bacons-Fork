@@ -63,7 +63,7 @@
 
 				//Do 200 damage divided by the number of damage types applied.
 				if(damagetype & BRUTELOSS)
-					adjustBruteLoss(200/damage_mod)
+					add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute, 200/damage_mod, INJURY_SEVERITY_CRITICAL, 200)
 
 				if(damagetype & FIRELOSS)
 					adjustFireLoss(200/damage_mod)

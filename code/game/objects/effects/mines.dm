@@ -216,7 +216,7 @@
 /obj/effect/mine/stun/mineEffect(mob/living/victim)
 	if(isliving(victim))
 		victim.adjustStaminaLoss(stun_time)
-		victim.adjustBruteLoss(damage)
+		victim.add_bodypart_injury(pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG), /datum/injury/burn/explosion, damage, INJURY_SEVERITY_MINOR, 40)
 
 /obj/effect/mine/shrapnel
 	name = "shrapnel mine"
