@@ -131,13 +131,13 @@
 			var/bloss = 60
 			if(prob(bomb_armor))
 				bloss = bloss / 1.5
-			adjustBruteLoss(bloss)
+			add_overall_injury(/datum/injury/burn/explosion, 60, INJURY_SEVERITY_MINOR, 40)
 
 		if(EXPLODE_LIGHT)
 			var/bloss = 30
 			if(prob(bomb_armor))
 				bloss = bloss / 1.5
-			adjustBruteLoss(bloss)
+			add_overall_injury(/datum/injury/burn/explosion, 30, INJURY_SEVERITY_MINOR, 40)
 
 /mob/living/simple_animal/blob_act(obj/structure/blob/B)
 	add_overall_injury(/datum/injury/brute/blunt/crush, 20, INJURY_SEVERITY_MINOR, 40)

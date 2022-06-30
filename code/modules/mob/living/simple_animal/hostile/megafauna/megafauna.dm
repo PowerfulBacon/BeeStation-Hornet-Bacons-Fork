@@ -125,7 +125,7 @@
 		"<span class='danger'>[src] devours [L]!</span>",
 		"<span class='userdanger'>You feast on [L], restoring your health!</span>")
 	if(!is_station_level(z) || client) //NPC monsters won't heal while on station
-		adjustBruteLoss(-L.maxHealth/2)
+		heal_overall_injury(/datum/injury/brute, L.maxHealth/2, INJURY_SEVERITY_CRITICAL, TRUE)
 	L.gib()
 	return TRUE
 

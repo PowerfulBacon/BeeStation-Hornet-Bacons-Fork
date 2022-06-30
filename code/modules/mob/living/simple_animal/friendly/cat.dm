@@ -287,7 +287,7 @@
 	if(stat)
 		return
 	if(health < maxHealth)
-		adjustBruteLoss(-8) //Fast life regen
+		heal_overall_injury(/datum/injury/brute, 8, INJURY_SEVERITY_MAJOR, TRUE) //Fast life regen
 
 /mob/living/simple_animal/pet/cat/cak/Move()
 	. = ..()

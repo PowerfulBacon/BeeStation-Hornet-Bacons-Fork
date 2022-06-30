@@ -1063,7 +1063,7 @@
 		return TRUE
 
 	if(chem.type == /datum/reagent/toxin/bonehurtingjuice)
-		H.adjustBruteLoss(0.5, 0)
+		H.add_bodypart_injury(ran_zone(), /datum/injury/brute/blunt/decay, 0.5, INJURY_SEVERITY_MINOR, 200)
 		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM)
 		return TRUE
 	return ..()

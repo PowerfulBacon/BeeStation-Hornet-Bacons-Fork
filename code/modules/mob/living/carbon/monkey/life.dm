@@ -117,7 +117,7 @@
 			if(HAS_TRAIT(src, TRAIT_RESISTLOWPRESSURE))
 				clear_alert("pressure")
 			else
-				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+				add_overall_injury(/datum/injury/brute/blunt/crush, LOW_PRESSURE_DAMAGE, INJURY_SEVERITY_MINOR, 200)
 				throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 2)
 
 	return

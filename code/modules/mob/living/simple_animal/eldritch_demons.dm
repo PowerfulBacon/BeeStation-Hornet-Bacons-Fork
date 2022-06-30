@@ -224,7 +224,7 @@
 	if(back)
 		back.heal()
 
-	adjustBruteLoss(-maxHealth * 0.5, FALSE)
+	heal_overall_injury(/datum/injury/brute, maxHealth * 0.5, INJURY_SEVERITY_CRITICAL, TRUE)
 	adjustFireLoss(-maxHealth * 0.5 ,FALSE)
 
 	if(health == maxHealth)
@@ -342,7 +342,7 @@
 		return ..()
 	var/turf/T = get_turf(src)
 	if(istype(T,/turf/open/floor/plating/rust))
-		adjustBruteLoss(-3, FALSE)
+		heal_overall_injury(/datum/injury/brute, 3, INJURY_SEVERITY_MINOR, FALSE)
 		adjustFireLoss(-3, FALSE)
 	return ..()
 

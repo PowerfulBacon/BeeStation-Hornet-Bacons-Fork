@@ -1,6 +1,7 @@
 /datum/injury
 	//Name of the injury
 	var/name
+	var/mechanical_name
 	//Does the injury stack
 	var/can_stack = FALSE
 	//Damage applied

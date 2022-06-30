@@ -19,7 +19,7 @@
 						D.visible_message("<span class='notice'>[D] begins to cannibalize parts from [src].</span>", "<span class='notice'>You begin to cannibalize parts from [src]...</span>")
 						if(do_after(D, 60, 0, target = src))
 							D.visible_message("<span class='notice'>[D] repairs itself using [src]'s remains!</span>", "<span class='notice'>You repair yourself using [src]'s remains.</span>")
-							D.adjustBruteLoss(-src.maxHealth)
+							D.heal_overall_injury(/datum/injury/brute, maxHealth, INJURY_SEVERITY_CRITICAL, TRUE)
 							new /obj/effect/decal/cleanable/oil/streak(get_turf(src))
 							qdel(src)
 						else

@@ -12,3 +12,5 @@
 /datum/injury/burn/radiation
 
 /datum/injury/burn/freeze
+
+/datum/injury/burn/heirophant

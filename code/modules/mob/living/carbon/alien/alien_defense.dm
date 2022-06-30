@@ -104,7 +104,7 @@ In all, this is a lot like the monkey code. /N
 			damage = rand(30)
 		if(M.transformeffects & SLIME_EFFECT_RED)
 			damage *= 1.1
-		adjustBruteLoss(damage)
+		add_bodypart_injury(ran_zone(M.zone_selected), /datum/injury/brute/blunt/glomp, damage, INJURY_SEVERITY_MINOR, 0)
 		log_combat(M, src, "attacked")
 		updatehealth()
 

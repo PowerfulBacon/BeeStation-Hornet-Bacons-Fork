@@ -62,6 +62,6 @@
 	if(istype(target, /mob/living/simple_animal/mouse))
 		visible_message("<span class='notice'>[name] consumes [target] in a single gulp!</span>", "<span class='notice'>You consume [target] in a single gulp!</span>")
 		QDEL_NULL(target)
-		adjustBruteLoss(-2)
+		heal_overall_injury(/datum/injury/brute, 2, INJURY_SEVERITY_MINOR, TRUE)
 	else
 		return ..()

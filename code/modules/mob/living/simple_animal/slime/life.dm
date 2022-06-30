@@ -95,7 +95,7 @@
 			var/plas_amt = min(amt,environment.get_moles(GAS_PLASMA))
 			environment.adjust_moles(GAS_PLASMA, -plas_amt)
 			environment.adjust_moles(GAS_O2, plas_amt)
-			adjustBruteLoss(plas_amt ? -2 : 0)
+			heal_overall_injury(/datum/injury/brute, plas_amt ? 2 : 0, INJURY_SEVERITY_MINOR, TRUE)
 
 		if(stat == CONSCIOUS && stasis)
 			to_chat(src, "<span class='danger'>Nerve gas in the air has put you in stasis!</span>")
@@ -138,7 +138,7 @@
 		var/heal = 1
 		if(transformeffects & SLIME_EFFECT_PURPLE)
 			heal += 0.5
-		adjustBruteLoss(-heal)
+		heal_overall_injury(/datum/injury/brute, heal, INJURY_SEVERITY_MINOR, TRUE)
 	if((transformeffects & SLIME_EFFECT_RAINBOW) && prob(5))
 		random_colour()
 
@@ -191,7 +191,7 @@
 		M.adjustCloneLoss(monkey_bonus_damage*bonus_damage)
 
 	add_nutrition((15 * CONFIG_GET(number/damage_multiplier)))
-	adjustBruteLoss(-5)
+	heal_overall_injury(/datum/injury/brute, 5, INJURY_SEVERITY_MINOR, TRUE)
 
 /mob/living/simple_animal/slime/proc/handle_nutrition()
 	if(docile) //God as my witness, I will never go hungry again

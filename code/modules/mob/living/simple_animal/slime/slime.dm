@@ -433,7 +433,7 @@
 	var/new_damage = rand(15,20)
 	if(transformeffects & SLIME_EFFECT_DARK_BLUE)
 		new_damage *= 0.5
-	adjustBruteLoss(new_damage)
+	add_bodypart_injury(ran_zone(), /datum/injury/clone, new_damage, INJURY_SEVERITY_MINOR, 200)
 	if(!client)
 		if(Target) // Like cats
 			set_target(null)

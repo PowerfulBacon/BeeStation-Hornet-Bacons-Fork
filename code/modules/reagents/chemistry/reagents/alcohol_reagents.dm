@@ -493,7 +493,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/cuba_libre/on_mob_life(mob/living/carbon/M)
 	if(M?.mind?.has_antag_datum(/datum/antagonist/rev)) //Cuba Libre, the traditional drink of revolutions! Heals revolutionaries.
-		M.adjustBruteLoss(-1, 0)
+		M.heal_overall_injury(/datum/injury/brute, 1, INJURY_SEVERITY_MINOR, TRUE)
 		M.adjustFireLoss(-1, 0)
 		M.adjustToxLoss(-1, 0)
 		M.adjustOxyLoss(-5, 0)
@@ -901,7 +901,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(ishuman(M)) //Barefoot causes the imbiber to quickly regenerate brute trauma if they're not wearing shoes.
 		var/mob/living/carbon/human/H = M
 		if(!H.shoes)
-			H.adjustBruteLoss(-3, 0)
+			H.heal_overall_injury(/datum/injury/brute, 3, INJURY_SEVERITY_MINOR, TRUE)
 			. = 1
 	return ..() || .
 
@@ -1308,7 +1308,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/hearty_punch/on_mob_life(mob/living/carbon/M)
 	if(M.health <= 0)
-		M.adjustBruteLoss(-3, 0)
+		M.heal_overall_injury(/datum/injury/brute, 3, INJURY_SEVERITY_MINOR, TRUE)
 		M.adjustFireLoss(-3, 0)
 		M.adjustCloneLoss(-5, 0)
 		M.adjustOxyLoss(-4, 0)
@@ -2502,7 +2502,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/beesknees/on_mob_life(mob/living/carbon/M)
 	if(is_species(M, /datum/species/apid))
-		M.adjustBruteLoss(-1.5, 0)
+		M.heal_overall_injury(/datum/injury/brute, 1.5, INJURY_SEVERITY_MINOR, TRUE)
 		M.adjustFireLoss(-1.5, 0)
 		M.adjustToxLoss(-1, 0)
 	. = ..()

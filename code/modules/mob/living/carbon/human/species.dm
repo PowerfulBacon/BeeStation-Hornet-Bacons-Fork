@@ -1870,7 +1870,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
 				H.clear_alert("pressure")
 			else
-				H.adjustBruteLoss(LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod)
+				H.add_overall_injury(/datum/injury/brute/blunt/crush, LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod, INJURY_SEVERITY_MINOR, 200)
 				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 2)
 
 //////////

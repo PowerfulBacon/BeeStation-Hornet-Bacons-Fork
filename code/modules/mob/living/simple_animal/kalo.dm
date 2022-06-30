@@ -101,7 +101,7 @@
 							if(prob(60))
 								INVOKE_ASYNC(src, /mob.proc/emote, "me", 1, "licks up \the [B]")
 							qdel(B)
-							adjustBruteLoss(-5)
+							heal_overall_injury(/datum/injury/brute, 5, INJURY_SEVERITY_MINOR, FALSE)
 							stop_automated_movement = 0
 
 		if(prob(1))

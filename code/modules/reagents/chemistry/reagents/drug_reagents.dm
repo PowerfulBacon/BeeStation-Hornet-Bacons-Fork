@@ -118,7 +118,7 @@
 	. = 1
 
 /datum/reagent/drug/crank/addiction_act_stage3(mob/living/M)
-	M.adjustBruteLoss(5*REM, 0)
+	M.add_bodypart_injury(ran_zone(), /datum/injury/brute/blunt/decay, 5*REM, INJURY_SEVERITY_MINOR, 200)
 	..()
 	. = 1
 

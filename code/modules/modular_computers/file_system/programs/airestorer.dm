@@ -76,7 +76,7 @@
 	A.adjustOxyLoss(-1, 0)
 	A.adjustFireLoss(-1, 0)
 	A.adjustToxLoss(-1, 0)
-	A.adjustBruteLoss(-1, 0)
+	A.heal_overall_injury(/datum/injury/brute, 1, INJURY_SEVERITY_CRITICAL, TRUE)
 	A.updatehealth()
 	if(A.health >= 0 && A.stat == DEAD)
 		A.revive()

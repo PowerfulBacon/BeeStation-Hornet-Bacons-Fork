@@ -418,7 +418,7 @@
 			if(!W.use_tool(src, user, 50))
 				return
 
-		adjustBruteLoss(-30)
+		heal_overall_injury(/datum/injury/brute, 30, INJURY_SEVERITY_MINOR, FALSE)
 		updatehealth()
 		add_fingerprint(user)
 		user.visible_message("[user] has fixed some of the dents on [src].", "<span class='notice'>You fix some of the dents on [src].</span>")

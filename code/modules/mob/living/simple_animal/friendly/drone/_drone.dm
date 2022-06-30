@@ -205,7 +205,7 @@
 	Stun(100)
 	to_chat(src, "<span class='danger'><b>ER@%R: MME^RY CO#RU9T!</b> R&$b@0tin)...</span>")
 	if(severity == 1)
-		adjustBruteLoss(heavy_emp_damage)
+		add_overall_injury(/datum/injury/burn/electric, heavy_emp_damage, INJURY_SEVERITY_MINOR, 200)
 		to_chat(src, "<span class='userdanger'>HeAV% DA%^MMA+G TO I/O CIR!%UUT!</span>")
 
 

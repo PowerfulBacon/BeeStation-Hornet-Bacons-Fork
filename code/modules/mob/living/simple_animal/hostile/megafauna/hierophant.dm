@@ -690,7 +690,7 @@ Difficulty: Hard
 					else
 						H.Goto(get_turf(caster), H.move_to_delay, 3)
 		if(monster_damage_boost && (ismegafauna(L) || istype(L, /mob/living/simple_animal/hostile/asteroid)))
-			L.adjustBruteLoss(damage)
+			L.add_bodypart_injury(ran_zone(), /datum/injury/burn/heirophant, damage, INJURY_SEVERITY_MINOR, 200)
 		if(caster)
 			log_combat(caster, L, "struck with a [name]")
 	for(var/obj/mecha/M in T.contents - hit_things) //also damage mechs.

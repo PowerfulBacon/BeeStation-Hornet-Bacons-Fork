@@ -105,7 +105,7 @@
 		return TRUE
 	if(chem.type == /datum/reagent/toxin/bonehurtingjuice)
 		H.adjustStaminaLoss(7.5, 0)
-		H.adjustBruteLoss(0.5, 0)
+		H.add_bodypart_injury(ran_zone(), /datum/injury/brute/blunt/decay, 0.5, INJURY_SEVERITY_MINOR, 200)
 		if(prob(20))
 			switch(rand(1, 3))
 				if(1)
