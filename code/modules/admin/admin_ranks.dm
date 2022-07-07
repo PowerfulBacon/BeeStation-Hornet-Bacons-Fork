@@ -88,6 +88,8 @@ GLOBAL_PROTECT(protected_ranks)
 				flag = R_AUTOADMIN
 			if("DBRANKS")
 				flag = R_DBRANKS
+			if("DMSCRIPT")
+				flag = R_DMSCRIPT
 			if("@")
 				if(previous_rank)
 					switch(group_count)

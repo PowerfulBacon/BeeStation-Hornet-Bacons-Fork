@@ -26,10 +26,11 @@
 #define R_AUTOADMIN		(1<<13)
 #define R_DBRANKS		(1<<14)
 #define R_SUPPRESS	(1<<15) //GDPR/R5 Compliance
+#define R_DMSCRIPT		(1<<16)	//Incredibly dangerous, allows abitrary proc calls. Do not allow this for anyone who doesn't have full power anyway (Localhost). I wouldn't even trust the most trusted with this.
 
 #define R_DEFAULT R_AUTOADMIN
 
-#define R_EVERYTHING (1<<16)-1 //the sum of all other rank permissions, used for +EVERYTHING
+#define R_EVERYTHING ~0 //the sum of all other rank permissions, used for +EVERYTHING
 
 #define ADMIN_QUE(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];adminmoreinfo=[REF(user)]'>?</a>)"
 #define ADMIN_FLW(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];adminplayerobservefollow=[REF(user)]'>FLW</a>)"

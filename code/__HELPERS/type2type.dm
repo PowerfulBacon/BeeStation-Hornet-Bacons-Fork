@@ -170,6 +170,8 @@
 		. += "[seperator]DBRANKS"
 	if(rights & R_SUPPRESS)
 		. += "[seperator]SUPPRESS"
+	if(rights & R_DMSCRIPT)
+		. += "[seperator]DMSCRIPT"
 	if(!.)
 		. = "NONE"
 	return .
