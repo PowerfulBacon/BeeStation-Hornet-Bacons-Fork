@@ -949,6 +949,7 @@
 #include "code\game\machinery\telecomms\machines\receiver.dm"
 #include "code\game\machinery\telecomms\machines\relay.dm"
 #include "code\game\machinery\telecomms\machines\server.dm"
+#include "code\game\machinery\telecomms\machines\suit_sensor_network.dm"
 #include "code\game\mecha\mech_bay.dm"
 #include "code\game\mecha\mecha.dm"
 #include "code\game\mecha\mecha_actions.dm"

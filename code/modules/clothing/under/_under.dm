@@ -5,6 +5,7 @@
 	permeability_coefficient = 0.9
 	slot_flags = ITEM_SLOT_ICLOTHING
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "stamina" = 0)
+	network_id = __NETWORK_SENSORS
 	var/fitted = FEMALE_UNIFORM_FULL // For use in alternate clothing styles for women
 	var/has_sensor = HAS_SENSORS // For the crew computer
 	var/random_sensor = TRUE
@@ -15,6 +16,22 @@
 	var/obj/item/clothing/accessory/attached_accessory
 	var/mutable_appearance/accessory_overlay
 	var/freshly_laundered = FALSE
+	//Sensor ID, for networking
+	var/static/total_sensors = 0
+	var/sensor_identifier
+
+/obj/item/clothing/under/Initialize(mapload)
+	. = ..()
+	//Set the sensor identifier
+	sensor_identifier = total_sensors++
+	var/new_sensor_mode = sensor_mode
+	sensor_mode = SENSOR_NOT_SET
+	if(random_sensor)
+		//make the sensor mode favor higher levels, except coords.
+		new_sensor_mode = pick(SENSOR_OFF, SENSOR_LIVING, SENSOR_LIVING, SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_COORDS, SENSOR_COORDS)
+	update_sensors(new_sensor_mode)
+	//Register for the NTnet signal
+	RegisterSignal(src, COMSIG_COMPONENT_NTNET_RECEIVE, .proc/handle_ntnet_signal)
 
 /obj/item/clothing/under/worn_overlays(mutable_appearance/standing, isinhands = FALSE)
 	. = list()
@@ -31,7 +48,7 @@
 		var/obj/item/stack/cable_coil/C = I
 		C.use(1)
 		has_sensor = HAS_SENSORS
-		update_sensors(NO_SENSORS)
+		update_sensors(SENSORS_OFF)
 		to_chat(user,"<span class='notice'>You repair the suit sensors on [src] with [C].</span>")
 		return 1
 	if(!attach_accessory(I, user))
@@ -44,16 +61,7 @@
 		M.update_inv_w_uniform()
 	if(has_sensor > NO_SENSORS)
 		has_sensor = BROKEN_SENSORS
-		update_sensors(NO_SENSORS)
-
-/obj/item/clothing/under/Initialize(mapload)
-	. = ..()
-	var/new_sensor_mode = sensor_mode
-	sensor_mode = SENSOR_NOT_SET
-	if(random_sensor)
-		//make the sensor mode favor higher levels, except coords.
-		new_sensor_mode = pick(SENSOR_OFF, SENSOR_LIVING, SENSOR_LIVING, SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_COORDS, SENSOR_COORDS)
-	update_sensors(new_sensor_mode)
+		update_sensors(SENSORS_OFF)
 
 /obj/item/clothing/under/Destroy()
 	. = ..()
@@ -164,24 +172,22 @@
 /obj/item/clothing/under/proc/update_sensors(new_mode, forced = FALSE)
 	var/old_mode = sensor_mode
 	sensor_mode = new_mode
-	if(!forced && (old_mode == new_mode || (old_mode != SENSOR_OFF && new_mode != SENSOR_OFF)))
+	if(!forced && ((old_mode == SENSORS_OFF) == (new_mode == SENSORS_OFF)))
 		return
 	if(!ishuman(loc) || istype(loc, /mob/living/carbon/human/dummy))
 		return
-
-	if(has_sensor >= HAS_SENSORS && sensor_mode > SENSOR_OFF)
-		if(HAS_TRAIT(loc, TRAIT_SUIT_SENSORS))
-			return
-		ADD_TRAIT(loc, TRAIT_SUIT_SENSORS, TRACKED_SENSORS_TRAIT)
-		if(!HAS_TRAIT(loc, TRAIT_NANITE_SENSORS))
-			GLOB.suit_sensors_list += loc
+	if (new_mode == SENSORS_OFF)
+		//Sensors were turned off, disconnect from the suit sensor network
+		ntnet_send(new /datum/netdata(list(
+			"request" = "disconnect",
+			"id" = sensor_identifier,
+		)))
 	else
-		if(!HAS_TRAIT(loc, TRAIT_SUIT_SENSORS))
-			return
-		REMOVE_TRAIT(loc, TRAIT_SUIT_SENSORS, TRACKED_SENSORS_TRAIT)
-		if(!HAS_TRAIT(loc, TRAIT_NANITE_SENSORS))
-			GLOB.suit_sensors_list -= loc
-
+		//Sensors were turned on, connect to the suit sensor network
+		ntnet_send(new /datum/netdata(list(
+			"request" = "connect",
+			"id" = sensor_identifier,
+		)))
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()
@@ -203,6 +209,16 @@
 				. += "Its vital tracker and tracking beacon appear to be enabled."
 	if(attached_accessory)
 		. += "\A [attached_accessory] is attached to it."
+
+/// Called when a request is recieved
+/// Handles updating the suit sensor network
+/obj/item/clothing/under/proc/handle_ntnet_signal(datum/source, datum/netdata/data)
+	// Don't respond if sensors are disabled
+	if (sensor_mode == SENSOR_OFF)
+		return
+	// Don't respond if the request is wrong
+	if (data.data["request"] != "query")
+		return
 
 /obj/item/clothing/under/rank
 	dying_key = DYE_REGISTRY_UNDER
