@@ -181,13 +181,13 @@
 		ntnet_send(new /datum/netdata(list(
 			"request" = "disconnect",
 			"id" = sensor_identifier,
-		)))
+		)), network_id)
 	else
 		//Sensors were turned on, connect to the suit sensor network
 		ntnet_send(new /datum/netdata(list(
 			"request" = "connect",
 			"id" = sensor_identifier,
-		)))
+		)), network_id)
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()
@@ -214,11 +214,19 @@
 /// Handles updating the suit sensor network
 /obj/item/clothing/under/proc/handle_ntnet_signal(datum/source, datum/netdata/data)
 	// Don't respond if sensors are disabled
-	if (sensor_mode == SENSOR_OFF)
+	// If we aren't being worn, then disconnect
+	var/mob/living/wearer = loc
+	if (sensor_mode == SENSOR_OFF || !istype(wearer))
+		// Disconnect from the network
+		ntnet_send(new /datum/netdata(list(
+			"request" = "disconnect",
+			"id" = sensor_identifier,
+		)), network_id)
 		return
 	// Don't respond if the request is wrong
 	if (data.data["request"] != "query")
 		return
+	// Load all suit sensors data into a packet and send it to the server
 
 /obj/item/clothing/under/rank
 	dying_key = DYE_REGISTRY_UNDER
