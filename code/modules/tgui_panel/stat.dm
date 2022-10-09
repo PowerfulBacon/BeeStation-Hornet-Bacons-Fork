@@ -31,18 +31,18 @@
  * Sends TGUI the data of every single verb accessable to client.
  */
 /datum/tgui_panel/proc/set_verb_infomation(client/C)
-	
+
 	var/list/tab_names = C?.mob?.get_all_verbs()
 	if(!tab_names)
 		return
 	var/list/payload = list()
 	for(var/tab_name in tab_names)
-		var/list/procpaths = tab_names[tab_name]
+		var/list/stat_verbs = tab_names[tab_name]
 		payload[tab_name] = list()
-		for(var/procpath/PP as() in procpaths)
+		for(var/datum/stat_verb/PP as() in stat_verbs)
 			payload[tab_name]["[PP.name]"] = list(
 				action = "verb",
-				params = list("verb" = PP.name),
+				params = list("verb" = PP.id),
 				type = STAT_VERB,
 			)
 	window.send_message("stat/setVerbInfomation", payload)

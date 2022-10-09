@@ -18,6 +18,7 @@
 	key = "buzz2"
 	message = "buzzes twice."
 	sound = 'sound/machines/buzz-two.ogg'
+	verb_name = "Buzz twice"
 
 /datum/emote/silicon/chime
 	key = "chime"

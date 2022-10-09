@@ -31,6 +31,7 @@
 /datum/emote/living/cross
 	key = "cross"
 	key_third_person = "crosses"
+	verb_name = "Cross Arms"
 	message = "crosses their arms"
 	restraint_check = TRUE
 
@@ -114,6 +115,7 @@
 /datum/emote/living/flap
 	key = "flap"
 	key_third_person = "flaps"
+	verb_name = "Flap wings"
 	message = "flaps their wings"
 	restraint_check = TRUE
 	var/wing_time = 10
@@ -128,6 +130,7 @@
 /datum/emote/living/flap/aflap
 	key = "aflap"
 	key_third_person = "aflaps"
+	verb_name = "Aggressively flap wings"
 	message = "flaps their wings aggressively"
 	restraint_check = TRUE
 	wing_time = 5
@@ -189,6 +192,7 @@
 /datum/emote/living/kiss
 	key = "kiss"
 	key_third_person = "kisses"
+	verb_name = "Blow a kiss"
 	message = "blows a kiss"
 	message_param = "blows a kiss to %t"
 	emote_type = EMOTE_AUDIBLE
@@ -311,6 +315,7 @@
 /datum/emote/living/smug
 	key = "smug"
 	key_third_person = "smugs"
+	verb_name = "Grin smugly"
 	message = "grins smugly"
 
 /datum/emote/living/sniff
@@ -368,11 +373,13 @@
 /datum/emote/living/twitch
 	key = "twitch"
 	key_third_person = "twitches"
+	verb_name = "Twitch violently"
 	message = "twitches violently"
 
 /datum/emote/living/twitch_s
 	key = "twitch_s"
 	message = "twitches"
+	verb_name = "Twitch"
 
 /datum/emote/living/wave
 	key = "wave"
@@ -388,6 +395,7 @@
 /datum/emote/living/wsmile
 	key = "wsmile"
 	key_third_person = "wsmiles"
+	verb_name = "Weak smile"
 	message = "smiles weakly"
 
 /datum/emote/living/yawn
@@ -399,6 +407,7 @@
 /datum/emote/living/custom
 	key = "me"
 	key_third_person = "custom"
+	verb_name = "Custom emote"
 	message = null
 
 /datum/emote/living/custom/proc/check_invalid(mob/user, input)
@@ -515,6 +524,7 @@
 	key = "highfive"
 	key_third_person = "highfives"
 	message = "raises their hand"
+	verb_name = "High five"
 	restraint_check = TRUE
 
 /datum/emote/living/raisehand/run_emote(mob/user, params)
@@ -540,6 +550,7 @@
 	key = "fingergun"
 	key_third_person = "fingerguns"
 	message = "forms their fingers into the shape of a crude gun"
+	verb_name = "Finger gun"
 	restraint_check = TRUE
 
 /datum/emote/living/fingergun/run_emote(mob/user, params)
@@ -599,6 +610,7 @@
 /datum/emote/living/thumbs_up
 	key = "thumbsup"
 	key_third_person = "thumbsup"
+	verb_name = "Thumbs up"
 	message = "flashes a thumbs up"
 	message_robot = "makes a crude thumbs up with their 'hands'"
 	message_AI = "flashes a quick hologram of a thumbs up"
@@ -610,6 +622,7 @@
 /datum/emote/living/thumbs_down
 	key = "thumbsdown"
 	key_third_person = "thumbsdown"
+	verb_name = "Thumbs down"
 	message = "flashes a thumbs down"
 	message_robot = "makes a crude thumbs down with their 'hands'"
 	message_AI = "flashes a quick hologram of a thumbs down"

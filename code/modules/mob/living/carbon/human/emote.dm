@@ -210,6 +210,7 @@
 /datum/emote/living/carbon/human/robot_tongue/buzz2
 	key = "buzz2"
 	message = "buzzes twice"
+	verb_name = "Buzz twice"
 
 /datum/emote/living/carbon/human/robot_tongue/buzz2/run_emote(mob/user, params)
 	if(..())
@@ -255,6 +256,7 @@
 	key = "sad"
 	key_third_person = "plays a sad trombone"
 	message = "plays a sad trombone"
+	verb_name = "Sad trombone"
 
 /datum/emote/living/carbon/human/robot_tongue/clown/sad/run_emote(mob/user, params)
 	if(..())

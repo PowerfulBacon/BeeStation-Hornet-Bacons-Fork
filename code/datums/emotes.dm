@@ -4,6 +4,7 @@
 /datum/emote
 	var/key = "" //What calls the emote
 	var/key_third_person = "" //This will also call the emote
+	var/verb_name = ""
 	var/message = "" //Message displayed when emote is used
 	var/message_mime = "" //Message displayed if the user is a mime
 	var/message_alien = "" //Message displayed if the user is a grown alien
@@ -39,6 +40,8 @@
 		mob_type_allowed_typecache = typecacheof(mob_type_allowed_typecache)
 	mob_type_blacklist_typecache = typecacheof(mob_type_blacklist_typecache)
 	mob_type_ignore_stat_typecache = typecacheof(mob_type_ignore_stat_typecache)
+	if (!verb_name)
+		verb_name = capitalize(key)
 
 /datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE)
 	. = TRUE
@@ -156,6 +159,27 @@
 		var/mob/living/L = user
 		if(HAS_TRAIT(L, TRAIT_EMOTEMUTE))
 			return FALSE
+
+/// Generates a procpath verb from the thing
+/datum/emote/proc/generate_verb()
+	var/procpath/created_verb = new()
+	created_verb.name = verb_name
+	created_verb.category = "Emotes"
+	created_verb.desc = message
+	return created_verb
+
+/mob/proc/update_emote_verbs()
+	var/list/keys = list()
+	var/list/emote_verbs = list()
+	for(var/key in GLOB.emote_list)
+		for(var/datum/emote/P in GLOB.emote_list[key])
+			if(P.key in keys)
+				continue
+			if(P.can_run_emote(src, status_check = FALSE , intentional = TRUE))
+				keys += P.key
+				emote_verbs += P.generate_verb()
+	//Tgui only 'verbs'
+	add_verb(emote_verbs, TRUE)
 
 /mob/proc/manual_emote(text) //Just override the song and dance
 	. = TRUE

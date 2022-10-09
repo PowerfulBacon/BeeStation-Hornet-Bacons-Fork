@@ -5,6 +5,7 @@
 	key = "airguitar"
 	message = "is strumming the air and headbanging like a safari chimp"
 	restraint_check = TRUE
+	verb_name = "Air guitar"
 
 /datum/emote/living/carbon/blink
 	key = "blink"
@@ -14,6 +15,7 @@
 /datum/emote/living/carbon/blink_r
 	key = "blink_r"
 	message = "blinks rapidly"
+	verb_name = "Rapidly blink"
 
 /datum/emote/living/carbon/clap
 	key = "clap"
@@ -100,6 +102,7 @@
 	message_param = "raises %t fingers"
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 	restraint_check = TRUE
+	verb_name = "Raise fingers"
 
 /datum/emote/living/carbon/tail
 	key = "tail"

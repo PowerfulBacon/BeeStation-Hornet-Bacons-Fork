@@ -459,6 +459,7 @@
 #include "code\datums\soullink.dm"
 #include "code\datums\soundtrack.dm"
 #include "code\datums\spawners_menu.dm"
+#include "code\datums\stat_verb.dm"
 #include "code\datums\tgs_event_handler.dm"
 #include "code\datums\view.dm"
 #include "code\datums\weakrefs.dm"

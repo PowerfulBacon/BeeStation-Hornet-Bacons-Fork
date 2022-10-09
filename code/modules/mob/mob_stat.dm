@@ -109,7 +109,7 @@
 	return tab_data
 
 /mob/proc/get_all_verbs()
-	var/list/all_verbs = new
+	var/list/all_verbs = list()
 
 	if(!client)
 		return all_verbs
@@ -121,12 +121,12 @@
 		all_verbs = deepCopyList(sorted_verbs)
 	//An annoying thing to mention:
 	// list A [A: ["b", "c"]] +  (list B) [A: ["c", "d"]] will only have A from list B
-	for(var/i in client.sorted_verbs)
-		if(i in all_verbs)
-			all_verbs[i] += client.sorted_verbs[i]
+	for(var/category in client.sorted_verbs)
+		if(category in all_verbs)
+			all_verbs[category] += client.sorted_verbs[category]
 		else
-			var/list/verbs_to_copy = client.sorted_verbs[i]
-			all_verbs[i] = verbs_to_copy.Copy()
+			var/list/verbs_to_copy = client.sorted_verbs[category]
+			all_verbs[category] = verbs_to_copy.Copy()
 	//TODO: Call tgui_panel/add_verbs on pickup and remove on drop.
 	for(var/atom/A as() in contents)
 		//As an optimisation we will make it so all verbs on objects will go into the object tab.
