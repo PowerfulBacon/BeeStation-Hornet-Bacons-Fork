@@ -32,7 +32,7 @@
  */
 /datum/tgui_panel/proc/set_verb_infomation(client/C)
 
-	var/list/tab_names = C?.mob?.get_all_verbs()
+	var/list/tab_names = C?.get_verb_list(TRUE)
 	if(!tab_names)
 		return
 	var/list/payload = list()

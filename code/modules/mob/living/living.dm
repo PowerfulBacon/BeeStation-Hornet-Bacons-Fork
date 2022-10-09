@@ -1212,6 +1212,9 @@
 		else
 			remove_movespeed_modifier(MOVESPEED_ID_LIVING_LIMBLESS, update=TRUE)
 
+	//Update the available emote verbs
+	update_emote_verbs()
+
 /mob/living/proc/fall(forced)
 
 /mob/living/proc/AddAbility(obj/effect/proc_holder/A)

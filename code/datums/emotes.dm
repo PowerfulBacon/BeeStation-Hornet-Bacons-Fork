@@ -162,24 +162,53 @@
 
 /// Generates a procpath verb from the thing
 /datum/emote/proc/generate_verb()
-	var/procpath/created_verb = new()
+	var/datum/stat_verb/emote/created_verb = new()
+	created_verb.emote_key = key
+	created_verb.id = key
 	created_verb.name = verb_name
 	created_verb.category = "Emotes"
 	created_verb.desc = message
 	return created_verb
 
+//======================
+// Emote Stat Verb - Executes the emote on the mob when clicked
+//======================
+
+/datum/stat_verb/emote
+	var/emote_key
+
+/datum/stat_verb/emote/default_click_behaviour(client/caller, list/params)
+	///Attempt to run the emote
+	caller.mob?.emote(emote_key, intentional = TRUE)
+
+//======================
+// Mob Updates - When a mob gets/loses emotes, trigger this
+//======================
+
 /mob/proc/update_emote_verbs()
+	if (!client)
+		return
 	var/list/keys = list()
 	var/list/emote_verbs = list()
+	var/list/client_verbs = client.get_accessible_verbs()
+	var/list/lost_emotes = list()
 	for(var/key in GLOB.emote_list)
 		for(var/datum/emote/P in GLOB.emote_list[key])
 			if(P.key in keys)
 				continue
 			if(P.can_run_emote(src, status_check = FALSE , intentional = TRUE))
 				keys += P.key
-				emote_verbs += P.generate_verb()
+				var/datum/stat_verb/generated_verb = P.generate_verb()
+				emote_verbs += generated_verb
+			else if (client_verbs["[P.key]"])
+				lost_emotes += client_verbs["[P.key]"]
 	//Tgui only 'verbs'
+	remove_verb(lost_emotes, TRUE)
 	add_verb(emote_verbs, TRUE)
+
+//======================
+// Manual Emote
+//======================
 
 /mob/proc/manual_emote(text) //Just override the song and dance
 	. = TRUE

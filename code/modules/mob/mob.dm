@@ -1074,7 +1074,7 @@
 				search_pda = 0
 
 /mob/proc/update_stat()
-	return
+	update_emote_verbs()
 
 /mob/proc/update_health_hud()
 	return

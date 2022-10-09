@@ -43,6 +43,8 @@
 	owner = M
 	M.internal_organs |= src
 	M.internal_organs_slot[slot] = src
+	//Update any emote verbs they might now have
+	M.update_emote_verbs()
 	moveToNullspace()
 	for(var/X in actions)
 		var/datum/action/A = X

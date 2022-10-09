@@ -6,6 +6,10 @@
 	var/selected_stat_tab = "Status"
 	var/list/previous_stat_tabs
 	var/last_adminhelp_reply = 0
+	//List of cached verbs by category
+	var/list/cached_verb_list = null
+	//List of verbs this client can execute
+	var/list/executable_verbs = null
 
 /*
  * Overrideable proc which gets the stat content for the selected tab.
@@ -108,33 +112,77 @@
 		return list()
 	return tab_data
 
-/mob/proc/get_all_verbs()
-	var/list/all_verbs = list()
+/client/proc/remove_verb_from_cache(datum/stat_verb/stat_verb)
+	if (isnull(cached_verb_list) || isnull(executable_verbs))
+		return
+	executable_verbs -= "[stat_verb.id]"
+	if (!cached_verb_list[stat_verb.category])
+		return
+	cached_verb_list[stat_verb.category] -= stat_verb
 
-	if(!client)
-		return all_verbs
+/client/proc/add_verb_to_cache(datum/stat_verb/stat_verb)
+	if (isnull(cached_verb_list) || isnull(executable_verbs))
+		initialise_verbs()
+	executable_verbs["[stat_verb.id]"] = stat_verb
+	if (!cached_verb_list[stat_verb.category])
+		cached_verb_list[stat_verb.category] = list()
+	var/list/target_list = cached_verb_list[stat_verb.category]
+	BINARY_INSERT_TEXT(stat_verb, target_list, datum/stat_verb, name)
 
-	if(client.interviewee)
-		return list("Interview" = list(/mob/dead/new_player/proc/open_interview))
+/client/proc/get_accessible_verbs()
+	if (isnull(executable_verbs))
+		initialise_verbs()
+	return executable_verbs
 
-	if(sorted_verbs)
-		all_verbs = deepCopyList(sorted_verbs)
+/client/proc/get_verb_list()
+	if (isnull(cached_verb_list))
+		initialise_verbs()
+	return cached_verb_list
+
+///Initialises the list of verbs that a client can execute
+///This only needs to run once, the cached verb lists will be maintained
+///as they are changed by add_verb and pickup/drop code.
+/client/proc/initialise_verbs()
+	cached_verb_list = list()
+	executable_verbs = list()
+
+	if(interviewee)
+		var/datum/stat_verb/interview_verb = new /datum/stat_verb(/mob/dead/new_player/proc/open_interview)
+		cached_verb_list["Interview"] = list(interview_verb)
+		executable_verbs["[interview_verb.id]"] = interview_verb
+		return
+
+	//===Set up mob verbs===
+
+	if(mob?.sorted_verbs)
+		cached_verb_list = deepCopyList(mob.sorted_verbs)
+		for (var/category in cached_verb_list)
+			for (var/datum/stat_verb/statverb in cached_verb_list[category])
+				executable_verbs["[statverb.id]"] = executable_verbs
+
+	//===Set up client verbs===
 	//An annoying thing to mention:
 	// list A [A: ["b", "c"]] +  (list B) [A: ["c", "d"]] will only have A from list B
-	for(var/category in client.sorted_verbs)
-		if(category in all_verbs)
-			all_verbs[category] += client.sorted_verbs[category]
+	for(var/category in sorted_verbs)
+		//Add the verbs to the cached verb list
+		if(category in cached_verb_list)
+			cached_verb_list[category] += sorted_verbs[category]
 		else
-			var/list/verbs_to_copy = client.sorted_verbs[category]
-			all_verbs[category] = verbs_to_copy.Copy()
-	//TODO: Call tgui_panel/add_verbs on pickup and remove on drop.
-	for(var/atom/A as() in contents)
+			var/list/verbs_to_copy = sorted_verbs[category]
+			cached_verb_list[category] = verbs_to_copy.Copy()
+		//Update the executable verb list
+		for (var/datum/stat_verb/statverb in sorted_verbs[category])
+			executable_verbs["[statverb.id]"] = statverb
+
+	//===Set up object in contents verbs===
+	for(var/atom/A as() in mob?.contents)
 		//As an optimisation we will make it so all verbs on objects will go into the object tab.
 		//If you don't want this to happen change this.
-		if(!all_verbs.Find("Object"))
-			all_verbs["Object"] = list()
-		all_verbs["Object"] += A.verbs
-	return all_verbs
+		if(!cached_verb_list.Find("Object"))
+			cached_verb_list["Object"] = list()
+		for (var/verb_id as() in A.verbs_by_id)
+			cached_verb_list["Object"] += A.verbs_by_id[verb_id]
+			executable_verbs["[verb_id]"] = A.verbs_by_id[verb_id]
 
 /*
  * Gets the stat tab contents for the status tab
@@ -235,7 +283,7 @@
 
 	var/list/additional_tabs = list()
 	//Performance increase from only adding keys is better than adding values too.
-	for(var/i in get_all_verbs())
+	for(var/i in client.get_verb_list(FALSE))
 		additional_tabs |= i
 	additional_tabs = sortList(additional_tabs)
 	//Get verbs
@@ -301,7 +349,13 @@
 			message_admins("Admin [key_name_admin(usr)] is debugging the [target] [class].")
 		if("verb")
 			var/verb_name = params["verb"]
-			winset(client, null, "command=[replacetext(verb_name, " ", "-")]")
+			var/list/accessbile_verbs = client.get_accessible_verbs()
+			var/datum/stat_verb/stat_verb = accessbile_verbs[verb_name]
+			if (stat_verb)
+				stat_verb.code_callback?.Invoke(client, params)
+			else
+				to_chat(src, "<span class='warning'>You cannot perform that action at this time.</span>")
+				log_runtime("[key_name(src)] attempted to access the verb [verb_name], but their client doesn't have it registered. This may be an attempt at a client exploit, or may be a bug with the mismanagement of verbs.")
 		if("sdql2debug")
 			client.debug_variables(GLOB.sdql2_queries)
 		if("sdql2delete")

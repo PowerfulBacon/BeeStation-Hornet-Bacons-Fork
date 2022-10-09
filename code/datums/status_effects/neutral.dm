@@ -83,10 +83,12 @@
 /datum/status_effect/throat_soothed/on_apply()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_SOOTHED_THROAT, "[STATUS_EFFECT_TRAIT]_[id]")
+	owner.update_emote_verbs()
 
 /datum/status_effect/throat_soothed/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_SOOTHED_THROAT, "[STATUS_EFFECT_TRAIT]_[id]")
+	owner.update_emote_verbs()
 
 /datum/status_effect/bounty
 	id = "bounty"

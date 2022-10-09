@@ -757,6 +757,7 @@
 	update_inv_handcuffed()
 	update_hud_handcuffed()
 	update_mobility()
+	update_emote_verbs()
 
 /mob/living/carbon/fully_heal(admin_revive = FALSE)
 	if(reagents)
