@@ -3291,6 +3291,8 @@
 #include "code\modules\science\anomalies\anomaly_base.dm"
 #include "code\modules\science\anomalies\anomaly_hazard_labels.dm"
 #include "code\modules\science\anomalies\anomaly_actions\_anomaly_action.dm"
+#include "code\modules\science\anomalies\anomaly_actions\book_actions\grant_language.dm"
+#include "code\modules\science\anomalies\anomaly_actions\logical_operations\pick_action.dm"
 #include "code\modules\science\anomalies\anomaly_types\_anomaly_base_atoms.dm"
 #include "code\modules\science\anomalies\anomaly_types\book.dm"
 #include "code\modules\science\equipment\containment\anomaly_monitor.dm"

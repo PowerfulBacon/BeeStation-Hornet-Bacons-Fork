@@ -1,0 +1,14 @@
+{
+	"anomaly_random": [
+		"The anomaly seemed to peform its events in an unpredictable manner when activated."
+	],
+	"interaction_anger": [
+		"When the anomaly was physically interacted with, the entropic stability around the anomaly was noticeably lowered."
+	],
+	"grant_language": [
+		"When %NAME% read the book, they began speaking the same unknown language that the book is written in."
+	],
+	"unknown_lang": [
+		"The book is written in a language that top language experts could not identify."
+	]
+}

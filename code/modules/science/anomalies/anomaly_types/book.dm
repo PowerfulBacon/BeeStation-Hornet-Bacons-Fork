@@ -11,6 +11,9 @@
 	attack_verb = list("bashed", "whacked", "educated")
 	var/title = ""
 
+/obj/item/anomaly/book/Initialize(mapload)
+	. = ..()
+
 /obj/item/anomaly/book/attack_self(mob/user)
 	if(!user.can_read(src))
 		return
