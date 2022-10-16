@@ -13,5 +13,5 @@
 /obj/machinery/power/flux_vacuum_generator/proc/do_expansion()
 
 /// Shut down the flux vacuum, removing any vacuum turfs that were created as a result of us
-/obj/machinery/power/flux_vacuum_generator/proc/shutdown()
+/obj/machinery/power/flux_vacuum_generator/proc/shutdown_vacuum()
 
