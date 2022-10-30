@@ -6,6 +6,11 @@
 #define STICKYBAN_MAX_EXISTING_USER_MATCHES 3 //ie, users who were connected before the ban triggered
 #define STICKYBAN_MAX_ADMIN_MATCHES 1
 
+//Maximum number of unique CIDs/IPs someone can have in a round
+//If the same ckey attempts to perform a ban check from more than this many
+//unique IP/CID setups, then they will not be allowed to join.
+#define MAX_ALLOWED_DEVICES 15
+
 GLOBAL_LIST_EMPTY(ckey_redirects)
 
 /world/IsBanned(key, address, computer_id, type, real_bans_only=FALSE)
@@ -28,12 +33,27 @@ GLOBAL_LIST_EMPTY(ckey_redirects)
 
 	//IsBanned can get re-called on a user in certain situations, this prevents that leading to repeated messages to admins.
 	var/static/list/checkedckeys = list()
-	//magic voodo to check for a key in a list while also adding that key to the list without having to do two associated lookups
-	var/message = !checkedckeys[ckey]++
+	var/message = FALSE
+	//Check if the ckey has been checked already
+	if (!checkedckeys[ckey])
+		message = TRUE
+		checkedckeys[ckey] = list()
+
+	//Add the checked ckey
+	//See if someone is constantly changing CIDs or IPs in order to bypass these ban checks
+	//If so, disallow access for the duration of this round
+	var/list/joining_ckey = checkedckeys[ckey]
+	var/datum/checked_ban/new_ban = new(ckey, address, computer_id)
+	joining_ckey[new_ban.hash()] = joining_ckey
+	//You have too many unique CIDs and IP addresses.
+	if (length(joining_ckey) >= MAX_ALLOWED_DEVICES)
+		return list(
+			"reason" = "automated protection",
+			"desc" = "Your IP address or CID has changed too many times this round. In order to protect the server from spam attacks you have been denied access temporarilly. Please try again later and file an issue report if you believe this is in error."
+			)
 
 	if(GLOB.admin_datums[ckey] || GLOB.deadmins[ckey])
 		admin = TRUE
-
 
 	//Whitelist
 	if(!real_bans_only && !C && CONFIG_GET(flag/usewhitelist))
@@ -227,6 +247,22 @@ GLOBAL_LIST_EMPTY(ckey_redirects)
 
 	return .
 
+/datum/checked_ban
+	//The ckey that we checked
+	var/ckey
+	//The address that we checked
+	var/address
+	//The CID that we checked
+	var/cid
+
+/datum/checked_ban/New(ckey, address, cid)
+	. = ..()
+	src.ckey = ckey
+	src.address = address
+	src.cid = cid
+
+/datum/checked_ban/proc/hash()
+	return "[ckey]-[address]-[cid]"
 
 #undef STICKYBAN_MAX_MATCHES
 #undef STICKYBAN_MAX_EXISTING_USER_MATCHES
