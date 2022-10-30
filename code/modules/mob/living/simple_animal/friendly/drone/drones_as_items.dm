@@ -25,7 +25,7 @@
 	. = ..()
 	var/area/A = get_area(src)
 	if(A)
-		notify_ghosts("A drone shell has been created in \the [A.name].", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_DRONE, notify_suiciders = FALSE)
+		notify_ghosts("A drone shell has been created in \the [A.name].", source = src, action=NOTIFY_ATTACK_ORBIT, flashwindow = FALSE, ignore_key = POLL_IGNORE_DRONE, notify_suiciders = FALSE)
 	GLOB.poi_list |= src
 	if(isnull(possible_seasonal_hats))
 		build_seasonal_hats()

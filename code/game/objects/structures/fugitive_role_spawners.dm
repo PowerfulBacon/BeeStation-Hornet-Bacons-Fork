@@ -12,7 +12,7 @@
 
 /obj/effect/mob_spawn/human/fugitive/Initialize(mapload)
 	. = ..()
-	notify_ghosts("Hunters are waking up looking for refugees!", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_FUGITIVE)
+	notify_ghosts("Hunters are waking up looking for refugees!", source = src, action=NOTIFY_ATTACK_ORBIT, flashwindow = FALSE, ignore_key = POLL_IGNORE_FUGITIVE)
 
 /obj/effect/mob_spawn/human/fugitive/special(mob/living/new_spawn)
 	var/datum/antagonist/fugitive_hunter/fughunter = new

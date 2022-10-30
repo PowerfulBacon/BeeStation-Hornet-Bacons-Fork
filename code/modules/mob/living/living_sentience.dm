@@ -44,7 +44,7 @@
 /mob/living/proc/set_playable()
 	playable = TRUE
 	if (!key)	//check if there is nobody already inhibiting this mob
-		notify_ghosts("[name] can be controlled", null, enter_link="<a href=?src=[REF(src)];activate=1>(Click to play)</a>", source=src, action=NOTIFY_ATTACK, ignore_key = name)
+		notify_ghosts("[name] can be controlled", null, enter_link="<a href=?src=[REF(src)];activate=1>(Click to play)</a>", source=src, action=NOTIFY_ATTACK_ORBIT, ignore_key = name)
 		LAZYADD(GLOB.mob_spawners["[name]"], src)
 		GLOB.poi_list |= src
 		SSmobs.update_spawners()

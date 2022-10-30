@@ -69,5 +69,6 @@
 #define NOTIFY_JUMP "jump"
 #define NOTIFY_ATTACK "attack"
 #define NOTIFY_ORBIT "orbit"
+#define NOTIFY_ATTACK_ORBIT "attackorbit"
 
 #define ADD_HUD_TO_COOLDOWN 20 //! cooldown for being shown the images for any particular data hud
