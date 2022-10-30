@@ -26,6 +26,6 @@
 	event_trigger = trig
 	RegisterSignal(anomaly.parent, COMSIG_ANOMALY_DIRECT_INTERACTION, .proc/trigger)
 
-/datum/event_holder/proc/trigger(mob/user)
+/datum/event_holder/proc/trigger(datum/source, mob/user)
 	SIGNAL_HANDLER
 	event_trigger.trigger_action(anomaly.parent, list(user))

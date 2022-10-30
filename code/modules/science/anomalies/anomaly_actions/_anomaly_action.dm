@@ -10,7 +10,7 @@
 /datum/anomaly_action/proc/initialise_anomaly(datum/component/anomaly_base/anomaly)
 	//Initialise children
 	for (var/datum/anomaly_action/child_action in children)
-		children.initialise_anomaly(anomaly)
+		child_action.initialise_anomaly(anomaly)
 
 ///Trigger the action of the anomaly
 /// anomaly_parent (/atom): The anomaly this action is attached to

@@ -1,0 +1,25 @@
+debug_anomaly_that_wont_work:
+	type: /datum/anomaly_action/trigger/interaction
+		type: /datum/anomaly_action/pick
+		amount: 1
+			type: /datum/anomaly_action/random
+				type: /datum/anomaly_action/do_something
+				type: /datum/anomaly_action/do_something
+				type: /datum/anomaly_action/do_something
+			type: /datum/anomaly_action/random
+				type: /datum/anomaly_action/pick
+				amount: 2
+					type: /datum/anomaly_action/do_something
+					type: /datum/anomaly_action/do_something
+					type: /datum/anomaly_action/do_something
+					type: /datum/anomaly_action/do_something
+			type: /datum/anomaly_action/sequence
+				type: /datum/anomaly_action/do_something
+				type: /datum/anomaly_action/do_something
+				type: /datum/anomaly_action/pick
+				amount: 1
+					type: /datum/anomaly_action/do_something
+					type: /datum/anomaly_action/do_something
+book:
+	type: /datum/anomaly_action/trigger/interaction
+		type: /datum/anomaly_action/grant_language
