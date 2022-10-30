@@ -4,11 +4,13 @@
 	/// Any additional information to attach to the anomaly
 	var/list/addition_details = list()
 	/// Any actions that are children of this node, if the node supports children.
-	var/list/sub_actions
+	var/list/children = list()
 
 ///Register signals to the anomaly base datum
-/datum/anomaly_action/proc/register_signals(datum/anomaly_base/anomaly)
-	return
+/datum/anomaly_action/proc/initialise_anomaly(datum/component/anomaly_base/anomaly)
+	//Initialise children
+	for (var/datum/anomaly_action/child_action in children)
+		children.initialise_anomaly(anomaly)
 
 ///Trigger the action of the anomaly
 /// anomaly_parent (/atom): The anomaly this action is attached to

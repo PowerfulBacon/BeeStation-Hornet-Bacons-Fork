@@ -11,8 +11,10 @@
 	attack_verb = list("bashed", "whacked", "educated")
 	var/title = ""
 
-/obj/item/anomaly/book/Initialize(mapload)
+/obj/item/anomaly/book/ComponentInitialize()
 	. = ..()
+	//Add the anomaly part
+	AddComponent(/datum/component/anomaly_base, "book")
 
 /obj/item/anomaly/book/attack_self(mob/user)
 	if(!user.can_read(src))

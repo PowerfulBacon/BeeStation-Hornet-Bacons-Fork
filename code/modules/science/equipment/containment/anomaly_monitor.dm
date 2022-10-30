@@ -4,4 +4,4 @@
 		Measures anomalitic entropy in order to automatically provide alerts about \
 		abnormal behaviour in anomalies."
 	/// The anomaly that we are currently monitoring
-	var/datum/anomaly_base/monitoring_anomaly
+	var/datum/component/anomaly_base/monitoring_anomaly

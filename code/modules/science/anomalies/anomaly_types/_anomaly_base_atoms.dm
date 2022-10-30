@@ -1,2 +1,2 @@
 /obj/item/anomaly
-	var/datum/anomaly_base/attached_anomaly
+	var/datum/component/anomaly_base/attached_anomaly
