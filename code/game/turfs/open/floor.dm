@@ -27,6 +27,10 @@
 
 /turf/open/floor/Initialize(mapload)
 
+	//DEBUG
+	var/mutable_appearance/MA = mutable_appearance('icons/effects/normals/turf_normals.dmi', "floor_normalised_total", layer, NORMAL_LIGHTING_PLANE)
+	add_overlay(MA)
+
 	if (!broken_states)
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else

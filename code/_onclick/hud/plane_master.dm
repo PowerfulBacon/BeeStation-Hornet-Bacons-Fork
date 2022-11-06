@@ -78,6 +78,7 @@
 /atom/movable/screen/plane_master/lighting/Initialize(mapload)
 	. = ..()
 	add_filter("lighting", 3, alpha_mask_filter(render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE))
+	add_filter("lighting", 4, alpha_mask_filter(render_source = NORMAL_LIGHTING_RENDER_TARGET))
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
   *
@@ -157,3 +158,12 @@
 	render_target = O_LIGHTING_VISUAL_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_MULTIPLY
+
+/atom/movable/screen/plane_master/normal_maps
+	name = "normal plane master"
+	layer = NORMAL_LIGHTING_LAYER
+	plane = NORMAL_LIGHTING_PLANE
+	render_target = NORMAL_LIGHTING_RENDER_TARGET
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	blend_mode = BLEND_OVERLAY
+	color = list(0.3,0.3,0.3,0, 0.3,0.3,0.3,0, 0.3,0.3,0.3,0, 0,0,0,1)
