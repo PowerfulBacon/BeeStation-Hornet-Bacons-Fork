@@ -78,7 +78,7 @@
 /atom/movable/screen/plane_master/lighting/Initialize(mapload)
 	. = ..()
 	add_filter("lighting", 3, alpha_mask_filter(render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE))
-	add_filter("lighting", 4, alpha_mask_filter(render_source = NORMAL_LIGHTING_RENDER_TARGET))
+	add_filter("normal_highlights", 4, layering_filter(render_source = NORMAL_LIGHTING_RENDER_TARGET, blend_mode = BLEND_MULTIPLY))
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
   *
@@ -166,4 +166,23 @@
 	render_target = NORMAL_LIGHTING_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_OVERLAY
-	color = list(0.3,0.3,0.3,0, 0.3,0.3,0.3,0, 0.3,0.3,0.3,0, 0,0,0,1)
+	color = list(0.7,0.7,0.7,0, 0.7,0.7,0.7,0, 0.7,0.7,0.7,0, 0,0,0,1)
+
+/atom/movable/screen/plane_master/normal_maps/Initialize(mapload)
+	. = ..()
+	add_filter("layer", 1, layering_filter(render_source = NORMAL_POINT_MAP_RENDER_TARGET, blend_mode = BLEND_MULTIPLY))
+
+/atom/movable/screen/plane_master/normal_maps/proc/update_intensity(intensity, offset)
+	color = list(
+		intensity, intensity, intensity, 0,
+		intensity, intensity, intensity, 0,
+		intensity, intensity, intensity, 0,
+		offset, offset, offset, 1)
+
+/atom/movable/screen/plane_master/normal_point_map
+	name = "normal point map master"
+	layer = NORMAL_POINT_MAP_LAYER
+	plane = NORMAL_POINT_MAP_PLANE
+	render_target = NORMAL_POINT_MAP_RENDER_TARGET
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	blend_mode = BLEND_MULTIPLY
