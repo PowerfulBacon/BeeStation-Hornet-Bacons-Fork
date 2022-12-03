@@ -919,7 +919,6 @@
 	dir = 8
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/firedoor,
 /turf/open/floor/plasteel/stairs/left,
 /area/shuttle/syndicate_scout)
 "Gn" = (

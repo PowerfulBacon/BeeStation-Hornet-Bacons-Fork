@@ -1,16 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aa" = (
-/obj/machinery/door/airlock/shuttle,
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/exploration)
 "ab" = (
 /obj/effect/turf_decal/delivery,
 /obj/machinery/atmospherics/pipe/manifold/purple/visible{
@@ -147,23 +135,6 @@
 /obj/machinery/atmospherics/pipe/simple/dark/hidden,
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/exploration)
-"at" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/machinery/atmospherics/pipe/simple/dark/hidden{
-	dir = 6
-	},
-/obj/docking_port/mobile{
-	dir = 4;
-	dwidth = 5;
-	height = 7;
-	id = "exploration";
-	name = "Exploration Shuttle";
-	port_direction = 8;
-	shuttle_object_type = /datum/orbital_object/shuttle/custom_shuttle;
-	width = 13
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
 "au" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -276,7 +247,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/exploration)
 "aK" = (
@@ -291,15 +262,6 @@
 	id = "exploration"
 	},
 /turf/open/floor/mineral/titanium,
-/area/shuttle/exploration)
-"aL" = (
-/obj/structure/window/reinforced/survival_pod{
-	dir = 1
-	},
-/obj/machinery/atmospherics/components/unary/shuttle/heater{
-	dir = 1
-	},
-/turf/open/floor/plating,
 /area/shuttle/exploration)
 "aM" = (
 /obj/machinery/computer/shuttle_flight/custom_shuttle/exploration,
@@ -338,18 +300,6 @@
 "aR" = (
 /obj/effect/spawner/structure/window/shuttle,
 /turf/open/floor/plating,
-/area/shuttle/exploration)
-"aS" = (
-/obj/machinery/door/airlock/shuttle,
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
 "aT" = (
 /obj/effect/turf_decal/bot,
@@ -401,7 +351,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
 
