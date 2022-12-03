@@ -956,7 +956,7 @@
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/syndicate_scout)
 "Hk" = (
-/obj/effect/turf_decal/tile/yellow/tile_full,
+/obj/effect/turf_decal/tile/yellow/fourcorners,
 /obj/effect/turf_decal/delivery,
 /obj/machinery/power/port_gen/pacman/super,
 /obj/structure/cable{
