@@ -249,21 +249,9 @@
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
 "GW" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
 /obj/machinery/power/apc/auto_name/east{
 	pixel_x = 24
 	},
-/obj/structure/cable/yellow{
-	icon_state = "0-8"
-	},
-/obj/effect/turf_decal/loading_area,
-/obj{
-	name = "---Merge conflict marker---"
-	},
-/obj/machinery/power/apc/auto_name/east,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -282,21 +270,6 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
 "LX" = (
-/obj/effect/turf_decal/delivery,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/machinery/computer/locator,
-/obj{
-	name = "---Merge conflict marker---"
-	},
 /obj/effect/turf_decal/delivery,
 /obj/machinery/computer/objective,
 /obj/effect/turf_decal/stripes/line{

@@ -274,25 +274,8 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/shuttle/pirate)
 "bS" = (
-/obj/effect/mob_spawn/human/pirate{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/mob_spawn/human/pirate{
 	dir = 1
@@ -302,16 +285,8 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/pirate)
 "bV" = (
-/obj/machinery/atmospherics/pipe/manifold4w/supply/hidden,
-/obj/effect/turf_decal/tile/bar,
-/obj/effect/turf_decal/tile/bar{
-	dir = 1
-	},
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/supply/hidden,
 /obj/effect/turf_decal/tile/bar/opposingcorners,
@@ -327,14 +302,14 @@
 	},
 /obj/docking_port/mobile/pirate{
 	dwidth = 11;
+	dynamic_id = 1;
 	faction_type = /datum/faction/pirates;
 	height = 16;
 	launch_status = 0;
-	movement_force = list("KNOCKDOWN"=0,"THROW"=0);
+	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
 	name = "Pirate Ship";
 	port_direction = 2;
-	width = 17;
-	dynamic_id = 1
+	width = 17
 	},
 /obj/docking_port/stationary{
 	dwidth = 11;
@@ -540,27 +515,8 @@
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "kU" = (
-/obj/machinery/airalarm/all_access{
-	pixel_y = 24
-	},
-/obj/structure/sign/poster/contraband/random{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/airalarm/all_access{
 	pixel_y = 24
@@ -598,22 +554,8 @@
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "ml" = (
-/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 8
@@ -680,19 +622,8 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/pirate)
 "pJ" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/bar,
-/obj/effect/turf_decal/tile/bar{
-	dir = 1
-	},
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -880,17 +811,8 @@
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "xJ" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/bar,
-/obj/effect/turf_decal/tile/bar{
-	dir = 1
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/decal/cleanable/dirt,
@@ -996,27 +918,8 @@
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "GU" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/door/airlock{
-	name = "Crew Cabin";
-	req_access_txt = "180"
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/door/airlock{
@@ -1221,37 +1124,18 @@
 "WY" = (
 /obj/effect/decal/cleanable/dirt,
 /mob/living/simple_animal/cow{
-	atmos_requirements = list("min_oxy"=0,"max_oxy"=0,"min_tox"=0,"max_tox"=0,"min_co2"=0,"max_co2"=0,"min_n2"=0,"max_n2"=0);
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0);
 	desc = "Stolen from a cow genetics lab, she can survive in a vacuum safely, her milk is also delicious!";
 	name = "Ol Betsy"
 	},
 /turf/open/floor/grass,
 /area/shuttle/pirate)
 "Xy" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/machinery/atmospherics/components/unary/vent_pump/on{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/light/small{
 	dir = 8

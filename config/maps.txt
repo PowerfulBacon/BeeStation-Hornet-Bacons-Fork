@@ -21,36 +21,6 @@ map corgstation
 	votable
 endmap
 
-map boxstation
-	maxplayers 60
-	votable
-endmap
-
-map metastation
-	default
-	votable
-endmap
-
-map pubbystation
-	maxplayers 50
-	votable
-endmap
-
-map deltastation
-	minplayers 40
-	votable
-endmap
-
-map kilostation
-	maxplayers 50
-	votable
-endmap
-
-map flandstation
-	minplayers 40
-	votable
-endmap
-
 #Debug Maps, you probably don't want these enabled.
 
 map runtimestation

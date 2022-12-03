@@ -82,19 +82,8 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
 "B" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -132,44 +121,22 @@
 /turf/open/floor/plating,
 /area/shuttle/transport)
 "L" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
 /obj/structure/chair/fancy/shuttle{
 	dir = 8
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
 "O" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -220,25 +187,8 @@
 /turf/open/floor/plating/airless,
 /area/shuttle/transport)
 "X" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/corner,
-/obj/effect/turf_decal/stripes/corner{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/corner,
 /obj/effect/turf_decal/stripes/corner{
@@ -289,12 +239,12 @@
 /obj/docking_port/mobile{
 	dir = 8;
 	dwidth = 2;
+	faction_type = /datum/faction/nanotrasen/central_command;
 	height = 11;
 	id = "ferry";
 	name = "ferry shuttle";
 	preferred_direction = 4;
-	width = 5;
-	faction_type = /datum/faction/nanotrasen/central_command
+	width = 5
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)

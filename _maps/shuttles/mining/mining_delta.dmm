@@ -75,12 +75,12 @@
 /obj/docking_port/mobile{
 	dir = 4;
 	dwidth = 3;
+	faction_type = /datum/faction/station;
 	height = 5;
 	id = "mining";
 	name = "mining shuttle";
 	port_direction = 8;
-	width = 7;
-	faction_type = /datum/faction/station
+	width = 7
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -175,21 +175,8 @@
 /turf/open/floor/plating/airless,
 /area/shuttle/mining)
 "O" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
 /obj/structure/cable{
 	icon_state = "4-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/pod/dark,
@@ -201,22 +188,6 @@
 /turf/open/floor/plating,
 /area/shuttle/mining)
 "R" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/obj{
-	name = "---Merge conflict marker---"
-	},
 /obj/structure/chair/fancy/shuttle{
 	dir = 1
 	},

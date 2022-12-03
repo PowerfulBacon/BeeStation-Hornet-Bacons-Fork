@@ -5,7 +5,7 @@
 
 /datum/map_config
 	// Metadata
-	var/config_filename = "_maps/boxstation.json"
+	var/config_filename = "_maps/corgstation.json"
 	var/defaulted = TRUE  // set to FALSE by LoadConfig() succeeding
 	// Config from maps.txt
 	var/config_max_users = 0
@@ -14,10 +14,10 @@
 	var/votable = FALSE
 
 	// Config actually from the JSON - should default to Box
-	var/map_name = "Box Station"
+	var/map_name = "Corg Station"
 	var/map_link = null //This is intentionally wrong, this will make it not link to webmap.
-	var/map_path = "map_files/BoxStation"
-	var/map_file = "BoxStation.dmm"
+	var/map_path = "map_files/CorgStation"
+	var/map_file = "CorgStation.dmm"
 
 	var/traits = null
 	var/space_ruin_levels = 4	//Keep this low, as new ones are created dynamically when needed.
@@ -132,7 +132,7 @@
 	if ("minetype" in json)
 		minetype = json["minetype"]
 
-	if("map_link" in json)						
+	if("map_link" in json)
 		map_link = json["map_link"]
 	else
 		log_world("map_link missing from json!")

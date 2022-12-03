@@ -95,12 +95,12 @@
 /obj/docking_port/mobile{
 	dir = 8;
 	dwidth = 3;
+	faction_type = /datum/faction/station;
 	height = 5;
 	id = "mining";
 	name = "mining shuttle";
 	port_direction = 4;
-	width = 7;
-	faction_type = /datum/faction/station
+	width = 7
 	},
 /obj/machinery/atmospherics/pipe/simple/general/hidden{
 	dir = 8
@@ -112,11 +112,6 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/mining)
 "x" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
@@ -126,29 +121,13 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj{
-	name = "---Merge conflict marker---"
-	},
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/mining)
 "z" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/machinery/status_display/evac{
-	pixel_x = -32
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 10
-	},
 /obj/structure/cable{
 	icon_state = "1-4"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/machinery/status_display/evac{
 	pixel_x = -32
@@ -189,21 +168,11 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/mining)
 "I" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
 /obj/machinery/power/terminal{
 	dir = 1
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -212,21 +181,8 @@
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/mining)
 "K" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -253,22 +209,11 @@
 /turf/open/floor/plating/airless,
 /area/shuttle/mining)
 "Z" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/corner{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/general/hidden{
 	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
-	},
-/obj{
-	name = "---Merge conflict marker---"
 	},
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/corner{
