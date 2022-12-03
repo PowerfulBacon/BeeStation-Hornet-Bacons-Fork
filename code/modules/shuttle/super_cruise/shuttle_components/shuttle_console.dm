@@ -510,11 +510,9 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	shuttleObject.valid_docks = valid_docks
 	return shuttleObject
 
-/obj/machinery/computer/shuttle_flight/emag_act(mob/user)
-	if(obj_flags & EMAGGED)
-		return
+/obj/machinery/computer/shuttle_flight/on_emag(mob/user)
+	..()
 	req_access = list()
-	obj_flags |= EMAGGED
 	to_chat(user, "<span class='notice'>You fried the consoles ID checking system.</span>")
 
 /obj/machinery/computer/shuttle_flight/allowed(mob/M)

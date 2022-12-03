@@ -52,25 +52,28 @@
 /obj/structure/chair/fancy/shuttle,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
-"m" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
 "n" = (
 /obj/structure/table/reinforced,
 /obj/machinery/recharger,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
-"o" = (
+"w" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"z" = (
+/obj/structure/window/shuttle,
+/obj/structure/grille,
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 4
+	},
+/obj/structure/cable/yellow,
+/turf/open/floor/plating,
+/area/shuttle/transport)
+"A" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/light{
 	dir = 1
@@ -78,7 +81,145 @@
 /obj/structure/chair/fancy/shuttle,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
-"p" = (
+"B" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"G" = (
+/obj/structure/window/shuttle,
+/obj/structure/grille,
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-4"
+	},
+/turf/open/floor/plating,
+/area/shuttle/transport)
+"J" = (
+/obj/structure/window/shuttle,
+/obj/structure/grille,
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/turf/open/floor/plating,
+/area/shuttle/transport)
+"L" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 8
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"O" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"Q" = (
+/obj/machinery/computer/shuttle_flight/ferry/request{
+	dir = 4
+	},
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"S" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"V" = (
+/obj/effect/turf_decal/bot,
+/obj/machinery/light,
+/obj/machinery/power/smes/engineering{
+	charge = 5e+006
+	},
+/obj/structure/cable/yellow,
+/turf/open/floor/plating,
+/area/shuttle/transport)
+"W" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/machinery/shuttle/engine/ion/burst{
+	dir = 4
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/transport)
+"X" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -96,9 +237,45 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/corner,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
-"t" = (
+"Y" = (
+/obj/structure/rack,
+/obj/effect/turf_decal/bot,
+/obj/item/radio{
+	pixel_x = -6;
+	pixel_y = 6
+	},
+/obj/item/radio{
+	pixel_x = 6;
+	pixel_y = 6
+	},
+/obj/item/radio{
+	pixel_y = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/half/contrasted{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/transport)
+"Z" = (
 /obj/machinery/door/airlock/shuttle{
 	name = "Ferry Shuttle Airlock"
 	},
@@ -121,226 +298,81 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/transport)
-"u" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"v" = (
-/obj/structure/rack,
-/obj/effect/turf_decal/bot,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/item/radio{
-	pixel_x = -6;
-	pixel_y = 6
-	},
-/obj/item/radio{
-	pixel_x = 6;
-	pixel_y = 6
-	},
-/obj/item/radio{
-	pixel_y = 4
-	},
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"w" = (
-/obj/effect/turf_decal/bot,
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"z" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 8
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"C" = (
-/obj/effect/turf_decal/bot,
-/obj/machinery/light,
-/obj/machinery/power/smes/engineering{
-	charge = 5e+006
-	},
-/obj/structure/cable/yellow,
-/turf/open/floor/plating,
-/area/shuttle/transport)
-"D" = (
-/obj/structure/window/shuttle,
-/obj/structure/grille,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-2"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-4"
-	},
-/turf/open/floor/plating,
-/area/shuttle/transport)
-"G" = (
-/obj/machinery/computer/shuttle_flight/ferry/request{
-	dir = 4
-	},
-/obj/effect/turf_decal/bot,
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"M" = (
-/obj/structure/window/shuttle,
-/obj/structure/grille,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-2"
-	},
-/turf/open/floor/plating,
-/area/shuttle/transport)
-"U" = (
-/obj/structure/window/shuttle,
-/obj/structure/grille,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 4
-	},
-/obj/structure/cable/yellow,
-/turf/open/floor/plating,
-/area/shuttle/transport)
-"Y" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/transport)
-"Z" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/machinery/shuttle/engine/ion/burst{
-	dir = 4
-	},
-/turf/open/floor/plating/airless,
-/area/shuttle/transport)
 
 (1,1,1) = {"
 a
-Z
-Z
-Z
+W
+W
+W
 a
 "}
 (2,1,1) = {"
 b
-M
-D
-U
+J
+G
+z
 b
 "}
 (3,1,1) = {"
 c
 j
-G
+Q
 j
 c
 "}
 (4,1,1) = {"
 d
 k
-z
-v
+L
+Y
 d
 "}
 (5,1,1) = {"
 e
 l
-u
+B
 w
 e
 "}
 (6,1,1) = {"
 d
 l
-u
+B
 w
 d
 "}
 (7,1,1) = {"
 f
-m
-p
-m
+S
+X
+S
 f
 "}
 (8,1,1) = {"
 g
 n
-u
+B
 n
 g
 "}
 (9,1,1) = {"
 e
 l
-u
+B
 w
 e
 "}
 (10,1,1) = {"
 d
-o
-Y
-C
+A
+O
+V
 d
 "}
 (11,1,1) = {"
 d
 e
-t
+Z
 e
 d
 "}

@@ -48,83 +48,11 @@
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining)
-"g" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining)
 "h" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining)
-"k" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
-/obj/machinery/door/airlock/survival_pod/glass,
-/obj/structure/fans/tiny,
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/pod/light,
-/area/shuttle/mining)
-"m" = (
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/machinery/power/smes{
-	charge = 1e+006
-	},
-/obj/structure/cable{
-	icon_state = "0-4"
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining)
-"o" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining)
-"r" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining)
@@ -137,7 +65,168 @@
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining)
-"u" = (
+"A" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/docking_port/mobile{
+	dir = 4;
+	dwidth = 3;
+	height = 5;
+	id = "mining";
+	name = "mining shuttle";
+	port_direction = 8;
+	width = 7;
+	faction_type = /datum/faction/station
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/obj/machinery/door/airlock/survival_pod/glass,
+/obj/structure/fans/tiny,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining)
+"B" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining)
+"D" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"F" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/power/smes{
+	charge = 1e+006
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"G" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining)
+"J" = (
+/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"K" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/end{
+	dir = 8
+	},
+/obj/machinery/power/terminal,
+/obj/structure/cable,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining)
+"M" = (
+/obj/structure/window/reinforced{
+	dir = 1;
+	layer = 2.9
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/shuttle/engine/ion/burst{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/mining)
+"O" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/dark,
+/area/shuttle/mining)
+"Q" = (
+/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"R" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/dark,
+/area/shuttle/mining)
+"S" = (
+/turf/closed/wall/mineral/titanium/survival/nodiagonal,
+/area/shuttle/mining)
+"V" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/end{
 	dir = 4
@@ -207,34 +296,15 @@
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining)
-"z" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining)
-"B" = (
+"X" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/docking_port/mobile{
-	dir = 4;
-	dwidth = 3;
-	height = 5;
-	id = "mining";
-	name = "mining shuttle";
-	port_direction = 8;
-	width = 7;
-	faction_type = /datum/faction/station
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
+	dir = 8
 	},
 /obj/machinery/door/airlock/survival_pod/glass,
 /obj/structure/fans/tiny,
@@ -243,82 +313,23 @@
 	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining)
-"G" = (
+"Z" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/stripes/end{
-	dir = 8
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
 	},
-/obj/machinery/power/terminal,
-/obj/structure/cable,
 /obj/structure/chair/fancy/shuttle{
 	dir = 1
 	},
 /turf/open/floor/pod/dark,
-/area/shuttle/mining)
-"I" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 1
-	},
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining)
-"J" = (
-/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining)
-"Q" = (
-/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining)
-"R" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "2-8"
-	},
-/obj/structure/cable{
-	icon_state = "2-4"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining)
-"S" = (
-/turf/closed/wall/mineral/titanium/survival/nodiagonal,
-/area/shuttle/mining)
-"W" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	layer = 2.9
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/shuttle/engine/ion/burst{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
 /area/shuttle/mining)
 
 (1,1,1) = {"
 a
 S
 Q
-B
+A
 Q
 S
 a
@@ -327,26 +338,26 @@ a
 S
 c
 f
-R
 G
-m
+K
+F
 S
 "}
 (3,1,1) = {"
 b
 d
-g
-r
-o
-I
-W
+R
+O
+Z
+D
+M
 "}
 (4,1,1) = {"
 S
 e
 h
-z
-u
+B
+V
 s
 S
 "}
@@ -354,7 +365,7 @@ S
 a
 S
 J
-k
+X
 J
 S
 a

@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 	/// Should we used the smooth tiled dirt decal or not
 	var/tiled_dirt = FALSE
 
-	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID	//when this be added to vis_contents of something it inherit something.plane and be associated with something on clicking, important for visualisation of turf in openspace and interraction with openspace that show you turf.
+	vis_flags = VIS_INHERIT_ID|VIS_INHERIT_PLANE // Important for interaction with and visualization of openspace.
 
 	///the holodeck can load onto this turf if TRUE
 	var/holodeck_compatible = FALSE
@@ -241,6 +241,26 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 /turf/proc/multiz_turf_del(turf/T, dir)
 
 /turf/proc/multiz_turf_new(turf/T, dir)
+
+/// Returns TRUE if the turf cannot be moved onto
+/proc/is_blocked_turf(turf/T, exclude_mobs)
+	if(T.density)
+		return 1
+	for(var/i in T)
+		var/atom/A = i
+		if(A.density && (!exclude_mobs || !ismob(A)))
+			return 1
+	return 0
+
+/proc/is_anchored_dense_turf(turf/T) //like the older version of the above, fails only if also anchored
+	if(T.density)
+		return 1
+	for(var/i in T)
+		var/atom/movable/A = i
+		if(A.density && A.anchored)
+			return 1
+	return 0
+
 
 //zPassIn doesn't necessarily pass an atom!
 //direction is direction of travel of air

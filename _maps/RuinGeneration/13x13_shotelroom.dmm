@@ -11,6 +11,13 @@
 /obj/machinery/computer/scan_consolenew,
 /turf/open/floor/plasteel/tiled,
 /area/ruin/unpowered)
+"c" = (
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/tile/purple/half/contrasted{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/ruin/unpowered)
 "d" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/bottle/orangejuice{
@@ -85,6 +92,10 @@
 /obj/item/kitchen/knife,
 /turf/open/floor/carpet/orange,
 /area/ruin/unpowered)
+"s" = (
+/obj/structure/chair/fancy/comfy/black,
+/turf/open/floor/carpet/orange,
+/area/ruin/unpowered)
 "t" = (
 /obj/structure/chair/office/light{
 	dir = 8
@@ -105,6 +116,12 @@
 /obj/machinery/dna_scannernew,
 /turf/open/floor/plasteel/tiled,
 /area/ruin/unpowered)
+"y" = (
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/obj/effect/turf_decal/tile/purple/anticorner/contrasted,
+/turf/open/floor/plasteel,
+/area/ruin/unpowered)
 "z" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/monkeycubes,
@@ -113,6 +130,14 @@
 "A" = (
 /obj/structure/table/wood,
 /turf/open/floor/wood,
+/area/ruin/unpowered)
+"B" = (
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/obj/effect/turf_decal/tile/purple/anticorner/contrasted{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
 /area/ruin/unpowered)
 "C" = (
 /obj/structure/table/glass,
@@ -127,17 +152,11 @@
 	},
 /turf/open/floor/wood,
 /area/ruin/unpowered)
-"F" = (
-/obj/structure/table,
-/obj/structure/bedsheetbin,
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
+"E" = (
+/obj/structure/chair/fancy/comfy/black{
+	dir = 1
 	},
-/obj/effect/turf_decal/tile/purple,
-/obj/effect/turf_decal/tile/purple{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
+/turf/open/floor/carpet/orange,
 /area/ruin/unpowered)
 "G" = (
 /obj/structure/table/glass,
@@ -164,10 +183,6 @@
 /obj/machinery/computer/med_data/laptop,
 /obj/structure/table/glass,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
-"L" = (
-/obj/structure/chair/fancy/comfy/black,
-/turf/open/floor/carpet/orange,
 /area/ruin/unpowered)
 "M" = (
 /obj/structure/table/glass,
@@ -202,12 +217,6 @@
 	},
 /turf/open/floor/wood,
 /area/ruin/unpowered)
-"P" = (
-/obj/structure/chair/fancy/comfy/black{
-	dir = 1
-	},
-/turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
 "Q" = (
 /obj/structure/chair/office{
 	dir = 1
@@ -217,18 +226,6 @@
 "R" = (
 /obj/structure/falsewall,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
-"S" = (
-/obj/structure/table,
-/obj/structure/bedsheetbin,
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/purple{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/purple,
-/turf/open/floor/plasteel,
 /area/ruin/unpowered)
 "T" = (
 /obj/effect/turf_decal/tile/purple{
@@ -260,14 +257,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/ruin/unpowered)
-"Y" = (
-/obj/machinery/washing_machine,
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/purple,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "Z" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/bottle/applejack{
@@ -297,7 +286,7 @@ m
 m
 m
 T
-S
+B
 j
 V
 G
@@ -312,7 +301,7 @@ m
 m
 m
 m
-Y
+c
 j
 K
 Q
@@ -327,7 +316,7 @@ m
 m
 m
 m
-Y
+c
 j
 O
 h
@@ -342,7 +331,7 @@ m
 m
 m
 f
-F
+y
 j
 v
 h
@@ -414,10 +403,10 @@ j
 (10,1,1) = {"
 j
 h
-L
+s
 Z
 n
-P
+E
 h
 u
 D
@@ -429,10 +418,10 @@ j
 (11,1,1) = {"
 j
 h
-L
+s
 J
 o
-P
+E
 h
 h
 h
@@ -444,10 +433,10 @@ k
 (12,1,1) = {"
 j
 h
-L
+s
 r
 d
-P
+E
 v
 A
 a

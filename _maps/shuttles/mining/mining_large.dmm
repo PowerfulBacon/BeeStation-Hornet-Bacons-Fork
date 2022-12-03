@@ -1,14 +1,14 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
+"aa" = (
 /turf/template_noop,
 /area/template_noop)
-"b" = (
+"ab" = (
 /obj/effect/spawner/structure/window/hollow/survival_pod/directional{
 	dir = 9
 	},
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"c" = (
+"ac" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/toolbox/emergency,
 /obj/effect/turf_decal/tile/brown,
@@ -21,7 +21,7 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"d" = (
+"ad" = (
 /obj/machinery/computer/shuttle_flight/mining,
 /obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/tile/brown{
@@ -30,7 +30,7 @@
 /obj/effect/turf_decal/bot_white,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"e" = (
+"ae" = (
 /obj/structure/table/reinforced,
 /obj/item/clothing/mask/gas,
 /obj/effect/turf_decal/tile/brown,
@@ -43,7 +43,7 @@
 /obj/item/tank/internals/emergency_oxygen,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"f" = (
+"af" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/tile/brown{
@@ -55,24 +55,24 @@
 /obj/item/storage/firstaid/regular,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"g" = (
+"ag" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
 	},
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
 	},
 /obj/effect/turf_decal/bot_white,
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"h" = (
+"ah" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -83,30 +83,30 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
-/obj/effect/turf_decal/bot_white,
 /obj/structure/chair/fancy/shuttle{
 	dir = 1
 	},
+/obj/effect/turf_decal/bot_white,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"i" = (
+"ai" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/structure/chair/fancy/shuttle{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
 	},
 /obj/effect/turf_decal/bot_white,
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"j" = (
+"aj" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -127,10 +127,10 @@
 	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"k" = (
+"ak" = (
 /turf/closed/wall/mineral/titanium/survival/nodiagonal,
 /area/shuttle/mining/large)
-"l" = (
+"al" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -144,7 +144,7 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"m" = (
+"am" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
@@ -159,7 +159,7 @@
 	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"n" = (
+"an" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -173,7 +173,7 @@
 /obj/effect/turf_decal/stripes/white/line,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"o" = (
+"ao" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
@@ -194,7 +194,7 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"p" = (
+"ap" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -210,11 +210,11 @@
 	},
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"q" = (
+"aq" = (
 /obj/machinery/status_display/evac,
 /turf/closed/wall/mineral/titanium/survival/nodiagonal,
 /area/shuttle/mining/large)
-"r" = (
+"ar" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -228,16 +228,156 @@
 /obj/machinery/door/airlock/survival_pod/glass,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"t" = (
-/obj/effect/turf_decal/box/white/corners{
-	dir = 4
+"as" = (
+/obj/item/clothing/suit/hazardvest{
+	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
+	name = "emergency lifejacket"
 	},
-/obj/structure/cable{
-	icon_state = "4-8"
+/obj/item/clothing/suit/hazardvest{
+	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
+	name = "emergency lifejacket"
+	},
+/obj/item/clothing/suit/hazardvest{
+	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
+	name = "emergency lifejacket"
+	},
+/obj/item/clothing/suit/hazardvest{
+	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
+	name = "emergency lifejacket"
+	},
+/obj/item/clothing/suit/hazardvest{
+	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
+	name = "emergency lifejacket"
+	},
+/obj/item/tank/internals/emergency_oxygen{
+	pixel_x = 3
+	},
+/obj/item/tank/internals/emergency_oxygen{
+	pixel_x = 3
+	},
+/obj/item/tank/internals/emergency_oxygen{
+	pixel_x = 3
+	},
+/obj/item/tank/internals/emergency_oxygen{
+	pixel_x = 3
+	},
+/obj/item/tank/internals/emergency_oxygen{
+	pixel_x = 3
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/clothing/head/hardhat/orange{
+	name = "protective hat";
+	pixel_y = 9
+	},
+/obj/item/clothing/head/hardhat/orange{
+	name = "protective hat";
+	pixel_y = 9
+	},
+/obj/item/clothing/head/hardhat/orange{
+	name = "protective hat";
+	pixel_y = 9
+	},
+/obj/item/clothing/head/hardhat/orange{
+	name = "protective hat";
+	pixel_y = 9
+	},
+/obj/item/clothing/head/hardhat/orange{
+	name = "protective hat";
+	pixel_y = 9
+	},
+/obj/structure/closet/crate/internals,
+/obj/item/pickaxe/emergency,
+/obj/item/pickaxe/emergency,
+/obj/effect/turf_decal/box/white/corners{
+	dir = 1
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining/large)
-"v" = (
+"at" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 4
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"au" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"av" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 1
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"aw" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/ore_box,
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"ax" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"ay" = (
+/obj/machinery/light/small,
+/obj/effect/turf_decal/box/white/corners,
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"az" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/white/line,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"aA" = (
 /obj/machinery/light/small,
 /obj/effect/turf_decal/box/white/corners{
 	dir = 8
@@ -245,12 +385,16 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/structure/cable{
-	icon_state = "1-6"
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"aB" = (
+/obj/effect/turf_decal/box/white/corners,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining/large)
-"w" = (
+"aC" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 1
 	},
@@ -258,55 +402,9 @@
 /obj/item/crowbar/red,
 /obj/item/wrench,
 /obj/item/flashlight,
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"x" = (
-/obj/effect/turf_decal/box/white/corners{
-	dir = 1
-	},
-/obj/structure/cable{
-	icon_state = "2-8"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining/large)
-"y" = (
-/obj/machinery/light/small,
-/obj/effect/turf_decal/box/white/corners,
-/obj/machinery/power/terminal{
-	dir = 8
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-4"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining/large)
-"z" = (
-/obj/effect/turf_decal/box/white/corners{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/ore_box,
-/obj/machinery/power/apc/highcap{
-	dir = 4;
-	locked = 0;
-	name = "Mining Shuttle APC";
-	pixel_x = 24
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-2"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/mining/large)
-"B" = (
-/obj/machinery/shuttle/engine/ion/burst{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
-/area/shuttle/mining/large)
-"D" = (
+"aD" = (
 /obj/machinery/door/airlock/external{
 	name = "Mining Shuttle External Airlock"
 	},
@@ -317,20 +415,32 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"F" = (
-/turf/closed/wall/mineral/titanium/survival,
-/area/shuttle/mining/large)
-"G" = (
+"aE" = (
+/obj/machinery/power/apc/highcap{
+	dir = 4;
+	locked = 0;
+	name = "Mining Shuttle APC";
+	pixel_x = 24
+	},
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable{
-	icon_state = "2-9"
-	},
+/obj/structure/cable/yellow,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"H" = (
+"aF" = (
+/turf/closed/wall/mineral/titanium/survival,
+/area/shuttle/mining/large)
+"aG" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	layer = 2.9
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/mining/large)
+"aH" = (
 /obj/structure/sign/warning/vacuum/external{
 	pixel_x = 32
 	},
@@ -339,23 +449,11 @@
 	},
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"I" = (
-/obj/effect/turf_decal/box/white/corners{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/smes{
-	charge = 1e+006
-	},
-/obj/structure/cable{
-	icon_state = "0-2"
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/turf/open/floor/pod/dark,
+"aI" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/open/floor/plating/airless,
 /area/shuttle/mining/large)
-"J" = (
+"aJ" = (
 /obj/machinery/door/airlock/external{
 	name = "Mining Shuttle External Airlock"
 	},
@@ -371,13 +469,100 @@
 	id = "mining";
 	name = "mining shuttle";
 	port_direction = 2;
-	width = 7;
-	faction_type = /datum/faction/station
+	width = 7
 	},
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"K" = (
+"aK" = (
+/obj/machinery/light/small,
+/obj/effect/turf_decal/box/white/corners{
+	dir = 8
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-6"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"aL" = (
+/obj/effect/turf_decal/box/white/corners,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"aM" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable{
+	icon_state = "2-9"
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"aN" = (
+/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"aO" = (
+/obj/structure/window/reinforced{
+	dir = 1;
+	layer = 2.9
+	},
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 1
+	},
+/obj/structure/cable,
+/turf/open/floor/plating/airless,
+/area/shuttle/mining/large)
+"aP" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/power/smes{
+	charge = 1e+006
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"aQ" = (
+/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
+	dir = 5
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"aR" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/crowbar/red,
+/obj/item/wrench,
+/obj/item/flashlight,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"aS" = (
+/obj/machinery/shuttle/engine/ion/burst{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/mining/large)
+"aT" = (
 /obj/item/clothing/suit/hazardvest{
 	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
 	name = "emergency lifejacket"
@@ -464,62 +649,46 @@
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining/large)
-"L" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	layer = 2.9
-	},
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 1
-	},
-/obj/structure/cable,
-/turf/open/floor/plating/airless,
-/area/shuttle/mining/large)
-"N" = (
+"aU" = (
 /obj/effect/spawner/structure/window/hollow/survival_pod/directional{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining/large)
-"O" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/white/line{
-	dir = 1
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/pod/light,
-/area/shuttle/mining/large)
-"Q" = (
-/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
-	dir = 5
-	},
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
-"S" = (
-/obj/effect/turf_decal/box/white/corners,
+"aV" = (
+/obj/machinery/door/airlock/external{
+	name = "Mining Shuttle External Airlock"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
 /obj/structure/cable/yellow{
-	icon_state = "1-8"
+	icon_state = "1-2"
+	},
+/obj/docking_port/mobile{
+	dwidth = 3;
+	height = 10;
+	id = "mining";
+	name = "mining shuttle";
+	port_direction = 2;
+	width = 7;
+	faction_type = /datum/faction/station
+	},
+/obj/structure/fans/tiny,
+/turf/open/floor/plating,
+/area/shuttle/mining/large)
+"aW" = (
+/obj/machinery/light/small,
+/obj/effect/turf_decal/box/white/corners,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-4"
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/mining/large)
-"U" = (
-/obj/effect/spawner/structure/window/hollow/survival_pod/directional{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/shuttle/mining/large)
-"W" = (
+"aX" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -537,96 +706,351 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/white/line,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/pod/light,
 /area/shuttle/mining/large)
-"Y" = (
+"aY" = (
 /obj/effect/spawner/structure/window/hollow/survival_pod/directional{
 	dir = 1
 	},
 /turf/open/floor/plating,
 /area/shuttle/mining/large)
+"aZ" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"cD" = (
+/obj/effect/turf_decal/stripes/white/corner,
+/obj/machinery/light/small,
+/obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"dN" = (
+/obj/machinery/door/airlock/survival_pod/glass,
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"gd" = (
+/obj/structure/table/reinforced,
+/obj/item/folder/yellow,
+/obj/item/pen,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"gL" = (
+/obj/effect/turf_decal/stripes/white/line,
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"hx" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/firstaid/regular,
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 4
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"jy" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"jL" = (
+/obj/machinery/computer/shuttle_flight/mining,
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/brown/half/contrasted{
+	dir = 8
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"ld" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/ore/iron{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/item/stack/ore/iron{
+	pixel_x = -2;
+	pixel_y = -8
+	},
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 1
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"pK" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/neutral/anticorner/contrasted,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"th" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"tE" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"Au" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/brown{
+	dir = 4
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"EB" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/toolbox/emergency,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 8
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"Jv" = (
+/obj/structure/table/reinforced,
+/obj/item/clothing/mask/gas,
+/obj/item/tank/internals/emergency_oxygen,
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"Mb" = (
+/obj/effect/turf_decal/box/white/corners{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/ore_box,
+/obj/machinery/power/apc/highcap{
+	dir = 4;
+	locked = 0;
+	name = "Mining Shuttle APC";
+	pixel_x = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-2"
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/mining/large)
+"TD" = (
+/obj/structure/table/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stock_parts/cell/high,
+/obj/item/screwdriver{
+	pixel_y = 18
+	},
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 8
+	},
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
+"Zz" = (
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 8
+	},
+/obj/machinery/light/small,
+/obj/item/radio/intercom{
+	pixel_y = -29
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown,
+/turf/open/floor/pod/light,
+/area/shuttle/mining/large)
 
 (1,1,1) = {"
-a
-U
-U
-k
-k
-k
-U
-k
-F
-a
+aa
+aU
+aU
+ak
+ak
+ak
+aU
+ak
+aF
+aa
 "}
 (2,1,1) = {"
-b
-Y
-f
-l
-k
-K
-I
-w
-L
-B
+ab
+aY
+hx
+gd
+ak
+aT
+aP
+aR
+aO
+aS
 "}
 (3,1,1) = {"
-Y
-c
-g
-m
-q
-t
-y
-k
-k
-k
+aY
+EB
+pK
+cD
+aq
+aZ
+aW
+ak
+ak
+ak
 "}
 (4,1,1) = {"
-Y
-d
-h
-n
-r
-O
-W
-D
-H
-J
+aY
+jL
+jy
+gL
+dN
+tE
+aX
+aD
+aH
+aV
 "}
 (5,1,1) = {"
-Y
-e
-i
-o
-k
-x
-v
-k
-k
-k
+aY
+Jv
+Au
+Zz
+ak
+th
+aK
+ak
+ak
+ak
 "}
 (6,1,1) = {"
-Q
-Y
-j
-p
-k
-z
-S
-G
-L
-B
+aQ
+aY
+ld
+TD
+ak
+Mb
+aL
+aM
+aO
+aS
 "}
 (7,1,1) = {"
-a
-Q
-N
-k
-k
-k
-N
-k
-F
-a
+aa
+aQ
+aN
+ak
+ak
+ak
+aN
+ak
+aF
+aa
 "}

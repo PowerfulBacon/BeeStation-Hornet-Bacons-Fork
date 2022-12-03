@@ -2,6 +2,17 @@
 "b" = (
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/labor)
+"d" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_y = -32
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/dark,
+/area/shuttle/labor)
 "e" = (
 /obj/structure/shuttle/engine/propulsion,
 /obj/effect/turf_decal/stripes/line,
@@ -21,9 +32,33 @@
 "i" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/shuttle/labor)
-"k" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
-/obj/machinery/light,
+"j" = (
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 8
+	},
+/turf/open/floor/pod/dark,
+/area/shuttle/labor)
+"o" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/fans/tiny,
+/obj/docking_port/mobile{
+	dir = 8;
+	dwidth = 2;
+	height = 5;
+	id = "laborcamp";
+	name = "labor camp shuttle";
+	port_direction = 4;
+	width = 10;
+	faction_type = /datum/faction/station
+	},
+/obj/machinery/door/airlock/external{
+	name = "Mining Shuttle External Airlock"
+	},
 /turf/open/floor/pod/dark,
 /area/shuttle/labor)
 "p" = (
@@ -44,17 +79,6 @@
 	},
 /turf/open/floor/pod/light,
 /area/shuttle/labor)
-"v" = (
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/obj/effect/turf_decal/bot,
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_y = -32
-	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
-/turf/open/floor/pod/dark,
-/area/shuttle/labor)
 "w" = (
 /obj/structure/ore_box,
 /turf/open/floor/mineral/plastitanium,
@@ -73,10 +97,6 @@
 	dir = 8
 	},
 /turf/open/floor/mineral/plastitanium,
-/area/shuttle/labor)
-"z" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
-/turf/open/floor/pod/dark,
 /area/shuttle/labor)
 "A" = (
 /obj/effect/spawner/structure/window/hollow/survival_pod/directional{
@@ -100,36 +120,6 @@
 /obj/machinery/door/airlock/external{
 	name = "Mining Shuttle External Airlock";
 	req_access_txt = "2"
-	},
-/turf/open/floor/pod/dark,
-/area/shuttle/labor)
-"E" = (
-/obj/effect/turf_decal/caution/stand_clear{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
-/turf/open/floor/pod/dark,
-/area/shuttle/labor)
-"G" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/fans/tiny,
-/obj/docking_port/mobile{
-	dir = 8;
-	dwidth = 2;
-	height = 5;
-	id = "laborcamp";
-	name = "labor camp shuttle";
-	port_direction = 4;
-	width = 10;
-	faction_type = /datum/faction/station
-	},
-/obj/machinery/door/airlock/external{
-	name = "Mining Shuttle External Airlock"
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/labor)
@@ -238,6 +228,10 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/labor)
+"P" = (
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/dark,
+/area/shuttle/labor)
 "R" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -263,6 +257,11 @@
 	dir = 1
 	},
 /turf/open/floor/plating,
+/area/shuttle/labor)
+"W" = (
+/obj/machinery/light,
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/pod/dark,
 /area/shuttle/labor)
 "X" = (
 /obj/structure/chair/fancy/shuttle{
@@ -303,24 +302,24 @@ e
 (3,1,1) = {"
 V
 p
-v
+d
 Z
-z
-z
-z
-k
+P
+P
+P
+W
 U
 e
 "}
 (4,1,1) = {"
 V
 K
-E
+j
 h
 w
 O
 y
-E
+j
 B
 e
 "}
@@ -332,7 +331,7 @@ Z
 T
 U
 T
-G
+o
 U
 i
 "}

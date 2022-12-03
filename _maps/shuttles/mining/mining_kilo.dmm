@@ -24,23 +24,6 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/mining)
-"i" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/corner{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/general/hidden{
-	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/mining)
 "k" = (
 /obj/item/clothing/suit/hazardvest{
 	desc = "A high-visibility lifejacket complete with whistle and slot for oxygen tanks.";
@@ -92,66 +75,14 @@
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/mining)
 "p" = (
-/obj/effect/spawner/structure/window/shuttle,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 1
-	},
-/obj/structure/cable/yellow,
-/turf/open/floor/plating,
-/area/shuttle/mining)
-"s" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 5
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/mining)
-"y" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/mining)
-"z" = (
 /obj/effect/turf_decal/bot,
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
+/obj/machinery/computer/shuttle_flight/mining,
 /obj/structure/cable/yellow{
-	icon_state = "1-2"
+	icon_state = "2-8"
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/mining)
-"A" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/structure/cable{
-	icon_state = "0-2"
-	},
-/obj/machinery/power/terminal{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/mining)
-"E" = (
+"r" = (
 /obj/machinery/door/airlock/shuttle{
 	name = "Mining Shuttle Airlock"
 	},
@@ -180,22 +111,7 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/mining)
-"G" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/shuttle/engine/ion/burst{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
-/area/shuttle/mining)
-"H" = (
-/obj/effect/turf_decal/bot,
-/obj/machinery/computer/shuttle_flight/mining,
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/mining)
-"L" = (
+"x" = (
 /obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -210,9 +126,14 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/mining)
-"O" = (
+"z" = (
 /obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -226,9 +147,19 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/machinery/status_display/evac{
+	pixel_x = -32
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/mining)
-"R" = (
+"A" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -239,6 +170,112 @@
 	icon_state = "0-4"
 	},
 /turf/open/floor/mineral/plastitanium,
+/area/shuttle/mining)
+"D" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/mining)
+"H" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/mining)
+"I" = (
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/mining)
+"K" = (
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/mining)
+"O" = (
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/power/engine_capacitor_bank{
+	dir = 1
+	},
+/obj/structure/cable/yellow,
+/turf/open/floor/plating,
+/area/shuttle/mining)
+"V" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/shuttle/engine/ion/burst{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/mining)
+"Z" = (
+/obj/effect/turf_decal/tile/brown,
+/obj/effect/turf_decal/tile/brown{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/general/hidden{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/mining)
 
 (1,1,1) = {"
@@ -252,27 +289,27 @@ a
 "}
 (2,1,1) = {"
 a
-R
 A
-O
+I
+z
 g
 k
 n
 "}
 (3,1,1) = {"
 b
-H
-y
-L
-z
 p
-G
+K
+x
+H
+O
+V
 "}
 (4,1,1) = {"
 a
 e
-s
-i
+D
+Z
 g
 m
 n
@@ -281,7 +318,7 @@ n
 a
 a
 b
-E
+r
 b
 a
 a

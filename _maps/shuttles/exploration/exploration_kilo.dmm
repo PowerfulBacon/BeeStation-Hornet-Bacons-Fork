@@ -1,37 +1,56 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"cr" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
+"bp" = (
+/obj/structure/window/reinforced/survival_pod{
 	dir = 1
 	},
-/turf/open/floor/mineral/plastitanium,
+/obj/machinery/atmospherics/components/unary/shuttle/engine_heater{
+	dir = 1
+	},
+/turf/open/floor/plating,
 /area/shuttle/exploration)
-"dp" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
+"br" = (
+/obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/caution/red{
-	dir = 4
-	},
-/obj/effect/turf_decal/box/corners,
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
-"ff" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
+"bt" = (
+/obj/machinery/light,
+/obj/item/kirbyplants{
+	icon_state = "plant-03"
+	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"ct" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"cT" = (
+/obj/machinery/holopad{
+	pixel_x = 15
+	},
+/obj/effect/turf_decal/box/corners{
 	dir = 1
 	},
-/obj/machinery/power/apc/auto_name/east{
-	pixel_x = 24
+/obj/effect/turf_decal/box/corners{
+	dir = 8
 	},
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"eh" = (
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"eW" = (
 /obj/structure/cable/yellow{
-	icon_state = "0-8"
+	icon_state = "2-4"
 	},
-/obj/effect/turf_decal/loading_area,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/exploration)
 "gl" = (
@@ -48,31 +67,102 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/exploration)
-"gm" = (
+"gs" = (
+/obj/machinery/atmospherics/components/unary/plasma_refiner{
+	dir = 8
+	},
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/exploration)
+"kp" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/exploration)
+"kW" = (
+/obj/item/kirbyplants{
+	icon_state = "applebush"
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"na" = (
+/obj/effect/turf_decal/box/corners{
+	dir = 4
+	},
+/obj/effect/turf_decal/box/corners,
+/obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"nW" = (
 /obj/effect/turf_decal/delivery,
 /obj/structure/table/reinforced,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
 	},
 /obj/item/storage/box/donkpockets,
 /obj/item/storage/box/donkpockets/donkpockethonk{
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
-"gz" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
+"pt" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/machinery/atmospherics/pipe/manifold/purple/visible{
 	dir = 1
 	},
+/obj/structure/cable/yellow,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/exploration)
+"qA" = (
+/obj/item/trash/pistachios,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"qJ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"rh" = (
+/obj/machinery/button/door{
+	desc = "A remote control switch.";
+	id = "exploration";
+	name = "Exploration Shuttle Shutters";
+	pixel_y = 8
+	},
+/turf/closed/wall/mineral/titanium/nodiagonal,
+/area/shuttle/exploration)
+"rr" = (
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/exploration)
+"si" = (
+/obj/structure/sign/warning/fire,
+/turf/closed/wall/mineral/plastitanium/nodiagonal,
+/area/shuttle/exploration)
+"sX" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"un" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -82,75 +172,25 @@
 /obj/effect/turf_decal/box/corners{
 	dir = 4
 	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
-"is" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 1
-	},
-/obj/machinery/atmospherics/components/unary/portables_connector/visible{
-	dir = 4
-	},
+"vf" = (
+/obj/structure/sign/nanotrasen,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/exploration)
+"wi" = (
+/obj/structure/closet/crate/bin,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/light{
-	dir = 8;
-	light_color = "#e8eaff"
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"jI" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/blood/old,
+/obj/item/toy/beach_ball,
+/obj/item/bikehorn/rubberducky,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
-"kt" = (
-/obj/machinery/microwave{
-	pixel_y = 6
-	},
-/obj/structure/table/reinforced,
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
+"wG" = (
+/turf/closed/wall/mineral/titanium,
 /area/shuttle/exploration)
-"kH" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"kJ" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/decal/remains/human,
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"nU" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"pJ" = (
+"yt" = (
 /obj/machinery/atmospherics/pipe/manifold/purple/visible{
 	dir = 1
 	},
@@ -159,28 +199,90 @@
 /obj/structure/closet/crate/science,
 /obj/item/multitool,
 /obj/item/wrench,
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
 /obj/item/stack/sheet/mineral/plasma/twenty,
 /obj/item/mining_scanner,
 /obj/item/pickaxe,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/exploration)
-"pK" = (
-/obj/machinery/atmospherics/pipe/manifold/purple/visible{
+"AE" = (
+/turf/closed/wall/mineral/titanium/nodiagonal,
+/area/shuttle/exploration)
+"AZ" = (
+/obj/effect/spawner/structure/window/shuttle,
+/turf/open/floor/plating,
+/area/shuttle/exploration)
+"Cg" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/caution/red{
+	dir = 4
+	},
+/obj/effect/turf_decal/box/corners,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"Dn" = (
+/obj/machinery/microwave{
+	pixel_y = 6
+	},
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"Eh" = (
+/obj/item/kirbyplants{
+	icon_state = "plant-21"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"EO" = (
+/obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/exploration)
+"GW" = (
+/obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/brown,
+/obj/machinery/power/apc/auto_name/east{
+	pixel_x = 24
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/obj/effect/turf_decal/loading_area,
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/machinery/power/apc/auto_name/east,
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/obj/effect/turf_decal/loading_area,
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/exploration)
-"qt" = (
+"Kl" = (
+/obj/structure/table/reinforced,
+/obj/item/flashlight/lamp/green{
+	on = 0;
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"LX" = (
 /obj/effect/turf_decal/delivery,
-/obj/machinery/computer/shuttle_flight/custom_shuttle/exploration,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -191,9 +293,43 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
+/obj/machinery/computer/locator,
+/obj{
+	name = "---Merge conflict marker---"
+	},
+/obj/effect/turf_decal/delivery,
+/obj/machinery/computer/objective,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
-"qZ" = (
+"NL" = (
+/obj/structure/lattice/catwalk,
+/obj/item/stack/marker_beacon{
+	anchored = 1;
+	icon_state = "markerburgundy-on";
+	light_color = "#FA644B";
+	light_power = 3;
+	light_range = 2;
+	name = "landing marker";
+	picked_color = "Burgundy"
+	},
+/turf/template_noop,
+/area/shuttle/exploration)
+"PK" = (
+/obj/machinery/shuttle/engine/plasma{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/shuttle/exploration)
+"Qu" = (
+/obj/machinery/telecomms/relay/preset/exploration,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"QY" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/structure/fans/tiny,
 /obj/docking_port/mobile{
@@ -209,175 +345,50 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
-"rh" = (
-/obj/machinery/button/door{
-	desc = "A remote control switch.";
-	id = "exploration";
-	name = "Exploration Shuttle Shutters";
-	pixel_y = 8
+"Rk" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
 	},
-/turf/closed/wall/mineral/titanium/nodiagonal,
+/obj/effect/turf_decal/caution/red{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
-"si" = (
-/obj/structure/sign/warning/fire,
-/turf/closed/wall/mineral/plastitanium/nodiagonal,
-/area/shuttle/exploration)
-"tc" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
+"RK" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/computer/shuttle_flight/custom_shuttle/exploration,
+/obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"Sw" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/delivery,
+/obj/machinery/light{
+	dir = 8;
+	light_color = "#e8eaff"
+	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/exploration)
+"SG" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
+/obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
-"tu" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/obj/item/trash/pistachios,
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"uU" = (
-/obj/structure/window/reinforced/survival_pod{
-	dir = 1
-	},
-/obj/machinery/atmospherics/components/unary/shuttle/engine_heater{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/shuttle/exploration)
-"vf" = (
-/obj/structure/sign/nanotrasen,
-/turf/closed/wall/mineral/titanium,
-/area/shuttle/exploration)
-"vp" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/caution/stand_clear{
-	dir = 4
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"vE" = (
-/obj/machinery/holopad{
-	pixel_x = 15
-	},
-/obj/effect/turf_decal/box/corners{
-	dir = 1
-	},
-/obj/effect/turf_decal/box/corners{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"wG" = (
-/turf/closed/wall/mineral/titanium,
-/area/shuttle/exploration)
-"wH" = (
-/obj/machinery/atmospherics/components/unary/plasma_refiner{
-	dir = 8
-	},
-/obj/effect/turf_decal/delivery,
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"zs" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"AE" = (
-/turf/closed/wall/mineral/titanium/nodiagonal,
-/area/shuttle/exploration)
-"AV" = (
-/obj/effect/turf_decal/delivery,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/machinery/computer/locator,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"AY" = (
-/obj/item/kirbyplants{
-	icon_state = "applebush"
-	},
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"AZ" = (
-/obj/effect/spawner/structure/window/shuttle,
-/turf/open/floor/plating,
-/area/shuttle/exploration)
-"BC" = (
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/structure/chair/fancy/shuttle,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"BL" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"FF" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"GK" = (
+"SV" = (
 /obj/effect/turf_decal/delivery,
 /obj/structure/table/reinforced,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
 /obj/item/tank/internals/emergency_oxygen/engi{
 	pixel_x = -10;
 	pixel_y = 3
@@ -390,102 +401,27 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
-"Ht" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
+"Tw" = (
+/obj/structure/chair/fancy/shuttle{
 	dir = 1
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/caution/red{
-	dir = 4
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"Iv" = (
-/obj/structure/table/reinforced,
-/obj/item/flashlight/lamp/green{
-	on = 0;
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
-"JB" = (
+"Tz" = (
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"TL" = (
+/obj/structure/chair/fancy/shuttle,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"Us" = (
 /obj/machinery/light,
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/obj/item/kirbyplants{
-	icon_state = "plant-03"
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"Lt" = (
-/obj/effect/turf_decal/box/corners{
-	dir = 4
-	},
-/obj/effect/turf_decal/box/corners,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"Mj" = (
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/brown,
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"Np" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"NL" = (
-/obj/structure/lattice/catwalk,
-/obj/item/stack/marker_beacon{
-	anchored = 1;
-	icon_state = "markerburgundy-on";
-	light_color = "#FA644B";
-	light_power = 3;
-	light_range = 2;
-	name = "landing marker";
-	picked_color = "Burgundy"
-	},
-/turf/template_noop,
-/area/shuttle/exploration)
-"NQ" = (
-/obj/machinery/light,
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
 /obj/item/kirbyplants{
 	icon_state = "plant-10"
 	},
@@ -495,77 +431,26 @@
 /obj/structure/sign/warning/vacuum/external{
 	pixel_y = -32
 	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"PK" = (
-/obj/machinery/shuttle/engine/plasma{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/shuttle/exploration)
-"Qj" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/purple/visible{
-	dir = 1
-	},
-/obj/structure/cable/yellow,
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/exploration)
-"Qu" = (
-/obj/machinery/telecomms/relay/preset/exploration,
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"QP" = (
-/obj/item/kirbyplants{
-	icon_state = "plant-21"
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"TY" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/white,
-/area/shuttle/exploration)
-"UH" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
-	},
-/obj/structure/closet/crate/bin,
-/obj/effect/turf_decal/delivery,
-/obj/item/toy/beach_ball,
-/obj/item/bikehorn/rubberducky,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/exploration)
 "Vg" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/shuttle/exploration)
-"WK" = (
-/obj/effect/turf_decal/tile/brown,
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
+"Wk" = (
 /obj/machinery/atmospherics/pipe/manifold/purple/visible{
 	dir = 1
 	},
+/obj/effect/turf_decal/tile/brown/opposingcorners,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/exploration)
-"Yd" = (
+"Xu" = (
+/obj/effect/decal/remains/human,
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/exploration)
+"YB" = (
 /obj/machinery/recharger{
 	pixel_x = 6
 	},
@@ -573,20 +458,7 @@
 	pixel_x = -6
 	},
 /obj/structure/table/reinforced,
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/exploration)
-"Zq" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/exploration)
 
@@ -601,7 +473,7 @@ gl
 gl
 AZ
 wG
-qZ
+QY
 rh
 Vg
 NL
@@ -609,96 +481,96 @@ NL
 (2,1,1) = {"
 AZ
 AZ
-kt
-AY
-tc
-gz
-Ht
-dp
-NQ
+Dn
+kW
+SG
+un
+Rk
+Cg
+Us
 wG
-vp
-is
+kp
+Sw
 si
 Vg
 "}
 (3,1,1) = {"
 AZ
-gm
-zs
-zs
-zs
-zs
-FF
-tu
-BL
-TY
-kH
-WK
-uU
+nW
+qJ
+qJ
+qJ
+qJ
+EO
+qA
+eh
+ct
+rr
+Wk
+bp
 PK
 "}
 (4,1,1) = {"
 AZ
-qt
-cr
-BC
-Yd
-nU
-FF
-vE
-BL
-TY
-kH
-pJ
-uU
+RK
+Tz
+TL
+YB
+Tw
+EO
+cT
+eh
+ct
+rr
+yt
+bp
 PK
 "}
 (5,1,1) = {"
 AZ
-AV
-kJ
-BC
-Iv
-nU
-FF
-Lt
-BL
-TY
-Mj
-pK
-uU
+LX
+Xu
+TL
+Kl
+Tw
+EO
+na
+eh
+ct
+rr
+Wk
+bp
 PK
 "}
 (6,1,1) = {"
 AZ
-GK
-Zq
-Zq
-Zq
-Zq
-jI
-BL
-BL
-TY
-Np
-Qj
-uU
+SV
+sX
+sX
+sX
+sX
+br
+eh
+eh
+ct
+eW
+pt
+bp
 PK
 "}
 (7,1,1) = {"
 AZ
 AZ
 Qu
-QP
-BL
-BL
-BL
-UH
-JB
+Eh
+eh
+eh
+eh
+wi
+bt
 wG
-ff
-wH
+GW
+gs
 si
 Vg
 "}

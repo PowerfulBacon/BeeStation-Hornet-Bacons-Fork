@@ -2,10 +2,10 @@
 	name = "Artifact Recovery"
 	var/generated = FALSE
 	//The blackbox required to recover.
-	var/obj/item/alienartifact/objective/linked_artifact
-	min_payout = 4000
-	max_payout = 9000
 	weight = 3
+	var/obj/item/xenoartifact/objective/linked_artifact
+	min_payout = 5000
+	max_payout = 25000
 
 /datum/orbital_objective/ruin/artifact/generate_objective_stuff(turf/chosen_turf)
 	generated = TRUE
