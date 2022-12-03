@@ -110,7 +110,7 @@
 /obj/machinery/microwave{
 	pixel_y = 5
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
@@ -121,7 +121,7 @@
 	dir = 4;
 	name = "tactical chair"
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/structure/sign/poster/contraband/random{
 	pixel_x = -32
 	},
@@ -173,7 +173,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "hA" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -201,7 +201,7 @@
 /area/shuttle/syndicate_scout)
 "hY" = (
 /obj/machinery/vending/cola/black,
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
@@ -261,7 +261,7 @@
 	pixel_x = 11;
 	pixel_y = -2
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/pod/light,
 /area/shuttle/syndicate_scout)
 "je" = (
@@ -270,7 +270,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "jl" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -295,7 +295,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "jq" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
@@ -397,7 +397,7 @@
 	pixel_y = -5
 	},
 /obj/item/trash/chips,
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/light,
 /turf/open/floor/pod/light,
 /area/shuttle/syndicate_scout)
@@ -515,7 +515,7 @@
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/syndicate_scout)
 "sa" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/computer/shuttle_flight/syndicate,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/mineral/plastitanium,
@@ -539,7 +539,7 @@
 /turf/open/floor/plasteel/tech/grid,
 /area/shuttle/syndicate_scout)
 "tt" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/structure/table/reinforced,
 /obj/item/tank/jetpack/oxygen/harness{
 	pixel_y = 10
@@ -568,7 +568,7 @@
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/syndicate_scout)
 "uD" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/chair/fancy/shuttle{
 	dir = 8;
@@ -617,7 +617,7 @@
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/syndicate_scout)
 "vG" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/light,
 /turf/open/floor/pod/dark,
@@ -661,7 +661,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate_scout)
 "xP" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/openup{
 	dir = 4
 	},
@@ -730,7 +730,7 @@
 	},
 /obj/item/reagent_containers/food/snacks/syndicake,
 /obj/item/reagent_containers/food/snacks/syndicake,
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -849,7 +849,7 @@
 	dir = 8;
 	name = "tactical chair"
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/pod/light,
 /area/shuttle/syndicate_scout)
 "Du" = (
@@ -892,7 +892,7 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/syndicate_scout)
 "Ff" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/structure/table/reinforced,
 /obj/item/clothing/shoes/magboots/syndie{
 	pixel_y = 6
@@ -901,7 +901,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "Fp" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "Fs" = (
@@ -1001,7 +1001,7 @@
 	pixel_x = 4;
 	pixel_y = 5
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
@@ -1077,11 +1077,11 @@
 	dir = 4;
 	name = "tactical chair"
 	},
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/pod/light,
 /area/shuttle/syndicate_scout)
 "Lh" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
@@ -1125,7 +1125,7 @@
 /area/shuttle/syndicate_scout)
 "LJ" = (
 /obj/machinery/suit_storage_unit/syndicate,
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
@@ -1219,7 +1219,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "Rb" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
@@ -1230,7 +1230,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "Rn" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
@@ -1434,7 +1434,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate_scout)
 "UX" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/turf_decal/bot/right,
 /turf/open/floor/mineral/plastitanium,
@@ -1576,7 +1576,7 @@
 /turf/open/floor/plasteel/tech/grid,
 /area/shuttle/syndicate_scout)
 "ZQ" = (
-/obj/effect/turf_decal/tile/neutral/tile_full,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/stripes/openup{
 	dir = 1
 	},
