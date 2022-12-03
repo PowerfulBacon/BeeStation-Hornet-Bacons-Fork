@@ -12,7 +12,7 @@
 /area/shuttle/syndicate_scout)
 "aW" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/machinery/atmospherics/components/unary/portables_connector/visible{
@@ -26,7 +26,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/structure/reagent_dispensers/fueltank,
@@ -145,7 +145,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/corner{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 5
 	},
 /turf/open/floor/plasteel/techmaint,
@@ -191,7 +191,7 @@
 /area/shuttle/syndicate_scout)
 "hX" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/purple/visible{
@@ -372,7 +372,7 @@
 	pixel_x = 8;
 	pixel_y = -3
 	},
-/obj/effect/turf_decal/tile/brown/tile_marquee{
+/obj/effect/turf_decal/tile/neutral/diagonal_centre{
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -412,7 +412,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate_scout)
 "mF" = (
-/obj/effect/turf_decal/tile/brown/tile_marquee,
+/obj/effect/turf_decal/tile/neutral/diagonal_centre,
 /obj/structure/closet/crate/medical,
 /obj/item/holosign_creator/medical,
 /obj/item/stack/medical/bruise_pack{
@@ -609,7 +609,7 @@
 /area/shuttle/syndicate_scout)
 "vF" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/structure/closet/crate,
@@ -632,7 +632,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/corner{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 9
 	},
 /turf/open/floor/plasteel/techmaint,
@@ -753,7 +753,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/structure/reagent_dispensers/watertank,
@@ -782,7 +782,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/brown/tile_marquee,
+/obj/effect/turf_decal/tile/neutral/diagonal_centre,
 /obj/item/storage/backpack/duffelbag/syndie/med/medicalbundle{
 	pixel_x = -2;
 	pixel_y = 8
@@ -833,7 +833,7 @@
 /area/shuttle/syndicate_scout)
 "Dk" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -941,7 +941,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/structure/table/reinforced,
@@ -1171,7 +1171,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -1307,7 +1307,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/structure/table/reinforced,
@@ -1325,7 +1325,7 @@
 /area/shuttle/syndicate_scout)
 "TC" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/purple/visible{
@@ -1335,7 +1335,7 @@
 /area/shuttle/syndicate_scout)
 "TD" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/corner{
@@ -1385,7 +1385,7 @@
 /obj/structure/closet/crate{
 	name = "food crate"
 	},
-/obj/effect/turf_decal/tile/brown/tile_marquee{
+/obj/effect/turf_decal/tile/neutral/diagonal_centre{
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -1473,7 +1473,7 @@
 /area/shuttle/syndicate_scout)
 "VG" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line,
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -1505,7 +1505,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/tile_side{
+/obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line{
