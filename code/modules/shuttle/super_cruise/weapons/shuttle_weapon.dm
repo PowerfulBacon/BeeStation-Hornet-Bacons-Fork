@@ -64,6 +64,7 @@
 	set_directional_offset(newdir, FALSE)
 
 /obj/machinery/shuttle_weapon/obj_break(damage_flag)
+	. = ..()
 	qdel(src)
 
 /obj/machinery/shuttle_weapon/proc/set_directional_offset(newdir, update_pixel = FALSE)
