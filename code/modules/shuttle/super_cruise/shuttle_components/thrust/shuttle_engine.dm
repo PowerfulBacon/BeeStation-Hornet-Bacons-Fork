@@ -52,7 +52,7 @@
 		icon_state = icon_state_closed
 		set_active(TRUE)
 		return
-	if((!idle_power_usage || !(stat & NOPOWER)))
+	if((!idle_power_usage || !(machine_stat & NOPOWER)))
 		icon_state = icon_state_closed
 		set_active(TRUE)
 	else
@@ -181,7 +181,7 @@
 		set_active(FALSE)
 		return
 	var/obj/machinery/atmospherics/components/unary/shuttle/engine_heater/resolved_heater = attached_heater.resolve()
-	if(resolved_heater?.hasFuel(1) && (!idle_power_usage || !(stat & NOPOWER)))
+	if(resolved_heater?.hasFuel(1) && (!idle_power_usage || !(machine_stat & NOPOWER)))
 		icon_state = icon_state_closed
 		set_active(TRUE)
 	else

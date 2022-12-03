@@ -127,7 +127,7 @@
 
 /obj/machinery/computer/archive/proc/can_process()
 	//Check if we are disabled
-	if(stat)
+	if(machine_stat)
 		return FALSE
 	return TRUE
 

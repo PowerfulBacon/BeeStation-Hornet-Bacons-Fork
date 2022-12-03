@@ -20,7 +20,7 @@
 	if(A.always_unpowered)
 		to_chat(user, "<span class='warning'>You cannot place [src] in this area!</span>")
 		return
-	if(gotwallitem(on_wall, ndir, inverse*2))
+	if(check_wall_item(on_wall, ndir, inverse*2))
 		to_chat(user, "<span class='warning'>There's already an item on this wall!</span>")
 		return
 
