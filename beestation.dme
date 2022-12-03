@@ -167,6 +167,7 @@
 #include "code\__DEFINES\dcs\signals\datum_signals\nanite_signals.dm"
 #include "code\__DEFINES\dcs\signals\datum_signals\ntnet_signals.dm"
 #include "code\__DEFINES\dcs\signals\datum_signals\storage_signals.dm"
+#include "code\__DEFINES\dcs\signals\datum_signals\supercruise_signals.dm"
 #include "code\__DEFINES\dcs\signals\mob_signals\carbon_signals.dm"
 #include "code\__DEFINES\dcs\signals\mob_signals\human_signals.dm"
 #include "code\__DEFINES\dcs\signals\mob_signals\living_signals.dm"
