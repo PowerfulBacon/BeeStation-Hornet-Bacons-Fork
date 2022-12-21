@@ -222,7 +222,7 @@
 /datum/action/item_action/organ_action/use/bee_dash/proc/crash_into_table(turf/tableturf)
 	if(owner.loc == tableturf)
 		var/mob/living/carbon/L = owner
-		L.take_bodypart_damage(10,check_armor = TRUE)
+		L.add_bodypart_injury(BODY_ZONE_CHEST, /datum/injury/brute/blunt/crush, 10, INJURY_SEVERITY_MINOR, 30)
 		L.Paralyze(40)
 		L.visible_message("<span class='danger'>[L] crashes into a table, falling over!</span>",\
 			"<span class='userdanger'>You violently crash into a table!</span>")

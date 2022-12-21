@@ -33,7 +33,7 @@
 	return TRUE
 
 /obj/vehicle/sealed/car/proc/RunOver(mob/living/carbon/human/H) //pasted right out of mulebot code
-	log_combat(src, H, "run over", null, "(DAMTYPE: [uppertext(BRUTE)])")
+	log_combat(src, H, "run over", null, "(DAMTYPE: Brute (Crush))")
 	H.visible_message("<span class='danger'>[src] drives over [H]!</span>", \
 					"<span class='userdanger'>[src] drives over you!</span>")
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
