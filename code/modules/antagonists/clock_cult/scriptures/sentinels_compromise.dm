@@ -31,11 +31,11 @@
 /datum/clockcult/scripture/slab/sentinelscompromise/apply_effects(mob/living/M)
 	if(M.stat == DEAD)
 		return FALSE
-	var/total_damage = (M.getBruteLoss() + M.getFireLoss() + M.getOxyLoss() + M.getCloneLoss()) * 0.6
-	M.heal_overall_injury(/datum/injury/brute, M.getBruteLoss() * 0.6, INJURY_SEVERITY_MINOR, TRUE) * 0.6, FALSE)
-	M.adjustFireLoss(-M.getFireLoss() * 0.6, FALSE)
+	var/total_damage = (M.bruteloss + M.fireloss + M.getOxyLoss() + M.cloneloss) * 0.6
+	M.heal_overall_injury(/datum/injury/brute, M.bruteloss * 0.6, INJURY_SEVERITY_MINOR, TRUE)
+	M.adjustFireLoss(-M.fireloss * 0.6, FALSE)
 	M.adjustOxyLoss(-M.getOxyLoss() * 0.6, FALSE)
-	M.adjustCloneLoss(-M.getCloneLoss() * 0.6, TRUE)
+	M.adjustCloneLoss(-M.cloneloss * 0.6, TRUE)
 	M.blood_volume = BLOOD_VOLUME_NORMAL
 	M.reagents.remove_reagent(/datum/reagent/water/holywater, INFINITY)
 	M.set_nutrition(NUTRITION_LEVEL_FULL)

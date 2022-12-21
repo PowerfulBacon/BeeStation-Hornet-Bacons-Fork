@@ -486,10 +486,10 @@
 
 /datum/status_effect/stabilized/purple/tick()
 	var/is_healing = FALSE
-	if(owner.getBruteLoss() > 0)
+	if(owner.bruteloss > 0)
 		owner.heal_overall_injury(/datum/injury/brute, 0.2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		is_healing = TRUE
-	if(owner.getFireLoss() > 0)
+	if(owner.fireloss > 0)
 		owner.adjustFireLoss(-0.2)
 		is_healing = TRUE
 	if(owner.getToxLoss() > 0)
@@ -885,13 +885,13 @@
 			messagedelivered = TRUE
 		examine_text = "<span class='warning'>SUBJECTPRONOUN is draining health from [owner.pulling]!</span>"
 		var/list/healing_types = list()
-		if(owner.getBruteLoss() > 0)
+		if(owner.bruteloss > 0)
 			healing_types += BRUTE
-		if(owner.getFireLoss() > 0)
+		if(owner.fireloss > 0)
 			healing_types += BURN
 		if(owner.getToxLoss() > 0)
 			healing_types += TOX
-		if(owner.getCloneLoss() > 0)
+		if(owner.cloneloss > 0)
 			healing_types += CLONE
 
 		owner.apply_damage_type(-heal_amount, damagetype=)

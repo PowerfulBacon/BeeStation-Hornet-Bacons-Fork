@@ -1,6 +1,6 @@
 /mob/living/carbon/human/proc/delayed_suicide()
 	suicide_log()
-	adjustBruteLoss(max(200 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+	adjustBruteLoss(max(200 - getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 	death(FALSE)
 	ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
 

@@ -290,7 +290,7 @@
 /mob/living/silicon/pai/updatehealth()
 	if(status_flags & GODMODE)
 		return
-	health = maxHealth - getBruteLoss() - getFireLoss()
+	health = maxHealth - bruteloss - fireloss
 	update_stat()
 
 /mob/living/silicon/pai/process(delta_time)

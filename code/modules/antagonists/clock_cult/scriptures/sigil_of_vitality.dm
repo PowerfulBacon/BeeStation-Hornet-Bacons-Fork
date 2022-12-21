@@ -79,9 +79,9 @@
 			visible_message("<span class='neovgre'>\The [src] refuses to siphon [M]'s vitality, their mind has great potential!</span>")
 			return
 		M.Paralyze(10)
-		var/before_cloneloss = M.getCloneLoss()
+		var/before_cloneloss = M.cloneloss
 		M.adjustCloneLoss(20, TRUE, TRUE)
-		var/after_cloneloss = M.getCloneLoss()
+		var/after_cloneloss = M.cloneloss
 		if(before_cloneloss == after_cloneloss)
 			visible_message("<span class='neovgre'>\The [src] fails to siphon [M]'s spirit!</span>")
 			return

@@ -124,8 +124,8 @@
 	data["patient"]["blood_type"] = patient.dna.blood_type
 	data["patient"]["maxHealth"] = patient.maxHealth
 	data["patient"]["minHealth"] = HEALTH_THRESHOLD_DEAD
-	data["patient"]["bruteLoss"] = patient.getBruteLoss()
-	data["patient"]["fireLoss"] = patient.getFireLoss()
+	data["patient"]["bruteLoss"] = patient.bruteloss
+	data["patient"]["fireLoss"] = patient.fireloss
 	data["patient"]["toxLoss"] = patient.getToxLoss()
 	data["patient"]["oxyLoss"] = patient.getOxyLoss()
 	data["procedures"] = list()

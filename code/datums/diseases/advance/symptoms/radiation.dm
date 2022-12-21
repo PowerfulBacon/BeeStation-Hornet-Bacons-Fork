@@ -54,7 +54,7 @@
 	severity = 0 //this is, at base level, somewhat negative. low levels of radiation will become brute damage and a danger to a host, where otherwise they'd have no effect
 	symptom_delay_min = 1
 	symptom_delay_max = 1
-	var/toxheal = FALSE 
+	var/toxheal = FALSE
 	var/cellheal = FALSE
 	suffixes = list(" Aptosis")
 	threshold_desc = "<b>Stage Speed 6:</b> The disease also kills off contaminated cells, converting Toxin damage to Brute damage, at an efficient rate.<br>\
@@ -93,10 +93,10 @@
 			if(prob(5))
 				to_chat(M, "<span class='userdanger'>A tear opens in your flesh!</span>")
 				M.add_splatter_floor()
-		if(M.getCloneLoss() && cellheal)
+		if(M.cloneloss && cellheal)
 			M.adjustCloneLoss(-1)
 			M.take_overall_damage(burn = 2) //this uses burn, so as not to make it so you can heal brute to heal all the damage types this deals, and it isn't a no-brainer to use with Pituitary
 			if(prob(5))
 				to_chat(M, "<span class='userdanger'>A nasty rash appears on your skin!</span>")
-	else if(prob(2) && ((M.getCloneLoss() && cellheal) || (M.getToxLoss() && toxheal) || M.radiation))
+	else if(prob(2) && ((M.cloneloss && cellheal) || (M.getToxLoss() && toxheal) || M.radiation))
 		to_chat(M, "<span class='notice'>You feel a tingling sensation</span>")

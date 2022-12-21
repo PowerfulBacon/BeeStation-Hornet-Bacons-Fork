@@ -89,19 +89,10 @@
 	else
 		take_holo_damage(amount * 0.25)
 
-/mob/living/silicon/pai/getBruteLoss()
-	return emittermaxhealth - emitterhealth
-
-/mob/living/silicon/pai/getFireLoss()
-	return emittermaxhealth - emitterhealth
-
 /mob/living/silicon/pai/getToxLoss()
 	return FALSE
 
 /mob/living/silicon/pai/getOxyLoss()
-	return FALSE
-
-/mob/living/silicon/pai/getCloneLoss()
 	return FALSE
 
 /mob/living/silicon/pai/getStaminaLoss()

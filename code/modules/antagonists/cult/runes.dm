@@ -238,10 +238,10 @@ structure_check() searches for nearby cultist structures required for the invoca
 			to_chat(M, "<span class='warning'>Something is shielding [convertee]'s mind!</span>")
 		log_game("Offer rune failed - convertee had anti-magic")
 		return 0
-	var/brutedamage = convertee.getBruteLoss()
-	var/burndamage = convertee.getFireLoss()
+	var/brutedamage = convertee.bruteloss
+	var/burndamage = convertee.fireloss
 	if(brutedamage || burndamage)
-		convertee.heal_overall_injury(/datum/injury/brute, brutedamage * 0.75, INJURY_SEVERITY_CRITICAL, TRUE))
+		convertee.heal_overall_injury(/datum/injury/brute, brutedamage * 0.75, INJURY_SEVERITY_CRITICAL, TRUE)
 		convertee.adjustFireLoss(-(burndamage * 0.75))
 	convertee.visible_message("<span class='warning'>[convertee] writhes in pain \
 	[brutedamage || burndamage ? "even as [convertee.p_their()] wounds heal and close" : "as the markings below [convertee.p_them()] glow a bloody red"]!</span>", \

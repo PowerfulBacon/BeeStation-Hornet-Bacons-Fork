@@ -63,8 +63,8 @@
 		health.set_output(null)
 		return
 
-	brute.set_output(organism.getBruteLoss())
-	burn.set_output(organism.getFireLoss())
+	brute.set_output(organism.bruteloss)
+	burn.set_output(organism.fireloss)
 	toxin.set_output(organism.getToxLoss())
 	oxy.set_output(organism.getOxyLoss())
 	health.set_output(organism.health)

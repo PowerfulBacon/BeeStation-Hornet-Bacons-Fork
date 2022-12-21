@@ -68,10 +68,10 @@
 	//keep damage?
 	if (tr_flags & TR_KEEPDAMAGE)
 		O.setToxLoss(getToxLoss(), 0)
-		O.adjustBruteLoss(getBruteLoss(), 0)
+		O.adjustBruteLoss(bruteloss, 0)
 		O.setOxyLoss(getOxyLoss(), 0)
-		O.setCloneLoss(getCloneLoss(), 0)
-		O.adjustFireLoss(getFireLoss(), 0)
+		O.setCloneLoss(cloneloss, 0)
+		O.adjustFireLoss(fireloss, 0)
 		O.setOrganLoss(ORGAN_SLOT_BRAIN, getOrganLoss(ORGAN_SLOT_BRAIN))
 		O.updatehealth()
 		O.radiation = radiation
@@ -228,10 +228,10 @@
 	//keep damage?
 	if (tr_flags & TR_KEEPDAMAGE)
 		O.setToxLoss(getToxLoss(), 0)
-		O.adjustBruteLoss(getBruteLoss(), 0)
+		O.adjustBruteLoss(bruteloss, 0)
 		O.setOxyLoss(getOxyLoss(), 0)
-		O.setCloneLoss(getCloneLoss(), 0)
-		O.adjustFireLoss(getFireLoss(), 0)
+		O.setCloneLoss(cloneloss, 0)
+		O.adjustFireLoss(fireloss, 0)
 		O.setOrganLoss(ORGAN_SLOT_BRAIN, getOrganLoss(ORGAN_SLOT_BRAIN))
 		O.updatehealth()
 		O.radiation = radiation
@@ -386,10 +386,10 @@
 	//keep damage?
 	if (tr_flags & TR_KEEPDAMAGE)
 		O.setToxLoss(getToxLoss(), 0)
-		O.adjustBruteLoss(getBruteLoss(), 0)
+		O.adjustBruteLoss(bruteloss, 0)
 		O.setOxyLoss(getOxyLoss(), 0)
-		O.setCloneLoss(getCloneLoss(), 0)
-		O.adjustFireLoss(getFireLoss(), 0)
+		O.setCloneLoss(cloneloss, 0)
+		O.adjustFireLoss(fireloss, 0)
 		O.adjustOrganLoss(ORGAN_SLOT_BRAIN, getOrganLoss(ORGAN_SLOT_BRAIN))
 		O.updatehealth()
 		O.radiation = radiation

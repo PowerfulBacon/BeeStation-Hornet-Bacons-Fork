@@ -7,7 +7,7 @@
 	rogue_types = list(/datum/nanite_program/necrotic)
 
 /datum/nanite_program/regenerative/check_conditions()
-	if(!host_mob.getBruteLoss() && !host_mob.getFireLoss())
+	if(!host_mob.bruteloss && !host_mob.fireloss)
 		return FALSE
 	if(iscarbon(host_mob))
 		var/mob/living/carbon/C = host_mob
@@ -112,7 +112,7 @@
 	rogue_types = list(/datum/nanite_program/necrotic)
 
 /datum/nanite_program/repairing/check_conditions()
-	if(!host_mob.getBruteLoss() && !host_mob.getFireLoss())
+	if(!host_mob.bruteloss && !host_mob.fireloss)
 		return FALSE
 
 	if(iscarbon(host_mob))
@@ -227,7 +227,7 @@
 		return FALSE
 	if((world.time - C.timeofdeath) > 1800) //too late
 		return FALSE
-	if((C.getBruteLoss() >= MAX_REVIVE_BRUTE_DAMAGE) || (C.getFireLoss() >= MAX_REVIVE_FIRE_DAMAGE) || !C.can_be_revived()) //too damaged
+	if((C.bruteloss >= MAX_REVIVE_BRUTE_DAMAGE) || (C.fireloss >= MAX_REVIVE_FIRE_DAMAGE) || !C.can_be_revived()) //too damaged
 		return FALSE
 	if(!C.getorgan(/obj/item/organ/heart)) //what are we even shocking
 		return FALSE

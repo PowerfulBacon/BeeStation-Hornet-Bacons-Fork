@@ -91,8 +91,8 @@
 			tab_data["Nutrition Status"] = GENERATE_STAT_TEXT("[nutrition]")
 			tab_data["Oxygen Loss"] = GENERATE_STAT_TEXT("[getOxyLoss()]")
 			tab_data["Toxin Levels"] = GENERATE_STAT_TEXT("[getToxLoss()]")
-			tab_data["Burn Severity"] = GENERATE_STAT_TEXT("[getFireLoss()]")
-			tab_data["Brute Trauma"] = GENERATE_STAT_TEXT("[getBruteLoss()]")
+			tab_data["Burn Severity"] = GENERATE_STAT_TEXT("[fireloss]")
+			tab_data["Brute Trauma"] = GENERATE_STAT_TEXT("[bruteloss]")
 			tab_data["Radiation Levels"] = GENERATE_STAT_TEXT("[radiation] rad")
 			tab_data["Body Temperature"] = GENERATE_STAT_TEXT("[bodytemperature-T0C] degrees C ([bodytemperature*1.8-459.67] degrees F)")
 
@@ -185,12 +185,12 @@
 			if(!HAS_TRAIT(H, TRAIT_MEDICAL_HUD))
 				return
 			if(href_list["evaluation"])
-				if(!getBruteLoss() && !getFireLoss() && !getOxyLoss() && getToxLoss() < 20)
+				if(!bruteloss && !fireloss && !getOxyLoss() && getToxLoss() < 20)
 					to_chat(usr, "<span class='notice'>No external injuries detected.</span><br>")
 					return
 				var/span = "notice"
 				var/status = ""
-				if(getBruteLoss())
+				if(bruteloss)
 					to_chat(usr, "<b>Physical trauma analysis:</b>")
 					for(var/obj/item/bodypart/BP as() in bodyparts)
 						var/brutedamage = BP.brute_dam
@@ -205,7 +205,7 @@
 							span = "userdanger"
 						if(brutedamage)
 							to_chat(usr, "<span class='[span]'>[BP] appears to have [status]</span>")
-				if(getFireLoss())
+				if(fireloss)
 					to_chat(usr, "<b>Analysis of skin burns:</b>")
 					for(var/obj/item/bodypart/BP as() in bodyparts)
 						var/burndamage = BP.burn_dam

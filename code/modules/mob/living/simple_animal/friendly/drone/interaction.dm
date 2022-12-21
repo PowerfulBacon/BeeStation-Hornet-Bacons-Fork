@@ -82,7 +82,7 @@
 		if(health < maxHealth)
 			to_chat(user, "<span class='notice'>You start to tighten loose screws on [src]...</span>")
 			if(I.use_tool(src, user, 80))
-				adjustBruteLoss(-getBruteLoss())
+				adjustBruteLoss(-bruteloss)
 				visible_message("<span class='notice'>[user] tightens [src == user ? "[user.p_their()]" : "[src]'s"] loose screws!</span>", "<span class='notice'>You tighten [src == user ? "your" : "[src]'s"] loose screws.</span>")
 			else
 				to_chat(user, "<span class='warning'>You need to remain still to tighten [src]'s screws!</span>")

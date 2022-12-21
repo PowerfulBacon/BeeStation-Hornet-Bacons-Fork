@@ -233,7 +233,7 @@
 	. = ..()
 	if(iscarbon(M))
 		var/mob/living/carbon/patient = M
-		if(reac_volume >= 5 && HAS_TRAIT_FROM(patient, TRAIT_HUSK, "burn") && patient.getFireLoss() < THRESHOLD_UNHUSK) //One carp yields 12u rezadone.
+		if(reac_volume >= 5 && HAS_TRAIT_FROM(patient, TRAIT_HUSK, "burn") && patient.fireloss < THRESHOLD_UNHUSK) //One carp yields 12u rezadone.
 			patient.cure_husk("burn")
 			patient.visible_message("<span class='nicegreen'>[patient]'s body rapidly absorbs moisture from the environment, taking on a more healthy appearance.")
 
@@ -260,7 +260,7 @@
 			M.adjustToxLoss(0.5*reac_volume)
 			if(show_message)
 				to_chat(M, "<span class='warning'>You don't feel so good...</span>")
-		else if(M.getFireLoss() && method == PATCH)
+		else if(M.fireloss && method == PATCH)
 			M.adjustFireLoss(-reac_volume)
 			M.adjustStaminaLoss(reac_volume*2)
 			if(show_message)
@@ -290,7 +290,7 @@
 
 /datum/reagent/medicine/oxandrolone/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(-3*REM, 0)
-	if(M.getFireLoss() != 0)
+	if(M.fireloss != 0)
 		M.adjustStaminaLoss(3*REM, FALSE)
 	..()
 	. = 1
@@ -316,7 +316,7 @@
 			M.adjustToxLoss(0.5*reac_volume)
 			if(show_message)
 				to_chat(M, "<span class='warning'>You don't feel so good...</span>")
-		else if(M.getBruteLoss() && method == PATCH)
+		else if(M.bruteloss && method == PATCH)
 			M.adjustBruteLoss(-reac_volume)
 			M.adjustStaminaLoss(reac_volume*2)
 			if(show_message)
@@ -437,7 +437,7 @@
 				to_chat(M, "<span class='danger'>You feel your burns and bruises healing! It stings like hell!</span>")
 			SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "painful_medicine", /datum/mood_event/painful_medicine)
 			//Has to be at less than THRESHOLD_UNHUSK burn damage and have at least 100 synthflesh (currently inside the body + amount now being applied). Corpses dont metabolize.
-			if(HAS_TRAIT_FROM(M, TRAIT_HUSK, "burn") && M.getFireLoss() < THRESHOLD_UNHUSK && (M.reagents.get_reagent_amount(/datum/reagent/medicine/synthflesh) + reac_volume) >= 100)
+			if(HAS_TRAIT_FROM(M, TRAIT_HUSK, "burn") && M.fireloss < THRESHOLD_UNHUSK && (M.reagents.get_reagent_amount(/datum/reagent/medicine/synthflesh) + reac_volume) >= 100)
 				M.cure_husk("burn")
 				M.visible_message("<span class='nicegreen'>You successfully replace most of the burnt off flesh of [M].")
 	..()
@@ -592,7 +592,7 @@
 
 /datum/reagent/medicine/sal_acid/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-3*REM, 0)
-	if(M.getBruteLoss() != 0)
+	if(M.bruteloss != 0)
 		M.adjustStaminaLoss(3*REM, FALSE)
 	..()
 	. = 1
@@ -938,7 +938,7 @@
 		if(M.suiciding || M.ishellbound()) //they are never coming back
 			M.visible_message("<span class='warning'>[M]'s body does not react...</span>")
 			return
-		if(M.getBruteLoss() >= 100 || M.getFireLoss() >= 100 || HAS_TRAIT(M, TRAIT_HUSK)) //body is too damaged to be revived
+		if(M.bruteloss >= 100 || M.fireloss >= 100 || HAS_TRAIT(M, TRAIT_HUSK)) //body is too damaged to be revived
 			M.visible_message("<span class='warning'>[M]'s body convulses a bit, and then falls still once more.</span>")
 			M.do_jitter_animation(10)
 			return
@@ -1114,7 +1114,7 @@
 	overdose_threshold = 30
 
 /datum/reagent/medicine/bicaridine/on_mob_life(mob/living/carbon/M)
-	if(M.getBruteLoss() < 50)
+	if(M.bruteloss < 50)
 		M.adjustBruteLoss(-1.5*REM, 0)
 	else
 		M.adjustBruteLoss(-0.5*REM, 0)
@@ -1177,7 +1177,7 @@
 	overdose_threshold = 30
 
 /datum/reagent/medicine/kelotane/on_mob_life(mob/living/carbon/M)
-	if(M.getFireLoss() < 50)
+	if(M.fireloss < 50)
 		M.adjustFireLoss(-1.5*REM, 0)
 	else
 		M.adjustFireLoss(-0.5*REM, 0)

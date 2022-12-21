@@ -51,7 +51,7 @@
 
 /datum/surgery_step/heal/initiate(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	if(..())
-		while((brutehealing && target.getBruteLoss()) || (burnhealing && target.getFireLoss()))
+		while((brutehealing && target.bruteloss) || (burnhealing && target.fireloss))
 			if(!..())
 				break
 
@@ -62,11 +62,11 @@
 	var/urhealedamt_burn = burnhealing
 	if(missinghpbonus)
 		if(target.stat != DEAD)
-			urhealedamt_brute += round((target.getBruteLoss()/ missinghpbonus),0.1)
-			urhealedamt_burn += round((target.getFireLoss()/ missinghpbonus),0.1)
+			urhealedamt_brute += round((target.bruteloss/ missinghpbonus),0.1)
+			urhealedamt_burn += round((target.fireloss/ missinghpbonus),0.1)
 		else //less healing bonus for the dead since they're expected to have lots of damage to begin with (to make TW into defib not TOO simple)
-			urhealedamt_brute += round((target.getBruteLoss()/ (missinghpbonus*5)),0.1)
-			urhealedamt_burn += round((target.getFireLoss()/ (missinghpbonus*5)),0.1)
+			urhealedamt_brute += round((target.bruteloss/ (missinghpbonus*5)),0.1)
+			urhealedamt_burn += round((target.fireloss/ (missinghpbonus*5)),0.1)
 	if(!get_location_accessible(target, target_zone))
 		urhealedamt_brute *= 0.55
 		urhealedamt_burn *= 0.55
@@ -90,8 +90,8 @@
 	var/urdamageamt_burn = brutehealing * 0.8
 	var/urdamageamt_brute = burnhealing * 0.8
 	if(missinghpbonus)
-		urdamageamt_brute += round((target.getBruteLoss()/ (missinghpbonus*2)),0.1)
-		urdamageamt_burn += round((target.getFireLoss()/ (missinghpbonus*2)),0.1)
+		urdamageamt_brute += round((target.bruteloss/ (missinghpbonus*2)),0.1)
+		urdamageamt_burn += round((target.fireloss/ (missinghpbonus*2)),0.1)
 
 	target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn)
 	return FALSE
@@ -125,10 +125,10 @@
 	if(!brute_healed)
 		return
 
-	var/estimated_remaining_steps = target.getBruteLoss() / brute_healed
+	var/estimated_remaining_steps = target.bruteloss / brute_healed
 	var/progress_text
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
-		progress_text = ". Remaining brute: <font color='#ff3333'>[target.getBruteLoss()]</font>"
+		progress_text = ". Remaining brute: <font color='#ff3333'>[target.bruteloss]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)
@@ -190,10 +190,10 @@
 	if(!burn_healed)
 		return
 
-	var/estimated_remaining_steps = target.getFireLoss() / burn_healed
+	var/estimated_remaining_steps = target.fireloss / burn_healed
 	var/progress_text
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
-		progress_text = ". Remaining burn: <font color='#ff9933'>[target.getFireLoss()]</font>"
+		progress_text = ". Remaining burn: <font color='#ff9933'>[target.fireloss]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)
@@ -251,17 +251,17 @@
 /datum/surgery_step/heal/combo/get_progress(mob/user, mob/living/carbon/target, brute_healed, burn_healed)
 	var/estimated_remaining_steps = 0
 	if(brute_healed > 0)
-		estimated_remaining_steps = max(0, (target.getBruteLoss() / brute_healed))
+		estimated_remaining_steps = max(0, (target.bruteloss / brute_healed))
 	if(burn_healed > 0)
-		estimated_remaining_steps = max(estimated_remaining_steps, (target.getFireLoss() / burn_healed)) // whichever is higher between brute or burn steps
+		estimated_remaining_steps = max(estimated_remaining_steps, (target.fireloss / burn_healed)) // whichever is higher between brute or burn steps
 
 	var/progress_text
 
 	if(locate(/obj/item/healthanalyzer) in user.held_items)
-		if(target.getBruteLoss())
-			progress_text = ". Remaining brute: <font color='#ff3333'>[target.getBruteLoss()]</font>"
-		if(target.getFireLoss())
-			progress_text += ". Remaining burn: <font color='#ff9933'>[target.getFireLoss()]</font>"
+		if(target.bruteloss)
+			progress_text = ". Remaining brute: <font color='#ff3333'>[target.bruteloss]</font>"
+		if(target.fireloss)
+			progress_text += ". Remaining burn: <font color='#ff9933'>[target.fireloss]</font>"
 	else
 		switch(estimated_remaining_steps)
 			if(-INFINITY to 1)

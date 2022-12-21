@@ -85,8 +85,8 @@
 	if(L.blood_volume <= 500) //bandage them up and give em some blood if they're bleeding
 		L.blood_volume += 30
 		L.suppress_bloodloss(1800)
-	if(L.getBruteLoss() >= 50)
-		var/healing = min(L.getBruteLoss(), 120)
+	if(L.bruteloss >= 50)
+		var/healing = min(L.bruteloss, 120)
 		L.heal_overall_injury(/datum/injury/brute, healing, INJURY_SEVERITY_MINOR, TRUE)
 		L.suppress_bloodloss(1800)//bandage their ass
 	FindTarget()
@@ -102,7 +102,7 @@
 			maxHealth = (100 + (20 * LAZYLEN(victims)))
 		else
 			maxHealth = (300 + (5 * (LAZYLEN(victims)-10)))
-		switch(LAZYLEN(victims))	
+		switch(LAZYLEN(victims))
 			if(2)
 				projectiletype = /obj/item/projectile/bullet/dart/tranq/plus
 			if(4)//gain space adaptation to make cheesing harder

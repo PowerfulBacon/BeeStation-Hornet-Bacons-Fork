@@ -130,7 +130,7 @@
 		return power * 0.5
 	else if(M.IsSleeping())
 		return power * 0.25
-	else if(M.getBruteLoss() + M.getFireLoss() >= 70 && !active_coma)
+	else if(M.bruteloss + M.fireloss >= 70 && !active_coma)
 		to_chat(M, "<span class='warning'>You feel yourself slip into a deep, regenerative slumber.</span>")
 		active_coma = TRUE
 		addtimer(CALLBACK(src, .proc/coma, M), 60)
@@ -167,13 +167,13 @@
 		if(L.heal_damage(heal_amt/parts.len, heal_amt/parts.len, null, BODYTYPE_ORGANIC))
 			M.update_damage_overlays()
 
-	if(active_coma && M.getBruteLoss() + M.getFireLoss() == 0)
+	if(active_coma && M.bruteloss + M.fireloss == 0)
 		uncoma(M)
 
 	return 1
 
 /datum/symptom/heal/coma/passive_message_condition(mob/living/M)
-	if((M.getBruteLoss() + M.getFireLoss()) > 30)
+	if((M.bruteloss + M.fireloss) > 30)
 		return TRUE
 	return FALSE
 
@@ -205,12 +205,12 @@
 /datum/symptom/heal/surface/Heal(mob/living/carbon/M, datum/disease/advance/A, actual_power)
 	var/healed = FALSE
 
-	if(M.getBruteLoss() && M.getBruteLoss() <= threshhold)
+	if(M.bruteloss && M.bruteloss <= threshhold)
 		M.heal_overall_damage(power, required_status = BODYTYPE_ORGANIC)
 		healed = TRUE
 		scarcounter++
 
-	if(M.getFireLoss() && M.getFireLoss() <= threshhold)
+	if(M.fireloss && M.fireloss <= threshhold)
 		M.heal_overall_damage(burn = power, required_status = BODYTYPE_ORGANIC)
 		healed = TRUE
 		scarcounter++
@@ -228,7 +228,7 @@
 
 
 /datum/symptom/heal/surface/passive_message_condition(mob/living/M)
-	return M.getBruteLoss() <= threshhold || M.getFireLoss() <= threshhold
+	return M.bruteloss <= threshhold || M.fireloss <= threshhold
 
 /datum/symptom/heal/metabolism
 	name = "Metabolic Boost"
@@ -450,7 +450,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 				if(location_return.z != M.loc.z)
 					location_return = null
 					COOLDOWN_RESET(src, teleport_cooldown)
-				else if(((M.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT + telethreshold  && !HAS_TRAIT(M, TRAIT_RESISTHEAT)) || (M.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - telethreshold  && !HAS_TRAIT(M, TRAIT_RESISTCOLD)) || (burnheal && M.getFireLoss() > 60 + telethreshold)))
+				else if(((M.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT + telethreshold  && !HAS_TRAIT(M, TRAIT_RESISTHEAT)) || (M.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - telethreshold  && !HAS_TRAIT(M, TRAIT_RESISTCOLD)) || (burnheal && M.fireloss > 60 + telethreshold)))
 					do_sparks(5, FALSE, M)
 					to_chat(M, "<span class='userdanger'>The change in temperature shocks you back to a previous spatial state!</span>")
 					do_teleport(M, location_return, 0, asoundin = 'sound/effects/phasein.ogg') //Teleports home
@@ -690,7 +690,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 				bloodpoints += 1
 			else
 				bloodpoints += max(0, grabbedblood)
-			for(var/I in 1 to power)//power doesnt increase efficiency, just usage. 
+			for(var/I in 1 to power)//power doesnt increase efficiency, just usage.
 				if(bloodpoints > 0)
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
@@ -700,10 +700,10 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 					if(M.blood_volume < BLOOD_VOLUME_NORMAL && M.get_blood_id() == /datum/reagent/blood) //bloodloss is prioritized over healing brute
 						bloodpoints -= 1
 						M.blood_volume = max((M.blood_volume + 3 * power), BLOOD_VOLUME_NORMAL) //bloodpoints are valued at 4 units of blood volume per point, so this is diminished
-					else if(bruteheal && M.getBruteLoss())
+					else if(bruteheal && M.bruteloss)
 						bloodpoints -= 1
 						M.heal_overall_damage(2, required_status = BODYTYPE_ORGANIC)
-					if(prob(60) && !M.stat) 
+					if(prob(60) && !M.stat)
 						bloodpoints -- //you cant just accumulate blood and keep it as a battery of healing. the quicker the symptom is, the faster your bloodpoints decay
 				else if(prob(20) && M.blood_volume >= BLOOD_VOLUME_BAD)//the virus continues to extract blood if you dont have any stored up. higher probability due to BP value
 					M.blood_volume = (M.blood_volume - 1)
@@ -716,7 +716,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 	REMOVE_TRAIT(A.affected_mob, TRAIT_DRINKSBLOOD, DISEASE_TRAIT)
 	if(bloodtypearchive && ishuman(A.affected_mob))
 		var/mob/living/carbon/human/H = A.affected_mob
-		H.dna.blood_type = bloodtypearchive 
+		H.dna.blood_type = bloodtypearchive
 
 /datum/symptom/vampirism/proc/succ(mob/living/carbon/M) //you dont need the blood reagent to suck blood. however, you need to have blood, or at least a shared blood reagent, for most of the other uses
 	var/gainedpoints = 0
@@ -754,7 +754,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 						playsound(T, 'sound/effects/splat.ogg', 50, 1)
 						bloodpoints -= 2
 						return 0
-					else 
+					else
 						var/todir = get_dir(H, bloodbag)
 						var/targetloc = bloodbag.loc
 						var/dist = get_dist(H, bloodbag)
@@ -772,8 +772,8 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 								bloodpoints -= 2
 								bloodbag.visible_message("<span class='warning'>A current of blood pushes [bloodbag.name] towards [H.name]'s corpse!</span>")
 								playsound(bloodbag.loc, 'sound/magic/exit_blood.ogg', 25, 1)
-								return 0 
-			else 
+								return 0
+			else
 				var/list/candidates = list()
 				for(var/mob/living/carbon/human/C in ohearers(min(bloodpoints/4, possibledist), H))
 					if(NOBLOOD in C.dna.species.species_traits)
@@ -788,7 +788,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 						candidates[prospect] += (3 - get_dist(candidate, H)) * 2
 						candidates[prospect] += round(candidate.blood_volume / 150)
 				bloodbag = pickweight(candidates) //dont return here
-	
+
 	if(bloodpoints >= maxbloodpoints)
 		return 0
 	if(ishuman(M) && aggression) //first, try to suck those the host is actively grabbing
@@ -839,7 +839,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 			playsound(M.loc, 'sound/magic/exit_blood.ogg', 50, 1)
 			M.visible_message("<span class='warning'>Blood flows from the floor into [M.name]!</span>", "<span class='warning'>You consume the errant blood</span>")
 		return CLAMP(gainedpoints, 0, maxbloodpoints - bloodpoints)
-	if(ishuman(M) && aggression)//finally, attack mobs touching the host. 
+	if(ishuman(M) && aggression)//finally, attack mobs touching the host.
 		var/mob/living/carbon/human/H = M
 		for(var/mob/living/carbon/human/C in ohearers(1, H))
 			if(NOBLOOD in C.dna.species.species_traits)
@@ -892,7 +892,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 /datum/symptom/parasite/proc/isslimetarget(var/mob/living/carbon/M)
 	if(isslimeperson(M) || isluminescent(M) || isjellyperson(M) || isoozeling(M) || isstargazer(M))
 		return TRUE
-	else 
+	else
 		return FALSE
 
 /datum/symptom/parasite/Activate(datum/disease/advance/A)
@@ -900,7 +900,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 		return
 	var/mob/living/carbon/M = A.affected_mob
 	switch(A.stage)
-		if(1, 2)	
+		if(1, 2)
 			to_chat(M, "<span class='warning'>[pick("You feel something crawling in your veins!", "You feel an unpleasant throbbing.", "You hear something squishy in your ear.")]</span>")
 		if(3 to 5)
 			var/slowdown = 0
@@ -926,12 +926,12 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 			if(((M.getToxLoss() > (LAZYLEN(grubs) * (30/power))) || isslimetarget(M)) && prob(10 * power) && (LAZYLEN(grubs) < power * 2))
 				var/mob/living/simple_animal/hostile/redgrub/grub = new(src)// add new grubs if there's enough toxin for them
 				grub.food = 10
-				grubs += grub 
+				grubs += grub
 				grub.togglehibernation()
 				grub.grubdisease = list(A)
 			if(prob(LAZYLEN(grubs) * (6/power)))// so you know its working. power lowers this so it doesnt spam you at high grub counts
 				to_chat(M, "<span class='warning'>You feel something squirming inside of you!</span>")
-			M.add_movespeed_modifier(MOVESPEED_ID_GRUB_VIRUS_SLOWDOWN, override = TRUE, multiplicative_slowdown = max(slowdown - 0.5, 0)) 
+			M.add_movespeed_modifier(MOVESPEED_ID_GRUB_VIRUS_SLOWDOWN, override = TRUE, multiplicative_slowdown = max(slowdown - 0.5, 0))
 
 /datum/symptom/parasite/End(datum/disease/advance/A)
 	. = ..()
@@ -974,7 +974,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 	prefixes = list("Gray ", "Amped ", "Nervous ")
 	var/clearcc = FALSE
 	threshold_desc = "<b>Resistance 8:</b>The virus causes an even greater rate of nutriment loss, able to cause starvation, but its energy gain greatly increases<br>\
-					<b>Stage Speed 8:</b>The virus causes extreme nervousness and paranoia, resulting in occasional hallucinations, and extreme restlessness, but greater overall energy and the ability to shake off stuns faster." 
+					<b>Stage Speed 8:</b>The virus causes extreme nervousness and paranoia, resulting in occasional hallucinations, and extreme restlessness, but greater overall energy and the ability to shake off stuns faster."
 
 /datum/symptom/jitters/severityset(datum/disease/advance/A)
 	. = ..()

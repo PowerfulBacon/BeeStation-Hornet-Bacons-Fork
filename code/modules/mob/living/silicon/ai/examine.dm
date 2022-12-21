@@ -3,13 +3,13 @@
 	if (stat == DEAD)
 		. += "<span class='deadsay'>It appears to be powered-down.</span>"
 	else
-		if (getBruteLoss())
-			if (getBruteLoss() < 30)
+		if (bruteloss)
+			if (bruteloss < 30)
 				. += "<span class='warning'>It looks slightly dented.</span>"
 			else
 				. += "<span class='warning'><B>It looks severely dented!</B></span>"
-		if (getFireLoss())
-			if (getFireLoss() < 30)
+		if (fireloss)
+			if (fireloss < 30)
 				. += "<span class='warning'>It looks slightly charred.</span>"
 			else
 				. += "<span class='warning'><B>Its casing is melted and heat-warped!</B></span>"

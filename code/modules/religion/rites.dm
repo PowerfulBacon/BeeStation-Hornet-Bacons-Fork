@@ -196,7 +196,7 @@
 		to_chat(user, "<span class='warning'>The sacrifice has to stay dead for the rite to work!</span>")
 		chosen_sacrifice = null
 		return FALSE
-	var/favor_gained = 100 + round(chosen_sacrifice.getFireLoss())
+	var/favor_gained = 100 + round(chosen_sacrifice.fireloss)
 	GLOB.religious_sect?.adjust_favor(favor_gained, user)
 	to_chat(user, "<span class='notice'>[GLOB.deity] absorbs the burning corpse and any trace of fire with it. [GLOB.deity] rewards you with [favor_gained] favor.</span>")
 	chosen_sacrifice.dust(force = TRUE)

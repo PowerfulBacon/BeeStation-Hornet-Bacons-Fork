@@ -123,7 +123,7 @@
 	if(get_bodypart(BODY_ZONE_HEAD) && !getorgan(/obj/item/organ/brain))
 		. += "<span class='deadsay'>It appears that [t_his] brain is missing.</span>"
 
-	var/temp = getBruteLoss() //no need to calculate each of these twice
+	var/temp = bruteloss //no need to calculate each of these twice
 
 	var/list/msg = list("<span class='warning'>")
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
@@ -192,7 +192,7 @@
 			else
 				msg += "<B>[t_He] [t_has] severe [brute_msg]!</B>\n"
 
-		temp = getFireLoss()
+		temp = fireloss
 		if(temp)
 			if(temp < 25)
 				msg += "[t_He] [t_has] minor [burn_msg].\n"
@@ -201,7 +201,7 @@
 			else
 				msg += "<B>[t_He] [t_has] severe [burn_msg]!</B>\n"
 
-		temp = getCloneLoss()
+		temp = cloneloss
 		if(temp)
 			if(temp < 25)
 				msg += "[t_He] [t_has] minor cellular damage.\n"

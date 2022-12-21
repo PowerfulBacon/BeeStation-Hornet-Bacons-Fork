@@ -272,7 +272,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_desc = "A brew of milk and beer. For those alcoholics who fear osteoporosis."
 
 /datum/reagent/consumable/ethanol/bilk/on_mob_life(mob/living/carbon/M)
-	if(M.getBruteLoss() && prob(10))
+	if(M.bruteloss && prob(10))
 		M.heal_bodypart_damage(1)
 		. = 1
 	return ..() || .
@@ -1815,14 +1815,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /datum/reagent/consumable/ethanol/between_the_sheets/on_mob_life(mob/living/L)
 	..()
 	if(L.IsSleeping())
-		if(L.getBruteLoss() && L.getFireLoss()) //If you are damaged by both types, slightly increased healing but it only heals one. The more the merrier wink wink.
+		if(L.bruteloss && L.fireloss) //If you are damaged by both types, slightly increased healing but it only heals one. The more the merrier wink wink.
 			if(prob(50))
 				L.heal_overall_injury(/datum/injury/brute, 0.25, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 			else
 				L.adjustFireLoss(-0.25)
-		else if(L.getBruteLoss()) //If you have only one, it still heals but not as well.
+		else if(L.bruteloss) //If you have only one, it still heals but not as well.
 			L.heal_overall_injury(/datum/injury/brute, 0.2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
-		else if(L.getFireLoss())
+		else if(L.fireloss)
 			L.adjustFireLoss(-0.2)
 
 /datum/reagent/consumable/ethanol/kamikaze

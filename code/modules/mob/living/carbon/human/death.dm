@@ -71,7 +71,7 @@
 
 	if(SSticker.HasRoundStarted())
 		SSblackbox.ReportDeath(src)
-		log_game("[key_name(src)] has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()]) ([AREACOORD(src)])")
+		log_game("[key_name(src)] has died (BRUTE: [src.bruteloss], BURN: [src.fireloss], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.cloneloss]) ([AREACOORD(src)])")
 	if(is_devil(src))
 		INVOKE_ASYNC(is_devil(src), /datum/antagonist/devil.proc/beginResurrectionCheck, src)
 	if(is_hivemember(src))

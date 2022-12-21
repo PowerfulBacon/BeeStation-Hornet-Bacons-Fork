@@ -358,7 +358,7 @@
 				reagents.remove_reagent(/datum/reagent/medicine/synthflesh, fleshamnt)
 			else if(reagents.has_reagent(/datum/reagent/blood, fleshamnt*3))
 				reagents.remove_reagent(/datum/reagent/blood, fleshamnt*3)
-			var/progress = CLONE_INITIAL_DAMAGE - mob_occupant.getCloneLoss()
+			var/progress = CLONE_INITIAL_DAMAGE - mob_occupant.cloneloss
 			// To avoid the default cloner making incomplete clones
 			progress += (100 - MINIMUM_HEAL_LEVEL)
 			var/milestone = CLONE_INITIAL_DAMAGE / flesh_number
@@ -492,7 +492,7 @@
 		return
 
 	if(HAS_TRAIT(mob_occupant, TRAIT_NOCLONELOSS))
-		var/cl_loss = mob_occupant.getCloneLoss()
+		var/cl_loss = mob_occupant.cloneloss
 		mob_occupant.add_overall_injury(/datum/injury/brute/blunt, cl_loss, INJURY_SEVERITY_MAJOR, 200)
 		mob_occupant.setCloneLoss(0, FALSE, TRUE)
 

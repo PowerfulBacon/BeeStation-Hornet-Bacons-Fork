@@ -63,7 +63,7 @@
 		msg += "<span class='warning'><B>[t_His] [parse_zone(t)] is missing!</B></span>\n"
 
 
-	var/temp = getBruteLoss()
+	var/temp = bruteloss
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
 		if(temp)
 			if (temp < 25)
@@ -73,7 +73,7 @@
 			else
 				msg += "<B>[t_He] [t_has] severe bruising!</B>\n"
 
-		temp = getFireLoss()
+		temp = fireloss
 		if(temp)
 			if (temp < 25)
 				msg += "[t_He] [t_has] minor burns.\n"
@@ -82,7 +82,7 @@
 			else
 				msg += "<B>[t_He] [t_has] severe burns!</B>\n"
 
-		temp = getCloneLoss()
+		temp = cloneloss
 		if(temp)
 			if(temp < 25)
 				msg += "[t_He] [t_is] slightly deformed.\n"

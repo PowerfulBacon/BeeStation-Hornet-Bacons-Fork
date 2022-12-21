@@ -203,8 +203,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (nanite_sensors || uniform.sensor_mode >= SENSOR_VITALS)
 			entry["oxydam"] = round(tracked_human.getOxyLoss(), 1)
 			entry["toxdam"] = round(tracked_human.getToxLoss(), 1)
-			entry["burndam"] = round(tracked_human.getFireLoss(), 1)
-			entry["brutedam"] = round(tracked_human.getBruteLoss(), 1)
+			entry["burndam"] = round(tracked_human.fireloss, 1)
+			entry["brutedam"] = round(tracked_human.bruteloss, 1)
 
 		// Area
 		if (pos && (nanite_sensors || uniform.sensor_mode >= SENSOR_COORDS))

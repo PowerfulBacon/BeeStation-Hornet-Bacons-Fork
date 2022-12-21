@@ -199,11 +199,11 @@
 		data["occupant"]["health"] = mob_occupant.health
 		data["occupant"]["maxHealth"] = mob_occupant.maxHealth
 		data["occupant"]["minHealth"] = HEALTH_THRESHOLD_DEAD
-		data["occupant"]["bruteLoss"] = mob_occupant.getBruteLoss()
+		data["occupant"]["bruteLoss"] = mob_occupant.bruteloss
 		data["occupant"]["oxyLoss"] = mob_occupant.getOxyLoss()
 		data["occupant"]["toxLoss"] = mob_occupant.getToxLoss()
-		data["occupant"]["fireLoss"] = mob_occupant.getFireLoss()
-		data["occupant"]["cloneLoss"] = mob_occupant.getCloneLoss()
+		data["occupant"]["fireLoss"] = mob_occupant.fireloss
+		data["occupant"]["cloneLoss"] = mob_occupant.cloneloss
 		data["occupant"]["brainLoss"] = mob_occupant.getOrganLoss(ORGAN_SLOT_BRAIN)
 		data["occupant"]["reagents"] = list()
 		if(mob_occupant.reagents && mob_occupant.reagents.reagent_list.len)

@@ -201,11 +201,11 @@
 		owner.staminaloss *= 10
 		owner.updatehealth()
 		last_health = owner.health
-		last_bruteloss = owner.getBruteLoss()
-		last_fireloss = owner.getFireLoss()
+		last_bruteloss = owner.bruteloss
+		last_fireloss = owner.fireloss
 		last_toxloss = owner.getToxLoss()
 		last_oxyloss = owner.getOxyLoss()
-		last_cloneloss = owner.getCloneLoss()
+		last_cloneloss = owner.cloneloss
 		last_staminaloss = owner.getStaminaLoss()
 		owner.log_message("gained blood-drunk stun immunity", LOG_ATTACK)
 		owner.add_stun_absorption("blooddrunk", INFINITY, 4)
@@ -214,19 +214,19 @@
 /datum/status_effect/blooddrunk/tick() //multiply the effect of healing by 10
 	if(owner.health > last_health)
 		var/needs_health_update = FALSE
-		var/new_bruteloss = owner.getBruteLoss()
+		var/new_bruteloss = owner.bruteloss
 		if(new_bruteloss < last_bruteloss)
 			var/heal_amount = (new_bruteloss - last_bruteloss) * 10
 			owner.heal_overall_injury(/datum/injury/brute, heal_amount, INJURY_SEVERITY_MINOR, TRUE)
-			new_bruteloss = owner.getBruteLoss()
+			new_bruteloss = owner.bruteloss
 			needs_health_update = TRUE
 		last_bruteloss = new_bruteloss
 
-		var/new_fireloss = owner.getFireLoss()
+		var/new_fireloss = owner.fireloss
 		if(new_fireloss < last_fireloss)
 			var/heal_amount = (new_fireloss - last_fireloss) * 10
 			owner.adjustFireLoss(heal_amount, updating_health = FALSE)
-			new_fireloss = owner.getFireLoss()
+			new_fireloss = owner.fireloss
 			needs_health_update = TRUE
 		last_fireloss = new_fireloss
 
@@ -246,11 +246,11 @@
 			needs_health_update = TRUE
 		last_oxyloss = new_oxyloss
 
-		var/new_cloneloss = owner.getCloneLoss()
+		var/new_cloneloss = owner.cloneloss
 		if(new_cloneloss < last_cloneloss)
 			var/heal_amount = (new_cloneloss - last_cloneloss) * 10
 			owner.adjustCloneLoss(heal_amount, updating_health = FALSE)
-			new_cloneloss = owner.getCloneLoss()
+			new_cloneloss = owner.cloneloss
 			needs_health_update = TRUE
 		last_cloneloss = new_cloneloss
 

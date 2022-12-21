@@ -447,9 +447,9 @@
 	else
 		if (stat == UNCONSCIOUS) // Slime stasis
 			. += "<span class='deadsay'>It appears to be alive but unresponsive.</span>"
-		if (getBruteLoss())
+		if (bruteloss)
 			. += "<span class='warning'>"
-			if (getBruteLoss() < 40)
+			if (bruteloss < 40)
 				. += "It has some punctures in its flesh!"
 			else
 				. += "<B>It has severe punctures and tears in its flesh!</B>"

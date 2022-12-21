@@ -79,7 +79,7 @@
 
 				//If something went wrong, just do normal oxyloss
 				if(!(damagetype & (BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS) ))
-					adjustOxyLoss(max(200 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+					adjustOxyLoss(max(200 - getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 
 				death(FALSE)
 				ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
@@ -112,7 +112,7 @@
 
 		suicide_log()
 
-		adjustOxyLoss(max(200 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+		adjustOxyLoss(max(200 - getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 		death(FALSE)
 
 /mob/living/brain/verb/suicide()
@@ -146,7 +146,7 @@
 
 		suicide_log()
 
-		adjustOxyLoss(max(200- getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+		adjustOxyLoss(max(200- getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 		death(FALSE)
 		ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
 
@@ -165,7 +165,7 @@
 		suicide_log()
 
 		//put em at -175
-		adjustOxyLoss(max(maxHealth * 2 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+		adjustOxyLoss(max(maxHealth * 2 - getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 		death(FALSE)
 		ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
 
@@ -184,7 +184,7 @@
 		suicide_log()
 
 		//put em at -175
-		adjustOxyLoss(max(maxHealth * 2 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+		adjustOxyLoss(max(maxHealth * 2 - getToxLoss() - fireloss - bruteloss - getOxyLoss(), 0))
 		death(FALSE)
 		ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
 
@@ -219,7 +219,7 @@
 		suicide_log()
 
 		//put em at -175
-		adjustOxyLoss(max(200 - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+		adjustOxyLoss(max(200 - fireloss - bruteloss - getOxyLoss(), 0))
 		death(FALSE)
 		ghostize(FALSE,SENTIENCE_ERASE)	// Disallows reentering body and disassociates mind
 

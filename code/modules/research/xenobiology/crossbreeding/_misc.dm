@@ -80,7 +80,7 @@ Slimecrossing Items
 		z = T.z
 	if(isliving(parent))
 		var/mob/living/L = parent
-		clone_loss = L.getCloneLoss()
+		clone_loss = L.cloneloss
 		tox_loss = L.getToxLoss()
 		oxy_loss = L.getOxyLoss()
 		brain_loss = L.getOrganLoss(ORGAN_SLOT_BRAIN)

@@ -79,10 +79,10 @@
 	if(owner.getOxyLoss())
 		owner.adjustOxyLoss(-5)
 		revive_cost += 5
-	if(owner.getBruteLoss())
+	if(owner.bruteloss)
 		owner.heal_overall_injury(/datum/injury/brute, 2, INJURY_SEVERITY_MINOR, TRUE) //MASS CONVERTED
 		revive_cost += 40
-	if(owner.getFireLoss())
+	if(owner.fireloss)
 		owner.adjustFireLoss(-2)
 		revive_cost += 40
 	if(owner.getToxLoss())

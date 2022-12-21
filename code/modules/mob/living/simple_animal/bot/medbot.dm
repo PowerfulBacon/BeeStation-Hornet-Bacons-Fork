@@ -443,13 +443,13 @@ GLOBAL_VAR(medibot_unique_id_gen)
 		declare(C)
 
 	//They're injured enough for it!
-	if(C.getBruteLoss() >= heal_threshold)
+	if(C.bruteloss >= heal_threshold)
 		return TRUE //If they're already medicated don't bother!
 
 	if(C.getOxyLoss() >= (5 + heal_threshold))
 		return TRUE
 
-	if(C.getFireLoss() >= heal_threshold)
+	if(C.fireloss >= heal_threshold)
 		return TRUE
 
 	if(C.getToxLoss() >= heal_threshold)
@@ -516,10 +516,10 @@ GLOBAL_VAR(medibot_unique_id_gen)
 
 		var/treatment_method = null
 
-		if(C.getBruteLoss() >= heal_threshold)
+		if(C.bruteloss >= heal_threshold)
 			treatment_method = BRUTE
 
-		else if(C.getFireLoss() >= heal_threshold)
+		else if(C.fireloss >= heal_threshold)
 			treatment_method = BURN
 
 		else if(C.getOxyLoss() >= (5 + heal_threshold))

@@ -86,12 +86,12 @@
 	else
 		if(isliving(imp_in))
 			var/mob/living/L = imp_in
-			healthstring = "<small>Oxygen Deprivation Damage => [round(L.getOxyLoss())]<br />Fire Damage => [round(L.getFireLoss())]<br />Toxin Damage => [round(L.getToxLoss())]<br />Brute Force Damage => [round(L.getBruteLoss())]</small>"
+			healthstring = "<small>Oxygen Deprivation Damage => [round(L.getOxyLoss())]<br />Fire Damage => [round(L.fireloss)]<br />Toxin Damage => [round(L.getToxLoss())]<br />Brute Force Damage => [round(L.bruteloss)]</small>"
 			raw_data = list() //Reset list
 			raw_data["oxy"] = list("[round(L.getOxyLoss())]")		//Suffocation
-			raw_data["burn"] = list("[round(L.getFireLoss())]")		//Burn
+			raw_data["burn"] = list("[round(L.fireloss)]")		//Burn
 			raw_data["tox"] = list("[round(L.getToxLoss())]")		//Tox
-			raw_data["brute"] = list("[round(L.getBruteLoss())]")	//Brute
+			raw_data["brute"] = list("[round(L.bruteloss)]")	//Brute
 		if(!healthstring)											//I have no idea who made it go this order but okay.
 			healthstring = "ERROR"
 		if(!length(raw_data))

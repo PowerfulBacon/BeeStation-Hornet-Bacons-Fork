@@ -154,8 +154,8 @@
 		return
 	//Leave the corgi
 	L.key = new_corgi.key
-	L.adjustBruteLoss(new_corgi.getBruteLoss())
-	L.adjustFireLoss(new_corgi.getFireLoss())
+	L.adjustBruteLoss(new_corgi.bruteloss)
+	L.adjustFireLoss(new_corgi.fireloss)
 	L.forceMove(get_turf(new_corgi))
 	// HACK - drop all corgi inventory
 	var/turf/T = get_turf(new_corgi)
@@ -1371,7 +1371,7 @@
 	color = "#E1A116"
 	chem_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
 	taste_description = "sourness"
-	///stores whether or not the mob has been warned that they are having difficulty breathing. 
+	///stores whether or not the mob has been warned that they are having difficulty breathing.
 	var/warned = FALSE
 
 /datum/reagent/stimulum/on_mob_metabolize(mob/living/L)

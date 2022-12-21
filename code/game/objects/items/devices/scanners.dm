@@ -134,8 +134,8 @@ GENE SCANNER
 	//Damage specifics
 	var/oxy_loss = M.getOxyLoss()
 	var/tox_loss = M.getToxLoss()
-	var/fire_loss = M.getFireLoss()
-	var/brute_loss = M.getBruteLoss()
+	var/fire_loss = M.fireloss
+	var/brute_loss = M.bruteloss
 	var/mob_status = (M.stat == DEAD ? "<span class='alert'><b>Deceased</b></span>" : "<b>[round(M.health/M.maxHealth,0.01)*100] % healthy</b>")
 
 	if(HAS_TRAIT(M, TRAIT_FAKEDEATH) && !advanced)
@@ -162,10 +162,10 @@ GENE SCANNER
 		to_chat(user, "\t<span class='alert'>Subject appears to be suffering from fatigue.</span>")
 		if(advanced)
 			to_chat(user, "\t<span class='info'>Fatigue Level: [M.getStaminaLoss()]%.</span>")
-	if(M.getCloneLoss())
-		to_chat(user, "\t<span class='alert'>Subject appears to have [M.getCloneLoss() > 30 ? "Severe" : "Minor"] cellular damage.</span>")
+	if(M.cloneloss)
+		to_chat(user, "\t<span class='alert'>Subject appears to have [M.cloneloss > 30 ? "Severe" : "Minor"] cellular damage.</span>")
 		if(advanced)
-			to_chat(user, "\t<span class='info'>Cellular Damage Level: [M.getCloneLoss()].</span>")
+			to_chat(user, "\t<span class='info'>Cellular Damage Level: [M.cloneloss].</span>")
 	if(!M.getorgan(/obj/item/organ/brain))
 		to_chat(user, "\t<span class='alert'>Subject lacks a brain.</span>")
 	if(iscarbon(M))
@@ -1014,10 +1014,10 @@ GENE SCANNER
 		to_chat(user, "<span class='warning'>you begin isolating [chosen].</span>")
 		if(do_after(user, (600 / (scanner.rating + 1)), target = AM))
 			create_culture(symptomholder, user, AM)
-	else 
+	else
 		using = TRUE
 		if(do_after(user, (timer / (scanner.rating + 1)), target = AM))
-			create_culture(A, user, AM)	
+			create_culture(A, user, AM)
 	using = FALSE
 
 /obj/item/extrapolator/proc/create_culture(var/datum/disease/advance/A, mob/user)

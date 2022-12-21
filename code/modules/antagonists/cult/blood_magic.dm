@@ -701,7 +701,7 @@
 						H.blood_volume = BLOOD_VOLUME_SAFE
 						uses -= round(restore_blood/2)
 						to_chat(user,"<span class='warning'>Your blood rites have restored [H == user ? "your" : "[H.p_their()]"] blood to safe levels!</span>")
-				var/overall_damage = H.getBruteLoss() + H.getFireLoss() + H.getToxLoss() + H.getOxyLoss()
+				var/overall_damage = H.bruteloss + H.fireloss + H.getToxLoss() + H.getOxyLoss()
 				if(overall_damage == 0)
 					to_chat(user,"<span class='cult'>That cultist doesn't require healing!</span>")
 				else
@@ -720,8 +720,8 @@
 					ratio *= -1
 					H.adjustOxyLoss((overall_damage*ratio) * (H.getOxyLoss() / overall_damage), 0)
 					H.adjustToxLoss((overall_damage*ratio) * (H.getToxLoss() / overall_damage), 0)
-					H.adjustFireLoss((overall_damage*ratio) * (H.getFireLoss() / overall_damage), 0)
-					H.heal_overall_injury(/datum/injury/brute, (overall_damage*ratio) * (H.getBruteLoss() / overall_damage), INJURY_SEVERITY_MAJOR, TRUE) * (H.getBruteLoss() / overall_damage), 0)
+					H.adjustFireLoss((overall_damage*ratio) * (H.fireloss / overall_damage), 0)
+					H.heal_overall_injury(/datum/injury/brute, (overall_damage*ratio) * (H.bruteloss / overall_damage), INJURY_SEVERITY_MAJOR, TRUE)
 					H.updatehealth()
 					playsound(get_turf(H), 'sound/magic/staff_healing.ogg', 25)
 					new /obj/effect/temp_visual/cult/sparks(get_turf(H))

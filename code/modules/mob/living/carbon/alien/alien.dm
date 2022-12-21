@@ -88,7 +88,7 @@
 	return has_fine_manipulation
 
 /mob/living/carbon/alien/getTrail()
-	if(getBruteLoss() < 200)
+	if(bruteloss < 200)
 		return pick (list("xltrails_1", "xltrails2"))
 	else
 		return pick (list("xttrails_1", "xttrails2"))

@@ -90,10 +90,10 @@
 			switch(Text)
 				if("brute")
 					L.adjustBruteLoss(amount,TRUE,TRUE)//BACONTODO
-					newamt = L.getBruteLoss()
+					newamt = L.bruteloss
 				if("fire")
 					L.adjustFireLoss(amount,TRUE,TRUE)
-					newamt = L.getFireLoss()
+					newamt = L.fireloss
 				if("toxin")
 					L.adjustToxLoss(amount)
 					newamt = L.getToxLoss()
@@ -105,7 +105,7 @@
 					newamt = L.getOrganLoss(ORGAN_SLOT_BRAIN)
 				if("clone")
 					L.adjustCloneLoss(amount)
-					newamt = L.getCloneLoss()
+					newamt = L.cloneloss
 				if("stamina")
 					L.adjustStaminaLoss(amount)
 					newamt = L.getStaminaLoss()

@@ -7,13 +7,13 @@
 	if(act_module)
 		. += "It is holding [icon2html(act_module, user)] \a [act_module]."
 	. += status_effect_examines()
-	if (getBruteLoss())
-		if (getBruteLoss() < maxHealth*0.5)
+	if (bruteloss)
+		if (bruteloss < maxHealth*0.5)
 			. += "<span class='warning'>It looks slightly dented.</span>"
 		else
 			. += "<span class='warning'><B>It looks severely dented!</B></span>"
-	if (getFireLoss() || getToxLoss())
-		var/overall_fireloss = getFireLoss() + getToxLoss()
+	if (fireloss || getToxLoss())
+		var/overall_fireloss = fireloss + getToxLoss()
 		if (overall_fireloss < maxHealth * 0.5)
 			. += "<span class='warning'>It looks slightly charred.</span>"
 		else

@@ -482,7 +482,7 @@
 		return
 	if((world.time - H.timeofdeath) > tlimit)
 		return
-	if((H.getBruteLoss() >= MAX_REVIVE_BRUTE_DAMAGE) || (H.getFireLoss() >= MAX_REVIVE_FIRE_DAMAGE))
+	if((H.bruteloss >= MAX_REVIVE_BRUTE_DAMAGE) || (H.fireloss >= MAX_REVIVE_FIRE_DAMAGE))
 		return
 	if(!heart || (heart.organ_flags & ORGAN_FAILING))
 		return
@@ -603,8 +603,8 @@
 				H.visible_message("<span class='warning'>[H]'s body convulses a bit.</span>")
 				playsound(src, "bodyfall", 50, 1)
 				playsound(src, 'sound/machines/defib_zap.ogg', 75, 1, -1)
-				total_brute	= H.getBruteLoss()
-				total_burn	= H.getFireLoss()
+				total_brute	= H.bruteloss
+				total_burn	= H.fireloss
 				shock_touching(30, H)
 				var/failed
 
@@ -647,7 +647,7 @@
 						H.adjustOxyLoss((mobhealth - HALFWAYCRITDEATH) * (H.getOxyLoss() / overall_damage), 0)
 						H.adjustToxLoss((mobhealth - HALFWAYCRITDEATH) * (H.getToxLoss() / overall_damage), 0)
 						H.adjustFireLoss((mobhealth - HALFWAYCRITDEATH) * (total_burn / overall_damage), 0)
-						H.heal_overall_injury(/datum/injury/brute, (mobhealth - HALFWAYCRITDEATH) * (total_brute / overall_damage), INJURY_SEVERITY_MINOR, TRUE) * (total_brute / overall_damage), 0)
+						H.heal_overall_injury(/datum/injury/brute, (mobhealth - HALFWAYCRITDEATH) * (total_brute / overall_damage), INJURY_SEVERITY_MINOR, TRUE)
 					H.updatehealth() // Previous "adjust" procs don't update health, so we do it manually.
 					user.visible_message("<span class='notice'>[req_defib ? "[defib]" : "[src]"] pings: Resuscitation successful.</span>")
 					playsound(src, 'sound/machines/defib_success.ogg', 50, 0)

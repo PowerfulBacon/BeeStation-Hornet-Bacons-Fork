@@ -89,7 +89,7 @@
 
 	playsound(src.loc, 'sound/items/welder.ogg', 50, 1)
 	H.emote("scream") // It is painful
-	H.add_overall_injury(/datum/injury/brute/blunt, max(0, 80 - H.getBruteLoss()), INJURY_SEVERITY_MAJOR, 200))) // Hurt the human, don't try to kill them though.
+	H.add_overall_injury(/datum/injury/brute/blunt, max(0, 80 - H.bruteloss), INJURY_SEVERITY_MAJOR, 200) // Hurt the human, don't try to kill them though.
 
 	// Sleep for a couple of ticks to allow the human to see the pain
 	sleep(5)

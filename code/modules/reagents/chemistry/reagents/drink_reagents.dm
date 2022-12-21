@@ -31,7 +31,7 @@
 	glass_desc = "Are you sure this is tomato juice?"
 
 /datum/reagent/consumable/tomatojuice/on_mob_life(mob/living/carbon/M)
-	if(M.getFireLoss() && prob(20))
+	if(M.fireloss && prob(20))
 		M.heal_bodypart_damage(0,1, 0)
 		. = 1
 	..()
@@ -228,7 +228,7 @@
 	overdose_threshold = 500 //High calcium intake is bad for bone health. OD is exactly like having taken a normal-ish bone hurt juice. If anyone hits the superoverdose, well I'll be damned
 
 /datum/reagent/consumable/milk/on_mob_life(mob/living/carbon/M)
-	if(M.getBruteLoss() && prob(20))
+	if(M.bruteloss && prob(20))
 		M.heal_bodypart_damage(1,0, 0)
 		. = 1
 	if(holder.has_reagent(/datum/reagent/consumable/capsaicin))
@@ -279,7 +279,7 @@
 
 
 /datum/reagent/consumable/soymilk/on_mob_life(mob/living/carbon/M)
-	if(M.getBruteLoss() && prob(20))
+	if(M.bruteloss && prob(20))
 		M.heal_bodypart_damage(1,0, 0)
 		. = 1
 	..()
@@ -295,7 +295,7 @@
 	glass_desc = "Ewwww..."
 
 /datum/reagent/consumable/cream/on_mob_life(mob/living/carbon/M)
-	if(M.getBruteLoss() && prob(20))
+	if(M.bruteloss && prob(20))
 		M.heal_bodypart_damage(1,0, 0)
 		. = 1
 	..()
@@ -674,7 +674,7 @@
 	M.SetSleeping(0, FALSE)
 	M.adjust_bodytemperature(5 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
 	M.Jitter(5)
-	if(M.getBruteLoss() && prob(20))
+	if(M.bruteloss && prob(20))
 		M.heal_bodypart_damage(1,0, 0)
 	..()
 	. = 1
@@ -696,7 +696,7 @@
 	M.SetSleeping(0, FALSE)
 	M.adjust_bodytemperature(5 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
 	M.Jitter(5)
-	if(M.getBruteLoss() && prob(20))
+	if(M.bruteloss && prob(20))
 		M.heal_bodypart_damage(1,0, 0)
 	..()
 	. = 1
