@@ -9,9 +9,12 @@
 #define WAVE_FUNCTION_COLLAPSE_FLOOR 2
 #define WAVE_FUNCTION_COLLAPSE_WINDOW 3
 #define WAVE_FUNCTION_COLLAPSE_DOOR 4
+#define WAVE_FUNCTION_COLLAPSE_PLATING 5
+#define WAVE_FUNCTION_COLLAPSE_EXTERNAL_AIRLOCK 6
+#define WAVE_FUNCTION_COLLAPSE_WINDOW_HALLWAY 7
 
 #define WAVE_FUNCTION_START 0
-#define WAVE_FUNCTION_END 4
+#define WAVE_FUNCTION_END 7
 
 /**
  * Wave function collapse profile generator for ruin generation.
@@ -72,6 +75,14 @@ SUBSYSTEM_DEF(wave_function_collapse)
 	var/start_time = TICK_USAGE_REAL
 	//Wipe the entire directory
 	fdel(WAVE_FUNCTION_COLLAPSE_DATA_PATH)
+	//Create the space turf typecache
+	var/list/space_turf_typecache = typecacheof(list(
+		/turf/template_noop,
+		/turf/open/space,
+		/turf/open/genturf,
+		/turf/open/floor/plating/asteroid,
+		/turf/closed/mineral,
+	))
 	//Create the generations
 	var/map_count = 0
 	var/list/all_blocks = list()
@@ -102,27 +113,43 @@ SUBSYSTEM_DEF(wave_function_collapse)
 							current_line += WAVE_FUNCTION_COLLAPSE_SPACE
 							continue
 						//Check the turf
+						var/area_path = cache[1][length(cache[1])]
+						if (ispath(area_path, /area/space) || ispath(area_path, /area/solar) || ispath(area_path, /area/asteroid) || ispath(area_path, /area/docking) || ispath(area_path, /area/drydock))
+							current_line += WAVE_FUNCTION_COLLAPSE_SPACE
+							continue
 						var/turf_path = cache[1][length(cache[1]) - 1]
+						//Space turf
+						if (space_turf_typecache[turf_path])
+							current_line += WAVE_FUNCTION_COLLAPSE_SPACE
+							continue
 						//Wall turf
 						if (ispath(turf_path, /turf/closed))
 							current_line += WAVE_FUNCTION_COLLAPSE_WALL
 							continue
-						//Space turf
-						if (ispath(turf_path, /turf/template_noop) || ispath(turf_path, /turf/open/space))
-							current_line += WAVE_FUNCTION_COLLAPSE_SPACE
-							continue
 						//Check things on it
 						var/found = FALSE
 						for (var/obj_path in cache[1])
-							if (ispath(obj_path, /obj/machinery/door))
+							if (ispath(obj_path, /obj/machinery/door/airlock/external))
+								current_line += WAVE_FUNCTION_COLLAPSE_EXTERNAL_AIRLOCK
+								found = TRUE
+								break
+							if (ispath(obj_path, /obj/machinery/door/airlock))
 								current_line += WAVE_FUNCTION_COLLAPSE_DOOR
 								found = TRUE
 								break
-							if (ispath(obj_path, /obj/structure/window))
+							if (ispath(obj_path, /obj/structure/window/fulltile) || ispath(obj_path, /obj/structure/window/reinforced/fulltile) || ispath(obj_path, /obj/effect/spawner/structure/window))
 								current_line += WAVE_FUNCTION_COLLAPSE_WINDOW
 								found = TRUE
 								break
+							//Not a fulltile window
+							if (ispath(obj_path, /obj/structure/window))
+								current_line += WAVE_FUNCTION_COLLAPSE_WINDOW_HALLWAY
+								found = TRUE
+								break
 						if (found)
+							continue
+						if (ispath(turf_path, /turf/open/floor/plating))
+							current_line += WAVE_FUNCTION_COLLAPSE_PLATING
 							continue
 						//Floor turf
 						current_line += WAVE_FUNCTION_COLLAPSE_FLOOR

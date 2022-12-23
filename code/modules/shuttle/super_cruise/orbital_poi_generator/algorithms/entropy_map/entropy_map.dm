@@ -22,6 +22,8 @@
 	var/list/datum/entropy_map_node/child_nodes = null
 	/// The highest value we store
 	var/value
+	/// The depth
+	var/depth
 
 /datum/entropy_map_node/New(x, y)
 	. = ..()
@@ -36,9 +38,48 @@
 		emn.determine_initial_value()
 		value = min(value, emn.value)
 
+/datum/entropy_map_node/proc/update(update_x, update_y, new_value)
+	//If we are at the base, update
+	if (!length(child_nodes))
+		if (depth == 1)
+			value = new_value
+		else
+			CRASH("Entropy map exception")
+		return
+	//Travserse the tree to where we need to be
+	var/grid_size = 1 << (depth - 2)
+	//Propogate updates
+	var/found = FALSE
+	for (var/datum/entropy_map_node/child as() in child_nodes)
+		if (update_x >= child.x && update_y >= child.y && update_x < child.x + grid_size && update_y < child.y + grid_size)
+			child.update(update_x, update_y, new_value)
+			found = TRUE
+			break
+	if (!found)
+		CRASH("Failed to locate child to go to (Index out of bounds?)")
+	//Recalculate value
+	value = INFINITY
+	for (var/datum/entropy_map_node/child as() in child_nodes)
+		value = min(child.value, value)
+
 /datum/entropy_map_node/proc/take()
-	//TODO
-	CRASH("Not implemented exception")
+	if (!length(child_nodes))
+		if (depth > 1)
+			return null
+		return src
+	//Pick which child we are going to take
+	for (var/datum/entropy_map_node/child as() in child_nodes)
+		//Take this one
+		if (child.value == value)
+			var/datum/entropy_map_node/taken = child.take()
+			//Our child is the bottom level, remove it
+			if (!length(child.child_nodes))
+				child_nodes -= child
+			//Recalculate value
+			value = INFINITY
+			for (var/datum/entropy_map_node/child2 as() in child_nodes)
+				value = min(child2.value, value)
+			return taken
 
 ///Map should be a 2D array
 /proc/build_entropy_map(list/map)
@@ -50,6 +91,7 @@
 		for (var/x in 1 to length(map[y]))
 			var/datum/entropy_map_node/created_node = new(x, y)
 			created_node.value = map[x][y]
+			created_node.depth = 1
 			base_map[x][y] = created_node
 	//Recursively build the map until its completed
 	var/increment = 1
@@ -62,6 +104,7 @@
 			for (var/x in 1 to length(map[y]) step increment)
 				var/datum/entropy_map_node/created_node_parent = new(x, y)
 				created_node_parent.child_nodes = list(base_map[x][y])
+				created_node_parent.depth = base_map[x][y].depth + 1
 				if (x + half_increment <= length(map[y]))
 					created_node_parent.child_nodes += base_map[x + half_increment][y]
 				if (y + half_increment <= length(map))
