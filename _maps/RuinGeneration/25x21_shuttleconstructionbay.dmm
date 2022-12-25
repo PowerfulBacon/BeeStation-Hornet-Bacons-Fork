@@ -3,23 +3,20 @@
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "ay" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners{
-	dir = 1
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "aY" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "bf" = (
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/plating/airless,
@@ -37,13 +34,13 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "eq" = (
 /obj/effect/abstract/doorway_marker{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "es" = (
 /turf/template_noop/open,
 /area/template_noop)
@@ -55,14 +52,7 @@
 /area/template_noop)
 "hf" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
-"hB" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "ib" = (
 /obj/machinery/shuttle/engine/plasma{
 	dir = 1
@@ -115,14 +105,6 @@
 /obj/machinery/door/window/northleft,
 /turf/open/floor/plating/airless,
 /area/template_noop)
-"ts" = (
-/obj/structure/closet/emcloset,
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/spawner/lootdrop/ruinloot/basic,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "tP" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -163,11 +145,7 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"BT" = (
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Cc" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -217,12 +195,6 @@
 	},
 /turf/open/floor/plating/airless,
 /area/template_noop)
-"Gl" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "GG" = (
 /obj/machinery/atmospherics/pipe/manifold/purple/visible{
 	dir = 1
@@ -232,13 +204,6 @@
 "Hx" = (
 /turf/template_noop,
 /area/template_noop)
-"HD" = (
-/obj/structure/closet/firecloset,
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "HL" = (
 /obj/structure/frame/computer,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
@@ -246,13 +211,6 @@
 	},
 /turf/open/floor/mineral/titanium/airless,
 /area/template_noop)
-"IO" = (
-/obj/structure/sign/poster/random{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "Ky" = (
 /obj/machinery/computer/shuttle_flight/custom_shuttle,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
@@ -263,24 +221,14 @@
 "KA" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Lp" = (
-/obj/effect/turf_decal/tile/neutral/opposingcorners{
-	dir = 1
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "MD" = (
 /obj/structure/girder,
 /turf/open/floor/plating/airless,
 /area/template_noop)
-"Oy" = (
-/obj/structure/sign/nanotrasen{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "OB" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -288,12 +236,11 @@
 /turf/open/floor/plating/airless,
 /area/template_noop)
 "Ps" = (
-/obj/item/kirbyplants/random,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "PH" = (
 /obj/effect/spawner/structure/window/shuttle,
 /turf/open/floor/plating,
@@ -325,7 +272,6 @@
 /turf/open/floor/plating/airless,
 /area/template_noop)
 "Th" = (
-/obj/machinery/vending/coffee,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -333,7 +279,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "Tj" = (
 /turf/open/floor/plating/airless,
 /area/template_noop)
@@ -345,20 +291,14 @@
 /area/template_noop)
 "Vz" = (
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"VW" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Wh" = (
 /turf/closed/wall/mineral/titanium,
 /area/template_noop)
 "WJ" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "WT" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -372,9 +312,6 @@
 	},
 /turf/open/floor/plating/airless,
 /area/template_noop)
-"Zp" = (
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 
 (1,1,1) = {"
 Hx
@@ -842,13 +779,13 @@ Hx
 Hx
 hf
 Th
-HD
-ts
+Ps
+Ps
 KA
 AT
 KA
-Gl
-Gl
+Ps
+Ps
 Ps
 hf
 hf
@@ -887,22 +824,22 @@ Hx
 as
 Vz
 aY
-VW
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
-Zp
+ay
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
 WJ
 "}
 (24,1,1) = {"
@@ -910,23 +847,23 @@ Hx
 KA
 KA
 KA
-hB
-BT
-BT
-BT
-BT
-BT
-Oy
-BT
-BT
-BT
-IO
-BT
-BT
-BT
-BT
-BT
-BT
+ay
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
+Lp
 "}
 (25,1,1) = {"
 Hx

@@ -6,11 +6,11 @@
 	pixel_y = 16
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "b" = (
 /obj/machinery/computer/scan_consolenew,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "d" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/bottle/orangejuice{
@@ -18,42 +18,34 @@
 	pixel_y = 7
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "e" = (
 /obj/effect/mob_spawn/human/corpse/zombie,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
-"f" = (
-/obj/effect/turf_decal/tile/purple,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "g" = (
 /obj/structure/bed,
 /obj/item/bedsheet/rd,
 /obj/item/toy/plush/slimeplushie,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "h" = (
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "i" = (
 /obj/structure/dresser,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "j" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "k" = (
 /obj/structure/falsewall,
-/obj/effect/abstract/doorway_marker,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "l" = (
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
-"m" = (
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "n" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/snacks/pizzabread,
@@ -66,101 +58,83 @@
 	pixel_y = 3
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "o" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/storage/fancy/egg_box{
 	pixel_y = 12
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "q" = (
 /obj/machinery/door/airlock/wood,
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "r" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/snacks/store/cake/chocolate,
 /obj/item/kitchen/knife,
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
-"s" = (
-/obj/machinery/washing_machine,
-/obj/effect/turf_decal/tile/purple/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "t" = (
 /obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "u" = (
 /obj/structure/chair/fancy/sofa/old/left{
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "v" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "x" = (
 /obj/machinery/dna_scannernew,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
-"y" = (
-/obj/structure/table,
-/obj/structure/bedsheetbin,
-/obj/effect/turf_decal/tile/purple/anticorner/contrasted,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "z" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/monkeycubes,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "A" = (
 /obj/structure/table/wood,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "B" = (
-/obj/structure/table,
-/obj/structure/bedsheetbin,
-/obj/effect/turf_decal/tile/purple/anticorner/contrasted{
-	dir = 8
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "C" = (
 /obj/structure/table/glass,
 /obj/structure/sign/departments/minsky/research/genetics{
 	pixel_y = 32
 	},
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "D" = (
 /obj/structure/chair/fancy/sofa/old/right{
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "G" = (
 /obj/structure/table/glass,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "H" = (
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "I" = (
 /obj/structure/table/glass,
 /obj/item/storage/pill_bottle/mutadone,
 /obj/item/clothing/gloves/color/latex,
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "J" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/drinkingglass/filled/soda{
@@ -168,16 +142,16 @@
 	pixel_y = 5
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "K" = (
 /obj/machinery/computer/med_data/laptop,
 /obj/structure/table/glass,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "L" = (
 /obj/structure/chair/comfy/black,
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "M" = (
 /obj/structure/table/glass,
 /obj/item/chromosome/power{
@@ -188,12 +162,12 @@
 	pixel_y = 2
 	},
 /turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "N" = (
 /obj/machinery/door/airlock/wood,
 /obj/effect/mapping_helpers/airlock/abandoned,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "O" = (
 /obj/item/paper/crumpled/bloody/ruins/lavaland/clown_planet/escape{
 	info = "lol";
@@ -210,29 +184,19 @@
 	pixel_y = -1
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "P" = (
 /obj/structure/chair/comfy/black{
 	dir = 1
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Q" = (
 /obj/structure/chair/office{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
-"R" = (
-/obj/structure/falsewall,
-/turf/open/floor/plasteel/tiled,
-/area/ruin/unpowered)
-"T" = (
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "U" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/under/dress/skirt/purple,
@@ -240,36 +204,36 @@
 /obj/item/clothing/under/pants/classicjeans,
 /obj/item/clothing/suit/jacket/letterman_nanotrasen,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "V" = (
 /obj/item/flashlight/lamp/green,
 /obj/structure/table/glass,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "W" = (
 /obj/structure/table/glass,
 /obj/item/reagent_containers/food/snacks/grown/harebell,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "X" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "Z" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/bottle/applejack{
 	pixel_y = 2
 	},
 /turf/open/floor/carpet/orange,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 j
-m
+B
 X
-m
+B
 j
 j
 j
@@ -282,10 +246,10 @@ j
 "}
 (2,1,1) = {"
 j
-m
-m
-m
-T
+B
+B
+B
+B
 B
 j
 V
@@ -297,11 +261,11 @@ j
 "}
 (3,1,1) = {"
 j
-m
-m
-m
-m
-s
+B
+B
+B
+B
+B
 j
 K
 Q
@@ -312,11 +276,11 @@ j
 "}
 (4,1,1) = {"
 j
-m
-m
-m
-m
-s
+B
+B
+B
+B
+B
 j
 O
 h
@@ -327,11 +291,11 @@ j
 "}
 (5,1,1) = {"
 j
-m
-m
-m
-f
-y
+B
+B
+B
+B
+B
 j
 v
 h
@@ -395,7 +359,7 @@ H
 h
 h
 h
-R
+k
 l
 e
 j

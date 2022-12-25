@@ -1,66 +1,66 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "b" = (
 /turf/closed/wall/r_wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "c" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "d" = (
 /obj/item/reagent_containers/food/snacks/pizzaslice/margherita,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "e" = (
 /turf/closed/mineral/random/high_chance,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "f" = (
 /turf/open/indestructible/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "i" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "o" = (
 /obj/structure/fans/tiny/invisible,
 /turf/open/indestructible/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "p" = (
 /obj/item/reagent_containers/food/snacks/pizza/pineapple,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "q" = (
 /obj/item/reagent_containers/food/snacks/pizza/meat,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "t" = (
 /mob/living/simple_animal/hostile/asteroid/elite/pandora,
 /turf/open/indestructible/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "v" = (
 /obj/effect/spawner/lootdrop/ruinloot/important,
 /turf/open/indestructible/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "A" = (
 /obj/item/pizzabox/infinite,
 /turf/open/indestructible/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "C" = (
 /turf/template_noop,
 /area/template_noop)
 "F" = (
 /obj/item/reagent_containers/food/snacks/pizza/margherita/robo,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "G" = (
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "I" = (
 /turf/closed/indestructible/riveted/hierophant,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "U" = (
 /obj/item/reagent_containers/food/snacks/pizzaslice/meat,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 b

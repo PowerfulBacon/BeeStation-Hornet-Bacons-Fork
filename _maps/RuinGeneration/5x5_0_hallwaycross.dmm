@@ -2,31 +2,31 @@
 "c" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "m" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "n" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "x" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "J" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "Q" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 
 (1,1,1) = {"
 m

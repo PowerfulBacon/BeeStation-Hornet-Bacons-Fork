@@ -1,11 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "f" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "N" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "O" = (
 /obj/structure/lattice,
 /turf/template_noop,
@@ -17,10 +17,10 @@
 /obj/effect/spawner/structure/window,
 /obj/machinery/door/firedoor/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "X" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 R

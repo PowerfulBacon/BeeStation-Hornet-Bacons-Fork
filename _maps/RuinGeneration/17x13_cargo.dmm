@@ -4,14 +4,14 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "b" = (
 /obj/machinery/door/poddoor/shutters/preopen,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "c" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 4
@@ -20,167 +20,106 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "f" = (
 /obj/structure/shuttle/engine/propulsion/burst/right{
 	dir = 4
 	},
 /turf/closed/wall/mineral/plastitanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "g" = (
 /obj/machinery/computer{
 	dir = 4
 	},
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "h" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "i" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"l" = (
-/obj/effect/turf_decal/delivery,
-/obj/effect/spawner/lootdrop/crate_spawner,
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"m" = (
-/obj/effect/turf_decal/tile/brown/half/contrasted,
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"n" = (
-/obj/effect/turf_decal/bot,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"p" = (
-/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
-	dir = 4
-	},
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"q" = (
-/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
-	dir = 1
-	},
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "r" = (
 /obj/structure/rack,
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "s" = (
 /obj/effect/spawner/lootdrop/crate_spawner,
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "t" = (
 /obj/effect/spawner/structure/window/shuttle,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "v" = (
 /obj/structure/shuttle/engine/propulsion/burst/left{
 	dir = 4
 	},
 /turf/closed/wall/mineral/plastitanium,
-/area/ruin/unpowered)
-"w" = (
-/obj/effect/spawner/lootdrop/crate_spawner,
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"y" = (
-/obj/effect/turf_decal/delivery,
-/obj/effect/spawner/lootdrop/glowstick/lit,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"A" = (
-/obj/effect/turf_decal/tile/brown/half/contrasted{
-	dir = 4
-	},
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "B" = (
 /turf/closed/wall/mineral/plastitanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "C" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"D" = (
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "E" = (
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
-"G" = (
-/obj/effect/turf_decal/delivery,
-/obj/effect/spawner/lootdrop/crate_spawner,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"H" = (
-/obj/effect/turf_decal/bot,
-/obj/effect/spawner/lootdrop/crate_spawner,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "I" = (
 /obj/machinery/door/airlock/mining,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"J" = (
-/obj/effect/turf_decal/delivery,
+/area/ruin_mapping/nullroom)
+"K" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "M" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "P" = (
 /obj/structure/chair/fancy/shuttle{
 	dir = 8
 	},
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Q" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "S" = (
 /turf/open/floor/engine,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "T" = (
 /obj/structure/shuttle/engine/propulsion/burst/cargo{
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "U" = (
-/obj/effect/turf_decal/tile/brown/half/contrasted{
-	dir = 1
-	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"V" = (
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/two)
 "X" = (
 /obj/machinery/door/poddoor/shutters/preopen,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Y" = (
 /turf/closed/wall/mineral/titanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 M
-h
+K
 a
-h
+K
 M
 M
 M
@@ -215,9 +154,9 @@ h
 h
 h
 h
-J
-J
-H
+h
+h
+h
 h
 M
 "}
@@ -245,9 +184,9 @@ h
 h
 h
 h
-G
-y
-n
+h
+h
+h
 h
 M
 "}
@@ -275,9 +214,9 @@ Q
 Q
 Q
 i
-J
-G
-n
+h
+h
+h
 h
 M
 "}
@@ -335,7 +274,7 @@ P
 r
 Y
 M
-q
+U
 U
 U
 U
@@ -350,10 +289,10 @@ E
 E
 X
 b
-A
-l
-l
-V
+U
+U
+U
+U
 M
 "}
 (13,1,1) = {"
@@ -365,10 +304,10 @@ E
 E
 X
 b
-A
-V
-V
-V
+U
+U
+U
+U
 M
 "}
 (14,1,1) = {"
@@ -380,10 +319,10 @@ E
 E
 X
 b
-A
-w
-V
-V
+U
+U
+U
+U
 M
 "}
 (15,1,1) = {"
@@ -395,10 +334,10 @@ c
 B
 B
 M
-A
-D
-l
-V
+U
+U
+U
+U
 M
 "}
 (16,1,1) = {"
@@ -410,10 +349,10 @@ T
 v
 S
 M
-p
-m
-m
-m
+U
+U
+U
+U
 M
 "}
 (17,1,1) = {"

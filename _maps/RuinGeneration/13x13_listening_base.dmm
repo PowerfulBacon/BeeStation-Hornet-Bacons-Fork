@@ -2,7 +2,7 @@
 "bD" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/plasteel/grimy,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "bO" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -15,7 +15,7 @@
 /obj/item/paper/fluff/ruins/listeningstation/reports/november,
 /obj/item/pen,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "cX" = (
 /obj/machinery/vending/snack/random{
 	extended_inventory = 1
@@ -29,7 +29,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "dr" = (
 /turf/template_noop,
 /area/template_noop)
@@ -47,7 +47,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "er" = (
 /obj/structure/sink{
 	dir = 4;
@@ -66,14 +66,14 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 6
 	},
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "eN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "fG" = (
 /obj/machinery/computer/camera_advanced{
 	dir = 4
@@ -88,7 +88,7 @@
 	pixel_x = -30
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "gd" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
@@ -104,7 +104,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "ic" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -114,12 +114,12 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/mineral/plastitanium,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "jx" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel/white/corner,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "kI" = (
 /obj/structure/table,
 /obj/machinery/computer/security/telescreen/entertainment{
@@ -145,7 +145,7 @@
 /obj/effect/spawner/lootdrop/ruinloot/security,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "kX" = (
 /obj/machinery/airalarm/syndicate{
 	pixel_y = 24
@@ -165,7 +165,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "mh" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4{
 	dir = 6
@@ -175,14 +175,14 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "mp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/abstract/doorway_marker{
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "mw" = (
 /obj/structure/rack{
 	dir = 8
@@ -190,7 +190,7 @@
 /obj/item/multitool,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "mM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
@@ -200,7 +200,7 @@
 	pixel_y = -29
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "oA" = (
 /obj/effect/turf_decal/stripes/red/corner{
 	dir = 8
@@ -215,7 +215,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "oR" = (
 /obj/effect/turf_decal/stripes/red/corner,
 /obj/machinery/light/small{
@@ -237,7 +237,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "pa" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -253,7 +253,7 @@
 	name = "Personal Quarters"
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "pB" = (
 /obj/machinery/power/terminal{
 	dir = 1
@@ -269,7 +269,7 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "qg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
@@ -280,7 +280,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "qm" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -289,7 +289,7 @@
 /obj/structure/closet/emcloset/anchored,
 /obj/machinery/light/small,
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "qz" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/syndicate,
@@ -298,7 +298,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "rx" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
@@ -311,7 +311,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "sk" = (
 /obj/structure/table,
 /obj/item/storage/firstaid/regular,
@@ -321,7 +321,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 10
 	},
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "sQ" = (
 /obj/structure/rack{
 	dir = 8;
@@ -331,7 +331,7 @@
 /obj/item/pickaxe,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "sV" = (
 /obj/machinery/washing_machine{
 	pixel_x = 4
@@ -343,7 +343,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "tf" = (
 /obj/structure/sink{
 	dir = 4;
@@ -357,11 +357,11 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/showroomfloor,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "ty" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "uw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/med_data/syndie{
@@ -369,7 +369,7 @@
 	req_one_access = null
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "ux" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
@@ -382,7 +382,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "vx" = (
 /obj/structure/curtain,
 /obj/machinery/shower{
@@ -392,7 +392,7 @@
 /obj/item/soap,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/showroomfloor,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "xp" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
@@ -404,7 +404,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "xC" = (
 /obj/machinery/vending/cola/random{
 	extended_inventory = 1
@@ -414,7 +414,7 @@
 /turf/open/floor/plasteel/white/corner{
 	dir = 8
 	},
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "xP" = (
 /obj/structure/table/reinforced,
 /obj/machinery/firealarm{
@@ -424,7 +424,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/libraryconsole/bookmanagement,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "yk" = (
 /obj/structure/rack{
 	dir = 8
@@ -436,7 +436,7 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/item/clothing/mask/gas,
 /turf/open/floor/mineral/plastitanium/red,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "yz" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -460,13 +460,13 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "yL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "yP" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -477,7 +477,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Au" = (
 /obj/structure/filingcabinet,
 /obj/item/paper/fluff/ruins/listeningstation/reports/april,
@@ -491,7 +491,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/paper/fluff/ruins/listeningstation/odd_report,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Bn" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/decal/cleanable/dirt,
@@ -509,7 +509,7 @@
 	},
 /obj/item/stock_parts/cell/high/plus,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "BT" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
@@ -526,13 +526,13 @@
 	},
 /obj/effect/spawner/lootdrop/ruinloot/important,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Ce" = (
 /obj/structure/table/wood,
 /obj/item/ammo_box/magazine/m10mm,
 /obj/item/paper/fluff/ruins/listeningstation/briefing,
 /turf/open/floor/plasteel/grimy,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Df" = (
 /obj/structure/table,
 /obj/machinery/firealarm{
@@ -542,10 +542,10 @@
 /obj/machinery/microwave,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "DE" = (
 /turf/closed/wall,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Ed" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -561,7 +561,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Ex" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -570,10 +570,10 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "ES" = (
 /turf/closed/wall/r_wall,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "ET" = (
 /obj/structure/cable,
 /obj/machinery/power/port_gen/pacman{
@@ -584,21 +584,21 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/wrench,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "EY" = (
 /obj/item/bombcore/badmin{
 	anchored = 1;
 	invisibility = 100
 	},
 /turf/closed/wall,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Fs" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "FB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -610,7 +610,7 @@
 /obj/effect/spawner/lootdrop/ruinloot/important,
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Kg" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/reagent_containers/blood/OMinus{
@@ -628,14 +628,14 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 9
 	},
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Kn" = (
 /obj/structure/chair/office{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Kv" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -657,7 +657,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Lj" = (
 /obj/structure/chair/stool,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
@@ -667,14 +667,14 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "LZ" = (
 /obj/machinery/door/airlock/external{
 	id_tag = "syndie_listeningpost_external";
 	req_access_txt = "150"
 	},
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Of" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
@@ -689,7 +689,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "OZ" = (
 /obj/structure/table,
 /obj/machinery/light/small{
@@ -714,7 +714,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Pg" = (
 /obj/machinery/syndicatebomb/self_destruct{
 	anchored = 1
@@ -727,7 +727,7 @@
 	pixel_x = 32
 	},
 /turf/open/floor/circuit/red,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "QE" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -739,7 +739,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 5
 	},
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "QT" = (
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/dirt,
@@ -755,7 +755,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "SJ" = (
 /obj/effect/mob_spawn/human/lavaland_syndicate/comms/space{
 	assignedrole = "Space Syndicate";
@@ -768,7 +768,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel/grimy,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Tg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -778,7 +778,7 @@
 	},
 /obj/effect/spawner/lootdrop/ruinloot/medical,
 /turf/open/floor/plasteel/white,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "To" = (
 /obj/structure/closet{
 	icon_door = "black";
@@ -813,16 +813,16 @@
 /obj/item/storage/photo_album,
 /obj/machinery/light/small,
 /turf/open/floor/plasteel/grimy,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "TD" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "TQ" = (
 /obj/structure/sign/departments/medbay/alt,
 /turf/closed/wall,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Vh" = (
 /obj/machinery/atmospherics/components/unary/tank/air{
 	dir = 1
@@ -831,7 +831,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Vw" = (
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 4
@@ -846,7 +846,7 @@
 	dir = 9
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Vy" = (
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/dirt,
@@ -860,14 +860,14 @@
 	name = "Medbay"
 	},
 /turf/open/floor/plasteel/white,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Wd" = (
 /obj/machinery/telecomms/relay/preset/ruskie{
 	use_power = 0
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Xe" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 1
@@ -879,7 +879,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel/grimy,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "XB" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -889,7 +889,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "XH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -904,7 +904,7 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Yu" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -912,7 +912,7 @@
 	dir = 6
 	},
 /turf/open/floor/plasteel,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "YS" = (
 /obj/machinery/computer/message_monitor{
 	dir = 2
@@ -924,13 +924,13 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/paper/monitorkey,
 /turf/open/floor/plasteel/dark,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Zn" = (
 /obj/machinery/door/airlock{
 	name = "Toilet"
 	},
 /turf/open/floor/plasteel/showroomfloor,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 "Zp" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 1;
@@ -939,7 +939,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plasteel/white/side,
-/area/ruin/space/has_grav/listeningstation)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 dr

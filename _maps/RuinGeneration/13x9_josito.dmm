@@ -2,16 +2,16 @@
 "a" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "c" = (
 /obj/structure/table/wood,
 /obj/effect/spawner/lootdrop/snowdin/dungeonlite,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "h" = (
-/obj/effect/abstract/doorway_marker,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/obj/effect/abstract/open_area_marker,
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "i" = (
 /obj/structure/bed/dogbed,
 /mob/living/simple_animal/pet/cat{
@@ -20,112 +20,114 @@
 	unique_name = 1
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "j" = (
 /obj/structure/chair/wood,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "k" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/snacks/grown/poppy,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "m" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "n" = (
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "o" = (
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "p" = (
 /obj/structure/table/wood,
 /obj/effect/spawner/lootdrop/minor/kittyears_or_rabbitears,
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "r" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance/three,
 /obj/effect/spawner/lootdrop/minor/kittyears_or_rabbitears,
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "s" = (
 /obj/effect/abstract/doorway_marker,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "t" = (
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "u" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "x" = (
 /obj/structure/table/wood,
 /obj/item/candle,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "y" = (
 /obj/structure/table/wood,
 /obj/item/storage/box/matches,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "A" = (
 /obj/structure/chair/fancy/sofa/old/left{
 	dir = 8
 	},
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "B" = (
 /obj/structure/chair/wood{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "D" = (
 /obj/structure/chair/fancy/sofa/old/left,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "E" = (
 /obj/effect/abstract/doorway_marker{
 	dir = 1
 	},
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
-"I" = (
+/area/ruin_mapping/nullroom)
+"G" = (
 /obj/effect/abstract/doorway_marker{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/ruin_mapping/nullroom)
+"I" = (
+/obj/effect/abstract/open_area_marker{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "J" = (
 /obj/structure/chair/fancy/sofa/old/right,
 /turf/open/floor/wood,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "L" = (
 /obj/structure/chair/fancy/sofa/old/right{
 	dir = 8
 	},
 /turf/open/floor/carpet/purple,
-/area/ruin/unpowered)
-"O" = (
-/obj/effect/spawner/room/threexthree,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
-"Q" = (
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"Z" = (
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 u
 u
+G
 u
 u
 u
-u
-u
+G
 u
 u
 "}
@@ -223,10 +225,10 @@ r
 t
 t
 u
-Q
-Q
-O
-u
+Z
+Z
+Z
+Z
 "}
 (11,1,1) = {"
 E
@@ -234,9 +236,9 @@ t
 t
 t
 o
-Q
-Q
-Q
+Z
+Z
+Z
 h
 "}
 (12,1,1) = {"
@@ -245,10 +247,10 @@ p
 L
 A
 u
-Q
-Q
-Q
-u
+Z
+Z
+Z
+Z
 "}
 (13,1,1) = {"
 u
@@ -256,8 +258,8 @@ u
 u
 u
 u
-u
+Z
 I
-u
+Z
 u
 "}

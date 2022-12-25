@@ -1,58 +1,53 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
-/obj/machinery/field/generator,
-/turf/open/floor/engine,
-/area/ruin/unpowered)
 "c" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
-"e" = (
-/obj/machinery/field/generator,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
-"f" = (
-/obj/item/scalpel,
-/obj/effect/decal/remains/human,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"g" = (
+/obj/effect/abstract/doorway_marker{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "h" = (
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/machinery/door/airlock/highsecurity,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "m" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
+"s" = (
+/obj/effect/abstract/doorway_marker{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "w" = (
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "G" = (
 /turf/open/floor/engine,
-/area/ruin/unpowered)
+/area/ruin_mapping/room/one)
 "K" = (
 /obj/effect/spawner/structure/window,
 /obj/machinery/door/firedoor/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "N" = (
 /turf/template_noop/open,
 /area/template_noop)
-"P" = (
-/obj/machinery/power/supermatter_crystal/shard/hugbox,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
 "Q" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "T" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 
 (1,1,1) = {"
 c
@@ -176,9 +171,9 @@ N
 "}
 (9,1,1) = {"
 c
-e
 w
-e
+w
+w
 G
 G
 h
@@ -192,8 +187,8 @@ N
 (10,1,1) = {"
 c
 w
-P
-f
+w
+w
 w
 G
 c
@@ -205,10 +200,10 @@ c
 c
 "}
 (11,1,1) = {"
-c
-a
+g
+G
 w
-e
+w
 G
 G
 G
@@ -237,7 +232,7 @@ c
 (13,1,1) = {"
 c
 c
-c
+s
 c
 c
 c

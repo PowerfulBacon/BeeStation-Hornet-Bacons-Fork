@@ -1,69 +1,56 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ad" = (
-/obj/structure/rack,
-/obj/effect/spawner/lootdrop/ruinloot/security,
-/obj/effect/turf_decal/tile/red,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "aW" = (
 /turf/template_noop,
 /area/template_noop)
-"bO" = (
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "cK" = (
 /obj/machinery/biogenerator,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "dn" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/vending/cola/random,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"dG" = (
-/obj/structure/closet/secure_closet/brig,
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "dQ" = (
 /obj/machinery/computer/libraryconsole/bookmanagement,
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "fZ" = (
 /obj/machinery/door/airlock{
 	name = "Unisex Restroom"
 	},
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "hq" = (
 /obj/structure/table,
 /obj/item/pen,
 /obj/effect/spawner/lootdrop/ruinloot/security,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "hu" = (
 /obj/effect/turf_decal/tile/blue/opposingcorners{
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "hU" = (
 /obj/structure/bookcase,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jj" = (
 /obj/structure/window/reinforced,
 /obj/machinery/hydroponics/soil,
 /obj/item/cultivator,
 /obj/effect/turf_decal/tile/green/anticorner/contrasted,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jn" = (
 /obj/machinery/washing_machine,
 /obj/structure/window/reinforced{
@@ -73,24 +60,24 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jz" = (
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "kJ" = (
 /obj/machinery/seed_extractor,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "lv" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "lG" = (
 /obj/structure/toilet{
 	dir = 1
 	},
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "lI" = (
 /obj/machinery/door/airlock/public/glass{
 	id_tag = "permabolt2";
@@ -99,7 +86,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "mv" = (
 /obj/structure/sign/warning/electricshock{
 	pixel_y = 32
@@ -111,19 +98,19 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "mW" = (
 /obj/structure/window/reinforced,
 /obj/effect/turf_decal/tile/blue/opposingcorners{
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "pC" = (
 /obj/structure/table,
 /obj/item/storage/pill_bottle/dice,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "pO" = (
 /obj/machinery/door/airlock/security/glass{
 	name = "Long-Term Cell 1";
@@ -137,20 +124,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"qb" = (
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"qh" = (
-/obj/item/kirbyplants/random,
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "rp" = (
 /obj/machinery/door/airlock/public/glass{
 	id_tag = "permabolt3";
@@ -159,17 +133,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"sf" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 1;
-	pixel_y = -27
-	},
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "si" = (
 /obj/structure/table,
 /obj/structure/bedsheetbin,
@@ -177,21 +141,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
-"sk" = (
-/obj/structure/table,
-/obj/item/razor{
-	pixel_x = -6
-	},
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
-	dir = 1
-	},
-/obj/effect/spawner/lootdrop/ruinloot/security,
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "su" = (
 /obj/structure/window/reinforced,
 /obj/machinery/hydroponics/soil,
@@ -200,7 +150,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "ve" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/window/westleft{
@@ -209,18 +159,18 @@
 	name = "Unisex Showers"
 	},
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vM" = (
 /obj/structure/table,
 /obj/item/paper,
 /obj/item/pen,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vY" = (
 /obj/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xe" = (
 /obj/structure/window/reinforced,
 /obj/machinery/hydroponics/soil,
@@ -229,10 +179,10 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xh" = (
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xP" = (
 /obj/structure/window/reinforced,
 /obj/machinery/hydroponics/soil,
@@ -241,27 +191,27 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xS" = (
 /obj/machinery/shower{
 	dir = 8
 	},
 /obj/item/soap/nanotrasen,
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xV" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "zd" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "zp" = (
 /obj/machinery/hydroponics/soil,
 /obj/item/seeds/carrot,
@@ -269,34 +219,28 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "zq" = (
 /obj/structure/table,
 /obj/item/toy/cards/deck,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "AG" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "AM" = (
 /obj/structure/sink{
 	pixel_y = 20
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Be" = (
 /obj/effect/abstract/doorway_marker,
-/turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
-"BT" = (
-/obj/structure/table,
-/obj/effect/spawner/lootdrop/ruinloot/security,
-/obj/effect/spawner/lootdrop/ruinloot/security,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "CC" = (
 /obj/machinery/door/airlock/public/glass{
 	id_tag = "permabolt1";
@@ -305,7 +249,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "CE" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -314,22 +258,22 @@
 	},
 /obj/item/pen,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ez" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "EW" = (
 /turf/closed/wall/r_wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Fz" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
 /obj/item/paper,
 /obj/item/pen,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Gr" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -338,13 +282,13 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ha" = (
 /obj/machinery/light,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/vending/sustenance,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "KP" = (
 /obj/machinery/hydroponics/soil,
 /obj/item/seeds/ambrosia,
@@ -352,33 +296,27 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Le" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/arcade,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "My" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/firedoor/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"MX" = (
-/obj/effect/turf_decal/tile/red{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Nf" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "NR" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "NZ" = (
 /obj/machinery/door/airlock/security/glass{
 	name = "Long-Term Cell 2";
@@ -389,7 +327,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Oe" = (
 /obj/structure/lattice,
 /turf/template_noop,
@@ -398,7 +336,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/bed,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Qh" = (
 /obj/structure/sink{
 	dir = 8;
@@ -406,15 +344,7 @@
 	pixel_y = 2
 	},
 /turf/open/floor/plasteel/freezer,
-/area/ruin/unpowered)
-"QQ" = (
-/obj/structure/table,
-/obj/item/electropack,
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ra" = (
 /obj/machinery/washing_machine,
 /obj/structure/window/reinforced,
@@ -422,30 +352,30 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/cafeteria,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "RC" = (
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "SO" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/toy/plush/carpplushie,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "SX" = (
 /obj/item/reagent_containers/glass/bucket,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "TT" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/r_wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "UG" = (
 /mob/living/simple_animal/mouse/brown/Tom,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "VE" = (
 /obj/machinery/door/airlock/security/glass{
 	name = "Long-Term Cell 3";
@@ -456,12 +386,12 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "VL" = (
 /obj/machinery/holopad,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Wj" = (
 /obj/machinery/hydroponics/soil,
 /obj/item/seeds/glowshroom,
@@ -469,11 +399,11 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "ZT" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 Oe
@@ -489,7 +419,7 @@ EW
 TT
 TT
 lv
-bO
+ad
 xV
 ad
 lv
@@ -508,9 +438,9 @@ rp
 NR
 NR
 VE
-bO
-bO
-sf
+ad
+ad
+ad
 lv
 "}
 (3,1,1) = {"
@@ -527,9 +457,9 @@ lv
 PN
 vM
 lv
-bO
-bO
-qb
+ad
+ad
+ad
 Be
 "}
 (4,1,1) = {"
@@ -546,9 +476,9 @@ lv
 lv
 lv
 lv
-bO
-bO
-qh
+ad
+ad
+ad
 lv
 "}
 (5,1,1) = {"
@@ -565,9 +495,9 @@ lv
 Ez
 NR
 lv
-bO
-bO
-QQ
+ad
+ad
+ad
 lv
 "}
 (6,1,1) = {"
@@ -584,9 +514,9 @@ lI
 NR
 NR
 NZ
-bO
-bO
-sk
+ad
+ad
+ad
 lv
 "}
 (7,1,1) = {"
@@ -603,10 +533,10 @@ lv
 RC
 vM
 lv
-bO
-bO
-BT
-lv
+ad
+ad
+ad
+Be
 "}
 (8,1,1) = {"
 My
@@ -622,9 +552,9 @@ lv
 lv
 lv
 lv
-bO
-bO
-dG
+ad
+ad
+ad
 lv
 "}
 (9,1,1) = {"
@@ -641,9 +571,9 @@ lv
 SO
 Fz
 lv
-bO
-bO
-dG
+ad
+ad
+ad
 lv
 "}
 (10,1,1) = {"
@@ -660,9 +590,9 @@ CC
 NR
 NR
 pO
-bO
-bO
-dG
+ad
+ad
+ad
 lv
 "}
 (11,1,1) = {"
@@ -679,10 +609,10 @@ lv
 ZT
 ZT
 lv
-bO
-bO
-MX
-lv
+ad
+ad
+ad
+Be
 "}
 (12,1,1) = {"
 EW
@@ -698,9 +628,9 @@ fZ
 Qh
 lG
 lv
-bO
-bO
-bO
+ad
+ad
+ad
 lv
 "}
 (13,1,1) = {"
@@ -717,8 +647,8 @@ EW
 EW
 EW
 EW
-bO
+ad
 AG
-bO
+ad
 lv
 "}

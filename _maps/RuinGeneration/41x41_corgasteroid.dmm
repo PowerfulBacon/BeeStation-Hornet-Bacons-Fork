@@ -4,12 +4,16 @@
 /obj/structure/lattice,
 /turf/template_noop,
 /area/template_noop)
+"aQ" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/two)
 "bw" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "bC" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -17,8 +21,8 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "cl" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -30,8 +34,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/mapping_helpers/airlock/abandoned,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "cA" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -40,7 +44,7 @@
 	dir = 1
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "cH" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -56,40 +60,40 @@
 	dir = 5
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "cT" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
 	},
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "cX" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "dk" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "eq" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "eZ" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "fl" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/four)
 "fB" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "fN" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 8
@@ -101,7 +105,13 @@
 	dir = 6
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"fX" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
 "ge" = (
 /obj/structure/sign/warning/vacuum{
 	pixel_y = 32
@@ -109,7 +119,7 @@
 /obj/machinery/atmospherics/components/unary/tank/air,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "gp" = (
 /obj/machinery/power/smes{
 	charge = 5e+006
@@ -121,7 +131,13 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"gz" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/ruin_mapping/nullroom)
 "he" = (
 /obj/structure/transit_tube/curved{
 	dir = 1
@@ -134,7 +150,7 @@
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/emcloset,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "hp" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -152,86 +168,79 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "iy" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "jk" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jv" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jC" = (
 /obj/machinery/atmospherics/pipe/simple/dark/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jG" = (
 /obj/item/pickaxe,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "jZ" = (
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "kE" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
-"kN" = (
-/obj/machinery/door/airlock/external/glass{
-	name = "Escape Pod Charlie"
-	},
-/obj/effect/mapping_helpers/airlock/locked,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "kS" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 1
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "lc" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
 /obj/machinery/light/small,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "lO" = (
 /obj/structure/chair/comfy/black{
 	dir = 1
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "mf" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "mi" = (
 /obj/structure/chair/stool,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "mj" = (
 /obj/structure/chair/comfy/black{
 	dir = 8
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "mE" = (
 /obj/structure/window/reinforced/spawner,
 /turf/template_noop,
@@ -241,20 +250,20 @@
 /obj/effect/spawner/lootdrop/maintenance,
 /obj/effect/spawner/lootdrop/ruinloot/basic,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "oI" = (
 /obj/structure/window/reinforced/spawner,
 /obj/machinery/atmospherics/pipe/simple/dark/hidden{
 	dir = 10
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "oR" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "oT" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 8
@@ -266,10 +275,10 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "po" = (
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "pz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -278,7 +287,7 @@
 	dir = 10
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "qf" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -286,17 +295,17 @@
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/emcloset,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "qp" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "qq" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "qs" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/item/wrench,
@@ -305,54 +314,54 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "qG" = (
 /obj/machinery/atmospherics/pipe/simple/dark/hidden{
 	dir = 10
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "rp" = (
 /obj/machinery/door/airlock/external{
 	name = "Escape Airlock"
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "sq" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "sw" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
 "te" = (
 /obj/machinery/atmospherics/pipe/simple/dark/hidden{
 	dir = 5
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "tC" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 10
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "tH" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "uX" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vc" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 4
@@ -367,30 +376,13 @@
 	dir = 5
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"vl" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/machinery/door/airlock/maintenance_hatch{
-	name = "Maintenance Hatch";
-	req_access_txt = "12"
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/abandoned,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vt" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 1
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/two)
 "vN" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -398,39 +390,45 @@
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/firecloset/full,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vQ" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vU" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vY" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "vZ" = (
 /turf/template_noop,
 /area/template_noop)
+"we" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/four)
 "wg" = (
 /obj/machinery/door/airlock/external{
 	name = "Escape Airlock"
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "wl" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "wr" = (
 /obj/machinery/advanced_airlock_controller/directional/east,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -442,7 +440,13 @@
 /obj/structure/closet/emcloset,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"wN" = (
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
 "wO" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -451,24 +455,24 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "wS" = (
 /obj/effect/spawner/lootdrop/maintenance,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "xC" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "xE" = (
 /obj/structure/sign/warning/vacuum{
 	pixel_x = 32
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "xY" = (
 /obj/structure/window/reinforced/spawner,
 /obj/structure/lattice,
@@ -488,12 +492,16 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
+"yr" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "yQ" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "zc" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -502,14 +510,14 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "zL" = (
 /turf/closed/mineral/random,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ai" = (
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ak" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -521,49 +529,43 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
-"Av" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"AC" = (
-/turf/closed/wall/mineral/plastitanium,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
+"Ay" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "AQ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "By" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "BA" = (
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Cb" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "Cc" = (
 /obj/effect/spawner/lootdrop/glowstick/lit,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Cj" = (
-/obj/effect/spawner/room/threexfive,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
 "Co" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/window/reinforced/spawner{
@@ -580,18 +582,18 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Cy" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "CK" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "CX" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 4
@@ -601,7 +603,7 @@
 	},
 /obj/effect/spawner/lootdrop/glowstick/lit,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Dq" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -610,14 +612,14 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Du" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Dx" = (
 /obj/structure/window/reinforced/spawner,
 /obj/structure/transit_tube/diagonal,
@@ -628,7 +630,7 @@
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ef" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 6
@@ -636,14 +638,14 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "EC" = (
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "EF" = (
 /obj/structure/transit_tube/diagonal/crossing,
 /obj/structure/lattice,
@@ -657,7 +659,7 @@
 	dir = 10
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Fv" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -666,17 +668,17 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Fw" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "FX" = (
 /obj/item/crowbar/red,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
 	dir = 1
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "FY" = (
 /obj/structure/transit_tube/diagonal,
 /turf/template_noop,
@@ -689,12 +691,12 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "Hc" = (
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Hf" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 4
@@ -707,7 +709,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Iw" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -718,8 +720,8 @@
 	req_access_txt = "12"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "IF" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -727,8 +729,8 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "IL" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
@@ -737,7 +739,7 @@
 	dir = 10
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "IX" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 8
@@ -747,7 +749,7 @@
 	},
 /obj/effect/turf_decal/caution/stand_clear,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Jn" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -760,20 +762,20 @@
 	req_access_txt = "12"
 	},
 /obj/effect/mapping_helpers/airlock/abandoned,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "JI" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "JK" = (
 /obj/structure/bonfire,
 /obj/effect/spawner/lootdrop/ruinloot/important,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "JL" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -783,18 +785,27 @@
 	},
 /obj/effect/spawner/lootdrop/ruinloot/basic,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "JP" = (
-/obj/effect/spawner/room/fivexfour,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/four)
+"JQ" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
+"KJ" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/two)
 "Ln" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "Lr" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -803,14 +814,14 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "LM" = (
 /obj/effect/spawner/lootdrop/maintenance,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Nr" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -823,11 +834,11 @@
 	dir = 6
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Nz" = (
 /obj/structure/chair/comfy/black,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ok" = (
 /obj/structure/cable{
 	icon_state = "2-4"
@@ -840,11 +851,11 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ov" = (
 /obj/effect/abstract/doorway_marker,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Oz" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -854,12 +865,11 @@
 	name = "Maintenance Hatch";
 	req_access_txt = "12"
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "OX" = (
-/obj/effect/spawner/room/tenxfive,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/two)
 "Pk" = (
 /obj/structure/lattice,
 /turf/template_noop,
@@ -868,11 +878,10 @@
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "PF" = (
-/obj/effect/spawner/room/tenxten,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/one)
 "PY" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 1
@@ -881,19 +890,19 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Qr" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/four)
 "Qv" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/one)
 "QD" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -906,27 +915,24 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "QV" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/on{
 	dir = 4
 	},
 /obj/structure/window/reinforced/spawner,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Rf" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ri" = (
 /obj/structure/lattice/catwalk,
 /turf/template_noop,
 /area/template_noop)
-"Rq" = (
-/turf/open/floor/plating,
-/area/ruin/unpowered)
 "RG" = (
 /obj/structure/transit_tube/diagonal,
 /obj/structure/lattice/catwalk,
@@ -940,7 +946,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "RT" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 8
@@ -949,7 +955,7 @@
 	dir = 9
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "RY" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -960,33 +966,33 @@
 	req_access_txt = "12"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/nullroom)
 "Si" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/three)
 "SC" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Tt" = (
 /obj/effect/spawner/lootdrop/ruinloot/basic,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ty" = (
 /obj/effect/spawner/lootdrop/glowstick/lit,
 /obj/machinery/atmospherics/pipe/simple/dark/hidden{
 	dir = 4
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "TZ" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Ue" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 4
@@ -996,7 +1002,7 @@
 	},
 /obj/effect/turf_decal/caution/stand_clear,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Uo" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1008,18 +1014,18 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "UB" = (
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
 /obj/effect/spawner/lootdrop/ruinloot/basic,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "UN" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on,
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/one)
 "Vd" = (
 /obj/structure/transit_tube,
 /turf/template_noop,
@@ -1036,12 +1042,12 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Vo" = (
 /obj/structure/table/wood,
 /obj/item/candle,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "VQ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
@@ -1049,31 +1055,31 @@
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/firecloset/full,
 /turf/open/floor/plasteel/dark,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "VT" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Wc" = (
 /obj/machinery/atmospherics/components/binary/dp_vent_pump{
 	dir = 4
 	},
 /obj/machinery/advanced_airlock_controller/directional/east,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Wn" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "Xc" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
-/turf/open/floor/plating,
-/area/ruin/unpowered)
+/turf/open/floor/plasteel,
+/area/ruin_mapping/room/four)
 "Xy" = (
 /obj/structure/transit_tube,
 /obj/structure/lattice,
@@ -1084,18 +1090,18 @@
 	dir = 5
 	},
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "YM" = (
 /obj/structure/window/reinforced/spawner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/dark/hidden,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "YT" = (
 /obj/structure/chair/stool,
 /turf/open/floor/plating/asteroid,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 
 (1,1,1) = {"
 vZ
@@ -1540,10 +1546,10 @@ vZ
 Pk
 vZ
 Fw
-Rq
-Rq
-Cb
-Rq
+OX
+OX
+KJ
+OX
 OX
 Fw
 qq
@@ -1583,11 +1589,11 @@ Pk
 Pk
 zL
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
 po
 UB
@@ -1595,9 +1601,9 @@ RP
 BA
 po
 Fw
-Rq
-Rq
-Rq
+JP
+JP
+JP
 JP
 Fw
 VT
@@ -1626,11 +1632,11 @@ vZ
 Pk
 zL
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
 VQ
 Rf
@@ -1638,10 +1644,10 @@ LM
 po
 vN
 Fw
-Rq
-Rq
-Rq
-Rq
+JP
+JP
+JP
+JP
 Fw
 Cb
 wg
@@ -1669,14 +1675,14 @@ vZ
 zL
 zL
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
 hn
-Av
+Cb
 po
 po
 qf
@@ -1712,11 +1718,11 @@ zL
 zL
 zL
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
 Fw
 ym
@@ -1724,10 +1730,10 @@ Fw
 Fw
 Fw
 Fw
-Cb
-Rq
-Rq
-Rq
+we
+JP
+JP
+JP
 Fw
 xC
 eq
@@ -1755,22 +1761,22 @@ zL
 zL
 jZ
 Fw
-Rq
-Rq
+OX
+OX
 vt
-fl
-fl
+aQ
+aQ
 Iw
 wS
 By
 mf
-fl
-fl
+Ay
+Ay
 dk
 Qr
-Rq
-Rq
-Rq
+JP
+JP
+JP
 Fw
 xC
 eq
@@ -1798,11 +1804,11 @@ YM
 te
 jZ
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
 Fw
 Fw
@@ -1841,21 +1847,21 @@ kS
 jC
 Tt
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 PF
 Fw
 xC
@@ -1884,22 +1890,22 @@ jZ
 jC
 jZ
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 FX
 CK
@@ -1927,22 +1933,22 @@ jZ
 Ty
 jZ
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+OX
+OX
+KJ
+OX
+OX
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 xC
 eq
@@ -1959,11 +1965,11 @@ vZ
 "}
 (21,1,1) = {"
 vZ
-Ri
-Pk
-Pk
-Pk
-Pk
+vZ
+vZ
+vZ
+vZ
+vZ
 zL
 vY
 jZ
@@ -1976,16 +1982,16 @@ ym
 Fw
 Fw
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 xC
 Fw
@@ -2004,7 +2010,7 @@ vZ
 vZ
 vZ
 vZ
-Pk
+vZ
 vZ
 zL
 Fw
@@ -2013,22 +2019,22 @@ XL
 Uo
 EC
 Fw
-Rq
-Rq
-Cb
-Rq
+Cj
+Cj
+fX
+Cj
 Cj
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Oz
 xC
 eq
@@ -2045,10 +2051,10 @@ vZ
 "}
 (23,1,1) = {"
 vZ
-AC
-Fw
-Fw
-Fw
+vZ
+vZ
+vZ
+vZ
 zL
 zL
 tH
@@ -2056,21 +2062,21 @@ Cy
 QD
 lc
 Fw
-Rq
-Rq
-vt
-fl
-fl
+Cj
+Cj
+wN
+JQ
+JQ
 Iw
 Qv
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 UN
 RY
 iy
@@ -2099,22 +2105,22 @@ Cy
 ie
 gp
 Fw
-Rq
-Rq
-Cb
-Rq
-Rq
+Cj
+Cj
+fX
+Cj
+Cj
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 xC
 eq
@@ -2135,7 +2141,7 @@ vZ
 vZ
 vZ
 vZ
-kN
+zL
 Hc
 jZ
 Cy
@@ -2143,21 +2149,21 @@ qG
 te
 Fw
 Fw
+Cj
+fX
+Cj
+Cj
 Fw
-vl
-Fw
-Fw
-Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 xC
 Fw
@@ -2186,21 +2192,21 @@ cA
 wO
 bw
 Fw
-Rq
-Cb
-Rq
-JP
+Cj
+fX
+Cj
+Cj
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 xC
 eq
@@ -2217,33 +2223,33 @@ vZ
 "}
 (27,1,1) = {"
 vZ
-AC
-Fw
-Fw
-Fw
+vZ
+vZ
+vZ
+vZ
 zL
 zL
 jZ
 EI
 vU
 Du
-fl
+yr
 Wn
-fl
+JQ
 Si
-Rq
-Rq
+Cj
+Cj
 Fw
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
-Rq
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
+PF
 Fw
 zc
 eq
@@ -2262,7 +2268,7 @@ vZ
 vZ
 vZ
 vZ
-Pk
+vZ
 vZ
 zL
 zL
@@ -2270,12 +2276,12 @@ jZ
 uX
 pz
 Lr
-As
+gz
 Fw
-Rq
-Cb
-Rq
-Rq
+Cj
+fX
+Cj
+Cj
 Fw
 Fw
 Fw
@@ -2303,10 +2309,10 @@ vZ
 "}
 (29,1,1) = {"
 vZ
-Ri
-Pk
-Pk
-Pk
+vZ
+vZ
+vZ
+vZ
 zL
 zL
 jZ
@@ -2315,10 +2321,10 @@ jZ
 DU
 jZ
 Fw
-Rq
+Cj
 sw
-fl
-fl
+JQ
+JQ
 cl
 qp
 XL
@@ -2358,10 +2364,10 @@ Cc
 DU
 jZ
 Fw
-Rq
-Rq
-Rq
-Rq
+Cj
+Cj
+Cj
+Cj
 Fw
 Fw
 TZ

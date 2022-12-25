@@ -2,94 +2,56 @@
 "a" = (
 /obj/structure/lattice,
 /turf/template_noop/open,
-/area/template_noop)
+/area/ruin_mapping/nullroom)
 "c" = (
 /turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/hallway)
 "d" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/hallway)
 "g" = (
 /turf/closed/wall,
-/area/ruin)
-"j" = (
-/obj/structure/sign/warning/radiation{
-	pixel_y = 32
-	},
-/turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/nullroom)
 "l" = (
 /obj/machinery/the_singularitygen,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/ruin_mapping/nullroom)
 "o" = (
 /obj/machinery/field/generator,
 /turf/open/floor/plating,
-/area/template_noop)
-"p" = (
-/obj/machinery/power/rad_collector,
-/turf/open/floor/plasteel,
-/area/ruin)
-"q" = (
-/obj/structure/sign/warning/radiation{
-	pixel_y = -32
-	},
-/turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/nullroom)
 "t" = (
-/turf/template_noop/open,
-/area/template_noop)
-"x" = (
-/obj/structure/table/reinforced,
-/turf/open/floor/plasteel,
-/area/ruin)
-"z" = (
-/obj/structure/closet/radiation,
-/turf/open/floor/plasteel,
-/area/ruin)
+/turf/open/floor/plating,
+/area/ruin_mapping/nullroom)
 "A" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/hallway)
 "C" = (
 /turf/closed/wall/r_wall,
-/area/ruin)
-"E" = (
-/obj/machinery/computer,
-/turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/nullroom)
 "F" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/hallway)
 "G" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/hallway)
 "N" = (
-/obj/effect/decal/fakelattice,
 /turf/template_noop/open,
-/area/template_noop)
+/area/ruin_mapping/nullroom)
 "R" = (
-/obj/effect/spawner/structure/window/plasma/reinforced,
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin)
-"S" = (
-/turf/open/floor/plating,
-/area/template_noop)
-"W" = (
-/obj/structure/chair/office{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/ruin)
+/area/ruin_mapping/nullroom)
 "X" = (
 /turf/template_noop,
 /area/template_noop)
@@ -124,7 +86,6 @@ g
 g
 g
 g
-z
 c
 c
 c
@@ -132,7 +93,8 @@ c
 c
 c
 c
-z
+c
+c
 g
 g
 g
@@ -166,13 +128,6 @@ X
 (4,1,1) = {"
 X
 g
-j
-c
-c
-c
-c
-c
-p
 c
 c
 c
@@ -182,7 +137,14 @@ c
 c
 c
 c
-q
+c
+c
+c
+c
+c
+c
+c
+c
 g
 X
 "}
@@ -198,9 +160,9 @@ c
 c
 c
 c
-p
 c
-p
+c
+c
 c
 c
 c
@@ -240,16 +202,16 @@ c
 c
 C
 t
-N
+t
 t
 N
 t
 N
 t
-N
+t
 t
 C
-x
+c
 c
 c
 c
@@ -262,17 +224,17 @@ c
 c
 c
 R
-N
-o
-t
-S
-S
-S
 t
 o
+t
 N
+t
+N
+t
+o
+t
 R
-E
+c
 c
 c
 c
@@ -287,16 +249,16 @@ c
 R
 t
 t
-t
+N
 a
 t
 a
-t
+N
 t
 t
 R
-E
-W
+c
+c
 c
 c
 g
@@ -309,16 +271,16 @@ c
 c
 R
 N
-S
+N
 a
-S
-S
-S
+t
+t
+t
 a
-S
+N
 N
 R
-E
+c
 c
 c
 c
@@ -332,16 +294,16 @@ c
 c
 C
 t
-S
 t
-S
+t
+t
 l
-S
 t
-S
+t
+t
 t
 C
-x
+c
 c
 c
 c
@@ -355,16 +317,16 @@ c
 c
 R
 N
-S
+N
 a
-S
-S
-S
+t
+t
+t
 a
-S
+N
 N
 R
-E
+c
 c
 c
 c
@@ -379,16 +341,16 @@ c
 R
 t
 t
-t
+N
 a
 t
 a
-t
+N
 t
 t
 R
-E
-W
+c
+c
 c
 c
 g
@@ -400,17 +362,17 @@ c
 c
 c
 R
-N
-o
-t
-S
-S
-S
 t
 o
+t
 N
+t
+N
+t
+o
+t
 R
-E
+c
 c
 c
 c
@@ -424,16 +386,16 @@ c
 c
 C
 t
-N
+t
 t
 N
 t
 N
 t
-N
+t
 t
 C
-x
+c
 c
 c
 c
@@ -471,8 +433,8 @@ c
 c
 c
 c
-p
-p
+c
+c
 c
 c
 c
@@ -488,7 +450,6 @@ X
 (18,1,1) = {"
 X
 g
-j
 c
 c
 c
@@ -504,7 +465,8 @@ c
 c
 c
 c
-q
+c
+c
 g
 X
 "}
@@ -538,7 +500,6 @@ g
 g
 g
 g
-z
 c
 c
 c
@@ -546,7 +507,8 @@ c
 c
 c
 c
-z
+c
+c
 g
 g
 g

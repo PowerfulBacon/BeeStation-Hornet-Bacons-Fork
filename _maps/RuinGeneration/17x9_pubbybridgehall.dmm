@@ -1,108 +1,58 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/wall,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "b" = (
-/obj/effect/turf_decal/tile/neutral/opposingcorners{
-	dir = 1
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"f" = (
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"h" = (
-/obj/machinery/vending/cigarette,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
-"i" = (
-/obj/machinery/vending/coffee,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "k" = (
 /obj/item/toy/plush/lizardplushie,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "m" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "o" = (
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "p" = (
 /obj/effect/abstract/doorway_marker,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"s" = (
-/obj/structure/closet/firecloset/full,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "u" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"v" = (
-/obj/machinery/vending/snack/random,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "w" = (
 /obj/effect/abstract/open_area_marker,
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "z" = (
-/obj/item/kirbyplants/random,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners{
-	dir = 1
-	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "C" = (
 /obj/machinery/door/airlock/maintenance_hatch{
 	req_access_txt = "12"
 	},
 /turf/open/floor/plating,
-/area/ruin/unpowered)
-"F" = (
-/obj/structure/closet/emcloset,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "G" = (
 /obj/effect/abstract/open_area_marker{
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/ruin/unpowered)
+/area/ruin_mapping/hallway)
 "I" = (
 /obj/item/kirbyplants/photosynthetic{
 	layer = 3.1
 	},
 /obj/structure/window/fulltile,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "J" = (
 /obj/structure/lattice,
 /obj/structure/sign/logo{
@@ -121,7 +71,7 @@
 "O" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "P" = (
 /obj/structure/lattice,
 /obj/structure/sign/logo{
@@ -130,17 +80,13 @@
 	},
 /turf/template_noop,
 /area/space)
-"V" = (
-/obj/effect/turf_decal/tile/neutral/opposingcorners,
-/turf/open/floor/plasteel,
-/area/ruin/unpowered)
 "W" = (
 /obj/structure/sign/poster/contraband/lizard{
 	pixel_y = 32
 	},
 /obj/effect/spawner/lootdrop/maintenance,
 /turf/open/floor/plating,
-/area/ruin/unpowered)
+/area/ruin_mapping/nullroom)
 "X" = (
 /obj/structure/lattice,
 /obj/structure/sign/logo{
@@ -164,7 +110,7 @@ a
 a
 a
 a
-V
+b
 G
 b
 a
@@ -173,41 +119,41 @@ a
 m
 z
 b
-f
-f
-f
-f
-f
+b
+b
+b
+b
+b
 b
 "}
 (3,1,1) = {"
 m
-s
-f
-f
-f
-f
-f
-f
+z
+b
+b
+b
+b
+b
+b
 w
 "}
 (4,1,1) = {"
 m
-F
-V
-f
-f
-f
-V
-V
-V
+z
+b
+b
+b
+b
+b
+b
+b
 "}
 (5,1,1) = {"
 a
 a
 a
-V
-f
+b
+b
 b
 a
 a
@@ -217,8 +163,8 @@ a
 a
 I
 a
-V
-f
+b
+b
 b
 a
 O
@@ -228,8 +174,8 @@ a
 a
 J
 m
-V
-f
+b
+b
 b
 C
 o
@@ -239,8 +185,8 @@ p
 a
 M
 m
-V
-f
+b
+b
 b
 a
 o
@@ -250,8 +196,8 @@ a
 a
 P
 m
-V
-f
+b
+b
 b
 a
 u
@@ -261,8 +207,8 @@ a
 a
 X
 m
-V
-f
+b
+b
 b
 a
 a
@@ -272,8 +218,8 @@ a
 a
 Y
 m
-V
-f
+b
+b
 b
 a
 W
@@ -283,8 +229,8 @@ a
 a
 I
 a
-V
-f
+b
+b
 b
 a
 k
@@ -294,8 +240,8 @@ a
 a
 a
 a
-V
-f
+b
+b
 b
 a
 a
@@ -303,36 +249,36 @@ a
 "}
 (14,1,1) = {"
 m
-i
+z
 b
-f
-f
-f
+b
+b
+b
 b
 b
 b
 "}
 (15,1,1) = {"
 m
-h
-f
-f
-f
-f
-f
-f
+z
+b
+b
+b
+b
+b
+b
 w
 "}
 (16,1,1) = {"
 m
-v
-V
-f
-f
-f
-f
-f
-V
+z
+b
+b
+b
+b
+b
+b
+b
 "}
 (17,1,1) = {"
 a
