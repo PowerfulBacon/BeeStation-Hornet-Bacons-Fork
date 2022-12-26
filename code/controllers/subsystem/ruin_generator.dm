@@ -2,8 +2,13 @@ SUBSYSTEM_DEF(ruin_generator)
 	name = "Ruin Generator"
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_RUIN_GENERATOR
+
+	//Ruin mapping areas by z-level by type
+	var/list/mapping_areas
+
 	//The decorators that we can apply
 	var/list/datum/ruin_decorator/decorators = list()
+
 	//The ruin that we are waiting to gobble up
 	var/datum/map_generator/space_ruin/unused_ruin
 
