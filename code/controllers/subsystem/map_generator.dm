@@ -1,3 +1,7 @@
+#define MAP_GENERATOR_PAUSE 0
+#define MAP_GENERATOR_CONTINUE 1
+#define MAP_GENERATOR_FINISHED 2
+
 SUBSYSTEM_DEF(map_generator)
 	name = "Map Generator"
 	wait = 1
@@ -34,14 +38,16 @@ SUBSYSTEM_DEF(map_generator)
 		var/datum/map_generator/currently_running = executing_generators[current_run_index]
 		current_run_index ++
 		//Perform generate action
-		var/completed = TRUE
-		while (!currently_running.execute_run())
+		var/result = currently_running.try_execute_run()
+		// Continue running while it tells us we are allowed to keep running
+		while (result == MAP_GENERATOR_CONTINUE)
+			//Get the next result (Optimise away the conditional check, since we have to have passed it already)
+			result = currently_running.execute_run()
 			// We overused our allocated amount of tick
 			if(MC_TICK_CHECK)
-				completed = FALSE
 				break
 		//We completed
-		if (completed)
+		if (result == MAP_GENERATOR_FINISHED)
 			currently_running.complete()
 			//Remove the currently running generator
 			executing_generators -= currently_running

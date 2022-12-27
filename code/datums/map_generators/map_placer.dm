@@ -93,7 +93,7 @@
 		build_coordinates_start()
 	if (current_run == GENERATE_STAGE_BUILD_COORDINATES)
 		build_coordinates()
-	. = current_run == GENERATE_STAGE_COMPLETED
+	. = (current_run == GENERATE_STAGE_COMPLETED ? MAP_GENERATOR_FINISHED : MAP_GENERATOR_CONTINUE)
 
 /datum/map_generator/map_place/proc/set_stage(stage)
 	run_stage = 1

@@ -4,7 +4,7 @@ SUBSYSTEM_DEF(ruin_generator)
 	init_order = INIT_ORDER_RUIN_GENERATOR
 
 	//Ruin mapping areas by z-level by type
-	var/list/mapping_areas
+	var/list/mapping_areas = list()
 
 	//The decorators that we can apply
 	var/list/datum/ruin_decorator/decorators = list()
@@ -40,3 +40,12 @@ SUBSYSTEM_DEF(ruin_generator)
 	decorate_ruin(unused_ruin)
 	//Keep this around until the explorers arrive
 	SSzclear.keep_z(target_level.z_value)
+
+/datum/controller/subsystem/ruin_generator/proc/store_z_area(z_val, area/a)
+	while (length(mapping_areas) < a.z)
+		mapping_areas += list()
+	var/list/areas_by_z = mapping_areas[a.z]
+	var/list/areas_by_type = areas_by_z[a.type]
+	if (!areas_by_type)
+		areas_by_z[a.type] = areas_by_type = list()
+	areas_by_type += a

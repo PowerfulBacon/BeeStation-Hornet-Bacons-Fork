@@ -57,6 +57,9 @@
 	//The space level we were created on
 	var/datum/space_level/created_space_level
 
+	//Create the station datum
+	var/datum/map_generator/ruin_station/station_populator = new //TODO: Fill this in or runtime
+
 /datum/map_generator/space_ruin/New(center_x, center_y, center_z, border_x, border_y)
 	. = ..()
 	src.center_x = center_x
@@ -106,11 +109,11 @@
 			stage = 2
 		if (2)
 			finalize()
-			return TRUE
+			return MAP_GENERATOR_FINISHED
 		else
-			. = TRUE
+			. = MAP_GENERATOR_FINISHED
 			CRASH("Ruin generator in invalid state: [stage]")
-	return FALSE
+	return MAP_GENERATOR_CONTINUE
 
 /datum/map_generator/space_ruin/proc/ruin_placer_run()
 	// Lets pause for a bit to let the map generator catch up
@@ -240,7 +243,9 @@
 				valid_ruin_parts.Remove(ruin_part)
 
 	//Actual spawn
-	ruin_part.load(locate(ruin_offset_x + 1, ruin_offset_y + 1, center_z), FALSE, FALSE)
+	var/datum/map_generator/ruin_map_loader = ruin_part.load(locate(ruin_offset_x + 1, ruin_offset_y + 1, center_z), FALSE, FALSE)
+	//The station populator needs the station to be fully generated before it can run
+	station_populator.wait_for(ruin_map_loader)
 	//Simulate spawning
 	//Remove filled connection points
 	for(var/point in ruin_part.connection_points)
@@ -316,17 +321,7 @@
 				valid = FALSE
 		if(valid)
 			new /obj/machinery/door/airlock/hatch(T)
-			switch(placed_room_entrances[door_pos])
-				if(SOUTH, NORTH)
-					var/obj/machinery/door/firedoor/border_only/b1 = new(T)
-					var/obj/machinery/door/firedoor/border_only/b2 = new(T)
-					b1.setDir(NORTH)
-					b2.setDir(SOUTH)
-				if(EAST, WEST)
-					var/obj/machinery/door/firedoor/border_only/b1 = new(T)
-					var/obj/machinery/door/firedoor/border_only/b2 = new(T)
-					b1.setDir(EAST)
-					b2.setDir(WEST)
+			new /obj/machinery/door/firedoor(T)
 
 	//Repopulate areas
 	repopulate_sorted_areas()
@@ -348,8 +343,12 @@
 
 	SSair.unpause_z(center_z)
 
-	// Trigger furnature generation
-	
+	// TODO: Trigger furnature generation
+	// Note that we need to wait for the map loading to complete so we have the areas initialised
+	station_populator.blocked_turfs = blocked_turfs
+	station_populator.floor_turfs = floor_turfs
+	station_populator.z_level = center_z
+	station_populator.generate()
 
 	log_mapping("Finished generating ruin at [center_x], [center_y], [center_z]")
 

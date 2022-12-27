@@ -3,6 +3,11 @@
 	area_flags = HIDDEN_AREA
 	icon = 'icons/effects/ruin_generator_mapping.dmi'
 
+/area/ruin_mapping/Initialize(mapload)
+	. = ..()
+	//Record this so we can work with them
+	SSruin_generator.store_z_area(z, src)
+
 /area/ruin_mapping/room
 	icon_state = "room"
 

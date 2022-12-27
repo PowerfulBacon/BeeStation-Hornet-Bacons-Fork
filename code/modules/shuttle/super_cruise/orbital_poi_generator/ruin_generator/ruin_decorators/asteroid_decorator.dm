@@ -26,29 +26,28 @@
 	src.perlin_noise_scale = perlin_noise_scale
 
 /datum/map_generator/asteroid_generator/execute_run()
-	index ++
+	..()
 	if (index > length(turfs_to_generate))
 		turfs_to_generate = null
 		z_center = null
-		return TRUE
-	. = ..()
+		return MAP_GENERATOR_FINISHED
 	var/turf/T = turfs_to_generate[index]
 	if (!isspaceturf(T))
-		return FALSE
+		return MAP_GENERATOR_CONTINUE
 	//Calculate distance to edge
 	var/distance = z_center.Distance(T)
 	if(distance > max_radius)
-		return FALSE
+		return MAP_GENERATOR_CONTINUE
 	var/noise_at_coord = text2num(rustg_noise_get_at_coordinates("[seed]", "[T.x / perlin_noise_scale]", "[T.y / perlin_noise_scale]"))
 	if (!isspaceturf(T))
-		return FALSE
+		return MAP_GENERATOR_CONTINUE
 	var/rock_value = (distance / max_radius) + 0.1
 	var/sand_value = (distance / max_radius)
 	if(noise_at_coord >= rock_value)
 		T.ChangeTurf(/turf/closed/mineral/random, list(/turf/open/floor/plating/asteroid/airless), CHANGETURF_IGNORE_AIR)
 	else if(noise_at_coord >= sand_value)
 		T.ChangeTurf(/turf/open/floor/plating/asteroid/airless, flags = CHANGETURF_IGNORE_AIR)
-	return FALSE
+	return MAP_GENERATOR_CONTINUE
 
 /datum/map_generator/asteroid_generator/get_name()
 	return "Asteroid generator"
