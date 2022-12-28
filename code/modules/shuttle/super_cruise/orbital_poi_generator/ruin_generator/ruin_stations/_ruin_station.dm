@@ -35,5 +35,21 @@
 /// Smaller stations might have global access for all crews, while larger ones may have proper command
 /// structures, well-defined access requirements and different departments.
 /datum/map_generator/ruin_station/proc/determine_rooms()
-	for (var/location in floor_turfs)
-
+	var/list/processing_turfs = blocked_turfs.Copy()
+	while (length(processing_turfs))
+		//Get the location we need to process
+		var/to_process = processing_turfs[length(processing_turfs)]
+		processing_turfs.len --
+		var/value = processing_turfs[to_process]
+		//We already dealt with this room
+		if (!value)
+			continue
+		//Identify our starting point
+		var/list/split_location = splittext(to_process, "_")
+		var/x_position = text2num(split_location[1])
+		var/y_position = text2num(split_location[2])
+		//Start expanding the room
+		var/turf/located_turf = locate(x_position, y_position, z_level)
+		var/area/located_area = get_area(located_turf)
+		var/area_type = located_area.type
+		processing_turfs[to_process] = FALSE
