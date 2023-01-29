@@ -89,17 +89,52 @@
 /obj/structure/shuttle/engine/propulsion/burst/right,
 /turf/open/floor/plating/airless,
 /area/shuttle/supply)
-"w" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/open/floor/mineral/titanium/blue,
-/area/shuttle/supply)
 "x" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/open/floor/mineral/titanium/blue,
+/area/shuttle/supply)
+"z" = (
+/turf/open/floor/plasteel/cargo,
+/area/shuttle/supply)
+"A" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"C" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"H" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"R" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/computer/cargo,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"S" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"W" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/turf/open/floor/mineral/titanium,
 /area/shuttle/supply)
 
 (1,1,1) = {"
@@ -132,13 +167,13 @@ t
 "}
 (3,1,1) = {"
 b
+S
+H
 e
-e
-e
-e
-e
-e
-e
+z
+z
+z
+z
 e
 e
 q
@@ -146,13 +181,13 @@ u
 "}
 (4,1,1) = {"
 b
-w
+R
+C
 e
-e
-e
-e
-e
-e
+z
+z
+z
+z
 e
 e
 q
@@ -160,13 +195,13 @@ u
 "}
 (5,1,1) = {"
 b
+A
+W
 e
-e
-e
-e
-e
-e
-e
+z
+z
+z
+z
 e
 e
 q

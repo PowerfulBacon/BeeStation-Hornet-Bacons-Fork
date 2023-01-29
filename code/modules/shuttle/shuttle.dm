@@ -369,6 +369,9 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	/// If true, the shuttle will be deleted upon landing
 	var/delete_on_land = FALSE
 
+	/// List of things that this shuttle is capable of selling
+	var/list/sellable_atoms = list()
+
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile |= src
 	SSorbits.register_shuttle(id)
@@ -991,6 +994,14 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 /obj/docking_port/mobile/proc/getTimerStr()
 	if(mode == SHUTTLE_STRANDED)
 		return "--:--"
+
+	//If the shuttle is in bluespace transit
+	var/datum/orbital_object/shuttle/shuttle_object = SSorbits.assoc_shuttles[id]
+	if(shuttle_object && shuttle_object.autopilot && shuttle_object.shuttleTarget)
+		var/distance = shuttle_object.position.Distance(shuttle_object.shuttleTarget.position)
+		if(distance > 9999)
+			return "9999u"
+		return "[round(distance)]u"
 
 	var/timeleft = timeLeft()
 	if(timeleft > 1 HOURS)

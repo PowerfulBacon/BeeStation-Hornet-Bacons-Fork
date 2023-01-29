@@ -1,4 +1,13 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"c" = (
+/turf/open/floor/plasteel/cargo,
+/area/shuttle/supply)
+"d" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
 "e" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -38,6 +47,12 @@
 "p" = (
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/supply)
+"q" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
 "s" = (
 /obj/machinery/conveyor{
 	dir = 8;
@@ -54,8 +69,25 @@
 /obj/structure/shuttle/engine/propulsion,
 /turf/open/floor/plating/airless,
 /area/shuttle/supply)
+"x" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
 "z" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
+/area/shuttle/supply)
+"A" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/supply)
+"E" = (
+/obj/machinery/computer/cargo,
+/turf/open/floor/mineral/titanium,
 /area/shuttle/supply)
 "G" = (
 /obj/machinery/conveyor{
@@ -68,6 +100,12 @@
 	},
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
+/area/shuttle/supply)
+"K" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/turf/open/floor/mineral/titanium,
 /area/shuttle/supply)
 "L" = (
 /turf/open/floor/mineral/titanium/blue,
@@ -160,13 +198,13 @@ X
 "}
 (3,1,1) = {"
 W
+A
+q
 L
-L
-L
-L
-L
-L
-L
+c
+c
+c
+c
 L
 L
 e
@@ -174,13 +212,13 @@ u
 "}
 (4,1,1) = {"
 W
+E
+x
 L
-L
-L
-L
-L
-L
-L
+c
+c
+c
+c
 L
 L
 e
@@ -188,13 +226,13 @@ u
 "}
 (5,1,1) = {"
 W
+d
+K
 L
-L
-L
-L
-L
-L
-L
+c
+c
+c
+c
 L
 L
 e

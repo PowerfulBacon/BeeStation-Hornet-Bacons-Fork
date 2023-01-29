@@ -27,9 +27,6 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 
 // external_report works as "transaction" object, pass same one in if you're doing more than one export in single go
 /proc/export_item_and_contents(atom/movable/AM, allowed_categories = EXPORT_CARGO, apply_elastic = TRUE, delete_unsold = TRUE, dry_run=FALSE, datum/export_report/external_report)
-	if(!GLOB.exports_list.len)
-		setupExports()
-
 	var/list/contents = AM.GetAllContents()
 
 	var/datum/export_report/report = external_report
@@ -40,7 +37,7 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 	for(var/i in reverseRange(contents))
 		var/atom/movable/thing = i
 		var/sold = FALSE
-		for(var/datum/export/E in GLOB.exports_list)
+		for(var/datum/export/E in SSexport.exports_list)
 			if(!E)
 				continue
 			if(E.applies_to(thing, allowed_categories, apply_elastic))
@@ -55,9 +52,6 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 	return report
 
 /proc/export_contents(atom/movable/AM, allowed_categories = EXPORT_CARGO, apply_elastic = TRUE, delete_unsold = TRUE, dry_run=FALSE, datum/export_report/external_report)
-	if(!GLOB.exports_list.len)
-		setupExports()
-
 	var/list/contents = AM.GetAllContents() - AM
 
 	var/datum/export_report/report = external_report
@@ -68,7 +62,7 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 	for(var/i in reverseRange(contents))
 		var/atom/movable/thing = i
 		var/sold = FALSE
-		for(var/datum/export/E in GLOB.exports_list)
+		for(var/datum/export/E in SSexport.exports_list)
 			if(!E)
 				continue
 			if(E.applies_to(thing, allowed_categories, apply_elastic))
@@ -101,8 +95,9 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 	..()
 	START_PROCESSING(SSprocessing, src)
 	init_cost = cost
-	export_types = typecacheof(export_types)
+	export_types = typecacheof(export_types, only_root_path = !include_subtypes)
 	exclude_types = typecacheof(exclude_types)
+	SSexport.register_export(src)
 
 /datum/export/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
@@ -195,11 +190,3 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 
 	msg += "."
 	return msg
-
-GLOBAL_LIST_EMPTY(exports_list)
-
-/proc/setupExports()
-	for(var/subtype in subtypesof(/datum/export))
-		var/datum/export/E = new subtype
-		if(E.export_types?.len) // Exports without a type are invalid/base types
-			GLOB.exports_list += E

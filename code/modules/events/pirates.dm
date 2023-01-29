@@ -212,10 +212,8 @@
 		say("Located: [AM.name] at [get_area_name(AM)]")
 
 /obj/machinery/loot_locator/proc/find_random_loot()
-	if(!GLOB.exports_list.len)
-		setupExports()
 	var/list/possible_loot = list()
-	for(var/datum/export/pirate/E in GLOB.exports_list)
+	for(var/datum/export/pirate/E in SSexport.exports_list)
 		possible_loot += E
 	var/datum/export/pirate/P
 	var/atom/movable/AM
