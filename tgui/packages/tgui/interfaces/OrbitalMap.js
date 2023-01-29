@@ -70,9 +70,9 @@ export const OrbitalMap = (props, context) => {
     <Window
       width={1136}
       height={770}>
-      <Window.Content fitted>
+      <Window.Content>
         <Flex height="100%">
-          <Flex.Item class="OrbitalMap__radar" grow id="radar">
+          <Flex.Item class="OrbitalMap__radar" id="radar">
             <DisplayWindow
               xOffset={dynamicXOffset}
               yOffset={dynamicYOffset}
@@ -237,7 +237,7 @@ class DisplayWindow extends Component {
             setZoomScale={setZoomScale}
             setXOffset={setXOffset}
             setYOffset={setYOffset} />
-        ) : (
+        ) : this.selectedMap === 'map' ? (
           <OrbitalMapDisplay
             dynamicXOffset={xOffset}
             dynamicYOffset={yOffset}
@@ -246,8 +246,10 @@ class DisplayWindow extends Component {
             setZoomScale={setZoomScale}
             setTrackedBody={setTrackedBody}
             ourObject={ourObject} />
+        ) : (
+          <CargoBay />
         )}
-        {this.selectedMap !== 'communication' && (
+        {this.selectedMap !== 'cargo' && (
           <>
             <Button
               position="absolute"
@@ -283,7 +285,7 @@ class DisplayWindow extends Component {
           position="absolute"
           icon="route"
           right="5px"
-          bottom="49px"
+          bottom="48px"
           fontSize="18px"
           color="grey"
           onClick={() => {
@@ -291,10 +293,75 @@ class DisplayWindow extends Component {
           }}
           selected={this.selectedMap === 'interdiction'}
           content="Local Map" />
+        <Button
+          position="absolute"
+          icon="shopping-cart"
+          right="8px"
+          bottom="15px"
+          fontSize="18px"
+          color="grey"
+          onClick={() => {
+            this.selectedMap = 'cargo';
+          }}
+          selected={this.selectedMap === 'cargo'}
+          content="Cargo Bay" />
       </>
     );
   }
 }
+
+const CargoBay = (props, context) => {
+  const {
+    act,
+    data,
+  } = useBackend(context);
+
+  const {
+    can_sell = false,
+    sellable_goods = {},
+  } = data;
+
+  return (
+    <Section
+      width="100%"
+      height="100%"
+      m="5px"
+      title="Cargo Bay">
+      <div className="Cargo__list">
+        {Object.keys(sellable_goods).map(key => (
+          <div className="Cargo__element" key={key}>
+            <div className="Cargo__header">
+              <div className="Cargo__itemName">
+                {sellable_goods[key].name}
+              </div>
+              <div className="Cargo__price">
+                Value: {sellable_goods[key].value}
+              </div>
+              <div className="Cargo__sell">
+                <Button
+                  width="100px"
+                  icon="shopping-cart"
+                  content="Sell Items"
+                  disabled={!can_sell}
+                  onClick={() => act('sell_item', {
+                    id: key,
+                  })} />
+              </div>
+            </div>
+            <Divider />
+            <div className="Cargo__contents">
+              {sellable_goods[key].full_contents.map(element => (
+                <div className="Cargo__element_contents" key={element}>
+                  {element}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+};
 
 const InterdictionDisplay = (props, context) => {
 

@@ -254,6 +254,9 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 							"name" = stationary_port.name,
 							"id" = stationary_port.id,
 						))
+	data["can_sell"] = !!shuttleObject.docking_target?.merchant
+	var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
+	data["sellable_goods"] = mobile_port.sellable_atoms.get_ui_data()
 	return data
 
 /obj/machinery/computer/shuttle_flight/ui_act(action, params)
@@ -405,6 +408,46 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 				return
 			//Go to the specified docking port
 			shuttleObject.goto_port(params["port"])
+		/// Handle selling of items
+		if ("sell_item")
+			// Get the reference for what we want to sell
+			var/sell_ref = params["id"]
+			// Make sure this isn't just some random item in the middle of the map
+			var/obj/docking_port/mobile/shuttle_port = SSshuttle.getShuttle(shuttleId)
+			if (!shuttle_port)
+				return
+			// Prevent clients from abusing their UI code
+			if (!shuttle_port.sellable_atoms.compiled_ui_data[sell_ref])
+				return
+			// Prevent my code from bugging out
+			var/atom/movable/sellable_item = locate(sell_ref)
+			var/turf/turf = get_turf(sellable_item)
+			if (!istype(turf, /turf/open/floor/plasteel/cargo))
+				say("Item was not located on transport pad.")
+				return
+			var/area/shuttle/shuttle_area = turf.loc
+			if (shuttle_area.mobile_port != shuttle_port)
+				say("Cannot sell item on a different shuttle.")
+				return
+			// Get the merchant we are interacting with
+			var/datum/orbital_object/current_location = shuttleObject?.docking_target
+			if (!current_location)
+				say("You must dock at a location in order to sell items.")
+				return
+			if (!current_location.merchant)
+				say("This location doesn't accept trades.")
+				return
+			if (!current_location.merchant.can_buy)
+				say("This location does not purchase items.")
+				return
+			// Locate and attempt to sell the item
+			if (!current_location.merchant.sell_item(sellable_item))
+				say("For safety and ethical reasons, the automated supply shuttle \
+		cannot sell live organisms, human remains, classified nuclear weaponry, \
+		homing beacons, mail, or machinery housing any form of artificial intelligence.")
+				return
+			say("Sale successful")
+			return TRUE
 
 /obj/machinery/computer/shuttle_flight/proc/launch_shuttle()
 	var/datum/shuttle_data/shuttle_data = SSorbits.get_shuttle_data(shuttleId)

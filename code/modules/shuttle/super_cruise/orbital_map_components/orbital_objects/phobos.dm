@@ -7,6 +7,7 @@
 	render_mode = RENDER_MODE_PLANET
 	priority = 20
 	signal_range = 6000
+	merchant = new /datum/merchant()
 
 /datum/orbital_object/z_linked/phobos/post_map_setup()
 	//Orbit around the systems sun

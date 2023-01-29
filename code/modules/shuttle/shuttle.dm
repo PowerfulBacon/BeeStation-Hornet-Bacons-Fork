@@ -370,7 +370,7 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	var/delete_on_land = FALSE
 
 	/// List of things that this shuttle is capable of selling
-	var/list/sellable_atoms = list()
+	var/datum/cargo_hold/sellable_atoms = new()
 
 /obj/docking_port/mobile/proc/register()
 	SSshuttle.mobile |= src
@@ -991,17 +991,19 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	return ""
 
 // returns 5-letter timer string, used by status screens and mob status panel
-/obj/docking_port/mobile/proc/getTimerStr()
+/obj/docking_port/mobile/proc/getTimerStr(z_location)
 	if(mode == SHUTTLE_STRANDED)
 		return "--:--"
 
 	//If the shuttle is in bluespace transit
-	var/datum/orbital_object/shuttle/shuttle_object = SSorbits.assoc_shuttles[id]
-	if(shuttle_object && shuttle_object.autopilot && shuttle_object.shuttleTarget)
-		var/distance = shuttle_object.position.Distance(shuttle_object.shuttleTarget.position)
-		if(distance > 9999)
-			return "9999u"
-		return "[round(distance)]u"
+	if (z_location)
+		var/datum/orbital_object/shuttle/shuttle_object = SSorbits.assoc_shuttles[id]
+		var/datum/orbital_object/current_location = SSorbits.assoc_z_levels["[z_location]"]
+		if(shuttle_object && current_location)
+			var/distance = shuttle_object.position.DistanceTo(current_location)
+			if(distance > 9999)
+				return "9999u"
+			return "[round(distance)]u"
 
 	var/timeleft = timeLeft()
 	if(timeleft > 1 HOURS)

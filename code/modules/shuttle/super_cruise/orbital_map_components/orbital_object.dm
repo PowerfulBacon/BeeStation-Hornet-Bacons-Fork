@@ -61,6 +61,9 @@
 	//The color of the locator
 	var/locator_colour
 
+	//The merchant object attached with this location
+	var/datum/merchant/merchant
+
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
 		src.orbital_map_index = orbital_map_index

@@ -68,7 +68,7 @@
 	if (iseffect(sellable_good) || !isobj(sellable_good) || (sellable_good in tracked))
 		return
 	tracked += sellable_good
-	linked_shuttle.sellable_atoms += sellable_good
+	linked_shuttle.sellable_atoms.add_atom(sellable_good)
 	//Register signals
 	RegisterSignal(sellable_good, COMSIG_MOVABLE_MOVED, .proc/on_good_moved)
 	RegisterSignal(sellable_good, COMSIG_PARENT_QDELETING, .proc/on_good_deleted)
@@ -78,10 +78,14 @@
 	if (iseffect(sellable_good) || !isobj(sellable_good) || !(sellable_good in tracked))
 		return
 	tracked -= sellable_good
-	linked_shuttle.sellable_atoms -= sellable_good
+	linked_shuttle.sellable_atoms.remove_atom(sellable_good)
 	//Unregister signals
 	UnregisterSignal(sellable_good, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(sellable_good, COMSIG_PARENT_QDELETING)
+
+/turf/open/floor/plasteel/cargo/proc/on_good_entered(atom/movable/source, atom/movable/entering, atom/no_idea)
+	SIGNAL_HANDLER
+
 
 /turf/open/floor/plasteel/cargo/proc/on_good_deleted(atom/movable/source)
 	SIGNAL_HANDLER

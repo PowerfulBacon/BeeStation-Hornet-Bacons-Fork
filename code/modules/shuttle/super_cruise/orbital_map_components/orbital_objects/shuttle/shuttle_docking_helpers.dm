@@ -213,3 +213,17 @@
 		timer_id = null
 	shuttle_dock.setTimer(20)
 	qdel(src)
+
+/datum/orbital_object/shuttle/proc/can_dock_at(datum/orbital_object/z_linked/other)
+	if (!istype(other))
+		return FALSE
+	//Check if shuttle can dock at this location.
+	if(!other.random_docking && !(other.can_dock_anywhere && (!GLOB.shuttle_docking_jammed || is_stealth() || !istype(other, /datum/orbital_object/z_linked/station))))
+		var/can_dock_here = FALSE
+		for(var/port_name in valid_docks)
+			var/obj/docking_port/port = SSshuttle.getDock(port_name)
+			if(other.z_in_contents(port?.z))
+				return TRUE
+		if(!can_dock_here)
+			return FALSE
+	return TRUE

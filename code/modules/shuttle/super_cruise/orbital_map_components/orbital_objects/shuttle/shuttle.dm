@@ -159,9 +159,9 @@
 
 /datum/orbital_object/shuttle/proc/strand_shuttle()
 	SEND_SIGNAL(src, COMSIG_ORBITAL_BODY_MESSAGE, "Shuttle can no longer sustain supercruise flight mode, please check your engines for correct setup and fuel reserves.")
-	if(!docking_target)
+	if(!can_dock_at(docking_target))
 		//Dock with the current location
-		if(can_dock_with)
+		if(can_dock_at(can_dock_with))
 			commence_docking(can_dock_with, TRUE, FALSE, TRUE)
 			message_admins("Shuttle [shuttle_port_id] is dropping to a random location at [can_dock_with.name] due to running out of fuel/incorrect engine configuration. (EXPLOSION INCOMMING!!)")
 		//Create a new orbital waypoint to drop at

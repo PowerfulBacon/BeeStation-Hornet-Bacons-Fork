@@ -1,8 +1,58 @@
 .OrbitalMap__radar {
   position: relative;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .OrbitalMap__panel {
   width: 400px;
+  flex-shrink: 0;
+}
+
+.Cargo__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.Cargo__element {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+}
+
+.Cargo__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.Cargo__itemName {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.Cargo__price {
+  margin-top: 3px;
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+.Cargo__sell {
+  flex-shrink: 0;
+}
+
+.Cargo__contents {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Cargo__element_contents {
+  display: flex;
+  padding: 5px;
+  margin: 0px 5px;
+  border: 1px solid rgb(240, 224, 180);
+  background-color: rgb(12, 12, 12);
 }
