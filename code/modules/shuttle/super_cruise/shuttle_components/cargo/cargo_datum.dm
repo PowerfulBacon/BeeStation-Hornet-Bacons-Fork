@@ -60,7 +60,6 @@
 	if (!attached_export)
 		return
 	sellable["value"] -= attached_export.get_cost(source)
-	message_admins(json_encode(compiled_ui_data))
 
 /// Something being sold had another item enter its contents, update the value
 /datum/cargo_hold/proc/sellable_contents_entered(atom/movable/item, atom/movable/entered)
@@ -79,7 +78,6 @@
 	if (!attached_export)
 		return
 	compiled_ui_data[REF(sellable)]["value"] += attached_export.get_cost(item)
-	message_admins(json_encode(compiled_ui_data))
 
 /// Remove a sellable atom from the list of sellable atoms
 /datum/cargo_hold/proc/remove_atom(atom/movable/sellable)
