@@ -58,9 +58,6 @@
 
 	var/ambient_buzz = 'sound/ambience/shipambience.ogg' // Ambient buzz of the station, plays repeatedly, also IC
 
-	var/ambient_music_index
-	var/list/ambientmusic
-
 	flags_1 = CAN_BE_DIRTY_1
 
 	var/list/firedoors
@@ -167,9 +164,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 
 	if(!ambientsounds && ambience_index)
 		ambientsounds = GLOB.ambience_assoc[ambience_index]
-
-	if(!ambientmusic && ambient_music_index)
-		ambientmusic = GLOB.ambient_music_assoc[ambient_music_index]
 
 	if(requires_power)
 		luminosity = 0

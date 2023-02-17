@@ -151,7 +151,6 @@
 		usr.stop_sound_channel(CHANNEL_AMBIENT_EFFECTS)
 		usr.stop_sound_channel(CHANNEL_AMBIENT_MUSIC)
 		usr.stop_sound_channel(CHANNEL_BUZZ)
-		usr.client.buzz_playing = FALSE
 	usr.client.update_ambience_pref()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ambience", "[usr.client.prefs.toggles & PREFTOGGLE_SOUND_AMBIENCE ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -166,7 +165,6 @@
 	else
 		to_chat(usr, "You will no longer hear ship ambience.")
 		usr.stop_sound_channel(CHANNEL_BUZZ)
-		usr.client.buzz_playing = FALSE
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ship Ambience", "[usr.client.prefs.toggles & PREFTOGGLE_SOUND_SHIP_AMBIENCE ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, I bet you read this comment expecting to see the same thing :^)
 
 /client/verb/toggle_announcement_sound()

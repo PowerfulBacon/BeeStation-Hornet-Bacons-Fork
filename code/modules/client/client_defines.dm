@@ -43,7 +43,6 @@
 
 	var/area			= null
 
-	var/buzz_playing = null
 		////////////
 		//SECURITY//
 		////////////
