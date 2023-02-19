@@ -170,3 +170,9 @@
 #define COMSIG_ATOM_SHOULD_EMAG "atom_should_emag"
 /// Do the emag action (if CHECK is FALSE)
 #define COMSIG_ATOM_ON_EMAG "atom_on_emag"
+
+/// Change the interaction hints of an object
+#define COMSIG_INTERACTION_TOOL_CHANGED "interaction_tool_changed"	//! Simplified version of hint changed (construction_tool, deconstruction_tool)
+#define COMSIG_INTERACTION_HINT_CHANGED "interaction_hint_changed"	//! Sent when an interaction hint changes (list/datum/interaction_hint/interaction_hints)
+#define COMSIG_INTERACTION_HINT_ENTERED "inthintenter"				//! from base of atom/MouseEntered(): (mob/user, location, control, params)
+#define COMSIG_INTERACTION_HINT_EXITED "inthintexit"				//! from base of atom/MouseExited(): (mob/user, location, control, params

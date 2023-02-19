@@ -1,3 +1,7 @@
+HAS_INTERACTION_HINT(/turf/closed/wall/r_wall, TOOL_WIRECUTTER)
+INTERACTION_HINT_ENTER(/turf/closed/wall/r_wall)
+INTERACTION_HINT_EXIT(/turf/closed/wall/r_wall)
+
 /turf/closed/wall/r_wall
 	name = "reinforced wall"
 	desc = "A huge chunk of reinforced metal used to separate rooms."
@@ -62,6 +66,7 @@
 			if(W.tool_behaviour == TOOL_WIRECUTTER)
 				W.play_tool_sound(src, 100)
 				d_state = SUPPORT_LINES
+				SET_INTERACTION_TOOLS(TOOL_WIRECUTTER, TOOL_SCREWDRIVER)
 				update_icon()
 				balloon_alert(user, "You cut the outer grille.")
 				return TRUE
@@ -73,6 +78,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_LINES)
 						return TRUE
 					d_state = COVER
+					SET_INTERACTION_TOOLS(TOOL_SCREWDRIVER, TOOL_WELDER)
 					update_icon()
 					balloon_alert(user, "You unsecure the support lines.")
 				return TRUE
@@ -80,6 +86,7 @@
 			else if(W.tool_behaviour == TOOL_WIRECUTTER)
 				W.play_tool_sound(src, 100)
 				d_state = INTACT
+				SET_INTERACTION_TOOLS(null, TOOL_WIRECUTTER)
 				update_icon()
 				balloon_alert(user, "You repair the outer grille.")
 				return TRUE
@@ -93,6 +100,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return TRUE
 					d_state = CUT_COVER
+					SET_INTERACTION_TOOLS(TOOL_WELDER, TOOL_CROWBAR)
 					update_icon()
 					balloon_alert(user, "You remove the metal cover.")
 				return TRUE
@@ -103,6 +111,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != COVER)
 						return TRUE
 					d_state = SUPPORT_LINES
+					SET_INTERACTION_TOOLS(TOOL_WIRECUTTER, TOOL_SCREWDRIVER)
 					update_icon()
 					balloon_alert(user, "You secure the support lines.")
 				return TRUE
@@ -114,6 +123,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return TRUE
 					d_state = ANCHOR_BOLTS
+					SET_INTERACTION_TOOLS(TOOL_CROWBAR, TOOL_WRENCH)
 					update_icon()
 					balloon_alert(user, "You pry the cover off.")
 				return TRUE
@@ -126,6 +136,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != CUT_COVER)
 						return TRUE
 					d_state = COVER
+					SET_INTERACTION_TOOLS(TOOL_SCREWDRIVER, TOOL_WELDER)
 					update_icon()
 					balloon_alert(user, "You welded the metal cover to the frame.")
 				return TRUE
@@ -137,6 +148,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return TRUE
 					d_state = SUPPORT_RODS
+					SET_INTERACTION_TOOLS(TOOL_WRENCH, TOOL_WELDER)
 					update_icon()
 					balloon_alert(user, "You remove the bolts.")
 				return TRUE
@@ -147,6 +159,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != ANCHOR_BOLTS)
 						return TRUE
 					d_state = CUT_COVER
+					SET_INTERACTION_TOOLS(TOOL_WELDER, TOOL_CROWBAR)
 					update_icon()
 					balloon_alert(user, "You pry the metal cover back in place.")
 				return TRUE
@@ -160,6 +173,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return TRUE
 					d_state = SHEATH
+					SET_INTERACTION_TOOLS(TOOL_WELDER, TOOL_CROWBAR)
 					update_icon()
 					balloon_alert(user, "You have sliced through the support rods.")
 				return TRUE
@@ -171,6 +185,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SUPPORT_RODS)
 						return TRUE
 					d_state = ANCHOR_BOLTS
+					SET_INTERACTION_TOOLS(TOOL_CROWBAR, TOOL_WRENCH)
 					update_icon()
 					balloon_alert(user, "You tighten the bolts.")
 				return TRUE
@@ -193,6 +208,7 @@
 					if(!istype(src, /turf/closed/wall/r_wall) || d_state != SHEATH)
 						return TRUE
 					d_state = SUPPORT_RODS
+					SET_INTERACTION_TOOLS(TOOL_WRENCH, TOOL_WELDER)
 					update_icon()
 					balloon_alert(user, "You weld the support rods back together.")
 				return TRUE

@@ -1,4 +1,5 @@
 // Tool types
+// Add to interaction_hint.dmi when expanding
 #define TOOL_CROWBAR 		"crowbar"
 #define TOOL_MULTITOOL 		"multitool"
 #define TOOL_SCREWDRIVER 	"screwdriver"
