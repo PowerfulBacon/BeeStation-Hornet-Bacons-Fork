@@ -1,6 +1,4 @@
-HAS_INTERACTION_HINT(/turf/closed/wall/r_wall, TOOL_WIRECUTTER)
-INTERACTION_HINT_ENTER(/turf/closed/wall/r_wall)
-INTERACTION_HINT_EXIT(/turf/closed/wall/r_wall)
+HAS_CONSTRUCTION_HINT(/turf/closed/wall/r_wall, TOOL_WIRECUTTER)
 
 /turf/closed/wall/r_wall
 	name = "reinforced wall"
