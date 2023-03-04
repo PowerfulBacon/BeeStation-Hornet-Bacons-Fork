@@ -39,6 +39,7 @@ require only minor tweaks.
 #define ZTRAIT_LAVA_RUINS "Lava Ruins"
 #define ZTRAIT_POCKETDIM "Pocket Dimension"
 #define ZTRAIT_ISOLATED_RUINS "Isolated Ruins" //Placing ruins on z levels with this trait will use turf reservation instead of usual placement.
+#define ZTRAIT_ANOMALY_SPAWNING "Anomaly Spawning" //Allows anomalys to spawn on this z
 
 // boolean - weather types that occur on the level
 #define ZTRAIT_ASHSTORM "Weather_Ashstorm"
@@ -47,7 +48,10 @@ require only minor tweaks.
 /// number - bombcap is multiplied by this before being applied to bombs
 #define ZTRAIT_BOMBCAP_MULTIPLIER "Bombcap Multiplier"
 
-/// number - default gravity if there's no gravity generators or area overrides present
+/// Number - Group for flux grouping. 2 levels with the same flux group will share flux. A value of 0 will not be in a group and will act independantly.
+#define ZTRAIT_FLUX_GROUP "Flux Group"
+
+/// number - default gravity if there's no gravity generators or area overrides present.
 #define ZTRAIT_GRAVITY "Gravity"
 
 // numeric offsets - e.g. {"Down": -1} means that chasms will fall to z - 1 rather than oblivion
@@ -68,15 +72,22 @@ require only minor tweaks.
 
 /// default trait definitions, used by SSmapping
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = SELFLOOPING, ZTRAIT_STATION = TRUE)
-#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = SELFLOOPING, ZTRAIT_DYNAMIC_LEVEL = TRUE)
+#define ZTRAITS_STATION list(\
+	ZTRAIT_LINKAGE = SELFLOOPING, \
+	ZTRAIT_STATION = TRUE, \
+	ZTRAIT_FLUX_GROUP = FLUX_STATION)
+#define ZTRAITS_SPACE list(\
+	ZTRAIT_LINKAGE = SELFLOOPING, \
+	ZTRAIT_DYNAMIC_LEVEL = TRUE)
 #define ZTRAITS_LAVALAND list(\
     ZTRAIT_MINING = TRUE, \
 	ZTRAIT_ASHSTORM = TRUE, \
     ZTRAIT_LAVA_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
     ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
-#define ZTRAITS_REEBE list(ZTRAIT_REEBE = TRUE, ZTRAIT_BOMBCAP_MULTIPLIER = 0.5)
+#define ZTRAITS_REEBE list(\
+	ZTRAIT_REEBE = TRUE, \
+	ZTRAIT_BOMBCAP_MULTIPLIER = 0.5)
 #define DL_NAME "name"
 #define DL_TRAITS "traits"
 #define DECLARE_LEVEL(NAME, TRAITS) list(DL_NAME = NAME, DL_TRAITS = TRAITS)
@@ -85,6 +96,9 @@ require only minor tweaks.
 #define DEFAULT_MAP_TRAITS list(\
     DECLARE_LEVEL("CentCom", ZTRAITS_CENTCOM),\
 )
+
+// Default Flux Groups
+#define FLUX_STATION 1
 
 // Camera lock flags
 #define CAMERA_LOCK_STATION 1

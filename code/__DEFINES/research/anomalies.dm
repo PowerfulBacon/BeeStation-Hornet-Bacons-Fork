@@ -17,3 +17,8 @@
 #define ANOMALY_FLUX_NO_EXPLOSION 0
 #define ANOMALY_FLUX_EXPLOSIVE 1
 #define ANOMALY_FLUX_LOW_EXPLOSIVE 2
+
+#define DEFAULT_FLUX_VALUE 1000
+/// Changes how flux decays. Lower values means flux decays slower
+/// This means that after 10 minutes, the initial value will have halved
+#define FLUX_HALF_LIFE 10
