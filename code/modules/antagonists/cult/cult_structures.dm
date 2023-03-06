@@ -12,9 +12,8 @@
 	visible_message("<span class='danger'>[src] fades away.</span>")
 	invisibility = INVISIBILITY_OBSERVER
 	alpha = 100 //To help ghosts distinguish hidden runes
-	light_range = 0
-	light_power = 0
-	update_light()
+	set_light_range(0)
+	set_light_power(0)
 	STOP_PROCESSING(SSfastprocess, src)
 
 /obj/structure/destructible/cult/proc/reveal() //for spells that reveal cult presence
@@ -22,9 +21,8 @@
 	invisibility = 0
 	visible_message("<span class='danger'>[src] suddenly appears!</span>")
 	alpha = initial(alpha)
-	light_range = initial(light_range)
-	light_power = initial(light_power)
-	update_light()
+	set_light_range(initial(light_range))
+	set_light_power(initial(light_power))
 	START_PROCESSING(SSfastprocess, src)
 
 

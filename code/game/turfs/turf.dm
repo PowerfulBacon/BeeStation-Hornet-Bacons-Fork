@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 		Entered(content, null)
 
 	var/area/A = loc
-	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
+	if(IS_DYNAMIC_LIGHTING(A))
 		add_overlay(/obj/effect/fullbright)
 
 	if(requires_activation)
@@ -98,9 +98,6 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
-
-	if (light_power && light_range)
-		update_light()
 
 	var/turf/T = SSmapping.get_turf_above(src)
 	if(T)
@@ -110,9 +107,6 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 	if(T)
 		T.multiz_turf_new(src, UP)
 		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, UP)
-
-	if (opacity)
-		has_opaque_atom = TRUE
 
 	ComponentInitialize()
 	if(isopenturf(src))
@@ -419,13 +413,6 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 		mover.Bump(firstbump)
 		return (mover.movement_type & PHASING)
 	return TRUE
-
-/turf/Entered(atom/movable/arrived, direction)
-	..()
-	// If an opaque movable atom moves around we need to potentially update visibility.
-	if (arrived.opacity)
-		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
-		reconsider_lights()
 
 /turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	..()

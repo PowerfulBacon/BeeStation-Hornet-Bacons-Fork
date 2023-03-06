@@ -79,7 +79,7 @@
 	///Bitfield for how the atom handles materials.
 	var/material_flags = NONE
 	///Light systems, both shouldn't be active at the same time.
-	var/light_system = STATIC_LIGHT
+	var/light_system = MOVABLE_LIGHT
 	///Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
 	var/light_on = TRUE
 	///Bitflags to determine lighting-related atom properties.
@@ -207,13 +207,6 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if (light_system == STATIC_LIGHT && light_power && light_range)
-		update_light()
-
-	if (opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
-
 	if(custom_materials && custom_materials.len)
 		var/temp_list = list()
 		for(var/i in custom_materials)
@@ -280,7 +273,6 @@
 	LAZYCLEARLIST(overlays)
 	LAZYNULL(managed_overlays)
 
-	QDEL_NULL(light)
 	QDEL_NULL(ai_controller)
 
 	for(var/i in targeted_by)
@@ -912,9 +904,6 @@
 /atom/proc/lighteater_act(obj/item/light_eater/light_eater, atom/parent)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src,COMSIG_ATOM_LIGHTEATER_ACT)
-	for(var/datum/light_source/light_source in light_sources)
-		if(light_source.source_atom != src)
-			light_source.source_atom.lighteater_act(light_eater, src)
 
 /**
   * Respond to the eminence clicking on our atom

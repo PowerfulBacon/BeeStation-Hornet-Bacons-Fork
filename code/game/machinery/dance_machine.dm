@@ -280,50 +280,42 @@
 			if(QDELETED(src) || !active || QDELETED(glow))
 				return
 			if(glow.light_color == LIGHT_COLOR_RED)
-				glow.light_color = LIGHT_COLOR_BLUE
-				glow.light_power = glow.light_power * 1.48
-				glow.light_range = 0
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_BLUE)
+				set_light_power(glow.light_power * 1.48)
+				set_light_range(0)
 				continue
 			if(glow.light_color == LIGHT_COLOR_BLUE)
-				glow.light_color = LIGHT_COLOR_GREEN
-				glow.light_range = glow.light_range * DISCO_INFENO_RANGE
-				glow.light_power = glow.light_power * 2 // Any changes to power must come in pairs to neutralize it for other colors
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_GREEN)
+				set_light_range(glow.light_range * DISCO_INFENO_RANGE)
+				set_light_power(glow.light_power * 2) // Any changes to power must come in pairs to neutralize it for other colors
 				continue
 			if(glow.light_color == LIGHT_COLOR_GREEN)
-				glow.light_color = LIGHT_COLOR_ORANGE
-				glow.light_power = glow.light_power * 0.5
-				glow.light_range = 0
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_ORANGE)
+				set_light_power(glow.light_power * 0.5)
+				set_light_range(0)
 				continue
 			if(glow.light_color == LIGHT_COLOR_ORANGE)
-				glow.light_color = LIGHT_COLOR_PURPLE
-				glow.light_power = glow.light_power * 2.27
-				glow.light_range = glow.light_range * DISCO_INFENO_RANGE
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_PURPLE)
+				set_light_power(glow.light_power * 2.27)
+				set_light_range(glow.light_range * DISCO_INFENO_RANGE)
 				continue
 			if(glow.light_color == LIGHT_COLOR_PURPLE)
-				glow.light_color = LIGHT_COLOR_BLUEGREEN
-				glow.light_power = glow.light_power * 0.44
-				glow.light_range = 0
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_BLUEGREEN)
+				set_light_power(glow.light_power * 0.44)
+				set_light_range(0)
 				continue
 			if(glow.light_color == LIGHT_COLOR_BLUEGREEN)
-				glow.light_color = LIGHT_COLOR_YELLOW
-				glow.light_range = glow.light_range * DISCO_INFENO_RANGE
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_YELLOW)
+				set_light_range(glow.light_range * DISCO_INFENO_RANGE)
 				continue
 			if(glow.light_color == LIGHT_COLOR_YELLOW)
-				glow.light_color = LIGHT_COLOR_CYAN
-				glow.light_range = 0
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_CYAN)
+				set_light_range(0)
 				continue
 			if(glow.light_color == LIGHT_COLOR_CYAN)
-				glow.light_color = LIGHT_COLOR_RED
-				glow.light_power = glow.light_power * 0.68
-				glow.light_range = glow.light_range * DISCO_INFENO_RANGE
-				glow.update_light()
+				set_light_color(LIGHT_COLOR_RED)
+				set_light_power(glow.light_power * 0.68)
+				set_light_range(glow.light_range * DISCO_INFENO_RANGE)
 				continue
 		if(prob(2))  // Unique effects for the dance floor that show up randomly to mix things up
 			INVOKE_ASYNC(src, .proc/hierofunk)

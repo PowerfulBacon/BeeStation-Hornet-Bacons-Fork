@@ -10,7 +10,6 @@
 	integrity_failure = 100
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 40, "acid" = 20, "stamina" = 0)
 	clicksound = "keyboard"
-	light_system = STATIC_LIGHT
 	light_range = 1
 	light_power = 0.5
 	light_on = TRUE

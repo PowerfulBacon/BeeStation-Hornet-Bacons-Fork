@@ -165,7 +165,6 @@
 		icon_state = "carp_rift_carpspawn"
 		if(light_color != LIGHT_COLOR_PURPLE)
 			set_light_color(LIGHT_COLOR_PURPLE)
-			update_light()
 		notify_ghosts("The carp rift can summon an additional carp!", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Carp Spawn Available")
 		last_carp_inc -= carp_interval
 
@@ -177,7 +176,6 @@
 		obj_integrity = INFINITY
 		icon_state = "carp_rift_charged"
 		set_light_color(LIGHT_COLOR_YELLOW)
-		update_light()
 		resistance_flags = INDESTRUCTIBLE
 		dragon.rifts_charged += 1
 		if(dragon.rifts_charged != 3 && !dragon.objective_complete)
@@ -238,7 +236,6 @@
 	if(carp_stored <= 0 && charge_state < CHARGE_COMPLETED)
 		icon_state = "carp_rift"
 		set_light_color(LIGHT_COLOR_BLUE)
-		update_light()
 	return TRUE
 
 #undef CHARGE_ONGOING

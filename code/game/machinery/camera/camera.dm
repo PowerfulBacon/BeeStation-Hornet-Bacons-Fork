@@ -141,7 +141,6 @@
 			previous_network = network
 			network = list()
 			GLOB.cameranet.removeCamera(src)
-			set_light(0)
 			emped = emped+1  //Increase the number of consecutive EMP's
 			update_icon()
 			thisemp = emped //Take note of which EMP this proc is for

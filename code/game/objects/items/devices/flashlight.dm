@@ -33,8 +33,6 @@
 		icon_state = initial(icon_state)
 		playsound(src, 'sound/items/flashlight_off.ogg', 25, 1)
 	set_light_on(on)
-	if(light_system == STATIC_LIGHT)
-		update_light()
 
 
 /obj/item/flashlight/attack_self(mob/user)
@@ -561,7 +559,6 @@
 	name = "disco light"
 	desc = "Groovy..."
 	icon_state = null
-	light_system = STATIC_LIGHT
 	light_range = 4
 	light_power = 10
 	alpha = 0
@@ -591,7 +588,6 @@
 	desc = "A strange device manufactured with mysterious elements that somehow emits darkness. Or maybe it just sucks in light? Nobody knows for sure."
 	icon_state = "flashdark"
 	item_state = "flashdark"
-	light_system = STATIC_LIGHT //The overlay light component is not yet ready to produce darkness.
 	light_range = 0
 	///Variable to preserve old lighting behavior in flashlights, to handle darkness.
 	var/dark_light_range = 2.5

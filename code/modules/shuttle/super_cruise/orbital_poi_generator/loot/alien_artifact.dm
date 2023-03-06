@@ -439,25 +439,6 @@ GLOBAL_LIST_EMPTY(destabliization_exits)
 			thing.update_icon()
 
 //===================
-// Light Breaker
-//===================
-
-/datum/artifact_effect/light_breaker
-	requires_processing = TRUE
-	effect_act_descs = list("near something")
-	var/next_world_time
-
-/datum/artifact_effect/light_breaker/process(delta_time)
-	if(world.time < next_world_time)
-		return
-	var/turf/T = get_turf(source_object)
-	for(var/datum/light_source/light_source in T.light_sources)
-		var/atom/movable/AM = light_source.source_atom
-		//Starts at light but gets stronger the longer it is in light.
-		AM.lighteater_act()
-	next_world_time = world.time + rand(30 SECONDS, 5 MINUTES)
-
-//===================
 // Insanity Pulse
 //===================
 

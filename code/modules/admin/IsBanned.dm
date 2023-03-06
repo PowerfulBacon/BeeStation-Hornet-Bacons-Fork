@@ -19,6 +19,13 @@ GLOBAL_LIST_EMPTY(ckey_redirects)
 	if (type == "world")
 		return ..() //shunt world topic banchecks to purely to byond's internal ban system
 
+	// Reject new connections if the player has not registered
+	if (!SSentry_restriction.join_game(key))
+		return list(\
+			"reason"="entry restriction",\
+			"desc"="\nReason: The games have already started, the server has been locked down to participants only."\
+		)
+
 	var/admin = FALSE
 	var/ckey = ckey(key)
 

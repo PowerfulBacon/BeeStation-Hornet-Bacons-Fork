@@ -78,14 +78,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(flags & CHANGETURF_SKIP)
 		return new path(src)
 
-	var/old_opacity = opacity
-	var/old_dynamic_lighting = dynamic_lighting
-	var/old_lighting_object = lighting_object
-	var/old_lighting_corner_NE = lighting_corner_NE
-	var/old_lighting_corner_SE = lighting_corner_SE
-	var/old_lighting_corner_SW = lighting_corner_SW
-	var/old_lighting_corner_NW = lighting_corner_NW
-
 	var/old_exl = explosion_level
 	var/old_exi = explosion_id
 	var/old_bp = blueprint_data
@@ -126,27 +118,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		W.AfterChange(flags)
 
 	W.blueprint_data = old_bp
-
-	lighting_corner_NE = old_lighting_corner_NE
-	lighting_corner_SE = old_lighting_corner_SE
-	lighting_corner_SW = old_lighting_corner_SW
-	lighting_corner_NW = old_lighting_corner_NW
-
-	if(SSlighting.initialized)
-		recalc_atom_opacity()
-		lighting_object = old_lighting_object
-
-		if (old_opacity != opacity || dynamic_lighting != old_dynamic_lighting)
-			reconsider_lights()
-
-		if (dynamic_lighting != old_dynamic_lighting)
-			if (IS_DYNAMIC_LIGHTING(src))
-				lighting_build_overlay()
-			else
-				lighting_clear_overlay()
-
-		for(var/turf/open/space/S in RANGE_TURFS(1, src)) //RANGE_TURFS is in code\__HELPERS\game.dm
-			S.update_starlight()
 
 	return W
 
