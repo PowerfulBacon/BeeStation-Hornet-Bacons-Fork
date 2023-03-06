@@ -122,7 +122,6 @@
 			)
 			query_round_game_mode.Execute()
 			qdel(query_round_game_mode)
-	create_special_antags()
 	if(report)
 		addtimer(CALLBACK(src, .proc/send_intercept, 0), rand(waittime_l, waittime_h))
 	gamemode_ready = TRUE
@@ -134,34 +133,6 @@
 	if(replacementmode && round_converted == 2)
 		replacementmode.make_antag_chance(character)
 	return
-
-/datum/game_mode/proc/make_special_antag_chance(mob/living/character)
-	if(!character.mind.antag_datums)
-		return
-	//Check if they are banned
-	if(QDELETED(character))
-		return
-	for(var/datum/special_role/subantag in active_specials)
-		if(!subantag.latejoin_allowed)
-			continue
-		if(subantag.spawn_mode == SPAWNTYPE_MIDROUND)
-			continue
-		var/count = 0
-		for(var/mob/living/M in GLOB.mob_living_list)
-			if(!M.mind)
-				continue
-			if(!is_special_type(M, subantag.attached_antag_datum))
-				continue
-			if(is_banned_from(M.ckey, list(subantag.preference_type)))
-				continue
-			count++
-		if(count >= subantag.max_amount)
-			continue
-		//Lower chance for midrounds than round starts
-		if(prob(subantag.proportion * 100))
-			var/datum/antagonist/special/A = subantag.add_antag_status_to(character.mind)
-			log_game("[key_name(character.mind)] has been selected as a [A.name]")
-			return
 
 ///Allows rounds to basically be "rerolled" should the initial premise fall through. Also known as mulligan antags.
 /datum/game_mode/proc/convert_roundtype()

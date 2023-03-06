@@ -723,23 +723,5 @@
 	linked_bot.weather_immunities -= "ash"
 	. = ..()
 
-// Minebot Sentience
-
-/obj/item/slimepotion/slime/sentience/mining
-	name = "minebot AI upgrade"
-	desc = "Can be used to grant sentience to minebots."
-	icon_state = "door_electronics"
-	icon = 'icons/obj/module.dmi'
-	sentience_type = SENTIENCE_MINEBOT
-	var/cooldown_time = 600
-	var/timer
-
-/obj/item/slimepotion/slime/sentience/mining/attack(mob/living/M, mob/user)
-	if(timer > world.time)
-		to_chat(user, "<span class='warning'>Please wait [(timer - world.time)/10] seconds before trying again.</span>")
-		return
-	timer = world.time + cooldown_time
-	..()
-
 #undef MODE_COMBAT
 #undef MODE_MINING

@@ -150,8 +150,6 @@
 
 
 /mob/living/carbon/monkey/ex_act(severity, target, origin)
-	if(origin && istype(origin, /datum/spacevine_mutation) && isvineimmune(src))
-		return
 	..()
 	if(QDELETED(src))
 		return

@@ -33,11 +33,3 @@
 	reagents_list = list(/datum/reagent/medicine/synthflesh = 25)
 	build_path = /obj/item/bodypart/r_leg
 	category = list("initial","human","lizard","fly","moth","plasmaman")
-
-/datum/design/armblade
-	name = "Arm Blade"
-	id = "armblade"
-	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/synthflesh = 75)
-	build_path = /obj/item/melee/synthetic_arm_blade
-	category = list("other","emagged")

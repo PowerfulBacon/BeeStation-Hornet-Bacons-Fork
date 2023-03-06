@@ -186,15 +186,6 @@ GLOBAL_DATUM_INIT(requests, /datum/request_manager, new)
 			var/mob/M = request.owner?.mob
 			usr.client.admin_headset_message(M, request.req_type == REQUEST_SYNDICATE ? RADIO_CHANNEL_SYNDICATE : RADIO_CHANNEL_CENTCOM)
 			return TRUE
-		if ("setcode")
-			if (request.req_type != REQUEST_NUKE)
-				to_chat(usr, "You cannot set the nuke code for a non-nuke-code-request request!")
-				return TRUE
-			var/code = random_code(5)
-			for(var/obj/machinery/nuclearbomb/selfdestruct/SD in GLOB.nuke_list)
-				SD.r_code = code
-			message_admins("[key_name_admin(usr)] has set the self-destruct code to \"[code]\".")
-			return TRUE
 
 /datum/request_manager/ui_data(mob/user)
 	. = list(

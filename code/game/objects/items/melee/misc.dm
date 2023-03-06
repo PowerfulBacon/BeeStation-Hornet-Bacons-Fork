@@ -29,26 +29,6 @@
 	user.visible_message("<span class='suicide'>[user] is strangling [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (OXYLOSS)
 
-/obj/item/melee/synthetic_arm_blade
-	name = "synthetic arm blade"
-	desc = "A grotesque blade that on closer inspection seems made of synthetic flesh, it still feels like it would hurt very badly as a weapon."
-	icon = 'icons/obj/changeling_items.dmi'
-	icon_state = "arm_blade"
-	item_state = "arm_blade"
-	lefthand_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
-	w_class = WEIGHT_CLASS_HUGE
-	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
-	force = 20
-	throwforce = 10
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
-	sharpness = IS_SHARP
-
-/obj/item/melee/synthetic_arm_blade/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/butchering, 60, 80) //very imprecise
-
 /obj/item/melee/sabre
 	name = "officer's sabre"
 	desc = "An elegant weapon, its monomolecular edge is capable of cutting through flesh and bone with ease."

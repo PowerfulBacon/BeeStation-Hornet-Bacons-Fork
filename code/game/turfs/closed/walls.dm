@@ -308,12 +308,4 @@
 
 	add_overlay(dent_decals)
 
-/turf/closed/wall/rust_heretic_act()
-	if(HAS_TRAIT(src, TRAIT_RUSTY))
-		ScrapeAway()
-		return
-	if(prob(70))
-		new /obj/effect/temp_visual/glowing_rune(src)
-	return ..()
-
 #undef MAX_DENT_DECALS

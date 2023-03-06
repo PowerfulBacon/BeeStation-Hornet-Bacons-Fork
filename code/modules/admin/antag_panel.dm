@@ -190,22 +190,7 @@ GLOBAL_VAR(antag_prototypes)
 		out += sections[s]
 
 	out += "<br>"
-
-	//Uplink
-	if(ishuman(current))
-		var/uplink_info = "<i><b>Uplink</b></i>:"
-		var/datum/component/uplink/U = find_syndicate_uplink()
-		if(U)
-			uplink_info += "<a href='?src=[REF(src)];common=takeuplink'>take</a>"
-			if (check_rights(R_FUN, 0))
-				uplink_info += ", <a href='?src=[REF(src)];common=crystals'>[U.telecrystals]</a> TC"
-			else
-				uplink_info += ", [U.telecrystals] TC"
-		else
-			uplink_info += "<a href='?src=[REF(src)];common=uplink'>give</a>"
-		uplink_info += "." //hiel grammar
-
-		out += uplink_info + "<br>"
+	
 	//Common Memory
 	var/common_memory = "<span>Common Memory:</span>"
 	common_memory += memory

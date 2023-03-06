@@ -307,13 +307,6 @@
 			begin_process()
 			. = TRUE
 
-/obj/machinery/modular_fabricator/proc/resync_research()
-	for(var/obj/machinery/computer/rdconsole/RDC in orange(7, src))
-		RDC.stored_research.copy_research_to(stored_research)
-		update_viewer_statics()
-		say("Successfully synchronized with R&D server.")
-		return
-
 /obj/machinery/modular_fabricator/proc/update_viewer_statics()
 	for(var/mob/M in viewing_mobs)
 		if(QDELETED(M) || !(M.client || M.mind))

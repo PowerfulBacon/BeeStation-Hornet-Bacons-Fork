@@ -434,14 +434,6 @@
 	for(var/obj/item/reagent_containers/glass/G in beakers)
 		reactants += G.reagents
 
-	for(var/obj/item/slime_extract/S in beakers)
-		if(S.Uses)
-			for(var/obj/item/reagent_containers/glass/G in beakers)
-				G.reagents.trans_to(S, G.reagents.total_volume)
-
-			if(S?.reagents?.total_volume)
-				reactants += S.reagents
-
 	if(!chem_splash(get_turf(src), spread_range, reactants, temp_boost))
 		playsound(loc, 'sound/items/screwdriver2.ogg', 50, 1)
 		return // The Explosion didn't do anything. No need to log, or disappear.

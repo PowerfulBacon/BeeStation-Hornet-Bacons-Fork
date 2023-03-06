@@ -36,7 +36,7 @@
 	var/list/grubdisease = list()
 
 /mob/living/simple_animal/hostile/redgrub/proc/isslimetarget(var/mob/living/M)
-	if(isslimeperson(M) || isluminescent(M) || isjellyperson(M) || isoozeling(M) || isstargazer(M)) // i hate this
+	if(isslimeperson(M) || isjellyperson(M) || isoozeling(M) || isstargazer(M)) // i hate this
 		return TRUE
 	return FALSE
 

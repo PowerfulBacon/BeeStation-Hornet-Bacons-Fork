@@ -1,20 +1,14 @@
 GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		/mob/living,
 		/obj/structure/blob,
-		/obj/effect/rune,
 		/obj/structure/spider/spiderling,
-		/obj/item/disk/nuclear,
-		/obj/machinery/nuclearbomb,
 		/obj/item/beacon,
-		/obj/eldritch/narsie,
-		/obj/tear_in_reality,
 		/obj/machinery/teleport/station,
 		/obj/machinery/teleport/hub,
 		/obj/machinery/quantumpad,
 		/obj/machinery/clonepod,
 		/obj/effect/mob_spawn,
 		/obj/effect/hierophant,
-		/obj/structure/receiving_pad,
 		/obj/item/warp_cube,
 		/obj/machinery/rnd/production, //print tracking beacons, send shuttle
 		/obj/machinery/modular_fabricator/autolathe, //same
@@ -23,9 +17,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		/obj/item/shared_storage,
 		/obj/structure/extraction_point,
 		/obj/machinery/syndicatebomb,
-		/obj/item/hilbertshotel,
 		/obj/item/swapper,
-		/obj/item/mail,
 		/obj/docking_port
 	)))
 
@@ -211,25 +203,3 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 
 	SSshuttle.centcom_message = msg
 	investigate_log("Shuttle contents sold for [D.account_balance - presale_points] credits. Contents: [ex.exported_atoms ? ex.exported_atoms.Join(",") + "." : "none."] Message: [SSshuttle.centcom_message || "none."]", INVESTIGATE_CARGO)
-
-
-//	Generates a box of mail depending on our exports and imports.
-//	Applied in the cargo shuttle sending/arriving, by building the crate if the round is ready to introduce mail based on the economy subsystem.
-// Then, fills the mail crate with mail, by picking applicable crew who can recieve mail at the time to sending.
-
-/obj/docking_port/mobile/supply/proc/create_mail()
-	//Early return if there's no mail waiting to prevent taking up a slot.
-	if(!SSeconomy.mail_waiting)
-		return
-	//spawn crate
-	var/list/empty_turfs = list()
-	for(var/area/shuttle/shuttle_area in shuttle_areas)
-		for(var/turf/open/floor/T in shuttle_area)
-			if(is_blocked_turf(T))
-				continue
-			empty_turfs += T
-
-	if(!length(empty_turfs))
-		return
-
-	new /obj/structure/closet/crate/mail/economy(pick(empty_turfs))

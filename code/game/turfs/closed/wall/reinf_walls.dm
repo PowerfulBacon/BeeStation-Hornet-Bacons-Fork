@@ -232,16 +232,6 @@
 	if(the_rcd.canRturf)
 		return ..()
 
-/turf/closed/wall/r_wall/rust_heretic_act()
-	if(prob(50))
-		return
-	if(HAS_TRAIT(src, TRAIT_RUSTY))
-		ScrapeAway()
-		return
-	if(prob(70))
-		new /obj/effect/temp_visual/glowing_rune(src)
-	return ..()
-
 /turf/closed/wall/r_wall/syndicate
 	name = "hull"
 	desc = "The armored hull of an ominous looking ship."

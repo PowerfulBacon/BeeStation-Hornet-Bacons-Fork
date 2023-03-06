@@ -140,7 +140,6 @@
 	new /obj/item/storage/box/flashbangs(src)
 	new /obj/item/storage/box/deputy(src)
 	new /obj/item/storage/lockbox/medal/sec(src)
-	new /obj/item/storage/lockbox/loyalty(src)
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/circuitboard/machine/techfab/department/security(src)
 
@@ -152,7 +151,6 @@
 	new /obj/item/shield/riot/tele(src)
 	new /obj/item/storage/belt/security/full(src)
 	new /obj/item/gun/energy/e_gun/hos(src)
-	new /obj/item/pinpointer/nuke(src)
 
 /obj/item/storage/box/suitbox/hos
 	name = "compression box of head of security outfits"

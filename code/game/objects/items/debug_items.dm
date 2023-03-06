@@ -228,11 +228,8 @@
 		/obj/item/areaeditor/blueprints=1,
 		/obj/item/card/emag=1,
 		/obj/item/storage/belt/medical/ert=1,
-		/obj/item/disk/tech_disk/debug=1,
 		/obj/item/disk/surgery/debug=1,
 		/obj/item/disk/data/debug=1,
-		/obj/item/uplink/debug=1,
-		/obj/item/uplink/nuclear/debug=1,
 		/obj/item/storage/box/beakers/bluespace=1,
 		/obj/item/storage/box/beakers/variety=1,
 		/obj/item/storage/box/material=1

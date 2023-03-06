@@ -150,10 +150,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 /datum/controller/subsystem/processing/orbits/proc/create_objective()
 	var/static/list/valid_objectives = list(
 		/datum/orbital_objective/recover_blackbox = 3,
-		/datum/orbital_objective/nuclear_bomb = 1,
-		/datum/orbital_objective/assassination = 1,
 		/datum/orbital_objective/artifact = 2,
-		/datum/orbital_objective/vip_recovery = 1
 	)
 	if(!length(possible_objectives))
 		priority_announce("Priority station objective received - Details transmitted to all available objective consoles. \

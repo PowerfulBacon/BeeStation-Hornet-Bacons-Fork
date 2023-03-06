@@ -11,7 +11,6 @@
 		/obj/eldritch/narsie,
 		/obj/docking_port,
 		/obj/structure/lattice,
-		/obj/structure/stone_tile,
 		/obj/item/projectile,
 		/obj/effect/projectile,
 		/obj/effect/portal,
@@ -41,9 +40,6 @@
 		return PROCESS_KILL
 
 /datum/component/chasm/proc/drop_stuff(AM)
-	if (is_safe())
-		return FALSE
-
 	var/atom/parent = src.parent
 	var/to_check = AM ? list(AM) : parent.contents
 	for (var/thing in to_check)

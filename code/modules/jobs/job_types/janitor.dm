@@ -34,9 +34,3 @@
 	belt = /obj/item/modular_computer/tablet/pda/janitor
 	ears = /obj/item/radio/headset/headset_srv
 	uniform = /obj/item/clothing/under/rank/civilian/janitor
-
-/datum/outfit/job/janitor/pre_equip(mob/living/carbon/human/H, visualsOnly)
-	. = ..()
-	if(GARBAGEDAY in SSevents.holidays)
-		l_pocket = /obj/item/gun/ballistic/revolver
-		r_pocket = /obj/item/ammo_box/a357

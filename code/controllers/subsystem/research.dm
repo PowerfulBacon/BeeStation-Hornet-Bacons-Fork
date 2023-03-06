@@ -2,7 +2,7 @@
 SUBSYSTEM_DEF(research)
 	name = "Research"
 	priority = FIRE_PRIORITY_RESEARCH
-	wait = 10
+	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_RESEARCH
 	//TECHWEB STATIC
 	var/list/techweb_nodes = list()				//associative id = node datum
@@ -58,40 +58,6 @@ SUBSYSTEM_DEF(research)
 	error_design = new
 	error_node = new
 	return ..()
-
-/datum/controller/subsystem/research/fire()
-	var/list/bitcoins = list()
-	if(multiserver_calculation)
-		var/eff = calculate_server_coefficient()
-		for(var/obj/machinery/rnd/server/miner in servers)
-			var/list/result = (miner.mine())	//SLAVE AWAY, SLAVE.
-			for(var/i in result)
-				result[i] *= eff
-				bitcoins[i] = bitcoins[i]? bitcoins[i] + result[i] : result[i]
-	else
-		for(var/obj/machinery/rnd/server/miner in servers)
-			if(miner.working)
-				bitcoins = single_server_income.Copy()
-				break			//Just need one to work.
-	if (!isnull(last_income))
-		var/income_time_difference = world.time - last_income
-		science_tech.last_bitcoins = bitcoins  // Doesn't take tick drift into account
-		for(var/i in bitcoins)
-			bitcoins[i] *= income_time_difference / 10
-		science_tech.add_point_list(bitcoins)
-	last_income = world.time
-
-/datum/controller/subsystem/research/proc/calculate_server_coefficient()	//Diminishing returns.
-	var/list/obj/machinery/rnd/server/active = new()
-	for(var/obj/machinery/rnd/server/miner in servers)
-		if(miner.working)
-			active.Add(miner)
-	var/amt = active.len
-	if(!amt)
-		return 0
-	var/coeff = 100
-	coeff = sqrt(coeff / amt)
-	return coeff
 
 /datum/controller/subsystem/research/proc/autosort_categories()
 	for(var/i in techweb_nodes)

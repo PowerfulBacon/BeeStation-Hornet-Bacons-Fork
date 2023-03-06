@@ -158,9 +158,6 @@
 /obj/mecha/get_cell()
 	return cell
 
-/obj/mecha/rust_heretic_act()
-	take_damage(500,  BRUTE)
-
 /obj/mecha/Destroy()
 	if(occupant)
 		occupant.SetSleeping(destruction_sleep_duration)
@@ -1158,9 +1155,6 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 	if(occupant_sight_flags)
 		if(user == occupant)
 			user.sight |= occupant_sight_flags
-
-/obj/mecha/rust_heretic_act()
-	take_damage(500,  BRUTE)
 
 /obj/mecha/lighteater_act(obj/item/light_eater/light_eater, atom/parent)
 	..()

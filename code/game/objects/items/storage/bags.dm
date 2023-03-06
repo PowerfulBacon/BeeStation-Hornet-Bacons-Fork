@@ -49,7 +49,6 @@
 	STR.max_w_class = WEIGHT_CLASS_SMALL
 	STR.max_combined_w_class = 30
 	STR.max_items = 30
-	STR.cant_hold = typecacheof(list(/obj/item/disk/nuclear))
 
 /obj/item/storage/bag/trash/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] puts [src] over [user.p_their()] head and starts chomping at the insides! Disgusting!</span>")
@@ -413,12 +412,7 @@
 	STR.max_combined_w_class = 200
 	STR.max_items = 25
 	STR.insert_preposition = "in"
-	STR.can_hold = typecacheof(list(/obj/item/slime_extract, /obj/item/reagent_containers/syringe, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/blood, /obj/item/reagent_containers/hypospray/medipen, /obj/item/reagent_containers/food/snacks/deadmouse, /obj/item/reagent_containers/food/snacks/monkeycube, /obj/item/organ, /obj/item/bodypart))
-
-/obj/item/storage/bag/bio/pre_attack(atom/A, mob/living/user, params)
-	if(istype(A, /obj/item/slimecross/reproductive))
-		return TRUE
-	return ..()
+	STR.can_hold = typecacheof(list(/obj/item/reagent_containers/syringe, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/blood, /obj/item/reagent_containers/hypospray/medipen, /obj/item/reagent_containers/food/snacks/deadmouse, /obj/item/reagent_containers/food/snacks/monkeycube, /obj/item/organ, /obj/item/bodypart))
 
 /obj/item/storage/bag/construction
 	name = "construction bag"
@@ -455,8 +449,7 @@
 	STR.max_combined_w_class = 32
 	STR.max_items = 32
 	STR.display_numerical_stacking = FALSE
-	STR.can_hold = typecacheof (list(	/obj/item/mail,
-										/obj/item/small_delivery,
+	STR.can_hold = typecacheof (list(	/obj/item/small_delivery,
 										/obj/item/paper,
 										/obj/item/reagent_containers/food/condiment/milk,
 										/obj/item/reagent_containers/food/snacks/store/bread/plain

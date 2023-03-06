@@ -341,12 +341,6 @@
 	status = BURST
 	icon_state = "egg_hatched"
 
-/obj/structure/alien/egg/troll
-
-/obj/structure/alien/egg/troll/finish_bursting(kill = TRUE)
-	qdel(child)
-	new /obj/item/paper/troll(get_turf(src))
-
 #undef BURSTING
 #undef BURST
 #undef GROWING

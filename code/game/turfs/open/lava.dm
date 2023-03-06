@@ -70,9 +70,6 @@
 			return TRUE
 	return FALSE
 
-/turf/open/lava/rust_heretic_act()
-	return FALSE
-
 /turf/open/lava/singularity_act()
 	return
 
@@ -95,11 +92,8 @@
 
 /turf/open/lava/proc/is_safe()
 	//if anything matching this typecache is found in the lava, we don't burn things
-	var/static/list/lava_safeties_typecache = typecacheof(list(/obj/structure/lattice/catwalk, /obj/structure/stone_tile))
+	var/static/list/lava_safeties_typecache = typecacheof(list(/obj/structure/lattice/catwalk))
 	var/list/found_safeties = typecache_filter_list(contents, lava_safeties_typecache)
-	for(var/obj/structure/stone_tile/S in found_safeties)
-		if(S.fallen)
-			LAZYREMOVE(found_safeties, S)
 	return LAZYLEN(found_safeties)
 
 

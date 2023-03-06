@@ -33,22 +33,3 @@ Exotic mineral Sheets
 	singular_name = "adamantine sheet"
 	merge_type = /obj/item/stack/sheet/mineral/adamantine
 	grind_results = list(/datum/reagent/liquidadamantine = 10)
-
-/obj/item/stack/sheet/mineral/adamantine/Initialize(mapload, new_amount, merge = TRUE)
-	recipes = GLOB.adamantine_recipes
-	. = ..()
-
-/* Alien Alloy */
-
-/obj/item/stack/sheet/mineral/abductor
-	name = "alien alloy"
-	icon = 'icons/obj/abductor.dmi'
-	icon_state = "sheet-abductor"
-	item_state = "sheet-abductor"
-	singular_name = "alien alloy sheet"
-	sheettype = "abductor"
-	merge_type = /obj/item/stack/sheet/mineral/abductor
-
-/obj/item/stack/sheet/mineral/abductor/Initialize(mapload, new_amount, merge = TRUE)
-	recipes = GLOB.abductor_recipes
-	. = ..()

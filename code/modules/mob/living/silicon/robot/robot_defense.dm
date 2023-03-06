@@ -115,12 +115,6 @@
 	addtimer(CALLBACK(src, .proc/after_emag, user), 1)
 
 /mob/living/silicon/robot/proc/after_emag(mob/user)
-	if(connected_ai?.mind && connected_ai.mind.has_antag_datum(/datum/antagonist/traitor))
-		to_chat(src, "<span class='danger'>ALERT: Foreign software execution prevented.</span>")
-		logevent("ALERT: Foreign software execution prevented.")
-		to_chat(connected_ai, "<span class='danger'>ALERT: Cyborg unit \[[src]] successfully defended against subversion.</span>")
-		log_game("[key_name(user)] attempted to emag cyborg [key_name(src)], but they were slaved to traitor AI [connected_ai].")
-		return
 
 	if(shell) //AI shells cannot be emagged, so we try to make it look like a standard reset. Smart players may see through this, however.
 		to_chat(user, "<span class='danger'>[src] is remotely controlled! Your emag attempt has triggered a system reset instead!</span>")

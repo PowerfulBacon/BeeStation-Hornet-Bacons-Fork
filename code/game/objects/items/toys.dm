@@ -611,17 +611,6 @@
 	if(chattering)
 		chatter(message, phomeme, user)
 
-/*
- * AI core prizes
- */
-/obj/item/toy/talking/AI
-	name = "toy AI"
-	desc = "A little toy model AI core with real law announcing action!"
-	icon_state = "AI"
-
-/obj/item/toy/talking/AI/generate_messages()
-	return list(generate_ion_law())
-
 /obj/item/toy/talking/owl
 	name = "owl action figure"
 	desc = "An action figure modeled after 'The Owl', defender of justice."

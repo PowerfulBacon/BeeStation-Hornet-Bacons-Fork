@@ -212,7 +212,7 @@
 		if(90)
 			new /obj/item/organ/heart(src)
 		if(91)
-			new /obj/item/soulstone/anybody(src)
+			new /obj/item/organ/eyes/night_vision/alien(src)
 		if(92)
 			new /obj/item/katana(src)
 		if(93)

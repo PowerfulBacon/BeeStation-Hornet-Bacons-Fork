@@ -74,10 +74,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/proc/eat_plants()
 	var/eaten = FALSE
-	var/obj/structure/spacevine/SV = locate(/obj/structure/spacevine) in loc
-	if(SV)
-		SV.eat(src)
-		eaten = TRUE
 
 	var/obj/structure/glowshroom/GS = locate(/obj/structure/glowshroom) in loc
 	if(GS)

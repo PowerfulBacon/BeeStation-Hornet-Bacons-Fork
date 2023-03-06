@@ -185,45 +185,6 @@
 	if(owner && ismonkey(owner) && owner.stat != DEAD && !..())
 		. = owner.humanize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPVIRUS | TR_KEEPSE | TR_KEEPAI)
 
-/datum/mutation/glow
-	name = "Glowy"
-	desc = "You permanently emit a light with a random color and intensity."
-	quality = POSITIVE
-	text_gain_indication = "<span class='notice'>Your skin begins to glow softly.</span>"
-	instability = 5
-	var/obj/effect/dummy/luminescent_glow/glowth //shamelessly copied from luminescents
-	var/glow = 2.5
-	var/range = 2.5
-	power_coeff = 1
-	conflicts = list(/datum/mutation/glow/anti)
-
-/datum/mutation/glow/on_acquiring(mob/living/carbon/owner)
-	. = ..()
-	if(.)
-		return
-	glowth = new(owner)
-	modify()
-
-/datum/mutation/glow/modify()
-	if(!glowth)
-		return
-	var/power = GET_MUTATION_POWER(src)
-	glowth.set_light_range_power_color(range * power, glow * power, "#[dna.features["mcolor"]]")
-
-/datum/mutation/glow/on_losing(mob/living/carbon/owner)
-	. = ..()
-	if(.)
-		return
-	QDEL_NULL(glowth)
-
-/datum/mutation/glow/anti
-	name = "Anti-Glow"
-	desc = "Your skin seems to attract and absorb nearby light creating 'darkness' around you."
-	text_gain_indication = "<span class='notice'>Your light around you seems to disappear.</span>"
-	glow = -3.5 //Slightly stronger, since negating light tends to be harder than making it.
-	conflicts = list(/datum/mutation/glow)
-	locked = TRUE
-
 /datum/mutation/strong
 	name = "Strength"
 	desc = "The user's muscles slightly expand."

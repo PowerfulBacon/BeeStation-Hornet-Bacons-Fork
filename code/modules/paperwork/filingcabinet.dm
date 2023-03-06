@@ -181,43 +181,5 @@
  * Employment contract Cabinets
  */
 
-GLOBAL_LIST_EMPTY(employmentCabinets)
-
 /obj/structure/filingcabinet/employment
-	var/cooldown = 0
 	icon_state = "employmentcabinet"
-	var/virgin = 1
-
-/obj/structure/filingcabinet/employment/Initialize(mapload)
-	. = ..()
-	GLOB.employmentCabinets += src
-
-/obj/structure/filingcabinet/employment/Destroy()
-	GLOB.employmentCabinets -= src
-	return ..()
-
-/obj/structure/filingcabinet/employment/proc/fillCurrent()
-	//This proc fills the cabinet with the current crew.
-	for(var/record in GLOB.data_core.locked)
-		var/datum/data/record/G = record
-		if(!G)
-			continue
-		var/datum/mind/M = G.fields["mindref"]
-		if(M && ishuman(M.current))
-			addFile(M.current)
-
-
-/obj/structure/filingcabinet/employment/proc/addFile(mob/living/carbon/human/employee)
-	new /obj/item/paper/contract/employment(src, employee)
-
-/obj/structure/filingcabinet/employment/interact(mob/user)
-	if(!cooldown)
-		if(virgin)
-			fillCurrent()
-			virgin = 0
-		cooldown = 1
-		sleep(100) // prevents the devil from just instantly emptying the cabinet, ensuring an easy win.
-		cooldown = 0
-	else
-		to_chat(user, "<span class='warning'>[src] is jammed, give it a few seconds.</span>")
-	..()

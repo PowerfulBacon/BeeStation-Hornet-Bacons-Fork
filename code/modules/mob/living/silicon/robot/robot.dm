@@ -719,7 +719,6 @@
 	lawupdate = FALSE
 	lockcharge = FALSE
 	mobility_flags |= MOBILITY_FLAGS_DEFAULT
-	scrambledcodes = TRUE_DEVIL
 	//Disconnect it's camera so it's not so easily tracked.
 	if(!QDELETED(builtInCamera))
 		QDEL_NULL(builtInCamera)
@@ -762,18 +761,6 @@
 	else
 		clear_alert("hacked")
 	set_modularInterface_theme()
-
-/mob/living/silicon/robot/proc/SetRatvar(new_state, rebuild=TRUE)
-	ratvar = new_state
-	if(rebuild)
-		module.rebuild_modules()
-	update_icons()
-	if(ratvar)
-		internal_clock_slab = new(src)
-		throw_alert("ratvar", /atom/movable/screen/alert/ratvar)
-	else
-		qdel(internal_clock_slab)
-		clear_alert("ratvar")
 
 /**
   * Handles headlamp smashing

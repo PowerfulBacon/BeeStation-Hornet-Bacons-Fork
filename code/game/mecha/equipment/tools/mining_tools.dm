@@ -128,11 +128,11 @@
 		target.apply_damage(10, BRUTE, BODY_ZONE_CHEST, target.run_armor_check(target_part, "melee"))
 
 		//blood splatters and sparks
-		if(issilicon(target)  || isbot(target) || isswarmer(target) || !IS_ORGANIC_LIMB(target_part))
+		if(issilicon(target)  || isbot(target) || !IS_ORGANIC_LIMB(target_part))
 			do_sparks(rand(1, 3), FALSE, target.drop_location())
 		else
 			var/splatter_dir = get_dir(chassis, target)
-		
+
 			if(isalien(target))
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(target.drop_location(), splatter_dir)
 			else

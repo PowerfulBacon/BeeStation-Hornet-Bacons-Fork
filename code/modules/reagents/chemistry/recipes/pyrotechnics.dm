@@ -58,24 +58,6 @@
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/potassium = 1)
 	strengthdiv = 10
 
-/datum/chemical_reaction/reagent_explosion/potassium_explosion/holyboom
-	name = "Holy Explosion"
-	id = "holyboom"
-	required_reagents = list(/datum/reagent/water/holywater = 1, /datum/reagent/potassium = 1)
-
-/datum/chemical_reaction/reagent_explosion/potassium_explosion/holyboom/on_reaction(datum/reagents/holder, created_volume)
-	if(created_volume >= 150)
-		playsound(get_turf(holder.my_atom), 'sound/effects/pray.ogg', 80, 0, round(created_volume/48))
-		strengthdiv = 8
-		for(var/mob/living/simple_animal/revenant/R in hearers(7,get_turf(holder.my_atom)))
-			var/deity = GLOB.deity || "Christ"
-			to_chat(R, "<span class='userdanger'>The power of [deity] compels you!</span>")
-			R.stun(20)
-			R.reveal(100)
-			R.adjustHealth(50)
-		addtimer(CALLBACK(src, .proc/divine_explosion, round(created_volume/48,1),get_turf(holder.my_atom)), 2 SECONDS)
-	..()
-
 /datum/chemical_reaction/blackpowder
 	name = "Black Powder"
 	id = /datum/reagent/blackpowder

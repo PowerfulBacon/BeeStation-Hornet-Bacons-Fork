@@ -1,6 +1,5 @@
 #define SCANGATE_NONE 			"Off"
 #define SCANGATE_MINDSHIELD 	"Mindshield"
-#define SCANGATE_NANITES 		"Nanites"
 #define SCANGATE_DISEASE 		"Disease"
 #define SCANGATE_GUNS 			"Guns"
 #define SCANGATE_WANTED			"Wanted"
@@ -115,14 +114,6 @@
 		if(SCANGATE_MINDSHIELD)
 			if(M.has_mindshield_hud_icon())
 				beep = TRUE
-		if(SCANGATE_NANITES)
-			if(SEND_SIGNAL(M, COMSIG_HAS_NANITES))
-				if(nanite_cloud)
-					var/datum/component/nanites/nanites = M.GetComponent(/datum/component/nanites)
-					if(nanites && nanites.cloud_id == nanite_cloud)
-						beep = TRUE
-				else
-					beep = TRUE
 		if(SCANGATE_DISEASE)
 			if(iscarbon(M))
 				var/mob/living/carbon/C = M
@@ -254,7 +245,6 @@
 
 #undef SCANGATE_NONE
 #undef SCANGATE_MINDSHIELD
-#undef SCANGATE_NANITES
 #undef SCANGATE_DISEASE
 #undef SCANGATE_GUNS
 #undef SCANGATE_WANTED

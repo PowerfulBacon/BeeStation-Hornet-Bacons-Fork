@@ -80,10 +80,6 @@ Metals Sheets
 		return FALSE
 	return ..()
 
-/obj/item/stack/sheet/runed_metal/Initialize(mapload, new_amount, merge = TRUE)
-	recipes = GLOB.runed_metal_recipes
-	return ..()
-
 
 /* Brass - the cult one */
 
@@ -104,7 +100,6 @@ Metals Sheets
 
 /obj/item/stack/sheet/brass/Initialize(mapload, new_amount, merge = TRUE)
 	. = ..()
-	recipes = GLOB.brass_recipes
 	pixel_x = 0
 	pixel_y = 0
 

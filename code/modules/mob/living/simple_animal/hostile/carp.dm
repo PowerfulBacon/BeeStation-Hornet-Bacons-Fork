@@ -145,71 +145,11 @@
 	gold_core_spawnable = NO_SPAWN
 	faction = list(ROLE_SYNDICATE)
 	AIStatus = AI_OFF
-	/// Keeping track of the nuke disk for the functionality of storing it.
-	var/obj/item/disk/nuclear/disky
-	/// Location of the file storing disk overlays
-	var/icon/disk_overlay_file = 'icons/mob/carp.dmi'
-	/// Colored disk mouth appearance for adding it as a mouth overlay
-	var/mutable_appearance/colored_disk_mouth
 
 /mob/living/simple_animal/hostile/carp/cayenne/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_DISK_VERIFIER, INNATE_TRAIT) //carp can verify disky
 	ADD_TRAIT(src, TRAIT_CAN_USE_NUKE, INNATE_TRAIT)  //carp SMART
-	colored_disk_mouth = mutable_appearance(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/carp/disk_mouth, greyscale_colors), "disk_mouth")
-
-/mob/living/simple_animal/hostile/carp/cayenne/death(gibbed)
-	if(disky)
-		disky.forceMove(drop_location())
-		disky = null
-	return ..()
-
-/mob/living/simple_animal/hostile/carp/cayenne/Destroy(force)
-	QDEL_NULL(disky)
-	return ..()
-
-/mob/living/simple_animal/hostile/carp/cayenne/examine(mob/user)
-	. = ..()
-	if(disky)
-		. += "<span class='notice'>Wait... is that [disky] in [p_their()] mouth?</span>"
-
-/mob/living/simple_animal/hostile/carp/cayenne/AttackingTarget()
-	if(istype(target, /obj/item/disk/nuclear))
-		var/obj/item/disk/nuclear/potential_disky = target
-		if(potential_disky.anchored)
-			return
-		potential_disky.forceMove(src)
-		disky = potential_disky
-		to_chat(src, "<span class='nicegreen'>YES!! You manage to pick up [disky]. (Click anywhere to place it back down.)</span>")
-		update_icon()
-		return
-	if(disky)
-		if(isopenturf(target))
-			to_chat(src, "<span class='notice'>You place [disky] on [target]</span>")
-			disky.forceMove(target)
-			disky = null
-			update_icon()
-		else
-			disky.melee_attack_chain(src, target)
-		return
-	if(istype(target, /obj/machinery/nuclearbomb))
-		var/obj/machinery/nuclearbomb/nuke = target
-		nuke.ui_interact(src)
-		return
-	return ..()
-
-/mob/living/simple_animal/hostile/carp/cayenne/Exited(atom/movable/AM, atom/newLoc)
-	. = ..()
-	if(AM == disky)
-		disky = null
-		update_icon()
-
-/mob/living/simple_animal/hostile/carp/cayenne/update_overlays()
-	. = ..()
-	if(!disky || stat == DEAD)
-		return
-	. += colored_disk_mouth
-	. += mutable_appearance(disk_overlay_file, "disk_overlay")
 
 /mob/living/simple_animal/hostile/carp/lia
 	name = "Lia"

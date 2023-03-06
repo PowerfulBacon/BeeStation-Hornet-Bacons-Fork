@@ -845,7 +845,7 @@ im not even gonna bother with these for the following symptoms. typed em out, co
 		power += 1
 
 /datum/symptom/parasite/proc/isslimetarget(var/mob/living/carbon/M)
-	if(isslimeperson(M) || isluminescent(M) || isjellyperson(M) || isoozeling(M) || isstargazer(M))
+	if(isslimeperson(M) || isjellyperson(M) || isoozeling(M) || isstargazer(M))
 		return TRUE
 	else
 		return FALSE

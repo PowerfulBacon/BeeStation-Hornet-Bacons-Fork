@@ -4,11 +4,6 @@
 	layer = TURF_PLATING_DECAL_LAYER
 	alpha = 110
 
-/obj/effect/turf_decal/tile/Initialize(mapload)
-	if(SSevents.holidays && SSevents.holidays[APRIL_FOOLS])
-		color = "#[random_short_color()]"
-	return ..()
-
 /// White tiles
 
 /obj/effect/turf_decal/tile/white
@@ -651,12 +646,6 @@
 	layer = TURF_PLATING_DECAL_LAYER
 	alpha = 110
 	icon_state = "trimline_box"
-
-/obj/effect/turf_decal/trimline/Initialize(mapload)
-	if(SSevents.holidays && SSevents.holidays[APRIL_FOOLS])
-		color = "#[random_short_color()]"
-	return ..()
-
 /// White trimlines
 
 /obj/effect/turf_decal/trimline/white

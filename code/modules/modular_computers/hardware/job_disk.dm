@@ -40,9 +40,6 @@
 	if(disk_flags & DISK_SEC)
 		progs_to_store += new /datum/computer_file/program/records/security(src)
 
-	if(disk_flags & DISK_JANI)
-		progs_to_store += new /datum/computer_file/program/radar/custodial_locator(src)
-
 	if((disk_flags & DISK_CHEM) || (disk_flags & DISK_MED) || (disk_flags & DISK_POWER) || (disk_flags & DISK_ATMOS))
 		var/datum/computer_file/program/phys_scanner/scanner = new(src)
 

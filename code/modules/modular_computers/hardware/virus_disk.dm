@@ -93,8 +93,7 @@
 			difficulty++ //if disk has manifest access it has extra snowflake difficulty
 		else
 			difficulty += 2
-	var/datum/component/uplink/hidden_uplink = target.GetComponent(/datum/component/uplink)
-	if(!target.detonatable || prob(difficulty * 15) || (hidden_uplink))
+	if(!target.detonatable || prob(difficulty * 15))
 		to_chat(user, "<span class='danger'>An error flashes on your [src].</span>")
 	else
 		log_bomber(user, "triggered a PDA explosion on", target, "[!is_special_character(user) ? "(TRIGGED BY NON-ANTAG)" : ""]")
@@ -106,29 +105,3 @@
 	disk_flags = DISK_REMOTE_AIRLOCK
 	// Make sure this matches the syndicate shuttle's shield/door id in _maps/shuttles/infiltrator/infiltrator_basic.dmm
 	controllable_airlocks = list("smindicate")
-
-/obj/item/computer_hardware/hard_drive/role/virus/frame
-	name = "\improper F.R.A.M.E. disk"
-	icon_state = "cart-prove"
-	var/telecrystals = 0
-
-/obj/item/computer_hardware/hard_drive/role/virus/frame/send_virus(obj/item/modular_computer/tablet/target, mob/living/user)
-	if(charges <= 0)
-		to_chat(user, "<span class='notice'>ERROR: Out of charges.</span>")
-		return
-	if(!target)
-		to_chat(user, "<span class='notice'>ERROR: Could not find device.</span>")
-		return
-	charges--
-	var/lock_code = "[random_code(3)] [pick(GLOB.phonetic_alphabet)]"
-	to_chat(user, "<span class='notice'>Success! The unlock code to the target is: [lock_code]</span>")
-	var/datum/component/uplink/hidden_uplink = target.GetComponent(/datum/component/uplink)
-	if(!hidden_uplink)
-		hidden_uplink = target.AddComponent(/datum/component/uplink)
-		hidden_uplink.unlock_code = lock_code
-	else
-		hidden_uplink.hidden_crystals += hidden_uplink.telecrystals //Temporarially hide the PDA's crystals, so you can't steal telecrystals.
-	hidden_uplink.telecrystals = telecrystals
-	telecrystals = 0
-	hidden_uplink.active = TRUE
-

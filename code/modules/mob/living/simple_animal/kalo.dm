@@ -83,7 +83,7 @@
 			else //if we don't see a better snack, lick up nearby blood
 				var/obj/effect/decal/cleanable/blood/B
 				for(var/obj/effect/decal/cleanable/blood/O in oview(2, src))
-					if (!istype(O, /obj/effect/decal/cleanable/blood/gibs) && !istype(O, /obj/effect/decal/cleanable/blood/innards)) //dont lick up gibs or innards
+					if (!istype(O, /obj/effect/decal/cleanable/blood/gibs)) //dont lick up gibs or innards
 						B = O
 						break
 				if(B)

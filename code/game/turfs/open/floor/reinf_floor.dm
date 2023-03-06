@@ -165,21 +165,6 @@
 /turf/open/floor/engine/cult/Initialize(mapload)
 	. = ..()
 	new /obj/effect/temp_visual/cult/turf/floor(src)
-	realappearance = new /obj/effect/clockwork/overlay/floor/bloodcult(src)
-	realappearance.linked = src
-
-/turf/open/floor/engine/cult/Destroy()
-	be_removed()
-	return ..()
-
-/turf/open/floor/engine/cult/ChangeTurf(path, new_baseturf, flags)
-	if(path != type)
-		be_removed()
-	return ..()
-
-/turf/open/floor/engine/cult/proc/be_removed()
-	qdel(realappearance)
-	realappearance = null
 
 /turf/open/floor/engine/cult/airless
 	initial_gas_mix = AIRLESS_ATMOS

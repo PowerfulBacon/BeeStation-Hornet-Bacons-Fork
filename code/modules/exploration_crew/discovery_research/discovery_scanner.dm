@@ -24,14 +24,6 @@
 	. += "<span class='notice'>[src] has unlimited range.</span>"
 	. += "<span class='notice'>Science goggles can help detect researchable items.</span>"
 
-/obj/item/discovery_scanner/attack_obj(obj/O, mob/living/user)
-	if(istype(O, /obj/machinery/computer/rdconsole))
-		to_chat(user, "<span class='notice'>You link [src] to [O].</span>")
-		var/obj/machinery/computer/rdconsole/rdconsole = O
-		linked_techweb = rdconsole.stored_research
-		return
-	. = ..()
-
 /obj/item/discovery_scanner/proc/begin_scanning(mob/user, datum/component/discoverable/discoverable)
 	to_chat(user, "<span class='notice'>You begin scanning [discoverable.parent]...</span>")
 	if(do_after(user, 50, target=get_turf(user)))

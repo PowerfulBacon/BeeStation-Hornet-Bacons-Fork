@@ -156,10 +156,5 @@
 	if (isliving(target))
 		var/mob/living/hit_mob = target
 		if (contained)
-			if (iswizard(hit_mob))
-				//Pickup the hammer
-				if (hit_mob.put_in_active_hand(contained))
-					contained = null
-			else
-				contained.shock(hit_mob)
+			contained.shock(hit_mob)
 		qdel(src)

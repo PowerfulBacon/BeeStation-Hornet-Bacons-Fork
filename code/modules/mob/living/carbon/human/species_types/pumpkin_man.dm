@@ -17,12 +17,6 @@
 	species_l_leg = /obj/item/bodypart/l_leg/pumpkin_man
 	species_r_leg = /obj/item/bodypart/r_leg/pumpkin_man
 
-//Only allow race roundstart on Halloween
-/datum/species/pod/pumpkin_man/check_roundstart_eligible()
-	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
-		return TRUE
-	return FALSE
-
 /obj/item/organ/brain/pumpkin_brain
 	name = "pumpkinperson brain"
 	actions_types = list(/datum/action/item_action/organ_action/pumpkin_head_candy)
@@ -73,9 +67,7 @@
 
 /datum/action/item_action/organ_action/pumpkin_head_candy/proc/generate_candy()
 	//Get a candy type
-	var/obj/item/type = pick(/obj/item/reagent_containers/food/snacks/sugarcookie/spookyskull,
-		/obj/item/reagent_containers/food/snacks/sugarcookie/spookycoffin,
-		/obj/item/reagent_containers/food/snacks/candy_corn,
+	var/obj/item/type = pick(/obj/item/reagent_containers/food/snacks/candy_corn,
 		/obj/item/reagent_containers/food/snacks/candy,
 		/obj/item/reagent_containers/food/snacks/candiedapple,
 		/obj/item/reagent_containers/food/snacks/chocolatebar)

@@ -297,11 +297,6 @@
 		/obj/effect/decal/remains/xeno = 49,
 		/obj/effect/spawner/xeno_egg_delivery = 1)
 
-/obj/effect/spawner/lootdrop/two_percent_xeno_egg_spawner/Initialize(mapload)
-	if(prob(40) && SSevents.holidays && SSevents.holidays[APRIL_FOOLS])
-		loot = list(/obj/effect/spawner/xeno_egg_delivery_troll = 1)
-	. = ..()
-
 /obj/effect/spawner/lootdrop/ten_percent_girlfriend_spawner
 	name = "10% chance girlfriend spawner"
 	loot = list(

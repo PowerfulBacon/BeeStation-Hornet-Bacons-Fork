@@ -659,6 +659,3 @@ Class Procs:
 	if((custom_clicksound ||= clicksound) && world.time > next_clicksound)
 		next_clicksound = world.time + CLICKSOUND_INTERVAL
 		playsound(src, custom_clicksound, clickvol)
-
-/obj/machinery/rust_heretic_act()
-	take_damage(500, BRUTE, "melee", 1)
