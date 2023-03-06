@@ -51,10 +51,6 @@
 			smoothing_flags |= SMOOTH_OBJ
 		SET_BITFLAG_LIST(canSmoothWith)
 
-	var/area/A = loc
-	if(IS_DYNAMIC_LIGHTING(A))
-		add_overlay(/obj/effect/fullbright)
-
 	ComponentInitialize()
 
 	return INITIALIZE_HINT_NORMAL

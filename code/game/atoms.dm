@@ -79,7 +79,7 @@
 	///Bitfield for how the atom handles materials.
 	var/material_flags = NONE
 	///Light systems, both shouldn't be active at the same time.
-	var/light_system = MOVABLE_LIGHT
+	var/light_system = NO_LIGHT_SUPPORT
 	///Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
 	var/light_on = TRUE
 	///Bitflags to determine lighting-related atom properties.

@@ -61,7 +61,7 @@
 
 
 /datum/component/overlay_lighting/Initialize(_range, _power, _color, starts_on)
-	if(!ismovable(parent))
+	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	var/atom/movable/movable_parent = parent
