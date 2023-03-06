@@ -76,14 +76,6 @@
 		addtimer(CALLBACK(src, .proc/divine_explosion, round(created_volume/48,1),get_turf(holder.my_atom)), 2 SECONDS)
 	..()
 
-/datum/chemical_reaction/reagent_explosion/potassium_explosion/holyboom/proc/divine_explosion(size, turf/T)
-	for(var/mob/living/carbon/C in hearers(size,T))
-		if(iscultist(C))
-			to_chat(C, "<span class='userdanger'>The divine explosion sears you!</span>")
-			C.Paralyze(40)
-			C.adjust_fire_stacks(5)
-			C.IgniteMob()
-
 /datum/chemical_reaction/blackpowder
 	name = "Black Powder"
 	id = /datum/reagent/blackpowder

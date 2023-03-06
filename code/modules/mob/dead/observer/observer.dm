@@ -157,12 +157,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 /mob/dead/observer/get_photo_description(obj/item/camera/camera)
 	return "You can also see a g-g-g-g-ghooooost!"
 
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, /atom/proc/update_atom_colour), 10)
-
 /mob/dead/observer/Destroy()
 	UnregisterSignal(src, COMSIG_MOB_MOUSE_SCROLL_ON)
 	// Update medhud on their body (soul departed?)

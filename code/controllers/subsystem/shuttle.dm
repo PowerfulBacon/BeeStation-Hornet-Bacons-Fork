@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/area/emergencyLastCallLoc
 	var/emergencyCallAmount = 0		//how many times the escape shuttle was called
 	var/emergencyNoEscape			//Hostile environment that prevents the shuttle from leaving after it has arrived
-	var/emergencyDelayArrival 		//Infestation that delays the shuttle arrival while contingency plans are put into place 
+	var/emergencyDelayArrival 		//Infestation that delays the shuttle arrival while contingency plans are put into place
 	var/emergencyNoRecall = FALSE
 	var/adminEmergencyNoRecall = FALSE
 	var/list/hostileEnvironments = list() //Things blocking escape shuttle from leaving
@@ -42,8 +42,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/list/hidden_shuttle_turfs = list() //all turfs hidden from navigation computers associated with a list containing the image hiding them and the type of the turf they are pretending to be
 	var/list/hidden_shuttle_turf_images = list() //only the images from the above list
-
-	var/datum/round_event/shuttle_loan/shuttle_loan
 
 	var/shuttle_purchased = FALSE //If the station has purchased a replacement escape shuttle this round
 	var/list/shuttle_purchase_requirements_met = list() //For keeping track of ingame events that would unlock new shuttles, such as defeating a boss or discovering a secret item
@@ -395,7 +393,7 @@ SUBSYSTEM_DEF(shuttle)
 		emergency.request(null, set_coefficient=1) //If a shuttle wasn't already called, call one now, with 10 minute delay
 	else if(emergency.mode == SHUTTLE_CALL)
 		emergency.setTimer(10 MINUTES) //If shuttle was already in transit, delay the arrival time to 10 minutes
-		//If the emergency shuttle has already passed the point of no return before a queen existed, do not delay round for Xenomorphs - they spawned too late on a round that was already coming to an end. 
+		//If the emergency shuttle has already passed the point of no return before a queen existed, do not delay round for Xenomorphs - they spawned too late on a round that was already coming to an end.
 
 //try to move/request to dockHome if possible, otherwise dockAway. Mainly used for admin buttons
 /datum/controller/subsystem/shuttle/proc/toggleShuttle(shuttleId, dockHome, dockAway, timed)
@@ -535,9 +533,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	if (istype(SSshuttle.discoveredPlants))
 		discoveredPlants = SSshuttle.discoveredPlants
-
-	if (istype(SSshuttle.shuttle_loan))
-		shuttle_loan = SSshuttle.shuttle_loan
 
 	if (istype(SSshuttle.shuttle_purchase_requirements_met))
 		shuttle_purchase_requirements_met = SSshuttle.shuttle_purchase_requirements_met

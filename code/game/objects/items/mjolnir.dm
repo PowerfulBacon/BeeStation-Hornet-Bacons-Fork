@@ -105,7 +105,7 @@
 			M.playsound_local(get_turf(src), 'sound/effects/bamf.ogg', 50, 1, random_frequency, 10)
 	//Any lying mobs on the turf (apart from wizards) get crushed
 	for (var/mob/living/mob_on_tile in loc)
-		if (mob_on_tile.mobility_flags & MOBILITY_STAND || iswizard(mob_on_tile))
+		if (mob_on_tile.mobility_flags & MOBILITY_STAND)
 			continue
 		mob_on_tile.emote("scream")
 		mob_on_tile.take_bodypart_damage(40, 0, 0, check_armor = TRUE)
@@ -119,12 +119,7 @@
 
 /obj/structure/anchored_mjolnir/attack_hand(mob/user)
 	. = ..()
-	if (iswizard(user))
-		var/hammer = contained
-		if (user.put_in_active_hand(contained))
-			user.visible_message("<span class='danger'>[user] effortlessly lifts [hammer].</span>")
-	else
-		user.visible_message("<span class='notice'>[user] attempts to lift [contained], but its too heavy!</span>", "<span class='userdanger'>[contained] is too heavy!</span>")
+	user.visible_message("<span class='notice'>[user] attempts to lift [contained], but its too heavy!</span>", "<span class='userdanger'>[contained] is too heavy!</span>")
 
 
 /obj/item/projectile/mjolnir

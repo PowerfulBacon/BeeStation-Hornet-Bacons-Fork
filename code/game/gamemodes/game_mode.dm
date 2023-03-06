@@ -47,8 +47,6 @@
 	var/const/waittime_l = 600
 	var/const/waittime_h = 1800 // started at 1800
 
-	var/list/datum/station_goal/station_goals = list()
-
 	var/allow_persistence_save = TRUE
 
 	var/gamemode_ready = FALSE //Is the gamemode all set up and ready to start checking for ending conditions.
@@ -93,53 +91,6 @@
 /datum/game_mode/proc/pre_setup()
 	return 1
 
-/datum/game_mode/proc/create_special_antags()
-	var/list/living_crew = list()
-	living_crew = get_living_station_crew()
-
-	var/list/candidates = list()
-	for(var/mob/living/carbon/human/H in living_crew)
-		if((!H.client) || (is_centcom_level(H.z)))
-			continue
-		candidates += H
-
-	for(var/role_to_init in allowed_special)
-		var/datum/special_role/new_role = new role_to_init
-		new_role.setup()
-		if(!prob(new_role.probability))
-			continue
-		new_role.add_to_pool()
-		active_specials += new_role
-
-	for(var/datum/special_role/special in active_specials)
-		if(special.spawn_mode == SPAWNTYPE_MIDROUND)
-			continue
-		//To make it feel a little more random, and for efficiency reasons we just pick the person, then check their job and if they cannot be antag, we will just remove the slot
-		var/amount = round(living_crew.len * special.proportion)
-		amount = min(amount, special.max_amount)
-		for(var/i in 1 to amount)
-			if(candidates.len == 0)
-				return	//No more candidates, end the selection process, and active specials at this time will be handled by latejoins or not included
-			var/mob/person
-			if(special.special_role_flag)
-				person = antag_pick(candidates, special.special_role_flag)
-			else
-				person = pick_n_take(candidates)
-			if(is_banned_from(person.ckey, special.preference_type))
-				continue
-			if(!person)
-				continue
-			var/datum/mind/selected_mind = person.mind
-			if(selected_mind.special_role)
-				continue
-			if(person.job in special.restricted_jobs)
-				continue
-			//Would be annoying trying to assasinate someone with special statuses
-			if(selected_mind.isAntagTarget && !special.allowAntagTargets)
-				continue
-			var/datum/antagonist/special/A = special.add_antag_status_to(selected_mind)
-			log_game("[key_name(selected_mind)] has been selected as a [A.name]")
-
 ///Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things
 /datum/game_mode/proc/post_setup(report) //Gamemodes can override the intercept report. Passing TRUE as the argument will force a report.
 	if(!report)
@@ -172,12 +123,8 @@
 			query_round_game_mode.Execute()
 			qdel(query_round_game_mode)
 	create_special_antags()
-	generate_station_goals()
 	if(report)
 		addtimer(CALLBACK(src, .proc/send_intercept, 0), rand(waittime_l, waittime_h))
-	else // goals only become purchasable when on_report is called, this also makes a replacement announcement.
-		for(var/datum/station_goal/G in station_goals)
-			G.prepare_report()
 	gamemode_ready = TRUE
 	return 1
 
@@ -390,27 +337,10 @@
 		intercepttext += "<hr>"
 		intercepttext += report
 
-	intercepttext += generate_station_goal_report()
-
 	print_command_report(intercepttext, "Central Command Status Summary", announce=FALSE)
 	priority_announce("A summary has been copied and printed to all communications consoles.", "Enemy communication intercepted. Security level elevated.", ANNOUNCER_INTERCEPT)
 	if(GLOB.security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
-
-
-/*
- * Generate a list of station goals available to purchase to report to the crew.
- *
- * Returns a formatted string all station goals that are available to the station.
- */
-/datum/game_mode/proc/generate_station_goal_report()
-	if(!station_goals.len)
-		return
-	. = "<hr><b>Special Orders for [station_name()]:</b><BR>"
-	for(var/datum/station_goal/station_goal in station_goals)
-		station_goal.on_report()
-		. += station_goal.get_report()
-	return
 
 // This is a frequency selection system. You may imagine it like a raffle where each player can have some number of tickets. The more tickets you have the more likely you are to
 // "win". The default is 100 tickets. If no players use any extra tickets (earned with the antagonist rep system) calling this function should be equivalent to calling the normal
@@ -733,27 +663,6 @@
 		return 0
 
 	return max(0, enemy_minimum_age - C.player_age)
-
-/datum/game_mode/proc/remove_antag_for_borging(datum/mind/newborgie)
-	SSticker.mode.remove_cultist(newborgie, 0, 0)
-	remove_servant_of_ratvar(newborgie)
-	var/datum/antagonist/rev/rev = newborgie.has_antag_datum(/datum/antagonist/rev)
-	if(rev)
-		rev.remove_revolutionary(TRUE)
-
-/datum/game_mode/proc/generate_station_goals()
-	var/list/possible = list()
-	for(var/T in subtypesof(/datum/station_goal))
-		var/datum/station_goal/G = T
-		if(config_tag in initial(G.gamemode_blacklist))
-			continue
-		possible += T
-	var/goal_weights = 0
-	while(possible.len && goal_weights < STATION_GOAL_BUDGET)
-		var/datum/station_goal/picked = pick_n_take(possible)
-		goal_weights += initial(picked.weight)
-		station_goals += new picked
-
 
 /datum/game_mode/proc/generate_report() //Generates a small text blurb for the gamemode in centcom report
 	return "Gamemode report for [name] not set.  Contact a coder."

@@ -706,11 +706,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	REMOVE_TRAIT(M, TRAIT_NOBLOCK, type)
 	return ..()
 
-/datum/reagent/consumable/ethanol/beepsky_smash/overdose_start(mob/living/carbon/M)
-	if(M.mind && !HAS_TRAIT(M.mind, TRAIT_LAW_ENFORCEMENT_METABOLISM))
-		M.gain_trauma(/datum/brain_trauma/mild/phobia/security, TRAUMA_RESILIENCE_BASIC)
-
-
 /datum/reagent/consumable/ethanol/irish_cream
 	name = "Irish Cream"
 	description = "Whiskey-imbued cream. What else would you expect from the Irish?"
@@ -1132,14 +1127,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_icon_state = "changelingsting"
 	glass_name = "Changeling Sting"
 	glass_desc = "A stingy drink."
-
-/datum/reagent/consumable/ethanol/changelingsting/on_mob_life(mob/living/carbon/M)
-	if(M.mind) //Changeling Sting assists in the recharging of changeling chemicals.
-		var/datum/antagonist/changeling/changeling = M.mind.has_antag_datum(/datum/antagonist/changeling)
-		if(changeling)
-			changeling.chem_charges += metabolization_rate
-			changeling.chem_charges = CLAMP(changeling.chem_charges, 0, changeling.chem_storage)
-	return ..()
 
 /datum/reagent/consumable/ethanol/irishcarbomb
 	name = "Irish Car Bomb"

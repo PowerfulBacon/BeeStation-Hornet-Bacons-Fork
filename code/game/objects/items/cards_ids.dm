@@ -440,7 +440,6 @@ update_label("John Doe", "Clowny")
 		/obj/item/card/id/syndicate/broken,
 		/obj/item/card/id/away/old/apc,
 		/obj/item/card/id/away/deep_storage,
-		/obj/item/card/id/changeling,
 		/obj/item/card/id/golem,
 		/obj/item/card/id/pass), only_root_path = TRUE)
 	chameleon_action.initialize_disguises()

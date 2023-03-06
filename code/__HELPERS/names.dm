@@ -55,16 +55,7 @@ GLOBAL_VAR(command_name)
 		new_station_name = name + " "
 		name = ""
 
-	// Prefix
-	var/holiday_name = pick(SSevents.holidays)
-	if(holiday_name)
-		var/datum/holiday/holiday = SSevents.holidays[holiday_name]
-		name = holiday.getStationPrefix()
-		if(istype(holiday, /datum/holiday/friday_thirteenth))
-			random = 13
-		//get normal name
-	if(!name)
-		name = pick(GLOB.station_names)
+	name = pick(GLOB.station_names)
 	if(name)
 		new_station_name += name + " "
 

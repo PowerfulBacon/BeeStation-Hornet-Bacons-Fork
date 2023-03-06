@@ -64,10 +64,6 @@
 	new framestack(get_turf(src), framestackamount)
 	qdel(src)
 
-/obj/structure/table_frame/narsie_act()
-	new /obj/structure/table_frame/wood(src.loc)
-	qdel(src)
-
 /*
  * Wooden Frames
  */
@@ -122,11 +118,3 @@
 			make_new_table(/obj/structure/table/brass)
 	else
 		return ..()
-
-/obj/structure/table_frame/brass/narsie_act()
-	..()
-	if(src) //do we still exist?
-		var/previouscolor = color
-		color = "#960000"
-		animate(src, color = previouscolor, time = 8)
-		addtimer(CALLBACK(src, /atom/proc/update_atom_colour), 8)

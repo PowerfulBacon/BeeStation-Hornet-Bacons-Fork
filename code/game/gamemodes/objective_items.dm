@@ -73,9 +73,6 @@
 	difficulty = 5
 	excludefromjob = list(JOB_NAME_CAPTAIN)
 
-/datum/objective_item/steal/nukedisc/check_special_completion(obj/item/disk/nuclear/N)
-	return !N.fake
-
 /datum/objective_item/steal/reflector
 	name = "a reflector vest."
 	targetitem = /obj/item/clothing/suit/armor/laserproof

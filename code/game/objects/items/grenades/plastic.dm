@@ -152,16 +152,6 @@
 	if(!M)
 		return
 	var/message_say = "FOR NO RAISIN!"
-	if(M.mind)
-		var/datum/mind/UM = M.mind
-		if(UM.has_antag_datum(/datum/antagonist/nukeop) || UM.has_antag_datum(/datum/antagonist/traitor))
-			message_say = "FOR THE SYNDICATE!"
-		else if(UM.has_antag_datum(/datum/antagonist/changeling))
-			message_say = "FOR THE HIVE!"
-		else if(UM.has_antag_datum(/datum/antagonist/cult))
-			message_say = "FOR NAR'SIE!"
-		else if(UM.has_antag_datum(/datum/antagonist/rev))
-			message_say = "VIVA LA REVOLUTION!"
 	M.say(message_say, forced="C4 suicide")
 
 /obj/item/grenade/plastic/suicide_act(mob/user)

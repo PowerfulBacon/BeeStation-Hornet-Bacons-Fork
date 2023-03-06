@@ -173,12 +173,6 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 		return
 	user.Move_Pulled(src)
 
-/turf/eminence_act(mob/living/simple_animal/eminence/eminence)
-	if(get_turf(eminence) == src)
-		check_z_travel(eminence)
-		return
-	return ..()
-
 /turf/proc/check_z_travel(mob/user)
 	if(get_turf(user) != src)
 		return
@@ -584,24 +578,6 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 						SSexplosions.med_mov_atom += movable_thing
 					if(EXPLODE_LIGHT)
 						SSexplosions.low_mov_atom += movable_thing
-
-/turf/narsie_act(force, ignore_mobs, probability = 20)
-	. = (prob(probability) || force)
-	for(var/I in src)
-		var/atom/A = I
-		if(ignore_mobs && ismob(A))
-			continue
-		if(ismob(A) || .)
-			A.narsie_act()
-
-/turf/ratvar_act(force, ignore_mobs, probability = 40)
-	. = (prob(probability) || force)
-	for(var/I in src)
-		var/atom/A = I
-		if(ignore_mobs && ismob(A))
-			continue
-		if(ismob(A) || .)
-			A.ratvar_act()
 
 /turf/proc/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	underlay_appearance.icon = icon

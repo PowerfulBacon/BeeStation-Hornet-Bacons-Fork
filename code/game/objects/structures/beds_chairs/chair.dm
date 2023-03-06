@@ -64,16 +64,6 @@
 /obj/structure/chair/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/structure/chair/narsie_act()
-	var/obj/structure/chair/wood/W = new/obj/structure/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
-
-/obj/structure/chair/ratvar_act()
-	var/obj/structure/chair/fancy/brass/B = new(get_turf(src))
-	B.setDir(dir)
-	qdel(src)
-
 /obj/structure/chair/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1 & NODECONSTRUCT_1))
 		to_chat(user, "<span class='notice'>You start deconstructing [src]...</span>")
@@ -157,9 +147,6 @@
 	buildstacktype = /obj/item/stack/sheet/wood
 	buildstackamount = 3
 	item_chair = /obj/item/chair/wood
-
-/obj/structure/chair/wood/narsie_act()
-	return
 
 /obj/structure/chair/wood/normal //Kept for map compatibility
 
@@ -301,9 +288,6 @@
 	playsound(src, 'sound/effects/servostep.ogg', 50, FALSE)
 	return FALSE
 
-/obj/structure/chair/fancy/brass/ratvar_act()
-	return
-
 /obj/structure/chair/fancy/brass/AltClick(mob/living/user)
 	turns = 0
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
@@ -373,9 +357,6 @@
 	can_buckle = 0
 	buildstackamount = 1
 	item_chair = /obj/item/chair/stool
-
-/obj/structure/chair/stool/narsie_act()
-	return
 
 /obj/structure/chair/MouseDrop(over_object, src_location, over_location)
 	. = ..()

@@ -1,7 +1,6 @@
 GLOBAL_LIST_INIT(arcade_prize_pool, list(
 		/obj/item/storage/box/snappops = 2,
 		/obj/item/toy/talking/AI = 2,
-		/obj/item/toy/talking/codex_gigas = 2,
 		/obj/item/clothing/under/syndicate/tacticool = 2,
 		/obj/item/toy/sword = 2,
 		/obj/item/toy/gun = 2,
@@ -47,7 +46,6 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 		/obj/item/extendohand/acme = 1,
 		/obj/item/hot_potato/harmless/toy = 1,
 		/obj/item/card/emagfake = 1,
-		/obj/item/disk/nuclear/fake/obvious = 1,
 		/obj/item/clothing/shoes/wheelys = 2,
 		/obj/item/clothing/shoes/kindleKicks = 2,
 		/obj/item/toy/plush/moth/random = 2,
@@ -708,9 +706,6 @@ GLOBAL_LIST_INIT(arcade_prize_pool, list(
 					if(isliving(usr))
 						var/mob/living/L = usr
 						L.Stun(200, ignore_canstun = TRUE) //you can't run :^)
-					var/S = new /obj/anomaly/singularity/academy(usr.loc)
-					addtimer(CALLBACK(src, /atom/movable/proc/say, "[S] winks out, just as suddenly as it appeared."), 50)
-					QDEL_IN(S, 50)
 			else
 				event = null
 				turns += 1

@@ -136,5 +136,5 @@
 	switch(visualAppearence)
 		if(MAINTDRONE)
 			. = 0
-		if(REPAIRDRONE,SCOUTDRONE,CLOCKDRONE)
+		if(REPAIRDRONE,SCOUTDRONE)
 			. = -6

@@ -70,8 +70,6 @@
 			selfpenalty = 0.6
 	if(target.stat)//are they not conscious
 		sleepbonus = 0.5
-	if(locate(/obj/structure/table/optable/abductor, T))
-		propability = 1.2
 	else if(locate(/obj/structure/table/optable, T))
 		propability = 1
 	else if(locate(/obj/machinery/stasis, T))

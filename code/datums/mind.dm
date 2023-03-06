@@ -225,43 +225,6 @@
 	objectives, uplinks, powers etc are all handled.
 */
 
-/datum/mind/proc/remove_changeling()
-	var/datum/antagonist/changeling/C = has_antag_datum(/datum/antagonist/changeling)
-	if(C)
-		remove_antag_datum(/datum/antagonist/changeling)
-		special_role = null
-
-/datum/mind/proc/remove_traitor()
-	remove_antag_datum(/datum/antagonist/traitor)
-
-/datum/mind/proc/remove_brother()
-	if(src in SSticker.mode.brothers)
-		remove_antag_datum(/datum/antagonist/brother)
-	SSticker.mode.update_brother_icons_removed(src)
-
-/datum/mind/proc/remove_nukeop()
-	var/datum/antagonist/nukeop/nuke = has_antag_datum(/datum/antagonist/nukeop,TRUE)
-	if(nuke)
-		remove_antag_datum(nuke.type)
-		special_role = null
-
-/datum/mind/proc/remove_wizard()
-	remove_antag_datum(/datum/antagonist/wizard)
-	special_role = null
-
-/datum/mind/proc/remove_cultist()
-	if(src in SSticker.mode.cult)
-		SSticker.mode.remove_cultist(src, 0, 0)
-	special_role = null
-	remove_antag_equip()
-
-/datum/mind/proc/remove_rev()
-	var/datum/antagonist/rev/rev = has_antag_datum(/datum/antagonist/rev)
-	if(rev)
-		remove_antag_datum(rev.type)
-		special_role = null
-
-
 /datum/mind/proc/remove_antag_equip()
 	var/list/Mob_Contents = current.get_contents()
 	for(var/obj/item/I in Mob_Contents)
@@ -269,121 +232,9 @@
 		if(O)
 			O.unlock_code = null
 
-/datum/mind/proc/remove_all_antag() //For the Lazy amongst us.
-	remove_changeling()
-	remove_traitor()
-	remove_nukeop()
-	remove_wizard()
-	remove_cultist()
-	remove_rev()
-	SSticker.mode.update_cult_icons_removed(src)
-
-/datum/mind/proc/equip_traitor(employer = "The Syndicate", silent = FALSE, datum/antagonist/uplink_owner, telecrystals = 20, datum/game_mode/gamemode)
-	if(!current)
-		return
-	var/mob/living/carbon/human/traitor_mob = current
-	if (!istype(traitor_mob))
-		return
-
-	var/list/all_contents = traitor_mob.GetAllContents()
-	var/obj/item/modular_computer/tablet/pda/PDA = locate() in all_contents
-	var/obj/item/radio/R = locate() in all_contents
-	var/obj/item/pen/P
-
-	if (PDA) // Prioritize PDA pen, otherwise the pocket protector pens will be chosen, which causes numerous ahelps about missing uplink
-		P = locate() in PDA
-	if (!P) // If we couldn't find a pen in the PDA, or we didn't even have a PDA, do it the old way
-		P = locate() in all_contents
-		if(!P) // I do not have a pen.
-			var/obj/item/pen/inowhaveapen
-			if(istype(traitor_mob.back,/obj/item/storage)) //ok buddy you better have a backpack!
-				inowhaveapen = new /obj/item/pen(traitor_mob.back)
-			else
-				inowhaveapen = new /obj/item/pen(traitor_mob.loc)
-				traitor_mob.put_in_hands(inowhaveapen) // I hope you don't have arms and your traitor pen gets stolen for all this trouble you've caused.
-			P = inowhaveapen
-
-	var/obj/item/uplink_loc
-	var/implant = FALSE
-
-	if(traitor_mob.client?.prefs)
-		switch(traitor_mob.client.prefs.active_character.uplink_spawn_loc)
-			if(UPLINK_PDA)
-				uplink_loc = PDA
-				if(!uplink_loc)
-					uplink_loc = R
-				if(!uplink_loc)
-					uplink_loc = P
-			if(UPLINK_RADIO)
-				if(HAS_TRAIT(traitor_mob, TRAIT_MUTE))  // cant speak code into headset
-					to_chat(traitor_mob, "Using a radio uplink would be impossible with your muteness! Equipping PDA Uplink..")
-					uplink_loc = PDA
-					if(!uplink_loc)
-						uplink_loc = R
-					if(!uplink_loc)
-						uplink_loc = P
-				else
-					uplink_loc = R
-					if(!uplink_loc)
-						uplink_loc = PDA
-					if(!uplink_loc)
-						uplink_loc = P
-			if(UPLINK_PEN)
-				uplink_loc = P
-			if(UPLINK_IMPLANT)
-				implant = TRUE
-
-	if(!uplink_loc) // We've looked everywhere, let's just implant you
-		implant = TRUE
-
-	if (!implant)
-		. = uplink_loc
-		var/datum/component/uplink/U = uplink_loc.AddComponent(/datum/component/uplink, traitor_mob.key, TRUE, FALSE, gamemode, telecrystals)
-		if(src.has_antag_datum(/datum/antagonist/incursion))
-			U.uplink_flag = UPLINK_INCURSION
-		if(!U)
-			CRASH("Uplink creation failed.")
-		U.setup_unlock_code()
-		if(!silent)
-			if(uplink_loc == R)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [R.name]. Simply speak [U.unlock_code] into the :d channel to unlock its hidden features.</span>")
-			else if(uplink_loc == PDA)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [PDA.name]. Simply enter the code \"[U.unlock_code]\" into the ring tone selection to unlock its hidden features.</span>")
-			else if(uplink_loc == P)
-				to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly disguised a Syndicate Uplink as your [P.name]. Simply twist the top of the pen [english_list(U.unlock_code)] from its starting position to unlock its hidden features.</span>")
-
-		if(uplink_owner)
-			uplink_owner.antag_memory += U.unlock_note + "<br>"
-		else
-			traitor_mob.mind.store_memory(U.unlock_note)
-	else
-		var/obj/item/implant/uplink/starting/I = new(traitor_mob)
-		I.implant(traitor_mob, null, silent = TRUE)
-		if(!silent)
-			to_chat(traitor_mob, "<span class='boldnotice'>[employer] has cunningly implanted you with a Syndicate Uplink (although uplink implants cost valuable TC, so you will have slightly less). Simply trigger the uplink to access it.</span>")
-		return I
-
 //Link a new mobs mind to the creator of said mob. They will join any team they are currently on, and will only switch teams when their creator does.
 
 /datum/mind/proc/enslave_mind_to_creator(mob/living/creator)
-	if(iscultist(creator))
-		SSticker.mode.add_cultist(src)
-
-	else if(is_servant_of_ratvar(creator))
-		add_servant_of_ratvar(current)
-
-	else if(is_revolutionary(creator))
-		var/datum/antagonist/rev/converter = creator.mind.has_antag_datum(/datum/antagonist/rev,TRUE)
-		converter.add_revolutionary(src,FALSE)
-
-	else if(is_nuclear_operative(creator))
-		var/datum/antagonist/nukeop/converter = creator.mind.has_antag_datum(/datum/antagonist/nukeop,TRUE)
-		var/datum/antagonist/nukeop/N = new()
-		N.send_to_spawnpoint = FALSE
-		N.nukeop_outfit = null
-		add_antag_datum(N,converter.nuke_team)
-
-
 	enslaved_to = creator
 
 	current.faction |= creator.faction
@@ -577,25 +428,6 @@
 			if("undress")
 				for(var/obj/item/W in current)
 					current.dropItemToGround(W, TRUE) //The TRUE forces all items to drop, since this is an admin undress.
-			if("takeuplink")
-				take_uplink()
-				memory = null//Remove any memory they may have had.
-				log_admin("[key_name(usr)] removed [current]'s uplink.")
-			if("crystals")
-				if(check_rights(R_FUN, 0))
-					var/datum/component/uplink/U = find_syndicate_uplink()
-					if(U)
-						var/crystals = input("Amount of telecrystals for [key]","Syndicate uplink", U.telecrystals) as null | num
-						if(!isnull(crystals))
-							U.telecrystals = crystals
-							message_admins("[key_name_admin(usr)] changed [current]'s telecrystal count to [crystals].")
-							log_admin("[key_name(usr)] changed [current]'s telecrystal count to [crystals].")
-			if("uplink")
-				if(!equip_traitor())
-					to_chat(usr, "<span class='danger'>Equipping a syndicate failed!</span>")
-					log_admin("[key_name(usr)] tried and failed to give [current] an uplink.")
-				else
-					log_admin("[key_name(usr)] gave [current] an uplink.")
 
 	else if (href_list["obj_announce"])
 		announce_objectives()
@@ -644,45 +476,6 @@
 		. = I.GetComponent(/datum/component/uplink)
 		if(.)
 			break
-
-/datum/mind/proc/take_uplink()
-	qdel(find_syndicate_uplink())
-
-/datum/mind/proc/make_Traitor()
-	if(!(has_antag_datum(/datum/antagonist/traitor)))
-		add_antag_datum(/datum/antagonist/traitor)
-
-/datum/mind/proc/make_Contractor_Support()
-	if(!(has_antag_datum(/datum/antagonist/traitor/contractor_support)))
-		add_antag_datum(/datum/antagonist/traitor/contractor_support)
-
-/datum/mind/proc/make_Changeling()
-	var/datum/antagonist/changeling/C = has_antag_datum(/datum/antagonist/changeling)
-	if(!C)
-		C = add_antag_datum(/datum/antagonist/changeling)
-		special_role = ROLE_CHANGELING
-	return C
-
-/datum/mind/proc/make_Wizard()
-	if(!has_antag_datum(/datum/antagonist/wizard))
-		special_role = ROLE_WIZARD
-		assigned_role = ROLE_WIZARD
-		add_antag_datum(/datum/antagonist/wizard)
-
-
-/datum/mind/proc/make_Cultist()
-	if(!has_antag_datum(/datum/antagonist/cult,TRUE))
-		SSticker.mode.add_cultist(src,FALSE,equip=TRUE)
-		special_role = ROLE_CULTIST
-		to_chat(current, "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar'Sie, The Geometer of Blood. You now see how flimsy your world is, you see that it should be open to the knowledge of Nar'Sie.</b></i></font>")
-		to_chat(current, "<font color=\"purple\"><b><i>Assist your new brethren in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>")
-
-/datum/mind/proc/make_Rev()
-	var/datum/antagonist/rev/head/head = new()
-	head.give_flash = TRUE
-	head.give_hud = TRUE
-	add_antag_datum(head)
-	special_role = ROLE_REV_HEAD
 
 /datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/S)
 	spell_list += S

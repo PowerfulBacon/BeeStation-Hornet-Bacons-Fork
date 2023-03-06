@@ -201,14 +201,6 @@
 			debris -= fragment
 	qdel(src)
 
-/obj/machinery/door/window/narsie_act()
-	add_atom_colour("#7D1919", FIXED_COLOUR_PRIORITY)
-
-/obj/machinery/door/window/ratvar_act()
-	var/obj/machinery/door/window/clockwork/C = new(loc, dir)
-	C.name = name
-	qdel(src)
-
 /obj/machinery/door/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + (reinf ? 1600 : 800))
 		take_damage(round(exposed_volume / 200), BURN, 0, 0)
@@ -384,11 +376,6 @@
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/made_glow = FALSE
 
-/obj/machinery/door/window/clockwork/Initialize(mapload, set_dir)
-	. = ..()
-	for(var/i in 1 to 2)
-		debris += new/obj/item/clockwork/alloy_shards/medium/gear_bit/large(src)
-
 /obj/machinery/door/window/clockwork/setDir(direct)
 	if(!made_glow)
 		var/obj/effect/E = new /obj/effect/temp_visual/ratvar/door/window(get_turf(src))
@@ -407,19 +394,6 @@
 	return TRUE //yup that's power all right
 
 /obj/machinery/door/window/clockwork/allowed(mob/M)
-	if(is_servant_of_ratvar(M))
-		return TRUE
-	return FALSE
-
-/obj/machinery/door/window/clockwork/narsie_act()
-	take_damage(rand(30, 60), BRUTE)
-	if(src)
-		var/previouscolor = color
-		color = "#960000"
-		animate(src, color = previouscolor, time = 8)
-		addtimer(CALLBACK(src, /atom/proc/update_atom_colour), 8)
-
-/obj/machinery/door/window/clockwork/ratvar_act()
 	return FALSE
 
 /obj/machinery/door/window/clockwork/attackby(obj/item/I, mob/living/user, params)

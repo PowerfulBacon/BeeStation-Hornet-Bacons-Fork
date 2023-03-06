@@ -337,9 +337,6 @@
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
 		clearInternalDamage(MECHA_INT_CONTROL_LOST)
 
-/obj/mecha/narsie_act()
-	emp_act(EMP_HEAVY)
-
 /obj/mecha/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect)
 		if(selected)

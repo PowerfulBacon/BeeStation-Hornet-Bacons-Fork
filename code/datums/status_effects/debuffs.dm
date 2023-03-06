@@ -773,93 +773,6 @@
 
 	msg_stage++
 
-/datum/status_effect/eldritch
-	duration = 15 SECONDS
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = null
-	on_remove_on_mob_delete = TRUE
-	///underlay used to indicate that someone is marked
-	var/mutable_appearance/marked_underlay
-	///path for the underlay
-	var/effect_sprite = ""
-
-/datum/status_effect/eldritch/on_creation(mob/living/new_owner, ...)
-	marked_underlay = mutable_appearance('icons/effects/effects.dmi', effect_sprite,BELOW_MOB_LAYER)
-	return ..()
-
-/datum/status_effect/eldritch/on_apply()
-	if(owner.mob_size >= MOB_SIZE_HUMAN)
-		owner.add_overlay(marked_underlay)
-		owner.update_icon()
-		return TRUE
-	return FALSE
-
-/datum/status_effect/eldritch/on_remove()
-	owner.cut_overlay(marked_underlay)
-	owner.update_icon()
-	return ..()
-
-/datum/status_effect/eldritch/Destroy()
-	QDEL_NULL(marked_underlay)
-	return ..()
-
-/**
-  * What happens when this mark gets poppedd
-  *
-  * Adds actual functionality to each mark
-  */
-/datum/status_effect/eldritch/proc/on_effect()
-	playsound(owner, 'sound/magic/repulse.ogg', 75, TRUE)
-	qdel(src) //what happens when this is procced.
-
-//Each mark has diffrent effects when it is destroyed that combine with the mansus grasp effect.
-/datum/status_effect/eldritch/flesh
-	id = "flesh_mark"
-	effect_sprite = "emark1"
-
-/datum/status_effect/eldritch/flesh/on_effect()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.bleed_rate += 5
-	return ..()
-
-/datum/status_effect/eldritch/ash
-	id = "ash_mark"
-	effect_sprite = "emark2"
-	///Dictates how much damage and stamina loss this mark will cause.
-	var/repetitions = 1
-
-/datum/status_effect/eldritch/ash/on_creation(mob/living/new_owner, _repetition = 5)
-	. = ..()
-	repetitions = min(1,_repetition)
-
-/datum/status_effect/eldritch/ash/on_effect()
-	if(iscarbon(owner))
-		var/mob/living/carbon/carbon_owner = owner
-		carbon_owner.adjustStaminaLoss(10 * repetitions)
-		carbon_owner.adjustFireLoss(5 * repetitions)
-		for(var/mob/living/carbon/victim in ohearers(1,carbon_owner))
-			if(IS_HERETIC(victim))
-				continue
-			victim.apply_status_effect(type,repetitions-1)
-			break
-	return ..()
-
-/datum/status_effect/eldritch/rust
-	id = "rust_mark"
-	effect_sprite = "emark3"
-
-/datum/status_effect/eldritch/rust/on_effect()
-	if(!iscarbon(owner))
-		return
-	var/mob/living/carbon/carbon_owner = owner
-	for(var/obj/item/I in carbon_owner.get_all_gear())
-		//Affects roughly 75% of items
-		if(!QDELETED(I) && prob(75)) //Just in case
-			I.take_damage(100)
-	return ..()
-
 /datum/status_effect/corrosion_curse
 	id = "corrosion_curse"
 	status_type = STATUS_EFFECT_REPLACE
@@ -1000,32 +913,6 @@
 	name = "Infected"
 	desc = "You have a redgrub infection, and can't reproduce or grow! If you don't find a source of heat, you will die!"
 	icon_state = "grub"
-
-/datum/status_effect/amok
-	id = "amok"
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = null
-	duration = 10 SECONDS
-	tick_interval = 1 SECONDS
-
-/datum/status_effect/amok/on_apply(mob/living/afflicted)
-	. = ..()
-	to_chat(owner, "<span class='boldwarning'>You feel filled with a rage that is not your own!</span>")
-
-/datum/status_effect/amok/tick()
-	. = ..()
-	var/prev_intent = owner.a_intent
-	owner.a_intent = INTENT_HARM
-
-	var/list/mob/living/targets = list()
-	for(var/mob/living/potential_target in oview(owner, 1))
-		if(IS_HERETIC(potential_target) || potential_target.mind?.has_antag_datum(/datum/antagonist/heretic_monster))
-			continue
-		targets += potential_target
-	if(LAZYLEN(targets))
-		owner.log_message(" attacked someone due to the amok debuff.", LOG_ATTACK) //the following attack will log itself
-		owner.ClickOn(pick(targets))
-	owner.a_intent = prev_intent
 
 /datum/status_effect/cloudstruck
 	id = "cloudstruck"

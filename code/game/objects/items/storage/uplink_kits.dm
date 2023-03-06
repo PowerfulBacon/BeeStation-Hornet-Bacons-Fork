@@ -550,15 +550,6 @@
 	for(var/i in 1 to 3)
 		new /obj/item/grenade/spawnergrenade/buzzkill(src)
 
-/obj/item/storage/box/syndie_kit/cultconstructkit
-	name = "cult construct kit"
-	desc = "A sleek, sturdy box with an ominous, dark energy inside. Yikes."
-
-/obj/item/storage/box/syndie_kit/cultconstructkit/PopulateContents()
-	new /obj/item/storage/belt/soulstone/full/purified(src)
-	new /obj/item/sbeacondrop/constructshell(src)
-	new /obj/item/sbeacondrop/constructshell(src)
-
 /obj/item/storage/box/syndie_kit/mimesabrekit
 	name = "Baguette blade bundle"
 	desc = "Provides you with a hardly noticable blade hidden inside a baguette disguise."
@@ -592,7 +583,6 @@
 /obj/item/storage/box/syndie_kit/toy_box/PopulateContents()
 	new /obj/item/toy/spinningtoy(src)
 	new /obj/item/toy/talking/AI(src)
-	new /obj/item/toy/talking/codex_gigas(src)
 	new /obj/item/toy/eldrich_book(src)
 	new /obj/item/clothing/head/syndicatefake(src)
 	new /obj/item/clothing/suit/syndicatefake(src)
@@ -610,6 +600,5 @@
 	new /obj/item/toy/gun(src)
 	new /obj/item/toy/foamblade(src)
 	new /obj/item/toy/redbutton(src)
-	new /obj/item/disk/nuclear/fake/obvious
 	for(var/i in 1 to 4)
 		new /obj/item/toy/reality_pierce(src)

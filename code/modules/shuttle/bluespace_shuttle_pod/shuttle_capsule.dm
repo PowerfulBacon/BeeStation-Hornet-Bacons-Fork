@@ -21,7 +21,6 @@
 			/turf/open/floor/plating/asteroid/basalt/lava_land_surface
 		))
 		blacklisted_turfs = typecacheof(list(
-			/turf/open/space/bluespace,
 			/turf/open/space/transit
 		))
 

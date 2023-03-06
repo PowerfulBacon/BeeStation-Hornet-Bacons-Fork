@@ -502,9 +502,6 @@
 	. = ..()
 	new openingoverlaytype(loc)
 
-/obj/machinery/door/airlock/cult/canAIControl(mob/user)
-	return (iscultist(user) && !isAllPowerCut())
-
 /obj/machinery/door/airlock/cult/on_break()
 	if(!panel_open)
 		panel_open = TRUE
@@ -518,7 +515,7 @@
 /obj/machinery/door/airlock/cult/allowed(mob/living/L)
 	if(!density)
 		return 1
-	if(friendly || iscultist(L) || istype(L, /mob/living/simple_animal/shade) || isconstruct(L))
+	if(friendly)
 		if(!stealthy)
 			new openingoverlaytype(loc)
 		return 1
@@ -548,9 +545,6 @@
 	desc = initial(desc)
 	stealthy = initial(stealthy)
 	update_icon()
-
-/obj/machinery/door/airlock/cult/narsie_act()
-	return
 
 /obj/machinery/door/airlock/cult/emp_act(severity)
 	return
@@ -605,6 +599,3 @@
 	glass = TRUE
 	bound_width = 64 // 2x1
 	allow_repaint = FALSE
-
-/obj/machinery/door/airlock/glass_large/narsie_act()
-	return

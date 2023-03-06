@@ -274,30 +274,12 @@
 /datum/character_save/proc/update_preview_icon(client/parent)
 	if(!parent)
 		CRASH("Someone called update_preview_icon() without passing a client.")
-	// Determine what job is marked as 'High' priority, and dress them up as such.
-	var/datum/job/previewJob
-	var/highest_pref = 0
-	for(var/job in job_preferences)
-		if(job_preferences[job] > highest_pref)
-			previewJob = SSjob.GetJob(job)
-			highest_pref = job_preferences[job]
-
-	if(previewJob)
-		// Silicons only need a very basic preview since there is no customization for them.
-		if(istype(previewJob,/datum/job/ai))
-			parent.show_character_previews(image('icons/mob/ai.dmi', icon_state = resolve_ai_icon(preferred_ai_core_display), dir = SOUTH))
-			return
-		if(istype(previewJob,/datum/job/cyborg))
-			parent.show_character_previews(image('icons/mob/robots.dmi', icon_state = "robot", dir = SOUTH))
-			return
 
 	// Set up the dummy for its photoshoot
 	var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
 	copy_to(mannequin)
 
-	if(previewJob)
-		mannequin.job = previewJob.title
-		previewJob.equip(mannequin, TRUE, preference_source = parent)
+	SStoolbox_games.default_outfit?.equip(mannequin, TRUE)
 
 	COMPILE_OVERLAYS(mannequin)
 	parent.show_character_previews(new /mutable_appearance(mannequin))

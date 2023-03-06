@@ -110,12 +110,6 @@
 	req_one_access = list()
 	playsound(src, "sparks", 100, 1)
 
-/obj/machinery/button/eminence_act(mob/living/simple_animal/eminence/eminence)
-	. = ..()
-	to_chat(usr, "<span class='brass'>You begin manipulating [src]!</span>")
-	if(do_after(eminence, 20, target=get_turf(eminence)))
-		attack_hand(eminence)
-
 /obj/machinery/button/attack_ai(mob/user)
 	if(!panel_open)
 		return attack_hand(user)
@@ -164,7 +158,7 @@
 	if(device && device.next_activate > world.time)
 		return
 
-	if(!allowed(user) && !istype(user, /mob/living/simple_animal/eminence))
+	if(!allowed(user))
 		to_chat(user, "<span class='danger'>Access Denied.</span>")
 		flick("[skin]-denied", src)
 		return

@@ -41,7 +41,6 @@
 	var/can_repair_constructs = FALSE
 	var/can_repair_self = FALSE
 	var/runetype
-	var/datum/action/innate/cult/create_rune/our_rune
 	var/holy = FALSE
 	chat_color = "#FF6262"
 	mobchatspan = "cultmobsay"
@@ -67,15 +66,8 @@
 		S.action.button.screen_loc = "6:[pos],4:-2"
 		S.action.button.moved = "6:[pos],4:-2"
 		spellnum++
-	if(runetype)
-		our_rune = new runetype(src)
-		our_rune.Grant(src)
-		var/pos = 2+spellnum*31
-		our_rune.button.screen_loc = "6:[pos],4:-2"
-		our_rune.button.moved = "6:[pos],4:-2"
 
 /mob/living/simple_animal/hostile/construct/Destroy()
-	QDEL_NULL(our_rune)
 	return ..()
 
 /mob/living/simple_animal/hostile/construct/Login()
@@ -116,9 +108,6 @@
 				to_chat(M, "<span class='cult'>You cannot repair your own dents, as you have none!</span>")
 	else if(src != M)
 		return ..()
-
-/mob/living/simple_animal/hostile/construct/narsie_act()
-	return
 
 /mob/living/simple_animal/hostile/construct/electrocute_act(shock_damage, source, siemens_coeff = 1, safety = 0, tesla_shock = 0, illusion = 0, stun = TRUE)
 	return 0
@@ -221,7 +210,7 @@
 
 /mob/living/simple_animal/hostile/construct/wraith/AttackingTarget() //refund jaunt cooldown when attacking living targets
 	var/prev_stat
-	if(isliving(target) && !iscultist(target))
+	if(isliving(target))
 		var/mob/living/L = target
 		prev_stat = L.stat
 
@@ -402,81 +391,8 @@
 		return FALSE
 	. = ..()
 
-/mob/living/simple_animal/hostile/construct/harvester/Initialize(mapload)
-	. = ..()
-	var/datum/action/innate/seek_prey/seek = new()
-	seek.Grant(src)
-	seek.Activate()
-
 ///////////////////////Master-Tracker///////////////////////
 
-/datum/action/innate/seek_master
-	name = "Seek your Master"
-	desc = "You and your master share a soul-link that informs you of their location"
-	background_icon_state = "bg_demon"
-	buttontooltipstyle = "cult"
-	button_icon_state = "cult_mark"
-	var/tracking = FALSE
-	var/mob/living/simple_animal/hostile/construct/the_construct
-
-
-/datum/action/innate/seek_master/Grant(var/mob/living/C)
-	the_construct = C
-	..()
-
-/datum/action/innate/seek_master/Activate()
-	var/datum/antagonist/cult/C = owner.mind.has_antag_datum(/datum/antagonist/cult)
-	if(!C)
-		return
-	var/datum/objective/eldergod/summon_objective = locate() in C.cult_team.objectives
-
-	if(summon_objective.check_completion())
-		the_construct.master = C.cult_team.blood_target
-
-	if(!the_construct.master)
-		to_chat(the_construct, "<span class='cult italic'>You have no master to seek!</span>")
-		the_construct.seeking = FALSE
-		return
-	if(tracking)
-		tracking = FALSE
-		the_construct.seeking = FALSE
-		to_chat(the_construct, "<span class='cult italic'>You are no longer tracking your master.</span>")
-		return
-	else
-		tracking = TRUE
-		the_construct.seeking = TRUE
-		to_chat(the_construct, "<span class='cult italic'>You are now tracking your master.</span>")
-
-
-/datum/action/innate/seek_prey
-	name = "Seek the Harvest"
-	desc = "None can hide from Nar'Sie, activate to track a survivor attempting to flee the red harvest!"
-	icon_icon = 'icons/mob/actions/actions_cult.dmi'
-	background_icon_state = "bg_demon"
-	buttontooltipstyle = "cult"
-	button_icon_state = "cult_mark"
-
-/datum/action/innate/seek_prey/Activate()
-	if(GLOB.cult_narsie == null)
-		return
-	var/mob/living/simple_animal/hostile/construct/harvester/the_construct = owner
-	if(the_construct.seeking)
-		desc = "None can hide from Nar'Sie, activate to track a survivor attempting to flee the red harvest!"
-		button_icon_state = "cult_mark"
-		the_construct.seeking = FALSE
-		to_chat(the_construct, "<span class='cult italic'>You are now tracking Nar'Sie, return to reap the harvest!</span>")
-		return
-	else
-		if(LAZYLEN(GLOB.cult_narsie.souls_needed))
-			the_construct.master = pick(GLOB.cult_narsie.souls_needed)
-			var/mob/living/real_target = the_construct.master //We can typecast this way because Narsie only allows /mob/living into the souls list
-			to_chat(the_construct, "<span class='cult italic'>You are now tracking your prey, [real_target.real_name] - harvest [real_target.p_them()]!</span>")
-		else
-			to_chat(the_construct, "<span class='cult italic'>Nar'Sie has completed her harvest!</span>")
-			return
-		desc = "Activate to track Nar'Sie!"
-		button_icon_state = "sintouch"
-		the_construct.seeking = TRUE
 
 
 /////////////////////////////ui stuff/////////////////////////////

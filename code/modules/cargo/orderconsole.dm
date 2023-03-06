@@ -91,8 +91,6 @@
 	data["away"] = SSshuttle.supply.getDockedId() == "supply_away"
 	data["self_paid"] = self_paid
 	data["docked"] = SSshuttle.supply.mode == SHUTTLE_IDLE
-	data["loan"] = !!SSshuttle.shuttle_loan
-	data["loan_dispatched"] = SSshuttle.shuttle_loan && SSshuttle.shuttle_loan.dispatched
 	data["can_send"] = can_send
 	data["can_approve_requests"] = can_approve_requests
 	var/message = "Remember to stamp and send back the supply manifests."

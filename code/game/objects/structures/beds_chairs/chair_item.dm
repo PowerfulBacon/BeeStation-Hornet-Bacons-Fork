@@ -24,11 +24,6 @@
 	playsound(src,hitsound,50,1)
 	return BRUTELOSS
 
-/obj/item/chair/narsie_act()
-	var/obj/item/chair/wood/W = new/obj/item/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
-
 /obj/item/chair/attack_self(mob/user)
 	plant(user)
 
@@ -106,9 +101,6 @@
 	materials = null
 	break_chance = 50	//Submissive and breakable unlike the chad iron stool
 
-/obj/item/chair/stool/narsie_act()
-	return //sturdy enough to ignore a god
-
 /obj/item/chair/wood
 	name = "wooden chair"
 	desc = "Fancy brawl essential."
@@ -120,9 +112,6 @@
 	origin_type = /obj/structure/chair/wood
 	materials = null
 	break_chance = 50
-
-/obj/item/chair/wood/narsie_act()
-	return
 
 /obj/item/chair/wood/wings
 	name = "winged wooden chair"
@@ -145,9 +134,6 @@
 	materials = list(/datum/material/plastic = 2000)//duh
 	break_chance = 15 //Submissive and breakable, but can handle an angry demon
 
-/obj/item/chair/plastic/narsie_act()
-	return
-
 /obj/item/chair/foldable
 	name = "folding chair"
 	desc = "Somehow, you can always find one under the wrestling ring."
@@ -158,6 +144,3 @@
 	force = 7
 	break_chance = 25
 	origin_type = /obj/structure/chair/foldable
-
-/obj/item/chair/foldable/narsie_act()
-	return

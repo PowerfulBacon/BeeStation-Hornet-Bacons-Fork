@@ -127,44 +127,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 
 STACKSIZE_MACRO(/obj/item/stack/sheet/plasteel)
 
-/* Runed Metal */
-
-GLOBAL_LIST_INIT(runed_metal_recipes, list ( \
-	new/datum/stack_recipe("runed door",							/obj/machinery/door/airlock/cult, 1, one_per_turf = TRUE, on_floor = TRUE, time = 5 SECONDS), \
-	new/datum/stack_recipe("runed girder",							/obj/structure/girder/cult, 1, one_per_turf = TRUE, on_floor = TRUE, time = 5 SECONDS), \
-	null, \
-	new/datum/stack_recipe("pylon",									/obj/structure/destructible/cult/pylon, 4, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("forge",									/obj/structure/destructible/cult/forge, 3, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("archives",								/obj/structure/destructible/cult/tome, 3, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("altar",									/obj/structure/destructible/cult/talisman, 3, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-))
-
 STACKSIZE_MACRO(/obj/item/stack/sheet/runed_metal)
-
-/* Brass */
-
-GLOBAL_LIST_INIT(brass_recipes, list ( \
-	new/datum/stack_recipe("wall gear",								/obj/structure/destructible/clockwork/wall_gear, 2,one_per_turf = TRUE, on_floor = TRUE, time = 2 SECONDS), \
-	new/datum/stack_recipe("brass grille",							/obj/structure/grille/ratvar, 2, one_per_turf = TRUE, on_floor = TRUE, time = 2 SECONDS), \
-	new/datum/stack_recipe("brass floor tile",						/obj/item/stack/tile/mineral/brass, 1, 4, 20), \
-	null, \
-	new/datum/stack_recipe("brass fulltile window",					/obj/structure/window/reinforced/clockwork/fulltile/unanchored, 4,on_floor = TRUE, window_checks=TRUE, time = 1 SECONDS), \
-	new/datum/stack_recipe("brass directional window",				/obj/structure/window/reinforced/clockwork/unanchored, 2, on_floor = TRUE, window_checks=TRUE, time = 1 SECONDS), \
-	new/datum/stack_recipe("brass windoor",							/obj/machinery/door/window/clockwork, 5, on_floor = TRUE, window_checks=TRUE, time = 4 SECONDS), \
-	null, \
-	new/datum/stack_recipe("pinion airlock",						/obj/machinery/door/airlock/clockwork, 5, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("pinion windowed airlock",				/obj/machinery/door/airlock/clockwork/glass, 5, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	null, \
-	new/datum/stack_recipe("brass chair",							/obj/structure/chair/fancy/brass, 1, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("brass table frame",						/obj/structure/table_frame/brass, 1, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	null, \
-	new/datum/stack_recipe("lever",									/obj/item/wallframe/clocktrap/lever, 1, one_per_turf = FALSE, on_floor = FALSE, time = 4 SECONDS), \
-	new/datum/stack_recipe("timer",									/obj/item/wallframe/clocktrap/delay, 1, one_per_turf = FALSE, on_floor = FALSE, time = 4 SECONDS), \
-	new/datum/stack_recipe("pressure sensor",						/obj/structure/destructible/clockwork/trap/pressure_sensor, 4, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	null, \
-	new/datum/stack_recipe("brass skewer",							/obj/structure/destructible/clockwork/trap/skewer, 12, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-	new/datum/stack_recipe("brass flipper",							/obj/structure/destructible/clockwork/trap/flipper, 10, one_per_turf = TRUE, on_floor = TRUE, time = 4 SECONDS), \
-))
 
 STACKSIZE_MACRO(/obj/item/stack/sheet/brass)
 

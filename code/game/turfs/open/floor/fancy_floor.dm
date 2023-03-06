@@ -364,15 +364,6 @@
 	floor_tile = /obj/item/stack/tile/eighties
 	broken_states = list("damaged")
 
-/turf/open/floor/carpet/narsie_act(force, ignore_mobs, probability = 20)
-	. = (prob(probability) || force)
-	for(var/I in src)
-		var/atom/A = I
-		if(ignore_mobs && ismob(A))
-			continue
-		if(ismob(A) || .)
-			A.narsie_act()
-
 /turf/open/floor/carpet/break_tile()
 	broken = TRUE
 	update_icon()

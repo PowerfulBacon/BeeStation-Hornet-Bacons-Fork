@@ -155,8 +155,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 
-#define iseminence(A) (istype(A, /mob/living/simple_animal/eminence))
-
 #define iscogscarab(A) (istype(A, /mob/living/simple_animal/drone/cogscarab))
 
 GLOBAL_LIST_INIT(shoefootmob, typecacheof(list(
@@ -241,7 +239,7 @@ GLOBAL_LIST_INIT(heavyfootmob, typecacheof(list(
 
 #define ismecha(A) (istype(A, /obj/mecha))
 
-#define is_cleanable(A) (istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/rune)) //if something is cleanable
+#define is_cleanable(A) istype(A, /obj/effect/decal/cleanable) //if something is cleanable
 
 #define isorgan(A) (istype(A, /obj/item/organ))
 

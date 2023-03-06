@@ -63,9 +63,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/parallax
 
 	///What size should pixels be displayed as? 0 is strech to fit
-	var/pixel_size = 0
+	var/pixel_size = PIXEL_SCALING_AUTO
 	///What scaling method should we use?
-	var/scaling_method = "normal"
+	var/scaling_method = SCALING_METHOD_NORMAL
 
 	var/list/exp = list()
 	var/job_exempt = 0
@@ -160,8 +160,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[CS.slot_number];' [CS.slot_number == default_slot ? "class='linkOn'" : ""]>[name]</a> "
 			dat += "</center>"
 
-			dat += "<center><h2>Occupation Choices</h2>"
-			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
 			if(CONFIG_GET(flag/roundstart_traits))
 				dat += "<center><h2>Quirk Setup</h2>"
 				dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br></center>"
@@ -180,22 +178,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'>[active_character.gender == MALE ? "Male" : "Female"]</a><BR>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[active_character.age]</a><BR>"
 
-			dat += "<b>Special Names:</b><BR>"
-			var/old_group
-			for(var/custom_name_id in GLOB.preferences_custom_names)
-				var/namedata = GLOB.preferences_custom_names[custom_name_id]
-				if(!old_group)
-					old_group = namedata["group"]
-				else if(old_group != namedata["group"])
-					old_group = namedata["group"]
-					dat += "<br>"
-				dat += "<a href ='?_src_=prefs;preference=[custom_name_id];task=input'><b>[namedata["pref_name"]]:</b> [active_character.custom_names[custom_name_id]]</a> "
-			dat += "<br><br>"
-
-			dat += "<b>Custom Job Preferences:</b><BR>"
-			dat += "<a href='?_src_=prefs;preference=ai_core_icon;task=input'><b>Preferred AI Core Display:</b> [active_character.preferred_ai_core_display]</a><br>"
-			dat += "<a href='?_src_=prefs;preference=sec_dept;task=input'><b>Preferred Security Department:</b> [active_character.preferred_security_department]</a><BR></td>"
-
 			dat += "</tr></table>"
 
 			dat += "<h2>Body</h2>"
@@ -210,9 +192,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Underwear Color:</b><BR><span style='border: 1px solid #161616; background-color: #[active_character.underwear_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=underwear_color;task=input'>Change</a><BR>"
 			dat += "<b>Undershirt:</b><BR><a href ='?_src_=prefs;preference=undershirt;task=input'>[active_character.undershirt]</a><BR>"
 			dat += "<b>Socks:</b><BR><a href ='?_src_=prefs;preference=socks;task=input'>[active_character.socks]</a><BR>"
-			dat += "<b>Backpack:</b><BR><a href ='?_src_=prefs;preference=bag;task=input'>[active_character.backbag]</a><BR>"
-			dat += "<b>Jumpsuit:</b><BR><a href ='?_src_=prefs;preference=suit;task=input'>[active_character.jumpsuit_style]</a><BR>"
-			dat += "<b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[active_character.uplink_spawn_loc == UPLINK_IMPLANT ? UPLINK_IMPLANT_WITH_PRICE : active_character.uplink_spawn_loc]</a><BR></td>"
 
 			var/use_skintones = active_character.pref_species.use_skintones
 			if(use_skintones)
@@ -594,9 +573,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Action Buttons:</b> <a href='?_src_=prefs;preference=action_buttons'>[(toggles2 & PREFTOGGLE_2_LOCKED_BUTTONS) ? "Locked In Place" : "Unlocked"]</a><br>"
 			dat += "<b>Hotkey Mode:</b> <a href='?_src_=prefs;preference=hotkeys'>[(toggles2 & PREFTOGGLE_2_HOTKEYS) ? "Hotkeys" : "Default"]</a><br>"
 			dat += "<br>"
-			dat += "<b>PDA Theme:</b> <a href='?_src_=prefs;task=input;preference=pda_theme'>[theme_name_for_id(pda_theme)]</a><br>"
-			dat += "<b>PDA Classic Color:</b> <span style='border:1px solid #161616; background-color: [pda_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pda_color;task=input'>Change</a><BR>"
-			dat += "<br>"
 			dat += "<b>Crew Objectives:</b> <a href='?_src_=prefs;preference=crewobj'>[(toggles2 & PREFTOGGLE_2_CREW_OBJECTIVES) ? "Yes" : "No"]</a><br>"
 			dat += "<br>"
 			dat += "<b>Ghost Ears:</b> <a href='?_src_=prefs;preference=ghost_ears'>[(chat_toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</a><br>"
@@ -692,24 +668,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(is_banned_from(user.ckey, ROLE_SYNDICATE))
 				dat += "<font color=red><b>You are banned from antagonist roles.</b></font><br>"
 				src.be_special = list()
-
-
-			for (var/i in GLOB.special_roles)
-				if(is_banned_from(user.ckey, i))
-					dat += "<b>Be [capitalize(i)]:</b> <a href='?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
-				else
-					var/days_remaining = null
-					if(ispath(GLOB.special_roles[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs)) //If it's a game mode antag, check if the player meets the minimum age
-						var/mode_path = GLOB.special_roles[i]
-						var/datum/game_mode/temp_mode = new mode_path
-						days_remaining = temp_mode.get_remaining_days(user.client)
-
-					if(days_remaining)
-						dat += "<b>Be [capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS]</font><br>"
-					else
-						dat += "<b>Be [capitalize(i)]:</b> <a href='?_src_=prefs;preference=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
-			dat += "<br>"
-			dat += "<b>Midround Antagonist:</b> <a href='?_src_=prefs;preference=allow_midround_antag'>[(toggles & PREFTOGGLE_MIDROUND_ANTAG) ? "Enabled" : "Disabled"]</a><br>"
 
 			dat += "</td></tr><tr><td> </td></tr>" // i hate myself for this
 			dat += "<tr><td colspan='2' width='100%'><center><a style='font-size: 18px;' href='?_src_=prefs;preference=keybindings_menu'>Customize Keybinds</a></center></td></tr>"

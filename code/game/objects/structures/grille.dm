@@ -73,13 +73,6 @@
 			return TRUE
 	return FALSE
 
-/obj/structure/grille/ratvar_act()
-	if(broken)
-		new /obj/structure/grille/ratvar/broken(src.loc)
-	else
-		new /obj/structure/grille/ratvar(src.loc)
-	qdel(src)
-
 /obj/structure/grille/Bumped(atom/movable/AM)
 	if(!ismob(AM))
 		return

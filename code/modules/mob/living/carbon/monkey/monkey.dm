@@ -99,15 +99,6 @@ GLOBAL_LIST_INIT(strippable_monkey_items, create_strippable_list(list(
 			slow += (health_deficiency / 25)
 	add_movespeed_modifier(MOVESPEED_ID_MONKEY_HEALTH_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = slow)
 
-/mob/living/carbon/monkey/get_stat_tab_status()
-	var/list/tab_data = ..()
-	if(client && mind)
-		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
-		if(changeling)
-			tab_data["Chemical Storage"] = GENERATE_STAT_TEXT("[changeling.chem_charges]/[changeling.chem_storage]")
-			tab_data["Absorbed DNA"] = GENERATE_STAT_TEXT("[changeling.absorbedcount]")
-	return tab_data
-
 
 /mob/living/carbon/monkey/verb/removeinternal()
 	set name = "Remove Internals"

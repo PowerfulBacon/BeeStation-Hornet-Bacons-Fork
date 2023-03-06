@@ -63,16 +63,6 @@
 		QUEUE_SMOOTH(src)
 		QUEUE_SMOOTH_NEIGHBORS(src)
 
-/obj/structure/table/narsie_act()
-	var/atom/A = loc
-	qdel(src)
-	new /obj/structure/table/wood(A)
-
-/obj/structure/table/ratvar_act()
-	var/atom/A = loc
-	qdel(src)
-	new /obj/structure/table/brass(A)
-
 /obj/structure/table/attack_paw(mob/user)
 	return attack_hand(user)
 
@@ -324,11 +314,6 @@
 				debris -= AM
 	qdel(src)
 
-/obj/structure/table/glass/narsie_act()
-	color = NARSIE_WINDOW_COLOUR
-	for(var/obj/item/shard/S in debris)
-		S.color = NARSIE_WINDOW_COLOUR
-
 /*
  * Plasmaglass tables
  */
@@ -367,10 +352,6 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
 
-/obj/structure/table/wood/narsie_act(total_override = TRUE)
-	if(!total_override)
-		..()
-
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
 	name = "gambling table"
 	desc = "A seedy table for seedy dealings in seedy places."
@@ -378,9 +359,6 @@
 	icon_state = "poker_table-0"
 	base_icon_state = "poker_table"
 	buildstack = /obj/item/stack/tile/carpet
-
-/obj/structure/table/wood/poker/narsie_act()
-	..(FALSE)
 
 /obj/structure/table/wood/fancy
 	name = "fancy table"
@@ -502,20 +480,9 @@
 	framestackamount = 1
 	buildstackamount = 1
 
-/obj/structure/table/brass/ratvar_act()
-	return
-
 /obj/structure/table/brass/tablepush(mob/living/user, mob/living/pushed_mob)
 	. = ..()
 	playsound(src, 'sound/magic/clockwork/fellowship_armory.ogg', 50, TRUE)
-
-/obj/structure/table/brass/narsie_act()
-	take_damage(rand(15, 45), BRUTE)
-	if(src) //do we still exist?
-		var/previouscolor = color
-		color = "#960000"
-		animate(src, color = previouscolor, time = 8)
-		addtimer(CALLBACK(src, /atom/proc/update_atom_colour), 8)
 
 /obj/structure/table/bronze
 	name = "bronze table"

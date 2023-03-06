@@ -91,16 +91,6 @@
 			return TRUE
 	return FALSE
 
-/obj/structure/window/narsie_act()
-	add_atom_colour(NARSIE_WINDOW_COLOUR, FIXED_COLOUR_PRIORITY)
-
-/obj/structure/window/ratvar_act()
-	if(!fulltile)
-		new/obj/structure/window/reinforced/clockwork(get_turf(src), dir)
-	else
-		new/obj/structure/window/reinforced/clockwork/fulltile(get_turf(src))
-	qdel(src)
-
 /obj/structure/window/singularity_pull(S, current_size)
 	..()
 	if(current_size >= STAGE_FIVE)
@@ -640,9 +630,6 @@
 	glass_type = /obj/item/stack/sheet/titaniumglass
 	glass_amount = 2
 	ricochet_chance_mod = 0.9
-
-/obj/structure/window/shuttle/narsie_act()
-	add_atom_colour("#3C3434", FIXED_COLOUR_PRIORITY)
 
 /obj/structure/window/shuttle/tinted
 	opacity = TRUE

@@ -50,16 +50,6 @@
 	if(stat == DEAD)
 		stop_sound_channel(CHANNEL_HEARTBEAT)
 
-	//Updates the number of stored chemicals for changeling powers
-	if(hud_used?.lingchemdisplay && !isalien(src) && mind)
-		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
-		if(changeling)
-			changeling.regenerate()
-			hud_used.lingchemdisplay.invisibility = 0
-			hud_used.lingchemdisplay.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#dd66dd'>[round(changeling.chem_charges)]</font></div>")
-		else
-			hud_used.lingchemdisplay.invisibility = INVISIBILITY_ABSTRACT
-
 	if(stat != DEAD)
 		return 1
 

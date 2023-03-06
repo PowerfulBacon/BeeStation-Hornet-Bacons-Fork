@@ -48,17 +48,26 @@
 	var/output = "<center><p><a href='byond://?src=[REF(src)];show_preferences=1'>Setup Character</a></p>"
 
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
-		switch(ready)
-			if(PLAYER_NOT_READY)
-				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
-			if(PLAYER_READY_TO_PLAY)
-				output += "<p>\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
-			if(PLAYER_READY_TO_OBSERVE)
-				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | <b> Observe </b> \]</p>"
+		if (client.holder)
+			switch(ready)
+				if(PLAYER_NOT_READY)
+					output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
+				if(PLAYER_READY_TO_PLAY)
+					output += "<p>\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
+				if(PLAYER_READY_TO_OBSERVE)
+					output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | <b> Observe </b> \]</p>"
+		else
+			switch(ready)
+				if(PLAYER_NOT_READY)
+					output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b>]</p>"
+				if(PLAYER_READY_TO_PLAY)
+					output += "<p>\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)]</p>"
+				if(PLAYER_READY_TO_OBSERVE)
+					output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)]</p>"
 	else
-		output += "<p><a href='byond://?src=[REF(src)];manifest=1'>View the Crew Manifest</a></p>"
 		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</a></p>"
-		output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)]</p>"
+		if (client.holder)
+			output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)]</p>"
 
 	if(!IS_GUEST_KEY(src.key))
 		if (SSdbcore.Connect())
@@ -145,13 +154,9 @@
 			to_chat(usr, "<span class='danger'>The round is either not ready, or has already finished...</span>")
 			return
 
-		if(href_list["late_join"] == "override")
-			LateChoices()
-			return
-
 		if(SSticker.queued_players.len || (relevant_cap && living_player_count() >= relevant_cap))
 			if(IS_PATRON(src.ckey) || (client in GLOB.admins))
-				LateChoices()
+				AttemptLateSpawn()
 				return
 			to_chat(usr, "<span class='danger'>[CONFIG_GET(string/hard_popcap_message)]</span>")
 
@@ -164,27 +169,7 @@
 				SSticker.queued_players += usr
 				to_chat(usr, "<span class='notice'>You have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len].</span>")
 			return
-		LateChoices()
-
-	if(href_list["manifest"])
-		ViewManifest()
-
-	if(href_list["SelectedJob"])
-		if(!SSticker || !SSticker.IsRoundInProgress())
-			to_chat(usr, "<span class='danger'>The round is either not ready, or has already finished...</span>")
-			return
-
-		if(!GLOB.enter_allowed)
-			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
-			return
-
-		if(SSticker.queued_players.len && !(ckey(key) in GLOB.admin_datums) && !IS_PATRON(ckey(key)))
-			if((living_player_count() >= relevant_cap) || (src != SSticker.queued_players[1]))
-				to_chat(usr, "<span class='warning'>Server is full.</span>")
-				return
-
-		AttemptLateSpawn(href_list["SelectedJob"])
-		return
+		AttemptLateSpawn()
 
 	else if(!href_list["late_join"])
 		new_player_panel()
@@ -206,6 +191,10 @@
 	if(QDELETED(src) || !src.client)
 		ready = PLAYER_NOT_READY
 		return FALSE
+
+	// Only admins can observe
+	if (!client.holder)
+		return
 
 	var/this_is_like_playing_right = "Yes"
 	if(!force_observe)
@@ -507,24 +496,6 @@
 // Doing so would previously allow you to roll for antag, then send you back to lobby if you didn't get an antag role
 // This also does some admin notification and logging as well, as well as some extra logic to make sure things don't go wrong
 /mob/dead/new_player/proc/check_preferences()
-	if(!client)
-		return FALSE //Not sure how this would get run without the mob having a client, but let's just be safe.
-	if(client.prefs.active_character.joblessrole != RETURNTOLOBBY)
-		return TRUE
-	// If they have antags enabled, they're potentially doing this on purpose instead of by accident. Notify admins if so.
-	var/has_antags = FALSE
-	if(client.prefs.be_special.len > 0)
-		has_antags = TRUE
-	if(!length(client.prefs.active_character.job_preferences))
-		if(!ineligible_for_roles)
-			to_chat(src, "<span class='danger'>You have no jobs enabled, along with return to lobby if job is unavailable. This makes you ineligible for any round start role, please update your job preferences.</span>")
-		ineligible_for_roles = TRUE
-		ready = PLAYER_NOT_READY
-		if(has_antags)
-			log_admin("[src.ckey] just got booted back to lobby with no jobs, but antags enabled.")
-			message_admins("[src.ckey] just got booted back to lobby with no jobs enabled, but antag rolling enabled. Likely antag rolling abuse.")
-
-		return FALSE //This is the only case someone should actually be completely blocked from antag rolling as well
 	return TRUE
 
 /**

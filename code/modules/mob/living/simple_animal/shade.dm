@@ -38,11 +38,6 @@
 	deathmessage = "lets out a contented sigh as [p_their()] form unwinds."
 	..()
 
-/mob/living/simple_animal/shade/canSuicide()
-	if(istype(loc, /obj/item/soulstone)) //do not suicide inside the soulstone
-		return 0
-	return ..()
-
 /mob/living/simple_animal/shade/attack_animal(mob/living/simple_animal/M)
 	if(isconstruct(M))
 		var/mob/living/simple_animal/hostile/construct/C = M
@@ -57,10 +52,3 @@
 			to_chat(M, "<span class='cult'>You cannot heal <b>[src]</b>, as [p_theyre()] unharmed!</span>")
 	else if(src != M)
 		return ..()
-
-/mob/living/simple_animal/shade/attackby(obj/item/O, mob/user, params)  //Marker -Agouri
-	if(istype(O, /obj/item/soulstone))
-		var/obj/item/soulstone/SS = O
-		SS.transfer_soul("SHADE", src, user)
-	else
-		. = ..()

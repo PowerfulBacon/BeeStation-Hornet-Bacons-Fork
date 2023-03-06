@@ -29,14 +29,6 @@ Metals Sheets
 	point_value = 2
 	tableVariant = /obj/structure/table
 
-/obj/item/stack/sheet/iron/ratvar_act()
-	new /obj/item/stack/sheet/brass(loc, amount)
-	qdel(src)
-
-/obj/item/stack/sheet/iron/narsie_act()
-	new /obj/item/stack/sheet/runed_metal(loc, amount)
-	qdel(src)
-
 /obj/item/stack/sheet/iron/Initialize(mapload, new_amount, merge = TRUE)
 	recipes = GLOB.metal_recipes
 	return ..()
@@ -80,14 +72,7 @@ Metals Sheets
 	merge_type = /obj/item/stack/sheet/runed_metal
 	grind_results = list(/datum/reagent/iron = 5, /datum/reagent/blood = 15)
 
-/obj/item/stack/sheet/runed_metal/ratvar_act()
-	new /obj/item/stack/sheet/brass(loc, amount)
-	qdel(src)
-
 /obj/item/stack/sheet/runed_metal/attack_self(mob/living/user)
-	if(!iscultist(user))
-		to_chat(user, "<span class='warning'>Only one with forbidden knowledge could hope to work this metal...</span>")
-		return
 	var/turf/T = get_turf(user) //we may have moved. adjust as needed...
 	var/area/A = get_area(user)
 	if((!is_station_level(T.z) && !is_mining_level(T.z)) || (A && !(A.area_flags & BLOBS_ALLOWED)))
@@ -117,16 +102,6 @@ Metals Sheets
 	merge_type = /obj/item/stack/sheet/brass
 	materials = list(/datum/material/copper=MINERAL_MATERIAL_AMOUNT*0.5, /datum/material/iron=MINERAL_MATERIAL_AMOUNT*0.5)
 
-/obj/item/stack/sheet/brass/narsie_act()
-	new /obj/item/stack/sheet/runed_metal(loc, amount)
-	qdel(src)
-
-/obj/item/stack/sheet/brass/attack_self(mob/living/user)
-	if(!is_servant_of_ratvar(user))
-		to_chat(user, "<span class='danger'>[src] seems far too brittle to build with.</span>") //haha that's because it's actually replicant alloy you DUMMY << WOAH TOOO FAR! << :^)
-	else
-		return ..()
-
 /obj/item/stack/sheet/brass/Initialize(mapload, new_amount, merge = TRUE)
 	. = ..()
 	recipes = GLOB.brass_recipes
@@ -151,11 +126,6 @@ Metals Sheets
 	merge_type = /obj/item/stack/sheet/bronze
 	tableVariant = /obj/structure/table/bronze
 
-/obj/item/stack/sheet/bronze/attack_self(mob/living/user)
-	if(is_servant_of_ratvar(user))
-		to_chat(user, "<span class='danger'>Wha... what is this cheap imitation crap? This isn't brass at all!</span>")
-	else
-		return ..()
 
 /obj/item/stack/sheet/bronze/Initialize(mapload, new_amount, merge = TRUE)
 	recipes = GLOB.bronze_recipes

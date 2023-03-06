@@ -298,10 +298,6 @@
 		new remains(loc)
 	qdel(src)
 
-/obj/structure/girder/narsie_act()
-	new /obj/structure/girder/cult(loc)
-	qdel(src)
-
 /obj/structure/girder/displaced
 	name = "displaced girder"
 	icon_state = "displaced"
@@ -365,9 +361,6 @@
 
 	else
 		return ..()
-
-/obj/structure/girder/cult/narsie_act()
-	return
 
 /obj/structure/girder/cult/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))

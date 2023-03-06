@@ -40,10 +40,6 @@
 	mode = MODE_BINARY
 
 /datum/saymode/binary/handle_message(mob/living/user, message, datum/language/language)
-	if(isswarmer(user))
-		var/mob/living/simple_animal/hostile/swarmer/S = user
-		S.swarmer_chat(message)
-		return FALSE
 	if(isdrone(user))
 		var/mob/living/simple_animal/drone/D = user
 		D.drone_chat(message)

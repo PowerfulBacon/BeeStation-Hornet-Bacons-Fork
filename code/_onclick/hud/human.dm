@@ -62,24 +62,6 @@
 /atom/movable/screen/devil/soul_counter/proc/clear()
 	invisibility = INVISIBILITY_ABSTRACT
 
-/atom/movable/screen/ling
-	invisibility = INVISIBILITY_ABSTRACT
-
-/atom/movable/screen/ling/sting
-	name = "current sting"
-	screen_loc = ui_lingstingdisplay
-
-/atom/movable/screen/ling/sting/Click()
-	if(isobserver(usr))
-		return
-	var/mob/living/carbon/U = usr
-	U.unset_sting()
-
-/atom/movable/screen/ling/chems
-	name = "chemical storage"
-	icon_state = "power_display"
-	screen_loc = ui_lingchemdisplay
-
 /datum/hud/human/New(mob/living/carbon/human/owner)
 	..()
 	owner.overlay_fullscreen("see_through_darkness", /atom/movable/screen/fullscreen/see_through_darkness)
@@ -327,14 +309,6 @@
 	pull_icon.screen_loc = ui_above_intent
 	pull_icon.hud = src
 	static_inventory += pull_icon
-
-	lingchemdisplay = new /atom/movable/screen/ling/chems()
-	lingchemdisplay.hud = src
-	infodisplay += lingchemdisplay
-
-	lingstingdisplay = new /atom/movable/screen/ling/sting()
-	lingstingdisplay.hud = src
-	infodisplay += lingstingdisplay
 
 	devilsouldisplay = new /atom/movable/screen/devil/soul_counter
 	devilsouldisplay.hud = src

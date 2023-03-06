@@ -459,40 +459,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/admin = key_name_admin(src)
 	var/player_key = G_found.key
 
-	//Now for special roles and equipment.
-	var/datum/antagonist/traitor/traitordatum = new_character.mind.has_antag_datum(/datum/antagonist/traitor)
-	if(traitordatum)
-		SSjob.EquipRank(new_character, new_character.mind.assigned_role, 1)
-		traitordatum.equip()
-
-
-	switch(new_character.mind.special_role)
-		if(ROLE_WIZARD)
-			new_character.forceMove(pick(GLOB.wizardstart))
-			var/datum/antagonist/wizard/A = new_character.mind.has_antag_datum(/datum/antagonist/wizard,TRUE)
-			A.equip_wizard()
-		if(ROLE_SYNDICATE)
-			new_character.forceMove(pick(GLOB.nukeop_start))
-			var/datum/antagonist/nukeop/N = new_character.mind.has_antag_datum(/datum/antagonist/nukeop,TRUE)
-			N.equip_op()
-		if(ROLE_NINJA)
-			var/list/ninja_spawn = list()
-			for(var/obj/effect/landmark/carpspawn/L in GLOB.landmarks_list)
-				ninja_spawn += L
-			var/datum/antagonist/ninja/ninjadatum = new_character.mind.has_antag_datum(/datum/antagonist/ninja)
-			ninjadatum.equip_space_ninja()
-			if(ninja_spawn.len)
-				new_character.forceMove(pick(ninja_spawn))
-
-		else//They may also be a cyborg or AI.
-			switch(new_character.mind.assigned_role)
-				if(JOB_NAME_CYBORG)//More rigging to make em' work and check if they're traitor.
-					new_character = new_character.Robotize(TRUE)
-				if(JOB_NAME_AI)
-					new_character = new_character.AIize()
-				else
-					SSjob.EquipRank(new_character, new_character.mind.assigned_role, 1)//Or we simply equip them.
-
 	//Announces the character on all the systems, based on the record.
 	if(!issilicon(new_character))//If they are not a cyborg/AI.
 		if(!record_found&&new_character.mind.assigned_role!=new_character.mind.special_role)//If there are no records for them. If they have a record, this info is already in there. MODE people are not announced anyway.
@@ -511,30 +477,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Respawn Character") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return new_character
-
-/client/proc/cmd_admin_add_freeform_ai_law()
-	set category = "Fun"
-	set name = "Add Custom AI law"
-
-	if(!check_rights(R_ADMIN))
-		return
-
-	var/input = capped_input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?")
-	if(!input)
-		return
-
-	log_admin("Admin [key_name(usr)] has added a new AI law - [input]")
-	message_admins("Admin [key_name_admin(usr)] has added a new AI law - [input]")
-
-	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
-	var/announce_ion_laws = (show_log == "Yes" ? 100 : 0)
-
-	var/datum/round_event/ion_storm/add_law_only/ion = new()
-	ion.announceChance = announce_ion_laws
-	ion.ionMessage = input
-	ion.lawsource = "Admin fuckery by [key_name(usr)]"
-
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Add Custom AI Law") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M in GLOB.mob_list)
 	set category = "Adminbus"
@@ -846,25 +788,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		message_admins("[key_name_admin(usr)] changed the security level to [level]")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Security Level [capitalize(level)]") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/toggle_nuke(obj/machinery/nuclearbomb/N in GLOB.nuke_list)
-	set name = "Toggle Nuke"
-	set category = "Fun"
-	set popup_menu = 0
-	if(!check_rights(R_DEBUG))
-		return
-
-	if(!N.timing)
-		var/newtime = input(usr, "Set activation timer.", "Activate Nuke", "[N.timer_set]") as num|null
-		if(!newtime)
-			return
-		N.timer_set = newtime
-	N.set_safety()
-	N.set_active()
-
-	log_admin("[key_name(usr)] [N.timing ? "activated" : "deactivated"] a nuke at [AREACOORD(N)].")
-	message_admins("[ADMIN_LOOKUPFLW(usr)] [N.timing ? "activated" : "deactivated"] a nuke at [ADMIN_VERBOSEJMP(N)].")
-	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Nuke", "[N.timing]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /client/proc/toggle_combo_hud()
 	set category = "Admin"
 	set name = "Toggle Combo HUD"
@@ -1027,23 +950,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("[key_name_admin(usr)] sent a tip of the round.")
 	log_admin("[key_name(usr)] sent \"[input]\" as the Tip of the Round.")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Show Tip")
-
-/client/proc/modify_goals()
-	set category = "Debug"
-	set name = "Modify goals"
-
-	if(!check_rights(R_ADMIN|R_DEBUG))
-		return
-
-	holder.modify_goals()
-
-/datum/admins/proc/modify_goals()
-	var/dat = ""
-	for(var/datum/station_goal/S in SSticker.mode.station_goals)
-		dat += "[S.name] - <a href='?src=[REF(S)];[HrefToken()];announce=1'>Announce</a> | <a href='?src=[REF(S)];[HrefToken()];remove=1'>Remove</a><br>"
-	dat += "<br><a href='?src=[REF(src)];[HrefToken()];add_station_goal=1'>Add New Goal</a>"
-	usr << browse(dat, "window=goals;size=400x400")
-
 
 /client/proc/toggle_hub()
 	set category = "Server"
@@ -1230,19 +1136,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(ADMIN_PUNISHMENT_PACIFISM)
 			ADD_TRAIT(target, TRAIT_PACIFISM, "adminabuse")
 			to_chat(target, "<span class='danger'>You feel repulsed by the thought of violence!</span>")
-
-		if(ADMIN_PUNISHMENT_PUZZLE)
-			if(!puzzle_imprison(target))
-				to_chat(usr,"<span class='warning'>Imprisonment failed!</span>")
-				return
-
-		if(ADMIN_PUNISHMENT_ROD)
-			var/turf/T = get_turf(target)
-			var/startside = pick(GLOB.cardinals)
-			var/turf/startT = spaceDebrisStartLoc(startside, T.z)
-			var/turf/endT = spaceDebrisFinishLoc(startside, T.z)
-			new /obj/effect/immovablerod(startT, endT,target)
-
+		
 		if(ADMIN_PUNISHMENT_SLEEP)
 			target.visible_message("<span class='danger'>[target] faints in fear!</span>", "<span class='userdanger'>You inexplicably faint!</span>")
 			target.Sleeping(300, TRUE, TRUE)

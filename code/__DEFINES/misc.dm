@@ -251,9 +251,6 @@ GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DE
 	text = "DEBUG: [msg]")
 #define debug_world_log(msg) if (GLOB.Debug2) log_world("DEBUG: [msg]")
 
-//TODO Move to a pref
-#define STATION_GOAL_BUDGET  1
-
 //Luma coefficients suggested for HDTVs. If you change these, make sure they add up to 1.
 #define LUMA_R 0.213
 #define LUMA_G 0.715

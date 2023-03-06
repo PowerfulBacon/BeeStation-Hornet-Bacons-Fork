@@ -80,17 +80,6 @@
 	else if(S.active)
 		return S.seconds_remaining()
 
-/obj/effect/countdown/nuclearbomb
-	name = "nuclear bomb countdown"
-	color = "#81FF14"
-
-/obj/effect/countdown/nuclearbomb/get_value()
-	var/obj/machinery/nuclearbomb/N = attached_to
-	if(!istype(N))
-		return
-	else if(N.timing)
-		return round(N.get_time_left(), 1)
-
 /obj/effect/countdown/clonepod
 	name = "cloning pod countdown"
 	color = "#18d100"
@@ -126,16 +115,6 @@
 	else if(T.cooldown)
 		var/seconds_left = max(0, (T.cooldown_timer - world.time) / 10)
 		return "[round(seconds_left)]"
-
-/obj/effect/countdown/doomsday
-	name = "doomsday countdown"
-
-/obj/effect/countdown/doomsday/get_value()
-	var/obj/machinery/doomsday_device/DD = attached_to
-	if(!istype(DD))
-		return
-	else if(DD.timing)
-		return "<div align='center' valign='middle' style='position:relative; top:0px; left:0px'>[DD.seconds_remaining()]</div>"
 
 /obj/effect/countdown/anomaly
 	name = "anomaly countdown"

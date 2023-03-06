@@ -33,9 +33,6 @@
 /obj/structure/lattice/blob_act(obj/structure/blob/B)
 	return
 
-/obj/structure/lattice/ratvar_act()
-	new /obj/structure/lattice/clockwork(loc)
-
 /obj/structure/lattice/attackby(obj/item/C, mob/user, params)
 	if(resistance_flags & INDESTRUCTIBLE)
 		return

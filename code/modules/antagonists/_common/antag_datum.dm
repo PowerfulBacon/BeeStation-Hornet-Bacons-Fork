@@ -284,23 +284,6 @@ GLOBAL_LIST(admin_antag_list)
 		return
 	..()
 
-/proc/generate_admin_antag_list()
-	GLOB.admin_antag_list = list()
-
-	var/list/allowed_types = list(
-		/datum/antagonist/traitor,
-		/datum/antagonist/blob,
-		/datum/antagonist/changeling,
-		/datum/antagonist/devil,
-		/datum/antagonist/ninja,
-		/datum/antagonist/nukeop,
-		/datum/antagonist/wizard,
-	)
-
-	for(var/T in allowed_types)
-		var/datum/antagonist/A = T
-		GLOB.admin_antag_list[initial(A.name)] = T
-
 // Adds the specified antag hud to the player. Usually called in an antag datum file
 /datum/antagonist/proc/add_antag_hud(antag_hud_type, antag_hud_name, mob/living/mob_override)
 	var/datum/atom_hud/antag/hud = GLOB.huds[antag_hud_type]

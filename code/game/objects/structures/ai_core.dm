@@ -234,7 +234,6 @@
 					P.play_tool_sound(src)
 					to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 					if(brain)
-						SSticker.mode.remove_antag_for_borging(brain.brainmob.mind)
 
 						var/mob/living/silicon/ai/A = null
 

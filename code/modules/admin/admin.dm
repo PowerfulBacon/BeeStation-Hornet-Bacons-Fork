@@ -238,17 +238,9 @@
 	if(SSticker.is_mode("dynamic"))
 		if(SSticker.current_state <= GAME_STATE_PREGAME)
 			dat += "<A href='?src=[REF(src)];[HrefToken()];f_dynamic_roundstart=1'>(Force Roundstart Rulesets)</A><br>"
-			if (GLOB.dynamic_forced_roundstart_ruleset.len > 0)
-				for(var/datum/dynamic_ruleset/roundstart/rule in GLOB.dynamic_forced_roundstart_ruleset)
-					dat += {"<A href='?src=[REF(src)];[HrefToken()];f_dynamic_roundstart_remove=\ref[rule]'>-> [rule.name] <-</A><br>"}
-				dat += "<A href='?src=[REF(src)];[HrefToken()];f_dynamic_roundstart_clear=1'>(Clear Rulesets)</A><br>"
 			dat += "<A href='?src=[REF(src)];[HrefToken()];f_dynamic_options=1'>(Dynamic mode options)</A><br>"
 		else if (SSticker.IsRoundInProgress())
 			dat += "<A href='?src=[REF(src)];[HrefToken()];f_dynamic_latejoin=1'>(Force Next Latejoin Ruleset)</A><br>"
-			if (SSticker && SSticker.mode && istype(SSticker.mode,/datum/game_mode/dynamic))
-				var/datum/game_mode/dynamic/mode = SSticker.mode
-				if (mode.forced_latejoin_rule)
-					dat += {"<A href='?src=[REF(src)];[HrefToken()];f_dynamic_latejoin_clear=1'>-> [mode.forced_latejoin_rule.name] <-</A><br>"}
 			dat += "<A href='?src=[REF(src)];[HrefToken()];f_dynamic_midround=1'>(Execute Midround Ruleset!)</A><br>"
 		dat += "<hr/>"
 	if(SSticker.IsRoundInProgress())
@@ -325,28 +317,6 @@
 	SSticker.force_ending = 1
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "End Round") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/dynamic_mode_options(mob/user)
-	var/dat = {"
-		<center><B><h2>Dynamic Mode Options</h2></B></center><hr>
-		<br/>
-		<h3>Common options</h3>
-		<i>All these options can be changed midround.</i> <br/>
-		<br/>
-		<b>Force extended:</b> - Option is <a href='?src=[REF(src)];[HrefToken()];f_dynamic_force_extended=1'> <b>[GLOB.dynamic_forced_extended ? "ON" : "OFF"]</a></b>.
-		<br/>This will force the round to be extended. No rulesets will be drafted. <br/>
-		<br/>
-		<b>No stacking:</b> - Option is <a href='?src=[REF(src)];[HrefToken()];f_dynamic_no_stacking=1'> <b>[GLOB.dynamic_no_stacking ? "ON" : "OFF"]</b></a>.
-		<br/>Unless the threat goes above [GLOB.dynamic_stacking_limit], only one "round-ender" ruleset will be drafted. <br/>
-		<br/>
-		<b>Forced threat level:</b> Current value : <a href='?src=[REF(src)];[HrefToken()];f_dynamic_forced_threat=1'><b>[GLOB.dynamic_forced_threat_level]</b></a>.
-		<br/>The value threat is set to if it is higher than -1.<br/>
-		<br/>
-		<br/>
-		<b>Stacking threeshold:</b> Current value : <a href='?src=[REF(src)];[HrefToken()];f_dynamic_stacking_limit=1'><b>[GLOB.dynamic_stacking_limit]</b></a>.
-		<br/>The threshold at which "round-ender" rulesets will stack. A value higher than 100 ensure this never happens. <br/>
-		"}
-
-	user << browse(dat, "window=dyn_mode_options;size=900x650")
 /datum/admins/proc/announce()
 	set category = "Admin"
 	set name = "Announce"
@@ -496,9 +466,6 @@
 		SSticker.admin_delay_notice = input(usr, "Enter a reason for delaying the round end", "Round Delay Reason") as null|text
 		if(isnull(SSticker.admin_delay_notice))
 			return
-		for(var/client/admin in GLOB.admins)
-			if(check_rights(R_FUN) && !GLOB.battle_royale && admin.tgui_panel && SSticker.current_state == GAME_STATE_FINISHED)
-				admin.tgui_panel.give_br_popup()
 	else
 		if(alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", "Yes", "No") != "Yes")
 			return
@@ -660,22 +627,6 @@
 
 	if(!ai_number)
 		to_chat(usr, "<b>No AIs located</b>" )
-
-/datum/admins/proc/output_all_devil_info()
-	var/devil_number = 0
-	for(var/datum/mind/D in SSticker.mode.devils)
-		devil_number++
-		var/datum/antagonist/devil/devil = D.has_antag_datum(/datum/antagonist/devil)
-		to_chat(usr, "Devil #[devil_number]:<br><br>" + devil.printdevilinfo())
-	if(!devil_number)
-		to_chat(usr, "<b>No Devils located</b>" )
-
-/datum/admins/proc/output_devil_info(mob/living/M)
-	if(is_devil(M))
-		var/datum/antagonist/devil/devil = M.mind.has_antag_datum(/datum/antagonist/devil)
-		to_chat(usr, devil.printdevilinfo())
-	else
-		to_chat(usr, "<b>[M] is not a devil.")
 
 /datum/admins/proc/manage_free_slots()
 	if(!check_rights())

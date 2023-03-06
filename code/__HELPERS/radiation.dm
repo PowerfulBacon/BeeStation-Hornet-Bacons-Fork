@@ -5,13 +5,11 @@
 	var/static/list/ignored_things = typecacheof(list(
 		/mob/dead,
 		/mob/camera,
-		/mob/living/simple_animal/revenant,
 		/obj/effect,
 		/obj/docking_port,
 		/atom/movable/lighting_object,
 		/obj/item/projectile,
 		/obj/structure/chisel_message,
-		/mob/living/simple_animal/eminence
 		))
 	var/list/processing_list = list(location)
 	. = list()

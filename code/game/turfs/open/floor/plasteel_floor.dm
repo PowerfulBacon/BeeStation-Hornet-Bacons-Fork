@@ -157,9 +157,6 @@
 	base_icon_state = "plaque"
 	tiled_dirt = FALSE
 
-/turf/open/floor/plasteel/cult/narsie_act()
-	return
-
 /turf/open/floor/plasteel/cult/airless
 	initial_gas_mix = AIRLESS_ATMOS
 

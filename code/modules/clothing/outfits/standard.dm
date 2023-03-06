@@ -332,10 +332,6 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/spellbook/S = locate() in H.held_items
-	if(S)
-		S.owner = H
-
 /datum/outfit/wizard/apprentice
 	name = "Wizard Apprentice"
 	r_hand = null

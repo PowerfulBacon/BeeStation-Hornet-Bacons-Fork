@@ -260,39 +260,6 @@
 		data = list("misc" = 1)
 	data["misc"]++
 	M.jitteriness = min(M.jitteriness+4,10)
-	if(iscultist(M))
-		for(var/datum/action/innate/cult/blood_magic/BM in M.actions)
-			to_chat(M, "<span class='cultlarge'>Your blood rites falter as holy water scours your body!</span>")
-			for(var/datum/action/innate/cult/blood_spell/BS in BM.spells)
-				qdel(BS)
-	if(data["misc"] >= 25)		// 10 units, 45 seconds @ metabolism 0.4 units & tick rate 1.8 sec
-		if(!M.stuttering)
-			M.stuttering = 1
-		M.stuttering = min(M.stuttering+4, 10)
-		M.Dizzy(5)
-		if(is_servant_of_ratvar(M) && prob(20))
-			M.say(text2ratvar(pick("Please don't leave me...", "Rat'var what happened?", "My friends, where are you?", "The hierophant network just went dark, is anyone there?", "The light is fading...", "No... It can't be...")), forced = "holy water")
-			if(prob(40))
-				if(!HAS_TRAIT_FROM(M, TRAIT_DEPRESSION, HOLYWATER_TRAIT))
-					to_chat(M, "<span class='large_brass'>You feel the light fading and the world collapsing around you...</span>")
-					ADD_TRAIT(M, TRAIT_DEPRESSION, HOLYWATER_TRAIT)
-		if(iscultist(M) && prob(20))
-			M.say(pick("Av'te Nar'Sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","R'ge Na'sie","Diabo us Vo'iscum","Eld' Mon Nobis"), forced = "holy water")
-			if(prob(10))
-				M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
-				M.Unconscious(120)
-				to_chat(M, "<span class='cultlarge'>[pick("Your blood is your bond - you are nothing without it", "Do not forget your place", \
-				"All that power, and you still fail?", "If you cannot scour this poison, I shall scour your meager life!")].</span>")
-	if(data["misc"] >= 60)	// 30 units, 135 seconds
-		if(iscultist(M) || is_servant_of_ratvar(M))
-			if(iscultist(M))
-				SSticker.mode.remove_cultist(M.mind, FALSE, TRUE)
-			if(is_servant_of_ratvar(M))
-				remove_servant_of_ratvar(M.mind)
-			M.jitteriness = 0
-			M.stuttering = 0
-			holder.remove_reagent(type, volume)	// maybe this is a little too perfect and a max() cap on the statuses would be better??
-			return
 	holder.remove_reagent(type, 0.4)	//fixed consumption to prevent balancing going out of whack
 
 /datum/reagent/water/holywater/reaction_turf(turf/T, reac_volume)
@@ -317,22 +284,11 @@
 	return ..()
 
 /datum/reagent/fuel/unholywater/on_mob_life(mob/living/carbon/M)
-	if(iscultist(M))
-		M.drowsyness = max(M.drowsyness-5, 0)
-		M.AdjustAllImmobility(-40, FALSE)
-		M.adjustStaminaLoss(-10, 0)
-		M.adjustToxLoss(-2, 0)
-		M.adjustOxyLoss(-2, 0)
-		M.adjustBruteLoss(-2, 0)
-		M.adjustFireLoss(-2, 0)
-		if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume += 3
-	else  // Will deal about 90 damage when 50 units are thrown
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
-		M.adjustToxLoss(2, 0)
-		M.adjustFireLoss(2, 0)
-		M.adjustOxyLoss(2, 0)
-		M.adjustBruteLoss(2, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
+	M.adjustToxLoss(2, 0)
+	M.adjustFireLoss(2, 0)
+	M.adjustOxyLoss(2, 0)
+	M.adjustBruteLoss(2, 0)
 	holder.remove_reagent(type, 1)
 	return TRUE
 
@@ -1985,13 +1941,6 @@
 	taste_description = "acrid cinnamon"
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 
-/datum/reagent/bz_metabolites/on_mob_life(mob/living/L)
-	if(L.mind)
-		var/datum/antagonist/changeling/changeling = L.mind.has_antag_datum(/datum/antagonist/changeling)
-		if(changeling)
-			changeling.chem_charges = max(changeling.chem_charges-2, 0)
-	return ..()
-
 /datum/reagent/pax/peaceborg
 	name = "Synthpax"
 	description = "A colorless liquid that suppresses violent urges in its subjects. Cheaper to synthesize than normal Pax, but wears off faster."
@@ -2073,33 +2022,6 @@
 	color = "#ED2939"
 	chem_flags = CHEMICAL_NOT_SYNTH | CHEMICAL_RNG_FUN
 	taste_description = "upside down"
-
-/datum/reagent/eldritch //unholy water, but for eldritch cultists. why couldn't they have both just used the same reagent? who knows. maybe nar'sie is considered to be too "mainstream" of a god to worship in the cultist community.
-	name = "Eldritch Essence"
-	description = "A strange liquid that defies the laws of physics. It re-energizes and heals those who can see beyond this fragile reality, but is incredibly harmful to the closed-minded. It metabolizes very quickly."
-	taste_description = "Ag'hsj'saje'sh"
-	color = "#1f8016"
-	chem_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
-	metabolization_rate = 2.5 * REAGENTS_METABOLISM  //1u/tick
-
-/datum/reagent/eldritch/on_mob_life(mob/living/carbon/M)
-	if(IS_HERETIC(M))
-		M.drowsyness = max(M.drowsyness-5, 0)
-		M.AdjustAllImmobility(-40, FALSE)
-		M.adjustStaminaLoss(-10, FALSE)
-		M.adjustToxLoss(-2, FALSE)
-		M.adjustOxyLoss(-2, FALSE)
-		M.adjustBruteLoss(-2, FALSE)
-		M.adjustFireLoss(-2, FALSE)
-		if(ishuman(M) && M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume += 3
-	else
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
-		M.adjustToxLoss(2, FALSE)
-		M.adjustFireLoss(2, FALSE)
-		M.adjustOxyLoss(2, FALSE)
-		M.adjustBruteLoss(2, FALSE)
-	return ..()
 
 /datum/reagent/consumable/ratlight
 	name = "Ratvarian Light"
