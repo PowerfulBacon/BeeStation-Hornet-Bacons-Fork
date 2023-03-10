@@ -18,8 +18,8 @@
 		to_chat(user, "<span class='notice'>This is a bug. Error:HIVE1</span>")
 		return
 	hive.glow = mutable_appearance('icons/effects/hivemind.dmi', "awoken", -BODY_BEHIND_LAYER)
-	for(var/datum/antagonist/hivevessel/vessel in hive.avessels)
-		var/mob/living/carbon/C = vessel.owner?.current
+	for(var/datum/mind/vessel in hive.avessels)
+		var/mob/living/carbon/C = vessel.current
 		C.Jitter(15)
 		C.Unconscious(150)
 		to_chat(C, "<span class='boldwarning'>Something's wrong...</span>")
@@ -27,6 +27,9 @@
 		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, C, "<span class='boldwarning'>You try to remember who you are...</span>"), 90)
 		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, C, "<span class='assimilator'>There is no you...</span>"), 110)
 		addtimer(CALLBACK(GLOBAL_PROC, /proc/to_chat, C, "<span class='bigassimilator'>...there is only us.</span>"), 130)
+		var/datum/antagonist/hivevessel/woke_vessel = IS_WOKEVESSEL(C)
+		if (woke_vessel)
+			woke_vessel.glow = hive.glow
 		addtimer(CALLBACK(C, /atom/proc/add_overlay, hive.glow), 150)
 
 	for(var/datum/antagonist/hivemind/enemy in GLOB.hivehosts)

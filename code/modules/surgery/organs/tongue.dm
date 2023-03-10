@@ -69,10 +69,18 @@
 /obj/item/organ/tongue/lizard/handle_speech(datum/source, list/speech_args)
 	var/static/regex/lizard_hiss = new("s+", "g")
 	var/static/regex/lizard_hiSS = new("S+", "g")
+	var/static/regex/lizard_kss = new(@"(\w)x", "g")
+	var/static/regex/lizard_kSS = new(@"(\w)X", "g")
+	var/static/regex/lizard_ecks = new(@"\bx([-rR]|\b)", "g")
+	var/static/regex/lizard_eckS = new(@"\bX([-rR]|\b)", "g")
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(message[1] != "*")
 		message = lizard_hiss.Replace(message, "sss")
 		message = lizard_hiSS.Replace(message, "SSS")
+		message = lizard_kss.Replace(message, "$1kss")
+		message = lizard_kSS.Replace(message, "$1KSS")
+		message = lizard_ecks.Replace(message, "ecks$1")
+		message = lizard_eckS.Replace(message, "ECKS$1")
 	speech_args[SPEECH_MESSAGE] = message
 
 /obj/item/organ/tongue/fly
@@ -129,6 +137,9 @@
 /obj/item/organ/tongue/abductor/handle_speech(datum/source, list/speech_args)
 	//Hacks
 	var/message = speech_args[SPEECH_MESSAGE]
+	speech_args[SPEECH_MESSAGE] = ""
+	if(!ishuman(usr))
+		return
 	var/mob/living/carbon/human/user = usr
 	var/rendered = "<span class='abductor'><b>[user.real_name]:</b> [message]</span>"
 	user.log_talk(message, LOG_SAY, tag="abductor")
@@ -142,8 +153,6 @@
 	for(var/mob/M in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(M, user)
 		to_chat(M, "[link] [rendered]")
-
-	speech_args[SPEECH_MESSAGE] = ""
 
 /obj/item/organ/tongue/zombie
 	name = "rotting tongue"
@@ -257,19 +266,6 @@
 
 /obj/item/organ/tongue/robot/handle_speech(datum/source, list/speech_args)
 	speech_args[SPEECH_SPANS] |= SPAN_ROBOT
-
-/obj/item/organ/tongue/honk
-	name = "clown voicebox"
-	desc = "A voice synthesizer that makes you 45% funnier."
-	slot = ORGAN_SLOT_TONGUE
-	icon_state = "tonguerobot"  // looks sufficiently tech-y enough to pass
-	say_mod = "honks"
-	attack_verb = list("honked", "clowns")
-	modifies_speech = TRUE
-	taste_sensitivity = 25 // not as good as an organic tongue
-
-/obj/item/organ/tongue/honk/handle_speech(datum/source, list/speech_args)
-	speech_args[SPEECH_SPANS] |= SPAN_CLOWN
 
 /obj/item/organ/tongue/snail
 	name = "snail tongue"

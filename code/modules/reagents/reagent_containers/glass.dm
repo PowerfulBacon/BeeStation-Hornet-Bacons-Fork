@@ -4,10 +4,10 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5, 10, 15, 20, 25, 30, 50)
 	volume = 50
+	obj_flags = UNIQUE_RENAME
 	reagent_flags = OPENCONTAINER
 	spillable = TRUE
 	resistance_flags = ACID_PROOF
-
 
 /obj/item/reagent_containers/glass/attack(mob/M, mob/user, obj/target)
 	if(!canconsume(M, user))
@@ -304,7 +304,12 @@
 	cap_overlay = mutable_appearance(icon, cap_icon_state)
 	if(cap_on)
 		spillable = FALSE
-		add_overlay(cap_overlay, TRUE)
+		update_icon()
+
+/obj/item/reagent_containers/glass/waterbottle/update_overlays()
+	. = ..()
+	if(cap_on)
+		. += cap_overlay
 
 /obj/item/reagent_containers/glass/waterbottle/examine(mob/user)
 	. = ..()
@@ -326,7 +331,6 @@
 	if(cap_on || fumbled)
 		cap_on = FALSE
 		spillable = TRUE
-		cut_overlay(cap_overlay, TRUE)
 		animate(src, transform = null, time = 2, loop = 0)
 		if(fumbled)
 			to_chat(user, "<span class='warning'>You fumble with [src]'s cap! The cap falls onto the ground and simply vanishes. Where the hell did it go?</span>")
@@ -336,7 +340,6 @@
 	else
 		cap_on = TRUE
 		spillable = FALSE
-		add_overlay(cap_overlay, TRUE)
 		to_chat(user, "<span class='notice'>You put the cap on [src].</span>")
 	update_icon()
 

@@ -138,6 +138,10 @@
 	if (CONFIG_GET(flag/log_say))
 		WRITE_LOG(GLOB.world_game_log, "SAY: [text]")
 
+/proc/log_radio_emote(text)
+	if (CONFIG_GET(flag/log_emote))
+		WRITE_LOG(GLOB.world_game_log, "RADIOEMOTE: [text]")
+
 /proc/log_ooc(text)
 	if (CONFIG_GET(flag/log_ooc))
 		WRITE_LOG(GLOB.world_game_log, "OOC: [text]")
@@ -246,7 +250,7 @@
 	rustg_log_close_all()
 
 /* Helper procs for building detailed log lines */
-/proc/key_name(whom, include_link = null, include_name = TRUE)
+/proc/key_name(whom, include_link = null, include_name = TRUE, href = "priv_msg")
 	var/mob/M
 	var/client/C
 	var/key
@@ -303,11 +307,11 @@
 	if(key)
 		if(C?.holder?.fakekey && !include_name)
 			if(include_link)
-				. += "<a href='?priv_msg=[C.findStealthKey()]'>"
+				. += "<a href='?[href]=[C.findStealthKey()]'>"
 			. += "Administrator"
 		else
 			if(include_link)
-				. += "<a href='?priv_msg=[ckey]'>"
+				. += "<a href='?[href]=[ckey]'>"
 			. += key
 		if(!C)
 			. += "\[DC\]"

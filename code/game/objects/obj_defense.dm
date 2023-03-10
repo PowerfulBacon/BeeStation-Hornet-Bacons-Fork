@@ -97,7 +97,7 @@
 		return
 	if(isturf(loc))
 		var/turf/T = loc
-		if(T.intact && level == 1) //the blob doesn't destroy thing below the floor
+		if(T.intact && HAS_TRAIT(src, TRAIT_T_RAY_VISIBLE))
 			return
 	take_damage(400, BRUTE, "melee", 0, get_dir(src, B))
 
@@ -182,7 +182,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 		if(!acid_level)
 			SSacid.processing[src] = src
-			add_overlay(GLOB.acid_overlay, TRUE)
+			update_icon()
 		var/acid_cap = acidpwr * 300 //so we cannot use huge amounts of weak acids to do as well as strong acids.
 		if(acid_level < acid_cap)
 			acid_level = min(acid_level + acidpwr * acid_volume, acid_cap)
@@ -213,14 +213,14 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/fire_act(exposed_temperature, exposed_volume)
 	if(isturf(loc))
 		var/turf/T = loc
-		if(T.intact && level == 1) //fire can't damage things hidden below the floor.
+		if(T.intact && HAS_TRAIT(src, TRAIT_T_RAY_VISIBLE))
 			return
 	if(exposed_temperature && !(resistance_flags & FIRE_PROOF))
 		take_damage(CLAMP(0.02 * exposed_temperature, 0, 20), BURN, "fire", 0)
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
 		resistance_flags |= ON_FIRE
 		SSfire_burning.processing[src] = src
-		add_overlay(GLOB.fire_overlay, TRUE)
+		update_icon()
 		return 1
 
 //called when the obj is destroyed by fire
@@ -232,7 +232,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/proc/extinguish()
 	if(resistance_flags & ON_FIRE)
 		resistance_flags &= ~ON_FIRE
-		cut_overlay(GLOB.fire_overlay, TRUE)
+		update_icon()
 		SSfire_burning.processing -= src
 
 /obj/proc/tesla_act(power, tesla_flags, shocked_targets)

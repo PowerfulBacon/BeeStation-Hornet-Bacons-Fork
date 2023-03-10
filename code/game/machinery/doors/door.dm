@@ -37,7 +37,6 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/real_explosion_block	//ignore this, just use explosion_block
 	var/red_alert_access = FALSE //if TRUE, this door will always open on red alert
-	var/poddoor = FALSE
 	var/unres_sides = 0 //Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
 	var/open_speed = 5
 
@@ -48,7 +47,6 @@
 			. += "<span class='notice'>Due to a security threat, its access requirements have been lifted!</span>"
 		else
 			. += "<span class='notice'>In the event of a red alert, its access requirements will automatically lift.</span>"
-	if(!poddoor)
 		. += "<span class='notice'>Its maintenance panel is <b>screwed</b> in place.</span>"
 
 /obj/machinery/door/check_access_list(list/access_list)
@@ -146,8 +144,8 @@
 	. = ..()
 	if(.)
 		return
-	// Snowflake handling for PASSGLASS.
-	if(istype(mover) && (mover.pass_flags & PASSGLASS))
+	// Snowflake handling for PASSTRANSPARENT.
+	if(istype(mover) && (mover.pass_flags & PASSTRANSPARENT))
 		return !opacity
 
 /// Helper method for bumpopen() and try_to_activate_door(). Don't override.
@@ -309,10 +307,10 @@
 	do_animate("opening")
 	set_opacity(0)
 	sleep(open_speed)
-	density = FALSE
+	set_density(FALSE)
 	sleep(open_speed)
 	layer = initial(layer)
-	update_icon()
+	update_appearance()
 	set_opacity(0)
 	operating = FALSE
 	air_update_turf(1)
@@ -339,9 +337,9 @@
 	do_animate("closing")
 	layer = closingLayer
 	if(air_tight)
-		density = TRUE
+		set_density(TRUE)
 	sleep(open_speed)
-	density = TRUE
+	set_density(TRUE)
 	sleep(open_speed)
 	update_icon()
 	if(visible && !glass)

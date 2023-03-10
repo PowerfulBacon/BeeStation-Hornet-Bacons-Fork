@@ -99,12 +99,11 @@
 	suit_store = /obj/item/gun/energy/e_gun
 	glasses = /obj/item/clothing/glasses/hud/health
 	back = /obj/item/storage/backpack/ert/medical
-	belt = /obj/item/storage/belt/medical
+	belt = /obj/item/storage/belt/medical/ert
 	l_hand = /obj/item/storage/firstaid/regular
 	backpack_contents = list(/obj/item/storage/box/engineer=1,
-		/obj/item/melee/baton/loaded=1,
 		/obj/item/reagent_containers/hypospray/combat=1,
-		/obj/item/gun/medbeam=1)
+		/obj/item/melee/baton/loaded=1)
 
 /datum/outfit/ert/medic/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	..()
@@ -120,11 +119,11 @@
 	name = "ERT Medic - High Alert"
 
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
+	l_hand = /obj/item/storage/firstaid/advanced
 	backpack_contents = list(/obj/item/storage/box/engineer=1,
 		/obj/item/melee/baton/loaded=1,
 		/obj/item/gun/energy/pulse/pistol/loyalpin=1,
-		/obj/item/reagent_containers/hypospray/combat/nanites=1,
-		/obj/item/gun/medbeam=1)
+		/obj/item/reagent_containers/hypospray/combat/nanites=1)
 
 /datum/outfit/ert/engineer
 	name = "ERT Engineer"
@@ -323,6 +322,22 @@
 	var/obj/item/radio/R = H.ears
 	R.keyslot = new /obj/item/encryptionkey/headset_service
 	R.recalculateChannels()
+
+/datum/outfit/centcom_attorney
+	name = "CentCom Attorney"
+
+	uniform = /obj/item/clothing/under/rank/centcom/intern
+	suit = /obj/item/clothing/suit/toggle/lawyer
+	shoes = /obj/item/clothing/shoes/laceup
+	ears = /obj/item/radio/headset/headset_cent
+	glasses = /obj/item/clothing/glasses/sunglasses/advanced
+	belt = /obj/item/modular_computer/tablet/pda/lawyer
+	back = /obj/item/storage/backpack/satchel
+	l_hand = /obj/item/storage/briefcase/lawyer
+	l_pocket = /obj/item/laser_pointer
+	r_pocket = /obj/item/clothing/accessory/lawyers_badge
+	id = /obj/item/card/id/ert/lawyer
+	backpack_contents = list(/obj/item/storage/box/survival = 1)
 
 /datum/outfit/centcom_intern
 	name = "CentCom Intern"
