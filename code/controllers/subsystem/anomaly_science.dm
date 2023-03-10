@@ -66,9 +66,17 @@ SUBSYSTEM_DEF(anomaly_science)
 		return independent_flux["[z_value]"]
 	return flux_entropy["[flux_group]"]
 
+/datum/controller/subsystem/anomaly_science/proc/set_flux_level(z_value, new_value)
+	var/flux_group = SSmapping.level_trait(z_value, ZTRAIT_FLUX_GROUP)
+	if (!flux_entropy)
+		var/list/independent_flux = flux_entropy["[0]"]
+		independent_flux["[z_value]"] = new_value
+		return
+	flux_entropy["[flux_group]"] = new_value
+
 /datum/controller/subsystem/anomaly_science/proc/check_anomaly_appearance(z_level)
 	// Anomalies cannot spawn here
 	if (!SSmapping.level_trait(z_level, ZTRAIT_ANOMALY_SPAWNING))
 		return FALSE
 	// Check anomaly spawn probability
-	
+
