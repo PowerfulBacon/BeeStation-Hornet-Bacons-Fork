@@ -21,7 +21,7 @@
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "FluxHarvester") //width, height
-		ui.set_autoupdate(FALSE)
+		ui.set_autoupdate(TRUE)
 		ui.open()
 
 /obj/machinery/power/flux_harvester/process(delta_time)
@@ -50,7 +50,7 @@
 	return data
 
 /obj/machinery/power/flux_harvester/ui_act(action, params)
-	if (!..())
+	if (..())
 		return
 
 	switch (action)
