@@ -78,7 +78,8 @@
 	var/datum/created_datum = new type
 	//Set the variables
 	for (var/var_key in data)
-		created_datum.vars[var_key] = data[var_key]
+		if (copytext(var_key, 1, 2) == "$")
+			created_datum.vars[var_key] = data[var_key]
 	//Create children
 	for (var/datum/parsed_anomaly_data/child_data as() in children)
 		created_datum.vars["children"] += child_data.create()

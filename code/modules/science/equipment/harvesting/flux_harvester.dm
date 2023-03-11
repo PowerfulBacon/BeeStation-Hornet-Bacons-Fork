@@ -112,7 +112,7 @@
 	var/turf/T = get_turf(src)
 	SSanomaly_science.set_flux_level(T.z, SSanomaly_science.get_flux_level(T.z) - harvest_amount)
 	container.energy_stored = harvest_amount
-	container.update_appearance(UPDATE_ICON)
+	container.update_appearance(UPDATE_ICON_STATE)
 	playsound(src, 'sound/machines/ding.ogg', 80, extrarange=7)
 	harvesting = FALSE
 

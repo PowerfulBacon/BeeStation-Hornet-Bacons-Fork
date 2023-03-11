@@ -964,7 +964,7 @@
 /obj/item/circuitboard/machine/techfab/department/science
 	name = "departmental techfab - science (Machine Board)"
 	icon_state = "science"
-	build_path = /obj/machinery/rnd/production/techfab/department/science
+	build_path = /obj/machinery/rnd/production/techfab/advanced
 
 /obj/item/circuitboard/machine/ecto_sniffer
 	name = "Ectoscopic Sniffer (Machine Board)"

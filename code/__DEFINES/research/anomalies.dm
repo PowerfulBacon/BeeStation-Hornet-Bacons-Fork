@@ -26,3 +26,6 @@
 #define FLUX_TIER_1 50
 #define FLUX_TIER_2 200
 #define FLUX_TIER_3 800
+
+// Supression types
+#define ANOMALY_SUPPRESSION_DISRUPTOR "disruptor"

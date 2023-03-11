@@ -15,6 +15,9 @@ SUBSYSTEM_DEF(anomaly_science)
 	. = ..()
 	// Create flux levels
 	create_flux_levels()
+	load_anomalies()
+
+/datum/controller/subsystem/anomaly_science/proc/load_anomalies()
 	// Load all anomaly data files
 	loaded_anomalies = list()
 	for (var/filepath in flist(ANOMALY_FILEPATH))

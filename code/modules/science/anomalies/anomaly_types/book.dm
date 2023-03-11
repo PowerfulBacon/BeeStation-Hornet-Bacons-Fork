@@ -14,7 +14,7 @@
 /obj/item/anomaly/book/ComponentInitialize()
 	. = ..()
 	//Add the anomaly part
-	AddComponent(/datum/component/anomaly_base, "book")
+	//AddComponent(/datum/component/anomaly_base, "book")
 
 /obj/item/anomaly/book/attack_self(mob/user)
 	if(!user.can_read(src))

@@ -6,11 +6,21 @@
 	/// Any actions that are children of this node, if the node supports children.
 	var/list/children = list()
 
+/datum/anomaly_action/Destroy(force, ...)
+	QDEL_LIST(children)
+	. = ..()
+
 ///Register signals to the anomaly base datum
 /datum/anomaly_action/proc/initialise_anomaly(datum/component/anomaly_base/anomaly)
 	//Initialise children
 	for (var/datum/anomaly_action/child_action in children)
 		child_action.initialise_anomaly(anomaly)
+
+///Unregister signals from the base datum
+/datum/anomaly_action/proc/deactive_anomaly(datum/component/anomaly_base/anomaly)
+	//Deactivate children
+	for (var/datum/anomaly_action/child_action in children)
+		child_action.deactive_anomaly(anomaly)
 
 ///Trigger the action of the anomaly
 /// anomaly_parent (/atom): The anomaly this action is attached to

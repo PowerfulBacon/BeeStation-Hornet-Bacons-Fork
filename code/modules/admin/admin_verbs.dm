@@ -147,6 +147,7 @@ GLOBAL_PROTECT(admin_verbs_server)
 	/client/proc/toggle_hub,
 	/client/proc/toggle_cdn
 	)
+
 GLOBAL_LIST_INIT(admin_verbs_debug, world.AVerbsDebug())
 GLOBAL_PROTECT(admin_verbs_debug)
 /world/proc/AVerbsDebug()
@@ -200,7 +201,9 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	#endif
 	/client/proc/toggle_cdn,
 	/client/proc/check_timer_sources,
-	/client/proc/test_dview_to_lum_changes
+	/client/proc/test_dview_to_lum_changes,
+	/client/proc/create_anomaly,
+	/client/proc/reload_anomalies
 	)
 
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, /proc/release))

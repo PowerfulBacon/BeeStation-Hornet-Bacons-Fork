@@ -3,6 +3,13 @@
 #define COMSIG_ANOMALY_BREACHED "anomaly_breached"
 
 ////////////////////////////////
+// Anomaly Attack Signals
+////////////////////////////////
+
+/// When an anomaly is hit with a supressing weapon (mob/user, suppression_type, power)
+#define COMSIG_ANOMALY_SUPRESSED "anomaly_suppressed"
+
+////////////////////////////////
 // Anomaly Interaction Signals
 ////////////////////////////////
 
