@@ -22,3 +22,7 @@
 /// Changes how flux decays. Lower values means flux decays slower
 /// This means that after 10 minutes, the initial value will have halved
 #define FLUX_HALF_LIFE 10
+
+#define FLUX_TIER_1 50
+#define FLUX_TIER_2 200
+#define FLUX_TIER_3 800

@@ -106,11 +106,11 @@
 	name = "Bluespace Body Bag"
 	desc = "A bluespace body bag, powered by experimental bluespace technology. It can hold loads of bodies and the largest of creatures."
 	id = "bluespacebodybag"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 3000, /datum/material/plasma = 2000, /datum/material/diamond = 500, /datum/material/bluespace = 500)
+	build_type = ADVANCED_FABRICATOR
+	materials = list(/datum/material/iron = 3000, /datum/material/plasma = 2000, /datum/material/diamond = 500, /datum/material/bluespace = 500, /datum/material/flux = FLUX_TIER_2)
 	build_path = /obj/item/bodybag/bluespace
 	category = list(CATEGORY_MEDICAL)
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
+	departmental_flags = ALL
 
 /datum/design/plasmarefiller
 	name = "Plasma-Man Jumpsuit Refill"

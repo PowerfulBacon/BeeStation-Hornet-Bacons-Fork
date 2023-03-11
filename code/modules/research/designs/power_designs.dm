@@ -6,7 +6,7 @@
 	name = "Basic Power Cell"
 	desc = "A basic power cell that holds 1 MJ of energy."
 	id = "basic_cell"
-	build_type = PROTOLATHE | AUTOLATHE |MECHFAB
+	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
 	materials = list(/datum/material/iron = 700, /datum/material/glass = 50, /datum/material/copper = 100)
 	construction_time=100
 	build_path = /obj/item/stock_parts/cell/empty

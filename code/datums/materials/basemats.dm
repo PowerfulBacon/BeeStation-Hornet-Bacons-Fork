@@ -151,15 +151,6 @@
 	strength_modifier = 0.85
 	sheet_type = /obj/item/stack/sheet/plastic
 
-///Force decrease and mushy sound effect. (Not yet implemented)
-/datum/material/biomass
-	name = "biomass"
-	id = "biomass"
-	desc = "Organic matter"
-	color = "#735b4d"
-	greyscale_colors = "#735b4d"
-	strength_modifier = 0.8
-
 
 /datum/material/copper
 	name = "copper"
@@ -169,3 +160,19 @@
 	greyscale_colors = "#d95802"
 	categories = list(MAT_CATEGORY_ORE = TRUE, MAT_CATEGORY_RIGID = TRUE)
 	sheet_type = /obj/item/stack/sheet/mineral/copper
+
+///Force decrease and mushy sound effect. (Not yet implemented)
+/datum/material/biomass
+	name = "biomass"
+	id = "biomass"
+	desc = "Organic matter"
+	color = "#735b4d"
+	greyscale_colors = "#735b4d"
+	strength_modifier = 0.8
+
+/datum/material/flux
+	name = "flux"
+	id = "flux"
+	desc = "A concentrated form of flux, an energetic substance believed to trigger anomalous activity."
+	color = "#af5faf"
+	greyscale_colors = "#af5faf"
