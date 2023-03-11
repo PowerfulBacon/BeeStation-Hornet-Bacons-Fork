@@ -24,7 +24,12 @@ export const FluxHarvester = (props, context) => {
           <Flex.Item
             grow={0}
             mb="20px">
-            <NoticeBox>Status: {status}</NoticeBox>
+            <NoticeBox
+              color={status === "Ready to process"
+                ? "green"
+                : "red"}>
+              Status: {status}
+            </NoticeBox>
           </Flex.Item>
           <Flex.Item
             grow={1}
@@ -44,11 +49,11 @@ export const FluxHarvester = (props, context) => {
                     })} />
                   Current Harvest Amount: {harvest_amount}
                 </Flex.Item>
-                <Flex.Item alignSelf="flex-end">
+                <Flex.Item grow={0}>
                   {is_processing ? (
-                    <ProgressBar value={100-ticks_left} maxValue={100} />
+                    <ProgressBar value={600-ticks_left} maxValue={600}>{ticks_left/10}s</ProgressBar>
                   ) : (
-                    <ProgressBar value={0} maxValue={100} />
+                    <ProgressBar value={0} maxValue={600}>Not Processing</ProgressBar>
                   )}
                 </Flex.Item>
               </Flex>
@@ -57,9 +62,18 @@ export const FluxHarvester = (props, context) => {
           <Flex.Item>
             <Section>
               <Flex direction="row">
-                <Flex.Item>
-                  <Button
-                    content="Start" />
+                <Flex.Item grow={1}>
+                  {!is_processing
+                    ? (
+                      <Button
+                        content="Start"
+                        onClick={() => act('begin_harvest')} />)
+                    : (
+                      <Button
+                        content="Emergency Stop"
+                        color="red"
+                        icon="exclamation-triangle"
+                        onClick={() => act('emergency_stop')} />)}
                 </Flex.Item>
                 <Flex.Item align="flex-end">
                   <Button

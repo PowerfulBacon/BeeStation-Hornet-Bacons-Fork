@@ -8,7 +8,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400, /datum/material/glass = 100, /datum/material/copper = 150)
 	build_path = /obj/item/computer_hardware/hard_drive
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/disk/advanced
@@ -17,7 +17,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 800, /datum/material/glass = 200, /datum/material/copper = 300)
 	build_path = /obj/item/computer_hardware/hard_drive/advanced
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/disk/super
@@ -26,7 +26,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 1600, /datum/material/glass = 400, /datum/material/copper = 600)
 	build_path = /obj/item/computer_hardware/hard_drive/super
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/disk/cluster
@@ -35,7 +35,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 3200, /datum/material/glass = 800, /datum/material/copper = 1000)
 	build_path = /obj/item/computer_hardware/hard_drive/cluster
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/disk/small
@@ -44,7 +44,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 800, /datum/material/glass = 200, /datum/material/copper = 200)
 	build_path = /obj/item/computer_hardware/hard_drive/small
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/disk/micro
@@ -53,7 +53,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400, /datum/material/glass = 100, /datum/material/copper = 150)
 	build_path = /obj/item/computer_hardware/hard_drive/micro
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Network cards
@@ -63,7 +63,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/iron = 250, /datum/material/glass = 100, /datum/material/copper = 100)
 	build_path = /obj/item/computer_hardware/network_card
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/netcard/advanced
@@ -72,7 +72,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/iron = 500, /datum/material/glass = 200, /datum/material/copper = 200)
 	build_path = /obj/item/computer_hardware/network_card/advanced
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/netcard/wired
@@ -81,7 +81,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/iron = 2500, /datum/material/glass = 400, /datum/material/copper = 400)
 	build_path = /obj/item/computer_hardware/network_card/wired
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Data disks
@@ -91,7 +91,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 800, /datum/material/copper = 200)
 	build_path = /obj/item/computer_hardware/hard_drive/portable
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/portabledrive/advanced
@@ -100,7 +100,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 1600, /datum/material/copper = 300)
 	build_path = /obj/item/computer_hardware/hard_drive/portable/advanced
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/portabledrive/super
@@ -109,7 +109,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 3200, /datum/material/copper = 400)
 	build_path = /obj/item/computer_hardware/hard_drive/portable/super
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Card slot
@@ -119,7 +119,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 600, /datum/material/copper = 100)
 	build_path = /obj/item/computer_hardware/card_slot
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Intellicard slot
@@ -129,7 +129,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 600, /datum/material/copper = 100)
 	build_path = /obj/item/computer_hardware/ai_slot
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Mini printer
@@ -139,7 +139,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 600, /datum/material/copper = 100)
 	build_path = /obj/item/computer_hardware/printer/mini
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // APC Link
@@ -149,7 +149,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 2000)
 	build_path = /obj/item/computer_hardware/recharger/APC
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Batteries
@@ -159,7 +159,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400)
 	build_path = /obj/item/computer_hardware/battery
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/battery/normal
@@ -168,7 +168,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400)
 	build_path = /obj/item/stock_parts/cell/computer
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/battery/advanced
@@ -177,7 +177,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 800)
 	build_path = /obj/item/stock_parts/cell/computer/advanced
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/battery/super
@@ -186,7 +186,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 1600)
 	build_path = /obj/item/stock_parts/cell/computer/super
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/battery/nano
@@ -195,7 +195,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200)
 	build_path = /obj/item/stock_parts/cell/computer/nano
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/battery/micro
@@ -204,7 +204,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400)
 	build_path = /obj/item/stock_parts/cell/computer/micro
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 // Processor unit
@@ -214,7 +214,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 200, /datum/material/copper = 1600)
 	build_path = /obj/item/computer_hardware/processor_unit
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/cpu/small
@@ -223,7 +223,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 100, /datum/material/copper = 800)
 	build_path = /obj/item/computer_hardware/processor_unit/small
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/cpu/photonic
@@ -232,7 +232,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 6400, /datum/material/gold = 2000, /datum/material/copper = 800)
 	build_path = /obj/item/computer_hardware/processor_unit/photonic
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/cpu/photonic/small
@@ -241,7 +241,7 @@
 	build_type = IMPRINTER
 	materials = list(/datum/material/glass = 3200, /datum/material/gold = 1000, /datum/material/copper = 400)
 	build_path = /obj/item/computer_hardware/processor_unit/photonic/small
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 //antivirus. While not a computer bit, it makes more flavor-sense in here
@@ -253,7 +253,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list(/datum/material/iron = 100, /datum/material/glass = 50, /datum/material/copper = 50)
 	build_path = /obj/item/disk/antivirus
-	category = list("Computer Parts","Machinery","initial")
+	category = list(CATEGORY_COMPUTER_PARTS,"Machinery","initial")
 	lathe_time_factor = 0.2
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_MEDICAL
 
@@ -264,7 +264,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 150, /datum/material/glass = 100, /datum/material/copper = 100)
 	build_path = /obj/item/disk/antivirus/tier2
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	lathe_time_factor = 0.2
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_MEDICAL
 
@@ -275,7 +275,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 150, /datum/material/silver = 60, /datum/material/copper = 100)
 	build_path = /obj/item/disk/antivirus/tier3
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	lathe_time_factor = 0.2
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_MEDICAL
 
@@ -286,7 +286,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 200, /datum/material/diamond = 30, /datum/material/bluespace = 30, /datum/material/copper = 100)
 	build_path = /obj/item/disk/antivirus/tier4
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	lathe_time_factor = 0.2
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_MEDICAL
 
@@ -296,7 +296,7 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 200, /datum/material/glass = 100, /datum/material/gold = 50, /datum/material/silver = 50)
 	build_path = /obj/item/computer_hardware/sensorpackage
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/signaler_part
@@ -305,5 +305,5 @@
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 400, /datum/material/glass = 100)
 	build_path = /obj/item/computer_hardware/radio_card
-	category = list("Computer Parts")
+	category = list(CATEGORY_COMPUTER_PARTS)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING

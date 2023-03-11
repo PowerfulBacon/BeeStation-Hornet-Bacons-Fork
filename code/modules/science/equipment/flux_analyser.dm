@@ -8,7 +8,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 
-/obj/item/flux_analyser/attack_hand(mob/user)
+/obj/item/flux_analyser/attack_self(mob/user)
 	. = ..()
 	var/turf/T = get_turf(src)
 	var/flux_level = SSanomaly_science.get_flux_level(T.z)

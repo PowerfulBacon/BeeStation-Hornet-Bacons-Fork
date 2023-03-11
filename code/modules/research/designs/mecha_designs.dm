@@ -7,7 +7,7 @@
 	desc = "Allows for the construction of a \"Ripley\" Central Control module."
 	id = "ripley_main"
 	build_path = /obj/item/circuitboard/mecha/ripley/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/ripley_peri
@@ -15,7 +15,7 @@
 	desc = "Allows for the construction of a  \"Ripley\" Peripheral Control module."
 	id = "ripley_peri"
 	build_path = /obj/item/circuitboard/mecha/ripley/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/odysseus_main
@@ -23,7 +23,7 @@
 	desc = "Allows for the construction of a \"Odysseus\" Central Control module."
 	id = "odysseus_main"
 	build_path = /obj/item/circuitboard/mecha/odysseus/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/odysseus_peri
@@ -31,7 +31,7 @@
 	desc = "Allows for the construction of a \"Odysseus\" Peripheral Control module."
 	id = "odysseus_peri"
 	build_path = /obj/item/circuitboard/mecha/odysseus/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/gygax_main
@@ -39,7 +39,7 @@
 	desc = "Allows for the construction of a \"Gygax\" Central Control module."
 	id = "gygax_main"
 	build_path = /obj/item/circuitboard/mecha/gygax/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/gygax_peri
@@ -47,7 +47,7 @@
 	desc = "Allows for the construction of a \"Gygax\" Peripheral Control module."
 	id = "gygax_peri"
 	build_path = /obj/item/circuitboard/mecha/gygax/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/gygax_targ
@@ -55,7 +55,7 @@
 	desc = "Allows for the construction of a \"Gygax\" Weapons & Targeting Control module."
 	id = "gygax_targ"
 	build_path = /obj/item/circuitboard/mecha/gygax/targeting
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/durand_main
@@ -63,7 +63,7 @@
 	desc = "Allows for the construction of a \"Durand\" Central Control module."
 	id = "durand_main"
 	build_path = /obj/item/circuitboard/mecha/durand/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/durand_peri
@@ -71,7 +71,7 @@
 	desc = "Allows for the construction of a \"Durand\" Peripheral Control module."
 	id = "durand_peri"
 	build_path = /obj/item/circuitboard/mecha/durand/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/durand_targ
@@ -79,7 +79,7 @@
 	desc = "Allows for the construction of a \"Durand\" Weapons & Targeting Control module."
 	id = "durand_targ"
 	build_path = /obj/item/circuitboard/mecha/durand/targeting
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/honker_main
@@ -87,7 +87,7 @@
 	desc = "Allows for the construction of a \"H.O.N.K\" Central Control module."
 	id = "honker_main"
 	build_path = /obj/item/circuitboard/mecha/honker/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/honker_peri
@@ -95,7 +95,7 @@
 	desc = "Allows for the construction of a \"H.O.N.K\" Peripheral Control module."
 	id = "honker_peri"
 	build_path = /obj/item/circuitboard/mecha/honker/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/honker_targ
@@ -103,7 +103,7 @@
 	desc = "Allows for the construction of a \"H.O.N.K\" Weapons & Targeting Control module."
 	id = "honker_targ"
 	build_path = /obj/item/circuitboard/mecha/honker/targeting
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/phazon_main
@@ -112,7 +112,7 @@
 	id = "phazon_main"
 	materials = list(/datum/material/glass = 1000, /datum/material/bluespace = 100)
 	build_path = /obj/item/circuitboard/mecha/phazon/main
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/phazon_peri
@@ -121,7 +121,7 @@
 	id = "phazon_peri"
 	materials = list(/datum/material/glass = 1000, /datum/material/bluespace = 100)
 	build_path = /obj/item/circuitboard/mecha/phazon/peripherals
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 /datum/design/board/phazon_targ
@@ -130,7 +130,7 @@
 	id = "phazon_targ"
 	materials = list(/datum/material/glass = 1000, /datum/material/bluespace = 100)
 	build_path = /obj/item/circuitboard/mecha/phazon/targeting
-	category = list("Exosuit Modules")
+	category = list(CATEGORY_EXOSUIT_MODULES)
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
 
 ////////////////////////////////////////
@@ -145,7 +145,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
 	materials = list(/datum/material/iron=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 
@@ -157,7 +157,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/carbine
 	materials = list(/datum/material/iron=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_ion
@@ -168,7 +168,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
 	materials = list(/datum/material/iron=20000,/datum/material/silver=6000,/datum/material/uranium=2000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_tesla
@@ -179,7 +179,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/tesla
 	materials = list(/datum/material/iron=20000,/datum/material/silver=8000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_laser
@@ -190,7 +190,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
 	materials = list(/datum/material/iron=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_laser_heavy
@@ -201,7 +201,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	materials = list(/datum/material/iron=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_disabler
@@ -232,7 +232,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/launcher/flashbang/clusterbang
 	materials = list(/datum/material/iron=20000,/datum/material/gold=10000,/datum/material/uranium=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_wormhole_gen
@@ -363,7 +363,7 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 	materials = list(/datum/material/iron=10000)
 	construction_time = 100
-	category = list("Weapons")
+	category = list(CATEGORY_WEAPONS)
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/mech_sleeper

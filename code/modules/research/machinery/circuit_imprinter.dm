@@ -4,19 +4,19 @@
 	icon_state = "circuit_imprinter"
 	circuit = /obj/item/circuitboard/machine/circuit_imprinter
 	categories = list(
-								"AI Modules",
-								"Computer Boards",
-								"Teleportation Machinery",
-								"Medical Machinery",
-								"Engineering Machinery",
-								"Exosuit Modules",
-								"Hydroponics Machinery",
-								"Subspace Telecomms",
-								"Research Machinery",
-								"Misc. Machinery",
-								"Computer Parts",
-								"Shuttle Machinery",
-								"Circuitry"
+								CATEGORY_AI_MODULES,
+								CATEGORY_COMPUTER_BOARDS,
+								CATEGORY_TELEPORTATION,
+								CATEGORY_MEDICAL,
+								CATEGORY_ENGINEERING,
+								CATEGORY_EXOSUIT_MODULES,
+								CATEGORY_HYDROPONICS,
+								CATEGORY_TCOMM,
+								CATEGORY_RESEARCH,
+								CATEGORY_MACHINERY,
+								CATEGORY_COMPUTER_PARTS,
+								CATEGORY_SHUTTLE_MACHINERY,
+								CATEGORY_CIRCUITRY
 								)
 	production_animation = "circuit_imprinter_ani"
 	allowed_buildtypes = IMPRINTER

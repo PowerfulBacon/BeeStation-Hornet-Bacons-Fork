@@ -4,19 +4,18 @@
 	icon_state = "protolathe"
 	circuit = /obj/item/circuitboard/machine/protolathe
 	categories = list(
-								"Power Designs",
-								"Medical Designs",
-								"Bluespace Designs",
-								"Stock Parts",
-								"Equipment",
-								"Tool Designs",
-								"Mining Designs",
-								"Electronics",
-								"Weapons",
-								"Ammo",
-								"Firing Pins",
-								"Computer Parts",
-								"Circuitry"
+								CATEGORY_POWER,
+								CATEGORY_MEDICAL,
+								CATEGORY_BLUESPACE,
+								CATEGORY_STOCK_PARTS,
+								CATEGORY_EQUIPMENT,
+								CATEGORY_TOOLS,
+								CATEGORY_MINING,
+								CATEGORY_ELECTRONICS,
+								CATEGORY_WEAPONS,
+								CATEGORY_AMMO,
+								CATEGORY_COMPUTER_PARTS,
+								CATEGORY_CIRCUITRY
 								)
 	production_animation = "protolathe_n"
 	allowed_buildtypes = PROTOLATHE

@@ -29,7 +29,7 @@
 
 	var/list/categories = list(
 		"Tools",
-		"Electronics",
+		CATEGORY_ELECTRONICS,
 		"Construction",
 		"T-Comm",
 		"Security",

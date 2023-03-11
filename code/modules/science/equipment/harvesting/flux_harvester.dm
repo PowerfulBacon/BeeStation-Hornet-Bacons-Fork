@@ -16,6 +16,8 @@
 	var/harvest_amount
 	/// The world time that the harvester will finish harvesting
 	var/completion_time
+	/// Time it takes to process
+	var/process_time = 60 SECONDS
 
 /obj/machinery/power/flux_harvester/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -98,6 +100,9 @@
 	var/obj/item/flux_container/container = locate() in contents
 	if (!container || container.energy_stored)
 		return
+	harvesting = TRUE
+	begin_processing()
+	completion_time = world.time + process_time
 
 /obj/machinery/power/flux_harvester/proc/complete_harvest()
 	var/obj/item/flux_container/container = locate() in contents
@@ -107,6 +112,9 @@
 	var/turf/T = get_turf(src)
 	SSanomaly_science.set_flux_level(T.z, SSanomaly_science.get_flux_level(T.z) - harvest_amount)
 	container.energy_stored = harvest_amount
+	container.update_appearance(UPDATE_ICON)
+	playsound(src, 'sound/machines/ding.ogg', 80, extrarange=7)
+	harvesting = FALSE
 
 /obj/machinery/power/flux_harvester/proc/emergency_shutdown()
 	if (!harvesting)
@@ -114,6 +122,8 @@
 	// Stop processing
 	end_processing()
 	// Do some weird effect
+	playsound(src, 'sound/effects/empulse.ogg', 70)
+	harvesting = FALSE
 
 /// Return the status message which indicates to the user why the machine might not be working
 /obj/machinery/power/flux_harvester/proc/get_status()

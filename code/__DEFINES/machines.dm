@@ -43,9 +43,46 @@
 #define LIMBGROWER		(1<<6) 	//Uses synthetic flesh
 #define SMELTER			(1<<7) 	//uses various minerals
 #define NANITE_COMPILER  (1<<8) //Prints nanite disks
+#define ADVANCED_FABRICATOR (1<<9) //Uses flux for production
 /// For wiremod/integrated circuits. Uses various minerals.
 #define COMPONENT_PRINTER (1<<10)
 //Note: More than one of these can be added to a design but imprinter and lathe designs are incompatable.
+
+//Fabricator categories
+#define CATEGORY_AI_MODULES "AI Modules"
+#define CATEGORY_AMMO "Ammunition"
+#define CATEGORY_BLUESPACE "Bluespace Deisgns"
+#define CATEGORY_BOTANY "Botany Chemicals"
+#define CATEGORY_CIRCUITRY "Circuitry"
+#define CATEGORY_COMPUTER_BOARDS "Computer Boards"
+#define CATEGORY_COMPUTER_PARTS "Computer Parts"
+#define CATEGORY_CONSTRUCTION "Construction"
+#define CATEGORY_CYBORG "Cyborg Upgrades"
+#define CATEGORY_DINNERWARE "Dinnerware"
+#define CATEGORY_ELECTRONICS "Electronics"
+#define CATEGORY_ENGINEERING "Engineering"
+#define CATEGORY_EQUIPMENT "Equipment"
+#define CATEGORY_EXOSUIT_MODULES "Exosuit Modules"
+#define CATEGORY_EXOSUIT_EQUIPMENT "Exosuit Equipment"
+#define CATEGORY_FOOD "Food"
+#define CATEGORY_HYDROPONICS "Hydroponics"
+#define CATEGORY_MACHINERY "Machinery"
+#define CATEGORY_MEDICAL "Medical"
+#define CATEGORY_MINING "Mining"
+#define CATEGORY_MISC "Misc"
+#define CATEGORY_ORGANIC "Organic Mateirals"
+#define CATEGORY_POWER "Power Designs"
+#define CATEGORY_RESEARCH "Research"
+#define CATEGORY_SECURITY "Security"
+#define CATEGORY_SHUTTLE_MACHINERY "Shuttles"
+#define CATEGORY_STOCK_PARTS "Stock Parts"
+#define CATEGORY_TELEPORTATION "Teleportation"
+#define CATEGORY_TCOMM "Telecommunications"
+#define CATEGORY_TOOLS "Tools"
+#define CATEGORY_WEAPONS "Weapons"
+
+#define CATEGORY_INITIAL "initial"
+#define CATEGORY_HACKED "hacked"
 
 //Modular computer/NTNet defines
 

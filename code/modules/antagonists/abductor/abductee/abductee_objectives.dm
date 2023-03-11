@@ -10,7 +10,7 @@
 	explanation_text = "Steal all"
 
 /datum/objective/abductee/steal/New()
-	var/target = pick(list("pets","lights","monkeys","fruits","shoes","bars of soap", "weapons", "computers", "organs"))
+	var/target = pick(list("pets","lights","monkeys","fruits","shoes","bars of soap", "firing pins", "computers", "organs"))
 	explanation_text+=" [target]."
 
 /datum/objective/abductee/paint
