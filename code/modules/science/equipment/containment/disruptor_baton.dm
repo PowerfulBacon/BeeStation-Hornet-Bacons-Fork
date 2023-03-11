@@ -56,6 +56,6 @@
 	return TRUE
 
 /obj/item/melee/baton/disruptor/proc/finish_disrupt_cooldown()
-	playsound(src, 'sound/effects/sparks1.ogg')
+	playsound(src, 'sound/effects/sparks1.ogg', 70)
 	disrupt_ready = TRUE
 	update_appearance(UPDATE_ICON_STATE)

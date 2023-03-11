@@ -27,6 +27,18 @@ debug_two_interactions:
 		type: /datum/anomaly_action/grant_language
 	type: /datum/anomaly_action/trigger/interaction
 		type: /datum/anomaly_action/grant_language
+debug_move:
+	atom_type: /obj/item/screwdriver
+	type: /datum/anomaly_action/trigger/process
+	$seconds_wait: 5
+		type: /datum/anomaly_action/probability
+		$probability: 45
+			type: /datum/anomaly_action/behaviour/random_move
+			$steps: 1
+	type: /datum/anomaly_action/trigger/process
+	$seconds_wait: 5
+		type: /datum/anomaly_action/behaviour/random_move
+		$steps: 10
 book:
 	atom_type: /obj/item/anomaly/book
 	type: /datum/anomaly_action/trigger/interaction

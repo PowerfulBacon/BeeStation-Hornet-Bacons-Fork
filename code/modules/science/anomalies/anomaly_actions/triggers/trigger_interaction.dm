@@ -12,8 +12,8 @@
 	..()
 
 /datum/anomaly_action/trigger/interaction/proc/relay_interaction(atom/source, mob/user)
-	trigger_action(source, list(user))
+	trigger_action(list(user), list())
 
-/datum/anomaly_action/trigger/interaction/trigger_action(atom/anomaly_parent, list/mob/living/trigger_mobs)
+/datum/anomaly_action/trigger/interaction/trigger_action(list/atom/trigger_atoms, list/extra_data)
 	for (var/datum/anomaly_action/child_action in children)
-		child_action.trigger_action(anomaly_parent, trigger_mobs)
+		child_action.trigger_action(trigger_atoms, extra_data)

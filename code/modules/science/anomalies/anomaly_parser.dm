@@ -1,5 +1,5 @@
 /// Parse anomdat file
-/datum/controller/subsystem/anomaly_science/proc/parse_anomdat(filepath)
+/datum/controller/subsystem/processing/anomaly_science/proc/parse_anomdat(filepath)
 	var/full_text = file2text(filepath)
 	var/list/text_lines = splittext(full_text, "\n")
 	var/static/regex/tag_regex = new("(.*):$", "m")
@@ -23,7 +23,7 @@
 		grouped[group_name] = parse_text(1, grouped_lines)
 	return grouped
 
-/datum/controller/subsystem/anomaly_science/proc/parse_text(current_indentation, list/text_lines)
+/datum/controller/subsystem/processing/anomaly_science/proc/parse_text(current_indentation, list/text_lines)
 	var/static/regex/data_point_regex = new("(\\w*)\\s*:\\s*(.*)$", "m")
 	//Parse self
 	var/datum/parsed_anomaly_data/self = new()
@@ -59,7 +59,7 @@
 	return self
 
 ///Returns the indentation level of a line
-/datum/controller/subsystem/anomaly_science/proc/indentation_level(line)
+/datum/controller/subsystem/processing/anomaly_science/proc/indentation_level(line)
 	. = 0
 	for(var/i in 1 to length(line))
 		if (line[i] != "\t")
