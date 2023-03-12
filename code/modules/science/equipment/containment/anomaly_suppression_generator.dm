@@ -21,3 +21,5 @@
 	name = "flux supression field generator"
 	desc = "A large pylon-like structure which stabilises flux-space decreasing the reactivity of nearby anomalies, making containment possible."
 	obj_flags = CAN_BE_HIT
+	icon = 'icons/obj/machines/field_generator.dmi'
+	icon_state = "Field_Gen"
