@@ -2,6 +2,7 @@
 	name = "flux vacuum generator"
 	desc = "A device used to generate localised flux vacuums, reducing the flux density in an area \
 		which may cause some anomalies to exhibit reactions."
+	obj_flags = CAN_BE_HIT
 	/// A list of turfs currently affected by the flux vacuum
 	/// Will continuously expand if it leaks, which may trigger other anomalies to be affected
 	/// This doesn't need to be managed for deletes due to the nature of turfs
