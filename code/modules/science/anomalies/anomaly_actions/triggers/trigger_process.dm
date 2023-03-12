@@ -2,6 +2,7 @@
  * Trigger Process
  * Will trigger children to perform their action event with
  * some set tick rate.
+ * Returns a success state if any of the children return success states
  */
 
 /datum/anomaly_action/trigger/process
@@ -25,5 +26,4 @@
 	))
 
 /datum/anomaly_action/trigger/process/trigger_action(list/atom/trigger_atoms, list/extra_data)
-	for (var/datum/anomaly_action/child_action in children)
-		child_action.trigger_action(trigger_atoms, extra_data)
+	return execute_children(trigger_atoms, extra_data)

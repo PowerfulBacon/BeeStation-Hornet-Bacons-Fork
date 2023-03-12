@@ -8,7 +8,7 @@
 	preload_cell_type = /obj/item/stock_parts/cell/high
 	var/disrupt_ready = TRUE
 	var/cooldown_time = 4 SECONDS
-	var/supression_power = 70
+	var/supression_power = 60
 
 /obj/item/melee/baton/disruptor/nocell
 	preload_cell_type = null

@@ -1,0 +1,13 @@
+consciouhazard:
+	atom_type: /obj/item/clothing/gloves/color/black
+	// We need this in order to put multiple actions on the parent
+	type: /datum/anomaly_action
+		type: /datum/anomaly_action/trigger/process_breached
+			type: /datum/anomaly_action/probability
+			$probability: 45
+				type: /datum/anomaly_action/behaviour/random_move
+			type: /datum/anomaly_action/probability
+			$probability: 10
+				type: /datum/anomaly_action/targetting/unanchored
+					type: /datum/anomaly_action/shuffle
+						type: /datum/anomaly_action/create_mimic

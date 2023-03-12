@@ -23,22 +23,36 @@ debug_anomaly_that_wont_work:
 					type: /datum/anomaly_action/do_something
 debug_two_interactions:
 	atom_type: /obj/item/anomaly/book
-	type: /datum/anomaly_action/trigger/interaction
-		type: /datum/anomaly_action/grant_language
-	type: /datum/anomaly_action/trigger/interaction
-		type: /datum/anomaly_action/grant_language
+	type: /datum/anomaly_action
+		type: /datum/anomaly_action/trigger/interaction
+			type: /datum/anomaly_action/grant_language
+		type: /datum/anomaly_action/trigger/interaction
+			type: /datum/anomaly_action/grant_language
 debug_move:
 	atom_type: /obj/item/screwdriver
-	type: /datum/anomaly_action/trigger/process
-	$seconds_wait: 5
-		type: /datum/anomaly_action/probability
-		$probability: 45
+	type: /datum/anomaly_action
+		type: /datum/anomaly_action/trigger/process
+		$seconds_wait: 5
+			type: /datum/anomaly_action/probability
+			$probability: 45
+				type: /datum/anomaly_action/behaviour/random_move
+				$steps: 1
+		type: /datum/anomaly_action/trigger/process
+		$seconds_wait: 5
+			type: /datum/anomaly_action/behaviour/random_move
+			$steps: 10
+conciousness:
+	atom_type: /obj/item/scrying
+	type: /datum/anomaly_action/hostile_conciousness
+	$override_target_with_attacker_probability: 40
+		type: /datum/anomaly_action/targetting/humans
+		$vision_range: 3
+		type: /datum/anomaly_action/trigger/idle_behaviour_root
 			type: /datum/anomaly_action/behaviour/random_move
 			$steps: 1
-	type: /datum/anomaly_action/trigger/process
-	$seconds_wait: 5
-		type: /datum/anomaly_action/behaviour/random_move
-		$steps: 10
+		type: /datum/anomaly_action/trigger/combat_behaviour_root
+			type: /datum/anomaly_action/behaviour/random_move
+			$steps: 3
 book:
 	atom_type: /obj/item/anomaly/book
 	type: /datum/anomaly_action/trigger/interaction

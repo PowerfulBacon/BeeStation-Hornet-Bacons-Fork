@@ -1,6 +1,29 @@
 
+////////////////////////////////
+// Anomaly Information Passing Signals
+////////////////////////////////
+
+/// Identify targets (list/out_target_list)
+#define COMSIG_ANOMALY_IDENTIFY_TARGETS "identify_targets"
+/// Trigger idle behaviour
+#define COMSIG_ANOMALY_IDLE_BEHAVIOUR "idle_behaviour"
+/// Combat behaviour (atom/movable/target)
+#define COMSIG_ANOMALY_COMBAT_BEHAVIOUR "combat_behaviour"
+/// The behaviour to run when the target moves out of range (atom/movable/target)
+#define COMSIG_ANOMALY_TARGET_LEAVE_RANGE "target_left_range"
+	/// Block the default action of losing the target
+	#define COMSIG_ANOMALY_DONT_LOSE_TARGET (1 << 0)
+
+////////////////////////////////
+// Anomaly Event Signals
+////////////////////////////////
+
 /// Anomaly breach triggered
 #define COMSIG_ANOMALY_BREACHED "anomaly_breached"
+/// Anomaly was successfully supressed
+#define COMSIG_ANOMALY_ENTER_SUPRESSED_STATE "anomaly_supressed_state"
+/// Anomaly finished its supression phase
+#define COMSIG_ANOMALY_EXIT_SUPRESSED_STATE "anomaly_unsupressed"
 
 ////////////////////////////////
 // Anomaly Attack Signals

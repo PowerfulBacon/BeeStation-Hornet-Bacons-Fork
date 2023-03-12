@@ -8,6 +8,8 @@
 	var/list/current = list()
 	var/list/current_tag = ""
 	for (var/line in text_lines)
+		if (is_comment(line))
+			continue
 		if (tag_regex.Find(line))
 			if (length(current))
 				grouped[current_tag] = current
@@ -24,12 +26,12 @@
 	return grouped
 
 /datum/controller/subsystem/processing/anomaly_science/proc/parse_text(current_indentation, list/text_lines)
-	var/static/regex/data_point_regex = new("(\\w*)\\s*:\\s*(.*)$", "m")
+	var/static/regex/data_point_regex = new("(\[$\\w\]*)\\s*:\\s*(.*)$", "m")
 	//Parse self
 	var/datum/parsed_anomaly_data/self = new()
 	for (var/line in text_lines)
 		//This does not belong to us
-		if (indentation_level(line) != current_indentation)
+		if (indentation_level(line) != current_indentation || is_comment(line))
 			continue
 		//Split the line by the comma
 		data_point_regex.Find(line)
@@ -43,7 +45,7 @@
 	var/list/child_lines = list()
 	for(var/line in text_lines)
 		//If we are the same indentation, or less, its not a child node
-		if (indentation_level(line) <= current_indentation)
+		if (indentation_level(line) <= current_indentation || is_comment(line))
 			continue
 		//If we read a type, then create a new child
 		if (data_point_regex.Find(line))
@@ -66,6 +68,10 @@
 			return
 		. ++
 
+/datum/controller/subsystem/processing/anomaly_science/proc/is_comment(line)
+	var/static/regex/commentex = new("^\t*//")
+	return commentex.Find(line)
+
 /datum/parsed_anomaly_data
 	var/typepath
 	/// List of any variables applied. Note that everything is stored as text
@@ -79,7 +85,13 @@
 	//Set the variables
 	for (var/var_key in data)
 		if (copytext(var_key, 1, 2) == "$")
-			created_datum.vars[var_key] = data[var_key]
+			// Determine type
+			var/value = data[var_key]
+			if (copytext(value, 1, 2) == "\"")
+				value = copytext(value, 2, length(value) - 1)
+			else
+				value = text2num(value)
+			created_datum.vars[copytext(var_key, 2)] = value
 	//Create children
 	for (var/datum/parsed_anomaly_data/child_data as() in children)
 		created_datum.vars["children"] += child_data.create()
