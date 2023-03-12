@@ -5,6 +5,9 @@
 		quite large and requires the target anomaly to be immobilised first."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "emitter"
+	processing_flags = START_PROCESSING_MANUALLY
+	density = TRUE
+	anchored = FALSE
 	var/toggled_on = FALSE
 
 /obj/machinery/anomaly_stabiliser/ui_interact(mob/user, datum/tgui/ui)

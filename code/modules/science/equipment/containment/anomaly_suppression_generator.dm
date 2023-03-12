@@ -23,3 +23,4 @@
 	obj_flags = CAN_BE_HIT
 	icon = 'icons/obj/machines/field_generator.dmi'
 	icon_state = "Field_Gen"
+	processing_flags = START_PROCESSING_MANUALLY
