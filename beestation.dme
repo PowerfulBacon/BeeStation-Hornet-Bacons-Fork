@@ -3397,6 +3397,7 @@
 #include "code\modules\science\anomalies\anomaly_actions\triggers\trigger_interaction.dm"
 #include "code\modules\science\anomalies\anomaly_actions\triggers\trigger_process.dm"
 #include "code\modules\science\anomalies\anomaly_actions\triggers\trigger_process_breached.dm"
+#include "code\modules\science\anomalies\anomaly_actions\triggers\trigger_process_unsupressed.dm"
 #include "code\modules\science\anomalies\anomaly_types\_anomaly_base_atoms.dm"
 #include "code\modules\science\anomalies\anomaly_types\book.dm"
 #include "code\modules\science\debug\debug_verbs.dm"
