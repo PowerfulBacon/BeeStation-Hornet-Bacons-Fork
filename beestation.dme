@@ -3409,6 +3409,7 @@
 #include "code\modules\science\equipment\containment\containment_computer.dm"
 #include "code\modules\science\equipment\containment\disruptor_baton.dm"
 #include "code\modules\science\equipment\containment\immobilisation_grid.dm"
+#include "code\modules\science\equipment\containment\mobile_suppression_pen.dm"
 #include "code\modules\science\equipment\experimentation\flux_vacuum_generator.dm"
 #include "code\modules\science\equipment\harvesting\flux_harvester.dm"
 #include "code\modules\science\resources\flux_container.dm"
