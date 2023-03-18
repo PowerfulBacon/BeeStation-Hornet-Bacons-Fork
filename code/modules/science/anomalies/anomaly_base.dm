@@ -24,6 +24,8 @@
 		O.obj_flags |= CAN_BE_HIT
 	// Register relevant signals
 	RegisterSignal(parent, COMSIG_ANOMALY_SUPRESSED, .proc/supress)
+	RegisterSignal(parent, COMSIG_ANOMALY_BREACH, .proc/begin_breach)
+	RegisterSignal(parent, COMSIG_ANOMALY_CONTAINED, .proc/enter_containment)
 
 /datum/component/anomaly_base/UnregisterFromParent()
 	base_action.deactive_anomaly(src)
@@ -34,6 +36,8 @@
 		// Enter a supressed state
 		is_supressed = TRUE
 		SEND_SIGNAL(parent, COMSIG_ANOMALY_ENTER_SUPRESSED_STATE)
+		// After some time, become unsuppressed (unless we were contained)
+		addtimer(CALLBACK(src, .proc/unsupress), 2 MINUTES)
 
 /datum/component/anomaly_base/proc/unsupress()
 	if (!is_supressed || anomaly_state != ANOMALY_STATE_BREACHED)
@@ -47,4 +51,7 @@
 	supression_health = supression_max_health
 	stability_level = 100
 	// Perform any breach actions
-	SEND_SIGNAL(parent, COMSIG_ANOMALY_BREACHED)
+	SEND_SIGNAL(parent, COMSIG_ON_ANOMALY_BREACHED)
+
+/datum/component/anomaly_base/proc/enter_containment()
+	anomaly_state = ANOMALY_STATE_STABLE

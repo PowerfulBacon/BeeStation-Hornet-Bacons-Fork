@@ -14,12 +14,12 @@
 	if (anomaly.anomaly_state == ANOMALY_STATE_BREACHED)
 		START_PROCESSING(SSanomaly_science, src)
 	// Register signal to the anomaly object in order to detect containment breaches
-	RegisterSignal(anomaly.parent, COMSIG_ANOMALY_BREACHED, .proc/on_breach)
+	RegisterSignal(anomaly.parent, COMSIG_ON_ANOMALY_BREACHED, .proc/on_breach)
 
 /datum/anomaly_action/trigger/process_breached/deactive_anomaly(datum/component/anomaly_base/anomaly)
 	if (anomaly.anomaly_state == ANOMALY_STATE_BREACHED)
 		STOP_PROCESSING(SSanomaly_science, src)
-	UnregisterSignal(anomaly.parent, COMSIG_ANOMALY_BREACHED)
+	UnregisterSignal(anomaly.parent, COMSIG_ON_ANOMALY_BREACHED)
 	. = ..()
 
 /datum/anomaly_action/trigger/process_breached/proc/on_breach(datum/source)

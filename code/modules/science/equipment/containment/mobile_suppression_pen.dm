@@ -5,26 +5,102 @@
 	icon = 'icons/obj/anomaly_science/anomaly_machines.dmi'
 	icon_state = "containment_pen"
 	anchored = FALSE
-	can_buckle = TRUE
 	density = TRUE
 	layer = ABOVE_ALL_MOB_LAYER
+	var/is_processing = FALSE
+	var/integrity_level = 3
+	var/suppression_charge
+	var/max_suppression_charge = 5000
+
+/obj/structure/mobile_suppression_pen/Initialize(mapload)
+	. = ..()
+	suppression_charge = max_suppression_charge
 
 //========================
 // Containment
 //========================
 
+/obj/structure/mobile_suppression_pen/process(delta_time)
+	// Check if we have an anomaly in our contents
+	var/has_anomaly = FALSE
+	for (var/atom/movable/contained in contents)
+		var/datum/component/anomaly_base/anomaly_component = contained.GetComponent(/datum/component/anomaly_base)
+		if (!anomaly_component)
+			continue
+		has_anomaly = TRUE
+		adjust_charge(delta_time * -30)
+	if (has_anomaly)
+		return
+	// Recharge (30 per second (~1.5 minutes seconds to full charge))
+	adjust_charge(delta_time * 60)
+	if (suppression_charge == max_suppression_charge)
+		is_processing = FALSE
+		return PROCESS_KILL
+
 /obj/structure/mobile_suppression_pen/proc/containment_check(atom/movable/target)
+	// Generic Checks
+	if (target.anchored)
+		return FALSE
 	if (!istype(target))
 		return FALSE
 	if (length(contents))
 		return FALSE
 	if (get_dist(target, src) > 1)
 		return FALSE
+	// Actual anomaly checks
+	var/datum/component/anomaly_base/anomaly_component = target.GetComponent(/datum/component/anomaly_base)
+	if (!anomaly_component)
+		// Only non-anomalous mobs and items can be contained, non-anomalous machines can't be
+		// otherwise we can contain a suppression pen inside a suppression pen and risk creating
+		// a loop.
+		if (!ismob(target) && !isitem(target))
+			return FALSE
+		return TRUE
 	return TRUE
+
+/obj/structure/mobile_suppression_pen/proc/adjust_charge(charge_amount)
+	suppression_charge = CLAMP(suppression_charge + charge_amount, 0, max_suppression_charge)
+	var/new_integrity_level = CLAMP(FLOOR(suppression_charge / max_suppression_charge * 4, 1), 0, 3)
+	if (integrity_level != new_integrity_level)
+		integrity_level = new_integrity_level
+		update_appearance(UPDATE_ICON)
+	// If no integrity
+	if (suppression_charge <= 0)
+		// Containment breach
+		containment_breach()
+	// If needs charge
+	if (suppression_charge < max_suppression_charge && !is_processing)
+		is_processing = TRUE
+		START_PROCESSING(SSmachines, src)
+
+/obj/structure/mobile_suppression_pen/proc/containment_breach()
+	visible_message("<span class='danger'>The suppression field shuts down!</span>")
+	balloon_alert_to_viewers("The suppression field shuts down!")
+	for (var/atom/movable/contained_entity in contents)
+		contained_entity.forceMove(loc)
+		// Begin the containment breach (again)
+		SEND_SIGNAL(contained_entity, COMSIG_ANOMALY_BREACH)
+
+//========================
+// User Interface
+//========================
 
 //========================
 // Contents Management
 //========================
+
+/obj/structure/mobile_suppression_pen/Destroy(force = FALSE)
+	// If force destroyed, delete indestructible contents along
+	// with the current contents.
+	if (force)
+		return ..()
+	// Drop indestructible contents in order to prevent their
+	// deletion
+	for (var/obj/thing in contents)
+		if (thing.resistance_flags & INDESTRUCTIBLE)
+			thing.forceMove(loc)
+	// Delete
+	return ..()
 
 /obj/structure/mobile_suppression_pen/deconstruct(disassembled)
 	// Drop contents
@@ -57,7 +133,6 @@
 		O.balloon_alert(user, "You fail to contain [O]!", color="#ff9090")
 		return
 	O.forceMove(src)
-	update_appearance(UPDATE_ICON)
 
 //========================
 // Icon Handling
@@ -83,46 +158,19 @@
 
 	// Add the overlays
 	add_overlay(image(icon(icon, "container_front"), layer=layer+0.02))
-	add_overlay(image(icon(icon, "container_integrity_3"), layer=layer+0.03))
+	add_overlay(image(icon(icon, "container_integrity_[integrity_level]"), layer=layer+0.03))
 	// Do whatever else we need to do
 	return ..()
 
 /obj/structure/mobile_suppression_pen/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+	if (!is_processing)
+		is_processing = TRUE
+		START_PROCESSING(SSmachines, src)
+	// Send the containment signal, we will handle breaching ourselves
+	SEND_SIGNAL(arrived, COMSIG_ANOMALY_CONTAINED)
 
 /obj/structure/mobile_suppression_pen/Exited(atom/movable/gone, direction)
 	. = ..()
 	update_appearance(UPDATE_ICON)
-
-//========================
-// Buckling Behaviour
-//========================
-
-/obj/structure/mobile_suppression_pen/buckle_mob(mob/living/M, force, check_loc)
-	if(!is_buckle_possible(M, force, check_loc))
-		return FALSE
-	M.buckling = src
-
-	if(!M.can_buckle() && !force)
-		if(M == usr)
-			to_chat(M, "<span class='warning'>You are unable to buckle yourself to [src]!</span>")
-		else
-			to_chat(usr, "<span class='warning'>You are unable to buckle [M] to [src]!</span>")
-		M.buckling = null
-		return FALSE
-
-	if(M.pulledby)
-		if(buckle_prevents_pull)
-			M.pulledby.stop_pulling()
-		else if(isliving(M.pulledby))
-			var/mob/living/L = M.pulledby
-			L.reset_pull_offsets(M, TRUE)
-
-	M.forceMove(src)
-	update_appearance(UPDATE_ICON)
-
-/obj/structure/mobile_suppression_pen/is_buckle_possible(mob/living/target, force, check_loc)
-	if (!containment_check(target))
-		return FALSE
-	return ..()

@@ -16,14 +16,14 @@
 		START_PROCESSING(SSanomaly_science, src)
 		processing = FALSE
 	// Register signal to the anomaly object in order to detect containment breaches
-	RegisterSignal(anomaly.parent, COMSIG_ANOMALY_BREACHED, .proc/on_breach)
+	RegisterSignal(anomaly.parent, COMSIG_ON_ANOMALY_BREACHED, .proc/on_breach)
 	RegisterSignal(anomaly.parent, COMSIG_ANOMALY_ENTER_SUPRESSED_STATE, .proc/on_supression)
 	RegisterSignal(anomaly.parent, COMSIG_ANOMALY_EXIT_SUPRESSED_STATE, .proc/on_desupression)
 
 /datum/anomaly_action/trigger/process_unsupressed/deactive_anomaly(datum/component/anomaly_base/anomaly)
 	if (processing)
 		STOP_PROCESSING(SSanomaly_science, src)
-	UnregisterSignal(anomaly.parent, COMSIG_ANOMALY_BREACHED)
+	UnregisterSignal(anomaly.parent, COMSIG_ON_ANOMALY_BREACHED)
 	. = ..()
 
 /datum/anomaly_action/trigger/process_unsupressed/proc/on_breach(datum/source)

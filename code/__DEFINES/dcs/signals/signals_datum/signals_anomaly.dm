@@ -19,7 +19,11 @@
 ////////////////////////////////
 
 /// Anomaly breach triggered
-#define COMSIG_ANOMALY_BREACHED "anomaly_breached"
+#define COMSIG_ANOMALY_BREACH "anomaly_breach"
+/// Order an anomaly to enter its contained state
+#define COMSIG_ANOMALY_CONTAINED "anomaly_contained"
+/// Anomaly breach triggered
+#define COMSIG_ON_ANOMALY_BREACHED "on_anomaly_breached"
 /// Anomaly was successfully supressed
 #define COMSIG_ANOMALY_ENTER_SUPRESSED_STATE "anomaly_supressed_state"
 /// Anomaly finished its supression phase
