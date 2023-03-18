@@ -2,6 +2,8 @@
 /obj/item/melee/baton/disruptor
 	name = "disruptor baton"
 	desc = "An electronicly charged baton developed to counter physical anomalous entities. Not permitted for use against humans."
+	icon = 'icons/obj/anomaly_science/anomaly_devices.dmi'
+	icon_state = "suppression_baton"
 	force = 12
 	stunforce = 45
 	hitcost = 2000
@@ -15,13 +17,13 @@
 
 /obj/item/melee/baton/disruptor/update_icon()
 	if(obj_flags & OBJ_EMPED)
-		icon_state = "[initial(icon_state)]"
+		icon_state = "[initial(icon_state)]_off"
 	else if(turned_on && disrupt_ready)
-		icon_state = "[initial(icon_state)]_active"
+		icon_state = "[initial(icon_state)]_on"
 	else if(!cell)
 		icon_state = "[initial(icon_state)]_nocell"
 	else
-		icon_state = "[initial(icon_state)]"
+		icon_state = "[initial(icon_state)]_off"
 
 /obj/item/melee/baton/disruptor/attack_obj(obj/O, mob/living/user)
 	. = ..()
