@@ -295,7 +295,7 @@ SUBSYSTEM_DEF(mapping)
 	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
 		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE, orbital_body_type = null))
-
+	
 	// load mining
 	if(config.minetype == "lavaland")
 		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND, orbital_body_type = /datum/orbital_object/z_linked/lavaland)

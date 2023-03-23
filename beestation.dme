@@ -3492,6 +3492,7 @@
 #include "code\modules\shuttle\super_cruise\shuttle_components\thrust\shuttle_heater.dm"
 #include "code\modules\shuttle\super_cruise\shuttle_data\shuttle_data.dm"
 #include "code\modules\shuttle\super_cruise\weapons\ammo_loader.dm"
+#include "code\modules\shuttle\super_cruise\weapons\debug_gun.dm"
 #include "code\modules\shuttle\super_cruise\weapons\shuttle_projectile_spawner.dm"
 #include "code\modules\shuttle\super_cruise\weapons\shuttle_weapon.dm"
 #include "code\modules\shuttle\super_cruise\weapons\target_location_spell.dm"
