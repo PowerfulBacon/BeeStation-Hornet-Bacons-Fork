@@ -1254,6 +1254,9 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
+/obj/item/gun/energy/e_gun,
+/obj/item/gun/energy/e_gun,
+/obj/item/gun/energy/e_gun,
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/inquisitor/lounge)
 "Ij" = (
@@ -1404,6 +1407,8 @@
 	name = "Evidence Closet 2"
 	},
 /obj/effect/turf_decal/bot,
+/obj/item/gun/energy/laser/scatter/shotty,
+/obj/item/gun/energy/laser/scatter/shotty,
 /turf/open/floor/plasteel/grid/steel,
 /area/shuttle/inquisitor/lounge)
 "Lw" = (
