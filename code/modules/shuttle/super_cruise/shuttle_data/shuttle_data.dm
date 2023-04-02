@@ -25,7 +25,7 @@
 	/// Updated when the shuttle size is changed
 	var/mass
 	/// Detection radius
-	var/detection_range = 1500
+	var/detection_range = 2500
 	/// Interidction range
 	var/interdiction_range = 150
 	///The maximum value of the ship integrity. This goes up as the ship is expanded/built upon and will not go down.
