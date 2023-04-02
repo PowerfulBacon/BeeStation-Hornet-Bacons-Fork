@@ -134,6 +134,11 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//Check space ruin count
 	if(ruin_levels < 2 && prob(5))
 		new /datum/orbital_object/z_linked/beacon/spaceruin()
+	// Check crilium count
+	var/cril = 0
+	var/datum/orbital_map/main_map = orbital_maps[PRIMARY_ORBITAL_MAP]
+	if (!(locate(/datum/orbital_object/z_linked/beacon/asteroid/crilium) in main_map.get_all_bodies()))
+		new /datum/orbital_object/z_linked/beacon/asteroid/crilium()
 	//Process events
 	for(var/datum/ruin_event/ruin_event as() in ruin_events)
 		if(!ruin_event.update())
