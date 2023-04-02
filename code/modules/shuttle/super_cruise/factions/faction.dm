@@ -11,7 +11,7 @@
 	// List of missions that this facation is offering
 	var/list/available_missions = list()
 	// List of respawns available for each team
-	var/respawns_available = 100
+	var/respawns_available = 150
 	var/important = FALSE
 
 /datum/faction/New(lead_instance = FALSE)
