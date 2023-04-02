@@ -37,8 +37,9 @@
 	if (signal.frequency == FREQ_FACTION && signal.ship_port && signal.ship_port == faction)
 		// Transmit a local signal
 		var/datum/signal/subspace/copied = signal.copy()
-		copied.transmission_method = TRANSMISSION_SUBSPACE
+		copied.transmission_method = TRANSMISSION_SHIP
 		copied.levels = list(get_virtual_z_level())
+		copied.ship_port = ship_port
 		copied.data["compression"] = 0
 		// Clean out spans
 		copied.data["spans"] = list()
