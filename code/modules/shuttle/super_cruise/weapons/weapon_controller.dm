@@ -72,7 +72,7 @@
 	QDEL_LIST(cam_plane_masters)
 	QDEL_NULL(visual_plane_master)
 	QDEL_NULL(cam_background)
-	concurrent_users = null
+	concurrent_users.Cut()
 	selected_weapon_system = null
 	return ..()
 
