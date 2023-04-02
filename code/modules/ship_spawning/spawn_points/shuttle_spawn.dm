@@ -17,6 +17,8 @@
 	// Check if there are enemies on our z-level
 	for (var/mob/living/player in GLOB.mob_living_list)
 		var/turf/T = get_turf(player)
+		if (!T)
+			continue
 		if (T.z != z)
 			continue
 		if ((faction_allowed & FACTION_SYNDICATE) && istype(player.assigned_faction, /datum/faction/nanotrasen))
