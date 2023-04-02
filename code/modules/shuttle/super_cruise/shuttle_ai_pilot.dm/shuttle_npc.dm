@@ -40,9 +40,9 @@
 				<font color='red'><b>This is a story role: Failure to properly roleplay will result in a ghost-role ban.</b></font><br /> \
 				<font color='red'><b>Do not take actions to permanently remove a station crewmember from the round.</b></font><br />"
 			pilot_mobs ++
-			RegisterSignal(L, COMSIG_PARENT_QDELETING, .proc/on_mob_died_or_deleted)
-			RegisterSignal(L, COMSIG_MOB_DEATH, .proc/on_mob_died_or_deleted)
-			RegisterSignal(L, COMSIG_GLOB_MOB_LOGGED_IN, .proc/human_takeover)
+			RegisterSignal(L, COMSIG_PARENT_QDELETING, PROC_REF(on_mob_died_or_deleted))
+			RegisterSignal(L, COMSIG_MOB_DEATH, PROC_REF(on_mob_died_or_deleted))
+			RegisterSignal(L, COMSIG_GLOB_MOB_LOGGED_IN, PROC_REF(human_takeover))
 
 /datum/shuttle_ai_pilot/npc/proc/human_takeover(datum/source, ...)
 	pilot_mobs = 0
@@ -203,14 +203,14 @@
 		return
 	target = pick(valid)
 	//Now that we have found our target, register relevent signals to prevent hard del
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, .proc/lose_target)
+	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(lose_target))
 
 /datum/shuttle_ai_pilot/npc/proc/set_target_location(datum/orbital_object/_shuttleTarget)
 	if(shuttleTarget)
 		UnregisterSignal(shuttleTarget, COMSIG_PARENT_QDELETING)
 	shuttleTarget = _shuttleTarget
 	if(shuttleTarget)
-		RegisterSignal(shuttleTarget, COMSIG_PARENT_QDELETING, .proc/target_deleted)
+		RegisterSignal(shuttleTarget, COMSIG_PARENT_QDELETING, PROC_REF(target_deleted))
 
 /datum/shuttle_ai_pilot/npc/proc/target_deleted(datum/source, force)
 	UnregisterSignal(shuttleTarget, COMSIG_PARENT_QDELETING)
