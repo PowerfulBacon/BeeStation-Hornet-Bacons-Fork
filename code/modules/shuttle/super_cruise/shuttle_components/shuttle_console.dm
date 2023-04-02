@@ -2,7 +2,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 
 /obj/machinery/computer/shuttle_flight
 	name = "shuttle console"
-	desc = "A shuttle control computer."
+	desc = "A shuttle control computer. Alt-click it to relink it to the currently attached shuttle."
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
@@ -41,8 +41,14 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		shuttlePortId = "[shuttleId]_custom"
 		set_shuttle_id(shuttleId)
 	else
-		var/static/i = 0
-		shuttlePortId = "unlinked_shuttle_console_[i++]"
+		// try and link
+		var/area/shuttle/shuttle_area = get_area(src)
+		if (istype(shuttle_area) && shuttle_area.mobile_port)
+			set_shuttle_id(shuttle_area.mobile_port)
+			shuttlePortId = "[shuttleId]"
+		else
+			var/static/i = 0
+			shuttlePortId = "unlinked_shuttle_console_[i++]"
 	RegisterSignal(SSorbits, COMSIG_ORBITAL_BODY_CREATED, PROC_REF(register_shuttle_object))
 
 /obj/machinery/computer/shuttle_flight/proc/set_shuttle_id(new_id, stack_depth = 0)
@@ -86,6 +92,16 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 			. += "It's access requirements have been disabled."
 		else
 			. += "It's access requirements could be disabled by disassembling the computer and using a multitool on the circuitboard."
+
+/obj/machinery/computer/shuttle_flight/AltClick(mob/user)
+	. = ..()
+	var/area/shuttle/shuttle_area = get_area(src)
+	if (istype(shuttle_area) && shuttle_area.mobile_port)
+		set_shuttle_id(shuttle_area.mobile_port)
+		shuttlePortId = "[shuttleId]"
+		to_chat(user, "<span class='notice'>You link [src] to [shuttle_area.mobile_port.name]<span>")
+	else
+		to_chat(user, "<span class='notice'>[src] could not find a shuttle to link to.<span>")
 
 /obj/machinery/computer/shuttle_flight/proc/register_shuttle_object(datum/source, datum/orbital_object/body, datum/orbital_map/map)
 	var/datum/orbital_object/shuttle/shuttle = body
