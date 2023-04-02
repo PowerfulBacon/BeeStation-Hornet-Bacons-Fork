@@ -232,6 +232,7 @@
 	M.name = ship_name
 	var/datum/shuttle_data/data = SSorbits.get_shuttle_data(M.id)
 	data.shuttle_name = ship_name
+	shuttle = data
 	// Check ship faction
 	if (!desired_faction)
 		desired_faction = (FACTION_INDEPENDANT & selected_ship.faction_flags) ? FACTION_INDEPENDANT : (FACTION_NANOTRASEN & selected_ship.faction_flags) ? FACTION_NANOTRASEN : FACTION_SYNDICATE
