@@ -372,6 +372,10 @@
 	var/datum/job/job_instance = SSjob.GetJob(initial(selected_choice.title))
 	job_instance.equip(created_character)
 	created_character.key = user.key
+	// Lock the lobby
+	if (length(options) <= 1 && !private_lobby)
+		private_lobby = TRUE
+		to_chat(members, "<span class='announce'>Your lobby has too many players in it and has been automatically locked!</span>")
 	return TRUE
 
 /datum/ship_lobby/proc/get_invalid_clients()
