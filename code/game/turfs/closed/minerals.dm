@@ -251,8 +251,9 @@
 
 /turf/closed/mineral/random/crilium
 	icon_state = "rock_highchance"
+	mineralAmt = 1
 	mineralSpawnChanceList = list(
-		/obj/item/stack/ore/crilium = 30,
+		/obj/item/stack/ore/crilium = 15,
 		/obj/item/stack/ore/uranium = 35, /obj/item/stack/ore/diamond = 30, /obj/item/stack/ore/gold = 45, /obj/item/stack/ore/titanium = 45,
 		/obj/item/stack/ore/silver = 50, /obj/item/stack/ore/copper = 50, /obj/item/stack/ore/plasma = 50, /obj/item/stack/ore/bluespace_crystal = 20)
 
