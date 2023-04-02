@@ -615,6 +615,8 @@
 	pixel_y = -3
 	},
 /obj/effect/turf_decal/bot,
+/obj/item/ammo_casing/caseless/shuttle_missile/breach,
+/obj/item/ammo_casing/caseless/shuttle_missile,
 /turf/open/floor/plasteel/grid/steel,
 /area/shuttle/inquisitor/lounge)
 "pc" = (
@@ -630,7 +632,6 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 10
 	},
-/obj/machinery/suit_storage_unit/mining,
 /obj/item/gun/energy/kinetic_accelerator,
 /obj/item/storage/bag/ore,
 /obj/item/mining_scanner,
@@ -640,6 +641,7 @@
 	pixel_x = -8;
 	pixel_y = 23
 	},
+/obj/machinery/suit_storage_unit/mining/eva,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/inquisitor/weapons)
 "pn" = (
@@ -714,7 +716,6 @@
 /turf/open/floor/plasteel,
 /area/shuttle/inquisitor/lounge)
 "tf" = (
-/obj/machinery/suit_storage_unit/mining,
 /obj/item/gun/energy/kinetic_accelerator,
 /obj/item/storage/bag/ore,
 /obj/effect/turf_decal/siding/white{
@@ -722,6 +723,7 @@
 	},
 /obj/item/mining_scanner,
 /obj/machinery/airalarm/directional/north,
+/obj/machinery/suit_storage_unit/mining/eva,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/inquisitor/weapons)
 "ti" = (
@@ -1256,9 +1258,8 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/item/gun/energy/e_gun,
-/obj/item/gun/energy/e_gun,
-/obj/item/gun/energy/e_gun,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/inquisitor/lounge)
 "Ij" = (
@@ -1409,8 +1410,7 @@
 	name = "Evidence Closet 2"
 	},
 /obj/effect/turf_decal/bot,
-/obj/item/gun/energy/laser/scatter/shotty,
-/obj/item/gun/energy/laser/scatter/shotty,
+/obj/item/gun/ballistic/shotgun/riot,
 /turf/open/floor/plasteel/grid/steel,
 /area/shuttle/inquisitor/lounge)
 "Lw" = (
@@ -1946,7 +1946,6 @@
 /area/shuttle/inquisitor/bridge)
 "YB" = (
 /obj/effect/turf_decal/siding/white,
-/obj/machinery/suit_storage_unit/mining,
 /obj/item/gun/energy/kinetic_accelerator,
 /obj/item/storage/bag/ore,
 /obj/item/mining_scanner,
@@ -1957,6 +1956,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
+/obj/machinery/suit_storage_unit/mining/eva,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/inquisitor/weapons)
 "YJ" = (

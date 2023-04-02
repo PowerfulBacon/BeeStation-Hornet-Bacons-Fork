@@ -1941,6 +1941,7 @@
 /obj/item/ammo_box/chaingun,
 /obj/item/ammo_box/chaingun,
 /obj/item/ammo_box/chaingun,
+/obj/item/ammo_casing/caseless/shuttle_missile/breach,
 /turf/open/floor/plasteel/grid/steel,
 /area/shuttle/inquisitor/weapons)
 "Yb" = (

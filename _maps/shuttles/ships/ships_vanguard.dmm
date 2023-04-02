@@ -334,15 +334,12 @@
 /area/shuttle/vanguard)
 "MP" = (
 /obj/structure/table/reinforced,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/ammo_box/magazine/m556,
-/obj/item/ammo_box/magazine/m556{
-	pixel_x = 3;
-	pixel_y = 6
-	},
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/gun/ballistic/automatic/pistol/m1911,
+/obj/item/ammo_box/magazine/m45,
+/obj/item/ammo_box/magazine/m45,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/vanguard)
 "Nv" = (
@@ -369,14 +366,6 @@
 /area/shuttle/vanguard)
 "PG" = (
 /obj/structure/table/reinforced,
-/obj/item/grenade/syndieminibomb{
-	pixel_x = 6;
-	pixel_y = 4
-	},
-/obj/item/grenade/syndieminibomb{
-	pixel_x = -4;
-	pixel_y = 4
-	},
 /obj/item/storage/firstaid/tactical{
 	pixel_x = 8;
 	pixel_y = -5
@@ -385,6 +374,7 @@
 	icon_state = "2-8"
 	},
 /obj/item/melee/transforming/energy/sword/saber/red,
+/obj/item/grenade/plastic/x4,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/vanguard)
 "PK" = (
