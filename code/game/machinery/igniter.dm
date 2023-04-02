@@ -5,8 +5,8 @@
 	icon_state = "igniter0"
 	plane = FLOOR_PLANE
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 200
-	active_power_usage = 400
+	idle_power_usage = 20
+	active_power_usage = 40
 	max_integrity = 300
 	circuit = /obj/item/circuitboard/machine/igniter
 	armor = list("melee" = 50, "bullet" = 30, "laser" = 70, "energy" = 50, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 70, "stamina" = 0)

@@ -4,8 +4,8 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "mass_driver"
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 200
-	active_power_usage = 5000
+	idle_power_usage = 20
+	active_power_usage = 500
 	circuit = /obj/item/circuitboard/machine/mass_driver
 	var/power = 1
 	var/code = 1

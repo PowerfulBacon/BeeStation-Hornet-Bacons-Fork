@@ -33,8 +33,8 @@
 	circuit = /obj/item/circuitboard/computer/scan_consolenew
 
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 10
-	active_power_usage = 400
+	idle_power_usage = 1
+	active_power_usage = 40
 	light_color = LIGHT_COLOR_BLUE
 	req_access = list(ACCESS_GENETICS)
 	clicksound = null

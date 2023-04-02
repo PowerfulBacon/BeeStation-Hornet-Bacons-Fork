@@ -7,8 +7,8 @@
 	icon_keyboard = "power_key"
 	light_color = LIGHT_COLOR_YELLOW
 	use_power = ACTIVE_POWER_USE
-	idle_power_usage = 500
-	active_power_usage = 4000
+	idle_power_usage = 50
+	active_power_usage = 400
 	circuit = /obj/item/circuitboard/computer/powermonitor
 	tgui_id = "PowerMonitor"
 

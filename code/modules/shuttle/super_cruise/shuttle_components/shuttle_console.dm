@@ -347,6 +347,9 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 			if(!shuttleObject.can_dock_with)
 				say("Docking computer failed to find docking target.")
 				return
+			if (!shuttleObject.can_dock_with.can_dock_here(shuttleObject))
+				say("You cannot acquire a track on this location's docking beacon, it is rejecting your ship!")
+				return
 			//Force dock with the thing we are colliding with.
 			shuttleObject.commence_docking(shuttleObject.can_dock_with, TRUE)
 		if("setTargetCoords")

@@ -171,6 +171,8 @@
 /obj/item/storage/box/survival/PopulateContents()
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
+	new /obj/item/pinpointer/nuke(src)
+	new /obj/item/kitchen/knife/combat(src)
 
 	if(!isplasmaman(loc))
 		new /obj/item/tank/internals/emergency_oxygen(src)

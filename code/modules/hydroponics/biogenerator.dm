@@ -5,7 +5,7 @@
 	icon_state = "biogen-empty"
 	density = TRUE
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 4000
+	idle_power_usage = 400
 	circuit = /obj/item/circuitboard/machine/biogenerator
 
 

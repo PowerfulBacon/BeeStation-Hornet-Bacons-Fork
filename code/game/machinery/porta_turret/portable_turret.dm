@@ -13,8 +13,8 @@
 	density = TRUE
 	desc = "A covered turret that shoots at its enemies."
 	use_power = IDLE_POWER_USE				//this turret uses and requires power
-	idle_power_usage = 10000		//when inactive, this turret takes up constant 50 Equipment power
-	active_power_usage = 60000	//when active, this turret takes up constant 300 Equipment power
+	idle_power_usage = 1000		//when inactive, this turret takes up constant 50 Equipment power
+	active_power_usage = 6000	//when active, this turret takes up constant 300 Equipment power
 	req_access = list(ACCESS_SECURITY)
 	power_channel = AREA_USAGE_EQUIP	//drains power from the EQUIPMENT channel
 

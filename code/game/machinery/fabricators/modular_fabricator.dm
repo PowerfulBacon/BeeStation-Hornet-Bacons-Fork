@@ -6,8 +6,8 @@
 	icon_state = "autolathe"
 	density = TRUE
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 1000
-	active_power_usage = 10000
+	idle_power_usage = 100
+	active_power_usage = 1000
 	layer = BELOW_OBJ_LAYER
 
 	var/operating = FALSE

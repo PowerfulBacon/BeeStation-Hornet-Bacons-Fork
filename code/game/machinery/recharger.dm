@@ -4,8 +4,8 @@
 	icon_state = "recharger0"
 	desc = "A charging dock for energy based weaponry."
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 800
-	active_power_usage = 10000
+	idle_power_usage = 80
+	active_power_usage = 1000
 	circuit = /obj/item/circuitboard/machine/recharger
 	pass_flags = PASSTABLE
 	var/obj/item/charging = null

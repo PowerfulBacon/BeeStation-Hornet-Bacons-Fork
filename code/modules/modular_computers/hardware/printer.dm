@@ -1,7 +1,7 @@
 /obj/item/computer_hardware/printer
 	name = "printer"
 	desc = "Computer-integrated printer with paper recycling module."
-	power_usage = 100
+	power_usage = 10
 	icon_state = "printer"
 	w_class = WEIGHT_CLASS_NORMAL
 	device_type = MC_PRINT
@@ -84,7 +84,7 @@
 /obj/item/computer_hardware/printer/mini
 	name = "miniprinter"
 	desc = "A small printer with paper recycling module."
-	power_usage = 50
+	power_usage = 5
 	icon_state = "printer_mini"
 	w_class = WEIGHT_CLASS_TINY
 	stored_paper = 5

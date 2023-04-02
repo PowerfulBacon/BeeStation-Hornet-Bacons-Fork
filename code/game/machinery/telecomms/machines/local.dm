@@ -8,8 +8,8 @@
 	desc = "A compact machine used for localized subspace telecommunications processing. A multitool can relink it to the current ship, hitting it with a radio will link that radio."
 	density = TRUE
 	use_power = ACTIVE_POWER_USE
-	idle_power_usage = 500
-	active_power_usage = 1000
+	idle_power_usage = 50
+	active_power_usage = 100
 	emp_disable_time = 30 SECONDS
 	var/ship_port
 	var/faction

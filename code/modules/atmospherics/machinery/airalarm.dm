@@ -63,8 +63,8 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 800
-	active_power_usage = 800
+	idle_power_usage = 80
+	active_power_usage = 80
 	power_channel = AREA_USAGE_ENVIRON
 	req_access = list(ACCESS_ATMOSPHERICS)
 	max_integrity = 250

@@ -147,7 +147,7 @@
 	name = "advanced hard disk drive"
 	desc = "A hybrid HDD, for use in higher grade computers where balance between power efficiency and capacity is desired."
 	max_capacity = 256
-	power_usage = 50 					// Hybrid, medium capacity and medium power storage
+	power_usage = 5 					// Hybrid, medium capacity and medium power storage
 	icon_state = "harddisk_mini"
 	w_class = WEIGHT_CLASS_SMALL
 
@@ -155,14 +155,14 @@
 	name = "super hard disk drive"
 	desc = "A high capacity HDD, for use in cluster storage solutions where capacity is more important than power efficiency."
 	max_capacity = 512
-	power_usage = 100					// High-capacity but uses lots of power, shortening battery life. Best used with APC link.
+	power_usage = 10					// High-capacity but uses lots of power, shortening battery life. Best used with APC link.
 	icon_state = "harddisk_mini"
 	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/computer_hardware/hard_drive/cluster
 	name = "cluster hard disk drive"
 	desc = "A large storage cluster consisting of multiple HDDs for usage in dedicated storage systems."
-	power_usage = 500
+	power_usage = 50
 	max_capacity = 2048
 	icon_state = "harddisk"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -171,7 +171,7 @@
 /obj/item/computer_hardware/hard_drive/small
 	name = "solid state drive"
 	desc = "An efficient SSD for portable devices."
-	power_usage = 10
+	power_usage = 1
 	max_capacity = 64
 	icon_state = "ssd_mini"
 	w_class = WEIGHT_CLASS_TINY

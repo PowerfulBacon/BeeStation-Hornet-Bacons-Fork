@@ -30,8 +30,8 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
 	icon_screen = "holocontrol"
-	idle_power_usage = 1000
-	active_power_usage = 5000
+	idle_power_usage = 100
+	active_power_usage = 500
 
 	//new vars
 
@@ -328,7 +328,7 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 				derez(item)
 	for(var/obj/effect/holodeck_effect/holo_effect as anything in effects)
 		holo_effect.tick()
-	active_power_usage = 50 + spawned.len * 3 + effects.len * 5
+	active_power_usage = 5 + spawned.len * 3 + effects.len * 5
 
 /obj/machinery/computer/holodeck/proc/toggle_power(toggleOn = FALSE)
 	if(active == toggleOn)

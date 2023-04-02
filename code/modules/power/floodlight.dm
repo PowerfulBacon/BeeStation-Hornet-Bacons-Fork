@@ -44,8 +44,8 @@
 	density = TRUE
 	max_integrity = 100
 	integrity_failure = 80
-	idle_power_usage = 500
-	active_power_usage = 4000
+	idle_power_usage = 50
+	active_power_usage = 400
 	var/list/light_setting_list = list(0, 5, 10, 15)
 	var/light_power_coefficient = 300
 	var/setting = 1

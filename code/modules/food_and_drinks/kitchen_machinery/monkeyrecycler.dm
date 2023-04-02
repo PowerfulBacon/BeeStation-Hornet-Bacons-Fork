@@ -8,8 +8,8 @@ GLOBAL_LIST_EMPTY(monkey_recyclers)
 	layer = BELOW_OBJ_LAYER
 	density = TRUE
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 1000
-	active_power_usage = 5000
+	idle_power_usage = 100
+	active_power_usage = 500
 	circuit = /obj/item/circuitboard/machine/monkey_recycler
 	var/stored_matter = 0
 	var/cube_production = 0.2

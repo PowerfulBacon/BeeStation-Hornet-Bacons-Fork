@@ -7,8 +7,8 @@
 	anchored = FALSE
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/pump
-	idle_power_usage = 10
-	active_power_usage = 1000
+	idle_power_usage = 1
+	active_power_usage = 100
 	///Are we powered?
 	var/powered = FALSE
 	///units we pump per second

@@ -5,8 +5,8 @@
 	icon_state = "borgcharger0"
 	density = FALSE
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 500
-	active_power_usage = 5000
+	idle_power_usage = 50
+	active_power_usage = 500
 	req_access = list(ACCESS_ROBOTICS)
 	state_open = TRUE
 	circuit = /obj/item/circuitboard/machine/cyborgrecharger

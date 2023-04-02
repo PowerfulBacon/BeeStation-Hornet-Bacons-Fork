@@ -6,8 +6,8 @@
 	name = "R&D Device"
 	icon = 'icons/obj/machines/research.dmi'
 	density = TRUE
-	idle_power_usage = 8000
-	active_power_usage = 60000
+	idle_power_usage = 800
+	active_power_usage = 6000
 	use_power = IDLE_POWER_USE
 	var/busy = FALSE
 	var/hacked = FALSE

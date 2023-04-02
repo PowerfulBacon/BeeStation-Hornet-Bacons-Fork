@@ -46,6 +46,6 @@
 /obj/machinery/telecomms/allinone/exploration
 	name = "exploration mainframe"
 	use_power = IDLE_POWER_USE
-	idle_power_usage = 50
+	idle_power_usage = 5
 	freq_listening = list(FREQ_EXPLORATION)
 	autolinkers = list("exp_relay")
