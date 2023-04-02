@@ -939,7 +939,7 @@
 	display_name = "Advanced Weapon Development Technology"
 	description = "Our weapons are breaking the rules of reality by now."
 	prereq_ids = list("adv_engi", "weaponry")
-	design_ids = list("pin_loyalty")
+	design_ids = list("pin_loyalty", "hardsuit_eng", "hardsuit_sec", "hardsuit_exp", "hardsuit_ert", "hardsuit_syn", "hardsuit_elite", "egun", "combat_shotgun", "esword", "pulse", "mosin")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 10000)
 	export_price = 5000
 

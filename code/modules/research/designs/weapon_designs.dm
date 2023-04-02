@@ -615,3 +615,113 @@
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE
 	category = list("Shuttle Weapons", "Security")
+
+/datum/design/hardsuit
+	name = "Engineering Hardsuit"
+	desc=  "An engineering hardsuit."
+	id = "hardsuit_eng"
+	materials = list(/datum/material/iron = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/gold = 6 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/engine
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/hardsuit/sec
+	name = "Security Hardsuit"
+	desc=  "A security hardsuit hardsuit."
+	id = "hardsuit_sec"
+	materials = list(/datum/material/iron = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/gold = 2 * MINERAL_MATERIAL_AMOUNT, /datum/material/titanium = 4 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/security
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/hardsuit/exp
+	name = "Exploration Hardsuit"
+	desc=  "An exploration hardsuit."
+	id = "hardsuit_exp"
+	materials = list(/datum/material/iron = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/gold = 6 * MINERAL_MATERIAL_AMOUNT, /datum/material/silver = 6 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/exploration
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/hardsuit/ert
+	name = "Emergency Response Hardsuit"
+	desc=  "An emergency response team hardsuit."
+	id = "hardsuit_ert"
+	materials = list(/datum/material/titanium = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 6 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/ert
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/hardsuit/syndicate
+	name = "Syndicate Hardsuit"
+	desc=  "A syndicate team hardsuit."
+	id = "hardsuit_syn"
+	materials = list(/datum/material/titanium = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 3 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 2 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/syndi
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/hardsuit/syndicate_elite
+	name = "Syndicate Elite Hardsuit"
+	desc=  "A syndicate elite hardsuit."
+	id = "hardsuit_elite"
+	materials = list(/datum/material/titanium = 18 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 6 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/clothing/suit/space/hardsuit/syndi/elite
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Suits")
+
+/datum/design/energy_gun
+	name = "Energy gun"
+	desc=  "An energy gun."
+	id = "egun"
+	materials = list(/datum/material/titanium = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/gold = 4 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 8 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/gun/energy/e_gun
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")
+
+/datum/design/shotgun
+	name = "Combat Shotgun"
+	desc=  "A combat shotgun."
+	id = "combat_shotgun"
+	materials = list(/datum/material/titanium = 25 * MINERAL_MATERIAL_AMOUNT, /datum/material/iron = 10 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/gun/ballistic/shotgun/automatic/combat
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")
+
+/datum/design/energy_sword
+	name = "Energy Sword"
+	desc=  "An energy sword."
+	id = "esword"
+	materials = list(/datum/material/titanium = 10 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 8 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 8 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/melee/transforming/energy/sword/saber
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")
+
+/datum/design/pulse_pistol
+	name = "Pulse Pistol"
+	desc=  "A high powered pulse pistol."
+	id = "pulse"
+	materials = list(/datum/material/titanium = 25 * MINERAL_MATERIAL_AMOUNT, /datum/material/silver = 10 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 15 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/gun/energy/pulse/pistol
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")
+
+/datum/design/mosin
+	name = "Mosin Nagant"
+	desc=  "This piece of junk looks like something that could have been used 700 years ago. It feels slightly moist."
+	id = "mosin"
+	materials = list(/datum/material/iron = 10 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/gun/ballistic/rifle/boltaction
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")
