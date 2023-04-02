@@ -12,6 +12,7 @@
 	cell_type = "/obj/item/stock_parts/cell/pulse"
 	fire_rate = 3
 	automatic = 1
+	pin = /obj/item/firing_pin
 
 /obj/item/gun/energy/pulse/prize
 	pin = /obj/item/firing_pin

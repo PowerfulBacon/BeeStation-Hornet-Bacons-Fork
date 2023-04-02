@@ -725,3 +725,13 @@
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
 	category = list("Weapons")
+
+/datum/design/firing_pin
+	name = "Firing Pin"
+	desc=  "A firing pin."
+	id = "firingping"
+	materials = list(/datum/material/iron = 5 * MINERAL_MATERIAL_AMOUNT)
+	build_path = /obj/item/firing_pin
+	build_type = PROTOLATHE
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_ENGINEERING
+	category = list("Weapons")

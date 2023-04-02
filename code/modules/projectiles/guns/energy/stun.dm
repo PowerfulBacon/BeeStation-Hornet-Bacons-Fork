@@ -13,7 +13,7 @@
 	item_state = "tesla"
 	ammo_type = list(/obj/item/ammo_casing/energy/tesla_revolver)
 	can_flashlight = FALSE
-	pin = null
+	pin = /obj/item/firing_pin
 	shaded_charge = 1
 	fire_rate = 1.5
 

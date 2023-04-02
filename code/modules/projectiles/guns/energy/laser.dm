@@ -71,7 +71,7 @@
 	item_state = "shotgun"
 	desc = "A combat shotgun gutted and refitted with an internal laser system. Can switch between taser and scattered disabler shots."
 	shaded_charge = 0
-	pin = /obj/item/firing_pin/implant/mindshield
+	pin = /obj/item/firing_pin
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/scatter/disabler, /obj/item/ammo_casing/energy/electrode)
 
 ///Laser Cannon
@@ -86,7 +86,7 @@
 	flags_1 =  CONDUCT_1
 	slot_flags = ITEM_SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/accelerator)
-	pin = null
+	pin = /obj/item/firing_pin
 	ammo_x_offset = 3
 
 /obj/item/ammo_casing/energy/laser/accelerator
@@ -111,7 +111,7 @@
 	icon_state = "xray"
 	item_state = null
 	ammo_type = list(/obj/item/ammo_casing/energy/xray)
-	pin = null
+	pin = /obj/item/firing_pin
 	ammo_x_offset = 3
 	w_class = WEIGHT_CLASS_BULKY
 
