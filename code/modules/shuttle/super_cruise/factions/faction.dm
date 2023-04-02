@@ -6,6 +6,7 @@
 	// hostile.
 	var/list/hostile_faction_instances = list()
 	var/faction_tag = "DEV"
+	var/hud_state = "hudunknown"
 	// ======== LEAD INSTANCE ========
 	var/is_lead_instance = FALSE
 	// List of missions that this facation is offering
@@ -63,12 +64,19 @@
 		return new /datum/faction/syndicate
 	return new /datum/faction/independant
 
-/datum/faction/proc/player_spawned()
+/datum/faction/proc/player_spawned(mob/living/player)
 	respawns_available--
 	for (var/atom/movable/screen/player_spawns/ps in GLOB.player_spawn_screens)
 		ps.update_player_counts()
 	if (important && respawns_available < 0)
 		SSround_manager.activate()
+	player.hud_set_faction_indicator(src)
+
+/mob/living/proc/hud_set_faction_indicator(datum/faction/f)
+	var/image/holder = hud_list[FACTION_HUD]
+	var/icon/I = icon(icon, icon_state, dir)
+	holder.pixel_y = I.Height() - world.icon_size
+	holder.icon_state = f.hud_state
 
 /datum/faction/independant
 	name = "Independant"
@@ -95,6 +103,7 @@
 	hostile_faction_types = list(/datum/faction/syndicate)
 	faction_tag = "NTC"
 	important = TRUE
+	hud_state = "hudnano"
 
 /datum/faction/syndicate
 	name = "The Syndicate"
@@ -102,3 +111,4 @@
 	hostile_faction_types = list(/datum/faction/nanotrasen, /datum/faction/station)
 	faction_tag = "SYD"
 	important = TRUE
+	hud_state = "synd"

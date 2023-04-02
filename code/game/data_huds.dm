@@ -18,7 +18,7 @@
 /datum/atom_hud/data
 
 /datum/atom_hud/data/human/medical
-	hud_icons = list(STATUS_HUD, HEALTH_HUD, NANITE_HUD)
+	hud_icons = list(STATUS_HUD, HEALTH_HUD, NANITE_HUD, FACTION_HUD)
 
 /datum/atom_hud/data/human/medical/basic
 
@@ -44,10 +44,10 @@
 /datum/atom_hud/data/human/security
 
 /datum/atom_hud/data/human/security/basic
-	hud_icons = list(ID_HUD)
+	hud_icons = list(ID_HUD, FACTION_HUD)
 
 /datum/atom_hud/data/human/security/advanced
-	hud_icons = list(ID_HUD, IMPTRACK_HUD, IMPLOYAL_HUD, IMPCHEM_HUD, WANTED_HUD, NANITE_HUD)
+	hud_icons = list(ID_HUD, IMPTRACK_HUD, IMPLOYAL_HUD, IMPCHEM_HUD, WANTED_HUD, NANITE_HUD, FACTION_HUD)
 
 /datum/atom_hud/data/diagnostic
 

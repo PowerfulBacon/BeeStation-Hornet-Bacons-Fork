@@ -215,6 +215,31 @@
 			if (!assoc_spawn_points[start_landmark.name])
 				assoc_spawn_points[start_landmark.name] = list()
 			assoc_spawn_points[start_landmark.name] += start_landmark
+
+
+	// Set the name of the ship
+	if (ship_name == initial(ship_name))
+		// Set a name, nerd
+		ship_name = selected_ship.spawned_template.name
+	// Check ship name
+	var/number = 0
+	for (var/obj/docking_port/mobile/other_ship in SSshuttle.mobile)
+		if (other_ship.name == ship_name || other_ship.name == "[ship_name] [number]")
+			number++
+	// Highly Mathemtical
+	if (number)
+		ship_name = "[ship_name] [number]"
+	M.name = ship_name
+	var/datum/shuttle_data/data = SSorbits.get_shuttle_data(M.id)
+	data.shuttle_name = ship_name
+	// Check ship faction
+	if (!desired_faction)
+		desired_faction = (FACTION_INDEPENDANT & selected_ship.faction_flags) ? FACTION_INDEPENDANT : (FACTION_NANOTRASEN & selected_ship.faction_flags) ? FACTION_NANOTRASEN : FACTION_SYNDICATE
+	// Set the ships factoin
+	data.faction = get_new_faction_from_flag(desired_faction)
+	var/datum/faction/lead_instance = SSorbits.get_lead_faction(data.faction.type)
+
+
 	// Keep track of the job list
 	job_list = selected_ship.job_roles.Copy()
 	var/list/unspawned_clients = list()
@@ -247,6 +272,8 @@
 			selected_spawn_point = get_turf(pick(assoc_spawn_points[initial(desired_job.spawn_title) || initial(desired_job.title)]))
 		// Perform roundstart prefs loading
 		var/mob/living/carbon/human/created_character = new(selected_spawn_point)
+		created_character.assigned_faction = data.faction
+		lead_instance.player_spawned(created_character)
 		player.prefs.active_character.copy_to(created_character)
 		created_character.dna.update_dna_identity()
 		// Spawn the job role
@@ -256,27 +283,7 @@
 		if (job_instance.importance > highest_importance)
 			highest_importance = job_instance.importance
 			most_important_player = created_character
-	// Set the name of the ship
-	if (ship_name == initial(ship_name))
-		// Set a name, nerd
-		ship_name = selected_ship.spawned_template.name
-	// Check ship name
-	var/number = 0
-	for (var/obj/docking_port/mobile/other_ship in SSshuttle.mobile)
-		if (other_ship.name == ship_name || other_ship.name == "[ship_name] [number]")
-			number++
-	// Highly Mathemtical
-	if (number)
-		ship_name = "[ship_name] [number]"
-	M.name = ship_name
-	var/datum/shuttle_data/data = SSorbits.get_shuttle_data(M.id)
-	data.shuttle_name = ship_name
-	// Check ship faction
-	if (!desired_faction)
-		desired_faction = (FACTION_INDEPENDANT & selected_ship.faction_flags) ? FACTION_INDEPENDANT : (FACTION_NANOTRASEN & selected_ship.faction_flags) ? FACTION_NANOTRASEN : FACTION_SYNDICATE
-	// Set the ships factoin
-	data.faction = get_new_faction_from_flag(desired_faction)
-	var/datum/faction/lead_instance = SSorbits.get_lead_faction(data.faction.type)
+
 	// Spawn and players that weren't spawned with randomised jobs
 	// If there are literally no job slots left, spawn as an assistant
 	for (var/client/player in unspawned_clients)
@@ -309,7 +316,8 @@
 		var/mob/living/carbon/human/created_character = new(selected_spawn_point)
 		player.prefs.active_character.copy_to(created_character)
 		created_character.dna.update_dna_identity()
-		lead_instance.player_spawned()
+		created_character.assigned_faction = data.faction
+		lead_instance.player_spawned(created_character)
 
 		// Spawn the job role
 		var/datum/job/job_instance = SSjob.GetJob(initial(desired_job.title))
@@ -358,7 +366,8 @@
 	created_character.dna.update_dna_identity()
 	if (shuttle?.faction)
 		var/datum/faction/lead_instance = SSorbits.get_lead_faction(shuttle.faction.type)
-		lead_instance.player_spawned()
+		lead_instance.player_spawned(created_character)
+		created_character.assigned_faction = shuttle?.faction
 	// Spawn the job role
 	var/datum/job/job_instance = SSjob.GetJob(initial(selected_choice.title))
 	job_instance.equip(created_character)

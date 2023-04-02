@@ -14,6 +14,15 @@
 	// All faction tags must be allowed to spawn here
 	if ((faction_tags & faction_allowed) != faction_tags)
 		return FALSE
+	// Check if there are enemies on our z-level
+	for (var/mob/living/player in GLOB.mob_living_list)
+		var/turf/T = get_turf(player)
+		if (T.z != z)
+			continue
+		if ((faction_allowed & FACTION_SYNDICATE) && istype(player.assigned_faction, /datum/faction/nanotrasen))
+			return FALSE
+		if ((faction_allowed & FACTION_NANOTRASEN) && istype(player.assigned_faction, /datum/faction/syndicate))
+			return FALSE
 	return TRUE
 
 /obj/docking_port/stationary/spawn_point/on_docked(obj/docking_port/mobile/docked)
