@@ -119,12 +119,12 @@
 	else
 		//If our docking target was deleted, null it to prevent docking interface etc.
 		docking_target = null
-	//I hate that I have to do this, but people keep flying them away.
-	if(position.GetX() > 20000 || position.GetX() < -20000 || position.GetY() > 20000 || position.GetY() < -20000)
-		SEND_SIGNAL(src, COMSIG_ORBITAL_BODY_MESSAGE, "Local bluespace anomaly detected, shuttle has been transported to a new location.")
-		MOVE_ORBITAL_BODY(src, rand(-2000, 2000), rand(-2000, 2000))
-		velocity.Set(0, 0)
-		thrust = 0
+	var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
+	var/distance_from_center = sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY())
+	if (distance_from_center > map.map_radius)
+		// Slowly get destroyed if you go too far out
+		if (prob((distance_from_center - map.map_radius) / 100))
+			explosion(pick(port.return_turfs()), rand(1, 2), rand(1, 4), rand(1, 8))
 	//Handle breaking
 	if(breaking)
 		//Reduce velocity

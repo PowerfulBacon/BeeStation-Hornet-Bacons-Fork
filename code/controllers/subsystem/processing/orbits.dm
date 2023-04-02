@@ -180,6 +180,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	)
 	var/data = list()
 	data["update_index"] = SSorbits.times_fired
+	data["map_radius"] = showing_map.map_radius
 	data["map_objects"] = list()
 	//Locate shuttle data if we have one
 	data["detection_range"] = attached_data?.detection_range

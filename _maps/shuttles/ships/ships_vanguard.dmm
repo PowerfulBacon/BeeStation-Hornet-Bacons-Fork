@@ -384,7 +384,6 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/item/shield/energy,
 /obj/item/melee/transforming/energy/sword/saber/red,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/vanguard)

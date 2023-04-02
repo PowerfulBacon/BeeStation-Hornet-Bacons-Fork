@@ -45,6 +45,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	var/atom/movable/screen/dock_allocation/dockallocationtime
 	var/atom/movable/screen/ship_intro/ship_intro
+	var/atom/movable/screen/player_spawns/player_spawns
+	var/atom/movable/screen/player_spawns/player_spawns_synd
 
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
@@ -91,6 +93,19 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		var/atom/movable/plane_master_controller/controller_instance = new mytype(null, src)
 		plane_master_controllers[controller_instance.name] = controller_instance
 
+	player_spawns = new /atom/movable/screen/player_spawns(null, owner)
+	player_spawns.screen_loc = "CENTER:16,TOP:-48"
+	player_spawns.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	player_spawns.plane = ABOVE_HUD_PLANE
+	player_spawns.hud = src
+	infodisplay += player_spawns
+
+	player_spawns_synd = new /atom/movable/screen/player_spawns/syndicate(null, owner)
+	player_spawns_synd.screen_loc = "CENTER:16,TOP:-48"
+	player_spawns_synd.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	player_spawns_synd.plane = ABOVE_HUD_PLANE
+	player_spawns_synd.hud = src
+	infodisplay += player_spawns_synd
 
 /datum/hud/Destroy()
 	if(mymob?.hud_used == src)

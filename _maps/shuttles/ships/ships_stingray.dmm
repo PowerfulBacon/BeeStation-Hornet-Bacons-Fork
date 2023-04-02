@@ -1821,6 +1821,7 @@
 /obj/item/gun/energy/ionrifle/carbine/pin{
 	pixel_y = 4
 	},
+/obj/item/gun/energy/laser/scatter/shotty,
 /turf/open/floor/plasteel/tech/grid,
 /area/shuttle/stingray/armoury)
 "LA" = (

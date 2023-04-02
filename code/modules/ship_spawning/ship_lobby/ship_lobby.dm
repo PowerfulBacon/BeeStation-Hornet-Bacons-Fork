@@ -276,6 +276,7 @@
 		desired_faction = (FACTION_INDEPENDANT & selected_ship.faction_flags) ? FACTION_INDEPENDANT : (FACTION_NANOTRASEN & selected_ship.faction_flags) ? FACTION_NANOTRASEN : FACTION_SYNDICATE
 	// Set the ships factoin
 	data.faction = get_new_faction_from_flag(desired_faction)
+	var/datum/faction/lead_instance = SSorbits.get_lead_faction(data.faction.type)
 	// Spawn and players that weren't spawned with randomised jobs
 	// If there are literally no job slots left, spawn as an assistant
 	for (var/client/player in unspawned_clients)
@@ -308,6 +309,8 @@
 		var/mob/living/carbon/human/created_character = new(selected_spawn_point)
 		player.prefs.active_character.copy_to(created_character)
 		created_character.dna.update_dna_identity()
+		lead_instance.player_spawned()
+
 		// Spawn the job role
 		var/datum/job/job_instance = SSjob.GetJob(initial(desired_job.title))
 		job_instance.equip(created_character)
@@ -353,6 +356,9 @@
 	var/mob/living/carbon/human/created_character = new(selected_spawn_point)
 	user.prefs.active_character.copy_to(created_character)
 	created_character.dna.update_dna_identity()
+	if (shuttle?.faction)
+		var/datum/faction/lead_instance = SSorbits.get_lead_faction(shuttle.faction.type)
+		lead_instance.player_spawned()
 	// Spawn the job role
 	var/datum/job/job_instance = SSjob.GetJob(initial(selected_choice.title))
 	job_instance.equip(created_character)

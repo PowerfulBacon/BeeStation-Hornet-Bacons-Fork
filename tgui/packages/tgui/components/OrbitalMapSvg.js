@@ -207,6 +207,7 @@ export class OrbitalMapSvg extends Component {
       currentUpdateIndex,
       children,
       lockedZoomScale,
+      map_radius,
     } = this.props;
 
     // Calculate elapsed here to not do a bunch of stupid updates.
@@ -238,6 +239,17 @@ export class OrbitalMapSvg extends Component {
             lockedZoomScale
           )
         ))};
+        {/*
+          Map Radius
+        */}
+        <circle
+          cx={xOffset * zoomScale}
+          cy={yOffset * zoomScale}
+          r={map_radius * zoomScale}
+          stroke="rgba(0, 255, 0, 0.5)"
+          stroke-width="3"
+          fill="#ffffff"
+          fill-opacity="0.05" />
         {/*
           Shuttle Target Locator
         */}

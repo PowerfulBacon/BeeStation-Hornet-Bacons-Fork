@@ -31,7 +31,7 @@
 		update_static_data(user)
 	switch (state)
 		if (STATE_INITIAL)
-			data["is_admin"] = !!user.client.holder
+			data["is_admin"] = TRUE	//Override to allow all players to observe
 		if (STATE_CREATE)
 			var/list/member_list = list()
 			for (var/client/C in lobby.members)
@@ -166,8 +166,6 @@
 					src.state = STATE_JOIN
 					update_static_data(usr, ui)
 				if ("observe")
-					if (!usr.client.holder)
-						return FALSE
 					var/mob/dead/new_player/np = usr
 					if (!istype(np))
 						return FALSE

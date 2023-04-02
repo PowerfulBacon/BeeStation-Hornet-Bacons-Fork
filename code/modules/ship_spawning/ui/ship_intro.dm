@@ -20,28 +20,13 @@
 \n\
 You are %NAME%.\n\
 The date is is [time2text(world.realtime, "DDD, Month DD")], [GLOB.year_integer+YEAR_OFFSET].\n\
-After conducting several unremarkable tests on bluespace-based materials, anomalous\n\
-properties were observed. Nanotrasenkept quiet on these discoveries\n\
-and proceeded forward with their research on these anomalous\n\
-behaviours.\n\
-One of the main resources that exhibit anomalous properties is Crilium, a highly reactive\n\
-material that leads to electromagenetic disruptions and explosions when exposed to oxygen.\n\
-Nanotrasen's rivals believed that Nanotrasen was researching anomalous materials in order\n\
-to create unstoppable military weaponry.\n\
-After an extensive legal battle, Nanotrasen was forced to move their operations into an\n\
-ungoverned sector outside the reach of most modern vessels.\n\
-Nanotrasen began swiftly shutting down its opposition in this sector. Their rival\n\
-corporations seized this opportunity to form a coalition with the specific goals\n\
-to bring down Nanotrasen and force them out of the sector.\n\
-This coalition was known as The Syndicate.\n\
-\n\
-You are now in this world and doing stuff and fighting or something, I don't\n\
-really care, just have fun.\n\
-You can use the lathes and circuit printers at the bases to make\n\
-more weapons and ammunition, mining can be done on asteroids or on lavaland.\n\
-\n\
-Also in this world killing corgis is like, super illegal and you will get erased\n\
-from reality if anybody finds out."
+You can gather resources by mining asteroids or lavaland.\n\
+You can create weapons using a protolathe.\n\
+Your base contains a variety of different services which you can use.\n\
+Ship to ship combat may occur, you can use the weapons console to fire long ranged ship to ship\n\
+weapons, or you can use the interdiction function of the flight computer in order to board the\n\
+enemy ship.\n\
+Good luck, have fun."
 	START_PROCESSING(SSfastprocess, src)
 	animate(src, alpha=255, time=30)
 	src.parent = parent

@@ -10,6 +10,9 @@
 	var/is_lead_instance = FALSE
 	// List of missions that this facation is offering
 	var/list/available_missions = list()
+	// List of respawns available for each team
+	var/respawns_available = 200
+	var/important = FALSE
 
 /datum/faction/New(lead_instance = FALSE)
 	. = ..()
@@ -59,6 +62,13 @@
 	if (faction_flag & FACTION_SYNDICATE)
 		return new /datum/faction/syndicate
 	return new /datum/faction/independant
+
+/datum/faction/proc/player_spawned()
+	respawns_available--
+	for (var/atom/movable/screen/player_spawns/ps in GLOB.player_spawn_screens)
+		ps.update_player_counts()
+	if (important && respawns_available < 0)
+		SSround_manager.activate()
 
 /datum/faction/independant
 	name = "Independant"
