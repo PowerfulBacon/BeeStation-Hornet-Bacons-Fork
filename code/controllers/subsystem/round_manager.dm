@@ -8,6 +8,7 @@ SUBSYSTEM_DEF(round_manager)
 /datum/controller/subsystem/round_manager/Initialize(start_timeofday)
 	can_fire = FALSE
 	addtimer(CALLBACK(src, PROC_REF(leak_nuke_codes)), 90 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(sudden_death)), 120 MINUTES)
 
 /datum/controller/subsystem/round_manager/fire(resumed)
 	time_to_end -= wait
@@ -27,6 +28,14 @@ SUBSYSTEM_DEF(round_manager)
 	priority_announce("A recent security vulnerability has been found in all NukeCo nuclear bombs. It was revealed that the nuclear authentication code is [code]. Fortunately, a nuclear authentication disk is still required to arm the nuke; which can be tracked using a pinpointer.", "BERAKING NEWS")
 	play_soundtrack_music(/datum/soundtrack_song/bee/future_perception, only_station = SOUNDTRACK_PLAY_ALL)
 	base_docking_allowed = TRUE
+
+/datum/controller/subsystem/round_manager/proc/sudden_death()
+	if (can_fire)
+		return
+	for (var/datum/faction/f in SSorbits.lead_faction_instances)
+		f.respawns_available = 0
+	for (var/atom/movable/screen/player_spawns/ps in GLOB.player_spawn_screens)
+		ps.update_player_counts()
 
 /datum/controller/subsystem/round_manager/proc/activate()
 	if (can_fire)
