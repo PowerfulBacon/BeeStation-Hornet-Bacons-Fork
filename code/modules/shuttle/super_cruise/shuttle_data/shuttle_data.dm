@@ -68,6 +68,11 @@
 	calculate_initial_stats()
 	if (!faction)
 		faction = new /datum/faction/independant
+	stealth = TRUE
+	addtimer(CALLBACK(src, PROC_REF(leave_stealth)), 4 MINUTES)
+
+/datum/shuttle_data/proc/leave_stealth()
+	stealth = initial(stealth)
 
 /datum/shuttle_data/Destroy(force, ...)
 	unregister_turfs()
