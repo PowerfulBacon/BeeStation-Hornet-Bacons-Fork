@@ -292,6 +292,8 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 //====================================
 
 /datum/controller/subsystem/processing/orbits/proc/get_associated_level(turf/place)
+	if (!place)
+		return null
 	if (SSorbits.assoc_z_levels["[place.get_virtual_z_level()]"])
 		return SSorbits.assoc_z_levels["[place.get_virtual_z_level()]"]
 	var/area/shuttle/location = place.loc
