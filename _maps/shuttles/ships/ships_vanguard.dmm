@@ -493,7 +493,7 @@
 "ZR" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/modular_fabricator/autolathe,
+/obj/machinery/rnd/production/protolathe,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/vanguard)
 

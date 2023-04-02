@@ -329,8 +329,8 @@
 	pixel_y = 3
 	},
 /obj/machinery/light,
-/obj/machinery/modular_fabricator/autolathe,
 /obj/effect/turf_decal/bot,
+/obj/machinery/rnd/production/protolathe,
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/inquisitor/engineering)
 "jX" = (
@@ -499,9 +499,9 @@
 /turf/open/floor/plasteel/grimy,
 /area/shuttle/inquisitor/lounge)
 "ol" = (
-/obj/structure/reagent_dispensers/watertank,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/bot,
+/obj/machinery/rnd/production/circuit_imprinter,
 /turf/open/floor/plasteel/techmaint,
 /area/shuttle/inquisitor/engineering)
 "oo" = (
