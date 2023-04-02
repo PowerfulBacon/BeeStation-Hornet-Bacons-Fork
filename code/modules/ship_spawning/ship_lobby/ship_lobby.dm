@@ -358,7 +358,11 @@
 	var/turf/selected_spawn_point
 	if (!assoc_spawn_points[initial(selected_choice.spawn_title) || initial(selected_choice.title)])
 		// Spawn at a random point
-		selected_spawn_point = get_turf(pick(pick(assoc_spawn_points)))
+		var/list/selected = pick(assoc_spawn_points)
+		if (!length(selected))
+			tgui_alert_async(user, "We were unable to spawn you due to having no valid spawnpoints available on the target ship.", "No valid spawns")
+			return FALSE
+		selected_spawn_point = get_turf(pick(selected))
 	else
 		selected_spawn_point = get_turf(pick(assoc_spawn_points[initial(selected_choice.spawn_title) || initial(selected_choice.title)]))
 	// Perform roundstart prefs loading
