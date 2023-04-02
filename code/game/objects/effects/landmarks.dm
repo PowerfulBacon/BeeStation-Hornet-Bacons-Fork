@@ -34,7 +34,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	anchored = TRUE
 	layer = MOB_LAYER
 	var/jobspawn_override = FALSE
-	var/delete_after_roundstart = TRUE
+	var/delete_after_roundstart = FALSE
 	var/used = FALSE
 
 /obj/effect/landmark/start/proc/after_round_start()
