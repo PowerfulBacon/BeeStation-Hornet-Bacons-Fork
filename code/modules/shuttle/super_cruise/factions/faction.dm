@@ -94,9 +94,11 @@
 	friendly_faction_types = list(/datum/faction/station)
 	hostile_faction_types = list(/datum/faction/syndicate)
 	faction_tag = "NTC"
+	important = TRUE
 
 /datum/faction/syndicate
 	name = "The Syndicate"
 	//Faction alignment
 	hostile_faction_types = list(/datum/faction/nanotrasen, /datum/faction/station)
 	faction_tag = "SYD"
+	important = TRUE
