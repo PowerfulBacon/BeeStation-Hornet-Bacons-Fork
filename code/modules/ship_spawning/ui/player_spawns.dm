@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(player_spawn_screens)
 /atom/movable/screen/player_spawns
 	maptext_width = 460
 	maptext_x = -230
-	maptext = "<span class='maptext'><span class='big'><font color='#2681a5'>Nanotrasen: 200 spawns</font><span class='right'><font color='#8f4a4b'>Syndicate: 200 spawns</font></span></span></span>"
+	maptext = ""
 	var/faded = FALSE
 
 /atom/movable/screen/player_spawns/New(loc, ...)
