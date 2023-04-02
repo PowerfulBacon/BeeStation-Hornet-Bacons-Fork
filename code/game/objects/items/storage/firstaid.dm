@@ -392,7 +392,6 @@
 		return
 	var/static/items_inside = list(
 		/obj/item/defibrillator/compact/combat/loaded = 1,
-		/obj/item/reagent_containers/hypospray/combat = 1,
 		/obj/item/reagent_containers/pill/patch/styptic = 2,
 		/obj/item/reagent_containers/pill/patch/silver_sulf = 2,
 		/obj/item/clothing/glasses/hud/health/night = 1)
