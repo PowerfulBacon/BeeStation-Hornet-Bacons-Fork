@@ -24,6 +24,8 @@ GLOBAL_LIST_EMPTY(player_spawn_screens)
 	if (faded)
 		return
 	var/datum/faction/nanotrasen = SSorbits.get_lead_faction(/datum/faction/nanotrasen)
+	if (!nanotrasen)
+		return
 	maptext = "<span class='maptext'><span class='big'><font color='#2681a5'>Nanotrasen: [nanotrasen.respawns_available] spawns</font></span></span>"
 	transform=matrix()*1.1
 	animate(src, transform=matrix(), time=5)
@@ -45,6 +47,8 @@ GLOBAL_LIST_EMPTY(player_spawn_screens)
 	if (faded)
 		return
 	var/datum/faction/syndicate = SSorbits.get_lead_faction(/datum/faction/syndicate)
+	if (!syndicate)
+		return
 	maptext = "<span class='maptext'><span class='big'><span class='right'><font color='#8f4a4b'>Syndicate: [syndicate.respawns_available] spawns</font></span></span></span>"
 	transform=matrix()*1.1
 	animate(src, transform=matrix(), time=5)
