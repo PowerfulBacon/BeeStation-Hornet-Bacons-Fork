@@ -23,4 +23,6 @@ SUBSYSTEM_DEF(round_manager)
 		return
 	for (var/atom/movable/screen/player_spawns/ps in GLOB.player_spawn_screens)
 		ps.disable()
+	for (var/mob/dead/new_player/np in GLOB.new_player_list)
+		np.make_me_an_observer()
 	can_fire = TRUE

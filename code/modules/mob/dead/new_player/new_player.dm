@@ -32,6 +32,9 @@
 
 	GLOB.new_player_list += src
 
+	if (SSround_manager.can_fire)
+		make_me_an_observer()
+
 /mob/dead/new_player/Destroy()
 	GLOB.new_player_list -= src
 	return ..()

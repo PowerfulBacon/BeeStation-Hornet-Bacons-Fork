@@ -685,6 +685,10 @@
 
 	log_game("[key_name(usr)] used abandon mob.")
 
+	if (SSround_manager.can_fire)
+		to_chat(src, "<span class='warning'>The game is ending, you can no longer respawn.</span>")
+		return
+
 	if (client.next_ghost_role_tick > world.time)
 		to_chat(src, "<span class='warning'>You have died recently, you must wait [(client.next_ghost_role_tick - world.time)/10] seconds until you can respawn.</span>")
 		return
