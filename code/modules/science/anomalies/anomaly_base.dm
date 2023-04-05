@@ -7,6 +7,8 @@
 	/// Anomaly stability
 	/// Upon reaching 0, the anomaly will enter its stable state
 	/// where it will slowly rise if not contained.
+	/// Stability will increase when not experimented on and will decrease when
+	/// poorly experimented on
 	var/stability_level = 100
 	/// Is the anomaly currently supressed?
 	var/is_supressed = FALSE

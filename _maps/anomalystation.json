@@ -1,0 +1,9 @@
+{
+	"map_name": "Anomaly Station",
+	"map_link": "None",
+	"map_path": "map_files/debug",
+	"map_file": "anomalystation.dmm",
+	"shuttles": {
+		"cargo": "cargo_delta"
+	}
+}

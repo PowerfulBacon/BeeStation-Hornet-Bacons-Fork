@@ -10,6 +10,11 @@
 	anchored = FALSE
 	var/toggled_on = FALSE
 
+/obj/machinery/anomaly_stabiliser/process(delta_time)
+	// Find all anomalies that we are effecting and stabilise them if they aren't breached.
+	// Share the stabilistaion amount between all different anomalies
+	
+
 /obj/machinery/anomaly_stabiliser/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

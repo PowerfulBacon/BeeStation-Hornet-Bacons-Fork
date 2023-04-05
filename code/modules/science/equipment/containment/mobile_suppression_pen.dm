@@ -56,6 +56,8 @@
 		if (!ismob(target) && !isitem(target))
 			return FALSE
 		return TRUE
+	// Check if we are immobilised and stabilised
+	if (anomaly_component != ANOMALY_STATE_STABLE)
 	return TRUE
 
 /obj/structure/mobile_suppression_pen/proc/adjust_charge(charge_amount)
@@ -125,7 +127,7 @@
 	if (user != O)
 		O.balloon_alert(user, "You try to place [O] into [src]...", color="#a5f3a9")
 	// Add the progress bar
-	if (!do_after(user, 15 SECONDS, TRUE, O))
+	if (!do_after(user, 15 SECONDS, O))
 		O.balloon_alert(user, "You fail to contain [O]!", color="#ff9090")
 		return
 	// Place the object in containment

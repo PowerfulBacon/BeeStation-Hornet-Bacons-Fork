@@ -61,7 +61,11 @@
 								//	2 for preloading absolutely everything;
 
 #ifdef LOWMEMORYMODE
+#ifdef ANOMALY_TESTING
+#define FORCE_MAP "anomalystation"
+#else
 #define FORCE_MAP "runtimestation"
+#endif
 #endif
 
 //TODO Remove the SDMM check when it supports 1568
