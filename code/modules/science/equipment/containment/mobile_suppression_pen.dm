@@ -58,6 +58,7 @@
 		return TRUE
 	// Check if we are immobilised and stabilised
 	if (anomaly_component != ANOMALY_STATE_STABLE)
+		return FALSE
 	return TRUE
 
 /obj/structure/mobile_suppression_pen/proc/adjust_charge(charge_amount)
