@@ -5,15 +5,19 @@
 	var/supression_max_health = ANOMALY_HEALTH_SAFE
 	var/supression_health = ANOMALY_HEALTH_SAFE
 	/// Anomaly stability
-	/// Upon reaching 0, the anomaly will enter its stable state
-	/// where it will slowly rise if not contained.
-	/// Stability will increase when not experimented on and will decrease when
-	/// poorly experimented on
+	/// Upon reaching 0 the anomaly will breach.
+	/// This value will decrease when being tested on and will
+	/// increase when in the containment chamber.
 	var/stability_level = 100
 	/// Is the anomaly currently supressed?
 	var/is_supressed = FALSE
 	/// Anomaly effect structure
 	var/datum/anomaly_action/base_action
+	// list of work types and their effect on stability
+	// The sublist indicates progressive works on the anomaly
+	var/list/work_type_stability_effect = list(
+		ANOMALY_WORK_INTERACTION = list(0),
+	)
 
 /datum/component/anomaly_base/Initialize(anomaly_tag)
 	. = ..()
@@ -51,7 +55,6 @@
 /datum/component/anomaly_base/proc/begin_breach()
 	anomaly_state = ANOMALY_STATE_BREACHED
 	supression_health = supression_max_health
-	stability_level = 100
 	// Perform any breach actions
 	SEND_SIGNAL(parent, COMSIG_ON_ANOMALY_BREACHED)
 
