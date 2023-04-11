@@ -173,7 +173,14 @@
 		START_PROCESSING(SSmachines, src)
 	// Send the containment signal, we will handle breaching ourselves
 	SEND_SIGNAL(arrived, COMSIG_ANOMALY_CONTAINED)
+	// Check when the breach has started
+	RegisterSignal(arrived, COMSIG_ON_ANOMALY_BREACHED, PROC_REF(contained_breach))
 
 /obj/structure/mobile_suppression_pen/Exited(atom/movable/gone, direction)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+	UnregisterSignal(gone, COMSIG_ON_ANOMALY_BREACHED)
+
+/obj/structure/mobile_suppression_pen/proc/contained_breach(atom/movable/object)
+	SIGNAL_HANDLER
+	object.forceMove(get_turf(src))

@@ -16,7 +16,8 @@
 	// list of work types and their effect on stability
 	// The sublist indicates progressive works on the anomaly
 	var/list/work_type_stability_effect = list(
-		ANOMALY_WORK_INTERACTION = list(0),
+		ANOMALY_WORK_INTERACTION = list(-10, -15, -20, -30, -50),
+		ANOMALY_WORK_FLUX = list(-10, -15, -20, -30, -50),
 	)
 
 /datum/component/anomaly_base/Initialize(anomaly_tag)
@@ -36,6 +37,12 @@
 /datum/component/anomaly_base/UnregisterFromParent()
 	base_action.deactive_anomaly(src)
 
+/datum/component/anomaly_base/process(delta_time)
+	// Lose 1 point every second
+	stability_level -= delta_time
+	if (stability_level <= 0)
+		begin_breach()
+
 /datum/component/anomaly_base/proc/supress(datum/source, mob/user, suppression_type, power)
 	supression_health -= power
 	if (supression_health <= 0)
@@ -53,10 +60,18 @@
 	SEND_SIGNAL(parent, COMSIG_ANOMALY_EXIT_SUPRESSED_STATE)
 
 /datum/component/anomaly_base/proc/begin_breach()
+	if (anomaly_state == ANOMALY_STATE_BREACHED)
+		CRASH("Attempted to start anomaly breach while anomaly was already breaching")
+	STOP_PROCESSING(SSanomaly_processing, src)
 	anomaly_state = ANOMALY_STATE_BREACHED
 	supression_health = supression_max_health
+	// Reset stability to the max level
+	stability_level = 100
 	// Perform any breach actions
 	SEND_SIGNAL(parent, COMSIG_ON_ANOMALY_BREACHED)
 
 /datum/component/anomaly_base/proc/enter_containment()
+	if (anomaly_state == ANOMALY_STATE_STABLE)
+		return
 	anomaly_state = ANOMALY_STATE_STABLE
+	START_PROCESSING(SSanomaly_processing, src)

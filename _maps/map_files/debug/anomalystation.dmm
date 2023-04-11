@@ -274,10 +274,10 @@
 /area/storage/primary)
 "eF" = (
 /obj/structure/cable{
-	icon_state = "2-8"
+	icon_state = "1-2"
 	},
-/turf/open/floor/plasteel,
-/area/construction)
+/turf/open/floor/engine,
+/area/storage/primary)
 "eG" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -632,6 +632,13 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
+"jY" = (
+/obj/machinery/door/airlock,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/open/floor/plasteel,
+/area/storage/primary)
 "ka" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel,
@@ -905,6 +912,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
+"qm" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/open/floor/plasteel,
+/area/storage/primary)
 "qw" = (
 /obj/machinery/light,
 /obj/structure/closet/secure_closet/hos{
@@ -1467,6 +1480,11 @@
 /obj/machinery/atmospherics/components/unary/tank/air,
 /turf/open/floor/plating,
 /area/engine/atmos)
+"CX" = (
+/obj/machinery/power/flux_vacuum_generator,
+/obj/structure/cable,
+/turf/open/floor/engine,
+/area/storage/primary)
 "Dh" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1805,6 +1823,15 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
+"ID" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/computer/flux_controller{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/storage/primary)
 "IL" = (
 /obj/structure/table,
 /obj/item/ammo_box/c10mm,
@@ -2523,6 +2550,9 @@
 /area/storage/primary)
 "Wf" = (
 /obj/machinery/light,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
 /turf/open/floor/plasteel,
 /area/construction)
 "Wr" = (
@@ -6637,7 +6667,7 @@ Cl
 Lj
 BW
 DG
-eF
+Uy
 zd
 vn
 vn
@@ -6729,7 +6759,7 @@ Cl
 wJ
 Cl
 DG
-Cl
+JN
 Wr
 cf
 HW
@@ -6821,7 +6851,7 @@ Cl
 Lj
 xE
 DG
-Cl
+JN
 wJ
 cf
 HW
@@ -6913,7 +6943,7 @@ Cl
 Lj
 xE
 Cl
-Cl
+JN
 Wr
 cf
 HW
@@ -7005,7 +7035,7 @@ xg
 Lj
 fM
 Cl
-Cl
+JN
 Wr
 cf
 cf
@@ -7189,7 +7219,7 @@ XV
 XV
 XV
 XV
-XV
+Sx
 XV
 XV
 XV
@@ -7281,7 +7311,7 @@ XV
 XV
 XV
 XV
-XV
+Sx
 XV
 XV
 XV
@@ -7373,7 +7403,7 @@ mH
 mH
 mH
 XV
-XV
+Sx
 mH
 mH
 mH
@@ -7465,7 +7495,7 @@ MB
 MB
 jy
 XV
-XV
+ID
 jy
 MB
 MB
@@ -7557,7 +7587,7 @@ MB
 MB
 jy
 XV
-XV
+Sx
 jy
 MB
 MB
@@ -7649,11 +7679,11 @@ MB
 MB
 VM
 XV
-XV
-VM
-MB
-MB
-MB
+qm
+jY
+eF
+eF
+CX
 rY
 mH
 DN

@@ -23,4 +23,21 @@
 	obj_flags = CAN_BE_HIT
 	icon = 'icons/obj/machines/field_generator.dmi'
 	icon_state = "Field_Gen"
-	processing_flags = START_PROCESSING_MANUALLY
+	processing_flags = START_PROCESSING_ON_INIT
+	// Gain 1.2 supression rates per second (Total of 0.2 increase per second)
+	var/supression_rate = 1.2
+
+/obj/machinery/power/anomaly_supression_generator/process(delta_time)
+	// Supress nearby anomalies
+	var/list/anomalies = list()
+	for (var/atom/movable/target in view(4, src))
+		var/datum/component/anomaly_base/anom = target.GetComponent(/datum/component/anomaly_base)
+		if (!anom)
+			continue
+		anomalies += anom
+		// For testing purposes
+		new /obj/effect/temp_visual/explosion(target.loc)
+	// Do the supression
+	var/supression_ratio = supression_rate / length(anomalies)
+	for (var/datum/component/anomaly_base/anom as() in anomalies)
+		anom.stability_level = max(anom.stability_level + supression_ratio, 100)

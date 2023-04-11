@@ -41,3 +41,4 @@
 #define ANOMALY_HEALTH_DANGER 3200
 
 #define ANOMALY_WORK_INTERACTION "interaction"
+#define ANOMALY_WORK_FLUX "flux"
