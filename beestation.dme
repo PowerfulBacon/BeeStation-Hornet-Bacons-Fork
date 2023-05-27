@@ -3443,7 +3443,6 @@
 #include "code\modules\science\debug\debug_verbs.dm"
 #include "code\modules\science\equipment\flux_analyser.dm"
 #include "code\modules\science\equipment\consumption\advanced_fabrifactor.dm"
-#include "code\modules\science\equipment\containment\anomaly_monitor.dm"
 #include "code\modules\science\equipment\containment\anomaly_stabiliser.dm"
 #include "code\modules\science\equipment\containment\anomaly_suppression_generator.dm"
 #include "code\modules\science\equipment\containment\containment_computer.dm"

@@ -23,9 +23,19 @@
 	obj_flags = CAN_BE_HIT
 	icon = 'icons/obj/machines/field_generator.dmi'
 	icon_state = "Field_Gen"
-	processing_flags = START_PROCESSING_ON_INIT
+	processing_flags = START_PROCESSING_MANUALLY
+	var/activated = FALSE
 	// Gain 1.2 supression rates per second (Total of 0.2 increase per second)
 	var/supression_rate = 1.2
+
+/obj/machinery/power/anomaly_supression_generator/proc/set_activate(state)
+	if (activated == state)
+		return
+	activated = state
+	if (activated)
+		begin_processing()
+	else
+		end_processing()
 
 /obj/machinery/power/anomaly_supression_generator/process(delta_time)
 	// Supress nearby anomalies
