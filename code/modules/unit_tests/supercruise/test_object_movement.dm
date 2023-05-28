@@ -32,17 +32,17 @@
 		PRIMARY_ORBITAL_MAP
 	)
 	// Assert that the object is in the correct map position
-	var/expected_x = round(position.GetX() / ORBITAL_MAP_ZONE_SIZE)
-	var/expected_y = round(position.GetY() / ORBITAL_MAP_ZONE_SIZE)
+	var/expected_x = round(moving_object.position.GetX() / ORBITAL_MAP_ZONE_SIZE)
+	var/expected_y = round(moving_object.position.GetY() / ORBITAL_MAP_ZONE_SIZE)
 	var/position_key = "[expected_x],[expected_y]"
-	if (!(moving_object in collision_zone_bodies[position_key]))
+	if (!(moving_object in map.collision_zone_bodies[position_key]))
 		Fail("Failed supercruise map zoning test. The object was not in the expected grid cell of [expected_x],[expected_y]. Are base orbital objects being moved directly instead of by using the wrapper define?")
 	// Run the simulation for 1 second
 	moving_object.process(1 SECONDS)
 	// Assert that the object is in the correct map position
-	expected_x = round(position.GetX() / ORBITAL_MAP_ZONE_SIZE)
-	expected_y = round(position.GetY() / ORBITAL_MAP_ZONE_SIZE)
+	expected_x = round(moving_object.position.GetX() / ORBITAL_MAP_ZONE_SIZE)
+	expected_y = round(moving_object.position.GetY() / ORBITAL_MAP_ZONE_SIZE)
 	position_key = "[expected_x],[expected_y]"
-	if (!(moving_object in collision_zone_bodies[position_key]))
+	if (!(moving_object in map.collision_zone_bodies[position_key]))
 		Fail("Failed supercruise map zoning test. The object was not in the expected grid cell of [expected_x],[expected_y]. Are base orbital objects being moved directly instead of by using the wrapper define?")
 

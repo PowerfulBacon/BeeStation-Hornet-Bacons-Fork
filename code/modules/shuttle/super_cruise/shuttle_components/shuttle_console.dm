@@ -2,7 +2,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 
 /obj/machinery/computer/shuttle_flight
 	name = "shuttle console"
-	desc = "A shuttle control computer."
+	desc = "A shuttle control computer. Alt-click it to relink it to the currently attached shuttle."
 	icon_screen = "shuttle"
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
@@ -41,8 +41,14 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		shuttlePortId = "[shuttleId]_custom"
 		set_shuttle_id(shuttleId)
 	else
-		var/static/i = 0
-		shuttlePortId = "unlinked_shuttle_console_[i++]"
+		// try and link
+		var/area/shuttle/shuttle_area = get_area(src)
+		if (istype(shuttle_area) && shuttle_area.mobile_port)
+			set_shuttle_id(shuttle_area.mobile_port)
+			shuttlePortId = "[shuttleId]"
+		else
+			var/static/i = 0
+			shuttlePortId = "unlinked_shuttle_console_[i++]"
 	RegisterSignal(SSorbits, COMSIG_ORBITAL_BODY_CREATED, PROC_REF(register_shuttle_object))
 
 /obj/machinery/computer/shuttle_flight/proc/set_shuttle_id(new_id, stack_depth = 0)
@@ -86,6 +92,16 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 			. += "It's access requirements have been disabled."
 		else
 			. += "It's access requirements could be disabled by disassembling the computer and using a multitool on the circuitboard."
+
+/obj/machinery/computer/shuttle_flight/AltClick(mob/user)
+	. = ..()
+	var/area/shuttle/shuttle_area = get_area(src)
+	if (istype(shuttle_area) && shuttle_area.mobile_port)
+		set_shuttle_id(shuttle_area.mobile_port)
+		shuttlePortId = "[shuttleId]"
+		to_chat(user, "<span class='notice'>You link [src] to [shuttle_area.mobile_port.name]<span>")
+	else
+		to_chat(user, "<span class='notice'>[src] could not find a shuttle to link to.<span>")
 
 /obj/machinery/computer/shuttle_flight/proc/register_shuttle_object(datum/source, datum/orbital_object/body, datum/orbital_map/map)
 	var/datum/orbital_object/shuttle/shuttle = body
@@ -168,7 +184,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		shuttle_data
 	)
 
-	data["shuttleName"] = map_reference_object?.name
+	data["shuttleName"] = map_reference_object?.get_name()
 
 	//Send shuttle data
 	if(!SSshuttle.getShuttle(shuttleId))
@@ -216,7 +232,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		return data
 	data["linkedToShuttle"] = TRUE
 	data["shuttleTarget"] = shuttleObject.shuttle_data.ai_pilot?.get_target_name()
-	data["shuttleName"] = shuttleObject.name
+	data["shuttleName"] = shuttleObject.get_name()
 	data["shuttleAngle"] = shuttleObject.angle
 	data["shuttleThrust"] = shuttleObject.thrust
 	data["autopilot_enabled"] = shuttleObject.shuttle_data.ai_pilot?.is_active()
@@ -249,7 +265,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		for(var/obj/docking_port/stationary/stationary_port as() in SSshuttle.stationary)
 			if(LAZYLEN(shuttleObject.docking_target.linked_z_level))
 				for(var/datum/space_level/level in shuttleObject.docking_target.linked_z_level)
-					if(stationary_port.z == level.z_value && (stationary_port.id in valid_docks))
+					if(stationary_port.z == level.z_value && our_port.canDock(stationary_port) == SHUTTLE_CAN_DOCK)
 						data["validDockingPorts"] += list(list(
 							"name" = stationary_port.name,
 							"id" = stationary_port.id,
@@ -318,11 +334,11 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 				say("Shuttle not in flight.")
 				return
 			var/desiredTarget = params["target"]
-			if(shuttleObject.name == desiredTarget)
+			if(shuttleObject.get_name() == desiredTarget)
 				return
 			var/datum/orbital_map/showing_map = SSorbits.orbital_maps[orbital_map_index]
 			for(var/datum/orbital_object/object as() in showing_map.get_all_bodies())
-				if(object.name == desiredTarget)
+				if(object.get_name() == desiredTarget)
 					var/is_autopilot_active = shuttleObject.shuttle_data.ai_pilot?.is_active()
 					if(shuttleObject.shuttle_data.try_override_pilot())
 						shuttleObject.shuttle_data.set_pilot(new /datum/shuttle_ai_pilot/autopilot(object))
@@ -346,6 +362,9 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 				return
 			if(!shuttleObject.can_dock_with)
 				say("Docking computer failed to find docking target.")
+				return
+			if (!shuttleObject.can_dock_with.can_dock_here(shuttleObject))
+				say("You cannot acquire a track on this location's docking beacon, it is rejecting your ship!")
 				return
 			//Force dock with the thing we are colliding with.
 			shuttleObject.commence_docking(shuttleObject.can_dock_with, TRUE)

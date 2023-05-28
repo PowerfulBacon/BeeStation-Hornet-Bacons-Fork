@@ -25,8 +25,6 @@
 	var/turf/target_turf
 	var/next_shot_world_time = 0
 
-	var/power_per_shot = 1000
-
 	//For weapons that are side mounted (None after new sprites, but support is still here.)
 	var/side = WEAPON_SIDE_LEFT
 	var/fire_from_source = TRUE
@@ -63,7 +61,8 @@
 
 /obj/machinery/shuttle_weapon/Initialize(mapload, ndir = 0)
 	. = ..()
-	weapon_id = "[LAZYLEN(SSorbits.shuttle_weapons)]"
+	var/static/global_weapon_count = 0
+	weapon_id = "[global_weapon_count++]"
 	SSorbits.shuttle_weapons[weapon_id] = src
 	set_directional_offset(ndir || dir, TRUE)
 	//Check our area
@@ -149,17 +148,19 @@
 	var/missed = FALSE
 	if(!prob(hit_chance))
 		current_target_turf = locate(target.x + rand(-innaccuracy, innaccuracy), target.y + rand(-innaccuracy, innaccuracy), target.z)
+		// You get lucky this time
+		if (!istype(current_target_turf.loc, /area/shuttle))
+			current_target_turf = get_turf(target)
 		if(prob(miss_chance))
 			missed = TRUE
 	playsound(loc, fire_sound, 75, 1)
-	use_power(power_per_shot)
 	if(!forced)
 		next_shot_world_time = world.time + cooldown
 	for(var/i in 1 to simultaneous_shots)
 		//Spawn the projectile to make it look like its firing from your end
 		var/obj/item/ammo_casing/fired_casing = get_fired_casing()
 		if (!fired_casing)
-			continue
+			return
 		fired_casing.forceMove(loc)
 		var/obj/item/projectile/bullet/shuttle/P = fired_casing.BB
 		fired_casing.BB = null
@@ -197,6 +198,15 @@
 		return null
 	return ammunition_loader.take_bullet(fired_caliber)
 
+/obj/machinery/shuttle_weapon/proc/has_ammo()
+	if (!requires_ammunition)
+		return TRUE
+	if (!ammunition_loader)
+		return FALSE
+	if (!ammunition_loader.has_ammo(fired_caliber))
+		return FALSE
+	return TRUE
+
 /obj/machinery/shuttle_weapon/proc/try_link_to(mob/user, obj/machinery/ammo_loader/loader)
 	if (loader.type != ammo_loader_type)
 		var/obj/machinery/ammo_loader/loader_type = ammo_loader_type
@@ -207,3 +217,12 @@
 	ammunition_loader = loader
 	if (user)
 		to_chat(user, "<span class='notice'>You connect [src] to [loader]!</span>")
+
+/obj/machinery/shuttle_weapon/proc/is_disabled()
+	if (!is_operational)
+		return TRUE
+	if (!powered())
+		return TRUE
+	if (!has_ammo())
+		return TRUE
+	return FALSE

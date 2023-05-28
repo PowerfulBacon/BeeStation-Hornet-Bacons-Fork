@@ -72,7 +72,7 @@
 	QDEL_LIST(cam_plane_masters)
 	QDEL_NULL(visual_plane_master)
 	QDEL_NULL(cam_background)
-	concurrent_users = null
+	concurrent_users.Cut()
 	selected_weapon_system = null
 	return ..()
 
@@ -150,6 +150,7 @@
 			cooldownLeft = max(weapon.next_shot_world_time - world.time, 0),
 			cooldown = weapon.cooldown,
 			inaccuracy = weapon.innaccuracy,
+			disabled = weapon.is_disabled(),
 		)
 		data["weapons"] += list(active_weapon)
 	data["in_flight"] = FALSE
@@ -174,10 +175,11 @@
 			continue
 		var/list/other_ship = list(
 			id = ship_id,
-			name = ship.shuttle_name,
+			name = shuttle_object.get_name(),
 			health = ship.integrity_remaining,
 			maxHealth = ship.max_ship_integrity * ship.critical_proportion,
 			critical = ship.reactor_critical,
+			aggro_state = our_ship.faction.check_faction_alignment(ship.faction),
 		)
 		data["ships"] += list(other_ship)
 	return data
@@ -315,6 +317,10 @@
 		return
 	if(!(T in M.return_turfs()))
 		return
+	// Log that we just attempted an attack
+	var/datum/shuttle_data/data = SSorbits.get_shuttle_data(M.id)
+	var/datum/shuttle_data/our_data = SSorbits.get_shuttle_data(shuttle_id)
+	data.faction.on_attacked_by(our_data.faction)
 	weapon.target_turf = T
 	//Fire
 	INVOKE_ASYNC(weapon, TYPE_PROC_REF(/obj/machinery/shuttle_weapon, fire), shuttle_id)

@@ -113,12 +113,12 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	orbits_setup = TRUE
 	//Create initial ruins
 	for(var/i in 1 to initial_space_ruins)
-		new /datum/orbital_object/z_linked/beacon/ruin/spaceruin()
+		new /datum/orbital_object/z_linked/beacon/spaceruin()
 	for(var/i in 1 to initial_objective_beacons)
 		new /datum/orbital_object/z_linked/beacon/ruin()
 	//Create asteroid belt
 	for(var/i in 1 to initial_asteroids)
-		new /datum/orbital_object/z_linked/beacon/ruin/asteroid()
+		new /datum/orbital_object/z_linked/beacon/asteroid()
 
 /datum/controller/subsystem/processing/orbits/fire(resumed)
 	if(resumed)
@@ -134,7 +134,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 		next_objective_time = world.time + rand(30 SECONDS, 5 MINUTES)
 	//Check space ruin count
 	if(ruin_levels < 2 && prob(5))
-		new /datum/orbital_object/z_linked/beacon/ruin/spaceruin()
+		new /datum/orbital_object/z_linked/beacon/spaceruin()
 	//Check objective
 	if(current_objective)
 		if(current_objective.check_failed())

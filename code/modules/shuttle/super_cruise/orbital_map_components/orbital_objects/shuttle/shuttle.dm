@@ -119,12 +119,12 @@
 	else
 		//If our docking target was deleted, null it to prevent docking interface etc.
 		docking_target = null
-	//I hate that I have to do this, but people keep flying them away.
-	if(position.GetX() > 20000 || position.GetX() < -20000 || position.GetY() > 20000 || position.GetY() < -20000)
-		SEND_SIGNAL(src, COMSIG_ORBITAL_BODY_MESSAGE, "Local bluespace anomaly detected, shuttle has been transported to a new location.")
-		MOVE_ORBITAL_BODY(src, rand(-2000, 2000), rand(-2000, 2000))
-		velocity.Set(0, 0)
-		thrust = 0
+	var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
+	var/distance_from_center = sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY())
+	if (distance_from_center > map.map_radius)
+		// Slowly get destroyed if you go too far out
+		if (prob((distance_from_center - map.map_radius) / 100))
+			explosion(pick(port.return_turfs()), rand(1, 2), rand(1, 4), rand(1, 8))
 	//Handle breaking
 	if(breaking)
 		//Reduce velocity
@@ -163,14 +163,14 @@
 	SEND_SIGNAL(src, COMSIG_ORBITAL_BODY_MESSAGE, "Shuttle can no longer sustain supercruise flight mode, please check your engines for correct setup and fuel reserves.")
 	if(!docking_target)
 		//Dock with the current location
-		if(can_dock_with)
+		if(can_dock_with && can_dock_with.can_dock_here(src))
 			commence_docking(can_dock_with, TRUE, FALSE, TRUE)
 			message_admins("Shuttle [shuttle_port_id] is dropping to a random location at [can_dock_with.name] due to running out of fuel/incorrect engine configuration. (EXPLOSION INCOMMING!!)")
 		//Create a new orbital waypoint to drop at
 		else
-			var/datum/orbital_object/z_linked/beacon/ruin/stranded_shuttle/shuttle_location = new(new /datum/orbital_vector(position.GetX(), position.GetY()))
+			var/datum/orbital_object/z_linked/beacon/stranded_shuttle/shuttle_location = new(new /datum/orbital_vector(position.GetX(), position.GetY()))
 			shuttle_location.name = "Stranded [name]"
-			commence_docking(shuttle_location, TRUE, FALSE, TRUE)
+			commence_docking(shuttle_location, TRUE, TRUE, TRUE)
 	//No more custom docking
 	docking_frozen = TRUE
 	if(!random_drop(docking_target.linked_z_level[1].z_value))
@@ -284,7 +284,7 @@
 		return FALSE
 	SEND_SIGNAL(src, COMSIG_ORBITAL_BODY_MESSAGE, "Interdictor activated, shuttle throttling down...")
 	//Create the site of interdiction
-	var/datum/orbital_object/z_linked/beacon/z_linked = new /datum/orbital_object/z_linked/beacon/ruin/interdiction(
+	var/datum/orbital_object/z_linked/beacon/z_linked = new /datum/orbital_object/z_linked/beacon/interdiction(
 		new /datum/orbital_vector(position.GetX(), position.GetY())
 	)
 	z_linked.name = "Interdiction Site"
@@ -301,9 +301,12 @@
 	return TRUE
 
 /datum/orbital_object/shuttle/get_locator_name()
-	return "Shuttle (#[unique_id])"
+	return "([shuttle_data.faction.faction_tag]) Shuttle #[unique_id]"
 
 /datum/orbital_object/shuttle/is_stealth()
 	if (!shuttle_data)
 		return FALSE
 	return shuttle_data.stealth
+
+/datum/orbital_object/shuttle/get_name()
+	return "([shuttle_data.faction.faction_tag]) [shuttle_data.shuttle_name]"

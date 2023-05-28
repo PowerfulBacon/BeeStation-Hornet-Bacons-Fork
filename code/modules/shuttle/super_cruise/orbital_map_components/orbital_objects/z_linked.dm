@@ -78,3 +78,6 @@
 		if(level.z_value == z_value)
 			return TRUE
 	return FALSE
+
+/datum/orbital_object/z_linked/proc/can_dock_here(datum/orbital_object/shuttle/shuttle)
+	return TRUE
