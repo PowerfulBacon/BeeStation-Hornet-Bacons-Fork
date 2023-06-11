@@ -2,7 +2,7 @@
 //////////////MISC Boards///////////////
 ////////////////////////////////////////
 
-/datum/design/board/shuttle/engine/plasma
+/datum/design/board/shuttle_plasma_engine
 	name = "Machine Design (Plasma Thruster Board)"
 	desc = "The circuit board for a plasma thruster."
 	id = "engine_plasma"
@@ -10,7 +10,7 @@
 	category = list ("Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/board/shuttle/engine/ion
+/datum/design/board/shuttle_engine_ion
 	name = "Machine Design (Ion Thruster Board)"
 	desc = "The circuit board for an ion thruster, a weak but electric driven engine."
 	id = "engine_ion"
@@ -18,7 +18,7 @@
 	category = list ("Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/board/shuttle/engine/ion/burst
+/datum/design/board/shuttle_engine_ion_burst
 	name = "Machine Design (Ion Burst Thruster Board)"
 	desc = "The circuit board for an ion burst thruster, a powerful but temporary thrust booster."
 	id = "engine_ion_burst"
@@ -26,7 +26,7 @@
 	category = list ("Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/board/shuttle/engine/void
+/datum/design/board/shuttle_void_engine
 	name = "Machine Design (Void Thruster Board)"
 	desc = "The circuit board for a void thruster."
 	id = "engine_void"
@@ -34,7 +34,7 @@
 	category = list ("Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/board/shuttle/engine/heater
+/datum/design/board/shuttle_heater_engine
 	name = "Machine Design (Engine Heater Board)"
 	desc = "The circuit board for an engine heater."
 	id = "engine_heater"
@@ -715,3 +715,11 @@
 	build_path = /obj/item/circuitboard/machine/suit_storage_unit
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 	category = list ("Misc. Machinery")
+
+/datum/design/board/fax
+	name = "Machine Design (Fax Machine)"
+	desc = "The circuit board for a fax machine."
+	id = "fax"
+	build_path = /obj/item/circuitboard/machine/fax
+	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_SERVICE
+	category = list("Misc. Machinery")

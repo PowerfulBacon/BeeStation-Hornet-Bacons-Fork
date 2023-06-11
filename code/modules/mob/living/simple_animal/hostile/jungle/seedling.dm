@@ -16,8 +16,7 @@
 	maxHealth = 100
 	health = 100
 	melee_damage = 30
-	pixel_x = -16
-	pixel_y = -14
+	SET_BASE_PIXEL(-16, -14)
 	minimum_distance = 3
 	move_to_delay = 20
 	vision_range = 9
@@ -40,7 +39,7 @@
 	damage = 10
 	damage_type = BURN
 	light_range = 2
-	flag = "energy"
+	armor_flag = ENERGY
 	light_color = LIGHT_COLOR_YELLOW
 	hitsound = 'sound/weapons/sear.ogg'
 	hitsound_wall = 'sound/weapons/effects/searwall.ogg'

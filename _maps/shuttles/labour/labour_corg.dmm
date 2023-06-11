@@ -19,7 +19,21 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"e" = (
+"c" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/window/reinforced/spawner/west,
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"g" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
@@ -27,18 +41,68 @@
 /obj/structure/cable/yellow,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"h" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = -31
+"i" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Labor Shuttle Airlock";
+	req_access_txt = "2"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"j" = (
+/obj/machinery/button/flasher{
+	id = "gulagshuttleflasher";
+	name = "Flash Control";
+	pixel_y = -26;
+	req_access_txt = "1"
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/effect/turf_decal/stripes/corner,
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/light,
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"k" = (
+/obj/machinery/shuttle_weapon/laser,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/labor)
+"l" = (
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"m" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/computer/weapons,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/labor)
+"o" = (
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 8
+	},
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
-/turf/open/floor/mineral/plastitanium/red,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/labor)
 "p" = (
 /obj/effect/turf_decal/stripes/line{
@@ -49,29 +113,10 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"r" = (
-/obj/effect/turf_decal/caution/stand_clear{
-	dir = 8
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/labor)
-"t" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Labor Shuttle Airlock";
-	req_access_txt = "2"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-8"
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/labor)
 "y" = (
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/labor)
-"A" = (
+"z" = (
 /obj/machinery/mineral/stacking_unit_console{
 	machinedir = 2;
 	pixel_x = 30;
@@ -92,98 +137,13 @@
 /obj/effect/spawner/structure/window/shuttle,
 /turf/open/floor/plating,
 /area/shuttle/labor)
-"D" = (
-/obj/effect/turf_decal/caution/stand_clear{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"E" = (
-/obj/machinery/door/airlock/titanium{
-	id_tag = "prisonshuttle";
-	name = "Labor Shuttle Airlock"
-	},
-/obj/docking_port/mobile{
-	dir = 8;
-	dwidth = 2;
-	height = 5;
-	id = "laborcamp";
-	name = "labor camp shuttle";
-	port_direction = 4;
-	width = 8
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/labor)
-"F" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Labor Shuttle Airlock";
-	req_access_txt = "2"
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"H" = (
-/turf/closed/wall/mineral/plastitanium,
-/area/shuttle/labor)
-"I" = (
-/obj/machinery/button/flasher{
-	id = "gulagshuttleflasher";
-	name = "Flash Control";
-	pixel_y = -26;
-	req_access_txt = "1"
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/light,
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"P" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/computer/weapons,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/labor)
-"Q" = (
-/obj/effect/turf_decal/bot,
-/obj/machinery/computer/shuttle_flight/labor,
-/turf/open/floor/mineral/plastitanium,
-/area/shuttle/labor)
-"R" = (
-/obj/effect/spawner/structure/window/shuttle,
-/obj/machinery/power/engine_capacitor_bank{
-	dir = 1
-	},
-/obj/structure/cable/yellow,
-/turf/open/floor/plating/airless,
-/area/shuttle/labor)
-"S" = (
+"C" = (
 /obj/machinery/shuttle/engine/ion{
 	dir = 1
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/labor)
-"U" = (
-/turf/closed/wall/mineral/titanium/nodiagonal,
-/area/shuttle/labor)
-"V" = (
+"G" = (
 /obj/machinery/flasher{
 	id = "gulagshuttleflasher";
 	pixel_x = -24
@@ -204,27 +164,60 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"X" = (
-/obj/structure/chair/fancy/shuttle{
+"H" = (
+/turf/closed/wall/mineral/plastitanium,
+/area/shuttle/labor)
+"K" = (
+/obj/effect/turf_decal/bot,
+/obj/machinery/computer/shuttle_flight/labor,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/labor)
+"L" = (
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/obj/machinery/door/airlock/titanium{
+	name = "Labor Shuttle Airlock";
+	req_access_txt = "2"
+	},
+/obj/structure/fans/tiny,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
+"M" = (
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/power/engine_capacitor_bank{
 	dir = 1
 	},
-/obj/effect/turf_decal/stripes/line,
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
+/obj/structure/cable/yellow,
+/turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"O" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = -31
 	},
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
 	},
-/obj/structure/window/reinforced/spawner/west,
+/obj/effect/turf_decal/stripes/corner,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
+"U" = (
+/turf/closed/wall/mineral/titanium/nodiagonal,
+/area/shuttle/labor)
 "Z" = (
-/obj/machinery/shuttle_weapon/laser,
-/turf/closed/wall/mineral/titanium,
+/obj/machinery/door/airlock/titanium{
+	id_tag = "prisonshuttle";
+	name = "Labor Shuttle Airlock"
+	},
+/obj/structure/fans/tiny,
+/turf/open/floor/mineral/titanium,
 /area/shuttle/labor)
 
 (1,1,1) = {"
-Z
+k
 B
 y
 y
@@ -235,41 +228,41 @@ H
 "}
 (2,1,1) = {"
 B
-P
-h
-F
-e
-V
-R
-S
+m
+O
+i
+g
+G
+M
+C
 "}
 (3,1,1) = {"
 B
-Q
-I
+K
+j
 y
 p
-X
-R
-S
+c
+M
+C
 "}
 (4,1,1) = {"
 B
-r
-A
+o
+z
 a
 b
-D
-R
-S
+l
+M
+C
 "}
 (5,1,1) = {"
+k
+L
+y
+y
+y
 Z
-t
-y
-y
-y
-E
 U
 H
 "}

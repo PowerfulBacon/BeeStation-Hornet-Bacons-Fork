@@ -648,6 +648,14 @@
 	suffix = "large"
 	name = "mining shuttle (Large)"
 
+/datum/map_template/shuttle/mining/rad
+	suffix = "rad"
+	name = "mining shuttle (Rad)"
+
+/datum/map_template/shuttle/cargo/rad
+	suffix = "rad"
+	name = "cargo ferry (Rad)"
+
 /datum/map_template/shuttle/science
 	port_id = "science"
 	suffix = "outpost"
@@ -671,6 +679,10 @@
 /datum/map_template/shuttle/exploration/kilo
 	suffix = "kilo"
 	name = "kilo exploration shuttle"
+
+/datum/map_template/shuttle/exploration/rad
+	suffix = "rad"
+	name = "rad exploration shuttle"
 
 /datum/map_template/shuttle/labour/delta
 	suffix = "delta"

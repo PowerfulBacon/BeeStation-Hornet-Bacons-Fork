@@ -15,46 +15,7 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"d" = (
-/obj/structure/chair/fancy/shuttle{
-	dir = 1
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"e" = (
-/obj/machinery/computer/weapons{
-	dir = 8
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
 "f" = (
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"h" = (
-/obj/machinery/mineral/stacking_unit_console{
-	machinedir = 2;
-	pixel_x = 30;
-	pixel_y = 30
-	},
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"i" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Labor Shuttle Airlock";
-	req_access_txt = "2"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "0-8"
-	},
-/turf/open/floor/plating,
-/area/shuttle/labor)
-"j" = (
-/obj/structure/cable/yellow{
-	icon_state = "2-4"
-	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
 "k" = (
@@ -64,37 +25,13 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/labor)
-"l" = (
-/obj/structure/cable/yellow{
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "4-8"
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/labor)
 "m" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/labor)
-"o" = (
-/obj/structure/chair/fancy/shuttle{
-	dir = 8
-	},
-/obj/machinery/mineral/labor_claim_console{
-	machinedir = 1;
-	pixel_x = 28;
-	pixel_y = 28
-	},
-/obj/machinery/flasher{
-	id = "gulagshuttleflasher";
-	pixel_x = 25
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/labor)
-"p" = (
+"u" = (
 /obj/structure/closet/crate,
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -104,23 +41,25 @@
 	},
 /turf/open/floor/mineral/titanium,
 /area/shuttle/labor)
-"q" = (
+"x" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Labor Shuttle Airlock";
+	req_access_txt = "2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"A" = (
 /obj/machinery/door/airlock/titanium{
 	id_tag = "prisonshuttle";
 	name = "Labor Shuttle Airlock"
 	},
-/obj/docking_port/mobile{
-	dir = 8;
-	dwidth = 2;
-	height = 5;
-	id = "laborcamp";
-	name = "labor camp shuttle";
-	port_direction = 4;
-	width = 9
-	},
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/labor)
-"r" = (
+"B" = (
 /obj/structure/window/reinforced{
 	dir = 1;
 	layer = 2.9
@@ -131,19 +70,13 @@
 /obj/structure/cable/yellow,
 /turf/open/floor/plating/airless,
 /area/shuttle/labor)
-"s" = (
-/obj/machinery/shuttle/engine/ion{
-	dir = 1
-	},
-/turf/open/floor/plating/airless,
-/area/shuttle/labor)
-"x" = (
+"G" = (
 /obj/structure/cable/yellow{
-	icon_state = "2-8"
+	icon_state = "2-4"
 	},
-/turf/open/floor/mineral/titanium,
+/turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"P" = (
+"I" = (
 /obj/machinery/button/flasher{
 	id = "gulagshuttleflasher";
 	name = "Flash Control";
@@ -159,27 +92,7 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
-"Q" = (
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/mineral/titanium,
-/area/shuttle/labor)
-"R" = (
-/obj/machinery/shuttle_weapon/laser,
-/turf/closed/wall/mineral/titanium,
-/area/shuttle/labor)
-"T" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Labor Shuttle Airlock";
-	req_access_txt = "2"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/open/floor/mineral/plastitanium/red,
-/area/shuttle/labor)
-"Z" = (
+"L" = (
 /obj/machinery/power/terminal{
 	dir = 8
 	},
@@ -189,9 +102,89 @@
 /obj/item/folder/red,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/labor)
+"M" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"N" = (
+/obj/machinery/shuttle_weapon/laser,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/labor)
+"P" = (
+/obj/machinery/shuttle/engine/ion{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/shuttle/labor)
+"Q" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
+"R" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Labor Shuttle Airlock";
+	req_access_txt = "2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "0-8"
+	},
+/obj/structure/fans/tiny,
+/turf/open/floor/plating,
+/area/shuttle/labor)
+"S" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "4-8"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
+"U" = (
+/obj/machinery/computer/weapons{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"X" = (
+/obj/machinery/mineral/stacking_unit_console{
+	machinedir = 2;
+	pixel_x = 30;
+	pixel_y = 30
+	},
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/labor)
+"Y" = (
+/obj/structure/chair/fancy/shuttle{
+	dir = 8
+	},
+/obj/machinery/mineral/labor_claim_console{
+	machinedir = 1;
+	pixel_x = 28;
+	pixel_y = 28
+	},
+/obj/machinery/flasher{
+	id = "gulagshuttleflasher";
+	pixel_x = 25
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
+"Z" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/labor)
 
 (1,1,1) = {"
-R
+N
 a
 b
 a
@@ -205,43 +198,43 @@ a
 b
 c
 f
-j
-T
-Q
-p
-r
-s
+G
+x
+Z
+u
+B
+P
 "}
 (3,1,1) = {"
 b
-d
+M
 f
-P
+I
 a
 m
-l
-r
-s
+S
+B
+P
 "}
 (4,1,1) = {"
 b
-e
-h
-Z
+U
+X
+L
 k
-o
-x
-r
-s
+Y
+Q
+B
+P
 "}
 (5,1,1) = {"
+N
+a
 R
 a
-i
 a
 a
-a
-q
+A
 a
 a
 "}

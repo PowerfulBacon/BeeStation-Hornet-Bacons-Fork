@@ -43,8 +43,9 @@
 		meteor.start_y = start_y + rand(-600, 600)
 		MOVE_ORBITAL_BODY(meteor, meteor.start_x, meteor.start_y)
 		//Calculate velocity
-		meteor.velocity.Set(((station_target.position.GetX() - meteor.start_x) * 10) / meteor_time, ((station_target.position.GetY() - meteor.start_y) * 10) / meteor_time)
-		meteor.end_tick = world.time + meteor_time
+		meteor.velocity.x = (station_target.position.GetX() - meteor.start_x * 10) / meteor_time
+		meteor.velocity.y = (station_target.position.GetY() - meteor.start_y * 10) / meteor_time
+		meteor.end_tick = SSorbits.times_fired + (meteor_time / SSorbits.wait)
 		meteor.target = station_target
 
 /datum/round_event/meteor_wave/on_admin_trigger()
@@ -54,7 +55,7 @@
 
 /datum/round_event/meteor_wave/proc/determine_wave_type()
 	if(!wave_name)
-		wave_name = pickweight(list(
+		wave_name = pick_weight(list(
 			"normal" = 50,
 			"threatening" = 40,
 			"catastrophic" = 10))

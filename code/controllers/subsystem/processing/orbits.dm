@@ -101,7 +101,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 /datum/controller/subsystem/processing/orbits/proc/get_event()
 	if(!event_probability)
 		return null
-	return pickweight(runnable_events)
+	return pick_weight(runnable_events)
 
 /datum/controller/subsystem/processing/orbits/proc/post_load_init()
 	for(var/map_key in orbital_maps)
@@ -149,6 +149,11 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	set name = "View Orbits"
 	set category = "Ghost"
 	SSorbits.orbital_map_tgui.ui_interact(src)
+
+/// parameter must accept 'get_virtual_z_level()' values
+/datum/controller/subsystem/processing/orbits/proc/get_orbital_map_name_from_z(my_z)
+	var/datum/orbital_object/O = assoc_z_levels["[my_z]"]
+	return O?.name
 
 /*
  * Returns the base data of what is required for
