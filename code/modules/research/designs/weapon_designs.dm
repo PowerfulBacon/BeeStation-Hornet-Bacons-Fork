@@ -438,7 +438,7 @@
 	desc = "An ammunition loader for charging laser turrets."
 	id = "loader_laser"
 	build_type = IMPRINTER
-	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 1 * MINERAL_MATERIAL_AMOUNT)
+	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 1 * MINERAL_MATERIAL_AMOUNT)
 	build_path = /obj/item/circuitboard/machine/loader_laser
 	category = list("Shuttle Weapons", "Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
@@ -448,7 +448,7 @@
 	desc = "An ammunition loader for loading railgun shells."
 	id = "loader_railgun"
 	build_type = IMPRINTER
-	materials = list(/datum/material/iron = 25 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 8 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 3 * MINERAL_MATERIAL_AMOUNT)
+	materials = list(/datum/material/iron = 25 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 8 * MINERAL_MATERIAL_AMOUNT)
 	build_path = /obj/item/circuitboard/machine/loader_railgun
 	category = list("Shuttle Weapons", "Shuttle Machinery")
 	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
@@ -599,7 +599,7 @@
 	name = "Shuttle-Fired Electromagnetic Disruption Missile"
 	desc=  "An electromagnetic disruption missile, fired from a shuttle turret."
 	id = "shuttle_missile_emp"
-	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/plasma = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 2 * MINERAL_MATERIAL_AMOUNT)
+	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/plasma = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/copper = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 2 * MINERAL_MATERIAL_AMOUNT)
 	build_path = /obj/item/ammo_casing/caseless/shuttle_missile/emp
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE
@@ -609,7 +609,7 @@
 	name = "Shuttle-Fired Breaching Missile"
 	desc=  "A high-explosive breaching missile, fired from a shuttle turret."
 	id = "shuttle_missile_breach"
-	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/plasma = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/crilium = 1 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 3 * MINERAL_MATERIAL_AMOUNT)
+	materials = list(/datum/material/iron = 15 * MINERAL_MATERIAL_AMOUNT, /datum/material/plasma = 5 * MINERAL_MATERIAL_AMOUNT, /datum/material/diamond = 3 * MINERAL_MATERIAL_AMOUNT)
 	build_path = /obj/item/ammo_casing/caseless/shuttle_missile/breach
 	build_type = PROTOLATHE
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY | DEPARTMENTAL_FLAG_SCIENCE

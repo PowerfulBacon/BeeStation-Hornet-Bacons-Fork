@@ -5,7 +5,7 @@
 	damage = 60
 	damage_type = BRUTE
 	hitsound_wall = "ricochet"
-	flag = "bullet"
+	armor_flag = "bullet"
 	eyeblur = 2
 	impact_effect_type = /obj/effect/temp_visual/impact_effect
 	ricochets_max = 2

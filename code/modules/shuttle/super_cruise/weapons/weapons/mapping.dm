@@ -30,7 +30,7 @@
 	var/list/valid_weapon_types = list()
 	for (var/obj/machinery/shuttle_weapon/shuttle_weapon_type as() in subtypesof(/obj/machinery/shuttle_weapon))
 		valid_weapon_types[shuttle_weapon_type] = 100 - abs(initial(shuttle_weapon_type.strength_rating) - shuttle_strength)
-	spawn_weapon(pickweight(valid_weapon_types))
+	spawn_weapon(pick_weight(valid_weapon_types))
 	qdel(src)
 
 /obj/effect/landmark/exploration_weapon_spawner/proc/spawn_weapon(weapon_type)

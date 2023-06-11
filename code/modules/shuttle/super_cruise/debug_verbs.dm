@@ -4,7 +4,6 @@ GLOBAL_LIST_INIT(supercruise_debug_verbs, list(
 	/client/proc/check_ship_status,
 	/client/proc/set_ship_faction,
 	/client/proc/highlight_registered_turfs,
-	/client/proc/create_npc_ship,
 ))
 GLOBAL_PROTECT(supercruise_debug_verbs)
 
@@ -130,37 +129,3 @@ GLOBAL_PROTECT(supercruise_debug_verbs)
 			spawn(20 SECONDS)
 				images -= I
 				qdel(I)
-
-/client/proc/create_npc_ship()
-	set category = "Exploration Debug"
-	set name = "Spawn NPC Ship"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	var/list/valid_maps = list()
-
-	for(var/id in SSmapping.shuttle_templates)
-		var/datum/map_template/shuttle/ship/map = SSmapping.shuttle_templates[id]
-		if(!istype(map))
-			continue
-		valid_maps[id] = map
-
-	var/selected = input(src, "Select the ship template to spawn", "Spawn NPC Ship", null) as null|anything in valid_maps
-	var/datum/map_template/shuttle/ship/selected_ship = valid_maps[selected]
-	if(!selected_ship)
-		return
-
-	var/selected_faction = input(src, "Select a faction", "Spawn NPC Ship", null) as null|anything in subtypesof(/datum/faction)
-	if(!selected_faction)
-		return
-
-	var/selected_ai = input(src, "Select an AI type to grant to this ship", "Spawn NPC Ship", null) as null|anything in typesof(/datum/shuttle_ai_pilot)
-	if(!selected_ai)
-		return
-
-	SSorbits.spawn_ship(selected_ship, new selected_faction(), new selected_ai())
-
-	message_admins("[key_name_admin(src)] spawned an NPC ship.")
-	log_shuttle("[key_name_admin(src)] spawned an NPC ship.")
-	log_admin("[key_name_admin(src)] spawned an NPC ship.")

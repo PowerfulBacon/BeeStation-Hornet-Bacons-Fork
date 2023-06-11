@@ -9,23 +9,11 @@
 	var/hud_state = "hudunknown"
 	// ======== LEAD INSTANCE ========
 	var/is_lead_instance = FALSE
-	// List of missions that this facation is offering
-	var/list/available_missions = list()
-	// List of respawns available for each team
-	var/respawns_available = 80
 	var/important = FALSE
 
 /datum/faction/New(lead_instance = FALSE)
 	. = ..()
 	is_lead_instance = lead_instance
-	if (is_lead_instance)
-		START_PROCESSING(SSorbits, src)
-
-/datum/faction/process(delta_time)
-	// Handle mission generation
-	if (length(available_missions) < 5 && DT_PROB(5, delta_time))
-		// Generate a new mission
-		available_missions += new /datum/mission/mining()
 
 /datum/faction/proc/generate_faction_reward(amount)
 	return
@@ -63,20 +51,6 @@
 	if (faction_flag & FACTION_SYNDICATE)
 		return new /datum/faction/syndicate
 	return new /datum/faction/independant
-
-/datum/faction/proc/player_spawned(mob/living/player)
-	respawns_available--
-	for (var/atom/movable/screen/player_spawns/ps in GLOB.player_spawn_screens)
-		ps.update_player_counts()
-	if (important && respawns_available < 0)
-		SSround_manager.activate()
-	player.hud_set_faction_indicator(src)
-
-/mob/living/proc/hud_set_faction_indicator(datum/faction/f)
-	var/image/holder = hud_list[FACTION_HUD]
-	var/icon/I = icon(icon, icon_state, dir)
-	holder.pixel_y = I.Height() - world.icon_size
-	holder.icon_state = f.hud_state
 
 /datum/faction/independant
 	name = "Independant"

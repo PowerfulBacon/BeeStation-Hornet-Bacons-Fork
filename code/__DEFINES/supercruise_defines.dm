@@ -12,3 +12,6 @@
 #define BATTLE_POLICY_CAREFUL 0.45		//For ships that don't mind a fight, but would rather not die
 #define BATTLE_POLICY_SUSTAINED 0.15	//Will keep a fight going and will only retreat when very, very low
 #define BATTLE_POLICY_NO_RETREAT 0		//Death to nanotrasen
+
+#define FACTION_NANOTRASEN (1 << 0)
+#define FACTION_SYNDICATE (1 << 2)
