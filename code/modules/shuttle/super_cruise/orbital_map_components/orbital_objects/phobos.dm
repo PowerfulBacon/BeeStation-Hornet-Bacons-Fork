@@ -7,8 +7,5 @@
 	render_mode = RENDER_MODE_PLANET
 	priority = 20
 	signal_range = 6000
-
-/datum/orbital_object/z_linked/phobos/post_map_setup()
-	//Orbit around the systems sun
-	var/datum/orbital_map/linked_map = SSorbits.orbital_maps[orbital_map_index]
-	set_orbitting_around_body(linked_map.center, 3800)
+	orbit_distance = 11000
+	orbit_distance_variation = 3000

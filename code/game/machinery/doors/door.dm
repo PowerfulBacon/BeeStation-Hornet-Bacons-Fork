@@ -129,7 +129,7 @@
 		var/obj/item/I = AM
 		if(!density)
 			return
-		if(check_access(I))
+		if(allowed(I))
 			open()
 		else
 			do_animate("deny")

@@ -75,12 +75,7 @@ SUBSYSTEM_DEF(zclear)
 			mob_levels["[T.z]"] = TRUE
 			if(L.stat != DEAD)
 				active_levels["[T.z]"] = TRUE
-				living_levels["[T.z]"] = TRUE
-	//Check active nukes
-	for(var/obj/machinery/nuclearbomb/decomission/bomb in GLOB.decomission_bombs)
-		if(bomb.timing)
-			active_levels["[bomb.z]"] = TRUE
-			living_levels["[bomb.z]"] = TRUE	//Dont perform mob saving actions on mobs about to be blown to smitherines.
+				living_levels["[T.z]"] = TRUE//Dont perform mob saving actions on mobs about to be blown to smitherines.
 	//Block z-clear from these levels.
 	for(var/atom/A as() in GLOB.zclear_blockers)
 		active_levels["[A.z]"] = TRUE
@@ -152,7 +147,7 @@ SUBSYSTEM_DEF(zclear)
 				break
 		if(free)
 			return picked_level
-	var/datum/space_level/picked_level = SSmapping.add_new_zlevel("Dynamic free level [LAZYLEN(free_levels)]", ZTRAITS_SPACE, orbital_body_type = null)
+	var/datum/space_level/picked_level = SSmapping.add_new_zlevel("Dynamic free level [LAZYLEN(free_levels)]", ZTRAITS_SPACE, orbital_body_type = null, initialise = TRUE)
 	addtimer(CALLBACK(src, PROC_REF(begin_tracking), picked_level), 60 SECONDS)
 	message_admins("SSORBITS: Created a new dynamic free level ([world.maxz] z-levels now exist) as none were available at the time.")
 	return picked_level

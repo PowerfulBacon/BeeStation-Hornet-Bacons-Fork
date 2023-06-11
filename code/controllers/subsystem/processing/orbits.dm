@@ -10,15 +10,11 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 	var/datum/orbital_map_tgui/orbital_map_tgui = new()
 
-	var/initial_space_ruins = 2
-	var/initial_objective_beacons = 3
-	var/initial_asteroids = 6
+	var/initial_space_ruins = 8
+	var/initial_asteroid_belt = 6
+	var/initial_asteroids = 12
 
 	var/orbits_setup = FALSE
-
-	var/list/datum/orbital_objective/possible_objectives = list()
-
-	var/datum/orbital_objective/current_objective
 
 	var/list/datum/ruin_event/ruin_events = list()
 
@@ -37,8 +33,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//Key = port_id
 	//value = world time of next launch
 	var/list/interdicted_shuttles = list()
-
-	var/next_objective_time = 0
 
 	//Research disks
 	var/list/research_disks = list()
@@ -62,15 +56,20 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//shuttle weapons
 	var/list/shuttle_weapons = list()
 
+	// Singleton Faction Instances
+	var/list/lead_faction_instances = list()
+
 /datum/controller/subsystem/processing/orbits/Initialize(start_timeofday)
 	. = ..()
 	setup_event_list()
 	//Create the main orbital map.
 	orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map()
+	// Create the lead faction instances
+	for (var/subtype in subtypesof(/datum/faction))
+		lead_faction_instances[subtype] = new subtype(TRUE)
 
 /datum/controller/subsystem/processing/orbits/Recover()
 	orbital_maps |= SSorbits.orbital_maps
-	possible_objectives |= SSorbits.possible_objectives
 	ruin_events |= SSorbits.ruin_events
 	assoc_shuttles |= SSorbits.assoc_shuttles
 	interdicted_shuttles |= SSorbits.interdicted_shuttles
@@ -79,8 +78,6 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	runnable_events |= SSorbits.runnable_events
 
 	station_instance = SSorbits.station_instance
-	current_objective = SSorbits.current_objective
-	next_objective_time = SSorbits.next_objective_time
 	ruin_levels = SSorbits.ruin_levels
 	orbital_map_tgui = SSorbits.orbital_map_tgui
 	orbits_setup = SSorbits.orbits_setup
@@ -114,11 +111,11 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//Create initial ruins
 	for(var/i in 1 to initial_space_ruins)
 		new /datum/orbital_object/z_linked/beacon/spaceruin()
-	for(var/i in 1 to initial_objective_beacons)
-		new /datum/orbital_object/z_linked/beacon/ruin()
 	//Create asteroid belt
-	for(var/i in 1 to initial_asteroids)
+	for(var/i in 1 to initial_asteroid_belt)
 		new /datum/orbital_object/z_linked/beacon/asteroid()
+	for(var/i in 1 to initial_asteroids)
+		new /datum/orbital_object/z_linked/beacon/asteroid/deep_space()
 
 /datum/controller/subsystem/processing/orbits/fire(resumed)
 	if(resumed)
@@ -128,18 +125,9 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 		//Update UIs
 		for(var/datum/tgui/tgui as() in open_orbital_maps)
 			tgui.send_update()
-	//Check creating objectives / missions.
-	if(next_objective_time < world.time && length(possible_objectives) < 6)
-		create_objective()
-		next_objective_time = world.time + rand(30 SECONDS, 5 MINUTES)
 	//Check space ruin count
 	if(ruin_levels < 2 && prob(5))
 		new /datum/orbital_object/z_linked/beacon/spaceruin()
-	//Check objective
-	if(current_objective)
-		if(current_objective.check_failed())
-			priority_announce("Central Command priority objective failed.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
-			QDEL_NULL(current_objective)
 	//Process events
 	for(var/datum/ruin_event/ruin_event as() in ruin_events)
 		if(!ruin_event.update())
@@ -153,46 +141,9 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 		for(var/datum/tgui/tgui as() in open_orbital_maps)
 			tgui.send_update()
 
-/datum/controller/subsystem/processing/orbits/proc/create_objective()
-	var/static/list/valid_objectives = list(
-		/datum/orbital_objective/recover_blackbox = 3,
-		/datum/orbital_objective/nuclear_bomb = 1,
-		/datum/orbital_objective/assassination = 1,
-		/datum/orbital_objective/artifact = 2,
-		/datum/orbital_objective/vip_recovery = 1
-	)
-	if(!length(possible_objectives))
-		priority_announce("Priority station objective received - Details transmitted to all available objective consoles. \
-			[GLOB.station_name] will have funds distributed upon objective completion.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
-	var/chosen = pickweight(valid_objectives)
-	if(!chosen)
-		return
-	var/datum/orbital_objective/objective = new chosen()
-	objective.generate_payout()
-	possible_objectives += objective
-	update_objective_computers()
-
-/datum/controller/subsystem/processing/orbits/proc/assign_objective(objective_computer, datum/orbital_objective/objective)
-	if(!possible_objectives.Find(objective))
-		return "Selected objective is no longer available or has been claimed already."
-	if(current_objective)
-		return "An objective has already been selected and must be completed first."
-	objective.on_assign(objective_computer)
-	objective.generate_attached_beacon()
-	objective.announce()
-	current_objective = objective
-	possible_objectives.Remove(objective)
-	update_objective_computers()
-	return "Objective selected, good luck."
-
 //====================================
 // User Interfaces
 //====================================
-
-/datum/controller/subsystem/processing/orbits/proc/update_objective_computers()
-	for(var/obj/machinery/computer/objective/computer as() in GLOB.objective_computers)
-		for(var/M in computer.viewing_mobs)
-			computer.update_static_data(M)
 
 /mob/dead/observer/verb/open_orbit_ui()
 	set name = "View Orbits"
@@ -285,3 +236,55 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	var/datum/shuttle_data/shuttle = get_shuttle_data(port_id)
 	assoc_shuttle_data -= port_id
 	qdel(shuttle)
+
+//====================================
+// Factions
+//====================================
+
+/datum/controller/subsystem/processing/orbits/proc/get_lead_faction(faction_type)
+	return lead_faction_instances[faction_type]
+
+//====================================
+// Ship Spawning
+//====================================
+
+/datum/controller/subsystem/processing/orbits/proc/spawn_ship(datum/map_template/shuttle/ship/selected_ship, ship_faction, ship_ai)
+	var/datum/turf_reservation/preview_reservation = SSmapping.RequestBlockReservation(selected_ship.width, selected_ship.height, SSmapping.transit.z_value, /datum/turf_reservation/transit)
+	if(!preview_reservation)
+		CRASH("failed to reserve an area for shuttle template loading")
+
+	// Spawn the ship
+	var/datum/variable_ref/shuttle_ref = new()
+	var/datum/map_generator/map_place/placer = SSshuttle.action_load(selected_ship, null, shuttle_ref)
+	if (!placer)
+		tgui_alert_async(usr, "Failed to load selected map, please file a GitHub issue or contact the Head Developer.", "Loading error")
+		return
+	// Give the clients their jobs, give bad clients a random job
+	placer.on_completion(COMPLETION_PRIORITY_PREVIEW, CALLBACK(src, PROC_REF(grant_ai), shuttle_ref, ship_faction, ship_ai))
+
+/datum/controller/subsystem/processing/orbits/proc/grant_ai(datum/variable_ref/shuttle_ref, faction_instance, ship_ai)
+	var/obj/docking_port/mobile/M = shuttle_ref.value
+	// Magically wrench in everything
+	var/obj/item/wrench/w = new()
+	for (var/turf/T in M.return_turfs())
+		for (var/obj/machinery/portable_atmospherics/pa in T)
+			pa.attackby(w, usr)
+	qdel(w)
+	//Give the ship some AI
+	var/datum/shuttle_data/located_shuttle = SSorbits.get_shuttle_data(M.id)
+	located_shuttle.faction = faction_instance
+	located_shuttle.set_pilot(ship_ai)
+
+//====================================
+// Other
+//====================================
+
+/datum/controller/subsystem/processing/orbits/proc/get_associated_level(turf/place)
+	if (!place)
+		return null
+	if (SSorbits.assoc_z_levels["[place.get_virtual_z_level()]"])
+		return SSorbits.assoc_z_levels["[place.get_virtual_z_level()]"]
+	var/area/shuttle/location = place.loc
+	if (istype(location) && location.mobile_port)
+		return SSorbits.assoc_shuttles[location.mobile_port.id]
+	return null

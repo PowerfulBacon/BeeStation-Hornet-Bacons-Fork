@@ -44,7 +44,7 @@
 	velocity.Set(current_x - position.GetX(), current_y - position.GetY())
 	. = ..()
 	MOVE_ORBITAL_BODY(src, current_x, current_y)
-	if(abs(position.GetX()) > 10000 || abs(position.GetY()) > 10000)
+	if(abs(position.GetX()) > 30000 || abs(position.GetY()) > 30000)
 		qdel(src)
 
 /datum/orbital_object/meteor/collision(datum/orbital_object/other)

@@ -8,6 +8,8 @@
 	//Sure, why not?
 	can_dock_anywhere = TRUE
 	signal_range = 4000
+	orbit_distance = 7000
+	orbit_distance_variation = 1000
 
 /datum/orbital_object/z_linked/station/New()
 	. = ..()
@@ -29,8 +31,3 @@
 /datum/orbital_object/z_linked/station/explode()
 	. = ..()
 	SSticker.force_ending = TRUE
-
-/datum/orbital_object/z_linked/station/post_map_setup()
-	//Orbit around the system center
-	var/datum/orbital_map/linked_map = SSorbits.orbital_maps[orbital_map_index]
-	set_orbitting_around_body(linked_map.center, 1800)

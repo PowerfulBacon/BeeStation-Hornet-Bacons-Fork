@@ -61,6 +61,13 @@
 	//The color of the locator
 	var/locator_colour
 
+	/// Initial orbit base distance
+	var/orbit_distance
+	/// Initial orbit variation
+	var/orbit_distance_variation
+	/// Is this a maintained orbit
+	var/orbit_maintained = FALSE
+
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
 		src.orbital_map_index = orbital_map_index
@@ -342,7 +349,9 @@
 	parent_map.on_body_move(src, prev_x, prev_y)
 
 /datum/orbital_object/proc/post_map_setup()
-	return
+	if (orbit_distance > 0)
+		var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
+		set_orbitting_around_body(map.center, orbit_distance + rand(-1000, 1000) / 1000 * orbit_distance_variation, orbit_maintained)
 
 /datum/orbital_object/proc/get_locator_name()
 	return name
