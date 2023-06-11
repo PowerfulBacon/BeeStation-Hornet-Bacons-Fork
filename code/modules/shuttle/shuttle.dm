@@ -159,6 +159,13 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	var/turf/T1 = locate(L[3],L[4],z)
 	return block(T0,T1)
 
+//returns the center turf
+/obj/docking_port/proc/return_center_turf()
+	var/list/L = return_coords()
+	var/x1 = CEILING((L[1] + L[3]) * 0.5, 1)
+	var/y1 = CEILING((L[2] + L[4]) * 0.5, 1)
+	return locate(x1, y1, z)
+
 //returns turfs within our projected rectangle in a specific order.
 //this ensures that turfs are copied over in the same order, regardless of any rotation
 /obj/docking_port/proc/return_ordered_turfs(_x, _y, _z, _dir)
@@ -277,6 +284,9 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	if(roundstart_template)
 		SSshuttle.action_load(roundstart_template, src)
 
+/obj/docking_port/stationary/proc/on_docked(obj/docking_port/mobile/docking)
+	docked = docking
+
 /obj/docking_port/stationary/transit
 	name = "In Transit"
 	var/datum/turf_reservation/reserved_area
@@ -361,6 +371,9 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	var/virtual_z
 	//The virtual Z-value this shuttle is at
 	var/current_z
+
+	/// Is the shuttle currently in the process of moving?
+	var/is_moving = FALSE
 
 	var/sound_played = 0 //If the launch sound has been sent to all players on the shuttle itself
 
@@ -583,7 +596,7 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 	//Find open dock here and set it as ours
 	for(var/obj/docking_port/stationary/S in loc.contents)
 		if(!S.docked)
-			S.docked = src
+			S.on_docked(src)
 			docked = S
 			break
 
@@ -601,11 +614,6 @@ GLOBAL_LIST_INIT(shuttle_turf_blacklist, typecacheof(list(
 /obj/docking_port/mobile/proc/linkup(datum/map_template/shuttle/template, obj/docking_port/stationary/dock)
 	var/list/static/shuttle_id = list()
 	var/idnum = ++shuttle_id[template]
-	if(idnum > 1)
-		if(id == initial(id))
-			id = "[id][idnum]"
-		if(name == initial(name))
-			name = "[name] [idnum]"
 	for(var/place in shuttle_areas)
 		var/area/area = place
 		area.connect_to_shuttle(src, dock, idnum, FALSE)

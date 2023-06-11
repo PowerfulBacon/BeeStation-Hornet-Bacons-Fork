@@ -16,6 +16,8 @@
 /obj/item/projectile/bullet/shuttle/ballistic/guass
 	icon_state = "guassstrong"
 	name = "guass round"
+	icon = 'icons/obj/shuttle_weapons.dmi'
+	icon_state = "rail"
 	damage = 50
 	armour_penetration = 40
 	projectile_piercing = ALL
@@ -34,6 +36,7 @@
 /obj/item/projectile/bullet/shuttle/ballistic/guass/uranium
 	icon_state = "gaussradioactive"
 	name = "uranium-coated guass round"
+	icon_state = "railu"
 	irradiate = 200
 	damage = 80
 	slur = 50
@@ -43,15 +46,15 @@
 	name = "88mm round"
 	damage = 15
 	eyeblur = 0
-	light_damage_factor = 7
-	heavy_damage_factor = 10
+	light_damage_factor = 3
+	heavy_damage_factor = 6
 
 /obj/item/projectile/bullet/shuttle/ballistic/bullet/heavy
 	name = "88mm armour-peircing round"
-	light_damage_factor = 6
-	heavy_damage_factor = 9
+	light_damage_factor = 3
+	heavy_damage_factor = 6
 
 /obj/item/projectile/bullet/shuttle/ballistic/bullet/heavy/prehit_pierce(atom/A)
-	if (prob(70))
+	if (prob(70) && isturf(A))
 		return PROJECTILE_PIERCE_PHASE
 	return ..()

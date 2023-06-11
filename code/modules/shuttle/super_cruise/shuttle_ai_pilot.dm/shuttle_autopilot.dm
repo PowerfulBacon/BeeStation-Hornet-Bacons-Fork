@@ -39,7 +39,7 @@
 				set_target(locate_target_object_from_port(targetPortId))
 		return
 	//Dock with the target location
-	if(shuttle.can_dock_with == shuttleTarget)
+	if(shuttle.can_dock_with == shuttleTarget && shuttle.can_dock_with.can_dock_here(shuttle))
 		shuttle.commence_docking(shuttleTarget, TRUE)
 
 /datum/shuttle_ai_pilot/autopilot/proc/locate_target_object_from_port(port_id)

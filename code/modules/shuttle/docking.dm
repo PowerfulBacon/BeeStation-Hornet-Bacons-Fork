@@ -1,5 +1,12 @@
 /// This is the main proc. It instantly moves our mobile port to stationary port `new_dock`.
 /obj/docking_port/mobile/proc/initiate_docking(obj/docking_port/stationary/new_dock, movement_direction, force=FALSE)
+	if (is_moving)
+		return DOCKING_ALREADY_DOCKING
+	is_moving = TRUE
+	. = _initiate_docking(new_dock, movement_direction, force)
+	is_moving = FALSE
+
+/obj/docking_port/mobile/proc/_initiate_docking(obj/docking_port/stationary/new_dock, movement_direction, force=FALSE)
 	// Crashing this ship with NO SURVIVORS
 	if(new_dock.docked == src)
 		remove_ripples()
@@ -84,10 +91,10 @@
 
 	CHECK_TICK
 
-	//Updating docked properties
-	new_dock.docked = src
 	if(docked) //Shuttles don't have a dock when initially loaded
 		docked.docked = null
+	//Updating docked properties
+	new_dock.on_docked(src)
 	docked = new_dock
 
 	/*******************************************Unhiding turfs if necessary******************************************/

@@ -1,4 +1,3 @@
-
 /obj/item/ammo_box/flak
 	name = "ammunition box (flak)"
 	icon_state = "45box"

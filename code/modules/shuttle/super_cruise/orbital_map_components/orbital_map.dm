@@ -7,8 +7,6 @@
 	var/list/collision_zone_bodies = list()
 	//Object count
 	var/object_count
-	/// The radius of the orbital map
-	var/map_radius = 30000
 
 /datum/orbital_map/proc/add_body(datum/orbital_object/body)
 	object_count ++

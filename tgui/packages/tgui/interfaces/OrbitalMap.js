@@ -55,7 +55,7 @@ export const OrbitalMap = (props, context) => {
       if (element.name === trackedBody && !trackedObject)
       {
         trackedObject = element;
-        if (trackedBody !== map_objects[0].name)
+        if (trackedBody !== "None")
         {
           dynamicXOffset = trackedObject.position_x
            + trackedObject.velocity_x;
@@ -485,6 +485,7 @@ const OrbitalMapDisplay = (props, context) => {
     shuttleTargetX = 0,
     shuttleTargetY = 0,
     update_index = 0,
+    map_radius = 0,
   } = data;
 
   return (
@@ -581,7 +582,8 @@ const OrbitalMapDisplay = (props, context) => {
             dragStartEvent={e => control.handleDragStart(e)}
             zoomScale={zoomScale}
             shuttleName={shuttleName}
-            currentUpdateIndex={update_index}>
+            currentUpdateIndex={update_index}
+            map_radius={map_radius}>
             {control => (
               control.svgComponent
             )}

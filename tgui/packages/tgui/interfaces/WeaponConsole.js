@@ -65,15 +65,19 @@ export const WeaponDisplay = (props, context) => {
     set_selected_weapon,
   ] = useLocalState(context, "selected_weapon", 0);
 
-  let style = (1-weapon.cooldownLeft / weapon.cooldown) < 0.3
-    ? "#weaponConsole__flash"
-    : (1-weapon.cooldownLeft / weapon.cooldown) < 1
-      && "weaponConsole__flash_yellow";
-  let colour = (1-weapon.cooldownLeft / weapon.cooldown) < 0.3
-    ? "#db6969"
-    : (1-weapon.cooldownLeft / weapon.cooldown) < 1
-      ? "#f5e553"
-      : "#8ff288";
+  let style = weapon.disabled
+    ? "weaponConsole__disabled"
+    : (1-weapon.cooldownLeft / weapon.cooldown) < 0.3
+      ? "weaponConsole__flash"
+      : (1-weapon.cooldownLeft / weapon.cooldown) < 1
+        && "weaponConsole__flash_yellow";
+  let colour = weapon.disabled
+    ? "#729cbe"
+    : (1-weapon.cooldownLeft / weapon.cooldown) < 0.3
+      ? "#db6969"
+      : (1-weapon.cooldownLeft / weapon.cooldown) < 1
+        ? "#f5e553"
+        : "#8ff288";
 
   return (
     <Box
@@ -161,20 +165,27 @@ export const ShipSearchContent = (props, context) => {
                   Integrity: {ship.health}
                 </ProgressBar>
                 <Divider />
-                {ship.hostile
+                {ship.aggro_state === "hostile"
                   ? (
                     <NoticeBox
                       textAlign="center"
                       color="red">
                       HOSTILE
                     </NoticeBox>
-                  ) : (
-                    <NoticeBox
-                      textAlign="center"
-                      color="green">
-                      Neutral
-                    </NoticeBox>
-                  )}
+                  ) : ship.aggro_state === "friendly"
+                    ? (
+                      <NoticeBox
+                        textAlign="center"
+                        color="green">
+                        Friendly
+                      </NoticeBox>
+                    ) : (
+                      <NoticeBox
+                        textAlign="center"
+                        color="yellow">
+                        Neutral
+                      </NoticeBox>
+                    )}
                 {ship.id === selectedShip
                   ? (
                     <NoticeBox

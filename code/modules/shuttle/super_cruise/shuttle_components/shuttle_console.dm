@@ -184,7 +184,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		shuttle_data
 	)
 
-	data["shuttleName"] = map_reference_object?.get_name()
+	data["shuttleName"] = map_reference_object?.name
 
 	//Send shuttle data
 	if(!SSshuttle.getShuttle(shuttleId))
@@ -232,7 +232,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 		return data
 	data["linkedToShuttle"] = TRUE
 	data["shuttleTarget"] = shuttleObject.shuttle_data.ai_pilot?.get_target_name()
-	data["shuttleName"] = shuttleObject.get_name()
+	data["shuttleName"] = shuttleObject.name
 	data["shuttleAngle"] = shuttleObject.angle
 	data["shuttleThrust"] = shuttleObject.thrust
 	data["autopilot_enabled"] = shuttleObject.shuttle_data.ai_pilot?.is_active()
@@ -334,11 +334,11 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 				say("Shuttle not in flight.")
 				return
 			var/desiredTarget = params["target"]
-			if(shuttleObject.get_name() == desiredTarget)
+			if(shuttleObject.name == desiredTarget)
 				return
 			var/datum/orbital_map/showing_map = SSorbits.orbital_maps[orbital_map_index]
 			for(var/datum/orbital_object/object as() in showing_map.get_all_bodies())
-				if(object.get_name() == desiredTarget)
+				if(object.name == desiredTarget)
 					var/is_autopilot_active = shuttleObject.shuttle_data.ai_pilot?.is_active()
 					if(shuttleObject.shuttle_data.try_override_pilot())
 						shuttleObject.shuttle_data.set_pilot(new /datum/shuttle_ai_pilot/autopilot(object))

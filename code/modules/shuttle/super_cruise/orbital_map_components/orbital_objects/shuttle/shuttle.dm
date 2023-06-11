@@ -119,12 +119,10 @@
 	else
 		//If our docking target was deleted, null it to prevent docking interface etc.
 		docking_target = null
-	var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
-	var/distance_from_center = sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY())
-	if (distance_from_center > map.map_radius)
-		// Slowly get destroyed if you go too far out
-		if (prob((distance_from_center - map.map_radius) / 100))
-			explosion(pick(port.return_turfs()), rand(1, 2), rand(1, 4), rand(1, 8))
+	//I hate that I have to do this, but people keep flying them away.
+	if(position.GetX() > 30000 || position.GetX() < -30000 || position.GetY() > 30000 || position.GetY() < -30000)
+		// Flip our direction
+		velocity.Set(-velocity.GetX(), -velocity.GetY())
 	//Handle breaking
 	if(breaking)
 		//Reduce velocity
@@ -307,6 +305,3 @@
 	if (!shuttle_data)
 		return FALSE
 	return shuttle_data.stealth
-
-/datum/orbital_object/shuttle/get_name()
-	return "([shuttle_data.faction.faction_tag]) [shuttle_data.shuttle_name]"

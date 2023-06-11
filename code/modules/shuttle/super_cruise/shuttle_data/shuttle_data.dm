@@ -66,6 +66,8 @@
 	var/obj/docking_port/mobile/attached_port = SSshuttle.getShuttle(port_id)
 	shuttle_name = attached_port.name
 	calculate_initial_stats()
+	if (!faction)
+		faction = new /datum/faction/independant
 	stealth = TRUE
 	addtimer(CALLBACK(src, PROC_REF(leave_stealth)), 4 MINUTES)
 
