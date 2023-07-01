@@ -80,12 +80,21 @@
 // Random-Ruin z-levels
 //====================
 /datum/orbital_object/z_linked/beacon/ruin
+	//The linked objective to the ruin, for generating extra stuff if required.
+	var/datum/orbital_objective/linked_objective
+
+/datum/orbital_object/z_linked/beacon/ruin/Destroy()
+	//Remove linked objective.
+	if(linked_objective)
+		linked_objective.linked_beacon = null
+		linked_objective = null
+	. = ..()
 
 /datum/orbital_object/z_linked/beacon/ruin/assign_z_level(quick_generation = FALSE)
 	var/datum/space_level/assigned_space_level = SSzclear.get_free_z_level()
 	linked_z_level = list(assigned_space_level)
 	SSorbits.assoc_z_levels["[assigned_space_level.z_value]"] = src
-	generate_space_ruin(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value, quick_generation ? 30 : 50, quick_generation ? 30 : 50, null, ruin_event)
+	generate_space_ruin(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value, quick_generation ? 30 : 50, quick_generation ? 30 : 50, linked_objective, null, ruin_event)
 
 //====================
 //Stranded shuttles

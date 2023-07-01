@@ -14,12 +14,13 @@
  * center_z - The z level the ruin is on.
  * border_x - The distance from the edge of the world in which the ruin will be forced to stop.
  * border_y - See above.
+ * linked_objective - Will spawn special objective stuff if this is part of an objective.
  * Note: The ruin can generate past the border. The border prevents rooms from attaching past that point,
  * however if a room attachment point is not past the border, the room it generates on that attachment point
  * can go past the border. No attachment points can be generated past the border.
  */
-/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, border_only, forced_decoration, datum/ruin_event/ruin_event)
-	var/datum/map_generator/space_ruin/ruin = new(center_x, center_y, center_z, border_x, border_y, forced_decoration, ruin_event)
+/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
+	var/datum/map_generator/space_ruin/ruin = new(center_x, center_y, center_z, border_x, border_y, linked_objective, forced_decoration, ruin_event)
 	ruin.generate()
 
 /datum/map_generator/space_ruin
@@ -39,6 +40,8 @@
 	var/datum/generator_settings/generator_settings
 	/// The ruin event to trigger throughout generation
 	var/datum/ruin_event/ruin_event
+	/// The objective linked to the generation of this ruin
+	var/datum/orbital_objective/linked_objective
 
 	//We need doors
 	var/list/placed_room_entrances = list()
@@ -66,13 +69,14 @@
 
 	var/stage = 0
 
-/datum/map_generator/space_ruin/New(center_x, center_y, center_z, border_x, border_y, forced_decoration, datum/ruin_event/ruin_event)
+/datum/map_generator/space_ruin/New(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
 	. = ..()
 	src.center_x = center_x
 	src.center_y = center_y
 	src.center_z = center_z
 	src.border_x = border_x
 	src.border_y = border_y
+	src.linked_objective = linked_objective
 	src.generator_settings = forced_decoration
 	src.ruin_event = ruin_event
 
@@ -410,6 +414,28 @@
 			break
 
 /datum/map_generator/space_ruin/proc/finalize()
+	//Generate objective stuff
+	if(linked_objective)
+		var/obj_sanity = 100
+		//Spawn in a sane place.
+		while(obj_sanity > 0)
+			obj_sanity --
+			var/objective_turf = pick(floor_turfs)
+			var/split_loc = splittext(objective_turf, "_")
+			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
+			if(isspaceturf(T))
+				continue
+			if(T.is_blocked_turf(FALSE))
+				continue
+			linked_objective.generate_objective_stuff(T)
+			break
+		if(!obj_sanity)
+			stack_trace("ruin generator failed to find a non-blocked turf to spawn an object")
+			var/objective_turf = pick(floor_turfs)
+			var/split_loc = splittext(objective_turf, "_")
+			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
+			linked_objective.generate_objective_stuff(T)
+
 	//Generate research disks
 	for(var/i in 1 to rand(1, 5))
 		var/objective_turf = pick(floor_turfs)

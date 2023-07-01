@@ -97,6 +97,11 @@ SUBSYSTEM_DEF(zclear)
 	for(var/docking_level in docking_levels)
 		active_levels["[docking_level]"] = TRUE
 		living_levels["[docking_level]"] = TRUE
+	//Check active nukes
+	for(var/obj/machinery/nuclearbomb/decomission/bomb in GLOB.decomission_bombs)
+		if(bomb.timing)
+			active_levels["[bomb.z]"] = TRUE
+			living_levels["[bomb.z]"] = TRUE	//Dont perform mob saving actions on mobs about to be blown to smitherines.
 
 	for(var/datum/space_level/level as() in autowipe)
 		if(!level)

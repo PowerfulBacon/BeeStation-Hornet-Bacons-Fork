@@ -232,6 +232,14 @@
 	category = list("Computer Boards")
 	departmental_flags = DEPARTMENTAL_FLAG_CARGO
 
+/datum/design/board/objective
+	name = "Computer Design (Objective Console)"
+	desc = "Allows for the construction of circuit boards used to build a Objective Console."
+	id = "objective"
+	build_path = /obj/item/circuitboard/computer/objective
+	category = list("Computer Boards")
+	departmental_flags = DEPARTMENTAL_FLAG_CARGO | DEPARTMENTAL_FLAG_SCIENCE
+
 /datum/design/board/bounty
 	name = "Computer Design (Bounty Console)"
 	desc = "Allows for the construction of circuit boards used to build a Bounty Console."

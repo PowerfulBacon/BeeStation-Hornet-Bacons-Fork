@@ -16,6 +16,12 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 	var/orbits_setup = FALSE
 
+	var/list/datum/orbital_objective/possible_objectives = list()
+
+	var/next_objective_time = 0
+
+	var/datum/orbital_objective/current_objective
+
 	var/list/datum/ruin_event/ruin_events = list()
 
 	var/list/runnable_events
@@ -76,6 +82,10 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	research_disks |= SSorbits.research_disks
 	if(!islist(runnable_events)) runnable_events = list()
 	runnable_events |= SSorbits.runnable_events
+
+	possible_objectives |= SSorbits.possible_objectives
+	current_objective = SSorbits.current_objective
+	next_objective_time = SSorbits.next_objective_time
 
 	station_instance = SSorbits.station_instance
 	ruin_levels = SSorbits.ruin_levels
@@ -140,6 +150,15 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 		//Update UIs
 		for(var/datum/tgui/tgui as() in open_orbital_maps)
 			tgui.send_update()
+	//Check creating objectives / missions.
+	if(next_objective_time < world.time && length(possible_objectives) < 6)
+		create_objective()
+		next_objective_time = world.time + rand(30 SECONDS, 5 MINUTES)
+	//Check objective
+	if(current_objective)
+		if(current_objective.check_failed())
+			priority_announce("Central Command priority objective failed.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
+			QDEL_NULL(current_objective)
 
 //====================================
 // User Interfaces
@@ -265,6 +284,47 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	var/datum/shuttle_data/located_shuttle = SSorbits.get_shuttle_data(M.id)
 	located_shuttle.faction = faction_instance
 	located_shuttle.set_pilot(ship_ai)
+
+//====================================
+// Objectives
+//====================================
+
+/datum/controller/subsystem/processing/orbits/proc/create_objective()
+	var/static/list/valid_objectives = list(
+		/datum/orbital_objective/recover_blackbox = 3,
+		/datum/orbital_objective/nuclear_bomb = 1,
+		/datum/orbital_objective/assassination = 1,
+		/datum/orbital_objective/artifact = 2,
+		/datum/orbital_objective/vip_recovery = 1
+	)
+	if(!length(possible_objectives))
+		priority_announce("Priority station objective received - Details transmitted to all available objective consoles. \
+			[GLOB.station_name] will have funds distributed upon objective completion.", "Central Command Report", SSstation.announcer.get_rand_report_sound())
+	var/chosen = pick_weight(valid_objectives)
+	if(!chosen)
+		return
+	var/datum/orbital_objective/objective = new chosen()
+	objective.generate_payout()
+	possible_objectives += objective
+	update_objective_computers()
+
+/datum/controller/subsystem/processing/orbits/proc/assign_objective(objective_computer, datum/orbital_objective/objective)
+	if(!possible_objectives.Find(objective))
+		return "Selected objective is no longer available or has been claimed already."
+	if(current_objective)
+		return "An objective has already been selected and must be completed first."
+	objective.on_assign(objective_computer)
+	objective.generate_attached_beacon()
+	objective.announce()
+	current_objective = objective
+	possible_objectives.Remove(objective)
+	update_objective_computers()
+	return "Objective selected, good luck."
+
+/datum/controller/subsystem/processing/orbits/proc/update_objective_computers()
+	for(var/obj/machinery/computer/objective/computer as() in GLOB.objective_computers)
+		for(var/M in computer.viewing_mobs)
+			computer.update_static_data(M)
 
 //====================================
 // Other
