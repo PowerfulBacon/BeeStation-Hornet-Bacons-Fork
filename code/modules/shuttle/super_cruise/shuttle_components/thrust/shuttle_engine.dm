@@ -219,5 +219,6 @@
 	icon_state_off = "DIY_burst_plasma_off"
 	icon_state_closed = "DIY_burst_plasma"
 	icon_state_open = "DIY_burst_plasma_open"
+	circuit = /obj/item/circuitboard/machine/shuttle/engine/ghetto
 	thrust = 110
 	fuel_use = 0.3

@@ -631,6 +631,22 @@
 				/obj/item/stack/sheet/cotton/cloth = 3)
 	category = CAT_MISC
 
+/datum/crafting_recipe/thruster
+	name = "Ghetto Shuttle Thruster"
+	result = /obj/item/circuitboard/machine/shuttle/engine/ghetto
+	time = 5 SECONDS
+	reqs = list(/obj/item/circuitboard = 1, /obj/item/stack/sheet/mineral/copper = 1)
+	tools = list(TOOL_SCREWDRIVER)
+	category = CAT_MISC
+
+/datum/crafting_recipe/thruster_heater
+	name = "Ghetto Shuttle Thruster Heater"
+	result = /obj/item/circuitboard/machine/shuttle/heater/ghetto
+	time = 5 SECONDS
+	reqs = list(/obj/item/circuitboard = 1, /obj/item/stack/sheet/mineral/copper = 1)
+	tools = list(TOOL_SCREWDRIVER)
+	category = CAT_MISC
+
 /datum/crafting_recipe/chemical_payload
 	name = "Chemical Payload (C4)"
 	result = /obj/item/bombcore/chemical

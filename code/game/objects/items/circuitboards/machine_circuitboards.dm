@@ -332,6 +332,15 @@
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/stock_parts/micro_laser/quadultra = 1)
 
+/obj/item/circuitboard/machine/shuttle/engine/ghetto
+	name = "ghetto thruster (Machine Board)"
+	icon_state = "diy"
+	build_path = /obj/machinery/shuttle/engine/ghetto
+	req_components = list(/obj/item/stock_parts/capacitor = 2,
+		/obj/item/stack/cable_coil = 5,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/pipe = 3)
+
 /obj/item/circuitboard/machine/shuttle/heater
 	name = "electronic engine heater (Machine Board)"
 	build_path = /obj/machinery/atmospherics/components/unary/shuttle/engine_heater
@@ -344,6 +353,15 @@
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 3,
 		/obj/item/stock_parts/micro_laser = 1)
+
+/obj/item/circuitboard/machine/shuttle/heater/ghetto
+	name = "ghetto engine heater"
+	icon_state = "diy"
+	build_path = /obj/machinery/atmospherics/components/unary/shuttle/engine_heater/ghetto
+	req_components = list(/obj/item/stock_parts/micro_laser = 2,
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/pipe = 2,
+		/obj/item/assembly/igniter = 1)
 
 /obj/item/circuitboard/machine/plasma_refiner
 	name = "plasma refinery (Machine Board)"
