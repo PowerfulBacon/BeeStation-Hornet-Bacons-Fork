@@ -9,7 +9,6 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/ion
 	thrust = 200
 	fuel_use = 0
-	cooldown = 45
 	var/usage_rate = 15
 	var/obj/machinery/power/engine_capacitor_bank/capacitor_bank
 

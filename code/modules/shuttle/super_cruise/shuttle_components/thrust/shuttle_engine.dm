@@ -16,7 +16,6 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine
 	var/thrust = 0
 	var/fuel_use = 0
-	var/cooldown = 0
 	var/thruster_active = FALSE
 	var/needs_heater = TRUE
 
@@ -107,7 +106,6 @@
 	circuit = /obj/item/circuitboard/machine/shuttle/engine/plasma
 	thrust = 300
 	fuel_use = 0.12
-	cooldown = 45
 	var/datum/weakref/attached_heater
 	var/cached_efficiency = -1
 
@@ -209,4 +207,17 @@
 	thrust = 250
 	fuel_use = 0
 	needs_heater = FALSE
-	cooldown = 90
+
+//========================
+// Ghetto Thruster
+//========================
+
+/obj/machinery/shuttle/engine/ghetto
+	name = "ghetto thruster"
+	desc = "A thruster made out of basic parts you could find lying around in a junkyard."
+	icon_state = "DIY_burst_plasma"
+	icon_state_off = "DIY_burst_plasma_off"
+	icon_state_closed = "DIY_burst_plasma"
+	icon_state_open = "DIY_burst_plasma_open"
+	thrust = 110
+	fuel_use = 0.3
