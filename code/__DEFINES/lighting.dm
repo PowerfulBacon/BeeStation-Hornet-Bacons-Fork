@@ -81,7 +81,6 @@
 #define DYNAMIC_LIGHTING_DISABLED 0 //! dynamic lighting disabled (area stays at full brightness)
 #define DYNAMIC_LIGHTING_ENABLED 1 //! dynamic lighting enabled
 #define DYNAMIC_LIGHTING_FORCED 2 //! dynamic lighting enabled even if the area doesn't require power
-#define DYNAMIC_LIGHTING_IFSTARLIGHT 3 //! dynamic lighting enabled only if starlight is.
 #define IS_DYNAMIC_LIGHTING(A) A.dynamic_lighting
 
 
@@ -144,3 +143,11 @@ GLOBAL_DATUM_INIT(fullbright_overlay, /image, create_fullbright_overlay())
 	var/image/lighting_effect = new()
 	lighting_effect.appearance = /obj/effect/fullbright
 	return lighting_effect
+
+GLOBAL_DATUM_INIT(starlight_overlay, /image, create_starlight_overlay())
+
+/proc/create_starlight_overlay()
+	var/image/lighting_effect = new()
+	lighting_effect.appearance = /obj/effect/fullbright/starlight
+	return lighting_effect
+

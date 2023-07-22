@@ -200,10 +200,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		if(dynamic_lighting == DYNAMIC_LIGHTING_FORCED)
 			dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 			luminosity = 0
-		else if(dynamic_lighting != DYNAMIC_LIGHTING_IFSTARLIGHT)
+		else
 			dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	if(dynamic_lighting == DYNAMIC_LIGHTING_IFSTARLIGHT)
-		dynamic_lighting = CONFIG_GET(flag/starlight) ? DYNAMIC_LIGHTING_ENABLED : DYNAMIC_LIGHTING_DISABLED
 
 	. = ..()
 

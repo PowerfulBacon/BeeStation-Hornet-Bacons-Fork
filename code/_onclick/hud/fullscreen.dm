@@ -178,6 +178,13 @@
 	layer = BACKGROUND_LAYER+20
 	show_when_dead = TRUE
 
+/// Provides a black background to the starlight layer
+/atom/movable/screen/fullscreen/lighting_backdrop/starlight
+	layer = BACKGROUND_LAYER+21
+	plane = STARLIGHT_PLANE
+	show_when_dead = TRUE
+	color="#000"
+
 /atom/movable/screen/fullscreen/see_through_darkness
 	icon_state = "nightvision"
 	plane = LIGHTING_PLANE
