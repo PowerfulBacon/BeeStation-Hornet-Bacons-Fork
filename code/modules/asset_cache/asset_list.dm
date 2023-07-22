@@ -116,15 +116,11 @@ GLOBAL_LIST_EMPTY(asset_datums)
 // spritesheet implementation - coalesces various icons into a single .png file
 // and uses CSS to select icons out of that file - saves on transferring some
 // 1400-odd individual PNG files
-#define SPR_CHECK(n) (n > 65535)
-#define SPR_GENERATE(size, index) ((size & 255) + ((index & 65535) << 8))
-#define SPR_SIZE(source) sizes[source & 255]
-#define SPR_IDX(source) ((source & 16776960) >> 8)
-
+#define SPR_SIZE 1
+#define SPR_IDX 2
 #define SPRSZ_COUNT 1
 #define SPRSZ_ICON 2
 #define SPRSZ_STRIPPED 3
-#define SPRSZ_INDEX 4
 
 /datum/asset/spritesheet
 	_abstract = /datum/asset/spritesheet
@@ -132,8 +128,8 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	/// List of arguments to pass into queuedInsert
 	/// Exists so we can queue icon insertion, mostly for stuff like preferences
 	var/list/to_generate = list()
-	var/list/sizes = list()    // "32x32" -> list(10, icon/normal, icon/stripped, index)
-	var/list/sprites = list()  // "foo_bar" -> num (First 8 bits are the index of the size, last 16 bits are the position)
+	var/list/sizes = list()    // "32x32" -> list(10, icon/normal, icon/stripped)
+	var/list/sprites = list()  // "foo_bar" -> list("32x32", 5)
 	var/list/cached_spritesheets_needed
 	var/generating_cache = FALSE
 	var/fully_generated = FALSE
@@ -264,9 +260,8 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 	for (var/sprite_id in sprites)
 		var/sprite = sprites[sprite_id]
-		var/size_id = SPR_SIZE(sprite)
-		var/idx = SPR_IDX(sprite)
-		// SPR_SIZE returns an index, so we need to get the index of the key and then lookup said key
+		var/size_id = sprite[SPR_SIZE]
+		var/idx = sprite[SPR_IDX]
 		var/size = sizes[size_id]
 
 		var/icon/tiny = size[SPRSZ_ICON]
@@ -363,20 +358,16 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 	if (size)
 		var/position = size[SPRSZ_COUNT]++
-		if (SPR_CHECK(position))
-			CRASH("Attempting to use a spritesheet with more than 65535 items. This is not allowed. The offending spritesheet is [type].")
 		var/icon/sheet = size[SPRSZ_ICON]
-		size[SPRSZ_STRIPPED] = null
-
 		var/icon/sheet_copy = icon(sheet)
+		size[SPRSZ_STRIPPED] = null
 		sheet_copy.Insert(I, icon_state=sprite_name)
 		size[SPRSZ_ICON] = sheet_copy
 
-		sprites[sprite_name] = SPR_GENERATE(size[SPRSZ_INDEX], position)
+		sprites[sprite_name] = list(size_id, position)
 	else
-		var/size_index = length(sizes) + 1
-		sizes[size_id] = list(1, I, null, size_index)
-		sprites[sprite_name] = SPR_GENERATE(size_index, 0)
+		sizes[size_id] = size = list(1, I, null)
+		sprites[sprite_name] = list(size_id, 0)
 
 /datum/asset/spritesheet/proc/InsertAll(prefix, icon/I, list/directions)
 	if (length(prefix))
@@ -400,14 +391,14 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	var/sprite = sprites[sprite_name]
 	if (!sprite)
 		return null
-	var/size_id = SPR_SIZE(sprite)
+	var/size_id = sprite[SPR_SIZE]
 	return {"<span class='[name][size_id] [sprite_name]'></span>"}
 
 /datum/asset/spritesheet/proc/icon_class_name(sprite_name)
 	var/sprite = sprites[sprite_name]
 	if (!sprite)
 		return null
-	var/size_id = SPR_SIZE(sprite)
+	var/size_id = sprite[SPR_SIZE]
 	return {"[name][size_id] [sprite_name]"}
 
 /**
@@ -420,7 +411,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	var/sprite = sprites[sprite_name]
 	if (!sprite)
 		return null
-	var/size_id = SPR_SIZE(sprite)
+	var/size_id = sprite[SPR_SIZE]
 	return "[name][size_id]"
 
 #undef SPR_SIZE
