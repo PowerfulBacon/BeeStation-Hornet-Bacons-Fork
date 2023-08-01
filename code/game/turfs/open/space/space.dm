@@ -3,6 +3,7 @@
 	icon_state = "0"
 	name = "\proper space"
 	intact = 0
+	luminosity = 2
 
 	FASTDMM_PROP(\
 		pipe_astar_cost = 100\
@@ -24,7 +25,7 @@
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
 	light_power = 0.25
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	dynamic_lighting = DYNAMIC_LIGHTING_STARLIGHT
 	bullet_bounce_sound = null
 
 	z_eventually_space = TRUE

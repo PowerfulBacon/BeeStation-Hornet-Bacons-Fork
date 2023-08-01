@@ -78,10 +78,11 @@
 #define LIGHTING_PLANE_ALPHA_INVISIBLE 0
 
 //lighting area defines
+#define DYNAMIC_LIGHTING_STARLIGHT -1 //! dynamic lighting is disabled, but area uses starlight overlay
 #define DYNAMIC_LIGHTING_DISABLED 0 //! dynamic lighting disabled (area stays at full brightness)
 #define DYNAMIC_LIGHTING_ENABLED 1 //! dynamic lighting enabled
 #define DYNAMIC_LIGHTING_FORCED 2 //! dynamic lighting enabled even if the area doesn't require power
-#define IS_DYNAMIC_LIGHTING(A) A.dynamic_lighting
+#define IS_DYNAMIC_LIGHTING(A) A.dynamic_lighting > 0
 
 
 //code assumes higher numbers override lower numbers.

@@ -111,3 +111,6 @@
 
 ///Called to all children when a parent moves, as long as it has the moved relay component.
 #define COMSIG_PARENT_MOVED_RELAY "parent_moved_relay"
+
+/// Called when the parallax colour is changed. (datum/source, colour)
+#define COMSIG_PARALLAX_COLOUR_CHANGED "parallax_colour_changed"

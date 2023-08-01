@@ -21,6 +21,9 @@ SUBSYSTEM_DEF(parallax)
 	var/throttle_ghost_pop = 0
 	var/throttle_all_pop = 0
 
+	// Random parallax colour
+	VAR_PRIVATE/random_parallax_colour = null
+
 	/// A random parallax layer that we sent to every player
 	var/atom/movable/screen/parallax_layer/random/random_layer
 	/// Weighted list with the parallax layers we could spawn
@@ -120,25 +123,17 @@ SUBSYSTEM_DEF(parallax)
 		return
 
 	random_layer = new picked_parallax(null, null, TRUE) //rip no named params, but we set template to TRUE so we don't del without a hud owner
-	RegisterSignal(random_layer, COMSIG_QDELETING, PROC_REF(clear_references))
-	random_layer.get_random_look()
+	RegisterSignal(random_layer, COMSIG_PARENT_QDELETING, PROC_REF(clear_references))
 
-/// Change the random parallax layer after it's already been set. update_player_huds = TRUE will also replace them in the players client images, if it was set
-/datum/controller/subsystem/parallax/proc/swap_out_random_parallax_layer(atom/movable/screen/parallax_layer/new_type, update_player_huds = TRUE)
-	set_random_parallax_layer(new_type)
-
-	if(!update_player_huds)
-		return
-
-	//Parallax is one of the first things to be set (during client join), so rarely is anything fast enough to swap it out
-	//That's why we need to swap the layers out for fast joining clients :/
-	for(var/client/client as anything in GLOB.clients)
-		client.parallax_layers_cached?.Cut()
-		client.mob?.hud_used?.update_parallax_pref(client.mob)
+/datum/controller/subsystem/parallax/proc/assign_random_parallax_colour()
+	if (random_parallax_colour == null)
+		random_parallax_colour = pick(COLOR_TEAL, COLOR_GREEN, COLOR_SILVER, COLOR_YELLOW, COLOR_CYAN, COLOR_ORANGE, COLOR_PURPLE)
+		// Change the global starlight colour
+		SEND_GLOBAL_SIGNAL(COMSIG_PARALLAX_COLOUR_CHANGED, random_parallax_colour)
+	return random_parallax_colour
 
 /datum/controller/subsystem/parallax/proc/clear_references()
 	SIGNAL_HANDLER
-
 	random_layer = null
 
 #undef PARALLAX_NONE

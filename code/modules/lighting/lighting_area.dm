@@ -10,6 +10,7 @@
 
 	if (IS_DYNAMIC_LIGHTING(src))
 		cut_overlay(GLOB.fullbright_overlay)
+		cut_overlay(GLOB.starlight_overlay)
 		blend_mode = BLEND_DEFAULT
 		if(lighting_overlay)
 			cut_overlay(lighting_overlay)
@@ -24,7 +25,10 @@
 	else
 		if(lighting_overlay)
 			cut_overlay(lighting_overlay)
-		add_overlay(GLOB.fullbright_overlay)
+		if (dynamic_lighting == DYNAMIC_LIGHTING_STARLIGHT)
+			add_overlay(GLOB.starlight_overlay)
+		else
+			add_overlay(GLOB.fullbright_overlay)
 		blend_mode = BLEND_DEFAULT
 		for(var/turf/T as anything in get_contained_turfs())
 			if (T.lighting_object)

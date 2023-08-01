@@ -129,8 +129,13 @@
 
 /atom/movable/screen/plane_master/starlight/Initialize(mapload)
 	. = ..()
-	// Debug, 16 is too big to reasonable use
+	// Blur this plane so the effect is smooth and looks like lighting
 	add_filter("guassian_blur", 1, gauss_blur_filter(6))
+	// Inherit the colour on spawn
+	RegisterSignal(SSdcs, COMSIG_PARALLAX_COLOUR_CHANGED, PROC_REF(inherit_colour))
+
+/atom/movable/screen/plane_master/starlight/proc/inherit_colour(datum/source, colour)
+	color = colour
 
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
