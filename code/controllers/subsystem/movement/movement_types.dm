@@ -69,6 +69,8 @@
 /datum/move_loop/Destroy()
 	if(owner)
 		owner.remove_loop(controller, src)
+	if (controller)
+		controller.remove_loop(src)
 	owner = null
 	moving = null
 	controller = null
