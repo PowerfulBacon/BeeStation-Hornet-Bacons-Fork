@@ -448,7 +448,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	if(!user)
 		return
 	if(anchored)
-		return
+		return TRUE
 
 	if(resistance_flags & ON_FIRE)
 		var/mob/living/carbon/C = user
@@ -468,7 +468,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
 			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
 				C.update_damage_overlays()
-			return
+			return TRUE
 
 	if(acid_level > 20 && !ismob(loc))// so we can still remove the clothes on us that have acid.
 		var/mob/living/carbon/C = user
@@ -488,19 +488,19 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		var/grav_power = min(3,grav - STANDARD_GRAVITY)
 		to_chat(user,"<span class='notice'>You start picking up [src]...</span>")
 		if(!do_after(user, 30*grav_power, src))
-			return
+			return TRUE
 
 
 	//If the item is in a storage item, take it out
 	SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
 	if(QDELETED(src)) //moving it out of the storage to the floor destroyed it.
-		return
+		return TRUE
 
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user)
 		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src))
-			return
+			return TRUE
 
 	remove_outline()
 	add_fingerprint(user)

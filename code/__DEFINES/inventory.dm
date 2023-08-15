@@ -61,7 +61,6 @@
 ///hides mutant/moth wings, does not apply to functional wings
 //#define HIDEMUTWINGS (1<<13)
 
-
 //bitflags for clothing coverage - also used for limbs
 #define HEAD		(1<<0)
 #define CHEST		(1<<1)

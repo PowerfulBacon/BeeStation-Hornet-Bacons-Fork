@@ -77,3 +77,6 @@
 
 	/// Timer id of any transformation
 	var/transformation_timer
+
+	/// If this is greater than 1, then icon updates will remove the overlay and not re-add it
+	var/mob_hidden = 0
