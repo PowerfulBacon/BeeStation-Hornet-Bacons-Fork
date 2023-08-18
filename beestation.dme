@@ -2483,6 +2483,7 @@
 #include "code\modules\exosuits\construction\exosuit_frame.dm"
 #include "code\modules\exosuits\modules\exosuit_module.dm"
 #include "code\modules\exosuits\modules\mobility\hydraulic_leg.dm"
+#include "code\modules\exosuits\modules\mobility\thrust_pack.dm"
 #include "code\modules\exploration_crew\exploration_explosives.dm"
 #include "code\modules\exploration_crew\exploration_laser_gun.dm"
 #include "code\modules\exploration_crew\exploration_shuttle.dm"

@@ -12,10 +12,12 @@
 	auto_consume_power()
 
 /obj/item/exosuit_module/hydraulic_leg/suit_equipped(mob/wearer)
+	..()
 	// Consume power on move
 	RegisterSignal(wearer, COMSIG_MOVABLE_MOVED, TYPE_PROC_REF(/obj/item/exosuit_module, auto_consume_power))
 
 /obj/item/exosuit_module/hydraulic_leg/suit_unequipped(mob/wearer)
+	..()
 	UnregisterSignal(wearer, COMSIG_MOVABLE_MOVED)
 
 /obj/item/exosuit_module/hydraulic_leg/on_enable()

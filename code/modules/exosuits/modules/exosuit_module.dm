@@ -16,6 +16,11 @@
 	var/height = 1
 	var/weight = 0
 	var/active = FALSE
+	// Action
+	var/action_name
+	var/action_icon
+	// Internal
+	VAR_PRIVATE/datum/action/item_action/created_action
 
 /obj/item/exosuit_module/proc/installed(obj/item/clothing/suit/space/hardsuit/exosuit/parent)
 	return
@@ -24,10 +29,18 @@
 	return
 
 /obj/item/exosuit_module/proc/suit_equipped(mob/wearer)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if (action_name)
+		if (!created_action)
+			created_action = new /datum/action/item_action(src)
+			created_action.name = action_name
+			created_action.button_icon_state = action_icon
+		created_action.Grant(wearer)
 
 /obj/item/exosuit_module/proc/suit_unequipped(mob/wearer)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if (created_action)
+		created_action.Remove(wearer)
 
 /// For when signals should consume power and toggle the module on/off accordingly.
 /obj/item/exosuit_module/proc/auto_consume_power()
