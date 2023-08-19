@@ -1,8 +1,8 @@
 
 /obj/item/clothing/suit/space/hardsuit/exosuit
 	name = "exosuit base"
-	icon = 'icons/mecha/mecha.dmi'
-	worn_icon = 'icons/mecha/mecha.dmi'
+	icon = 'icons/mecha/exosuit.dmi'
+	worn_icon = 'icons/mecha/exosuit.dmi'
 	// Hide everything
 	flags_inv = ALL
 	// Clicking on it doesn't pick it up

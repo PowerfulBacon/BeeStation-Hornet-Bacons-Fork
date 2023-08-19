@@ -7,8 +7,8 @@
 	weight = 6
 	action_name = "Engage thruster"
 
-/obj/item/exosuit_module/thrust_pack/ui_action_click(mob/user, datum/actiontype)
-	var/amount_forward = CEILING(80 / weight, 1)
+/obj/item/exosuit_module/thrust_pack/ui_action_click(mob/living/user, datum/actiontype)
+	var/amount_forward = CEILING(120 / exosuit.base_weight, 1)
 	// Activate the thruster
 	if (try_use_power(power_cost))
 		var/direction = user.dir
@@ -27,7 +27,11 @@
 			if (!knockdown(current_location, user))
 				current_location = previous
 				break
-		user.forceMove(current_location)
+			do_teleport(user, current_location, channel = TELEPORT_CHANNEL_FREE, no_effects = TRUE)
+			user.changeNext_move(1 SECONDS)
+			new /obj/effect/temp_visual/small_smoke(get_turf(user))
+			sleep(1)
+		do_teleport(user, current_location, channel = TELEPORT_CHANNEL_FREE, no_effects = TRUE)
 
 /obj/item/exosuit_module/thrust_pack/proc/knockdown(turf/target_location, mob/user)
 	for (var/mob/living/target in target_location)

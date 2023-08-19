@@ -10,6 +10,8 @@
 
 /obj/item/exosuit_module
 	name = "exosuit module"
+	icon = 'icons/mecha/mecha_equipment.dmi'
+	icon_state = "mecha_equip"
 	var/power_cost = 20
 	var/obj/item/clothing/suit/space/hardsuit/exosuit/exosuit
 	var/width = 1
