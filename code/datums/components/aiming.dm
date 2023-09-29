@@ -53,8 +53,7 @@
 	RegisterSignal(src.target, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
 
 	// Shows the radials to the aimer and target
-	aim_react(src.target)
-	show_ui(src.user, src.target, stage="start")
+	show_ui(src.user, stage="start")
 
 /*
 
@@ -141,7 +140,7 @@ AIMING_DROP_WEAPON means they selected the "drop your weapon" command
 
 */
 
-/datum/component/aiming/proc/show_ui(mob/user, mob/target, stage)
+/datum/component/aiming/proc/show_ui(mob/user, stage)
 	var/list/options = list()
 	var/list/possible_actions = list(CANCEL, SHOOT)
 	switch(stage)
@@ -166,7 +165,7 @@ AIMING_DROP_WEAPON means they selected the "drop your weapon" command
 	choice_menu = show_radial_menu_persistent(user, user, options, select_proc = CALLBACK(src, PROC_REF(act)))
 
 /datum/component/aiming/proc/act(choice)
-	if(QDELETED(user) || QDELETED(target)) // We lost our user or target somehow, abort aiming
+	if(QDELETED(user)) // We lost our user or target somehow, abort aiming
 		stop_aiming()
 		return
 	if(!choice)
@@ -175,11 +174,11 @@ AIMING_DROP_WEAPON means they selected the "drop your weapon" command
 	if(choice != CANCEL && choice != SHOOT) // Handling voiceline cooldowns and mimes
 		if(!COOLDOWN_FINISHED(src, voiceline_cooldown))
 			to_chat(user, "<span class = 'warning'>You've already given a command recently!</span>")
-			show_ui(user, target, choice)
+			show_ui(user, choice)
 			return
 		if(user.mind.assigned_role == JOB_NAME_MIME)
 			user.visible_message("<span class='warning'>[user] waves [parent] around menacingly!</span>")
-			show_ui(user, target, choice)
+			show_ui(user, choice)
 			COOLDOWN_START(src, voiceline_cooldown, 2 SECONDS)
 			return
 	switch(choice)
@@ -195,9 +194,8 @@ AIMING_DROP_WEAPON means they selected the "drop your weapon" command
 			user.say(pick("Drop your weapon!", "Weapon down! Now!", "Drop it!"), forced = "Weapon aiming")
 		if(DROP_TO_FLOOR)
 			user.say(pick("On the ground! Now!", "Lie down and place your hands behind your head!", "Get down on the ground!"), forced = "Weapon aiming")
-	aim_react(target)
 	COOLDOWN_START(src, voiceline_cooldown, 2 SECONDS)
-	show_ui(user, target, choice)
+	show_ui(user, choice)
 
 /datum/component/aiming/proc/shoot()
 	var/obj/item/held = user.get_active_held_item()
@@ -228,20 +226,6 @@ AIMING_DROP_WEAPON means they selected the "drop your weapon" command
 	QDEL_NULL(choice_menu)
 	QDEL_NULL(choice_menu_target)
 	target = null
-
-/datum/component/aiming/proc/aim_react(mob/target)
-	set waitfor = FALSE
-	if(QDELETED(target) || choice_menu_target) // We lost our target, or they already have a menu up
-		return
-	var/list/options = list()
-	for(var/option in list(SURRENDER, IGNORE))
-		options[option] = image(icon = 'icons/effects/aiming.dmi', icon_state = option)
-	choice_menu_target = show_radial_menu_persistent(target, target, options, select_proc = CALLBACK(src, PROC_REF(aim_react_act)))
-
-/datum/component/aiming/proc/aim_react_act(choice)
-	if(choice == SURRENDER)
-		target.emote(SURRENDER)
-	QDEL_NULL(choice_menu_target)
 
 // Shows a crosshair effect when aiming at a target
 /obj/effect/temp_visual/aiming
