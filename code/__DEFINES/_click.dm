@@ -39,3 +39,5 @@
 #define MOUSE_OPACITY_ICON 1
 /// Objects will be always be clicked on regardless of pixel transparency or other objects at that location (used in space vines, megafauna, storage containers)
 #define MOUSE_OPACITY_OPAQUE 2
+
+#define new ##new
