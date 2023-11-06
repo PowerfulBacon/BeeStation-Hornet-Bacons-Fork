@@ -2,6 +2,7 @@
 	var/result = null
 	var/completed = FALSE
 	var/list/subtasks
+	var/list/continue_withs
 
 /// Add a subtask to this subtask. When awaiting a parent task, it will wait for all subtasks to complete
 /// and then will return a list containing all the results.
@@ -14,6 +15,8 @@
 		CRASH("Attempting to mark a subtask holder as completed. This is not allowed")
 	completed = TRUE
 	src.result = result
+	for (var/datum/callback/continue_with in continue_withs)
+		callback.Invoke(src)
 
 /// Wait for the task to be completed, or the timeout to expire
 /// Returns true if the task was completed
@@ -41,3 +44,11 @@
 				return FALSE
 		return TRUE
 	return completed
+
+/datum/task/proc/continue_with(datum/callback/callback)
+	if (completed)
+		callback.Invoke(src)
+	else
+		if (!islist(continue_withs))
+			continue_withs = list()
+		continue_withs += callback
