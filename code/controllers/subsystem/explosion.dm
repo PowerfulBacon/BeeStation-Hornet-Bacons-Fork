@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(explosions)
 
 /client/proc/check_bomb_impacts()
 	set name = "Check Bomb Impact"
-	set category = "Debug"
+	set category = STAT_DEBUG_BOMB
 
 	var/newmode = alert("Use reactionary explosions?","Check Bomb Impact", "Yes", "No")
 	var/turf/epicenter = get_turf(mob)

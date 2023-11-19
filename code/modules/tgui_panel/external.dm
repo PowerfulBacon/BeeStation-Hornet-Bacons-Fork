@@ -10,7 +10,7 @@
  */
 /client/verb/fix_tgui_panel()
 	set name = "Fix chat"
-	set category = "OOC"
+	set category = STAT_OOC
 	var/action
 	log_tgui(src, "Started fixing.")
 
@@ -37,7 +37,7 @@
 
 /client/verb/refresh_tgui()
 	set name = "Refresh TGUI"
-	set category = "OOC"
+	set category = STAT_OOC
 
 	for(var/window_id in tgui_windows)
 		var/datum/tgui_window/window = tgui_windows[window_id]

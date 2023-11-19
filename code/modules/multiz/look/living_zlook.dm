@@ -57,7 +57,7 @@
 
 /mob/living/verb/look_up_short()
 	set name = "Look Up"
-	set category = "IC"
+	set category = STAT_IC
 	// you pressed the verb while holding a keybind, unlock!
 	attempt_looking_direction = LOOKING_DIRECTION_NONE
 	if(looking_direction == LOOKING_DIRECTION_UP)
@@ -77,7 +77,7 @@
 
 /mob/living/verb/look_down_short()
 	set name = "Look Down"
-	set category = "IC"
+	set category = STAT_IC
 	// you pressed the verb while holding a keybind, unlock!
 	attempt_looking_direction = LOOKING_DIRECTION_NONE
 	if(looking_direction == LOOKING_DIRECTION_DOWN)

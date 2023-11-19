@@ -144,7 +144,7 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 /mob/dead/observer/verb/open_orbit_ui()
 	set name = "View Orbits"
-	set category = "Ghost"
+	set category = STAT_GHOST
 	SSorbits.orbital_map_tgui.ui_interact(src)
 
 /datum/controller/subsystem/processing/orbits/proc/create_objective()

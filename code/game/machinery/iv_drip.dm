@@ -182,7 +182,7 @@
 		toggle_mode()
 
 /obj/machinery/iv_drip/verb/eject_beaker()
-	set category = "Object"
+	set category = STAT_OBJECT
 	set name = "Remove IV Container"
 	set src in view(1)
 
@@ -198,7 +198,7 @@
 		update_icon()
 
 /obj/machinery/iv_drip/verb/toggle_mode()
-	set category = "Object"
+	set category = STAT_OBJECT
 	set name = "Toggle Mode"
 	set src in view(1)
 

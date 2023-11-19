@@ -485,7 +485,7 @@
 
 /client/proc/stickybanpanel()
 	set name = "Sticky Ban Panel"
-	set category = "Admin"
+	set category = STAT_ADMIN_PUNISHMENT
 	if (!holder)
 		return
 	holder.stickyban_show()

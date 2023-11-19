@@ -63,14 +63,14 @@
 	return TRUE
 
 /mob/camera/blob/verb/transport_core()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Jump to Core"
 	set desc = "Move your camera to your core."
 	if(blob_core)
 		forceMove(blob_core.drop_location())
 
 /mob/camera/blob/verb/jump_to_node()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Jump to Node"
 	set desc = "Move your camera to a selected node."
 	if(GLOB.blob_nodes.len)
@@ -108,7 +108,7 @@
 	return N
 
 /mob/camera/blob/verb/toggle_node_req()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Toggle Node Requirement"
 	set desc = "Toggle requiring nodes to place resource and factory blobs."
 	nodes_required = !nodes_required
@@ -118,7 +118,7 @@
 		to_chat(src, "<span class='warning'>You no longer require a nearby node or core to place factory and resource blobs.</span>")
 
 /mob/camera/blob/verb/create_shield_power()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Create/Upgrade Shield Blob (15)"
 	set desc = "Create a shield blob, which will block fire and is hard to kill. Using this on an existing shield blob turns it into a reflective blob, capable of reflecting most projectiles but making it twice as weak to brute attacks."
 	create_shield()
@@ -138,25 +138,25 @@
 		createSpecial(15, /obj/structure/blob/shield, 0, 0, T)
 
 /mob/camera/blob/verb/create_resource()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Create Resource Blob (40)"
 	set desc = "Create a resource tower which will generate resources for you."
 	createSpecial(40, /obj/structure/blob/resource, 4, 1)
 
 /mob/camera/blob/verb/create_node()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Create Node Blob (50)"
 	set desc = "Create a node, which will power nearby factory and resource blobs."
 	createSpecial(50, /obj/structure/blob/node, 5, 0)
 
 /mob/camera/blob/verb/create_factory()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Create Factory Blob (60)"
 	set desc = "Create a spore tower that will spawn spores to harass your enemies."
 	createSpecial(60, /obj/structure/blob/factory, 7, 1)
 
 /mob/camera/blob/verb/create_blobbernaut()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Create Blobbernaut (40)"
 	set desc = "Create a powerful blobbernaut which is mildly smart and will attack enemies."
 	var/turf/T = get_turf(src)
@@ -205,7 +205,7 @@
 		B.naut = null
 
 /mob/camera/blob/verb/relocate_core()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Relocate Core (80)"
 	set desc = "Swaps the locations of your core and the selected node."
 	var/turf/T = get_turf(src)
@@ -229,7 +229,7 @@
 	B.setDir(olddir)
 
 /mob/camera/blob/verb/revert()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Remove Blob"
 	set desc = "Removes a blob, giving you back some resources."
 	var/turf/T = get_turf(src)
@@ -252,7 +252,7 @@
 	qdel(B)
 
 /mob/camera/blob/verb/expand_blob_power()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Expand/Attack Blob ([BLOB_SPREAD_COST])"
 	set desc = "Attempts to create a new blob in this tile. If the tile isn't clear, instead attacks it, damaging mobs and objects and refunding [BLOB_ATTACK_REFUND] points."
 	var/turf/T = get_turf(src)
@@ -311,7 +311,7 @@
 			last_attack = world.time + CLICK_CD_RAPID
 
 /mob/camera/blob/verb/rally_spores_power()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Rally Spores"
 	set desc = "Rally your spores to move to a target location."
 	var/turf/T = get_turf(src)
@@ -328,7 +328,7 @@
 			BS.Goto(pick(surrounding_turfs), BS.move_to_delay, 0)
 
 /mob/camera/blob/verb/blob_broadcast()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Blob Broadcast"
 	set desc = "Speak with your blob spores and blobbernauts as your mouthpieces."
 	var/speak_text = capped_input(src, "What would you like to say with your minions?", "Blob Broadcast")
@@ -342,7 +342,7 @@
 			BM.say(speak_text)
 
 /mob/camera/blob/verb/strain_reroll()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "Reactive Strain Adaptation (40)"
 	set desc = "Replaces your strain with a random, different one."
 
@@ -397,7 +397,7 @@
 			return
 
 /mob/camera/blob/verb/blob_help()
-	set category = "Blob"
+	set category = STAT_BLOB
 	set name = "*Blob Help*"
 	set desc = "Help on how to blob."
 	to_chat(src, "<b>As the overmind, you can control the blob!</b>")

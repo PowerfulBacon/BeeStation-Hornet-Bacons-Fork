@@ -426,7 +426,7 @@
 
 /obj/structure/closet/verb/verb_toggleopen()
 	set src in view(1)
-	set category = "Object"
+	set category = STAT_OBJECT
 	set name = "Toggle Open"
 
 	if(!usr.canUseTopic(src, BE_CLOSE) || !isturf(loc))

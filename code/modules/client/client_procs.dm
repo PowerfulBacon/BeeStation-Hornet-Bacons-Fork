@@ -1060,7 +1060,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 /client/proc/show_account_identifier()
 	set name = "Show Account Identifier"
-	set category = "OOC"
+	set category = STAT_OOC
 	set desc ="Get your ID for account verification."
 
 	remove_verb(/client/proc/show_account_identifier)

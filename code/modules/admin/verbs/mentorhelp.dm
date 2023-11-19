@@ -9,7 +9,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 /client/proc/openMentorTicketManager()
 	set name = "Mentor Ticket Manager"
 	set desc = "Opens the mentor ticket manager"
-	set category = "Mentor"
+	set category = STAT_MENTPR
 	GLOB.mhelp_tickets.BrowseTickets(usr)
 
 /datum/help_tickets/mentor/BrowseTickets(mob/user)
@@ -37,7 +37,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 	mentorhelp(msg)
 
 /client/verb/mentorhelp(msg as message)
-	set category = "Mentor"
+	set category = STAT_MENTPR
 	set name = "Mentorhelp"
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems

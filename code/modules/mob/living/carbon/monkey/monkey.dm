@@ -125,7 +125,7 @@ GLOBAL_LIST_INIT(strippable_monkey_items, create_strippable_list(list(
 
 /mob/living/carbon/monkey/verb/removeinternal()
 	set name = "Remove Internals"
-	set category = "IC"
+	set category = STAT_IC
 	internal = null
 	return
 

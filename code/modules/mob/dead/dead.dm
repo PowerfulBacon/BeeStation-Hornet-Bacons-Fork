@@ -50,7 +50,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	return tab_data
 
 /mob/dead/proc/server_hop()
-	set category = "OOC"
+	set category = STAT_OOC
 	set name = "Server Hop"
 	set desc= "Jump to the other server"
 	if(notransform)

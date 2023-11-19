@@ -115,7 +115,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 
 /client/proc/battle_royale()
 	set name = "Battle Royale"
-	set category = "Adminbus"
+	set category = STAT_EVENTS
 	if(!(check_rights(R_FUN) || (check_rights(R_ADMIN) && SSticker.current_state == GAME_STATE_FINISHED)))
 		to_chat(src, "<span class='warning'>You do not have permission to do that! (If you don't have +FUN, wait until the round is over then you can trigger it.)</span>")
 		return
@@ -137,7 +137,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 
 /client/proc/battle_royale_speed()
 	set name = "Battle Royale - Change wall speed"
-	set category = "Event"
+	set category = STAT_EVENTS_BATTLE_ROYALE
 	if(!check_rights(R_ADMIN))
 		to_chat(src, "<span class='warning'>You do not have permission to do that!</span>")
 		return
@@ -152,7 +152,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 
 /client/proc/battle_royale_varedit()
 	set name = "Battle Royale - Variable Edit"
-	set category = "Event"
+	set category = STAT_EVENTS_BATTLE_ROYALE
 	if(!check_rights(R_FUN))
 		to_chat(src, "<span class='warning'>You do not have permission to do that!</span>")
 		return
@@ -163,7 +163,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 
 /client/proc/battle_royale_spawn_loot()
 	set name = "Battle Royale - Spawn Loot Drop (Minor)"
-	set category = "Event"
+	set category = STAT_EVENTS_BATTLE_ROYALE
 	if(!check_rights(R_FUN))
 		to_chat(src, "<span class='warning'>You do not have permission to do that!</span>")
 		return
@@ -176,7 +176,7 @@ GLOBAL_DATUM(battle_royale, /datum/battle_royale_controller)
 
 /client/proc/battle_royale_spawn_loot_good()
 	set name = "Battle Royale - Spawn Loot Drop (Major)"
-	set category = "Event"
+	set category = STAT_EVENTS_BATTLE_ROYALE
 	if(!check_rights(R_FUN))
 		to_chat(src, "<span class='warning'>You do not have permission to do that!</span>")
 		return

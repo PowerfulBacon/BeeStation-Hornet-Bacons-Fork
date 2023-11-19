@@ -172,7 +172,7 @@
 
 /obj/item/defibrillator/proc/toggle_paddles()
 	set name = "Toggle Paddles"
-	set category = "Object"
+	set category = STAT_OBJECT
 	on = !on
 
 	var/mob/living/carbon/user = usr

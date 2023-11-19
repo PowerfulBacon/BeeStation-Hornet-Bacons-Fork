@@ -55,7 +55,7 @@
 	var/static/list/sound_lengths = list()
 
 /obj/item/soundsynth/verb/pick_sound()
-	set category = "Object"
+	set category = STAT_OBJECT
 	set name = "Select Sound Playback"
 	var/new_sound = tgui_input_list(usr, "Pick a sound!", "Sound Synthesizer", sounds, default = selected_sound_name)
 	if(!new_sound || !sounds[new_sound])

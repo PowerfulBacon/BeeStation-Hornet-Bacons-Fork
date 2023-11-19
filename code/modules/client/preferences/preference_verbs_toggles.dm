@@ -1,6 +1,6 @@
 /client/verb/toggletitlemusic()
 	set name = "Hear/Silence Lobby Music"
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set desc = "Hear Music In Lobby"
 	var/hear = !prefs.read_player_preference(/datum/preference/toggle/sound_lobby)
 	prefs.update_preference(/datum/preference/toggle/sound_lobby, hear)
@@ -12,7 +12,7 @@
 
 /client/verb/Toggle_Soundscape()
 	set name = "Hear/Silence Ambience"
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set desc = "Hear Ambient Sound Effects"
 	var/hear = !prefs.read_player_preference(/datum/preference/toggle/sound_ambience)
 	prefs.update_preference(/datum/preference/toggle/sound_ambience, hear)
@@ -24,7 +24,7 @@
 
 /client/verb/toggle_ship_ambience()
 	set name = "Hear/Silence Ship Ambience"
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set desc = "Hear Ship Ambience Roar"
 	var/hear = !prefs.read_player_preference(/datum/preference/toggle/sound_ship_ambience)
 	prefs.update_preference(/datum/preference/toggle/sound_ship_ambience, hear)
@@ -36,7 +36,7 @@
 
 /client/verb/stop_client_sounds()
 	set name = "Stop Sounds"
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set desc = "Stop Current Sounds"
 	SEND_SOUND(usr, sound(null))
 	tgui_panel?.stop_music()

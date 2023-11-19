@@ -11,15 +11,17 @@ import { Button } from './Button';
 export class Collapsible extends Component {
   constructor(props) {
     super(props);
-    const { open } = props;
+    const { open, onCollapse, onExpand } = props;
     this.state = {
       open: open || false,
+      onCollapse: onCollapse || null,
+      onExpand: onExpand || null,
     };
   }
 
   render() {
     const { props } = this;
-    const { open } = this.state;
+    const { open, onCollapse, onExpand } = this.state;
     const { children, color = 'default', title, buttons, ...rest } = props;
     return (
       <Box mb={1}>
@@ -29,7 +31,16 @@ export class Collapsible extends Component {
               fluid
               color={color}
               icon={open ? 'chevron-down' : 'chevron-right'}
-              onClick={() => this.setState({ open: !open })}
+              onClick={() => {
+                if (open) {
+                  if (onCollapse) {
+                    onCollapse();
+                  }
+                } else {
+                  onExpand?.();
+                }
+                this.setState({ open: !open });
+              }}
               {...rest}>
               {title}
             </Button>

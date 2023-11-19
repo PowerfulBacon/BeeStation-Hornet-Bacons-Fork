@@ -236,7 +236,7 @@
 		icon_state = resolve_ai_icon(preferred_icon)
 
 /mob/living/silicon/ai/verb/pick_icon()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Set AI Core Display"
 	if(incapacitated())
 		return
@@ -341,7 +341,7 @@
 
 /mob/living/silicon/ai/verb/wipe_core()
 	set name = "Wipe Core"
-	set category = "OOC"
+	set category = STAT_OOC
 	set desc = "Wipe your core. This is functionally equivalent to cryo, freeing up your job slot."
 
 	if(stat)
@@ -372,7 +372,7 @@
 	QDEL_NULL(src)
 
 /mob/living/silicon/ai/verb/toggle_anchor()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Toggle Floor Bolts"
 	if(!isturf(loc)) // if their location isn't a turf
 		return // stop
@@ -406,7 +406,7 @@
 		mobility_flags = ALL
 
 /mob/living/silicon/ai/proc/ai_cancel_call()
-	set category = "Malfunction"
+	set category = STAT_AI_MALF
 	if(control_disabled)
 		to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
 		return
@@ -508,7 +508,7 @@
 	return TRUE
 
 /mob/living/silicon/ai/proc/botcall()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Access Robot Control"
 	set desc = "Wirelessly control various automatic robots."
 
@@ -568,7 +568,7 @@
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
 //Addition by Mord_Sith to define AI's network change ability
 /mob/living/silicon/ai/proc/ai_network_change()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Jump To Network"
 	unset_machine()
 	var/cameralist[0]
@@ -611,13 +611,13 @@
 
 
 /mob/living/silicon/ai/proc/choose_modules()
-	set category = "Malfunction"
+	set category = STAT_AI_MALF
 	set name = "Choose Module"
 
 	malf_picker.use(src)
 
 /mob/living/silicon/ai/proc/ai_statuschange()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "AI Status"
 
 	if(incapacitated())
@@ -642,7 +642,7 @@
 /mob/living/silicon/ai/proc/ai_hologram_change()
 	set name = "Change Hologram"
 	set desc = "Change the default hologram available to AI to something else."
-	set category = "AI Commands"
+	set category = STAT_AI
 
 	if(incapacitated())
 		return
@@ -715,7 +715,7 @@
 	return
 
 /mob/living/silicon/ai/proc/corereturn()
-	set category = "Malfunction"
+	set category = STAT_AI_MALF
 	set name = "Return to Main Core"
 
 	var/obj/machinery/power/apc/apc = src.loc
@@ -765,7 +765,7 @@
 /mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Transceiver Settings"
 	set desc = "Allows you to change settings of your radio."
-	set category = "AI Commands"
+	set category = STAT_AI
 
 	if(incapacitated())
 		return
@@ -781,7 +781,7 @@
 /mob/living/silicon/ai/proc/set_automatic_say_channel()
 	set name = "Set Auto Announce Mode"
 	set desc = "Modify the default radio setting for your automatic announcements."
-	set category = "AI Commands"
+	set category = STAT_AI
 
 	if(incapacitated())
 		return
@@ -983,7 +983,7 @@
 		apc.update_appearance()
 
 /mob/living/silicon/ai/verb/deploy_to_shell(var/mob/living/silicon/robot/target)
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Deploy to Shell"
 
 	if(incapacitated())

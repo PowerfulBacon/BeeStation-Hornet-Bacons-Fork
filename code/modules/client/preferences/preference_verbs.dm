@@ -1,5 +1,5 @@
 /client/verb/open_character_preferences()
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set name = "Character Preferences"
 	set desc = "Open Character Preferences"
 
@@ -12,7 +12,7 @@
 	preferences.ui_interact(usr)
 
 /client/verb/open_game_preferences()
-	set category = "Preferences"
+	set category = STAT_PREFERENCES
 	set name = "Game Preferences"
 	set desc = "Open Game Preferences"
 

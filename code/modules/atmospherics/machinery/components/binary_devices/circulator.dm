@@ -172,7 +172,7 @@
 
 /obj/machinery/atmospherics/components/binary/circulator/verb/circulator_flip()
 	set name = "Flip"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in oview(1)
 
 	if(!ishuman(usr))

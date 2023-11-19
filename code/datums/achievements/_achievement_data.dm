@@ -143,7 +143,7 @@
 		.["highscore"] += list(list("name" = S.name,"scores" = S.high_scores))
 
 /client/verb/checkachievements()
-	set category = "OOC"
+	set category = STAT_OOC
 	set name = "Check Achievements"
 	set desc = "See all of your achievements!"
 

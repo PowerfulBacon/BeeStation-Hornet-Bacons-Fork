@@ -13,7 +13,7 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 	add_verb(/mob/proc/sandbox_panel)
 /mob/proc/sandbox_panel()
 	set name = "Sandbox Panel"
-	set category = "Sandbox"
+	set category = STAT_SANDBOX
 	if(sandbox)
 		sandbox.update()
 

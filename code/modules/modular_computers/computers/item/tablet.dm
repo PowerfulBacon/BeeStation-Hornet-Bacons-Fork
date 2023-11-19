@@ -141,13 +141,13 @@
 
 /obj/item/modular_computer/tablet/verb/verb_toggle_light()
 	set name = "Toggle Light"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in oview(1)
 	toggle_flashlight()
 
 /obj/item/modular_computer/tablet/verb/verb_remove_pen()
 	set name = "Eject Pen"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 	remove_pen(usr)
 

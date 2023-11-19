@@ -273,7 +273,7 @@ SUBSYSTEM_DEF(vote)
 	generated_actions = list()
 
 /mob/verb/vote()
-	set category = "OOC"
+	set category = STAT_OOC
 	set name = "Vote"
 	SSvote.ui_interact(src)
 

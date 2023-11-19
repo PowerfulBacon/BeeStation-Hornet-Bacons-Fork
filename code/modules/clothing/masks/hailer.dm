@@ -90,7 +90,7 @@
 	to_chat(user, "<span class='warning'>You silently fry [src]'s vocal circuit with the cryptographic sequencer.</span>")
 
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
-	set category = "Object"
+	set category = STAT_OBJECT
 	set name = "HALT"
 	set src in usr
 	if(!isliving(usr))

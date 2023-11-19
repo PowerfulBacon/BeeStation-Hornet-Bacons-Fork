@@ -1,7 +1,7 @@
 /client/proc/healall()
 	set name = "Heal Everybody"
 	set desc = "Heals every mob in the game"
-	set category = "Fun"
+	set category = STAT_EVENTS
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")
 		return

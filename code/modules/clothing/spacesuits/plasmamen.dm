@@ -175,7 +175,7 @@
 
 /obj/item/clothing/head/helmet/space/plasmaman/verb/unattach_hat()
 	set name = "Remove Hat"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 
 	usr.put_in_hands(attached_hat)

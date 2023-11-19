@@ -1,5 +1,5 @@
 /client/proc/dsay(msg as text)
-	set category = "Adminbus"
+	set category =STAT_ADMIN_BASE
 	set name = "Dsay"
 	set hidden = 1
 	if(!holder)

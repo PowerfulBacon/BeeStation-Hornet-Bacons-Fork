@@ -22,3 +22,31 @@
 	var/category as text
 	/// Only clients/mobs with `see_invisibility` higher can use the verb.
 	var/invisibility as num
+
+/datum/procpath_holder
+	/// The path being held by this holder
+	var/procpath/path
+	/// A text string of the verb's name.
+	var/name as text
+	/// The verb's help text or description.
+	var/desc as text
+	/// The category or tab the verb will appear in.
+	var/category as text
+	/// Only clients/mobs with `see_invisibility` higher can use the verb.
+	var/invisibility as num
+	/// The subcategories that lead to the path of the holder
+	var/list/subcategories
+
+/datum/procpath_holder/New(procpath/procpath)
+	. = ..()
+	path = procpath
+	name = path.name
+	desc = path.desc
+	category = path.category
+	invisibility = path.invisibility
+	if (!path.category)
+		subcategories = list()
+		return
+	var/list/category_path = splittext(path.category, ".")
+	category = category_path[1]
+	subcategories = category_path.Copy(2)

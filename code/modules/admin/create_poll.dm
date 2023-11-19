@@ -1,6 +1,6 @@
 /client/proc/create_poll()
 	set name = "Create Poll"
-	set category = "Adminbus"
+	set category = STAT_DEVELOPER
 	if(!check_rights(R_POLL))
 		return
 	if(!SSdbcore.Connect())

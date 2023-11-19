@@ -337,7 +337,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/hide_most_verbs()//Allows you to keep some functionality while hiding some verbs
 	set name = "Adminverbs - Hide Most"
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 
 	remove_verb(list(/client/proc/hide_most_verbs) + GLOB.admin_verbs_hideable)
 	add_verb(/client/proc/show_verbs)
@@ -348,7 +348,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/hide_verbs()
 	set name = "Adminverbs - Hide All"
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 
 	remove_admin_verbs()
 	add_verb(/client/proc/show_verbs)
@@ -359,7 +359,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/show_verbs()
 	set name = "Adminverbs - Show"
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 
 	remove_verb(/client/proc/show_verbs)
 	add_admin_verbs()
@@ -371,8 +371,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 
 /client/proc/admin_ghost()
-	set category = "Adminbus"
 	set name = "Aghost"
+	set category = STAT_ADMIN_BASE
 	if(!holder)
 		return
 	. = TRUE
@@ -402,7 +402,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/invisimin()
 	set name = "Invisimin"
-	set category = "Admin"
+	set category = STAT_ADMIN_UTILITY
 	set desc = "Toggles ghost-like invisibility (Don't abuse this)"
 	if(holder && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
@@ -414,7 +414,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/fix_say()
 	set name = "FIX SAY"
-	set category = "Admin"
+	set category = STAT_DEBUG_UI
 	set desc = "fixes bug where people can't say shid"
 	for(var/x in GLOB.player_list)
 		if(isnull(x))
@@ -422,7 +422,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"
-	set category = "Round"
+	set category = STAT_INVESTIGATE
 	if(holder)
 		holder.check_antagonists()
 		log_admin("[key_name(usr)] checked antagonists.")	//for tsar~
@@ -432,7 +432,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/check_teams()
 	set name = "Check Teams"
-	set category = "Round"
+	set category = STAT_INVESTIGATE
 	if(holder)
 		holder.check_teams()
 		log_admin("[key_name(usr)] checked antagonist teams.")
@@ -442,7 +442,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/ban_panel()
 	set name = "Banning Panel"
-	set category = "Admin"
+	set category = STAT_ADMIN_PUNISHMENT
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
@@ -450,7 +450,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
-	set category = "Admin"
+	set category = STAT_ADMIN_PUNISHMENT
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
@@ -458,21 +458,21 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/game_panel()
 	set name = "Game Panel"
-	set category = "Adminbus"
+	set category = STAT_ROUND
 	if(holder)
 		holder.Game()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/secrets()
 	set name = "Secrets"
-	set category = "Adminbus"
+	set category = STAT_INVESTIGATE
 	if (holder)
 		GLOB.admin_secrets.ui_interact(usr)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Secrets Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/poll_panel()
 	set name = "Server Poll Management"
-	set category = "Admin"
+	set category = STAT_DEVELOPER
 	if(!check_rights(R_POLL))
 		return
 	holder.poll_list_panel()
@@ -498,7 +498,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	GLOB.stealthminID["[ckey]"] = "@[num2text(num)]"
 
 /client/proc/stealth()
-	set category = "Admin"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Stealth Mode"
 	if(holder)
 		if(holder.fakekey)
@@ -526,7 +526,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stealth Mode") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/drop_bomb()
-	set category = "Fun"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Drop Bomb"
 	set desc = "Cause an explosion of varying strength at your location."
 
@@ -568,7 +568,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Bomb") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/drop_dynex_bomb()
-	set category = "Fun"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Drop DynEx Bomb"
 	set desc = "Cause an explosion of varying strength at your location."
 
@@ -581,7 +581,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Dynamic Bomb") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/get_dynex_range()
-	set category = "Debug"
+	set category = STAT_DEBUG_BOMB
 	set name = "Get DynEx Range"
 	set desc = "Get the estimated range of a bomb, using explosive power."
 
@@ -592,7 +592,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Range: (Devastation: [round(range*0.25)], Heavy: [round(range*0.5)], Light: [round(range)])")
 
 /client/proc/get_dynex_power()
-	set category = "Debug"
+	set category = STAT_DEBUG_BOMB
 	set name = "Get DynEx Power"
 	set desc = "Get the estimated required power of a bomb, to reach a specific range."
 
@@ -603,7 +603,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Power: [power]")
 
 /client/proc/set_dynex_scale()
-	set category = "Debug"
+	set category = STAT_DEBUG_BOMB
 	set name = "Set DynEx Scale"
 	set desc = "Set the scale multiplier of dynex explosions. The default is 0.5."
 
@@ -615,7 +615,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	message_admins("[key_name_admin(usr)] has  modified Dynamic Explosion Scale: [ex_scale]")
 
 /client/proc/give_spell(mob/T in GLOB.mob_list)
-	set category = "Fun"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
 
@@ -639,7 +639,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		message_admins("<span class='danger'>Spells given to mindless mobs will not be transferred in mindswap or cloning!</span>")
 
 /client/proc/remove_spell(mob/T in GLOB.mob_list)
-	set category = "Fun"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Remove Spell"
 	set desc = "Remove a spell from the selected mob."
 
@@ -652,7 +652,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			SSblackbox.record_feedback("tally", "admin_verb", 1, "Remove Spell") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/give_disease(mob/living/T in GLOB.mob_living_list)
-	set category = "Fun"
+	set category = STAT_ADMIN_UTILITY
 	set name = "Give Disease"
 	set desc = "Gives a Disease to a mob."
 
@@ -668,7 +668,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] gave [key_name_admin(T)] the disease [D].</span>")
 
 /client/proc/object_say(obj/O in world)
-	set category = "Adminbus"
+	set category = STAT_ADMIN_UTILITY
 	set name = "OSay"
 	set desc = "Makes an object say something."
 	var/message = capped_input(usr, "What do you want the message to be?", "Make Sound")
@@ -681,7 +681,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/togglebuildmodeself()
 	set name = "Toggle Build Mode Self"
-	set category = "Adminbus"
+	set category = STAT_ADMIN_UTILITY
 	if (!(holder.rank.rights & R_BUILD))
 		return
 	if(src.mob)
@@ -690,13 +690,13 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
-	set category = "Admin"
+	set category = STAT_INVESTIGATE
 	if(holder)
 		src.holder.output_ai_laws()
 
 /client/proc/deadmin()
 	set name = "Deadmin"
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 	set desc = "Shed your admin powers."
 
 	if(!holder)
@@ -714,7 +714,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/readmin()
 	set name = "Readmin"
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 	set desc = "Regain your admin powers."
 
 	var/datum/admins/A = GLOB.deadmins[ckey]
@@ -739,7 +739,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/populate_world(amount = 50 as num)
 	set name = "Populate World"
-	set category = "Debug"
+	set category = STAT_DEBUG_STRESS
 	set desc = "(\"Amount of mobs to create\") Populate the world with test mobs."
 
 	if(amount > 0)
@@ -773,7 +773,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/toggle_AI_interact()
 	set name = "Toggle Admin AI Interact"
-	set category = "Adminbus"
+	set category = STAT_ADMIN_UTILITY
 	set desc = "Allows you to interact with most machines as an AI would as a ghost"
 
 	AI_Interact = !AI_Interact
@@ -787,7 +787,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/stabilize_atmos()
 	set name = "Stabilize Atmos"
-	set category = "Adminbus"
+	set category = STAT_DEBUG_ATMOS
 	set desc = "Resets the air contents of every turf in view to normal. Closes all canisters in view."
 
 	if(!check_rights(R_ADMIN))
@@ -808,7 +808,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		can.update_icon()
 
 /client/proc/delete_book()
-	set category = "Admin"
+	set category = STAT_ADMIN_PUNISHMENT
 	set name = "Delete Book"
 
 	if(!check_rights(R_ADMIN))
@@ -845,7 +845,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 #ifdef SENDMAPS_PROFILE
 /client/proc/display_sendmaps()
 	set name = "Send Maps Profile"
-	set category = "Debug"
+	set category = STAT_DEBUG_PERFORMANCE
 
 	src << link("?debug=profile&type=sendmaps&window=test")
 #endif

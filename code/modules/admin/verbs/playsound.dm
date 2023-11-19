@@ -4,7 +4,7 @@
 #define SHELLEO_STDERR 3
 
 /client/proc/play_sound(S as sound)
-	set category = "Fun"
+	set category = STAT_EVENTS
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -45,7 +45,7 @@
 
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Fun"
+	set category = STAT_EVENTS
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -56,7 +56,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Fun"
+	set category = STAT_EVENTS
 	set name = "Play Internet Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -151,7 +151,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Fun"
+	set category = STAT_ROUND
 	set name = "Set Round End Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -163,7 +163,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_soundtrack()
-	set category = "Fun"
+	set category = STAT_EVENTS
 	set name = "Play Soundtrack Music"
 	set desc = "Choose a song to play from the available soundtrack."
 
@@ -181,7 +181,7 @@
 	play_soundtrack_music(song_choice, only_station = (station_only == "Station Only" ? SOUNDTRACK_PLAY_ONLYSTATION : SOUNDTRACK_PLAY_ALL))
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = STAT_DEBUG_UTILITY
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return

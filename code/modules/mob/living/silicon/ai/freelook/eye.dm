@@ -208,7 +208,7 @@
 	eyeobj.invisibility = state ? INVISIBILITY_OBSERVER : initial(eyeobj.invisibility)
 
 /mob/living/silicon/ai/verb/toggle_acceleration()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Toggle Camera Acceleration"
 
 	if(incapacitated())

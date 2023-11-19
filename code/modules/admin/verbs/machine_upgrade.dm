@@ -1,6 +1,6 @@
 /proc/machine_upgrade(obj/machinery/M in world)
 	set name = "Tweak Component Ratings"
-	set category = "Debug"
+	set category = STAT_DEBUG_ATMOS
 	if (!istype(M))
 		return
 

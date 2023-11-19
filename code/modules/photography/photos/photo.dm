@@ -87,7 +87,7 @@
 
 /obj/item/photo/verb/rename()
 	set name = "Rename photo"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 
 	var/n_name = stripped_input(usr, "What would you like to label the photo?", "Photo Labelling", max_length=MAX_NAME_LEN)

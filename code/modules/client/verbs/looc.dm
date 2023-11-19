@@ -5,7 +5,7 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 /client/verb/looc(msg as text)
 	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
-	set category = "OOC"
+	set category = STAT_OOC
 
 	if(GLOB.say_disabled)    //This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'> Speech is currently admin-disabled.</span>")

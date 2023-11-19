@@ -4,7 +4,7 @@ also probably less secure, but honestly dude
 its mentors, not actual dangerous perms
 ******************************************/
 /client/proc/edit_mentors()
-	set category = "Admin"
+	set category = STAT_ADMIN_PERMISSIONS
 	set name = "Mentor Panel"
 	set desc = "Edit mentors"
 

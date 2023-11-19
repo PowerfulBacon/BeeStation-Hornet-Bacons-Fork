@@ -58,7 +58,7 @@
 
 /obj/item/reagent_containers/hypospray/CMO/verb/empty()
 	set name = "Empty Hypospray"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 	if(usr.incapacitated())
 		return

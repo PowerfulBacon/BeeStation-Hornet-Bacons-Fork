@@ -3,7 +3,7 @@
  */
 /client/proc/fax_panel()
 	set name = "Send Fax Message"
-	set category = "Admin"
+	set category = STAT_ANNOUNCE
 
 	if(!check_rights(R_ADMIN))
 		return

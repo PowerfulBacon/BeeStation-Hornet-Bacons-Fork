@@ -3,7 +3,7 @@
 ///Say verb
 /mob/verb/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
@@ -14,7 +14,7 @@
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)
 	set name = "Whisper"
-	set category = "IC"
+	set category = STAT_IC
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
@@ -27,7 +27,7 @@
 ///The me emote verb
 /mob/verb/me_verb(message as text)
 	set name = "Me"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")

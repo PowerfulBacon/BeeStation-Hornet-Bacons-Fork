@@ -78,7 +78,7 @@
 
 /obj/item/taperecorder/verb/ejectverb()
 	set name = "Eject Tape"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	if(!can_use(usr))
 		return
@@ -110,7 +110,7 @@
 
 /obj/item/taperecorder/verb/record()
 	set name = "Start Recording"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	if(!can_use(usr))
 		return
@@ -141,7 +141,7 @@
 
 /obj/item/taperecorder/verb/stop()
 	set name = "Stop"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	if(!can_use(usr))
 		return
@@ -161,7 +161,7 @@
 
 /obj/item/taperecorder/verb/play()
 	set name = "Play Tape"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	if(!can_use(usr))
 		return
@@ -212,7 +212,7 @@
 
 /obj/item/taperecorder/verb/print_transcript()
 	set name = "Print Transcript"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	var/list/transcribed_info = mytape.storedinfo
 	if(!length(transcribed_info))

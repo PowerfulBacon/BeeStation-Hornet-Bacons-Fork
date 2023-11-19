@@ -347,7 +347,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 	set_sensors(usr)
 

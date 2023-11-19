@@ -54,7 +54,7 @@
 
 /obj/item/clothing/head/verb/unattach_wig()
 	set name = "Remove Wig"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 
 	var/mob/user = usr

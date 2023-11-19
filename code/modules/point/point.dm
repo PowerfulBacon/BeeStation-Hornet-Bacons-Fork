@@ -118,7 +118,7 @@
  */
 /mob/verb/pointed(atom/A as mob|obj|turf in view(), params = "" as text)
 	set name = "Point To"
-	set category = "Object"
+	set category = STAT_OBJECT
 	if(client && !(A in view(client.view, src)))
 		return FALSE
 	if(istype(A, /obj/effect/temp_visual/point))

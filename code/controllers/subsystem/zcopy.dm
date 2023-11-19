@@ -610,13 +610,13 @@ SUBSYSTEM_DEF(zcopy)
 /client/proc/update_all_openturf()
 	set name = "Update all openturfs"
 	set desc = "Forces all Z-Mimics to update immediately."
-	set category = "Debug"
+	set category = STAT_DEBUG_MULTIZ
 	SSzcopy.update_all()
 
 /client/proc/analyze_openturf(turf/T)
 	set name = "Analyze Openturf"
 	set desc = "Show the layering of an openturf and everything it's mimicking."
-	set category = "Debug"
+	set category = STAT_DEBUG_MULTIZ
 
 	if (!check_rights(R_DEBUG))
 		return

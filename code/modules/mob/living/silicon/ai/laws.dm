@@ -1,6 +1,6 @@
 
 /mob/living/silicon/ai/proc/show_laws_verb()
-	set category = "AI Commands"
+	set category = STAT_AI
 	set name = "Show Laws"
 	if(usr.stat == DEAD)
 		return //won't work if dead

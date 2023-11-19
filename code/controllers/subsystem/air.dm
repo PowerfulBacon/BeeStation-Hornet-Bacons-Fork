@@ -127,7 +127,7 @@ SUBSYSTEM_DEF(air)
 /proc/fix_corrupted_atmos()
 
 /datum/admins/proc/fixcorruption()
-	set category = "Debug"
+	set category = STAT_DEBUG_ATMOS
 	set desc="Fixes air that has weird NaNs (-1.#IND and such). Hopefully."
 	set name="Fix Infinite Air"
 	fix_corrupted_atmos()

@@ -2,7 +2,7 @@
 /client/proc/getserverlogs()
 	set name = "Get Server Logs"
 	set desc = "View/retrieve logfiles."
-	set category = "Admin"
+	set category = STAT_INVESTIGATE
 	if(!check_rights(R_SERVER))
 		return
 
@@ -11,7 +11,7 @@
 /client/proc/getcurrentlogs()
 	set name = "Get Current Logs"
 	set desc = "View/retrieve logfiles for the current round."
-	set category = "Admin"
+	set category = STAT_INVESTIGATE
 
 	browseserverlogs("[GLOB.log_directory]/")
 

@@ -213,7 +213,7 @@ RLD
 
 /obj/item/construction/rcd/verb/toggle_window_type_verb()
 	set name = "RCD : Toggle Window Type"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in view(1)
 
 	if(!usr.canUseTopic(src, BE_CLOSE))

@@ -9,7 +9,7 @@
 	vv_update_display(D, "marked", VV_MSG_MARKED)
 
 /client/proc/mark_datum_mapview(datum/D as mob|obj|turf|area in view(view))
-	set category = "Debug"
+	set category = STAT_DEBUG_ATOMS
 	set name = "Mark Object"
 
 	if(!check_rights(R_VAREDIT))

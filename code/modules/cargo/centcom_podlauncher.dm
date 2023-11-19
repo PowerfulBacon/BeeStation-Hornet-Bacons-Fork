@@ -19,7 +19,7 @@
 /client/proc/centcom_podlauncher() //Creates a verb for admins to open up the ui
 	set name = "Config/Launch Supplypod"
 	set desc = "Configure and launch a CentCom supplypod full of whatever your heart desires!"
-	set category = "Adminbus"
+	set category = STAT_EVENTS
 	if(!check_rights(R_SPAWN))
 		return
 	new /datum/centcom_podlauncher(usr)//create the datum
@@ -582,7 +582,7 @@
 	var/list/modifiers = params2list(params)
 
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
-	
+
 	if (launcherActivated)
 		//Clicking on UI elements shouldn't launch a pod
 		if(istype(target,/atom/movable/screen))

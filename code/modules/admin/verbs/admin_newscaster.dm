@@ -1,5 +1,5 @@
 /datum/admins/proc/access_news_network() //MARKER
-	set category = "Round"
+	set category = STAT_ANNOUNCE
 	set name = "Access Newscaster Network"
 	set desc = "Allows you to view, add and edit news feeds."
 

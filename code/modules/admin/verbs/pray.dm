@@ -1,5 +1,5 @@
 /mob/verb/pray(msg as text)
-	set category = "IC"
+	set category = STAT_IC
 	set name = "Pray"
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems

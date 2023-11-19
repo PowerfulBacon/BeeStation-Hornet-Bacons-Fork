@@ -1,5 +1,5 @@
 /client/proc/map_template_load()
-	set category = "Debug"
+	set category = STAT_DEBUG_MAPPING
 	set name = "Map template - Place"
 
 	var/datum/map_template/template
@@ -28,7 +28,7 @@
 	message_admins("<span class='adminnotice'>[key_name_admin(src)] has placed a map template ([template_name]) at [ADMIN_COORDJMP(T)]</span>")
 
 /client/proc/map_template_upload()
-	set category = "Debug"
+	set category = STAT_DEBUG_MAPPING
 	set name = "Map Template - Upload"
 
 	var/map = input(src, "Choose a Map Template to upload to template storage","Upload Map Template") as null|file

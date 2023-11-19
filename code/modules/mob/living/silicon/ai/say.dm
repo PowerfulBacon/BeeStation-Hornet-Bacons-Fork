@@ -70,7 +70,7 @@
 
 	set name = "Announcement Help"
 	set desc = "Display a list of vocal words to announce to the crew."
-	set category = "AI Commands"
+	set category = STAT_AI
 
 	if(incapacitated())
 		return

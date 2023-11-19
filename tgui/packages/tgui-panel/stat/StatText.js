@@ -1,13 +1,15 @@
 import { useSelector } from 'common/redux';
-import { Button, Flex, Box, Section } from 'tgui/components';
+import { Button, Flex, Box, Section, Collapsible } from 'tgui/components';
 import { useSettings } from '../settings';
 import { selectStatPanel } from './selectors';
 import { Divider, Table } from '../../tgui/components';
 import { STAT_TEXT, STAT_BUTTON, STAT_ATOM, STAT_DIVIDER, STAT_BLANK } from './constants';
 import { capitalize } from 'common/string';
+import { Color } from 'common/color';
 
 export const StatText = (props, context) => {
   const stat = useSelector(context, selectStatPanel);
+  const dispatch = useDispatch(context);
   let statPanelData = stat.statInfomation;
   if (!statPanelData) {
     return <Box color="red">Passed stat panel data was null contant coderman (or coderwoman).</Box>;
@@ -16,6 +18,7 @@ export const StatText = (props, context) => {
   if (stat.verbData !== null) {
     verbs = stat.verbData[stat.selectedTab] || {};
   }
+  let compiledVerbs = compileVerbInformation(verbs);
   return (
     <div className="StatBorder">
       <Box>
@@ -46,12 +49,70 @@ export const StatText = (props, context) => {
                   (statPanelData[key].type === STAT_BLANK && <br />))
             )
           : 'No data'}
-        {Object.keys(verbs).map((verb) => (
-          <StatTextVerb key={verb} title={verb} action_id={verbs[verb].action} params={verbs[verb].params} />
-        ))}
+        {Object.keys(compiledVerbs).map((key) => { return (key === ""
+        ? (
+        <div className={"StatVerbContainer" + (Object.keys(compiledVerbs).length > 1 ? " add_spacing" : "")}>
+          {compiledVerbs[key].map((verb) => (
+            <StatTextVerb key={verb} title={verb} action_id={verbs[verb].action} params={verbs[verb].params} />
+          ))}
+        </div>)
+        : (
+          <Collapsible
+            key={key}
+            title={key}
+            color="transparent"
+            open={!(key in stat.collapsed_stat_tabs)}
+            className="StatVerbCollapsible"
+            onCollapse={() => {
+              dispatch({
+                type: 'stat/collapseStat',
+                payload: {
+                  section: key,
+                },
+              });
+            }}
+            onExpand={() => {
+
+            }}>
+            <div className="StatVerbContainer">
+              {compiledVerbs[key].map((verb) => (
+                <StatTextVerb key={verb} title={verb} action_id={verbs[verb].action} params={verbs[verb].params} />
+              ))}
+            </div>
+          </Collapsible>
+        ));
+        }
+        )}
       </Box>
     </div>
   );
+};
+
+const compileVerbInformation = (verbs) => {
+  let output = {};
+  // Iterate over the original dictionary
+  for (const key in verbs) {
+    const subpath = verbs[key].params.subpaths.join(".") || "";
+
+    // Check if the subpath is already a key in the organized dictionary
+    if (output[subpath]) {
+        // If it exists, push the current object to the existing list
+        output[subpath].push(key);
+    } else {
+        // If it doesn't exist, create a new list with the current object
+        output[subpath] = [key];
+    }
+  }
+  // Get the keys and sort them
+  const sortedKeys = Object.keys(output).sort();
+  // Create a new dictionary with sorted keys
+  const sortedOutput = {};
+  // Iterate through the sorted keys
+  for (const key of sortedKeys) {
+    // Assign the corresponding value to the new dictionary
+    sortedOutput[key] = output[key];
+  }
+  return sortedOutput;
 };
 
 const StatTagToPriority = (text) => {
@@ -263,19 +324,25 @@ export const StatTextDivider = (props, context) => {
 export const StatTextVerb = (props, context) => {
   const { title, action_id, params = [] } = props;
   return (
-    <Box shrink={1} inline width="200px">
-      <Button
-        content={title}
-        onClick={() =>
-          Byond.sendMessage('stat/pressed', {
-            action_id: action_id,
-            params: params,
-          })
-        }
-        color="transparent"
-        fluid
-      />
-    </Box>
+    <div className="StatVerb">
+      <div className="StatVerbInside">
+        <Button
+          fontSize={0.82}
+          className="StatVerbText"
+          tooltip={<Box fontSize={0.85}>{title}</Box>}
+          onClick={() =>
+            Byond.sendMessage('stat/pressed', {
+              action_id: action_id,
+              params: params,
+            })
+          }
+          color="transparent"
+          fluid>
+          {title}
+        </Button>
+        <Button fontSize={0.82} className="StatVerbStar" icon="star" color="transparent" textColor="grey" />
+      </div>
+    </div>
   );
 };
 

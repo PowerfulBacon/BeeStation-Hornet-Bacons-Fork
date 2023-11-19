@@ -1,5 +1,5 @@
 /client/proc/air_status(turf/target)
-	set category = "Debug"
+	set category = STAT_DEBUG_ATMOS
 	set name = "Display Air Status"
 
 	if(!isturf(target))
@@ -8,7 +8,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Show Air Status") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/fix_next_move()
-	set category = "Debug"
+	set category = STAT_DEBUG_UTILITY
 	set name = "Unfreeze Everyone"
 	var/largest_move_time = 0
 	var/largest_click_time = 0
@@ -38,7 +38,7 @@
 	return
 
 /client/proc/radio_report()
-	set category = "Debug"
+	set category = STAT_DEBUG_UTILITY
 	set name = "Radio report"
 
 	var/output = "<b>Radio Report</b><hr>"
@@ -70,7 +70,7 @@
 
 /client/proc/reload_admins()
 	set name = "Reload Admins"
-	set category = "Server"
+	set category = STAT_SERVER
 
 	if(!src.holder)
 		return
@@ -85,7 +85,7 @@
 
 /client/proc/toggle_cdn()
 	set name = "Toggle CDN"
-	set category = "Server"
+	set category = STAT_SERVER
 	var/static/admin_disabled_cdn_transport = null
 	if (alert(usr, "Are you sure you want to toggle the CDN asset transport?", "Confirm", "Yes", "No") != "Yes")
 		return

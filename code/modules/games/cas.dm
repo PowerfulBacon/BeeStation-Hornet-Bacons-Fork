@@ -119,7 +119,7 @@
 
 /obj/item/toy/cards/singlecard/cas/Flip()
 	set name = "Flip Card"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in range(1)
 	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
 		return

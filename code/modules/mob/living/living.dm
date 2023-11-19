@@ -389,7 +389,7 @@
 //for more info on why this is not atom/pull, see examinate() in mob.dm
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
-	set category = "Object"
+	set category = STAT_OBJECT
 
 	if(istype(AM) && Adjacent(AM))
 		start_pulling(AM)
@@ -405,7 +405,7 @@
 
 /mob/living/verb/stop_pulling1()
 	set name = "Stop Pulling"
-	set category = "IC"
+	set category = STAT_IC
 	stop_pulling()
 
 //same as above
@@ -480,7 +480,7 @@
 
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(IsSleeping())
 		to_chat(src, "<span class='notice'>You are already sleeping.</span>")
@@ -494,7 +494,7 @@
 
 /mob/living/proc/lay_down()
 	set name = "Rest"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(!resting)
 		set_resting(TRUE, FALSE)
@@ -810,7 +810,7 @@
 
 /mob/living/verb/resist()
 	set name = "Resist"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(!can_resist())
 		return

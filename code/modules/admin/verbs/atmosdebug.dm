@@ -1,5 +1,5 @@
 /client/proc/atmosscan()
-	set category = "Mapping"
+	set category = STAT_DEBUG_MAPPING
 	set name = "Check Plumbing"
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")
@@ -29,7 +29,7 @@
 				to_chat(usr, "Errorneous connections around [AM.name]. Duplicate or rogue pipes suspected at or around [ADMIN_VERBOSEJMP(AM)]")
 
 /client/proc/powerdebug()
-	set category = "Mapping"
+	set category = STAT_DEBUG_MAPPING
 	set name = "Check Power"
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")

@@ -494,7 +494,7 @@
 ///Moves a mob upwards in z level
 /mob/verb/up()
 	set name = "Move Upwards"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(zMove(UP, TRUE))
 		to_chat(src, "<span class='notice'>You move upwards.</span>")
@@ -502,7 +502,7 @@
 ///Moves a mob down a z level
 /mob/verb/down()
 	set name = "Move Down"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(zMove(DOWN, TRUE))
 		to_chat(src, "<span class='notice'>You move down.</span>")

@@ -80,7 +80,7 @@
 
 /client/verb/hotkeys_help()
 	set name = "hotkeys-help"
-	set category = "OOC"
+	set category = STAT_OOC
 
 	var/adminhotkeys = {"<font color='purple'>
 Admin:
@@ -100,7 +100,7 @@ Admin:
 
 /client/verb/changelog()
 	set name = "Changelog"
-	set category = "OOC"
+	set category = STAT_OOC
 	var/datum/asset/simple/namespaced/changelog = get_asset_datum(/datum/asset/simple/namespaced/changelog)
 	changelog.send(src)
 	src << browse(changelog.get_htmlloader("changelog.html"), "window=changes;size=675x650")
@@ -258,7 +258,7 @@ Any-Mode: (hotkey doesn't need to be on)
 /client/verb/map()
 	set name = "View Webmap"
 	set desc = "View the current map in the webviewer"
-	set category = "OOC"
+	set category = STAT_OOC
 	if(SSmapping.config.map_link == "None")
 		to_chat(src,"<span class='danger'>The current map does not have a webmap. </span>")
 	else if(SSmapping.config.map_link)

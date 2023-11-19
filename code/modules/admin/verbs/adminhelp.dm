@@ -9,7 +9,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/help_tickets/admin, new)
 /client/proc/openTicketManager()
 	set name = "Ticket Manager"
 	set desc = "Opens the ticket manager"
-	set category = "Admin"
+	set category = STAT_INVESTIGATE
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
@@ -40,7 +40,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/help_tickets/admin, new)
 	adminhelp(msg)
 
 /client/verb/adminhelp(msg as message)
-	set category = "Admin"
+	set category = STAT_ADMIN_BASE
 	set name = "Adminhelp"
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems

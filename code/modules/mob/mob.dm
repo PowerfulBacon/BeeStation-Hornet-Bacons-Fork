@@ -476,7 +476,7 @@
   */
 /mob/verb/examinate(atom/A as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
 	set name = "Examine"
-	set category = "IC"
+	set category = STAT_IC
 
 	if(isturf(A) && !(sight & SEE_TURFS) && !(A in view(client ? client.view : world.view, src)))
 		// shift-click catcher may issue examinate() calls for out-of-sight turfs
@@ -588,7 +588,7 @@
   */
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src = usr
 
 	if(ismecha(loc))
@@ -613,7 +613,7 @@
   */
 /mob/verb/memory()
 	set name = "Notes"
-	set category = "IC"
+	set category = STAT_IC
 	set desc = "View your character's notes memory."
 	if(mind)
 		mind.show_memory(src)
@@ -625,7 +625,7 @@
   */
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
-	set category = "IC"
+	set category = STAT_IC
 	if(mind)
 		if (world.time < memory_throttle_time)
 			return
@@ -646,7 +646,7 @@
   */
 /mob/verb/abandon_mob()
 	set name = "Respawn"
-	set category = "OOC"
+	set category = STAT_OOC
 	var/alert_yes
 
 	if (CONFIG_GET(flag/norespawn))
@@ -693,7 +693,7 @@
   */
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
-	set category = "OOC"
+	set category = STAT_OOC
 	reset_perspective(null)
 	unset_machine()
 
@@ -1197,7 +1197,7 @@
 ///Show the language menu for this mob
 /mob/verb/open_language_menu()
 	set name = "Open Language Menu"
-	set category = "IC"
+	set category = STAT_IC
 
 	var/datum/language_holder/H = get_language_holder()
 	H.open_language_menu(usr)

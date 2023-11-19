@@ -1,5 +1,5 @@
 /client/proc/forcerandomrotate()
-	set category = "Server"
+	set category = STAT_SERVER
 	set name = "Trigger Random Map Rotation"
 	var/rotate = alert("Force a random map rotation to trigger?", "Rotate map?", "Yes", "Cancel")
 	if (rotate != "Yes")
@@ -10,7 +10,7 @@
 	SSmapping.maprotate()
 
 /client/proc/adminchangemap()
-	set category = "Server"
+	set category = STAT_SERVER
 	set name = "Change Map"
 
 	var/list/maprotatechoices = list()
@@ -45,7 +45,7 @@
 		message_admins("[key_name_admin(usr)] has changed the map to [VM.map_name]")
 
 /client/proc/forcemapconfig()
-	set category = "Debug"
+	set category = STAT_DEBUG_MAPPING
 	set name = "Debug Force Map"
 
 	//Locked behind permissions since it needs serious protection.

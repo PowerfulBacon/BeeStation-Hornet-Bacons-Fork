@@ -113,7 +113,7 @@
 
 /obj/item/clothing/suit/toggle/verb/suit_toggle()
 	set name = "Toggle Suit Style"
-	set category = "Object"
+	set category = STAT_OBJECT
 	set src in usr
 
 	if(!can_use(usr))
