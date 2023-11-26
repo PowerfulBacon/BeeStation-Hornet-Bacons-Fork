@@ -14,6 +14,14 @@
 /datum/respawn_event/proc/execute(list/candidates)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	var/datum/task/async_task = prepare(candidates)
+	if (isnull(async_task))
+		log_game("Respawn event failed to execute due to prepare() not returning a value.")
+		message_admins("Respawn event failed to execute due to prepare() not returning a value.")
+		return
+	if (islist(async_task) && !length(async_task))
+		log_game("Respawn event failed to execute due to having no candidates.")
+		message_admins("Respawn event failed to execute due to having no candidates.")
+		return
 	if (!istype(async_task))
 		generate_mobs(candidates)
 	else
@@ -26,6 +34,7 @@
 /// candidates: A list of /clients of the people that want to be included in the respawn wave.
 /// Note: Returning a task will make this function work asynchronously
 /datum/respawn_event/proc/prepare(list/candidates)
+	return null
 
 /// Generate the mobs for this respawn event
 /// candidates: A list of /clients of the people that want to be included in the respawn wave. May contain nulls.

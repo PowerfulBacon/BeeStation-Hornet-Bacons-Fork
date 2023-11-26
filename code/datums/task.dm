@@ -16,7 +16,7 @@
 	completed = TRUE
 	src.result = result
 	for (var/datum/callback/continue_with in continue_withs)
-		callback.Invoke(src)
+		continue_with.Invoke(src)
 
 /// Wait for the task to be completed, or the timeout to expire
 /// Returns true if the task was completed
@@ -45,6 +45,8 @@
 		return TRUE
 	return completed
 
+/// When the task is completed, continue by executing a callback.
+/// This task will be pushed as the final paremeter to the callback
 /datum/task/proc/continue_with(datum/callback/callback)
 	if (completed)
 		callback.Invoke(src)

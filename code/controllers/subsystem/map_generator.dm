@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(map_generator)
 
 /datum/controller/subsystem/map_generator/stat_entry()
 	var/list/things = list()
-	for(var/datum/map_generator/running_generator as() in executing_generators)
+	for(var/datum/task/map_generator/running_generator as() in executing_generators)
 		things += "{Ticks: [running_generator.ticks]}"
 	. = ..("GenCnt:[length(executing_generators)], [things.Join(",")]")
 
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(map_generator)
 	//Start processing
 	while (current_run_index <= current_run_length)
 		//Get current action
-		var/datum/map_generator/currently_running = executing_generators[current_run_index]
+		var/datum/task/map_generator/currently_running = executing_generators[current_run_index]
 		current_run_index ++
 		//Perform generate action
 		var/completed = TRUE
@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(map_generator)
 				break
 		//We completed
 		if (completed)
-			currently_running.complete()
+			currently_running.mark_completed()
 			//Remove the currently running generator
 			executing_generators -= currently_running
 			//Decrement the current run nidex

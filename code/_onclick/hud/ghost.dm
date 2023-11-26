@@ -78,6 +78,10 @@
 	using.hud = src
 	static_inventory += using
 
+	using = new /atom/movable/screen/respawn_timer
+	using.hud = src
+	static_inventory += using
+
 /datum/hud/ghost/show_hud(version = 0, mob/viewmob)
 	// don't show this HUD if observing; show the HUD of the observee
 	var/mob/dead/observer/O = mymob
