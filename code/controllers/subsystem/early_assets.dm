@@ -1,3 +1,6 @@
+// If we in low memory mode, then we don't really care about preferences and stuff having assets early.
+#ifndef LOWMEMORYMODE
+
 /// Initializes any assets that need to be loaded ASAP.
 /// This houses preference menu assets, since they can be loaded at any time,
 /// most dangerously before the atoms SS initializes.
@@ -22,3 +25,4 @@ SUBSYSTEM_DEF(early_assets)
 		CHECK_TICK
 
 	return ..()
+#endif
