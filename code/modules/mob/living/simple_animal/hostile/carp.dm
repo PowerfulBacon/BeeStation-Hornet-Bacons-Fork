@@ -70,8 +70,10 @@
 /mob/living/simple_animal/hostile/carp/Initialize(mapload)
 	ADD_TRAIT(src, TRAIT_FREE_HYPERSPACE_MOVEMENT, INNATE_TRAIT)
 	if(random_color)
-		set_greyscale(new_config=/datum/greyscale_config/carp)
 		carp_randomify(rarechance)
+	else
+		add_atom_colour("#aba2ff", FIXED_COLOUR_PRIORITY)
+	add_overlay(image(icon = icon, icon_state = "base_mouth"))
 	. = ..()
 
 /**
@@ -84,10 +86,10 @@
 	var/our_color
 	if(prob(rarechance))
 		our_color = pick(carp_colors_rare)
-		set_greyscale(colors=list(carp_colors_rare[our_color]))
+		add_atom_colour(carp_colors_rare[our_color], FIXED_COLOUR_PRIORITY)
 	else
 		our_color = pick(carp_colors)
-		set_greyscale(colors=list(carp_colors[our_color]))
+		add_atom_colour(carp_colors[our_color], FIXED_COLOUR_PRIORITY)
 
 /mob/living/simple_animal/hostile/carp/revive(full_heal = FALSE, admin_revive = FALSE)
 	. = ..()
