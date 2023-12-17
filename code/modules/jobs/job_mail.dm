@@ -214,7 +214,7 @@
 		/obj/item/reagent_containers/hypospray/medipen/pumpup = 1,
 	)
 
-//EXPLORATION CREW
+//EXPLORATION CREWc
 //Slightly more powerful due to the rarity of them ever actually getting a chance to get their mail.
 /datum/job/exploration_crew
 	mail_goodies = list(

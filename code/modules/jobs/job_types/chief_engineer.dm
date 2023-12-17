@@ -31,9 +31,7 @@
 	department_flag = ENGSEC
 	departments = DEPT_BITFLAG_ENG | DEPT_BITFLAG_COM
 	bank_account_department = ACCOUNT_ENG_BITFLAG | ACCOUNT_COM_BITFLAG
-	payment_per_department = list(
-		ACCOUNT_COM_ID = PAYCHECK_COMMAND_NT,
-		ACCOUNT_ENG_ID = PAYCHECK_COMMAND_DEPT)
+	payment_per_department = list(ACCOUNT_ENG_ID = PAYCHECK_COMMAND)
 
 
 	display_order = JOB_DISPLAY_ORDER_CHIEF_ENGINEER

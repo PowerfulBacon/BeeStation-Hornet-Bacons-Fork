@@ -1,19 +1,11 @@
 #define STARTING_PAYCHECKS 5
 
-#define PAYCHECK_ASSISTANT 10
-#define PAYCHECK_MINIMAL 10
-#define PAYCHECK_EASY 15
-#define PAYCHECK_MEDIUM 40
+#define PAYCHECK_MINIMAL 30
+#define PAYCHECK_EASY 40
+#define PAYCHECK_MEDIUM 50
 #define PAYCHECK_HARD 70
-#define PAYCHECK_COMMAND_NT   20 // given from nanotrasen to heads
-#define PAYCHECK_COMMAND_DEPT 80 // given from department budget
-#define PAYCHECK_VIP 2000
-/*	Note: The current intention for crazy amount of money to VIP is that they can be a rich shitter
-		  or be targeted by antags for their money - oh, my, being rich isn't always good.
-		  The first buff to their money was to 2,000 credits. Nerf is fine if you think it's necessary,
-		  but if you decrease their payment too much, they'll be no longer interested.
-		  I recommend to nerf their gimmick spawn chance instead. */
-
+#define PAYCHECK_COMMAND 100
+#define PAYCHECK_VIP 300
 
 #define PAYCHECK_WELFARE 20 //NEETbucks
 
@@ -23,8 +15,8 @@
 #define BUDGET_RATIO_TYPE_DOUBLE 2 // and for the rest
 
 
-#define ACCOUNT_CIV_ID "Civilian"
-#define ACCOUNT_CIV_NAME "Civil Budget"
+#define ACCOUNT_STATION_ID "Station"
+#define ACCOUNT_STATION_NAME "Station Budget"
 #define ACCOUNT_SRV_ID "Service"
 #define ACCOUNT_SRV_NAME "Service Budget"
 #define ACCOUNT_CAR_ID "Cargo"
@@ -37,17 +29,12 @@
 #define ACCOUNT_MED_NAME "Medical Budget"
 #define ACCOUNT_SEC_ID "Security"
 #define ACCOUNT_SEC_NAME "Defense Budget"
-#define ACCOUNT_COM_ID "Command"
-#define ACCOUNT_COM_NAME "Nanotrasen Commands' Quality ＆ Appearance Maintenance Budget"
 #define ACCOUNT_VIP_ID "VIP"
 #define ACCOUNT_VIP_NAME "Nanotrasen VIP Expense Account Budget"
 #define ACCOUNT_NEET_ID "Welfare"
 #define ACCOUNT_NEET_NAME "Space Nations Welfare"
 #define ACCOUNT_GOLEM_ID "Golem"
 #define ACCOUNT_GOLEM_NAME "Shared Mining Account"
-
-
-#define ACCOUNT_ALL_NAME "United Station Budget" // for negative station trait - united budget
 
 // If a vending machine matches its department flag with your bank account's, it gets free.
 #define NO_FREEBIES 0 // used for a vendor selling nothing for free

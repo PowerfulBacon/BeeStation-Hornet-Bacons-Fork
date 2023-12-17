@@ -5,7 +5,7 @@
 
 /obj/structure/closet/secure_closet/captains/populate_contents_immediate()
 	..()
-	new /obj/item/card/id/departmental_budget/civ(src)
+	new /obj/item/card/id/departmental_budget/station(src)
 
 /obj/structure/closet/secure_closet/captains/PopulateContents()
 	..()

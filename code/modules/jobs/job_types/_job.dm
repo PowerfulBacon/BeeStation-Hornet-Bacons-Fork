@@ -69,7 +69,7 @@
 	///vender will not ask you for credits when you buy a stuff from it as long as department matches
 	var/bank_account_department = ACCOUNT_CIV_BITFLAG
 	///your payment per department. geneticist will be a good example for this.
-	var/payment_per_department = list(ACCOUNT_CIV_ID = 0)
+	var/payment_per_department = list()
 
 	var/list/mind_traits // Traits added to the mind of the mob assigned this job
 

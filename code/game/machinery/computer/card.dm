@@ -65,10 +65,8 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		blacklisted += J.title
 
 	// This determines which department payment list the console will show to you.
-	if(!target_dept)
-		available_paycheck_departments |= list(ACCOUNT_COM_ID)
 	if((target_dept == DEPT_GEN) || !target_dept)
-		available_paycheck_departments |= list(ACCOUNT_CIV_ID, ACCOUNT_SRV_ID, ACCOUNT_CAR_ID)
+		available_paycheck_departments |= list(ACCOUNT_SRV_ID, ACCOUNT_CAR_ID)
 	if((target_dept == DEPT_ENG) || !target_dept)
 		available_paycheck_departments |= list(ACCOUNT_ENG_ID)
 	if((target_dept == DEPT_SCI) || !target_dept)
@@ -307,7 +305,6 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 			//Checking all the accesses and their corresponding departments
 			if((ACCESS_HOP in inserted_scan_id.access) && ((target_dept==DEPT_GEN) || !target_dept))
 				paycheck_departments |= ACCOUNT_SRV_ID
-				paycheck_departments |= ACCOUNT_CIV_ID
 				paycheck_departments |= ACCOUNT_CAR_ID //Currently no seperation between service/civillian and supply
 			if((ACCESS_HOS in inserted_scan_id.access) && ((target_dept==DEPT_SEC) || !target_dept))
 				paycheck_departments |= ACCOUNT_SEC_ID
@@ -648,8 +645,6 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							B.active_departments &= ~SSeconomy.get_budget_acc_bitflag(each) // turn off all bitflag for each department except for VIP/Command
 							B.payment_per_department[each] = 0 // your payment for each department is 0
 							B.bonus_per_department[each] = 0   // your bonus for each department is 0
-						B.active_departments &= ~SSeconomy.get_budget_acc_bitflag(ACCOUNT_COM_ID) // micromanagement. Command bitflag should be removed manually, because 'for/each' didn't remove it.
-						B.payment_per_department[ACCOUNT_CIV_ID] = PAYCHECK_MINIMAL // for the love of god, let them have minimal payment from Civ budget... to be a real assistant.
 					if(R)
 						for(var/each in B.payment_per_department)
 							if(SSeconomy.is_nonstation_account(each)) // do not touch VIP/Command flag
@@ -684,7 +679,6 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							B.active_departments &= ~SSeconomy.get_budget_acc_bitflag(each)
 							B.payment_per_department[each] = 0
 							B.bonus_per_department[each] = 0
-						B.active_departments &= ~SSeconomy.get_budget_acc_bitflag(ACCOUNT_COM_ID) // micromanagement
 					if(R && jobdatum) // 1-B: reseting crew manifest
 						for(var/each in available_paycheck_departments)
 							if(SSeconomy.is_nonstation_account(each))
@@ -865,7 +859,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 			if(!B)
 				updateUsrDialog()
 				return
-			if(SSeconomy.is_nonstation_account(paycheck_t) && !(paycheck_t == ACCOUNT_COM_ID)) // command is fine to turn on/off
+			if(SSeconomy.is_nonstation_account(paycheck_t))
 				message_admins("[ADMIN_LOOKUPFLW(usr)] tried to adjust [inserted_modify_id.registered_name]'s vendor free status of [B.account_holder]. It must be they're hacking the game.")
 				CRASH("[key_name(usr)] tried to adjust [inserted_modify_id.registered_name]'s vendor free status of [B.account_holder]. It must be they're hacking the game.")
 

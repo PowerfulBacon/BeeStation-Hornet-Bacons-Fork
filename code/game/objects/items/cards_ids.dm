@@ -930,8 +930,8 @@ update_label("John Doe", "Clowny")
 	name = "departmental card (budget)"
 	desc = "Provides access to the departmental budget."
 	icon_state = "budget"
-	var/department_ID = ACCOUNT_CIV_ID
-	var/department_name = ACCOUNT_CIV_NAME
+	var/department_ID = ACCOUNT_STATION_ID
+	var/department_name = ACCOUNT_STATION_NAME
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	investigate_flags = ADMIN_INVESTIGATE_TARGET
 
@@ -951,9 +951,9 @@ update_label("John Doe", "Clowny")
 	SSeconomy.dep_cards -= src
 	return ..()
 
-/obj/item/card/id/departmental_budget/civ
-	department_ID = ACCOUNT_CIV_ID
-	department_name = ACCOUNT_CIV_NAME
+/obj/item/card/id/departmental_budget/station
+	department_ID = ACCOUNT_STATION_ID
+	department_name = ACCOUNT_STATION_NAME
 	icon_state = "budget"
 	hud_state = JOB_HUD_RAWCOMMAND
 
@@ -992,13 +992,6 @@ update_label("John Doe", "Clowny")
 	department_name = ACCOUNT_SEC_NAME
 	icon_state = "budget_sec"
 	hud_state = JOB_HUD_RAWSECURITY
-
-// These will never be spawned, but should be trackable by admins anyway.
-/obj/item/card/id/departmental_budget/com
-	department_ID = ACCOUNT_COM_ID
-	department_name = ACCOUNT_COM_NAME
-	icon_state = "budget_centcom"
-	hud_state = JOB_HUD_ACTINGCAPTAIN
 
 /obj/item/card/id/departmental_budget/vip
 	department_ID = ACCOUNT_VIP_ID

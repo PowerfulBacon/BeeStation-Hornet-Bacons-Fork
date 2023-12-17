@@ -16,8 +16,8 @@
 
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_CIV
-	bank_account_department = ACCOUNT_CIV_BITFLAG
-	payment_per_department = list(ACCOUNT_CIV_ID = PAYCHECK_ASSISTANT)
+	bank_account_department = NONE
+	payment_per_department = list()
 
 	display_order = JOB_DISPLAY_ORDER_ASSISTANT
 	rpg_title = "Peasant"
@@ -47,7 +47,7 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG
-	payment_per_department = list(ACCOUNT_SRV_ID = PAYCHECK_ASSISTANT)
+	payment_per_department = list()
 
 	rpg_title = "Scissorhands"
 

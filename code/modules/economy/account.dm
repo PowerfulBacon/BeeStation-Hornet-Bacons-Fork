@@ -166,8 +166,8 @@
 	account_balance = exclusive_budget_pool ? exclusive_budget_pool : budget
 
 /datum/bank_account/department/civilian
-	account_holder = ACCOUNT_CIV_NAME
-	department_id = ACCOUNT_CIV_ID
+	account_holder = ACCOUNT_STATION_NAME
+	department_id = ACCOUNT_STATION_ID
 	department_bitflag = ACCOUNT_CIV_BITFLAG
 	budget_ratio = BUDGET_RATIO_TYPE_SINGLE
 	nonstation_account = FALSE
@@ -215,12 +215,6 @@
 	department_bitflag = ACCOUNT_SEC_BITFLAG
 	budget_ratio = BUDGET_RATIO_TYPE_DOUBLE
 	nonstation_account = FALSE
-
-/datum/bank_account/department/command
-	account_holder = ACCOUNT_COM_NAME
-	department_id = ACCOUNT_COM_ID
-	department_bitflag = ACCOUNT_COM_BITFLAG
-	show_budget_information = FALSE
 
 /datum/bank_account/department/command/New()
 	exclusive_budget_pool = NON_STATION_BUDGET_BASE
