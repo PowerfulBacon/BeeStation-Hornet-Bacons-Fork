@@ -338,7 +338,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 					dat += "<td>(Auth-denied)</td>"
 				else
 					if(B.active_departments & SSeconomy.get_budget_acc_bitflag(target_paycheck))
-						dat += "<td><a href='?src=[REF(src)];choice=turn_on_off_department_bank;bank_account=[B.account_id];check_card=1'><font color=\"6bc473\">Free Vendor Access</font></a></td>"
+						dat += "<td><a href='?src=[REF(src)];choice=turn_on_off_department_bank;bank_account=[B.account_id];check_card=1;paycheck_t=[target_paycheck]'><font color=\"6bc473\">Free Vendor Access</font></a></td>"
 					else
 						dat += "<td><a href='?src=[REF(src)];choice=turn_on_off_department_bank;bank_account=[B.account_id];check_card=1;paycheck_t=[target_paycheck]'>No Free Vendor Access</a></td>"
 				if(B.suspended)
