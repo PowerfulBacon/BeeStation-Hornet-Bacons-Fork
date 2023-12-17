@@ -35,13 +35,6 @@ SUBSYSTEM_DEF(economy)
 		var/datum/bank_account/department/D = new each(budget_to_hand_out)
 		budget_accounts += D
 
-	// If we have united budget trait, need to do something else
-	if(HAS_TRAIT(SSstation, STATION_TRAIT_UNITED_BUDGET))
-		var/datum/bank_account/department/D = get_budget_account(ACCOUNT_CAR_ID)
-		D.account_balance = budget_pool
-		D.account_holder = ACCOUNT_ALL_NAME
-		// Note: if you want to remove united_budget feature, try /event verb and find united budget cancel event
-
 	return ..()
 
 /datum/controller/subsystem/economy/Recover()
@@ -89,10 +82,7 @@ SUBSYSTEM_DEF(economy)
 
 	if(force || target_budget.is_nonstation_account())  // Warning: do not replace this into `is_nonstation_account(target_budget)` or it will loop. We have 2 types of the procs that have the same name for conveniet purpose.
 		return target_budget // 'force' is used to grab a correct budget regardless of united budget.
-	else if(HAS_TRAIT(SSstation, STATION_TRAIT_UNITED_BUDGET))
-		return united_budget
-	else
-		return target_budget
+	return target_budget
 
 /// Returns a budget account's bitflag
 /datum/controller/subsystem/economy/proc/get_budget_acc_bitflag(dept_id)

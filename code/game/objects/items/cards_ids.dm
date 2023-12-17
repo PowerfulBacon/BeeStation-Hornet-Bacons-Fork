@@ -370,15 +370,10 @@
 				. += "The payment of this account is -"
 				for(var/each in payment_result)
 					. += "\t[each]"
-			if(!HAS_TRAIT(SSstation, STATION_TRAIT_UNITED_BUDGET))
-				for(var/datum/bank_account/department/D in SSeconomy.budget_accounts)
-					if(D.department_bitflag & registered_account.active_departments)
-						if(D.show_budget_information)
-							. += "The [D.account_holder] reports a balance of $[D.account_balance]."
-			else
-				var/datum/bank_account/B = SSeconomy.get_budget_account(ACCOUNT_CAR_ID)
-				if(B)
-					. += "The [B.account_holder] reports a balance of $[B.account_balance]."
+			for(var/datum/bank_account/department/D in SSeconomy.budget_accounts)
+				if(D.department_bitflag & registered_account.active_departments)
+					if(D.show_budget_information)
+						. += "The [D.account_holder] reports a balance of $[D.account_balance]."
 
 
 		. += "<span class='info'>Alt-Click the ID to pull money from the linked account in the form of holochips.</span>"
@@ -943,10 +938,6 @@ update_label("John Doe", "Clowny")
 /obj/item/card/id/departmental_budget/Initialize(mapload)
 	. = ..()
 	var/datum/bank_account/department/B = SSeconomy.get_budget_account(department_ID)
-	if(HAS_TRAIT(SSstation, STATION_TRAIT_UNITED_BUDGET) && !B.is_nonstation_account())
-		department_ID = ACCOUNT_CAR_ID
-		department_name = ACCOUNT_ALL_NAME
-		B = SSeconomy.get_budget_account(department_ID)
 
 	if(B)
 		registered_account = B
