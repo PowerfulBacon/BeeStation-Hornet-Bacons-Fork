@@ -10,9 +10,7 @@
 	/// List of all transactions that have been applied
 	var/list/transactions = list()
 	/// List of functions that the department has access to
-	var/list/department_functions = list(
-		/datum/department_function/budget
-	)
+	var/list/department_functions = list()
 
 /datum/department/New()
 	. = ..()
@@ -21,17 +19,18 @@
 	department_account = new(1000)
 	department_account.account_holder = department_name
 	department_account.nonstation_account = FALSE
+	department_functions += new /datum/department_function/budget(src)
 
 /datum/department/proc/handle_paychecks()
 	for (var/datum/department_member/member in department_members)
-		if (!pay(department_account, "Paycheck", member.payment, "Payment of employee's paycheck."))
+		if (!pay(member.account, "Paycheck", member.payment, "Payment of employee's paycheck."))
 			member.account.bank_card_talk("ERROR: Payday aborted, [department_account] departmental funds insufficient.")
 		else
 			member.account.bank_card_talk("Payday processed, account now holds $[member.account.account_balance], paid with $[member.payment] from [department_account] budget.")
 
 /datum/department/proc/pay(datum/bank_account/target, purpose, amount, reason)
 	if (target.transfer_money(department_account, amount))
-		transactions += new /datum/department_transaction("[target.account_holder] - [purpose]", amount, reason)
+		transactions += new /datum/department_transaction("[target.account_holder] - [purpose]", -amount, reason, department_account.account_balance)
 		return TRUE
 	return FALSE
 

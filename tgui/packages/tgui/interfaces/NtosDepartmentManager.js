@@ -36,7 +36,12 @@ export const NtosDepartmentManager = (props, context) => {
                 <Tabs.Tab
                   key={department.name}
                   selected={department.name === selectedDepartment}
-                  onClick={() => setSelectedDepartment(department.name)}>
+                  onClick={() => {
+                    setSelectedDepartment(department.name);
+                    act('change_department', {
+                      department_id: department.id,
+                    });
+                  }}>
                     {department.name}
                 </Tabs.Tab>))}
               </Tabs>
@@ -145,29 +150,20 @@ const FundManager = (props, context) => {
   const { act, data } = useBackend(context);
 
   const {
-    managed_departments = [],
+    selected_tab_data,
   } = data;
 
-  const [
-    selectedDepartment,
-    setSelectedDepartment,
-  ] = useLocalState(context, 'department', '');
+  const {
+    transactions = [],
+  } = selected_tab_data;
 
   return (
     <>
       <Box height="120px" position="relative">
         <Chart.Line
-          data={[[0, 50], [100, 0]]}
-          rangeX={[0, 100]}
-          rangeY={[0, 50]}
-          strokeColor="rgba(217, 85, 85, 1)"
-          fillColor="rgba(217, 85, 85, 0.25)"
-          fillPositionedParent
-        />
-        <Chart.Line
-          data={[[0, 0], [100, 50]]}
-          rangeX={[0, 100]}
-          rangeY={[0, 50]}
+          data={transactions.map(x => [x.tick, x.total_money])}
+          rangeX={[Math.min.apply(null, transactions.map(x => x.tick)), Math.max.apply(null, transactions.map(x => x.tick))]}
+          rangeY={[Math.min.apply(null, transactions.map(x => x.total_money)) - 500, Math.max.apply(null, transactions.map(x => x.total_money)) + 500]}
           strokeColor="rgba(214, 187, 114, 1)"
           fillColor="rgba(214, 187, 114, 0.25)"
           fillPositionedParent
@@ -188,51 +184,24 @@ const FundManager = (props, context) => {
             Reason
           </Table.Cell>
         </Table.Row>
-        <Table.Row
-          className="candystripe">
-          <Table.Cell>
-            Supply - `Medical Supplies Crate`
-          </Table.Cell>
-          <Table.Cell color="red">
-            -(2000)
-          </Table.Cell>
-          <Table.Cell>
-            8:50pm
-          </Table.Cell>
-          <Table.Cell>
-            We have run out of medical supplies and need more.
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row
-          className="candystripe">
-          <Table.Cell>
-            Burnard Silkwind - Medical Insurance
-          </Table.Cell>
-          <Table.Cell color="green">
-            20
-          </Table.Cell>
-          <Table.Cell>
-            6:20pm
-          </Table.Cell>
-          <Table.Cell>
-            Standard medical insurance payment
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row
-          className="candystripe">
-          <Table.Cell>
-            Elizibeth Green - Medical Insurance
-          </Table.Cell>
-          <Table.Cell color="green">
-            20
-          </Table.Cell>
-          <Table.Cell>
-            6:20pm
-          </Table.Cell>
-          <Table.Cell>
-            Standard medical insurance payment
-          </Table.Cell>
-        </Table.Row>
+        {transactions.map(trans => (
+          <Table.Row
+            key={trans.purchase + "-" + trans.time}
+            className="candystripe">
+            <Table.Cell>
+              {trans.purchase}
+            </Table.Cell>
+            <Table.Cell color={trans.amount > 0 ? "green" : "red"}>
+              {trans.amount > 0 ? trans.amount : ("(" + trans.amount + ")")}
+            </Table.Cell>
+            <Table.Cell>
+              {trans.time}
+            </Table.Cell>
+            <Table.Cell>
+              {trans.reason}
+            </Table.Cell>
+          </Table.Row>
+        ))}
       </Table>
     </>
   );

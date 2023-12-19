@@ -39,12 +39,12 @@
 /datum/computer_file/program/department_manager/ui_data(mob/user)
 	var/list/data = list()
 	data["selected_tab"] = selected_function
-	data["selected_department"] = selected_department?.name || ""
+	data["selected_department"] = selected_department?.department_name || ""
 	data["selected_tab_data"] = list()
 	if (selected_department)
 		for (var/datum/department_function/function as() in selected_department.department_functions)
-			if (initial(function.function_name) == requested)
-				data[""]
+			if (function.function_name == selected_function)
+				data["selected_tab_data"] = function.ui_data()
 				break
 	return data
 
@@ -69,7 +69,6 @@
 			return TRUE
 		if ("change_department")
 			var/department_id = params["department_id"]
-			var/employee_id = params["id"]
 			selected_department = SSeconomy.get_department_by_id(department_id)
 		if ("change_tab")
 			var/requested = params["tab"]

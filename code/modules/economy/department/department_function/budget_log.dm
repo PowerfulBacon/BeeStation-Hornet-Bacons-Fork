@@ -10,6 +10,8 @@
 			"amount" = transaction.amount,
 			"time" = transaction.time,
 			"reason" = transaction.reason,
+			"tick" = transaction.tick,
+			"total_money" = transaction.total_money,
 		))
 	data["transactions"] = transactions
 	return data
