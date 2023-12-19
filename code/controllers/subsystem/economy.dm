@@ -17,6 +17,9 @@ SUBSYSTEM_DEF(economy)
 	///Multiplied as they go to all department accounts rather than just cargo.
 	var/bounty_modifier = 3
 
+	/// List of active departments
+	var/list/departments = list()
+
 	/// Number of mail items generated.
 	var/mail_waiting
 	/// Mail Holiday: AKA does mail arrive today? Always blocked on Sundays, but not on bee, the mail is 24/7.
@@ -35,6 +38,10 @@ SUBSYSTEM_DEF(economy)
 		var/datum/bank_account/department/D = new each(budget_to_hand_out)
 		budget_accounts += D
 
+	// Create the default departments
+	for (var/department_type in subtypesof(/datum/department))
+		departments += new department_type()
+
 	return ..()
 
 /datum/controller/subsystem/economy/Recover()
@@ -42,9 +49,8 @@ SUBSYSTEM_DEF(economy)
 	dep_cards = SSeconomy.dep_cards
 
 /datum/controller/subsystem/economy/fire(resumed = 0)
-	for(var/A in bank_accounts)
-		var/datum/bank_account/B = A
-		B.payday(1)
+	for (var/datum/department/department in departments)
+		department.handle_paychecks()
 	var/effective_mailcount = living_player_count()
 	mail_waiting += clamp(effective_mailcount, 1, MAX_MAIL_PER_MINUTE)
 
@@ -62,13 +68,6 @@ SUBSYSTEM_DEF(economy)
 
 /// Returns a budget account type, but it will return the united budget account(cargo one) if united budget is active
 /datum/controller/subsystem/economy/proc/get_budget_account(dept_id, force=FALSE)
-	var/static/datum/bank_account/department/united_budget
-	if(!united_budget)
-		for(var/datum/bank_account/department/D in budget_accounts)
-			if(D.department_id == ACCOUNT_CAR_ID)
-				united_budget = D
-				break
-
 	var/static/list/budget_id_list = list()
 	if(!length(budget_id_list))
 		for(var/datum/bank_account/department/D in budget_accounts)
@@ -123,12 +122,20 @@ SUBSYSTEM_DEF(economy)
 	return nonstation_account
 
 /datum/controller/subsystem/economy/proc/distribute_funds(amount)
-	var/distribution_sum = 0
-	for(var/datum/bank_account/department/D in budget_accounts)
-		distribution_sum += D.budget_ratio
-	var/single_part = round(amount / distribution_sum)
-	for(var/datum/bank_account/department/D in budget_accounts)
-		D.adjust_money(single_part * D.budget_ratio)
-		if(D.nonstation_account)
-			D.adjust_money(amount) // Who'd think Nanotrasen gets a lot of profit from your station
+	var/datum/department/station_department = get_department(/datum/department/station)
+	station_department.department_account.adjust_money(amount)
+
+/datum/controller/subsystem/economy/proc/get_department(department_type)
+	RETURN_TYPE(/datum/department)
+	for (var/datum/department/department in departments)
+		if (department.type == department_type)
+			return department
+	CRASH("Could not locate department with the type [department_type]")
+
+/datum/controller/subsystem/economy/proc/get_department_by_id(department_id)
+	RETURN_TYPE(/datum/department)
+	for (var/datum/department/department in departments)
+		if (department.department_id == department_id)
+			return department
+	return null
 

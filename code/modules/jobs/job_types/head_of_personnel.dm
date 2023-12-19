@@ -38,7 +38,9 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_COM | DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG | ACCOUNT_COM_BITFLAG
-	payment_per_department = list(ACCOUNT_SRV_ID = PAYCHECK_COMMAND)
+	payment_per_department = list(
+		DEPARTMENT_STATION = PAYCHECK_COMMAND
+	)
 
 	display_order = JOB_DISPLAY_ORDER_HEAD_OF_PERSONNEL
 	rpg_title = "Guild Questgiver"

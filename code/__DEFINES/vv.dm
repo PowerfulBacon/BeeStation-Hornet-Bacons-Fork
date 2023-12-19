@@ -102,7 +102,6 @@
 #define VV_HK_ARMOR_MOD "mod_obj_armor"
 
 // /obj/item/card/id
-#define VV_ID_PAYDAY "id_payday"
 #define VV_ID_GIVE_MINING_POINT "id_give_mining_points"
 
 // /obj/item/organ/cyberimp/arm

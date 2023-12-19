@@ -22,7 +22,9 @@
 	department_flag = MEDSCI
 	departments = DEPT_BITFLAG_SCI
 	bank_account_department = ACCOUNT_SCI_BITFLAG
-	payment_per_department = list(ACCOUNT_SCI_ID = PAYCHECK_MEDIUM)
+	payment_per_department = list(
+		DEPARTMENT_SCIENCE = PAYCHECK_MEDIUM
+	)
 
 	display_order = JOB_DISPLAY_ORDER_SCIENTIST
 	rpg_title = "Thaumaturgist"

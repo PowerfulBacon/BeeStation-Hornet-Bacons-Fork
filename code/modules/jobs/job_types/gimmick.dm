@@ -82,7 +82,7 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG
-	payment_per_department = list(ACCOUNT_SRV_ID = PAYCHECK_MINIMAL)
+	payment_per_department = list()
 
 	rpg_title = "Master Illusionist"
 	species_outfits = list(
@@ -123,7 +123,7 @@
 	department_flag = MEDSCI
 	departments = DEPT_BITFLAG_MED
 	bank_account_department = ACCOUNT_MED_BITFLAG
-	payment_per_department = list(ACCOUNT_MED_ID = PAYCHECK_EASY)
+	payment_per_department = list()
 	mind_traits = list(TRAIT_MADNESS_IMMUNE, TRAIT_MEDICAL_METABOLISM)
 
 	rpg_title = "Enchanter"
@@ -154,7 +154,9 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_VIP
 	bank_account_department = ACCOUNT_VIP_BITFLAG
-	payment_per_department = list(ACCOUNT_VIP_ID = PAYCHECK_VIP)  //our power is being fucking rich
+	payment_per_department = list(
+		DEPARTMENT_VIP = PAYCHECK_VIP
+	)  //our power is being fucking rich
 
 	rpg_title = "Master of Patronage"
 	species_outfits = list(

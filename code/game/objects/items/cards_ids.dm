@@ -211,17 +211,10 @@
 /obj/item/card/id/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION("", "---------")
-	VV_DROPDOWN_OPTION(VV_ID_PAYDAY, "Trigger Payday")
 	VV_DROPDOWN_OPTION(VV_ID_GIVE_MINING_POINT, "Give Mining Points")
 
 /obj/item/card/id/vv_do_topic(list/href_list)
 	. = ..()
-	if(href_list[VV_ID_PAYDAY])
-		if(!registered_account)
-			to_chat(usr, "There's no account registered!")
-			return
-		registered_account.payday(1)
-
 	if(href_list[VV_ID_GIVE_MINING_POINT])
 		if(!registered_account)
 			to_chat(usr, "There's no account registered!")

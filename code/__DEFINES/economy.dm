@@ -59,3 +59,17 @@
 /// used for custom_currency
 #define ACCOUNT_CURRENCY_MINING "mining points"
 #define ACCOUNT_CURRENCY_EXPLO "exploration points"
+
+// List of default, game-created departments
+#define DEPARTMENT_STATION /datum/department/station
+#define DEPARTMENT_ENGINEERING /datum/department/engineering
+#define DEPARTMENT_SCIENCE /datum/department/science
+#define DEPARTMENT_MEDICAL /datum/department/medical
+#define DEPARTMENT_SECURITY /datum/department/security
+#define DEPARTMENT_SUPPLY /datum/department/supply
+#define DEPARTMENT_KITCHEN /datum/department/kitchen
+#define DEPARTMENT_BOTANY /datum/department/botany
+#define DEPARTMENT_BAR /datum/department/bar
+#define DEPARTMENT_LIBRARY /datum/department/library
+#define DEPARTMENT_CHAPEL /datum/department/chapel
+#define DEPARTMENT_VIP /datum/department/vip

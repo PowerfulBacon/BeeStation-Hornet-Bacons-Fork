@@ -70,6 +70,8 @@
 	var/bank_account_department = ACCOUNT_CIV_BITFLAG
 	///your payment per department. geneticist will be a good example for this.
 	var/payment_per_department = list()
+	/// Determines which departments this person is a manager in
+	var/list/managed_departments = list()
 
 	var/list/mind_traits // Traits added to the mind of the mob assigned this job
 
@@ -251,8 +253,18 @@
 			H.apply_pref_name(/datum/preference/name/backup_human, preference_source)
 	if(!visualsOnly)
 		var/datum/bank_account/bank_account = new(H.real_name, src)
-		bank_account.payday(STARTING_PAYCHECKS, TRUE)
 		H.mind?.account_id = bank_account.account_id
+		// Assign this person to the department
+		for (var/department_type in payment_per_department)
+			var/datum/department/located_department = SSeconomy.get_department(department_type)
+			var/payment_amount = payment_per_department[department_type]
+			located_department.add_member(bank_account, DEPARTMENT_ROLE_EMPLOYEE, payment_amount)
+		// Check if we are managing any departments but not getting a paycheck
+		for  (var/department_type in managed_departments)
+			if (department_type in payment_per_department)
+				continue
+			var/datum/department/located_department = SSeconomy.get_department(department_type)
+			located_department.add_member(bank_account, DEPARTMENT_ROLE_ADMINISTRATOR, 0)
 
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
