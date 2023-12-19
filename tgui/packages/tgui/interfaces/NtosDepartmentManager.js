@@ -8,6 +8,7 @@ export const NtosDepartmentManager = (props, context) => {
 
   const {
     managed_departments = [],
+    selected_tab = "",
   } = data;
 
   const [
@@ -19,6 +20,10 @@ export const NtosDepartmentManager = (props, context) => {
     selectedTab,
     setSelectedTab,
   ] = useLocalState(context, 'selectedTab', 'funding');
+
+  const functions = {
+    "funding": <FundManager />,
+  };
 
   return (
     <NtosWindow width={900} height={600}>
@@ -41,18 +46,26 @@ export const NtosDepartmentManager = (props, context) => {
             <Section
               title={
                 <Tabs size={1}>
-                  <Tabs.Tab selected={selectedTab === "employee"}>
-                    Employee Management
-                  </Tabs.Tab>
-                  <Tabs.Tab selected={selectedTab === "funding"}>
-                    Department Funding
-                  </Tabs.Tab>
+                  {Object.keys(functions).map(f => (
+                    <Tabs.Tab
+                      key={f}
+                      selected={selectedTab === f}
+                      onClick={() => {
+                        setSelectedTab(f);
+                        act('change_tab', {
+                          tab: f,
+                          department_id: managed_departments.find(x => x.name === selectedDepartment)?.id,
+                        });
+                      }}>
+                      {f}
+                    </Tabs.Tab>
+                  ))}
                 </Tabs>
               }
               width="100%"
               height="100%"
               overflowY="scroll">
-              <EmployeeManager />
+              {managed_departments.find(x => x.name === selectedDepartment) && (selected_tab === selectedTab) && (selected_tab in functions) && functions[selected_tab]}
             </Section>
           </Flex.Item>
         </Flex>

@@ -19,6 +19,8 @@ SUBSYSTEM_DEF(economy)
 
 	/// List of active departments
 	var/list/departments = list()
+	/// List of department functions by path
+	var/list/functions = list()
 
 	/// Number of mail items generated.
 	var/mail_waiting
@@ -41,6 +43,10 @@ SUBSYSTEM_DEF(economy)
 	// Create the default departments
 	for (var/department_type in subtypesof(/datum/department))
 		departments += new department_type()
+
+	// Create an instance
+	for (var/typepath in subtypesof(/datum/department_function))
+		functions[typepath] = new typepath
 
 	return ..()
 

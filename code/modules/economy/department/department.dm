@@ -7,6 +7,12 @@
 	var/datum/bank_account/department/department_account
 	/// Members of the department
 	var/list/department_members = list()
+	/// List of all transactions that have been applied
+	var/list/transactions = list()
+	/// List of functions that the department has access to
+	var/list/department_functions = list(
+		/datum/department_function/budget
+	)
 
 /datum/department/New()
 	. = ..()
@@ -18,10 +24,16 @@
 
 /datum/department/proc/handle_paychecks()
 	for (var/datum/department_member/member in department_members)
-		if (!member.account.transfer_money(department_account, member.payment))
+		if (!pay(department_account, "Paycheck", member.payment, "Payment of employee's paycheck."))
 			member.account.bank_card_talk("ERROR: Payday aborted, [department_account] departmental funds insufficient.")
 		else
 			member.account.bank_card_talk("Payday processed, account now holds $[member.account.account_balance], paid with $[member.payment] from [department_account] budget.")
+
+/datum/department/proc/pay(datum/bank_account/target, purpose, amount, reason)
+	if (target.transfer_money(department_account, amount))
+		transactions += new /datum/department_transaction("[target.account_holder] - [purpose]", amount, reason)
+		return TRUE
+	return FALSE
 
 /datum/department/proc/add_member(datum/bank_account/account, rank, payment)
 	department_members += new /datum/department_member(account, rank, payment)

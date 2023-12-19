@@ -8,6 +8,8 @@
 	requires_ntnet = TRUE
 	size = 8
 	tgui_id = "NtosDepartmentManager"
+	var/datum/department/selected_department
+	var/selected_function = ""
 
 /datum/computer_file/program/department_manager/ui_static_data(mob/user)
 	var/list/data = list()
@@ -21,12 +23,29 @@
 				"payment" = member.payment,
 				"id" = member.account.account_id
 			))
+		// Add a list of allowed department functions
+		var/list/allowed_functions = list()
+		for (var/datum/department_function/function as() in department.department_functions)
+			allowed_functions += initial(function.function_name)
 		data["managed_departments"] += list(list(
 			"name" = department.department_name,
 			"department_funds" = department.department_account.account_balance,
 			"members" = department_members,
-			"id" = department.department_id
+			"id" = department.department_id,
+			"functions" = allowed_functions,
 		))
+	return data
+
+/datum/computer_file/program/department_manager/ui_data(mob/user)
+	var/list/data = list()
+	data["selected_tab"] = selected_function
+	data["selected_department"] = selected_department?.name || ""
+	data["selected_tab_data"] = list()
+	if (selected_department)
+		for (var/datum/department_function/function as() in selected_department.department_functions)
+			if (initial(function.function_name) == requested)
+				data[""]
+				break
 	return data
 
 /datum/computer_file/program/department_manager/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -46,6 +65,22 @@
 			if (!can_access_department(located))
 				return
 			located.fire_member(employee_id)
+			update_static_data(usr, ui)
+			return TRUE
+		if ("change_department")
+			var/department_id = params["department_id"]
+			var/employee_id = params["id"]
+			selected_department = SSeconomy.get_department_by_id(department_id)
+		if ("change_tab")
+			var/requested = params["tab"]
+			var/department_id = params["department_id"]
+			var/datum/department/located = SSeconomy.get_department_by_id(department_id)
+			if (!located)
+				return
+			for (var/datum/department_function/function as() in located.department_functions)
+				if (initial(function.function_name) == requested)
+					selected_function = requested
+					return TRUE
 
 /datum/computer_file/program/department_manager/proc/can_access_department(datum/department/department)
 	var/obj/item/computer_hardware/card_slot/card_slot = computer.all_components[MC_CARD]
