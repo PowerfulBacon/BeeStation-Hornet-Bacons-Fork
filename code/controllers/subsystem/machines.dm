@@ -30,6 +30,10 @@ SUBSYSTEM_DEF(machines)
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
 
+	// Make the powernets for meters
+	for (var/obj/machinery/power/power_meter/meter in GLOB.power_meters)
+		meter.update_powernets()
+
 /datum/controller/subsystem/machines/stat_entry()
 	. = ..("M:[processing.len]|PN:[powernets.len]")
 
