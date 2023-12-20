@@ -3,8 +3,8 @@
 	filedesc = "Department Management"
 	program_icon = "command"
 	extended_desc = "A program for managing necessary departmental processes, including budgeting, paychecks, and bills."
-	required_access = list(ACCESS_HEADS)
-	transfer_access = list(ACCESS_HEADS)
+	required_access = list()
+	transfer_access = list()
 	requires_ntnet = TRUE
 	size = 8
 	tgui_id = "NtosDepartmentManager"
