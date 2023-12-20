@@ -1,5 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import { Flex, Box, Button, Chart, Section, Table, Tabs } from '../components';
+import { Dropdown, Input, Flex, Box, Button, Chart, Section, Table, Tabs } from '../components';
 import { map } from 'common/collections';
 import { NtosWindow } from '../layouts';
 
@@ -23,6 +23,7 @@ export const NtosDepartmentManager = (props, context) => {
 
   const functions = {
     "funding": <FundManager />,
+    "employee": <EmployeeManager />,
   };
 
   return (
@@ -83,13 +84,12 @@ const EmployeeManager = (props, context) => {
   const { act, data } = useBackend(context);
 
   const {
-    managed_departments = [],
+    selected_tab_data,
   } = data;
 
-  const [
-    selectedDepartment,
-    setSelectedDepartment,
-  ] = useLocalState(context, 'department', '');
+  const {
+    members = [],
+  } = selected_tab_data;
 
   return (
     <Table>
@@ -107,9 +107,7 @@ const EmployeeManager = (props, context) => {
           Action
         </Table.Cell>
       </Table.Row>
-      {managed_departments
-        .find(x => x.name === selectedDepartment)
-        ?.members
+      {members
         .map(member => (
           <Table.Row
             className="candystripe"
@@ -118,16 +116,30 @@ const EmployeeManager = (props, context) => {
               {member.name}
             </Table.Cell>
             <Table.Cell width="20%">
-              <Button
+              <Dropdown
                 width="100%"
-                content={member.rank}
-                icon="user-shield" />
+                selected={member.rank}
+                overflow-y="scroll"
+                options={[
+                  "employee",
+                  "manager",
+                  "administrator",
+                ]}
+                icon="user-shield"
+                onSelected={(e, val) => act('set_rank', {
+                  id: member.id,
+                  rank: val,
+                })} />
             </Table.Cell>
             <Table.Cell width="20%">
-              <Button
+              <Input
                 width="100%"
-                content={member.payment}
-                icon="pen" />
+                value={member.paycheck}
+                icon="pen"
+                onInput={(e, val) => act('set_paycheck', {
+                  id: member.id,
+                  amount: val,
+                })} />
             </Table.Cell>
             <Table.Cell width="20%">
               <Button
@@ -137,7 +149,6 @@ const EmployeeManager = (props, context) => {
                 icon="user-slash"
                 onClick={() => act('fire_employee', {
                   id: member.id,
-                  department_id: managed_departments.find(x => x.name === selectedDepartment)?.id,
                 })} />
             </Table.Cell>
           </Table.Row>

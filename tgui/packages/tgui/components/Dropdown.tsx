@@ -330,7 +330,7 @@ export class Dropdown extends Component<DropdownProps, DropdownState> {
             {...rest}>
             {icon && <Icon name={icon} rotation={iconRotation} spin={iconSpin} mr={1} />}
             <span
-              className="Dropdown__selected-text"
+              className={icon ? "Dropdown__text_icon" : "Dropdown__selected-text"}
               style={{
                 overflow: clipSelectedText ? 'hidden' : 'visible',
               }}>

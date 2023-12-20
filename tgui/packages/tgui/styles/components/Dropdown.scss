@@ -69,3 +69,11 @@
   height: base.em(17px);
   width: calc(100% - 1.2em);
 }
+
+.Dropdown__text_icon {
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: base.em(17px);
+  width: calc(100% - 2.8em);
+}

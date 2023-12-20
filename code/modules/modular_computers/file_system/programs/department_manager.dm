@@ -15,14 +15,9 @@
 	var/list/data = list()
 	data["managed_departments"] = list()
 	for (var/datum/department/department in SSeconomy.departments)
-		var/list/department_members = list()
-		for (var/datum/department_member/member in department.department_members)
-			department_members += list(list(
-				"name" = member.account.account_holder,
-				"rank" = member.rank,
-				"payment" = member.payment,
-				"id" = member.account.account_id
-			))
+		// Check if we have access to this department
+		if (!can_access_department(department))
+			continue
 		// Add a list of allowed department functions
 		var/list/allowed_functions = list()
 		for (var/datum/department_function/function as() in department.department_functions)
@@ -30,7 +25,6 @@
 		data["managed_departments"] += list(list(
 			"name" = department.department_name,
 			"department_funds" = department.department_account.account_balance,
-			"members" = department_members,
 			"id" = department.department_id,
 			"functions" = allowed_functions,
 		))
@@ -53,20 +47,6 @@
 	if (.)
 		return
 	switch (action)
-		if ("fire_employee")
-			var/department_id = params["department_id"]
-			// No need for sanitisation as it is only used for comparison
-			var/employee_id = params["id"]
-			var/datum/department/located = SSeconomy.get_department_by_id(department_id)
-			// Invalid ID passed from the client
-			if (!located)
-				return
-			// Check to ensure that the inserted card has access to the department
-			if (!can_access_department(located))
-				return
-			located.fire_member(employee_id)
-			update_static_data(usr, ui)
-			return TRUE
 		if ("change_department")
 			var/department_id = params["department_id"]
 			selected_department = SSeconomy.get_department_by_id(department_id)
@@ -80,16 +60,25 @@
 				if (initial(function.function_name) == requested)
 					selected_function = requested
 					return TRUE
+	if (selected_department)
+		// Check to ensure that the inserted card has access to the department
+		if (!can_access_department(selected_department))
+			return FALSE
+		for (var/datum/department_function/function as() in selected_department.department_functions)
+			if (function.function_name == selected_function)
+				if (function.ui_act(action, params, ui, state))
+					update_static_data(usr, ui)
+					return TRUE
 
 /datum/computer_file/program/department_manager/proc/can_access_department(datum/department/department)
 	var/obj/item/computer_hardware/card_slot/card_slot = computer.all_components[MC_CARD]
 	var/obj/item/computer_hardware/card_slot/card_slot2 = computer.all_components[MC_CARD2]
 	if (card_slot.stored_card?.registered_account)
-		var/rank = department.get_member_rank(card_slot.stored_card.registered_account)
+		var/rank = department.get_member_rank(card_slot.stored_card.registered_account?.account_id)
 		if (rank == DEPARTMENT_ROLE_MANAGER || rank == DEPARTMENT_ROLE_ADMINISTRATOR)
 			return TRUE
 	if (card_slot2.stored_card?.registered_account)
-		var/rank = department.get_member_rank(card_slot2.stored_card.registered_account)
+		var/rank = department.get_member_rank(card_slot2.stored_card.registered_account?.account_id)
 		if (rank == DEPARTMENT_ROLE_MANAGER || rank == DEPARTMENT_ROLE_ADMINISTRATOR)
 			return TRUE
 	return FALSE
