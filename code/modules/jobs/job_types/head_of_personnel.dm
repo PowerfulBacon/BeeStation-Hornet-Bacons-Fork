@@ -41,6 +41,7 @@
 	payment_per_department = list(
 		DEPARTMENT_STATION = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_SUPPLY)
 
 	display_order = JOB_DISPLAY_ORDER_HEAD_OF_PERSONNEL
 	rpg_title = "Guild Questgiver"

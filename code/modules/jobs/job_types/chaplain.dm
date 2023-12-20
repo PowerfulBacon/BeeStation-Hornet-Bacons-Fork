@@ -18,8 +18,8 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_CIV
 	bank_account_department = ACCOUNT_CIV_BITFLAG
-	payment_per_department = list()
-
+	payment_per_department = list(DEPARTMENT_CHAPEL = PAYCHECK_MEDIUM)
+	managed_departments = list(DEPARTMENT_CHAPEL)
 
 	display_order = JOB_DISPLAY_ORDER_CHAPLAIN
 	rpg_title = "Paladin"

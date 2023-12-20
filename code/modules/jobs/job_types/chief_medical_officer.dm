@@ -34,6 +34,7 @@
 	payment_per_department = list(
 		DEPARTMENT_MEDICAL = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_MEDICAL)
 	mind_traits = list(TRAIT_MEDICAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_CHIEF_MEDICAL_OFFICER

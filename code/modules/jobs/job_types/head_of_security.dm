@@ -33,6 +33,7 @@
 	payment_per_department = list(
 		DEPARTMENT_SECURITY = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_SECURITY)
 
 	display_order = JOB_DISPLAY_ORDER_HEAD_OF_SECURITY
 	rpg_title = "Guard Leader"

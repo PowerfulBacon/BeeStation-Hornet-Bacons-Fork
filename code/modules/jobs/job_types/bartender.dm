@@ -19,7 +19,8 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG
-	payment_per_department = list()
+	payment_per_department = list(DEPARTMENT_BAR = PAYCHECK_MEDIUM)
+	managed_departments = list(DEPARTMENT_BAR)
 
 	display_order = JOB_DISPLAY_ORDER_BARTENDER
 	rpg_title = "Tavernkeeper"

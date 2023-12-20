@@ -20,6 +20,7 @@
 	departments = DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG
 	payment_per_department = list()
+	managed_departments = list(DEPARTMENT_KITCHEN)
 
 
 	display_order = JOB_DISPLAY_ORDER_COOK

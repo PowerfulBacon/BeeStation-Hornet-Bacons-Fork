@@ -36,6 +36,7 @@
 	payment_per_department = list(
 		DEPARTMENT_SCIENCE = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_SCIENCE)
 
 	display_order = JOB_DISPLAY_ORDER_RESEARCH_DIRECTOR
 	rpg_title = "Archmagister"

@@ -28,6 +28,7 @@
 	payment_per_department = list(
 		DEPARTMENT_STATION = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_STATION)
 	mind_traits = list(TRAIT_DISK_VERIFIER)
 
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN

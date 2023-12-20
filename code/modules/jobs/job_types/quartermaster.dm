@@ -24,6 +24,7 @@
 	payment_per_department = list(
 		DEPARTMENT_SUPPLY = PAYCHECK_MEDIUM
 	)
+	managed_departments = list(DEPARTMENT_SUPPLY)
 
 	display_order = JOB_DISPLAY_ORDER_QUARTERMASTER
 	rpg_title = "Steward"

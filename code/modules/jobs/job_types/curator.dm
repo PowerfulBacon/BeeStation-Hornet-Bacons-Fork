@@ -19,6 +19,7 @@
 	departments = DEPT_BITFLAG_CIV
 	bank_account_department = ACCOUNT_CIV_BITFLAG
 	payment_per_department = list()
+	managed_departments = list(DEPARTMENT_LIBRARY)
 
 	display_order = JOB_DISPLAY_ORDER_CURATOR
 	rpg_title = "Veteran Adventurer"

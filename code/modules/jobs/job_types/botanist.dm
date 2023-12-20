@@ -18,7 +18,8 @@
 	department_flag = CIVILIAN
 	departments = DEPT_BITFLAG_SRV
 	bank_account_department = ACCOUNT_SRV_BITFLAG
-	payment_per_department = list()
+	payment_per_department = list(DEPARTMENT_BOTANY = PAYCHECK_MEDIUM)
+	managed_departments = list(DEPARTMENT_BOTANY)
 
 	display_order = JOB_DISPLAY_ORDER_BOTANIST
 	rpg_title = "Gardener"

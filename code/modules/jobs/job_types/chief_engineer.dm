@@ -34,6 +34,7 @@
 	payment_per_department = list(
 		DEPARTMENT_ENGINEERING = PAYCHECK_COMMAND
 	)
+	managed_departments = list(DEPARTMENT_ENGINEERING)
 
 
 	display_order = JOB_DISPLAY_ORDER_CHIEF_ENGINEER
