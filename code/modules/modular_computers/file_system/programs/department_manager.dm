@@ -35,7 +35,7 @@
 	data["selected_tab"] = selected_function
 	data["selected_department"] = selected_department?.department_name || ""
 	data["selected_tab_data"] = list()
-	if (selected_department)
+	if (selected_department && can_access_department(selected_department))
 		for (var/datum/department_function/function as() in selected_department.department_functions)
 			if (function.function_name == selected_function)
 				data["selected_tab_data"] = function.ui_data()
