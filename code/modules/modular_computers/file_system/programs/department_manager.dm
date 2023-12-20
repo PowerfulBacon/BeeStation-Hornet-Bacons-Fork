@@ -73,11 +73,11 @@
 /datum/computer_file/program/department_manager/proc/can_access_department(datum/department/department)
 	var/obj/item/computer_hardware/card_slot/card_slot = computer.all_components[MC_CARD]
 	var/obj/item/computer_hardware/card_slot/card_slot2 = computer.all_components[MC_CARD2]
-	if (card_slot.stored_card?.registered_account)
+	if (card_slot?.stored_card?.registered_account)
 		var/rank = department.get_member_rank(card_slot.stored_card.registered_account?.account_id)
 		if (rank == DEPARTMENT_ROLE_MANAGER || rank == DEPARTMENT_ROLE_ADMINISTRATOR)
 			return TRUE
-	if (card_slot2.stored_card?.registered_account)
+	if (card_slot2?.stored_card?.registered_account)
 		var/rank = department.get_member_rank(card_slot2.stored_card.registered_account?.account_id)
 		if (rank == DEPARTMENT_ROLE_MANAGER || rank == DEPARTMENT_ROLE_ADMINISTRATOR)
 			return TRUE
