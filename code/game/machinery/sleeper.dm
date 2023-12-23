@@ -37,7 +37,6 @@
 	var/synthesizing = FALSE
 	var/scrambled_chems = FALSE //Are chem buttons scrambled? used as a warning
 	var/enter_message = "<span class='notice'><b>You feel cool air surround you. You go numb as your senses turn inward.</b></span>"
-	dept_req_for_free = ACCOUNT_MED_BITFLAG
 	fair_market_price = 5
 
 /obj/machinery/sleeper/Initialize(mapload)

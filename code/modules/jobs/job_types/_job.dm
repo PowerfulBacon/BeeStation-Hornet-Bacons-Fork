@@ -258,7 +258,7 @@
 		for (var/department_type in payment_per_department)
 			var/datum/department/located_department = SSeconomy.get_department(department_type)
 			var/payment_amount = payment_per_department[department_type]
-			located_department.add_member(bank_account, DEPARTMENT_ROLE_EMPLOYEE, payment_amount)
+			located_department.add_member(bank_account, (department_Type in managed_departments) ? DEPARTMENT_ROLE_ADMINISTRATOR : DEPARTMENT_ROLE_EMPLOYEE, payment_amount)
 		// Check if we are managing any departments but not getting a paycheck
 		for  (var/department_type in managed_departments)
 			if (department_type in payment_per_department)

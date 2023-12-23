@@ -115,6 +115,8 @@
 			for(var/datum/data/crime/crime in crimes)
 				if(crime.dataId == text2num(cDataId))
 					crime.paid = crime.paid + amount
+					var/datum/department/security_department = SSeconomy.get_department()
+					security_department.
 					var/datum/bank_account/D = SSeconomy.get_budget_account(ACCOUNT_SEC_ID)
 					D.adjust_money(amount)
 					return

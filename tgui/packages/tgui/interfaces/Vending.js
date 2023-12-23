@@ -8,8 +8,7 @@ const VendingRow = (props, context) => {
   const { product, productStock, custom } = props;
   const free =
     !data.onstation ||
-    product.price === 0 ||
-    (!product.premium && data.department_bitflag && data.user && data.department_bitflag & data.user.department_bitflag);
+    product.price === 0;
   return (
     <Table.Row>
       <Table.Cell collapsing>

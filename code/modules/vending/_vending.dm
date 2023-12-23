@@ -55,7 +55,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	armor = list(MELEE = 20,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 70, STAMINA = 0)
 	circuit = /obj/item/circuitboard/machine/vendor
 	clicksound = 'sound/machines/pda_button1.ogg'
-	dept_req_for_free = ACCOUNT_SRV_BITFLAG
 
 	light_color = LIGHT_COLOR_BLUE
 
@@ -653,7 +652,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/ui_static_data(mob/user)
 	. = list()
 	.["onstation"] = onstation
-	.["department_bitflag"] = dept_req_for_free
 	.["product_records"] = list()
 	for (var/datum/data/vending_product/R in product_records)
 		var/list/data = list(
@@ -703,11 +701,9 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 			.["user"]["name"] = H.name
 		.["user"]["cash"] = H.get_accessible_cash()
 		.["user"]["job"] = "No Job"
-		.["user"]["department_bitflag"] = 0
 		var/datum/data/record/R = find_record("name", card?.registered_account?.account_holder, GLOB.data_core.general)
 		if(card?.registered_account?.account_job)
 			.["user"]["job"] = card.registered_account.account_job.title
-			.["user"]["department_bitflag"] = card.registered_account.active_departments
 		if(R)
 			.["user"]["job"] = R.fields["rank"]
 	.["stock"] = list()
@@ -755,8 +751,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 				var/obj/item/card/id/C = H.get_idcard(TRUE)
 
 				var/datum/bank_account/account = C?.registered_account
-				if(account?.account_job && (account?.active_departments & dept_req_for_free))
-					price_to_use = 0
 				if(coin_records.Find(R))
 					price_to_use = R.custom_premium_price ? R.custom_premium_price : extra_price
 				if(price_to_use)
@@ -920,7 +914,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	max_integrity = 400
-	dept_req_for_free = NO_FREEBIES
 	refill_canister = /obj/item/vending_refill/custom
 	/// where the money is sent
 	var/datum/bank_account/private_a

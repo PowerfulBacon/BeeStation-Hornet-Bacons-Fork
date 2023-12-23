@@ -29,8 +29,6 @@
 	refill_canister = /obj/item/vending_refill/job_disk
 	default_price = 100
 	extra_price = 300
-	dept_req_for_free = ACCOUNT_COM_BITFLAG
-	seller_department = ACCOUNT_SRV_BITFLAG | ACCOUNT_CIV_BITFLAG // don't send the profic to CentCom Budget account.
 
 /obj/item/vending_refill/job_disk
 	machine_name = "PTech"
