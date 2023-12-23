@@ -57,3 +57,4 @@
 			overlay.color = colours[colour_id]
 			// Reapply the overlay in order to update the colour.
 			i.overlays[overlay_id] = overlay
+	target.appearance = i.appearance
