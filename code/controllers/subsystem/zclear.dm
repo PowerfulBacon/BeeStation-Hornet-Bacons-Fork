@@ -73,7 +73,8 @@ SUBSYSTEM_DEF(zclear)
 		if(L.ckey || L.client || L.mind)
 			var/turf/T = get_turf(L)
 			mob_levels["[T.z]"] = TRUE
-			if(L.stat != DEAD)
+			// Don't consider disconnected mobs
+			if(L.stat != DEAD && (L.ckey || L.client))
 				active_levels["[T.z]"] = TRUE
 				// Give the announcement if there are only non-humans left.
 				if (ishuman(L))
