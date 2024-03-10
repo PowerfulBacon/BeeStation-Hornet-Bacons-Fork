@@ -1,9 +1,9 @@
 /datum/action/changeling/fleshmend
 	name = "Fleshmend"
-	desc = "Our flesh rapidly regenerates, rapidly healing brute wounds and shortness of breath as well as slowly healing burns and genetic damage. Costs 25 chemicals."
-	helptext = "If we are on fire, the healing effect will not function. Does not regrow limbs or restore lost blood. Functions while unconscious."
+	desc = "Our flesh rapidly regenerates, rapidly healing brute wounds, burns, and genetic damage but causing exhaustion in the process. Costs 10 chemicals to start, and 1 chemical per second to maintain."
+	helptext = "If we are on fire, the healing effect will not function. Does not regrow limbs or restore lost blood. Functions while unconscious. Causes stamina damage. Costs chemicals to maintain."
 	button_icon_state = "fleshmend"
-	chemical_cost = 25
+	chemical_cost = 10
 	dna_cost = 2
 	req_stat = UNCONSCIOUS
 

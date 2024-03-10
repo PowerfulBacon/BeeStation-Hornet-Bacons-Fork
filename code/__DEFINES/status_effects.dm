@@ -29,7 +29,9 @@
 
 #define STATUS_EFFECT_BLOODDRUNK /datum/status_effect/blooddrunk //! Stun immunity and greatly reduced damage taken
 
-#define STATUS_EFFECT_FLESHMEND /datum/status_effect/fleshmend //! Very fast healing; suppressed by fire, and heals less fire damage
+#define STATUS_EFFECT_CHANGELING_armblade /datum/status_effect/changeling/armblade //! Very fast healing; suppressed by fire, and heals less fire damage
+
+#define STATUS_EFFECT_FLESHMEND /datum/status_effect/changeling/fleshmend //! Very fast healing; suppressed by fire, and heals less fire damage
 
 #define STATUS_EFFECT_CHANGELING_CAMO /datum/status_effect/changeling/camoflague //! Makes you slowly invisible over time, taking damage, being bumped, moving or burning removes the effect.
 

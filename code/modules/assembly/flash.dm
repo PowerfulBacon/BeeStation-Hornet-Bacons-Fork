@@ -246,6 +246,7 @@
 	if(targeted)
 		//No flash protection, blind and stun
 		if(M.flash_act(1))
+			M.emote("scream")
 			if(user)
 				terrible_conversion_proc(M, user)
 				visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>")
@@ -265,6 +266,7 @@
 
 		//Basic flash protection, only blind
 		else if(M.flash_act(2, TRUE))
+			M.emote("scream")
 			if(user)
 				//Tell the user that their flash failed
 				visible_message("<span class='disarm'>[user] fails to blind [M] with the flash!</span>")
@@ -282,7 +284,8 @@
 		else
 			to_chat(M, "<span class='danger'>[src] fails to blind you!</span>")
 	else
-		M.flash_act(2)
+		if (M.flash_act(2))
+			M.emote("scream")
 
 /obj/item/assembly/flash/attack(mob/living/M, mob/user)
 	if(!try_use_flash(user))
