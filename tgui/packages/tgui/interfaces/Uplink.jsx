@@ -20,10 +20,29 @@ const MAX_SEARCH_RESULTS = 25;
 export const Uplink = (props) => {
   const { data } = useBackend();
   const { telecrystals } = data;
+
+  const [tab, setTab] = useLocalState(context, 'tab_id', 0);
+
   return (
     <Window theme="syndicate" width={900} height={600}>
       <Window.Content scrollable>
-        <GenericUplink currencyAmount={telecrystals} currencySymbol="TC" />
+        <Tabs>
+          <Tabs.Tab
+              selected={tab === 0}
+              onClick={() => {
+                setTab(0);
+              }}>
+            Agent Marketplace
+          </Tabs.Tab>
+          <Tabs.Tab
+              selected={tab === 1}
+              onClick={() => {
+                setTab(1);
+              }}>
+            Priority Directives
+          </Tabs.Tab>
+        </Tabs>
+        {tab === 0 ? <GenericUplink currencyAmount={telecrystals} currencySymbol="TC" /> : 0}
       </Window.Content>
     </Window>
   );
