@@ -54,6 +54,9 @@
   );
   @include meta.load-css('../components/Uplink.scss');
 
+  // Interfaces
+  @include meta.load-css('../interfaces/Uplink.scss');
+
   // Layouts
   @include meta.load-css('../layouts/Layout.scss');
   @include meta.load-css('../layouts/Window.scss');
