@@ -309,7 +309,14 @@
 
 	if (!implant)
 		. = uplink_loc
-		var/datum/component/uplink/U = uplink_loc.AddComponent(/datum/component/uplink, traitor_mob.key, TRUE, FALSE, starting_tc = telecrystals)
+		var/datum/component/uplink/U = uplink_loc.AddComponent(
+			/datum/component/uplink,
+			traitor_mob?.mind,
+			TRUE,
+			FALSE,
+			UPLINK_TRAITORS,
+			telecrystals
+		)
 		if(!U)
 			CRASH("Uplink creation failed.")
 		U.setup_unlock_code()
@@ -327,7 +334,7 @@
 		else
 			traitor_mob.mind.store_memory(U.unlock_note)
 	else
-		var/obj/item/implant/uplink/starting/I = new(traitor_mob)
+		var/obj/item/implant/uplink/starting/I = new(traitor_mob, traitor_mob)
 		I.implant(traitor_mob, null, silent = TRUE)
 		var/datum/component/uplink/U = I.GetComponent(/datum/component/uplink)
 		if(!silent)
