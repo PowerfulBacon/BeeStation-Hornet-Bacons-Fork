@@ -96,13 +96,13 @@
 #define LOG_SPELL_AMOUNT "amount"
 
 /// How many telecrystals a normal traitor starts with
-#define TELECRYSTALS_DEFAULT 20
+#define TELECRYSTALS_DEFAULT 15
 /// How many telecrystals mapper/admin only "precharged" uplink implant
 #define TELECRYSTALS_PRELOADED_IMPLANT 10
-/// The normal cost of an uplink implant; used for calcuating how many
+/// The cost of a roundstart uplink implant; used for calcuating how many
 /// TC to charge someone if they get a free implant through choice or
 /// because they have nothing else that supports an implant.
-#define UPLINK_IMPLANT_TELECRYSTAL_COST 3
+#define UPLINK_IMPLANT_TELECRYSTAL_COST 1
 
 GLOBAL_LIST_INIT(ai_employers, list(
 	"Biohazard",
