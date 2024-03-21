@@ -16,7 +16,6 @@
 
 	setup_human_dna()
 
-
 	prepare_huds() //Prevents a nasty runtime on human init
 
 	if(dna.species)
@@ -55,6 +54,10 @@
 	GLOB.suit_sensors_list -= src
 	return ..()
 
+/mob/living/carbon/human/prepare_huds()
+	if (client?.prefs.read_player_preference(/datum/preference/choiced/zone_select) == PREFERENCE_BODYZONE_SIMPLIFIED)
+		_set_zone_selected(BODY_GROUP_CHEST_HEAD)
+	return ..()
 
 /mob/living/carbon/human/prepare_data_huds()
 	//Update med hud images...
