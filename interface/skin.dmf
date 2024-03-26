@@ -71,7 +71,7 @@ menu "menu"
 window "mainwindow"
 	elem "mainwindow"
 		type = MAIN
-		pos = 372,0
+		pos = 0,0
 		size = 640x440
 		anchor1 = 0,0
 		anchor2 = 100,100
@@ -90,7 +90,6 @@ window "mainwindow"
 		anchor2 = 100,100
 		saved-params = "splitter"
 		left = "mapwindow"
-		right = "infowindow"
 		is-vert = true
 	elem "status_bar_wide"
 		type = LABEL

@@ -37,6 +37,7 @@ SUBSYSTEM_DEF(title)
 		var/width = text2num(size_regex.group[1])
 		var/height = text2num(size_regex.group[2])
 		lobby_screen_size = "[width]x[height]"
+		lobby_screen_size = "16x9"
 
 		//Update the new player start (views are centered)
 		var/new_player_x = splash_turf.x + FLOOR(width / 2, 1)
