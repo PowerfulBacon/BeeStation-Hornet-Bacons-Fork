@@ -194,9 +194,9 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define REPUTATION_GAIN_PER_DIRECTIVE 200
 
 /// How much reputation you lose for failing a solo directive
-#define REPUTATION_LOSS_SOLO_DIRECTIVE 50
+#define REPUTATION_LOSS_SOLO_DIRECTIVE 0
 /// How much reputation you lose for failing a team-directive
-#define REPUTATION_LOSS_TEAM_DIRECTIVE 100
+#define REPUTATION_LOSS_TEAM_DIRECTIVE 0
 
 // Max of all fugitive types
 #define MAXIMUM_TOTAL_FUGITIVES 4
