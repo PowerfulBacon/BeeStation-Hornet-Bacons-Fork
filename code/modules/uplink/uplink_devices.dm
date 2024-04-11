@@ -24,7 +24,7 @@
 
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink)
 
-/obj/item/uplink/Initialize(mapload, mob/owner, tc_amount = 20)
+/obj/item/uplink/Initialize(mapload, mob/owner, tc_amount = 20, rep_amount = TRAITOR_REPUTATION_START)
 	. = ..()
 	AddComponent(/datum/component/uplink, owner?.mind, FALSE, TRUE, uplink_flag, tc_amount)
 
@@ -33,7 +33,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink)
 
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/debug)
 
-/obj/item/uplink/debug/Initialize(mapload, mob/owner, tc_amount = 9000)
+/obj/item/uplink/debug/Initialize(mapload, mob/owner, tc_amount = 9000, rep_amount = REPUTATION_MAX)
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = GetComponent(/datum/component/uplink)
 	hidden_uplink.name = "debug uplink"
@@ -48,7 +48,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/debug)
 
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/nuclear/debug)
 
-/obj/item/uplink/nuclear/debug/Initialize(mapload, mob/owner, tc_amount = 9000)
+/obj/item/uplink/nuclear/debug/Initialize(mapload, mob/owner, tc_amount = 9000, rep_amount = REPUTATION_MAX)
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = GetComponent(/datum/component/uplink)
 	hidden_uplink.name = "debug nuclear uplink"
@@ -71,7 +71,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/nuclear/debug)
 
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/old)
 
-/obj/item/uplink/old/Initialize(mapload, mob/owner, tc_amount = 10)
+/obj/item/uplink/old/Initialize(mapload, mob/owner, tc_amount = 10, rep_amount = REPUTATION_LOW)
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = GetComponent(/datum/component/uplink, owner?.mind)
 	hidden_uplink.name = "dusty radio"
@@ -79,13 +79,13 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/uplink/old)
 // Multitool uplink
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/multitool/uplink)
 
-/obj/item/multitool/uplink/Initialize(mapload, mob/owner, tc_amount = 20)
+/obj/item/multitool/uplink/Initialize(mapload, mob/owner, tc_amount = 20, rep_amount = TRAITOR_REPUTATION_START)
 	. = ..()
 	AddComponent(/datum/component/uplink, owner?.mind, FALSE, TRUE, UPLINK_TRAITORS, tc_amount)
 
 // Pen uplink
 CREATION_TEST_IGNORE_SUBTYPES(/obj/item/pen/uplink)
 
-/obj/item/pen/uplink/Initialize(mapload, mob/owner, tc_amount = 20)
+/obj/item/pen/uplink/Initialize(mapload, mob/owner, tc_amount = 20, rep_amount = TRAITOR_REPUTATION_START)
 	. = ..()
 	AddComponent(/datum/component/uplink, owner?.mind, TRUE, FALSE, UPLINK_TRAITORS, tc_amount)

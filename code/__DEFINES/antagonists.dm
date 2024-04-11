@@ -188,6 +188,8 @@ GLOBAL_LIST_INIT(ai_employers, list(
 /// Access to anything your heart could ever desire
 #define REPUTATION_MAX 1000
 
+#define REPUTATION_TRAITOR_START 300
+
 /// How much reputation is gained per completed directive
 #define REPUTATION_GAIN_PER_DIRECTIVE 200
 
