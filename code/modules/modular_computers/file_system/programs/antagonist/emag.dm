@@ -1,7 +1,7 @@
 /datum/computer_file/program/emag_console
 	filename = "emag_console"
 	filedesc = "Crypto-breaker"
-	category = PROGRAM_CATEGORY_MISC
+	category = PROGRAM_CATEGORY_SECU
 	program_icon_state = "hostile"
 	extended_desc = "The console output from an emag. You shouldn't be seeing this."
 	size = 0

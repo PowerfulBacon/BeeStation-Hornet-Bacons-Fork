@@ -20,6 +20,7 @@
 	extended_desc = "Allows the user to view several basic medical records from the crew."
 	transfer_access = list(ACCESS_MEDICAL, ACCESS_HEADS)
 	available_on_ntnet = TRUE
+	category = PROGRAM_CATEGORY_CREW
 	mode = "medical"
 
 /datum/computer_file/program/records/security
@@ -29,6 +30,7 @@
 	extended_desc = "Allows the user to view several basic security records from the crew."
 	transfer_access = list(ACCESS_SECURITY, ACCESS_HEADS)
 	available_on_ntnet = TRUE
+	category = PROGRAM_CATEGORY_SECU
 	mode = "security"
 
 /datum/computer_file/program/records/proc/GetRecordsReadable()

@@ -1,7 +1,7 @@
 /datum/computer_file/program/log_viewer
 	filename = "log_viewer"
 	filedesc = "Log Viewer"
-	category = PROGRAM_CATEGORY_MISC
+	category = PROGRAM_CATEGORY_SECU
 	program_icon_state = "generic"
 	extended_desc = "View logs via NTNet or saved to your system."
 	size = 4
