@@ -9,6 +9,7 @@
 	antagpanel_category = "Revolution"
 	banning_key = ROLE_REV
 	antag_moodlet = /datum/mood_event/revolution
+	chaos_cost = 0.5
 	var/hud_type = "rev"
 	var/datum/team/revolution/rev_team
 

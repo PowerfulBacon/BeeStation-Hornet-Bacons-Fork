@@ -20,6 +20,7 @@
 	antag_moodlet = /datum/mood_event/heretics
 	banning_key = ROLE_HERETIC
 	required_living_playtime = 4
+	chaos_cost = 3
 	/// Whether we've ascended! (Completed one of the final rituals)
 	var/ascended = FALSE
 	/// The path our heretic has chosen. Mostly used for flavor.

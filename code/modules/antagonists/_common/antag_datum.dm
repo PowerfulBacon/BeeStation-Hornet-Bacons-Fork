@@ -32,6 +32,9 @@ GLOBAL_LIST(admin_antag_list)
 	var/antagpanel_category = "Uncategorized"	//Antagpanel will display these together, REQUIRED
 	var/show_name_in_check_antagonists = FALSE //Will append antagonist name in admin listings - use for categories that share more than one antag type
 	var/show_to_ghosts = FALSE // Should this antagonist be shown as antag to ghosts? Shouldn't be used for stealthy antagonists like traitors
+	/// How much this antagonist contributes towards chaos
+	/// Relative to 1 being a single traitor.
+	var/chaos_cost = 0
 
 	/// Weakref to button to access antag interface
 	var/datum/weakref/info_button_ref

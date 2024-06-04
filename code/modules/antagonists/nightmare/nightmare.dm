@@ -6,6 +6,7 @@
 	antagpanel_category = "Nightmare"
 	ui_name = "AntagInfoNightmare"
 	show_name_in_check_antagonists = TRUE
+	chaos_cost = 2
 
 /datum/antagonist/nightmare/on_gain()
 	forge_objectives()

@@ -383,7 +383,7 @@
 			if (rule.lategame_spawned)
 				parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -0 threat (Lategame, threat cost ignored)"
 			else
-				parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
+				parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost] threat"
 	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()
@@ -801,7 +801,7 @@
 			if (rule.lategame_spawned)
 				discordmsg += "[rule.ruletype] - [rule.name]: -0 threat (Lategame, threat cost ignored)\n"
 			else
-				discordmsg += "[rule.ruletype] - [rule.name]: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat\n"
+				discordmsg += "[rule.ruletype] - [rule.name]: -[rule.cost] threat\n"
 	var/list/ded = SSblackbox.first_death
 	if(ded)
 		discordmsg += "First Death: [ded["name"]], [ded["role"]], at [ded["area"]]\n"

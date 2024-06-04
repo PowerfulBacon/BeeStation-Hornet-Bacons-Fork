@@ -142,7 +142,6 @@
 			"repeatable_weight_decrease" = ruleset.repeatable_weight_decrease,
 			"weight" = ruleset.weight,
 			"cost" = ruleset.cost,
-			"scaling_cost" = ruleset.scaling_cost,
 			"antag_cap" = ruleset.antag_cap,
 			"pop_per_requirement" = ruleset.pop_per_requirement,
 			"requirements" = ruleset.requirements,

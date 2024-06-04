@@ -13,25 +13,20 @@
 	restricted_roles = list(JOB_NAME_CYBORG)
 	required_candidates = 1
 	weight = 5
-	cost = 8	// Avoid raising traitor threat above this, as it is the default low cost ruleset.
-	scaling_cost = 9
 	requirements = list(8,8,8,8,8,8,8,8,8,8)
 	antag_cap = list("denominator" = 38)
 	var/autotraitor_cooldown = (15 MINUTES)
 
 /datum/dynamic_ruleset/roundstart/traitor/pre_execute(population)
-	. = ..()
 	if (population < CONFIG_GET(number/malf_ai_minimum_pop))
 		restricted_roles |= JOB_NAME_AI
-	var/num_traitors = get_antag_cap(population) * (scaled_times + 1)
-	for (var/i = 1 to num_traitors)
-		if(candidates.len <= 0)
-			break
-		var/mob/M = antag_pick_n_take(candidates)
-		assigned += M.mind
-		M.mind.special_role = ROLE_TRAITOR
-		M.mind.restricted_roles = restricted_roles
-		GLOB.pre_setup_antags += M.mind
+	if(candidates.len <= 0)
+		return FALSE
+	var/mob/M = antag_pick_n_take(candidates)
+	assigned += M.mind
+	M.mind.special_role = ROLE_TRAITOR
+	M.mind.restricted_roles = restricted_roles
+	GLOB.pre_setup_antags += M.mind
 	return TRUE
 
 
@@ -49,29 +44,24 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG)
 	required_candidates = 2
 	weight = 2
-	cost = 12
-	scaling_cost = 15
 	requirements = list(40,30,30,20,20,15,15,15,10,10)
 	antag_cap = 2	// Can pick 3 per team, but rare enough it doesn't matter.
 	var/list/datum/team/brother_team/pre_brother_teams = list()
 	var/const/min_team_size = 2
 
 /datum/dynamic_ruleset/roundstart/traitorbro/pre_execute(population)
-	. = ..()
-	var/num_teams = (get_antag_cap(population)/min_team_size) * (scaled_times + 1) // 1 team per scaling
-	for(var/j = 1 to num_teams)
-		if(candidates.len < min_team_size || candidates.len < required_candidates)
-			break
-		var/datum/team/brother_team/team = new
-		var/team_size = prob(10) ? min(3, candidates.len) : 2
-		for(var/k = 1 to team_size)
-			var/mob/bro = antag_pick_n_take(candidates)
-			assigned += bro.mind
-			team.add_member(bro.mind)
-			bro.mind.special_role = ROLE_BROTHER
-			bro.mind.restricted_roles = restricted_roles
-			GLOB.pre_setup_antags += bro.mind
-		pre_brother_teams += team
+	if(candidates.len < min_team_size || candidates.len < required_candidates)
+		return FALSE
+	var/datum/team/brother_team/team = new
+	var/team_size = prob(10) ? min(3, candidates.len) : 2
+	for(var/k = 1 to team_size)
+		var/mob/bro = antag_pick_n_take(candidates)
+		assigned += bro.mind
+		team.add_member(bro.mind)
+		bro.mind.special_role = ROLE_BROTHER
+		bro.mind.restricted_roles = restricted_roles
+		GLOB.pre_setup_antags += bro.mind
+	pre_brother_teams += team
 	return TRUE
 
 /datum/dynamic_ruleset/roundstart/traitorbro/execute(forced = FALSE)
@@ -99,22 +89,17 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG)
 	required_candidates = 1
 	weight = 3
-	cost = 16
-	scaling_cost = 10
 	requirements = list(70,70,60,50,40,20,20,10,10,10)
 	antag_cap = list("denominator" = 29)
 
 /datum/dynamic_ruleset/roundstart/changeling/pre_execute(population)
-	. = ..()
-	var/num_changelings = get_antag_cap(population) * (scaled_times + 1)
-	for (var/i = 1 to num_changelings)
-		if(candidates.len <= 0)
-			break
-		var/mob/M = antag_pick_n_take(candidates)
-		assigned += M.mind
-		M.mind.restricted_roles = restricted_roles
-		M.mind.special_role = ROLE_CHANGELING
-		GLOB.pre_setup_antags += M.mind
+	if(candidates.len <= 0)
+		return FALSE
+	var/mob/M = antag_pick_n_take(candidates)
+	assigned += M.mind
+	M.mind.restricted_roles = restricted_roles
+	M.mind.special_role = ROLE_CHANGELING
+	GLOB.pre_setup_antags += M.mind
 	return TRUE
 
 //////////////////////////////////////////////
@@ -131,24 +116,18 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG)
 	required_candidates = 1
 	weight = 3
-	cost = 15
-	scaling_cost = 9
 	requirements = list(101,101,101,40,35,20,20,15,10,10)
 	antag_cap = list("denominator" = 24)
 
 
 /datum/dynamic_ruleset/roundstart/heretics/pre_execute(population)
-	. = ..()
-	var/num_ecult = get_antag_cap(population) * (scaled_times + 1)
-
-	for (var/i = 1 to num_ecult)
-		if(candidates.len <= 0)
-			break
-		var/mob/picked_candidate = antag_pick_n_take(candidates)
-		assigned += picked_candidate.mind
-		picked_candidate.mind.restricted_roles = restricted_roles
-		picked_candidate.mind.special_role = ROLE_HERETIC
-		GLOB.pre_setup_antags += picked_candidate.mind
+	if(candidates.len <= 0)
+		return FALSE
+	var/mob/picked_candidate = antag_pick_n_take(candidates)
+	assigned += picked_candidate.mind
+	picked_candidate.mind.restricted_roles = restricted_roles
+	picked_candidate.mind.special_role = ROLE_HERETIC
+	GLOB.pre_setup_antags += picked_candidate.mind
 	return TRUE
 
 
@@ -167,7 +146,6 @@
 	restricted_roles = list(JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN) // Just to be sure that a wizard getting picked won't ever imply a Captain or HoS not getting drafted
 	required_candidates = 1
 	weight = 2
-	cost = 20
 	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	var/list/roundstart_wizards = list()
 
@@ -210,11 +188,11 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_CHAPLAIN, JOB_NAME_HEADOFPERSONNEL)
 	required_candidates = 2
 	weight = 3
-	cost = 20
 	requirements = list(100,90,80,60,40,30,10,10,10,10)
 	minimum_players = 24
 	flags = HIGH_IMPACT_RULESET | NO_OTHER_ROUNDSTARTS_RULESET | PERSISTENT_RULESET
 	antag_cap = list("denominator" = 20, "offset" = 1)
+	groups = list("no_late_traitors")
 	var/datum/team/cult/main_cult
 
 /datum/dynamic_ruleset/roundstart/bloodcult/ready(population, forced = FALSE)
@@ -268,10 +246,10 @@
 	restricted_roles = list(JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN) // Just to be sure that a nukie getting picked won't ever imply a Captain or HoS not getting drafted
 	required_candidates = 5
 	weight = 3
-	cost = 20
 	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	flags = HIGH_IMPACT_RULESET | NO_OTHER_ROUNDSTARTS_RULESET | PERSISTENT_RULESET
 	antag_cap = list("denominator" = 18, "offset" = 1)
+	groups = list("no_teleport", "no_nukies", "no_late_traitors")
 	var/datum/team/nuclear/nuke_team
 
 /datum/dynamic_ruleset/roundstart/nuclear/ready(population, forced = FALSE)
@@ -354,11 +332,11 @@
 	required_candidates = 3
 	weight = 3
 	delay = 7 MINUTES
-	cost = 20
 	requirements = list(101,101,70,40,30,20,10,10,10,10)
 	antag_cap = 3
 	flags = HIGH_IMPACT_RULESET | NO_OTHER_ROUNDSTARTS_RULESET | PERSISTENT_RULESET
-	blocking_rules = list(/datum/dynamic_ruleset/latejoin/provocateur)
+	groups = list("revs")
+	blocking_groups = list("revs")
 	// I give up, just there should be enough heads with 35 players...
 	minimum_players = 35
 	/// How much threat should be injected when the revolution wins?
@@ -435,7 +413,6 @@
 	restricted_roles = list()
 	required_candidates = 0
 	weight = 3
-	cost = 0
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	flags = LONE_RULESET
 
@@ -485,14 +462,13 @@
 	restricted_roles = list(JOB_NAME_LAWYER, JOB_NAME_CURATOR, JOB_NAME_CHAPLAIN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE)
 	required_candidates = 1
 	weight = 3
-	cost = 0
 	flags = LONE_RULESET
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	antag_cap = list("denominator" = 30)
 
 /datum/dynamic_ruleset/roundstart/devil/pre_execute(population)
 	. = ..()
-	var/num_devils = get_antag_cap(population) * (scaled_times + 1)
+	var/num_devils = get_antag_cap(population)
 
 	for(var/j = 0, j < num_devils, j++)
 		if (candidates.len <= 0)
@@ -538,7 +514,6 @@
 	persistent = TRUE
 	required_candidates = 0
 	weight = 3
-	cost = 0
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	flags = LONE_RULESET
 	var/meteordelay = 2000
@@ -575,10 +550,10 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE,JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_CHAPLAIN, JOB_NAME_HEADOFPERSONNEL)
 	required_candidates = 4
 	weight = 3
-	cost = 35
 	requirements = list(100,90,80,70,60,50,30,30,30,30)
 	minimum_players = 24
 	flags = HIGH_IMPACT_RULESET | NO_OTHER_ROUNDSTARTS_RULESET | PERSISTENT_RULESET
+	groups = list("no_teleport", "no_late_traitors")
 	var/datum/team/clock_cult/main_cult
 	var/list/selected_servants = list()
 
@@ -646,7 +621,6 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG)
 	required_candidates = 2
 	weight = 3
-	cost = 20
 	requirements = list(100,90,80,60,40,30,10,10,10,10)
 	flags = HIGH_IMPACT_RULESET | PERSISTENT_RULESET
 	antag_cap = list("denominator" = 26, "offset" = 1)
@@ -701,7 +675,6 @@
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG)
 	required_candidates = 3
 	weight = 3
-	cost = 30
 	requirements = list(100,90,80,60,40,30,10,10,10,10)
 	flags = HIGH_IMPACT_RULESET | NO_OTHER_ROUNDSTARTS_RULESET | PERSISTENT_RULESET
 

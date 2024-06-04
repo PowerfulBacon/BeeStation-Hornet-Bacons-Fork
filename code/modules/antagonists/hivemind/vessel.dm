@@ -6,6 +6,7 @@
 	roundend_category = "awoken vessels"
 	antagpanel_category = "Other"
 	show_name_in_check_antagonists = TRUE
+	chaos_cost = 0.1
 	var/hiveID = "Hivemind"
 	var/datum/antagonist/hivemind/master
 	var/mutable_appearance/glow

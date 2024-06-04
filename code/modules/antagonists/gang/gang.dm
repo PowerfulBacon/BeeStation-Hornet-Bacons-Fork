@@ -4,6 +4,7 @@
 	can_coexist_with_others = FALSE
 	banning_key = ROLE_GANG
 	antagpanel_category = "Gang"
+	chaos_cost = 1
 	var/hud_type = "gangster"
 	var/message_name = "Gangster"
 	var/datum/team/gang/gang

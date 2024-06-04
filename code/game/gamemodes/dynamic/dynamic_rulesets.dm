@@ -30,18 +30,12 @@
 	var/list/exclusive_roles = list()
 	/// If set, there needs to be a certain amount of players doing those roles (among the players who won't be drafted) for the rule to be drafted IMPORTANT: DOES NOT WORK ON ROUNDSTART RULESETS.
 	var/list/enemy_roles = list()
-	/// If enemy_roles was set, this is the amount of enemy job workers needed per threat_level range (0-10,10-20,etc) IMPORTANT: DOES NOT WORK ON ROUNDSTART RULESETS.
-	var/required_enemies = list(1,1,0,0,0,0,0,0,0,0)
+	/// If enemy_roles was set, this is the amount of enemy job workers needed. IMPORTANT: DOES NOT WORK ON ROUNDSTART RULESETS.
+	var/required_enemies = 1
 	/// The rule needs this many candidates (post-trimming) to be executed (example: Cult needs 4 players at round start)
 	var/required_candidates = 0
 	/// 0 -> 9, probability for this rule to be picked against other rules. If zero this will effectively disable the rule.
 	var/weight = 5
-	/// Threat cost for this rule, this is decreased from the mode's threat when the rule is executed.
-	var/cost = 0
-	/// Cost per level the rule scales up.
-	var/scaling_cost = 0
-	/// How many times a rule has scaled up upon getting picked.
-	var/scaled_times = 0
 	/// Used for the roundend report
 	var/total_cost = 0
 	/// A flag that determines how the ruleset is handled. Check __DEFINES/dynamic.dm for an explanation of the accepted values.
@@ -53,8 +47,6 @@
 	var/list/requirements = list(40,30,20,10,10,10,10,10,10,10)
 	/// Reference to the mode, use this instead of SSticker.mode.
 	var/datum/game_mode/dynamic/mode = null
-	/// If a ruleset type which is in this list has been executed, then the ruleset will not be executed.
-	var/list/blocking_rules = list()
 	/// The minimum amount of players required for the rule to be considered.
 	var/minimum_players = 0
 	/// The maximum amount of players required for the rule to be considered.
@@ -85,6 +77,13 @@
 
 	/// Was this ruleset spawned from the lategame mode?
 	var/lategame_spawned = FALSE
+
+	/// What groups does this dynamic ruleset belong to.
+	/// Will set the flag of all these group names when triggered.
+	var/list/groups = list()
+	/// Groups that block this gamemode, but aren't triggered by
+	/// this gamemode
+	var/list/blocking_groups = list()
 
 
 /datum/dynamic_ruleset/New(datum/game_mode/dynamic/dynamic_mode)
@@ -125,26 +124,6 @@
 
 	return TRUE
 
-/// When picking rulesets, if dynamic picks the same one multiple times, it will "scale up".
-/// However, doing this blindly would result in lowpop rounds (think under 10 people) where over 80% of the crew is antags!
-/// This function is here to ensure the antag ratio is kept under control while scaling up.
-/// Returns how much threat to actually spend in the end.
-/datum/dynamic_ruleset/proc/scale_up(population, max_scale)
-	if (!scaling_cost)
-		return 0
-
-	var/antag_fraction = 0
-	for(var/_ruleset in (mode.executed_rules + list(src))) // we care about the antags we *will* assign, too
-		var/datum/dynamic_ruleset/ruleset = _ruleset
-		antag_fraction += ((1 + ruleset.scaled_times) * ruleset.get_antag_cap(population)) / mode.roundstart_pop_ready
-
-	for(var/i in 1 to max_scale)
-		if(antag_fraction < 0.25)
-			scaled_times += 1
-			antag_fraction += get_antag_cap(population) / mode.roundstart_pop_ready // we added new antags, gotta update the %
-
-	return scaled_times * scaling_cost
-
 /// Returns what the antag cap with the given population is.
 /datum/dynamic_ruleset/proc/get_antag_cap(population)
 	if (isnum(antag_cap))
@@ -180,8 +159,8 @@
 /// This one only handles refunding the threat, override in ruleset to clean up the rest.
 /datum/dynamic_ruleset/proc/clean_up()
 	if(!lategame_spawned) // lategame execute failures shouldn't refund
-		mode.refund_threat(cost + (scaled_times * scaling_cost))
-	var/msg = "[ruletype] [name] refunded [cost + (scaled_times * scaling_cost)]. Failed to execute."
+		mode.refund_threat(cost)
+	var/msg = "[ruletype] [name] refunded [cost]. Failed to execute."
 	mode.threat_log += "[worldtime2text()]: [msg]"
 	message_admins(msg)
 	log_game("DYNAMIC: [ruletype] [name] is cleaning up, failed to execute.")

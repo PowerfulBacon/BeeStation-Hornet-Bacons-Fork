@@ -4,7 +4,7 @@
 /// Only one ruleset with this flag will be picked.
 #define HIGH_IMPACT_RULESET (1 << 1)
 
-/// This ruleset can only be picked once. Anything that does not have a scaling_cost MUST have this.
+/// This ruleset can only be picked once.
 #define LONE_RULESET (1 << 2)
 
 /// This ruleset can't execute alongside ANY other roundstart ruleset.

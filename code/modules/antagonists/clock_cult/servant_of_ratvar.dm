@@ -10,6 +10,7 @@
 	antag_moodlet = /datum/mood_event/cult
 	banning_key = ROLE_SERVANT_OF_RATVAR
 	required_living_playtime = 4
+	chaos_cost = 1
 
 	//The class of the servant
 	var/datum/action/innate/clockcult/transmit/transmit_spell

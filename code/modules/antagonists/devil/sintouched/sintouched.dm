@@ -11,6 +11,7 @@
 	roundend_category = "sintouched"
 	antagpanel_category = "Devil"
 	banning_key = UNBANNABLE_ANTAGONIST
+	chaos_cost = 0.5
 	var/sin
 
 	var/static/list/sins = list(SIN_ACEDIA,SIN_GLUTTONY,SIN_GREED,SIN_SLOTH,SIN_WRATH,SIN_ENVY,SIN_PRIDE)

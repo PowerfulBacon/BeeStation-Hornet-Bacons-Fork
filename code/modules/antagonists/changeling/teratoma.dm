@@ -3,6 +3,7 @@
 	roundend_category = "other"
 	antagpanel_category = "Changeling"
 	banning_key = ROLE_TERATOMA
+	chaos_cost = 0.25
 
 /datum/antagonist/teratoma/on_gain()
 	owner.special_role = "Teratoma"
@@ -45,6 +46,7 @@
 	name = "Maintenance Teratoma"
 	roundend_category = "other"
 	antagpanel_category = "Changeling"
+	chaos_cost = 0
 
 /datum/antagonist/teratoma/hugbox/greet()
 	..()

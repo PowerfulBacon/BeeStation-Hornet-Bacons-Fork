@@ -11,6 +11,7 @@
 	ui_name = "AntagInfoChangeling"
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
+	chaos_cost = 1.4
 	var/you_are_greet = TRUE
 	var/team_mode = FALSE //Should assign team objectives ?
 	var/competitive_objectives = FALSE //Should we assign objectives in competition with other lings?
@@ -582,6 +583,7 @@
 	give_objectives = FALSE
 	show_in_roundend = FALSE //These are here for admin tracking purposes only
 	you_are_greet = FALSE
+	chaos_cost = 0
 
 /datum/antagonist/changeling/roundend_report()
 	var/list/parts = list()

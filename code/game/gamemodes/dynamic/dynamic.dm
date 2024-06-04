@@ -26,6 +26,11 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 
 	reroll_friendly = FALSE
 
+	/// Antag proportions for every 5 population levels, relative to traitors. Used for minor
+	/// antags at roundstart. Note that this is relative to traitors, and some antags are more expensive
+	/// than traitors, meaning that won't be the actual proportion of antags in the round.
+	var/antag_proportion = 0.2
+
 	// Threat logging vars
 	/// The "threat cap", threat shouldn't normally go above this and is used in ruleset calculations
 	var/threat_level = 0
@@ -537,12 +542,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 		rule.trim_candidates()
 		if (rule.ready(roundstart_pop_ready, TRUE))
 			var/cost = rule.cost
-			var/scaled_times = 0
-			if (rule.scaling_cost)
-				scaled_times = round(max(round_start_budget - cost, 0) / rule.scaling_cost)
-				cost += rule.scaling_cost * scaled_times
-
-			spend_roundstart_budget(picking_roundstart_rule(rule, scaled_times, forced = TRUE))
+			spend_roundstart_budget(picking_roundstart_rule(rule, forced = TRUE))
 
 /datum/game_mode/dynamic/proc/roundstart(list/roundstart_rules)
 	if (GLOB.dynamic_forced_extended)
@@ -569,7 +569,7 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 			log_game("DYNAMIC: No more rules can be applied, stopping with [round_start_budget] left.")
 			break
 
-		var/cost = (ruleset in rulesets_picked) ? ruleset.scaling_cost : ruleset.cost
+		var/cost = ruleset.cost
 		if (cost == 0)
 			stack_trace("[ruleset] cost 0, this is going to result in an infinite loop.")
 			drafted_rules[ruleset] = null
@@ -606,17 +606,17 @@ GLOBAL_VAR_INIT(dynamic_forced_threat_level, -1)
 			break
 
 	for (var/ruleset in rulesets_picked)
-		spend_roundstart_budget(picking_roundstart_rule(ruleset, rulesets_picked[ruleset] - 1))
+		spend_roundstart_budget(picking_roundstart_rule(ruleset))
 
 /// Initializes the round start ruleset provided to it. Returns how much threat to spend.
-/datum/game_mode/dynamic/proc/picking_roundstart_rule(datum/dynamic_ruleset/roundstart/ruleset, scaled_times = 0, forced = FALSE)
-	log_game("DYNAMIC: Picked a ruleset: [ruleset.name], scaled [scaled_times] times")
+/datum/game_mode/dynamic/proc/picking_roundstart_rule(datum/dynamic_ruleset/roundstart/ruleset, forced = FALSE)
+	log_game("DYNAMIC: Picked a ruleset: [ruleset.name]")
 
 	ruleset.trim_candidates()
-	var/added_threat = ruleset.scale_up(roundstart_pop_ready, scaled_times)
+	var/added_threat = ruleset.scale_up(roundstart_pop_ready)
 
 	if(simulated || ruleset.pre_execute(roundstart_pop_ready))
-		threat_log += "[worldtime2text()]: Roundstart [ruleset.name] spent [ruleset.cost + added_threat]. [ruleset.scaling_cost ? "Scaled up [ruleset.scaled_times]/[scaled_times] times." : ""]"
+		threat_log += "[worldtime2text()]: Roundstart [ruleset.name] spent [ruleset.cost + added_threat]."
 		if(CHECK_BITFIELD(ruleset.flags, ONLY_RULESET))
 			only_ruleset_executed = TRUE
 		executed_rules += ruleset

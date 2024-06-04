@@ -33,18 +33,12 @@
 	/// The name of the ruleset chosen
 	var/name
 
-	/// If it is a round start ruleset, how much it was scaled by
-	var/scaled
-
 	/// The number of assigned antags
 	var/assigned
 
 /datum/dynamic_snapshot_ruleset/New(datum/dynamic_ruleset/ruleset)
 	name = ruleset.name
 	assigned = ruleset.assigned.len
-
-	if (istype(ruleset, /datum/dynamic_ruleset/roundstart))
-		scaled = ruleset.scaled_times
 
 /// Convert the snapshot to an associative list
 /datum/dynamic_snapshot/proc/to_list()
@@ -61,7 +55,6 @@
 		"alive_antags" = alive_antags,
 		"ruleset_chosen" = list(
 			"name" = ruleset_chosen.name,
-			"scaled" = ruleset_chosen.scaled,
 			"assigned" = ruleset_chosen.assigned,
 		),
 	)

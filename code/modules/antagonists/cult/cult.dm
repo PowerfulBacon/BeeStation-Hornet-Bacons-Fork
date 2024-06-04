@@ -6,6 +6,7 @@
 	antagpanel_category = "Cult"
 	ui_name = "AntagInfoBloodCult"
 	antag_moodlet = /datum/mood_event/cult
+	chaos_cost = 1
 	var/datum/action/innate/cult/comm/communion = new
 	var/datum/action/innate/cult/mastervote/vote = new
 	var/datum/action/innate/cult/blood_magic/magic = new

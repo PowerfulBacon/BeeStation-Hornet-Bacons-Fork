@@ -708,6 +708,7 @@
 	roundend_category = "Swarmer"
 	antagpanel_category = "Swarmer"
 	show_to_ghosts = TRUE
+	chaos_cost = 0.2
 	var/datum/team/swarmer/swarm
 
 /datum/antagonist/swarmer/on_gain()

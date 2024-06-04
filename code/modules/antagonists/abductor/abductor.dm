@@ -7,6 +7,7 @@
 	banning_key = ROLE_ABDUCTOR
 	show_in_antagpanel = FALSE //should only show subtypes
 	show_to_ghosts = TRUE
+	chaos_cost = 2
 	var/datum/team/abductor_team/team
 	var/sub_role
 	var/outfit

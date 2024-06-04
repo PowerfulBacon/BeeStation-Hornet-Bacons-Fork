@@ -34,8 +34,8 @@
 
 	var/threat = round(mode.threat_level/10)
 
-	if (job_check < required_enemies[threat])
-		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies[threat]] needed, [job_check] found")
+	if (job_check < required_enemies)
+		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies] needed, [job_check] found")
 		return FALSE
 
 	if (mode.check_lowpop_lowimpact_injection())
@@ -68,14 +68,7 @@
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	repeatable = TRUE
 	flags = INTACT_STATION_RULESET
-	blocking_rules = list(
-		/datum/dynamic_ruleset/roundstart/bloodcult,
-		/datum/dynamic_ruleset/roundstart/clockcult,
-		/datum/dynamic_ruleset/roundstart/nuclear,
-		/datum/dynamic_ruleset/roundstart/wizard,
-		/datum/dynamic_ruleset/roundstart/revs,
-		/datum/dynamic_ruleset/roundstart/hivemind
-	)
+	blocking_groups = list("no_late_traitors")
 
 //////////////////////////////////////////////
 //                                          //
@@ -90,14 +83,15 @@
 	role_preference = /datum/role_preference/antagonist/revolutionary
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_HEADOFPERSONNEL, JOB_NAME_CHIEFENGINEER, JOB_NAME_CHIEFMEDICALOFFICER, JOB_NAME_RESEARCHDIRECTOR)
 	enemy_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER,JOB_NAME_DETECTIVE,JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_WARDEN)
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = 2
 	required_candidates = 1
 	weight = 2
 	delay = 1 MINUTES // Prevents rule start while head is offstation.
 	cost = 13
 	requirements = list(101,101,70,40,30,20,20,20,20,20)
 	flags = HIGH_IMPACT_RULESET|INTACT_STATION_RULESET
-	blocking_rules = list(/datum/dynamic_ruleset/roundstart/revs)
+	groups = list("revs")
+	blocking_groups = list("revs")
 	var/required_heads_of_staff = 3
 	var/finished = FALSE
 	/// How much threat should be injected when the revolution wins?
@@ -170,14 +164,7 @@
 	cost = 10
 	requirements = list(101,101,101,10,10,10,10,10,10,10)
 	repeatable = TRUE
-	blocking_rules = list(
-		/datum/dynamic_ruleset/roundstart/bloodcult,
-		/datum/dynamic_ruleset/roundstart/clockcult,
-		/datum/dynamic_ruleset/roundstart/nuclear,
-		/datum/dynamic_ruleset/roundstart/wizard,
-		/datum/dynamic_ruleset/roundstart/revs,
-		/datum/dynamic_ruleset/roundstart/hivemind
-	)
+	blocking_groups = list("no_late_traitors")
 
 /datum/dynamic_ruleset/latejoin/heretic_smuggler/execute(forced = FALSE)
 	var/mob/picked_mob = pick(candidates)

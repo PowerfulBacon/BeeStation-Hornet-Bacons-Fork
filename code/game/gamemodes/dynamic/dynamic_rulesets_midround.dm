@@ -87,8 +87,8 @@
 
 	var/threat = round(mode.threat_level/10)
 
-	if (job_check < required_enemies[threat])
-		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies[threat]] needed, [job_check] found")
+	if (job_check < required_enemies)
+		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies] needed, [job_check] found")
 		return FALSE
 
 	if (mode.check_lowpop_lowimpact_injection())
@@ -196,14 +196,7 @@
 	requirements = list(8,8,8,8,8,8,8,8,8,8)
 	repeatable = TRUE
 	flags = INTACT_STATION_RULESET
-	blocking_rules = list(
-		/datum/dynamic_ruleset/roundstart/bloodcult,
-		/datum/dynamic_ruleset/roundstart/clockcult,
-		/datum/dynamic_ruleset/roundstart/nuclear,
-		/datum/dynamic_ruleset/roundstart/wizard,
-		/datum/dynamic_ruleset/roundstart/revs,
-		/datum/dynamic_ruleset/roundstart/hivemind
-	)
+	blocking_groups = list("no_late_traitors")
 
 /datum/dynamic_ruleset/midround/autotraitor/trim_candidates()
 	..()
@@ -238,13 +231,13 @@
 	role_preference = /datum/role_preference/midround_living/malfunctioning_ai
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_SCIENTIST, JOB_NAME_CHEMIST, JOB_NAME_RESEARCHDIRECTOR, JOB_NAME_CHIEFENGINEER)
 	exclusive_roles = list(JOB_NAME_AI)
-	required_enemies = list(3,3,2,2,2,1,1,1,1,0)
+	required_enemies = 2
 	required_candidates = 1
 	minimum_players = 0 // Handled by /datum/dynamic_ruleset/proc/acceptable override
 	weight = 2
 	cost = 13
 	required_type = /mob/living/silicon/ai
-	blocking_rules = list(/datum/dynamic_ruleset/roundstart/nuclear)
+	blocking_groups = list("no_nukies")
 	flags = HIGH_IMPACT_RULESET|INTACT_STATION_RULESET|PERSISTENT_RULESET
 	var/ion_announce = 33
 	var/removeDontImproveChance = 10
@@ -293,12 +286,14 @@
 	antag_datum = /datum/antagonist/wizard
 	role_preference = /datum/role_preference/midround_ghost/wizard
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN, JOB_NAME_RESEARCHDIRECTOR) //RD doesn't believe in magic
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = 2
 	required_candidates = 1
 	weight = 1
 	cost = 15
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
 	flags = HIGH_IMPACT_RULESET|PERSISTENT_RULESET|LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list()
 
 /datum/dynamic_ruleset/midround/from_ghosts/wizard/ready(forced = FALSE)
 	if(!length(GLOB.wizardstart))
@@ -322,7 +317,7 @@
 	role_preference = /datum/role_preference/midround_ghost/nuclear_operative
 	antag_datum = /datum/antagonist/nukeop
 	enemy_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_DETECTIVE, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(3,3,2,2,2,2,1,1,0,0)
+	required_enemies = 2
 	required_candidates = 5
 	weight = 5
 	cost = 15
@@ -331,6 +326,8 @@
 	var/list/operative_cap = list(2,2,3,3,4,5,5,5,5,5)
 	var/datum/team/nuclear/nuke_team
 	flags = HIGH_IMPACT_RULESET|PERSISTENT_RULESET
+	groups = list("combat_midround", "no_nukies")
+	blocking_groups = list("no_nukies")
 
 /datum/dynamic_ruleset/midround/from_ghosts/nuclear/acceptable(population=0, threat=0)
 	if (locate(/datum/dynamic_ruleset/roundstart/nuclear) in mode.executed_rules)
@@ -361,13 +358,15 @@
 	antag_datum = /datum/antagonist/blob
 	role_preference = /datum/role_preference/midround_ghost/blob
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = 2
 	required_candidates = 1
 	minimum_round_time = 35 MINUTES
 	weight = 3
 	cost = 12
 	minimum_players = 22
 	flags = HIGH_IMPACT_RULESET|INTACT_STATION_RULESET|PERSISTENT_RULESET|LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list()
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob/generate_ruleset_body(mob/applicant)
 	var/body = applicant.become_overmind()
@@ -385,13 +384,15 @@
 	antag_datum = /datum/antagonist/xeno
 	role_preference = /datum/role_preference/midround_ghost/xenomorph
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,2,1,1,1,1,0,0,0)
+	required_enemies = 2
 	required_candidates = 1
 	minimum_round_time = 40 MINUTES
 	weight = 3
 	cost = 12
 	minimum_players = 22
 	flags = HIGH_IMPACT_RULESET|INTACT_STATION_RULESET|PERSISTENT_RULESET|LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list()
 	var/list/vents
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/acceptable(population=0, threat=0)
@@ -439,12 +440,14 @@
 	antag_datum = /datum/antagonist/nightmare
 	role_preference = /datum/role_preference/midround_ghost/nightmare
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
+	required_enemies = 1
 	required_candidates = 1
 	weight = 5
 	cost = 6
 	minimum_players = 12
 	repeatable = TRUE
+	groups = list("combat_midround")
+	blocking_groups = list("combat_midround")
 	var/list/spawn_locs
 
 /datum/dynamic_ruleset/midround/from_ghosts/nightmare/ready(forced = FALSE)
@@ -486,13 +489,15 @@
 	antag_datum = /datum/antagonist/space_dragon
 	role_preference = /datum/role_preference/midround_ghost/space_dragon
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
+	required_enemies = 1
 	required_candidates = 1
 	weight = 4
 	cost = 11
 	minimum_players = 22
 	repeatable = TRUE
 	flags = INTACT_STATION_RULESET|PERSISTENT_RULESET|LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list("combat_midround")
 	var/list/spawn_locs
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/ready(forced = FALSE)
@@ -531,13 +536,15 @@
 	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
 	role_preference = /datum/role_preference/midround_ghost/abductor
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,1,1,1,1,0,0,0,0)
+	required_enemies = 1
 	required_candidates = 2
 	required_applicants = 2
 	weight = 4
 	cost = 7
 	minimum_players = 22
 	repeatable = TRUE
+	groups = list("minor_midround")
+	blocking_groups = list("minor_midround")
 	var/datum/team/abductor_team/new_team
 
 /datum/dynamic_ruleset/midround/from_ghosts/abductors/finish_setup(mob/new_character, index)
@@ -563,13 +570,13 @@
 	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
 	antag_datum = /datum/antagonist/revenant
 	role_preference = /datum/role_preference/midround_ghost/revenant
-	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
 	weight = 5
 	cost = 5
 	minimum_players = 12
 	repeatable = TRUE
+	groups = list("minor_midround")
+	blocking_groups = list("minor_midround")
 	var/dead_mobs_required = 15
 	var/need_extra_spawns_value = 15
 	var/list/spawn_locs
@@ -623,13 +630,15 @@
 	role_preference = /datum/role_preference/midround_ghost/space_pirate
 	required_type = /mob/dead/observer
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,2,1,1,1,1,0,0,0)
+	required_enemies = 1
 	required_candidates = 0
 	weight = 4
 	cost = 8
 	minimum_players = 25
 	repeatable = FALSE
 	flags = LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list("combat_midround")
 
 /datum/dynamic_ruleset/midround/pirates/acceptable(population=0, threat=0)
 	if (!SSmapping.empty_space)
@@ -650,8 +659,6 @@
 	antag_datum = /datum/antagonist/obsessed
 	role_preference = /datum/role_preference/midround_living/obsessed
 	restricted_roles = list(JOB_NAME_AI, JOB_NAME_CYBORG, "Positronic Brain")
-	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
 	weight = 3
 	cost = 5
@@ -690,13 +697,15 @@
 	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	required_type = /mob/dead/observer
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = 1
 	required_candidates = 2
 	weight = 3
 	cost = 11
 	repeatable = TRUE
 	flags = INTACT_STATION_RULESET|PERSISTENT_RULESET|LATEGAME_RULESET
 	minimum_players = 25
+	groups = list("spreading_midround")
+	blocking_groups = list("spreading_midround")
 	var/fed = 1
 	var/list/vents
 	var/datum/team/spiders/spider_team
@@ -751,13 +760,15 @@
 	antag_datum = /datum/antagonist/swarmer
 	role_preference = /datum/role_preference/midround_ghost/swarmer
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
+	required_enemies = 1
 	required_candidates = 1
 	weight = 3
 	cost = 10
 	minimum_players = 15
 	repeatable = FALSE // please no
 	flags = INTACT_STATION_RULESET|PERSISTENT_RULESET
+	groups = list("spreading_midround")
+	blocking_groups = list("spreading_midround")
 	var/announce_chance = 25
 
 /datum/dynamic_ruleset/midround/from_ghosts/swarmer/ready(forced = FALSE)
@@ -793,12 +804,14 @@
 	antag_datum = /datum/antagonist/morph
 	role_preference = /datum/role_preference/midround_ghost/morph
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,1,1,1,1,1,1,0,0)
+	required_enemies = 1
 	required_candidates = 1
 	weight = 3
 	cost = 8
 	minimum_players = 15
 	repeatable = FALSE // also please no
+	groups = list("minor_midround")
+	blocking_groups = list("minor_midround")
 
 /datum/dynamic_ruleset/midround/from_ghosts/morph/ready(forced = FALSE)
 	if(!..())
@@ -833,7 +846,7 @@
 	role_preference = /datum/role_preference/midround_ghost/prisoner
 	required_type = /mob/dead/observer
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY)
-	required_enemies = list(3,1,1,0,0,0,0,0,0,0)
+	required_enemies = 1
 	required_candidates = 1
 	weight = 2
 	cost = 6
@@ -882,8 +895,8 @@
 	cost = 7
 	minimum_players = 20
 	minimum_round_time = 30 MINUTES
-	blocking_rules = list(/datum/dynamic_ruleset/roundstart/nuclear)
 	repeatable = FALSE
+	blocking_groups = list("no_nukies")
 	var/list/spawn_locs
 
 /datum/dynamic_ruleset/midround/from_ghosts/fugitives/acceptable(population=0, threat=0)
@@ -930,14 +943,15 @@
 	required_type = /mob/dead/observer
 	antag_datum = /datum/antagonist/ninja
 	enemy_roles = list(JOB_NAME_SECURITYOFFICER, JOB_NAME_DETECTIVE, JOB_NAME_WARDEN, JOB_NAME_HEADOFSECURITY, JOB_NAME_CAPTAIN)
-	required_enemies = list(2,2,2,2,2,2,2,2,2,2)
+	required_enemies = 2
 	required_candidates = 1
 	weight = 3
 	cost = 9
 	minimum_players = 20
 	repeatable = TRUE
-	blocking_rules = list(/datum/dynamic_ruleset/roundstart/nuclear, /datum/dynamic_ruleset/roundstart/clockcult)
 	flags = LATEGAME_RULESET
+	groups = list("combat_midround")
+	blocking_groups = list("combat_midround", "no_teleport")
 	var/spawn_loc
 
 /datum/dynamic_ruleset/midround/from_ghosts/ninja/ready(forced)

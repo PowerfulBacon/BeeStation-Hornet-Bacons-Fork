@@ -90,6 +90,7 @@ GLOBAL_LIST_INIT(devil_suffix, list(" the Red", " the Soulless", " the Master", 
 	antagpanel_category = "Devil"
 	banning_key = ROLE_DEVIL
 	show_to_ghosts = TRUE
+	chaos_cost = 2
 	var/obligation
 	var/ban
 	var/bane

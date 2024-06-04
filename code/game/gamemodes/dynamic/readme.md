@@ -146,8 +146,6 @@ Rulesets have the following variables notable to developers and those interested
 		- Revolution: `antag_cap = 3`. There will always be 3 rev-heads, no matter what.
 - `weight` - How likely this ruleset is to be picked. A higher weight results in a higher chance of drafting.
 - `cost` - The initial cost of the ruleset. This cost is taken from either the roundstart or midround budget, depending on the ruleset.
-- `scaling_cost` - Cost for every *additional* application of this ruleset.
-	- Suppose traitors has a `cost` of 8, and a `scaling_cost` of 5. This means that buying 1 application of the traitor ruleset costs 8 threat, but buying two costs 13 (8 + 5). Buying it a third time is 18 (8 + 5 + 5), etc.
 - `pop_per_requirement` - The range of population each value in `requirements` represents. By default, this is 6.
 	- If the value is five the range is 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-54, 45+.
 	- If it is six the range is 0-5, 6-11, 12-17, 18-23, 24-29, 30-35, 36-41, 42-47, 48-53, 54+.

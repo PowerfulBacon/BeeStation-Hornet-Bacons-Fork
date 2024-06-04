@@ -1,32 +1,30 @@
 {
 	"Dynamic": {},
 	"Roundstart": {
-		"Traitors": {
-			"cost": 8,
-			"scaling_cost": 9,
-			"weight": 5,
-			"required_candidates": 1,
-			"requirements": [8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
-			"antag_cap": {
-				"denominator": 38
-			},
-			"protected_roles": [
-				"Security Officer",
-				"Warden",
-				"Detective",
-				"Head of Security",
-				"Captain"
-			],
-			"restricted_roles": ["Cyborg"]
-		},
-		"Revolution": {
-			"cost": 110
-		}
+	  "Assimilation": {
+		  "cost": 110
+	  },
+	  "Wizard": {
+		  "weight": 6,
+		  "requirements": [110, 110, 110, 110, 40, 10, 10, 10, 10, 10]
+	  },
+	  "Blood Cult": {
+		  "weight": 5,
+		  "requirements": [110, 110, 110, 110, 40, 10, 10, 10, 10, 10]
+	  },
+	  "Nuclear Emergency": {
+		  "weight": 5,
+		  "requirements": [110, 110, 110, 110, 40, 10, 10, 10, 10, 10]
+	  },
+	  "Revolution": {
+		  "weight": 5,
+		  "requirements": [110, 110, 110, 110, 40, 10, 10, 10, 10, 10]
+	  },
+	  "Clockwork Cult": {
+		  "weight": 5
+	  }
 	},
 	"Midround": {},
-	"Latejoin": {
-		"Provocateur": {
-			"cost": 110
-		}
-	}
-}
+	"Latejoin": {}
+  }
+  

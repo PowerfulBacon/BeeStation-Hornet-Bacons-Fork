@@ -4,6 +4,7 @@
 	roundend_category = "space pirates"
 	antagpanel_category = "Pirate"
 	show_to_ghosts = TRUE
+	chaos_cost = 3
 	var/datum/team/pirate/crew
 
 /datum/antagonist/pirate/captain

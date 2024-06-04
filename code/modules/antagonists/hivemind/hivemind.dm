@@ -5,6 +5,7 @@
 	banning_key = ROLE_HIVE
 	required_living_playtime = 4
 	antag_moodlet = /datum/mood_event/hivehost
+	chaos_cost = 1
 	var/list/hivemembers = list()
 	var/list/avessels = list()
 	var/hive_size = 0

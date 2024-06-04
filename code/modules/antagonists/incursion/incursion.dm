@@ -8,6 +8,7 @@
 	var/datum/weakref/uplink_ref
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
+	chaos_cost = 1
 
 /datum/antagonist/incursion/create_team(datum/team/incursion/new_team)
 	if(!new_team)

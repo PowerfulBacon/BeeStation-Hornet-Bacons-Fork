@@ -7,6 +7,7 @@
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
 	ui_name = "AntagInfoWizard"
+	chaos_cost = 6
 	var/strip = TRUE //strip before equipping
 	var/allow_rename = TRUE
 	var/hud_version = "wizard"
@@ -320,6 +321,7 @@
 	name = "Academy Teacher"
 	outfit_type = /datum/outfit/wizard/academy
 	move_to_lair = FALSE
+	chaos_cost = 0
 
 /datum/antagonist/wizard/academy/equip_wizard()
 	. = ..()
