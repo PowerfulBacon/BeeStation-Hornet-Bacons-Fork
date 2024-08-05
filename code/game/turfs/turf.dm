@@ -68,6 +68,8 @@ GLOBAL_LIST_EMPTY(created_baseturf_lists)
 	///Can this floor be an underlay, for turf damage
 	var/can_underlay = TRUE
 
+	var/blocks_air = FALSE
+
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
 	if(var_name in banned_edits)

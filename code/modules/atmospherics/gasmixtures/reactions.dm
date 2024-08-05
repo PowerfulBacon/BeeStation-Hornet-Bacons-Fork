@@ -6,24 +6,14 @@
 
 	for(var/r in subtypesof(/datum/gas_reaction))
 		var/datum/gas_reaction/reaction = r
-		if(initial(reaction.exclude))
-			continue
 		reaction = new r
-		. += reaction
-	sortTim(., GLOBAL_PROC_REF(cmp_gas_reactions))
+		if(!reaction.exclude)
+			. += reaction
+	sortTim(., GLOBAL_PROC_REF(cmp_gas_reaction))
 
-/proc/cmp_gas_reactions(list/datum/gas_reaction/a, list/datum/gas_reaction/b) // compares lists of reactions by the maximum priority contained within the list
-	if (!length(a) || !length(b))
-		return length(b) - length(a)
-	var/maxa
-	var/maxb
-	for (var/datum/gas_reaction/R in a)
-		if (R.priority > maxa)
-			maxa = R.priority
-	for (var/datum/gas_reaction/R in b)
-		if (R.priority > maxb)
-			maxb = R.priority
-	return maxb - maxa
+/proc/cmp_gas_reaction(datum/gas_reaction/a, datum/gas_reaction/b) // compares lists of reactions by the maximum priority contained within the list
+	return b.priority - a.priority
+
 
 /datum/gas_reaction
 	//regarding the requirements lists: the minimum or maximum requirements must be non-zero.

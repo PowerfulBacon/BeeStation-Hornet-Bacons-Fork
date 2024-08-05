@@ -483,3 +483,6 @@
 
 /datum/config_entry/number/virus_thinning_cap
 	config_entry_value = 4
+
+/datum/config_entry/flag/atmos_equalize_enabled
+	default = FALSE

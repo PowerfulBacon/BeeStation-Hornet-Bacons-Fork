@@ -72,11 +72,9 @@
 			if (current_turf.atmos_adjacent_turfs)
 				current_turf.atmos_adjacent_turfs -= src
 			UNSETEMPTY(current_turf.atmos_adjacent_turfs)
-			current_turf.set_sleeping(isclosedturf(current_turf))
 		current_turf.__update_auxtools_turf_adjacency_info()
 	UNSETEMPTY(atmos_adjacent_turfs)
 	src.atmos_adjacent_turfs = atmos_adjacent_turfs
-	set_sleeping(is_closed)
 	__update_auxtools_turf_adjacency_info()
 
 /turf/proc/ImmediateDisableAdjacency(disable_adjacent = TRUE)
@@ -105,10 +103,6 @@
 			current_turf.__update_auxtools_turf_adjacency_info()
 	LAZYCLEARLIST(atmos_adjacent_turfs)
 	__update_auxtools_turf_adjacency_info()
-
-/turf/proc/set_sleeping(should_sleep)
-
-/turf/proc/__update_auxtools_turf_adjacency_info()
 
 //returns a list of adjacent turfs that can share air with this one.
 //alldir includes adjacent diagonal tiles that can share

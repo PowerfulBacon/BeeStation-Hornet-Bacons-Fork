@@ -170,6 +170,7 @@ SUBSYSTEM_DEF(zclear)
 		return
 
 	SSair.pause_z(z_level)
+	SSair.pause()
 
 	var/list/turfs = block(locate(1, 1, z_level), locate(world.maxx, world.maxy, z_level))
 	var/list/divided_turfs = list()

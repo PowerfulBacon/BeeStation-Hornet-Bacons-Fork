@@ -48,8 +48,6 @@
 		QDEL_NULL(active_hotspot)
 	return ..()
 
-/turf/proc/update_air_ref()
-
 /////////////////GAS MIXTURE PROCS///////////////////
 
 /turf/open/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
@@ -58,61 +56,35 @@
 /turf/open/assume_air_moles(datum/gas_mixture/giver, moles)
 	if(!giver)
 		return FALSE
-	if(SSair.thread_running())
-		var giver_moles = giver.total_moles()
-		if(giver_moles > 0)
-			SSair.deferred_airs += list(list(giver, air, moles / giver_moles))
-		else
-			SSair.deferred_airs += list(list(giver, air, 0))
-	else
-		giver.transfer_to(air, moles)
-		update_visuals()
+	giver.transfer_to(air, moles)
 	return TRUE
 
 /turf/open/assume_air_ratio(datum/gas_mixture/giver, ratio)
 	if(!giver)
 		return FALSE
-	if(SSair.thread_running())
-		SSair.deferred_airs += list(list(giver, air, ratio))
-	else
-		giver.transfer_ratio_to(air, ratio)
-		update_visuals()
+	giver.transfer_ratio_to(air, ratio)
 	return TRUE
 
 /turf/open/transfer_air(datum/gas_mixture/taker, moles)
 	if(!taker || !return_air()) // shouldn't transfer from space
 		return FALSE
-	if(SSair.thread_running())
-		var air_moles = air.total_moles()
-		if(air_moles > 0)
-			SSair.deferred_airs += list(list(air, taker, moles / air_moles))
-		else
-			SSair.deferred_airs += list(list(air, taker, 0))
-	else
-		air.transfer_to(taker, moles)
-		update_visuals()
+	air.transfer_to(taker, moles)
 	return TRUE
 
 /turf/open/transfer_air_ratio(datum/gas_mixture/taker, ratio)
 	if(!taker || !return_air())
 		return FALSE
-	if(SSair.thread_running())
-		SSair.deferred_airs += list(list(air, taker, ratio))
-	else
-		air.transfer_ratio_to(taker, ratio)
-		update_visuals()
+	air.transfer_ratio_to(taker, ratio)
 	return TRUE
 
 /turf/open/remove_air(amount)
 	var/datum/gas_mixture/ours = return_air()
 	var/datum/gas_mixture/removed = ours.remove(amount)
-	update_visuals()
 	return removed
 
 /turf/open/remove_air_ratio(ratio)
 	var/datum/gas_mixture/ours = return_air()
 	var/datum/gas_mixture/removed = ours.remove_ratio(ratio)
-	update_visuals()
 	return removed
 
 /turf/open/proc/copy_air_with_tile(turf/open/T)
@@ -133,18 +105,9 @@
 	RETURN_TYPE(/datum/gas_mixture)
 	return air
 
-/turf/open/return_analyzable_air()
-	return return_air()
-
 /turf/temperature_expose()
 	if(return_temperature() > heat_capacity)
 		to_be_destroyed = TRUE
-
-
-/turf/open/proc/eg_reset_cooldowns()
-/turf/open/proc/eg_garbage_collect()
-/turf/open/proc/get_excited()
-/turf/open/proc/set_excited()
 
 /////////////////////////GAS OVERLAYS//////////////////////////////
 
@@ -205,9 +168,6 @@
 
 /////////////////////////////SIMULATION///////////////////////////////////
 
-/turf/proc/process_cell(fire_count)
-
-/turf/open/proc/equalize_pressure_in_zone(cyclenum)
 /turf/open/proc/consider_firelocks(turf/T2)
 	var/reconsider_adj = FALSE
 	for(var/obj/machinery/door/firedoor/FD in T2)
@@ -223,7 +183,6 @@
 	if(reconsider_adj)
 		T2.ImmediateCalculateAdjacentTurfs() // We want those firelocks closed yesterday.
 
-/turf/proc/handle_decompression_floor_rip()
 /turf/open/floor/handle_decompression_floor_rip(sum)
 	if(sum > 20 && prob(clamp(sum / 20, 0, 15)))
 		if(floor_tile)
@@ -235,8 +194,6 @@
 
 /turf/open/floor/engine/handle_decompression_floor_rip()
 	return
-
-/turf/open/process_cell(fire_count)
 
 //////////////////////////SPACEWIND/////////////////////////////
 

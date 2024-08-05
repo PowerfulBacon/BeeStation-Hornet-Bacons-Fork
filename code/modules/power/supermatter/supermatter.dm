@@ -396,12 +396,6 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			visible_message("<span class='warning'>[src] melts through [T]!</span>")
 		return
 
-	if(last_complete_process > SSair.last_complete_process)
-		power_changes = FALSE //Atmos has not been fully processed since the previous time the SM was. Abort all power and processing operations.
-		return
-	else
-		power_changes = TRUE //Atmos has run at least one full tick recently, resume processing.
-
 	if(power)
 		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
 	if(damage >= 300)
