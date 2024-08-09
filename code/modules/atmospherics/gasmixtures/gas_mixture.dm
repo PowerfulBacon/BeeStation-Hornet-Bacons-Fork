@@ -107,36 +107,36 @@ we use a hook instead
 		L[gt] = initial(G.specific_heat)
 	return L
 
-/datum/gas_mixture/remove_by_flag(flag, amount)
+/datum/gas_mixture/proc/remove_by_flag(flag, amount)
 	var/datum/gas_mixture/removed = new type
 	__remove_by_flag(removed, flag, amount)
 
 	return removed
 
-/datum/gas_mixture/remove(amount)
+/datum/gas_mixture/proc/remove(amount)
 	var/datum/gas_mixture/removed = new type
 	__remove(removed, amount)
 
 	return removed
 
-/datum/gas_mixture/remove_ratio(ratio)
+/datum/gas_mixture/proc/remove_ratio(ratio)
 	var/datum/gas_mixture/removed = new type
 	__remove_ratio(removed, ratio)
 
 	return removed
 
-/datum/gas_mixture/copy()
+/datum/gas_mixture/proc/copy()
 	var/datum/gas_mixture/copy = new type
 	copy.copy_from(src)
 
 	return copy
 
-/datum/gas_mixture/copy_from_turf(turf/model)
+/datum/gas_mixture/proc/copy_from_turf(turf/model)
 	set_temperature(initial(model.initial_temperature))
 	parse_gas_string(model.initial_gas_mix)
 	return 1
 
-/datum/gas_mixture/parse_gas_string(gas_string)
+/datum/gas_mixture/proc/parse_gas_string(gas_string)
 	return __auxtools_parse_gas_string(gas_string)
 
 /datum/gas_mixture/proc/set_analyzer_results(instability)

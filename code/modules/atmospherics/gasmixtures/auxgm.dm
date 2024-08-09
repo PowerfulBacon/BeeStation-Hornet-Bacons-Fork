@@ -53,6 +53,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 	var/list/fire_products = null // what results when this gas is burned (oxidizer or fuel); null for none
 	var/enthalpy = 0 // how much energy is released per mole of fuel burned
 	var/fire_burn_rate = 1 // how many moles are burned per product released
+	var/fire_radiation_released = 0 // How much radiation is released when this gas burns
 
 /datum/gas/proc/breath(partial_pressure, light_threshold, heavy_threshold, moles, mob/living/carbon/C, obj/item/organ/lungs/lungs)
 	// This is only called on gases with the GAS_FLAG_BREATH_PROC flag. When possible, do NOT use this--

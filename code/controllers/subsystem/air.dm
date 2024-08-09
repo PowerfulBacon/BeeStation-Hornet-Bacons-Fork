@@ -69,6 +69,8 @@ SUBSYSTEM_DEF(air)
 
 	var/list/paused_z_levels	//Paused z-levels will not add turfs to active
 
+	var/planet_share_ratio = 0
+
 /datum/controller/subsystem/air/stat_entry(msg)
 	msg += "C:{"
 	msg += "HP:[round(cost_highpressure,1)]|"

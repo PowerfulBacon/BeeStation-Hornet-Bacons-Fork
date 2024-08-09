@@ -183,18 +183,6 @@
 	if(reconsider_adj)
 		T2.ImmediateCalculateAdjacentTurfs() // We want those firelocks closed yesterday.
 
-/turf/open/floor/handle_decompression_floor_rip(sum)
-	if(sum > 20 && prob(clamp(sum / 20, 0, 15)))
-		if(floor_tile)
-			new floor_tile(src)
-		make_plating()
-
-/turf/open/floor/plating/handle_decompression_floor_rip()
-	return
-
-/turf/open/floor/engine/handle_decompression_floor_rip()
-	return
-
 //////////////////////////SPACEWIND/////////////////////////////
 
 /turf/proc/consider_pressure_difference()
