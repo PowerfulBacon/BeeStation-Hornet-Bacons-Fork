@@ -666,7 +666,9 @@ GENE SCANNER
 			message += "<span class='notice'>Volume: [volume] L</span>"
 			message += "<span class='notice'>Pressure: [round(pressure,0.01)] kPa</span>"
 
-			for(var/id in air_contents.get_gases())
+			for(var/id in 1 to GAS_MAX)
+				if (!air_contents.gas_contents[id])
+					continue
 				var/gas_concentration = air_contents.get_moles(id)/total_moles
 				message += "<span class='notice'>[GLOB.gas_data.names[id]]: [round(gas_concentration*100, 0.01)] % ([round(air_contents.get_moles(id), 0.01)] mol)</span>"
 			message += "<span class='notice'>Temperature: [round(temperature - T0C,0.01)] &deg;C ([round(temperature, 0.01)] K)</span>"
@@ -727,8 +729,10 @@ GENE SCANNER
 		else
 			message += "<span class='info'>Plasma: [round(plasma_concentration*100, 0.01)] % ([round(environment.get_moles(GAS_PLASMA), 0.01)] mol)</span>"
 
-		for(var/id in environment.get_gases())
-			if(id in GLOB.hardcoded_gases)
+		for(var/id in 1 to GAS_MAX)
+			if (!environment.gas_contents[id])
+				continue
+			if(id == GAS_N2 || id == GAS_O2 || id == GAS_CO2 || id == GAS_PLASMA)
 				continue
 			var/gas_concentration = environment.get_moles(id)/total_moles
 			message += "<span class='alert'>[GLOB.gas_data.names[id]]: [round(gas_concentration*100, 0.01)] % ([round(environment.get_moles(id), 0.01)] mol)</span>"

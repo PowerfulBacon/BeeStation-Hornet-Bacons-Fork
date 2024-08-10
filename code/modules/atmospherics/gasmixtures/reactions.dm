@@ -298,7 +298,9 @@
 	var/list/fuel_temps = GLOB.gas_data.fire_temperatures
 	var/total_fuel = 0
 	var/energy_released = 0
-	for(var/G in air.get_gases())
+	for(var/G in 1 to GAS_MAX)
+		if (!air.gas_contents[G])
+			continue
 		var/oxidation_temp = oxidation_temps[G]
 		if(oxidation_temp && oxidation_temp > temperature)
 			var/temperature_scale = max(0, 1-(temperature / oxidation_temp))
@@ -380,7 +382,9 @@
 							(temperature_scale-FUSION_BASE_TEMPSCALE) / FUSION_BUFFER_DIVISOR \
 							: 4 ** (temperature_scale-FUSION_BASE_TEMPSCALE) / FUSION_SLOPE_DIVISOR)
 	var/gas_power = 0
-	for (var/gas_id in air.get_gases())
+	for (var/gas_id in 1 to GAS_MAX)
+		if (!air.gas_contents[gas_id])
+			continue
 		gas_power += (GLOB.gas_data.fusion_powers[gas_id]*air.get_moles(gas_id))
 	var/instability = MODULUS((gas_power*INSTABILITY_GAS_POWER_FACTOR),toroidal_size) //Instability effects how chaotic the behavior of the reaction is
 	cached_scan_results[id] = instability//used for analyzer feedback

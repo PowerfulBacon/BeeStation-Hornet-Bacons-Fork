@@ -138,7 +138,9 @@
 
 	var/t =	"<span class='notice'>Coordinates: [x],[y] \n</span>"
 	t +=	"<span class='danger'>Temperature: [environment.return_temperature()] \n</span>"
-	for(var/id in environment.get_gases())
+	for(var/id in 1 to GAS_MAX)
+		if (!environment.gas_contents[id])
+			continue
 		if(environment.get_moles(id))
 			t+="<span class='notice'>[GLOB.gas_data.names[id]]: [environment.get_moles(id)] \n</span>"
 

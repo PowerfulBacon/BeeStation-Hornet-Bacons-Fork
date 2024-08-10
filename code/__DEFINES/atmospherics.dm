@@ -331,19 +331,23 @@
 #define PIPING_DEFAULT_LAYER_ONLY		(1<<2)	//! can only exist at PIPING_LAYER_DEFAULT
 #define PIPING_CARDINAL_AUTONORMALIZE	(1<<3)	//! north/south east/west doesn't matter, auto normalize on build.
 
-// Gas defines because i hate typepaths
-#define GAS_O2					"o2"
-#define GAS_N2					"n2"
-#define GAS_CO2					"co2"
-#define GAS_PLASMA				"plasma"
-#define GAS_H2O					"water_vapor"
-#define GAS_HYPERNOB			"nob"
-#define GAS_NITROUS				"n2o"
-#define GAS_NITRYL				"no2"
-#define GAS_TRITIUM				"tritium"
-#define GAS_BZ					"bz"
-#define GAS_STIMULUM			"stim"
-#define GAS_PLUOXIUM			"pluox"
+// Gas defines
+// Start at 1 and increment by 1 each time
+#define GAS_O2 1
+#define GAS_N2 2
+#define GAS_CO2	3
+#define GAS_PLASMA 4
+#define GAS_H2O 5
+#define GAS_HYPERNOB 6
+#define GAS_NITROUS 7
+#define GAS_NITRYL 8
+#define GAS_TRITIUM 9
+#define GAS_BZ 10
+#define GAS_STIMULUM 11
+#define GAS_PLUOXIUM 12
+
+// Maximum gas ID
+#define GAS_MAX 12
 
 #define GAS_FLAG_DANGEROUS		(1<<0)
 #define GAS_FLAG_BREATH_PROC	(1<<1)

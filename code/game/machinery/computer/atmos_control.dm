@@ -67,7 +67,9 @@
 		))
 		var/total_moles = air_sample.total_moles()
 		if(total_moles)
-			for(var/gas_id in air_sample.get_gases())
+			for(var/gas_id in 1 to GAS_MAX)
+				if (!air_sample.gas_contents[gas_id])
+					continue
 				var/gas_name = GLOB.gas_data.names[gas_id]
 				signal.data["gases"][gas_name] = air_sample.get_moles(gas_id) / total_moles * 100
 

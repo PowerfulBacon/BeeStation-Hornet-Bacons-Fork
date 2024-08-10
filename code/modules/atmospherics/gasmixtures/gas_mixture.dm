@@ -1,52 +1,19 @@
+#define CHECK_IMMUTABILITY if (immutable) { return; }
+
 /datum/gas_mixture
-	/// Never ever set this variable, hooked into vv_get_var for view variables viewing.
-	var/gas_list_view_only
+	// Gas contents by moles
+	var/list/gas_contents = new(GAS_MAX)
+	var/temperature = 0
+	var/total_moles = 0
 	var/initial_volume = CELL_VOLUME //liters
 	var/list/reaction_results
 	var/list/analyzer_results //used for analyzer feedback - not initialized until its used
-	var/_extools_pointer_gasmixture // Contains the index in the gas vector for this gas mixture in rust land. Don't. Touch. This. Var.
-
-GLOBAL_LIST_INIT(auxtools_atmos_initialized, FALSE)
-
-/proc/auxtools_atmos_init()
+	VAR_PRIVATE/immutable = FALSE
 
 /datum/gas_mixture/New(volume)
 	if (!isnull(volume))
 		initial_volume = volume
-	AUXTOOLS_CHECK(AUXMOS)
-	if(!GLOB.auxtools_atmos_initialized && auxtools_atmos_init())
-		GLOB.auxtools_atmos_initialized = TRUE
-	__gasmixture_register()
 	reaction_results = new
-
-/*
-we use a hook instead
-/datum/gas_mixture/Del()
-	__gasmixture_unregister()
-	. = ..()
-*/
-
-/datum/gas_mixture/vv_edit_var(var_name, var_value)
-	if(var_name == "_extools_pointer_gasmixture")
-		return FALSE // please no. segfaults bad.
-	if(var_name == "gas_list_view_only")
-		return FALSE
-	return ..()
-
-/datum/gas_mixture/vv_get_var(var_name)
-	. = ..()
-	if(var_name == "gas_list_view_only")
-		var/list/dummy = get_gases()
-		for(var/gas in dummy)
-			dummy[gas] = get_moles(gas)
-			dummy["CAP [gas]"] = partial_heat_capacity(gas)
-		dummy["TEMP"] = return_temperature()
-		dummy["PRESSURE"] = return_pressure()
-		dummy["HEAT CAPACITY"] = heat_capacity()
-		dummy["TOTAL MOLES"] = total_moles()
-		dummy["VOLUME"] = return_volume()
-		dummy["THERMAL ENERGY"] = thermal_energy()
-		return debug_variable("gases (READ ONLY)", dummy, 0, src)
 
 /datum/gas_mixture/vv_get_dropdown()
 	. = ..()
@@ -73,13 +40,10 @@ we use a hook instead
 		message_admins("[key_name(usr)] emptied gas mixture [REF(src)].")
 		clear()
 	if(href_list[VV_HK_SET_MOLES])
-		var/list/gases = get_gases()
-		for(var/gas in gases)
-			gases[gas] = get_moles(gas)
 		var/gasid = input(usr, "What kind of gas?", "Set Gas") as null|anything in GLOB.gas_data.ids
 		if(!gasid)
 			return
-		var/amount = input(usr, "Input amount", "Set Gas", gases[gasid] || 0) as num|null
+		var/amount = input(usr, "Input amount", "Set Gas", gas_contents[gasid] || 0) as num|null
 		if(!isnum(amount))
 			return
 		amount = max(0, amount)
@@ -103,9 +67,6 @@ we use a hook instead
 		message_admins("[key_name(usr)] modified gas mixture [REF(src)]: Changed volume to [volume].")
 		set_volume(volume)
 
-/datum/gas_mixture/proc/__gasmixture_unregister()
-/datum/gas_mixture/proc/__gasmixture_register()
-
 /proc/gas_types()
 	var/list/L = subtypesof(/datum/gas)
 	for(var/gt in L)
@@ -118,102 +79,133 @@ we use a hook instead
 /datum/gas_mixture/proc/partial_heat_capacity(gas_type)
 
 /datum/gas_mixture/proc/total_moles()
+	return total_moles
 
 /datum/gas_mixture/proc/return_pressure() //kilopascals
+	return (total_moles * R_IDEAL_GAS_EQUATION * temperature) / initial_volume
 
 /datum/gas_mixture/proc/return_temperature() //kelvins
+	return temperature
 
 /datum/gas_mixture/proc/set_min_heat_capacity(n)
+	CHECK_IMMUTABILITY
+
 /datum/gas_mixture/proc/set_temperature(new_temp)
+	CHECK_IMMUTABILITY
+
 /datum/gas_mixture/proc/set_volume(new_volume)
+	CHECK_IMMUTABILITY
+
 /datum/gas_mixture/proc/get_moles(gas_type)
-/datum/gas_mixture/proc/get_by_flag(flag)
+
 /datum/gas_mixture/proc/set_moles(gas_type, moles)
+	CHECK_IMMUTABILITY
+	total_moles -= gas_contents[gas_type]
+	gas_contents[gas_type] = moles
+	total_moles += moles
+
 /datum/gas_mixture/proc/scrub_into(datum/gas_mixture/target, ratio, list/gases)
+
 /datum/gas_mixture/proc/mark_immutable()
-/datum/gas_mixture/proc/get_gases()
-/datum/gas_mixture/proc/add(amt)
-/datum/gas_mixture/proc/subtract(amt)
+	immutable = TRUE
+
 /datum/gas_mixture/proc/multiply(factor)
+	CHECK_IMMUTABILITY
+	for (var/i in 1 to GAS_MAX)
+		gas_contents[i] *= factor
+	total_moles *= factor
+
 /datum/gas_mixture/proc/divide(factor)
-/datum/gas_mixture/proc/get_last_share()
+	CHECK_IMMUTABILITY
+	for (var/i in 1 to GAS_MAX)
+		gas_contents[i] /= factor
+	total_moles /= factor
+
 /datum/gas_mixture/proc/clear()
+	CHECK_IMMUTABILITY
+	for (var/i in 1 to GAS_MAX)
+		gas_contents[i] = 0
+	total_moles = 0
 
 /datum/gas_mixture/proc/adjust_moles(gas_type, amt = 0)
 	set_moles(gas_type, clamp(get_moles(gas_type) + amt,0,INFINITY))
 
-/datum/gas_mixture/proc/adjust_moles_temp(gas_type, amt, temperature)
-
-/datum/gas_mixture/proc/adjust_multi()
-
 /datum/gas_mixture/proc/return_volume() //liters
+	return initial_volume
 
 /datum/gas_mixture/proc/thermal_energy() //joules
-
-/datum/gas_mixture/proc/archive()
-	//Update archived versions of variables
-	//Returns: 1 in all cases
+	return
 
 /datum/gas_mixture/proc/merge(datum/gas_mixture/giver)
+	CHECK_IMMUTABILITY
 	//Merges all air from giver into self. Does NOT delete the giver.
 	//Returns: 1 if we are mutable, 0 otherwise
 
 /datum/gas_mixture/proc/remove(amount)
+	CHECK_IMMUTABILITY
 	//Proportionally removes amount of gas from the gas_mixture
 	//Returns: gas_mixture with the gases removed
 
-/datum/gas_mixture/proc/remove_by_flag(flag, amount)
-	//Removes amount of gas from the gas mixture by flag
-	//Returns: gas_mixture with gases that match the flag removed
-
 /datum/gas_mixture/proc/transfer_to(datum/gas_mixture/target, amount)
+	CHECK_IMMUTABILITY
 
 /datum/gas_mixture/proc/transfer_ratio_to(datum/gas_mixture/target, ratio)
+	CHECK_IMMUTABILITY
 	//Transfers ratio of gas to target. Equivalent to target.merge(remove_ratio(amount)) but faster.
 
 /datum/gas_mixture/proc/remove_ratio(ratio)
+	CHECK_IMMUTABILITY
 	//Proportionally removes amount of gas from the gas_mixture
 	//Returns: gas_mixture with the gases removed
 
+/// Creates new, identical gas mixture
+/// Returns: duplicate gas mixture
 /datum/gas_mixture/proc/copy()
-	//Creates new, identical gas mixture
-	//Returns: duplicate gas mixture
+	var/datum/gas_mixture/clone = new()
+	clone.copy_from(src)
+	return clone
 
+/// Copies variables from sample
 /datum/gas_mixture/proc/copy_from(datum/gas_mixture/sample)
-	//Copies variables from sample
-	//Returns: 1 if we are mutable, 0 otherwise
+	CHECK_IMMUTABILITY
+	temperature = sample.temperature
+	total_moles = sample.total_moles
+	initial_volume = sample.initial_volume
+	for (var/i in 1 to GAS_MAX)
+		gas_contents[i] = sample.gas_contents[i]
+	return TRUE
 
 /datum/gas_mixture/proc/copy_from_turf(turf/model)
+	CHECK_IMMUTABILITY
 	//Copies all gas info from the turf into the gas list along with temperature
 	//Returns: 1 if we are mutable, 0 otherwise
 
 /datum/gas_mixture/proc/parse_gas_string(gas_string)
+	CHECK_IMMUTABILITY
 	//Copies variables from a particularly formatted string.
 	//Returns: 1 if we are mutable, 0 otherwise
 
 /datum/gas_mixture/proc/share(datum/gas_mixture/sharer)
+	CHECK_IMMUTABILITY
 	//Performs air sharing calculations between two gas_mixtures assuming only 1 boundary length
 	//Returns: amount of gas exchanged (+ if sharer received)
 
+/// Performs temperature sharing calculations (via conduction) between two gas_mixtures assuming only 1 boundary length
 /datum/gas_mixture/proc/temperature_share(datum/gas_mixture/sharer, conduction_coefficient)
-	//Performs temperature sharing calculations (via conduction) between two gas_mixtures assuming only 1 boundary length
-	//Returns: new temperature of the sharer
-
-/datum/gas_mixture/proc/compare(datum/gas_mixture/sample)
-	//Compares sample to self to see if within acceptable ranges that group processing may be enabled
-	//Returns: a string indicating what check failed, or "" if check passes
+	CHECK_IMMUTABILITY
+	var/delta = (sharer.temperature - temperature) * conduction_coefficient
+	sharer.set_temperature(sharer.temperature - delta)
+	set_temperature(temperature + delta)
 
 /datum/gas_mixture/proc/react(turf/open/dump_location)
+	CHECK_IMMUTABILITY
 	//Performs various reactions such as combustion or fusion (LOL)
 	//Returns: 1 if any reaction took place; 0 otherwise
 
+//Adjusts the thermal energy of the gas mixture
 /datum/gas_mixture/proc/adjust_heat(amt)
-	//Adjusts the thermal energy of the gas mixture, rather than having to do the full calculation.
-	//Returns: null
-
-/datum/gas_mixture/proc/equalize_with(datum/gas_mixture/giver)
-	//Makes this mix have the same temperature and gas ratios as the giver, but with the same pressure, accounting for volume.
-	//Returns: null
+	CHECK_IMMUTABILITY
+	temperature += amt
 
 /datum/gas_mixture/proc/get_oxidation_power(temp)
 	//Gets how much oxidation this gas can do, optionally at a given temperature.
@@ -221,52 +213,34 @@ we use a hook instead
 /datum/gas_mixture/proc/get_fuel_amount(temp)
 	//Gets how much fuel for fires (not counting trit/plasma!) this gas has, optionally at a given temperature.
 
+/// Makes every gas mixture in the given list have the same pressure, temperature and gas proportions.
 /proc/equalize_all_gases_in_list(list/L)
-	//Makes every gas in the given list have the same pressure, temperature and gas proportions.
-	//Returns: null
 
-/datum/gas_mixture/proc/__remove_by_flag()
-
-/datum/gas_mixture/remove_by_flag(flag, amount)
-	var/datum/gas_mixture/removed = new type
-	__remove_by_flag(removed, flag, amount)
-
-	return removed
-
-/datum/gas_mixture/proc/__remove()
 /datum/gas_mixture/remove(amount)
+	CHECK_IMMUTABILITY
 	var/datum/gas_mixture/removed = new type
-	__remove(removed, amount)
 
 	return removed
 
-/datum/gas_mixture/proc/__remove_ratio()
 /datum/gas_mixture/remove_ratio(ratio)
+	CHECK_IMMUTABILITY
 	var/datum/gas_mixture/removed = new type
-	__remove_ratio(removed, ratio)
 
 	return removed
 
 /datum/gas_mixture/copy()
 	var/datum/gas_mixture/copy = new type
 	copy.copy_from(src)
-
 	return copy
 
 /datum/gas_mixture/copy_from_turf(turf/model)
+	CHECK_IMMUTABILITY
 	set_temperature(initial(model.initial_temperature))
 	parse_gas_string(model.initial_gas_mix)
 	return 1
 
-/datum/gas_mixture/proc/__auxtools_parse_gas_string(gas_string)
-
 /datum/gas_mixture/parse_gas_string(gas_string)
-	return __auxtools_parse_gas_string(gas_string)
-
-/datum/gas_mixture/proc/set_analyzer_results(instability)
-	if(!analyzer_results)
-		analyzer_results = new
-	analyzer_results["fusion"] = instability
+	CHECK_IMMUTABILITY
 
 //Mathematical proofs:
 /*
@@ -276,8 +250,6 @@ get_true_breath_pressure(pp) --> gas_pp = pp/breath_pp*total_moles()
 10/20*5 = 2.5
 10 = 2.5/5*20
 */
-
-/datum/gas_mixture/turf
 
 /// Releases gas from src to output air. This means that it can not transfer air to gas mixture with higher pressure.
 /datum/gas_mixture/proc/release_gas_to(datum/gas_mixture/output_air, target_pressure)

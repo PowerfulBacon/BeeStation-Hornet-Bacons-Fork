@@ -71,6 +71,8 @@ SUBSYSTEM_DEF(air)
 	var/list/pausing_z_levels = list()
 	var/list/pause_processing = list()
 
+	var/list/atmospheric_regions = list()
+
 /datum/controller/subsystem/air/stat_entry(msg)
 	msg += "C:{"
 	msg += "HP:[round(cost_highpressure,1)]|"
@@ -81,7 +83,6 @@ SUBSYSTEM_DEF(air)
 	msg += "AM:[round(cost_atmos_machinery,1)]"
 	msg += "} "
 	msg += "TC:{"
-	msg += "AT:[round(cost_turfs,1)]|"
 	msg += "EG:[round(cost_groups,1)]|"
 	msg += "EQ:[round(cost_equalize,1)]|"
 	msg += "PO:[round(cost_post_process,1)]"
@@ -105,71 +106,19 @@ SUBSYSTEM_DEF(air)
 	setup_atmos_machinery()
 	setup_pipenets()
 	gas_reactions = init_gas_reactions()
-	auxtools_update_reactions()
+	build_regions()
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/air/proc/extools_update_ssair()
-
-/datum/controller/subsystem/air/proc/auxtools_update_reactions()
-
-/proc/reset_all_air()
-	SSair.can_fire = 0
-	message_admins("Air reset begun.")
-	for(var/turf/open/T in world)
-		T.Initalize_Atmos(0)
-		CHECK_TICK
-	message_admins("Air reset done.")
-	SSair.can_fire = 1
 
 /datum/controller/subsystem/air/proc/thread_running()
 	return FALSE
 
 /proc/fix_corrupted_atmos()
 
-/datum/admins/proc/fixcorruption()
-	set category = "Debug"
-	set desc="Fixes air that has weird NaNs (-1.#IND and such). Hopefully."
-	set name="Fix Infinite Air"
-	fix_corrupted_atmos()
-
 /datum/controller/subsystem/air/fire(resumed = 0)
 
 	var/timer = TICK_USAGE_REAL
-
-		//If we have unpausing z-level, process them first
-	if(length(unpausing_z_levels) && !length(unpause_processing))
-		var/z_value = unpausing_z_levels[1]
-		unpausing_z_levels.Remove(z_value)
-		unpause_processing = block(locate(1, 1, z_value), locate(world.maxx, world.maxy, z_value))
-
-	while(length(unpause_processing))
-		var/turf/T = unpause_processing[length(unpause_processing)]
-		if(!isspaceturf(T))	//Skip space turfs, since they won't have atmos
-			T.Initalize_Atmos()
-		//Goodbye
-		unpause_processing.len --
-		//We overran this tick, stop processing
-		//This may result in a very brief atmos freeze when running unpause_z at high loads
-		//but that is better than freezing the entire MC
-		if(MC_TICK_CHECK)
-			return
-
-	//If we have unpausing z-level, process them first
-	if(length(pausing_z_levels) && !length(pause_processing))
-		var/z_value = pausing_z_levels[1]
-		pausing_z_levels.Remove(z_value)
-		pause_processing = block(locate(1, 1, z_value), locate(world.maxx, world.maxy, z_value))
-
-	while(length(pause_processing))
-		var/turf/T = pause_processing[length(pause_processing)]
-		T.ImmediateDisableAdjacency()
-		//Goodbye
-		pause_processing.len --
-		//We overran this tick, stop processing
-		//This may result in a very brief atmos freeze when running unpause_z at high loads
-		//but that is better than freezing the entire MC
-		if(MC_TICK_CHECK)
-			return
 
 	if(currentpart == SSAIR_REBUILD_PIPENETS)
 		timer = TICK_USAGE_REAL
@@ -202,36 +151,8 @@ SUBSYSTEM_DEF(air)
 		if(state != SS_RUNNING)
 			return
 		resumed = 0
-		currentpart = SSAIR_HIGHPRESSURE
-
-	if(currentpart == SSAIR_HIGHPRESSURE)
-		timer = TICK_USAGE_REAL
-		process_high_pressure_delta(resumed)
-		cost_highpressure = MC_AVERAGE(cost_highpressure, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-		currentpart = SSAIR_FINALIZE_TURFS
-	// This literally just waits for the turf processing thread to finish, doesn't do anything else.
-	// this is necessary cause the next step after this interacts with the air--we get consistency
-	// issues if we don't wait for it, disappearing gases etc.
-	if(currentpart == SSAIR_FINALIZE_TURFS)
-		finish_turf_processing(resumed)
-		if(state != SS_RUNNING)
-			cur_thread_wait_ticks++
-			return
-		resumed = 0
-		thread_wait_ticks = MC_AVERAGE(thread_wait_ticks, cur_thread_wait_ticks)
-		cur_thread_wait_ticks = 0
-		currentpart = SSAIR_DEFERRED_AIRS
-	if(currentpart == SSAIR_DEFERRED_AIRS)
-		timer = TICK_USAGE_REAL
-		process_deferred_airs(resumed)
-		cost_deferred_airs = MC_AVERAGE(cost_deferred_airs, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
 		currentpart = SSAIR_ATMOSMACHINERY_AIR
+
 	if(currentpart == SSAIR_ATMOSMACHINERY_AIR)
 		timer = TICK_USAGE_REAL
 		process_atmos_air_machinery(resumed)
@@ -248,56 +169,7 @@ SUBSYSTEM_DEF(air)
 		if(state != SS_RUNNING)
 			return
 		resumed = 0
-		currentpart = heat_enabled ? SSAIR_TURF_CONDUCTION : SSAIR_ACTIVETURFS
-	// Heat -- slow and of questionable usefulness. Off by default for this reason. Pretty cool, though.
-	if(currentpart == SSAIR_TURF_CONDUCTION)
-		timer = TICK_USAGE_REAL
-		if(process_turf_heat(MC_TICK_REMAINING_MS))
-			pause()
-		cost_superconductivity = MC_AVERAGE(cost_superconductivity, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-		currentpart = SSAIR_ACTIVETURFS
-	// This simply starts the turf thread. It runs in the background until the FINALIZE_TURFS step, at which point it's waited for.
-	// This also happens to do all the commented out stuff below, all in a single separate thread. This is mostly so that the
-	// waiting is consistent.
-	if(currentpart == SSAIR_ACTIVETURFS)
-		timer = TICK_USAGE_REAL
-		process_turfs(resumed)
-		cost_turfs = MC_AVERAGE(cost_turfs, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-	/*
-	// Monstermos and/or Putnamos--making large pressure deltas move faster
-	if(currentpart == SSAIR_EQUALIZE)
-		timer = TICK_USAGE_REAL
-		process_turf_equalize(resumed)
-		cost_equalize = MC_AVERAGE(cost_equalize, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-		currentpart = SSAIR_EXCITEDGROUPS
-	// Making small pressure deltas equalize immediately so they don't process anymore
-	if(currentpart == SSAIR_EXCITEDGROUPS)
-		timer = TICK_USAGE_REAL
-		process_excited_groups(resumed)
-		cost_groups = MC_AVERAGE(cost_groups, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-		currentpart = SSAIR_TURF_POST_PROCESS
-	// Quick multithreaded "should we display/react?" checks followed by finishing those up before the next step
-	if(currentpart == SSAIR_TURF_POST_PROCESS)
-		timer = TICK_USAGE_REAL
-		post_process_turfs(resumed)
-		cost_post_process = MC_AVERAGE(cost_post_process, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
-		if(state != SS_RUNNING)
-			return
-		resumed = 0
-		currentpart = SSAIR_HOTSPOTS
-	*/
+
 	currentpart = SSAIR_REBUILD_PIPENETS
 	last_complete_process = world.time
 
@@ -564,12 +436,10 @@ SUBSYSTEM_DEF(air)
 		if (!T.init_air)
 			continue
 		T.Initalize_Atmos(times_fired)
-		CHECK_TICK
 
 /datum/controller/subsystem/air/proc/setup_atmos_machinery()
 	for (var/obj/machinery/atmospherics/AM in atmos_machinery + atmos_air_machinery)
 		AM.atmosinit()
-		CHECK_TICK
 
 //this can't be done with setup_atmos_machinery() because
 //	all atmos machinery has to initalize before the first
@@ -577,7 +447,6 @@ SUBSYSTEM_DEF(air)
 /datum/controller/subsystem/air/proc/setup_pipenets()
 	for (var/obj/machinery/atmospherics/AM in atmos_machinery + atmos_air_machinery)
 		AM.build_network()
-		CHECK_TICK
 
 /datum/controller/subsystem/air/proc/setup_template_machinery(list/atmos_machines)
 	if(!initialized) // yogs - fixes randomized bars
@@ -604,14 +473,137 @@ SUBSYSTEM_DEF(air)
 
 	return pipe_init_dirs_cache[type]["[dir]"]
 
+/**
+ * BACONMOS
+ */
+
+/turf/var/_region_built = FALSE
+/turf/var/_temp_group = 0
+
+// This is going to be an expensive process that requires optimisation
+// Since its in init times, at this point I don't really care if there are some micro ops
+/datum/controller/subsystem/air/proc/build_regions()
+	// Step 1: Group everything into regions based on connectivity
+	var/list/regions = list()
+	for (var/z in 1 to world.maxz)
+		for (var/x in 1 to world.maxx)
+			for (var/y in 1 to world.maxy)
+				var/turf/T = locate(x, y, z)
+				if (T._region_built || isspaceturf(T) || !T.CanAtmosPass(T))
+					continue
+				var/datum/temp_region/current_region = new()
+				current_region.group_id = length(regions) + 1
+				var/list/to_search = list(T)
+				while (length(to_search))
+					var/turf/searched = to_search[to_search.len]
+					searched._region_built = TRUE
+					to_search.len --
+					current_region.turfs += searched
+					searched._temp_group = current_region.group_id
+					current_region.min_x = min(current_region.min_x, searched.x)
+					current_region.min_y = min(current_region.min_y, searched.y)
+					current_region.max_x = max(current_region.max_x, searched.x)
+					current_region.max_y = max(current_region.max_y, searched.y)
+					for (var/turf/adjacent in searched.GetAtmosAdjacentTurfs())
+						if (adjacent._region_built || isspaceturf(adjacent))
+							continue
+						adjacent._region_built = TRUE
+						to_search += adjacent
+				regions += current_region
+	to_chat(world, "[length(regions)] regions identified.")
+	var/list/subregions = list()
+	// Step 2: Divide each region into quad regions
+	for (var/datum/temp_region/region in regions)
+		while (length(region.turfs))
+			var/datum/atmospheric_region/atmos_zone = new()
+			var/turf/origin = region.turfs[1]
+			region.turfs -= origin
+			atmos_zone.turfs += origin
+			origin._temp_group = 0
+			var/minx = origin.x
+			var/miny = origin.y
+			var/maxx = origin.x
+			var/maxy = origin.y
+			// Greedy X expansion (Left)
+			while (maxx + 1 <= world.maxx)
+				var/turf/next = locate(maxx + 1, origin.y, origin.z)
+				if (next._temp_group != region.group_id)
+					break
+				maxx = maxx + 1
+				region.turfs -= next
+				atmos_zone.turfs += next
+				next._temp_group = 0
+			// Greedy X expansion (Right)
+			while (minx - 1 >= 1)
+				var/turf/next = locate(minx - 1, origin.y, origin.z)
+				if (next._temp_group != region.group_id)
+					break
+				minx = minx - 1
+				region.turfs -= next
+				atmos_zone.turfs += next
+				next._temp_group = 0
+			// Greedy Y expansion (Up)
+			while (maxy + 1 <= world.maxy)
+				// Ensure that the entire row of turfs is unblocked
+				var/blocked = FALSE
+				var/list/row = list()
+				for (var/x in minx to maxx)
+					var/turf/test = locate(x, maxy + 1, origin.z)
+					if (test._temp_group != region.group_id)
+						blocked = TRUE
+						break
+					row += test
+				if (blocked)
+					break
+				maxy = maxy + 1
+				for (var/turf/T in row)
+					region.turfs -= T
+					atmos_zone.turfs += T
+					T._temp_group = 0
+			// Greedy Y expansion (Down)
+			while (miny - 1 >= 1)
+				// Ensure that the entire row of turfs is unblocked
+				var/blocked = FALSE
+				var/list/row = list()
+				for (var/x in minx to maxx)
+					var/turf/test = locate(x, miny - 1, origin.z)
+					if (test._temp_group != region.group_id)
+						blocked = TRUE
+						break
+					row += test
+				if (blocked)
+					break
+				miny = miny - 1
+				for (var/turf/T in row)
+					region.turfs -= T
+					atmos_zone.turfs += T
+					T._temp_group = 0
+			subregions += atmos_zone
+	to_chat(world, "Atmos initialised with [length(subregions)] atmospheric regions.")
+	for (var/datum/atmospheric_region/region in subregions)
+		var/color = random_color()
+		for (var/turf/T in region.turfs)
+			T.add_atom_colour("#[color]", ADMIN_COLOUR_PRIORITY)
+	atmospheric_regions = subregions
+
+/datum/temp_region
+	var/group_id
+	var/list/turfs = list()
+	var/min_x = INFINITY
+	var/min_y = INFINITY
+	var/max_x = -INFINITY
+	var/max_y = -INFINITY
+
+/datum/atmospheric_region
+	var/list/turfs = list()
+	var/datum/gas_mixture/gas
+
+/datum/atmospheric_region/proc/setup()
+	gas = new(length(turfs) * CELL_VOLUME)
+	for (var/turf/open/T in turfs)
+		T.air = gas
+
 #undef SSAIR_PIPENETS
 #undef SSAIR_ATMOSMACHINERY
-#undef SSAIR_EXCITEDGROUPS
-#undef SSAIR_HIGHPRESSURE
 #undef SSAIR_HOTSPOTS
-#undef SSAIR_TURF_CONDUCTION
-#undef SSAIR_EQUALIZE
-#undef SSAIR_ACTIVETURFS
-#undef SSAIR_TURF_POST_PROCESS
-#undef SSAIR_FINALIZE_TURFS
 #undef SSAIR_ATMOSMACHINERY_AIR

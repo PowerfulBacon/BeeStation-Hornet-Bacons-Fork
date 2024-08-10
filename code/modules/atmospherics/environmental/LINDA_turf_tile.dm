@@ -20,35 +20,17 @@
 	var/pressure_direction = 0
 	var/turf/pressure_specific_target
 
-	var/datum/gas_mixture/turf/air
+	var/datum/gas_mixture/air
 
 	var/obj/effect/hotspot/active_hotspot
 	var/planetary_atmos = FALSE //air will revert to initial_gas_mix over time
 
 	var/list/atmos_overlay_types //gas IDs of current active gas overlays
 
-/turf/open/Initialize(mapload)
-	if (planetary_atmos && Debugger?.enabled)
-		var/static/list/planet_atmos_types = list()
-		if(planet_atmos_types[type])
-			air = planet_atmos_types[type]
-		else
-			air = new(2500,src)
-			air.copy_from_turf(src)
-			update_air_ref(1)
-			planet_atmos_types[type] = air
-	else
-		air = new(2500,src)
-		air.copy_from_turf(src)
-		update_air_ref(planetary_atmos ? 1 : 2)
-	. = ..()
-
 /turf/open/Destroy()
 	if(active_hotspot)
 		QDEL_NULL(active_hotspot)
 	return ..()
-
-/turf/proc/update_air_ref()
 
 /////////////////GAS MIXTURE PROCS///////////////////
 
@@ -163,7 +145,9 @@
 		return
 
 
-	for(var/id in air.get_gases())
+	for(var/id in 1 to GAS_MAX)
+		if (!air.gas_contents[id])
+			continue
 		if (nonoverlaying_gases[id])
 			continue
 		var/gas_overlay = GLOB.gas_data.overlays[id]

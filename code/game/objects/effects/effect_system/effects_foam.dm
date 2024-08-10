@@ -336,7 +336,9 @@
 			G.set_temperature(293.15)
 			for(var/obj/effect/hotspot/H in O)
 				qdel(H)
-			for(var/I in G.get_gases())
+			for(var/I in 1 to GAS_MAX)
+				if (!G.gas_contents[I])
+					continue
 				if(I == GAS_O2 || I == GAS_N2)
 					continue
 				G.set_moles(I, 0)

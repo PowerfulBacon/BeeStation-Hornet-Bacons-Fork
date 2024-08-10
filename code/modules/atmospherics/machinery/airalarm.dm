@@ -273,7 +273,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 24)
 	))
 	var/total_moles = environment.total_moles()
 	var/partial_pressure = R_IDEAL_GAS_EQUATION * environment.return_temperature() / environment.return_volume()
-	for(var/gas_id in environment.get_gases())
+	for(var/gas_id in 1 to GAS_MAX)
+		if (!environment.gas_contents[gas_id])
+			continue
 		if(!(gas_id in TLV)) // We're not interested in this gas, it seems.
 			continue
 		cur_tlv = TLV[gas_id]
@@ -677,7 +679,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 24)
 	var/temperature_dangerlevel = cur_tlv.get_danger_level(environment.return_temperature())
 
 	var/gas_dangerlevel = 0
-	for(var/gas_id in environment.get_gases())
+	for(var/gas_id in 1 to GAS_MAX)
+		if (!environment.gas_contents[gas_id])
+			continue
 		if(!(gas_id in TLV)) // We're not interested in this gas, it seems.
 			continue
 		cur_tlv = TLV[gas_id]

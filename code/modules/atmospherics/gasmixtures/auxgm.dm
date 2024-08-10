@@ -1,4 +1,3 @@
-GLOBAL_LIST_INIT(hardcoded_gases, list(GAS_O2, GAS_N2, GAS_CO2, GAS_PLASMA)) //the main four gases, which were at one time hardcoded
 GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GAS_PLUOXIUM, GAS_STIMULUM, GAS_NITRYL))) //unable to react amongst themselves
 
 // Auxgm
@@ -12,29 +11,27 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 
 // Also allows you to add new gases at runtime
 
-/proc/_auxtools_register_gas(datum/gas/gas) // makes sure auxtools knows stuff about this gas
-
 /datum/auxgm
-	var/list/datums = list()
-	var/list/specific_heats = list()
-	var/list/names = list()
-	var/list/visibility = list()
-	var/list/overlays = list()
-	var/list/flags = list()
-	var/list/ids = list()
-	var/list/typepaths = list()
-	var/list/fusion_powers = list()
-	var/list/breathing_classes = list()
-	var/list/breath_results = list()
-	var/list/breath_reagents = list()
-	var/list/breath_reagents_dangerous = list()
-	var/list/breath_alert_info = list()
-	var/list/oxidation_temperatures = list()
-	var/list/oxidation_rates = list()
-	var/list/fire_temperatures = list()
-	var/list/enthalpies = list()
-	var/list/fire_products = list()
-	var/list/fire_burn_rates = list()
+	var/list/datums = new(GAS_MAX)
+	var/list/specific_heats = new(GAS_MAX)
+	var/list/names = new(GAS_MAX)
+	var/list/visibility = new(GAS_MAX)
+	var/list/overlays = new(GAS_MAX)
+	var/list/flags = new(GAS_MAX)
+	var/list/ids = new(GAS_MAX)
+	var/list/typepaths = new(GAS_MAX)
+	var/list/fusion_powers = new(GAS_MAX)
+	var/list/breathing_classes = new(GAS_MAX)
+	var/list/breath_results = new(GAS_MAX)
+	var/list/breath_reagents = new(GAS_MAX)
+	var/list/breath_reagents_dangerous = new(GAS_MAX)
+	var/list/breath_alert_info = new(GAS_MAX)
+	var/list/oxidation_temperatures = new(GAS_MAX)
+	var/list/oxidation_rates = new(GAS_MAX)
+	var/list/fire_temperatures = new(GAS_MAX)
+	var/list/enthalpies = new(GAS_MAX)
+	var/list/fire_products = new(GAS_MAX)
+	var/list/fire_burn_rates = new(GAS_MAX)
 
 
 /datum/gas
@@ -100,8 +97,6 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 			if(gas.fire_products)
 				fire_products[g] = gas.fire_products
 			enthalpies[g] = gas.enthalpy
-
-		_auxtools_register_gas(gas)
 
 /proc/finalize_gas_refs()
 

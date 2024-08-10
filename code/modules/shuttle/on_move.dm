@@ -71,12 +71,6 @@ All ShuttleMove procs go here
 			sanity.Insert(inject_index, /turf/baseturf_skipover/shuttle)
 			newT.baseturfs = baseturfs_string_list(sanity, newT)
 
-	if(isopenturf(src))
-		var/turf/open/after_src_terf = src
-		update_air_ref(isspaceturf(src) ? 0 : (after_src_terf.planetary_atmos ? 1 : 2))
-	else
-		update_air_ref(-1)
-
 	//Air stuff
 	newT.air_update_turf(TRUE)
 	air_update_turf(TRUE)

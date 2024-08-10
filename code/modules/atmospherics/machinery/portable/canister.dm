@@ -96,7 +96,9 @@
 		logmsg = "Valve was <b>toggled</b> by [parent.get_creator_admin()]'s circuit, starting a transfer into \the [attached_can.holding || "air"].<br>"
 		if(!attached_can.holding)
 			var/list/danger = list()
-			for(var/id in attached_can.air_contents.get_gases())
+			for(var/id in 1 to GAS_MAX)
+				if (!attached_can.air_contents.gas_contents[id])
+					continue
 				if(!(GLOB.gas_data.flags[id] & GAS_FLAG_DANGEROUS))
 					continue
 				if(attached_can.air_contents.get_moles(id) > (GLOB.gas_data.visibility[id] || MOLES_GAS_VISIBLE)) //if moles_visible is undefined, default to default visibility
@@ -271,7 +273,7 @@
 		if(starter_temp)
 			air_contents.set_temperature(starter_temp)
 		if(!air_contents.return_volume())
-			CRASH("Auxtools is failing somehow! Gas with pointer [air_contents._extools_pointer_gasmixture] is not valid.")
+			CRASH("Auxtools is failing somehow!")
 		air_contents.set_moles(gas_type, (maximum_pressure * filled) * air_contents.return_volume() / (R_IDEAL_GAS_EQUATION * air_contents.return_temperature()))
 
 /obj/machinery/portable_atmospherics/canister/air/create_gas()
@@ -528,7 +530,9 @@
 			logmsg = "Valve was <b>opened</b> by [key_name(user)], starting a transfer into \the [holding || "air"].<br>"
 		if(!holding)
 			var/list/danger = list()
-			for(var/id in air_contents.get_gases())
+			for(var/id in 1 to GAS_MAX)
+				if (!air_contents.gas_contents[id])
+					continue
 				if(!(GLOB.gas_data.flags[id] & GAS_FLAG_DANGEROUS))
 					continue
 				if(air_contents.get_moles(id) > (GLOB.gas_data.visibility[id] || MOLES_GAS_VISIBLE)) //if moles_visible is undefined, default to default visibility

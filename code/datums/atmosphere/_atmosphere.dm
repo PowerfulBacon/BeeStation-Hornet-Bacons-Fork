@@ -53,7 +53,9 @@
 
 	// Now finally lets make that string
 	var/list/gas_string_builder = list()
-	for(var/i in gasmix.get_gases())
+	for(var/i in 1 to GAS_MAX)
+		if (!gasmix.gas_contents[i])
+			continue
 		gas_string_builder += "[GLOB.gas_data.ids[i]]=[gasmix.get_moles(i)]"
 	gas_string_builder += "TEMP=[gasmix.return_temperature()]"
 	gas_string = gas_string_builder.Join(";")
