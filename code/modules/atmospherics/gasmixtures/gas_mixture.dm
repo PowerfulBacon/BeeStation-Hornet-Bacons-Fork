@@ -105,8 +105,12 @@
 /datum/gas_mixture/proc/scrub_into(datum/gas_mixture/target, ratio, list/gases)
 	for (var/i in gases)
 		var/delta = gas_contents[i] * ratio
-		target.set_moles(i, target.gas_contents[i] + delta)
-		set_moles(i, gas_contents[i] - delta)
+		target.gas_contents[i] += delta
+		target.total_moles += delta
+		gas_contents[i] -= delta
+		total_moles -= delta
+	gas_content_change()
+	target.gas_content_change()
 
 /datum/gas_mixture/proc/mark_immutable()
 	immutable = TRUE
@@ -169,16 +173,24 @@
 	var/ratio = CLAMP01(amount / total_moles)
 	for (var/i in 1 to GAS_MAX)
 		var/delta = gas_contents[i] * ratio
-		target.set_moles(i, target.gas_contents[i] + delta)
-		set_moles(i, gas_contents[i] - delta)
+		target.gas_contents[i] += delta
+		target.total_moles += delta
+		gas_contents[i] -= delta
+		total_moles -= delta
+	gas_content_change()
+	target.gas_content_change()
 
 /// Transfers ratio of gas to target. Equivalent to target.merge(remove_ratio(amount)) but faster.
 /datum/gas_mixture/proc/transfer_ratio_to(datum/gas_mixture/target, ratio)
 	CHECK_IMMUTABILITY
 	for (var/i in 1 to GAS_MAX)
 		var/delta = gas_contents[i] * ratio
-		target.set_moles(i, target.gas_contents[i] + delta)
-		set_moles(i, gas_contents[i] - delta)
+		target.gas_contents[i] += delta
+		target.total_moles += delta
+		gas_contents[i] -= delta
+		total_moles -= delta
+	gas_content_change()
+	target.gas_content_change()
 
 //Proportionally removes amount of gas from the gas_mixture
 //Returns: gas_mixture with the gases removed
