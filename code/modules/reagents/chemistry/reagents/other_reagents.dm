@@ -786,12 +786,12 @@
 	if((!O) || (!reac_volume))
 		return 0
 	var/temp = holder ? holder.chem_temp : T20C
-	O.atmos_spawn_air("o2=[reac_volume/2];TEMP=[temp]")
+	O.create_atmos_populator().with_gas(GAS_O2, reac_volume / 2).at_temperature(temp)
 
 /datum/reagent/oxygen/reaction_turf(turf/open/T, reac_volume)
 	if(istype(T))
 		var/temp = holder ? holder.chem_temp : T20C
-		T.atmos_spawn_air("o2=[reac_volume/2];TEMP=[temp]")
+		T.create_atmos_populator().with_gas(GAS_O2, reac_volume / 2).at_temperature(temp)
 	return
 
 /datum/reagent/copper
@@ -823,12 +823,12 @@
 	if((!O) || (!reac_volume))
 		return 0
 	var/temp = holder ? holder.chem_temp : T20C
-	O.atmos_spawn_air("n2=[reac_volume/2];TEMP=[temp]")
+	O.create_atmos_populator().with_gas(GAS_N2, reac_volume / 2).at_temperature(temp)
 
 /datum/reagent/nitrogen/reaction_turf(turf/open/T, reac_volume)
 	if(istype(T))
 		var/temp = holder ? holder.chem_temp : T20C
-		T.atmos_spawn_air("n2=[reac_volume/2];TEMP=[temp]")
+		T.create_atmos_populator().with_gas(GAS_N2, reac_volume / 2).at_temperature(temp)
 	return
 
 /datum/reagent/hydrogen
@@ -1292,12 +1292,12 @@
 	if((!O) || (!reac_volume))
 		return 0
 	var/temp = holder ? holder.chem_temp : T20C
-	O.atmos_spawn_air("co2=[reac_volume/5];TEMP=[temp]")
+	O.create_atmos_populator().with_gas(GAS_CO2, reac_volume / 5).at_temperature(temp)
 
 /datum/reagent/carbondioxide/reaction_turf(turf/open/T, reac_volume)
 	if(istype(T))
 		var/temp = holder ? holder.chem_temp : T20C
-		T.atmos_spawn_air("co2=[reac_volume/5];TEMP=[temp]")
+		T.create_atmos_populator().with_gas(GAS_CO2, reac_volume / 5).at_temperature(temp)
 	return
 
 /datum/reagent/nitrous_oxide
@@ -1313,12 +1313,12 @@
 	if((!O) || (!reac_volume))
 		return 0
 	var/temp = holder ? holder.chem_temp : T20C
-	O.atmos_spawn_air("n2o=[reac_volume/5];TEMP=[temp]")
+	O.create_atmos_populator().with_gas(GAS_NITROUS, reac_volume / 5).at_temperature(temp)
 
 /datum/reagent/nitrous_oxide/reaction_turf(turf/open/T, reac_volume)
 	if(istype(T))
 		var/temp = holder ? holder.chem_temp : T20C
-		T.atmos_spawn_air("n2o=[reac_volume/5];TEMP=[temp]")
+		T.create_atmos_populator().with_gas(GAS_NITROUS, reac_volume / 5).at_temperature(temp)
 
 /datum/reagent/nitrous_oxide/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(method == VAPOR)

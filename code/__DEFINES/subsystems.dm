@@ -242,7 +242,6 @@
 #define SSAIR_ATMOSMACHINERY 2
 #define SSAIR_REBUILD_PIPENETS 7
 #define SSAIR_ATMOSMACHINERY_AIR 12
-#define SSAIR_DEFERRED_AIRS 13
 #define SSAIR_HOTSPOTS 7
 
 // Explosion Subsystem subtasks

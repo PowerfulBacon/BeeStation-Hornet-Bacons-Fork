@@ -219,7 +219,7 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			var/turf/open/T = get_turf(user)
 			if(istype(T))
-				T.atmos_spawn_air("plasma=20")
+				T.create_atmos_populator().with_gas(GAS_PLASMA, 20)
 			to_chat(user, "<span class='warning'>You activate [src], and a cloud of plasma bursts out of your skin!</span>")
 			return 90 SECONDS
 
@@ -342,7 +342,7 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			var/turf/open/T = get_turf(user)
 			if(istype(T))
-				T.atmos_spawn_air("nitrogen=40;TEMP=2.7")
+				T.create_atmos_populator().with_gas(GAS_N2, 40).at_temperature(TCMB)
 			to_chat(user, "<span class='warning'>You activate [src], and icy air bursts out of your skin!</span>")
 			return 90 SECONDS
 
@@ -601,7 +601,7 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			var/turf/open/T = get_turf(user)
 			if(istype(T))
-				T.atmos_spawn_air("o2=11;n2=41;TEMP=293.15")
+				T.create_atmos_populator().with_gas(GAS_O2, 11).with_gas(GAS_N2, 41).at_temperature(T20C)
 				to_chat(user, "<span class='warning'>You activate [src], and fresh air bursts out of your skin!</span>")
 				return 60 SECONDS
 

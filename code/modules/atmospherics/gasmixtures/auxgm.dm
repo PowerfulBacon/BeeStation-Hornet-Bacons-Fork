@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 
 /datum/gas
 	var/id = ""
-	var/specific_heat = 0
+	var/specific_heat = 0 // joules per moles per kelvin
 	var/name = ""
 	var/gas_overlay = "" //icon_state in icons/effects/atmospherics.dmi
 	var/moles_visible = null
@@ -66,12 +66,10 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(GAS_O2, GAS_N2, GAS_CO2, GA
 		names[g] = gas.name
 		if(gas.moles_visible)
 			visibility[g] = gas.moles_visible
-			overlays[g] = new /list(FACTOR_GAS_VISIBLE_MAX)
-			for(var/i in 1 to FACTOR_GAS_VISIBLE_MAX)
-				overlays[g][i] = new /obj/effect/overlay/gas(gas.gas_overlay, i * 255 / FACTOR_GAS_VISIBLE_MAX)
+			overlays[g] = gas.gas_overlay
 		else
 			visibility[g] = 0
-			overlays[g] = 0
+			overlays[g] = null
 		flags[g] = gas.flags
 		ids[g] = g
 		typepaths[g] = gas.type
@@ -119,7 +117,6 @@ GLOBAL_DATUM_INIT(gas_data, /datum/auxgm, new)
 	appearance_flags = TILE_BOUND
 	vis_flags = NONE
 
-/obj/effect/overlay/gas/New(state, alph)
+/obj/effect/overlay/gas/New(state)
 	. = ..()
 	icon_state = state
-	alpha = alph

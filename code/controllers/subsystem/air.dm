@@ -9,7 +9,6 @@ SUBSYSTEM_DEF(air)
 	var/cost_turfs = 0
 	var/cost_groups = 0
 	var/cost_highpressure = 0
-	var/cost_deferred_airs
 	var/cost_hotspots = 0
 	var/cost_post_process = 0
 	var/cost_superconductivity = 0
@@ -31,8 +30,6 @@ SUBSYSTEM_DEF(air)
 	var/list/hotspots = list()
 	var/list/networks = list()
 	var/list/pipenets_needing_rebuilt = list()
-	var/list/deferred_airs = list()
-	var/max_deferred_airs = 0
 	var/list/obj/machinery/atmos_machinery = list()
 	var/list/obj/machinery/atmos_air_machinery = list()
 	var/list/pipe_init_dirs_cache = list()
@@ -95,7 +92,6 @@ SUBSYSTEM_DEF(air)
 	msg += "LT:[low_pressure_turfs]|"
 	msg += "ET:[num_equalize_processed]|"
 	msg += "GT:[num_group_turfs_processed]|"
-	msg += "DF:[max_deferred_airs]|"
 	msg += "GA:[get_amt_gas_mixes()]|"
 	msg += "MG:[get_max_gas_mixes()]"
 	return ..()
@@ -143,6 +139,7 @@ SUBSYSTEM_DEF(air)
 			return
 		resumed = 0
 		currentpart = SSAIR_ATMOSMACHINERY
+
 	// This is only machinery like filters, mixers that don't interact with air
 	if(currentpart == SSAIR_ATMOSMACHINERY)
 		timer = TICK_USAGE_REAL
@@ -183,8 +180,6 @@ SUBSYSTEM_DEF(air)
 	hotspots = SSair.hotspots
 	networks = SSair.networks
 	pipenets_needing_rebuilt = SSair.pipenets_needing_rebuilt
-	deferred_airs = SSair.deferred_airs
-	max_deferred_airs = SSair.max_deferred_airs
 	atmos_machinery = SSair.atmos_machinery
 	atmos_air_machinery = SSair.atmos_air_machinery
 	pipe_init_dirs_cache = SSair.pipe_init_dirs_cache
@@ -220,34 +215,6 @@ SUBSYSTEM_DEF(air)
 /datum/controller/subsystem/air/proc/add_to_rebuild_queue(atmos_machine)
 	if(istype(atmos_machine, /obj/machinery/atmospherics))
 		pipenets_needing_rebuilt += atmos_machine
-
-/datum/controller/subsystem/air/proc/process_deferred_airs(resumed = 0)
-	max_deferred_airs = max(deferred_airs.len,max_deferred_airs)
-	while(deferred_airs.len)
-		var/list/cur_op = deferred_airs[deferred_airs.len]
-		deferred_airs.len--
-		var/datum/gas_mixture/air1
-		var/datum/gas_mixture/air2
-		if(isopenturf(cur_op[1]))
-			var/turf/open/T = cur_op[1]
-			air1 = T.return_air()
-		else
-			air1 = cur_op[1]
-		if(isopenturf(cur_op[2]))
-			var/turf/open/T = cur_op[2]
-			air2 = T.return_air()
-		else
-			air2 = cur_op[2]
-		if(istype(cur_op[3], /datum/callback))
-			var/datum/callback/cb = cur_op[3]
-			cb.Invoke(air1, air2)
-		else
-			if(cur_op[3] == 0)
-				air1.transfer_to(air2, air1.total_moles())
-			else
-				air1.transfer_ratio_to(air2, cur_op[3])
-		if(MC_TICK_CHECK)
-			return
 
 /datum/controller/subsystem/air/proc/process_atmos_machinery(resumed = 0)
 	if (!resumed)
@@ -581,9 +548,7 @@ SUBSYSTEM_DEF(air)
 			subregions += atmos_zone
 	to_chat(world, "Atmos initialised with [length(subregions)] atmospheric regions.")
 	for (var/datum/atmospheric_region/region in subregions)
-		var/color = random_color()
-		for (var/turf/T in region.turfs)
-			T.add_atom_colour("#[color]", ADMIN_COLOUR_PRIORITY)
+		region.setup()
 	atmospheric_regions = subregions
 
 /datum/temp_region
@@ -596,12 +561,45 @@ SUBSYSTEM_DEF(air)
 
 /datum/atmospheric_region
 	var/list/turfs = list()
-	var/datum/gas_mixture/gas
+	var/datum/gas_mixture/regional/gas
+	var/list/gas_overlays = new(GAS_MAX)
+	/// Directly adjacent regions to this one
+	var/list/adjacent = list()
 
 /datum/atmospheric_region/proc/setup()
-	gas = new(length(turfs) * CELL_VOLUME)
+	gas = new(length(turfs) * CELL_VOLUME, src)
+	var/color = random_color()
+	// Set the turfs air reference
 	for (var/turf/open/T in turfs)
 		T.air = gas
+		gas.populate_from_gas_string(T.initial_gas_mix)
+		T.add_atom_colour("#[color]", ADMIN_COLOUR_PRIORITY)
+	// Setup the turfs gas overlays
+	for (var/i in 1 to GAS_MAX)
+		if (!GLOB.gas_data.overlays[i])
+			continue
+		gas_overlays[i] = new /obj/effect/overlay/gas(GLOB.gas_data.overlays[i])
+	for (var/obj/effect/overlay/gas/gas_overlay in gas_overlays)
+		if (!gas_overlay)
+			continue
+		gas_overlay.alpha = 0
+		for (var/turf/open/T in turfs)
+			T.vis_contents += gas_overlay
+
+/datum/gas_mixture/regional
+	var/datum/atmospheric_region/region
+
+/datum/gas_mixture/regional/New(volume, region)
+	. = ..(volume)
+	src.region = region
+
+/datum/gas_mixture/regional/gas_content_change()
+	// Recalculate the appearance of the region
+	for (var/i in 1 to GAS_MAX)
+		var/obj/effect/overlay/gas/gas_overlay = region.gas_overlays[i]
+		if (!gas_overlay)
+			continue
+		gas_overlay.alpha = 255 * CLAMP01(gas_contents[i] / (FACTOR_GAS_VISIBLE_MAX * (initial_volume / CELL_VOLUME)))
 
 #undef SSAIR_PIPENETS
 #undef SSAIR_ATMOSMACHINERY

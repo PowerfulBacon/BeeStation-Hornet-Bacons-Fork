@@ -168,16 +168,15 @@
         T.air_update_turf(1)
     air_update_turf(1)
 
-/atom/proc/atmos_spawn_air(text) //because a lot of people loves to copy paste awful code lets just make an easy proc to spawn your plasma fires
+/atom/proc/create_atmos_populator() //because a lot of people loves to copy paste awful code lets just make an easy proc to spawn your plasma fires
+	RETURN_TYPE(/datum/mixture_populator)
 	var/turf/open/T = get_turf(src)
 	if(!istype(T))
-		return
-	T.atmos_spawn_air(text)
+		return new /datum/mixture_populator/blank
+	T.create_atmos_populator()
 
-/turf/open/atmos_spawn_air(text)
-	if(!text || !air)
-		return
-
-	var/datum/gas_mixture/G = new
-	G.parse_gas_string(text)
-	assume_air(G)
+/turf/open/create_atmos_populator()
+	RETURN_TYPE(/datum/mixture_populator)
+	if(!air)
+		return new /datum/mixture_populator/blank
+	return air.create_populator()

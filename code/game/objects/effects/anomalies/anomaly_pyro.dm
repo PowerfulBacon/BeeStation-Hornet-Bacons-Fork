@@ -16,7 +16,7 @@
 	var/turf/open/our_turf = get_turf(src)
 	if(!isturf(our_turf))
 		return
-	our_turf.atmos_spawn_air("o2=5;plasma=5;TEMP=1000")
+	create_atmos_populator().with_gas(GAS_O2, 5).with_gas(GAS_PLASMA, 5).at_temperature(1000)
 
 /obj/effect/anomaly/pyro/detonate()
 	INVOKE_ASYNC(src, PROC_REF(makepyroslime))
@@ -24,7 +24,7 @@
 /obj/effect/anomaly/pyro/proc/makepyroslime()
 	var/turf/open/T = get_turf(src)
 	if(istype(T))
-		T.atmos_spawn_air("o2=500;plasma=500;TEMP=1000") //Make it hot and burny for the new slime
+		T.create_atmos_populator().with_gas(GAS_O2, 500).with_gas(GAS_PLASMA, 500).at_temperature(1000) //Make it hot and burny for the new slime
 		log_game("A pyroclastic anomaly has detonated at [loc].")
 		message_admins("A pyroclastic anomaly has detonated at [ADMIN_VERBOSEJMP(loc)].")
 	var/new_colour = pick("red", "orange")

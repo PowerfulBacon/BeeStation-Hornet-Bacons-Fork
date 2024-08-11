@@ -265,8 +265,7 @@
 	disarm_product = /obj/item/deployablemine/gas
 
 /obj/effect/mine/gas/mineEffect(mob/victim)
-	atmos_spawn_air("[gas_type]=[gas_amount]")
-
+	create_atmos_populator().with_gas(gas_type, gas_amount)
 
 /obj/effect/mine/gas/plasma
 	name = "incendiary mine"

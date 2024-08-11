@@ -13,12 +13,13 @@
 /datum/gas_mixture/immutable/proc/populate()
 	return
 
-//used by space tiles
+// Used by space tiles, infinite volume
 /datum/gas_mixture/immutable/space
 	initial_temperature = TCMB
 
-/datum/gas_mixture/immutable/space/populate()
-	set_min_heat_capacity(HEAT_CAPACITY_VACUUM)
+// Infinite volume means 0 pressure
+/datum/gas_mixture/immutable/space/return_pressure()
+	return 0
 
 //used by cloners
 /datum/gas_mixture/immutable/cloner
@@ -34,3 +35,10 @@
 /datum/gas_mixture/immutable/planetary/populate()
 	set_moles(GAS_O2, MOLES_O2STANDARD)
 	set_moles(GAS_N2, MOLES_N2STANDARD)
+
+// closed turfs
+/datum/gas_mixture/immutable/closed_turfs
+	initial_temperature = T20C
+
+/datum/gas_mixture/immutable/closed_turfs/populate()
+	set_moles(GAS_N2, MOLES_O2STANDARD + MOLES_N2STANDARD)

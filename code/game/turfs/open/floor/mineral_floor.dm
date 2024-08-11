@@ -54,7 +54,7 @@
 
 /turf/open/floor/mineral/plasma/proc/PlasmaBurn(temperature)
 	make_plating()
-	atmos_spawn_air("plasma=20;TEMP=[temperature]")
+	create_atmos_populator().with_gas(GAS_PLASMA, 20).at_temperature(temperature)
 
 /turf/open/floor/mineral/plasma/proc/ignite(exposed_temperature)
 	if(exposed_temperature > 300)

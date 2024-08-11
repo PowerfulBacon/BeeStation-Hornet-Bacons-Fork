@@ -190,7 +190,7 @@ GLOBAL_LIST_EMPTY(bluespace_slime_crystals)
 		if(isspaceturf(T))
 			continue
 		var/datum/gas_mixture/gas = T.return_air()
-		gas.parse_gas_string(OPENTURF_DEFAULT_ATMOS)
+		gas.populate_from_gas_string(OPENTURF_DEFAULT_ATMOS)
 		T.air_update_turf()
 
 /obj/structure/slime_crystal/metal
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(bluespace_slime_crystals)
 		new /obj/item/stack/sheet/mineral/plasma(open_turf)
 
 /obj/structure/slime_crystal/darkpurple/Destroy()
-	atmos_spawn_air("plasma=[20];TEMP=[500]")
+	create_atmos_populator().with_gas(GAS_PLASMA, 20).at_temperature(500)
 	return ..()
 
 /obj/structure/slime_crystal/darkblue

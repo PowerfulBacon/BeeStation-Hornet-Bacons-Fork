@@ -230,6 +230,6 @@ Mineral Sheets
 		return ..()
 
 /obj/item/stack/sheet/mineral/coal/fire_act(exposed_temperature, exposed_volume)
-	atmos_spawn_air("co2=[amount*10];TEMP=[exposed_temperature]")
+	create_atmos_populator().with_gas(GAS_CO2, amount * 10).at_temperature(exposed_temperature)
 	qdel(src)
 

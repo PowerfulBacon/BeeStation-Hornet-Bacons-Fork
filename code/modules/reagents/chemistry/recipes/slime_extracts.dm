@@ -218,7 +218,7 @@
 	if(holder && holder.my_atom)
 		var/turf/open/T = get_turf(holder.my_atom)
 		if(istype(T))
-			T.atmos_spawn_air("n2=50;TEMP=2.7")
+			T.create_atmos_populator().with_gas(GAS_N2, 50).at_temperature(2.7)
 
 /datum/chemical_reaction/slime/slimefireproof
 	name = "Slime Fireproof"
@@ -261,7 +261,8 @@
 	if(holder && holder.my_atom)
 		var/turf/open/T = get_turf(holder.my_atom)
 		if(istype(T))
-			T.atmos_spawn_air("plasma=50;TEMP=1000")
+			T.create_atmos_populator().with_gas(GAS_PLASMA, 50).at_temperature(1000)
+
 
 
 /datum/chemical_reaction/slime/slimesmoke

@@ -110,7 +110,7 @@ Burning extracts:
 /obj/item/slimecross/burning/darkpurple/do_effect(mob/user)
 	user.visible_message("<span class='danger'>[src] sublimates into a cloud of plasma!</span>")
 	var/turf/T = get_turf(user)
-	T.atmos_spawn_air("plasma=60")
+	T.create_atmos_populator().with_gas(GAS_PLASMA, 60)
 	..()
 
 /obj/item/slimecross/burning/darkblue

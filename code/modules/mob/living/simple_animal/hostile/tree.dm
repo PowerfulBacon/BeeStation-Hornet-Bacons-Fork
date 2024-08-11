@@ -52,7 +52,7 @@
 				if(prob(25))
 					var/amt = min(co2, 9)
 					T.air.adjust_moles(GAS_CO2, -amt)
-					T.atmos_spawn_air("o2=[amt];TEMP=293.15")
+					T.create_atmos_populator().with_gas(GAS_O2, amt).at_temperature(T20C)
 
 /mob/living/simple_animal/hostile/tree/festivus
 	name = "festivus pole"
