@@ -446,6 +446,7 @@ SUBSYSTEM_DEF(air)
 
 /turf/var/_region_built = FALSE
 /turf/var/_temp_group = 0
+/turf/var/datum/atmospheric_region/atmospheric_region = null
 
 // This is going to be an expensive process that requires optimisation
 // Since its in init times, at this point I don't really care if there are some micro ops
@@ -487,6 +488,7 @@ SUBSYSTEM_DEF(air)
 			region.turfs -= origin
 			atmos_zone.turfs += origin
 			origin._temp_group = 0
+			origin.atmospheric_region = atmos_zone
 			var/minx = origin.x
 			var/miny = origin.y
 			var/maxx = origin.x
@@ -499,6 +501,7 @@ SUBSYSTEM_DEF(air)
 				maxx = maxx + 1
 				region.turfs -= next
 				atmos_zone.turfs += next
+				next.atmospheric_region = atmos_zone
 				next._temp_group = 0
 			// Greedy X expansion (Right)
 			while (minx - 1 >= 1)
@@ -508,6 +511,7 @@ SUBSYSTEM_DEF(air)
 				minx = minx - 1
 				region.turfs -= next
 				atmos_zone.turfs += next
+				next.atmospheric_region = atmos_zone
 				next._temp_group = 0
 			// Greedy Y expansion (Up)
 			while (maxy + 1 <= world.maxy)
@@ -526,6 +530,7 @@ SUBSYSTEM_DEF(air)
 				for (var/turf/T in row)
 					region.turfs -= T
 					atmos_zone.turfs += T
+					T.atmospheric_region = atmos_zone
 					T._temp_group = 0
 			// Greedy Y expansion (Down)
 			while (miny - 1 >= 1)
@@ -544,6 +549,7 @@ SUBSYSTEM_DEF(air)
 				for (var/turf/T in row)
 					region.turfs -= T
 					atmos_zone.turfs += T
+					T.atmospheric_region = atmos_zone
 					T._temp_group = 0
 			subregions += atmos_zone
 	to_chat(world, "Atmos initialised with [length(subregions)] atmospheric regions.")
@@ -565,6 +571,10 @@ SUBSYSTEM_DEF(air)
 	var/list/gas_overlays = new(GAS_MAX)
 	/// Directly adjacent regions to this one
 	var/list/adjacent = list()
+	var/_last_share = 0
+	/// List of regions that we directly share with, including ourselves
+	var/list/shared_regions = list()
+	var/list/shared_gas_mixtures = null
 
 /datum/atmospheric_region/proc/setup()
 	gas = new(length(turfs) * CELL_VOLUME, src)
@@ -574,6 +584,12 @@ SUBSYSTEM_DEF(air)
 		T.air = gas
 		gas.populate_from_gas_string(T.initial_gas_mix)
 		T.add_atom_colour("#[color]", ADMIN_COLOUR_PRIORITY)
+		// Join adjacent areas, kinda temporary, kinda not really
+		for (var/turf/adjacent_turf in T.GetAtmosAdjacentTurfs())
+			if (adjacent_turf.atmospheric_region != src)
+				adjacent |= adjacent_turf.atmospheric_region
+	// Calculate shared regions
+	recalculate_shared_regions()
 	// Setup the turfs gas overlays
 	for (var/i in 1 to GAS_MAX)
 		if (!GLOB.gas_data.overlays[i])
@@ -586,14 +602,49 @@ SUBSYSTEM_DEF(air)
 		for (var/turf/open/T in turfs)
 			T.vis_contents += gas_overlay
 
+/datum/atmospheric_region/proc/recalculate_shared_regions()
+	// Calculate linked regions
+	var/static/total_shares = 0
+	_last_share = ++total_shares
+	for (var/datum/atmospheric_region/region as() in shared_regions)
+		region.shared_regions -= src
+	shared_regions = list(src)
+	for (var/i = 1; i <= length(shared_regions); i++)
+		var/datum/atmospheric_region/check_region = shared_regions[i]
+		check_region._last_share = _last_share
+		for (var/datum/atmospheric_region/adjacent_regions as() in check_region.adjacent)
+			if (adjacent_regions._last_share == _last_share)
+				continue
+			shared_regions += adjacent_regions
+		shared_regions[i] = check_region
+
 /datum/gas_mixture/regional
 	var/datum/atmospheric_region/region
+	var/will_reconsile = FALSE
 
 /datum/gas_mixture/regional/New(volume, region)
 	. = ..(volume)
 	src.region = region
 
-/datum/gas_mixture/regional/gas_content_change()
+/datum/gas_mixture/regional/gas_content_change(visual_only = FALSE)
+	// Bundle gas changes together in order to propogate them to other
+	// directly adjacent regions.
+	if (!visual_only && length(region.shared_regions) > 1)
+		if (will_reconsile)
+			return
+		will_reconsile = TRUE
+		// This will execute upon the next time that Byond decides to yield
+		// which allows us to bundle multiple changes into a single visual update
+		// preventing this from executing 14 times if we merge 2 gasses together
+		spawn(0)
+			will_reconsile = FALSE
+			if (!region.shared_gas_mixtures)
+				region.shared_gas_mixtures = list()
+				for (var/datum/atmospheric_region/shared in region.shared_regions)
+					region.shared_gas_mixtures += shared.gas
+			// Perform regional sharing
+			equalize_all_gases_in_list(region.shared_gas_mixtures, TRUE)
+		return
 	// Recalculate the appearance of the region
 	for (var/i in 1 to GAS_MAX)
 		var/obj/effect/overlay/gas/gas_overlay = region.gas_overlays[i]

@@ -235,6 +235,8 @@
 	var/joules_per_kelvin = 0
 	for (var/i in 1 to GAS_MAX)
 		joules_per_kelvin += GLOB.gas_data.specific_heats[i] * gas_contents[i]
+	if (!joules_per_kelvin)
+		return
 	// Good enough for me
 	temperature += joules / joules_per_kelvin
 
@@ -245,7 +247,43 @@
 /datum/gas_mixture/proc/get_fuel_amount(temp)
 
 /// Makes every gas mixture in the given list have the same pressure, temperature and gas proportions.
-/proc/equalize_all_gases_in_list(list/L)
+/proc/equalize_all_gases_in_list(list/L, visual_only = FALSE)
+	if (!length(L))
+		return
+	var/datum/gas_mixture/master = L[1]
+	var/total_thermal_energy = master.thermal_energy()
+	var/total_volume = master.initial_volume
+	// Place all gas into the master
+	for (var/i in 2 to length(L))
+		var/datum/gas_mixture/slave = L[i]
+		for (var/j in 1 to GAS_MAX)
+			master.gas_contents[j] += slave.gas_contents[j]
+			master.total_moles += slave.total_moles
+		total_thermal_energy += slave.thermal_energy()
+		total_volume += slave.initial_volume
+	if (!total_volume)
+		CRASH("Attempting to equalise gas mixtures with no volume, this is a bug")
+	// Distribute gasses
+	for (var/i in 2 to length(L))
+		var/datum/gas_mixture/slave = L[i]
+		slave.temperature = 0
+		slave.total_moles = 0
+		var/proportion = slave.initial_volume / total_volume
+		for (var/j in 1 to GAS_MAX)
+			var/distributed_gas = master.gas_contents[j] * proportion
+			slave.gas_contents[j] = distributed_gas
+			slave.total_moles += distributed_gas
+		slave.adjust_thermal_energy(total_thermal_energy * proportion)
+		slave.gas_content_change(visual_only)
+	var/final_proportion = master.initial_volume / total_volume
+	master.temperature = 0
+	master.total_moles = 0
+	for (var/i in 1 to GAS_MAX)
+		var/distributed_gas = master.gas_contents[i] * final_proportion
+		master.gas_contents[i] = distributed_gas
+		master.total_moles += distributed_gas
+	master.adjust_thermal_energy(total_thermal_energy * final_proportion)
+	master.gas_content_change(visual_only)
 
 /datum/gas_mixture/remove(amount)
 	CHECK_IMMUTABILITY
@@ -304,7 +342,7 @@ get_true_breath_pressure(pp) --> gas_pp = pp/breath_pp*total_moles()
 /datum/gas_mixture/proc/vv_react(datum/holder)
 	return react(holder)
 
-/datum/gas_mixture/proc/gas_content_change()
+/datum/gas_mixture/proc/gas_content_change(visual_only = FALSE)
 	return
 
 // Instead of atmos_spawn_air, this can be used to populate a mixture
