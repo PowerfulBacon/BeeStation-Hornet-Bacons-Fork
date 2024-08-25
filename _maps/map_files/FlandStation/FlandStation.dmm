@@ -240,7 +240,7 @@
 /obj/effect/turf_decal/tile/red/opposingcorners{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Fore Primary Hallway - Security shuttle view";
 	name = "hallway camera"
 	},
@@ -283,7 +283,7 @@
 /obj/machinery/airalarm/directional/west{
 	pixel_x = -22
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Chapel - Port";
 	name = "chapel camera"
 	},
@@ -410,7 +410,7 @@
 /obj/structure/rack,
 /obj/item/aicard,
 /obj/item/storage/secure/briefcase,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Bridge - Port Central";
 	name = "command camera"
 	},
@@ -756,7 +756,7 @@
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "akh" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Science - Break Room";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -934,7 +934,7 @@
 /obj/effect/turf_decal/guideline/guideline_mid/purple,
 /obj/effect/turf_decal/guideline/guideline_out/yellow,
 /obj/effect/turf_decal/guideline/guideline_in/blue,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Central Primary Hallway - Central Starboard";
 	name = "hallway camera"
 	},
@@ -1535,11 +1535,11 @@
 /area/hallway/primary/central)
 "avb" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/small,
 /obj/effect/landmark/xeno_spawn,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 4
 	},
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/plating{
 	broken = 1
 	},
@@ -1817,7 +1817,7 @@
 /turf/open/floor/carpet/green,
 /area/security/detectives_office)
 "aze" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Cloning Lab";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -1916,11 +1916,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Aft";
-	dir = 9;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/sepia,
 /area/science/shuttle)
 "aAl" = (
@@ -1943,11 +1939,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Tool storage";
-	dir = 9;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/science/shuttle)
 "aAu" = (
@@ -2353,7 +2345,7 @@
 "aFL" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/apc/auto_name/directional/south,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Science - Robotics Lab";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -4373,7 +4365,7 @@
 "aYi" = (
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/effect/turf_decal/tile/blue/fourcorners/contrasted,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Medbay - Chief Medical Officer's Office";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -4409,7 +4401,7 @@
 /turf/closed/mineral/random/labormineral,
 /area/ai_monitored/turret_protected/ai)
 "aYA" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Fore";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -4767,6 +4759,9 @@
 	},
 /obj/structure/bed/dogbed/runtime,
 /mob/living/simple_animal/pet/cat/Runtime,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/open/floor/iron/cafeteria,
 /area/crew_quarters/heads/cmo)
 "bep" = (
@@ -4794,15 +4789,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/storage/tech)
-"bez" = (
-/obj/machinery/camera{
-	c_tag = "Xenobiology - Cell 6";
-	dir = 9;
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
-/turf/open/floor/iron/grid/steel,
-/area/science/xenobiology)
 "beF" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
@@ -5397,7 +5383,7 @@
 /turf/open/floor/iron/ridged/steel,
 /area/science/xenobiology)
 "bmD" = (
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Science - Experimentation Lab";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -5928,7 +5914,7 @@
 /obj/item/flashlight/lamp,
 /obj/item/clothing/neck/stethoscope,
 /obj/item/flashlight/pen,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Chief Medical Officer's Quarters";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -6087,7 +6073,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 1
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Cargo - Quartermaster's Office";
 	name = "cargo camera"
 	},
@@ -6430,11 +6416,7 @@
 /obj/effect/turf_decal/pool{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Recreation - Aft";
-	dir = 6;
-	name = "recreation camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/noslip/standard,
 /area/crew_quarters/fitness/recreation)
 "bCW" = (
@@ -6577,7 +6559,7 @@
 /obj/item/screwdriver{
 	pixel_y = 6
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Storage";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -6942,7 +6924,7 @@
 /turf/open/floor/iron/techmaint,
 /area/science/shuttle)
 "bMi" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Arrivals - Station Entrance";
 	name = "hallway camera"
 	},
@@ -7466,7 +7448,7 @@
 	pixel_x = 30
 	},
 /obj/effect/turf_decal/bot,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Hydroponics - Starboard";
 	name = "service camera"
 	},
@@ -7747,6 +7729,11 @@
 /obj/machinery/airalarm/directional/west{
 	pixel_x = -22
 	},
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Medbay - Cloning Lab";
+	name = "medbay camera";
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/iron/grid/steel,
 /area/medical/medbay/lobby)
 "bVk" = (
@@ -7972,7 +7959,7 @@
 	pixel_y = -24;
 	req_access_txt = "32;47;48"
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Auxiliary Base Construction"
 	},
 /turf/open/floor/iron/sepia,
@@ -8089,14 +8076,10 @@
 	name = "Engineering RC";
 	pixel_y = -30
 	},
-/obj/machinery/camera{
-	c_tag = "Engineering - Foyer";
-	dir = 5;
-	name = "engineering camera"
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/sepia,
 /area/engine/break_room)
 "cca" = (
@@ -8431,7 +8414,7 @@
 	pixel_x = 7;
 	pixel_y = 3
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Engieneering- Engine Access";
 	name = "engineering camera";
 	network = list("ss13","engine")
@@ -8652,14 +8635,10 @@
 "cjS" = (
 /obj/effect/turf_decal/delivery,
 /obj/machinery/disposal/bin,
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Canister Storage";
-	dir = 9;
-	name = "atmospherics camera"
-	},
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/engine/atmos)
 "ckd" = (
@@ -9309,12 +9288,6 @@
 	},
 /obj/item/stack/medical/gauze,
 /obj/effect/turf_decal/tile/blue/fourcorners/contrasted,
-/obj/machinery/camera{
-	c_tag = "Medbay - Side Storage";
-	dir = 5;
-	name = "medbay camera";
-	network = list("ss13","medbay")
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 1
 	},
@@ -9793,17 +9766,14 @@
 /turf/open/floor/engine/air/light,
 /area/engine/atmos)
 "czJ" = (
-/obj/machinery/camera{
-	c_tag = "Supermatter Engine - Aft";
-	dir = 5;
-	name = "engineering camera";
-	network = list("ss13","engine")
-	},
 /obj/item/radio/intercom{
 	pixel_y = -28
 	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
+	},
+/obj/machinery/camera/autoname/directional/south{
+	network = list("ss13","engine")
 	},
 /turf/open/floor/vault,
 /area/engine/engine_room)
@@ -10327,6 +10297,7 @@
 /obj/effect/turf_decal/tile/bar/opposingcorners{
 	dir = 1
 	},
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron/dark,
 /area/crew_quarters/bar)
 "cIz" = (
@@ -10970,7 +10941,7 @@
 	pixel_x = -26
 	},
 /obj/item/kirbyplants/random,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Research Division - Nanite Lab";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -11653,7 +11624,7 @@
 	pixel_y = -32
 	},
 /obj/machinery/light/small,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Engineering - Power Tools";
 	name = "engineering camera"
 	},
@@ -11827,11 +11798,6 @@
 /obj/machinery/airalarm/directional/east{
 	pixel_x = 22
 	},
-/obj/machinery/camera{
-	c_tag = "Cargo - Delivery Office";
-	dir = 6;
-	name = "cargo camera"
-	},
 /obj/structure/disposalpipe/sorting/wrap{
 	dir = 2
 	},
@@ -11841,6 +11807,10 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
+	},
+/obj/machinery/camera/autoname/directional/east{
+	c_tag = "Cargo - Office";
+	name = "cargo camera"
 	},
 /turf/open/floor/iron,
 /area/quartermaster/sorting)
@@ -12545,14 +12515,10 @@
 /turf/open/floor/iron/techmaint,
 /area/security/prison)
 "dko" = (
-/obj/machinery/camera{
-	c_tag = "Library Evac Pod";
-	dir = 6;
-	name = "library camera"
-	},
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/dark,
 /area/hallway/primary/aft)
 "dku" = (
@@ -12719,7 +12685,7 @@
 "dme" = (
 /obj/machinery/portable_atmospherics/scrubber,
 /obj/machinery/atmospherics/components/unary/portables_connector/visible,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Supermatter Engine - Fore";
 	name = "engineering camera";
 	network = list("ss13","engine")
@@ -13189,7 +13155,7 @@
 /turf/open/floor/iron/sepia,
 /area/engine/break_room)
 "dtF" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Chapel Crematorium";
 	name = "Chapel camera"
 	},
@@ -13427,16 +13393,12 @@
 /turf/open/floor/vault,
 /area/engine/engine_room)
 "dwC" = (
-/obj/machinery/camera{
-	c_tag = "Central Primary Hallway - Engineering Department Antichamber";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/trimline/yellow/filled/line,
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "dwQ" = (
@@ -13650,10 +13612,13 @@
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/glass/beaker,
 /obj/item/reagent_containers/dropper,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Xenobiology - Research Area";
 	name = "xenobiology camera";
 	network = list("ss13","xeno","rd")
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/open/floor/iron/grid/steel,
 /area/science/xenobiology)
@@ -14418,11 +14383,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Bridge - Dock - Docking Area";
-	dir = 6;
-	name = "command camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/plating/airless{
 	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
@@ -14772,22 +14733,11 @@
 /turf/open/floor/iron/techmaint,
 /area/security/execution/education)
 "dOV" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/general/hidden{
 	dir = 5
 	},
 /turf/open/floor/iron/sepia,
 /area/maintenance/department/engine)
-"dOX" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals - Aft Arm - Far";
-	dir = 10;
-	name = "hallway camera"
-	},
-/turf/open/floor/iron/dark,
-/area/hallway/secondary/entry)
 "dOZ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -15082,7 +15032,7 @@
 /obj/item/tank/internals/emergency_oxygen/engi,
 /obj/item/stack/cable_coil/white,
 /obj/effect/turf_decal/bot,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Engineering - Fore";
 	name = "engineering camera"
 	},
@@ -15484,7 +15434,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Dormitories - Central";
 	name = "dormitories camera"
 	},
@@ -15982,7 +15932,7 @@
 /obj/item/clothing/head/collectable/HoP{
 	name = "novelty HoP hat"
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Bridge - Corporate Showroom";
 	name = "command camera"
 	},
@@ -16003,9 +15953,6 @@
 	},
 /obj/item/computer_hardware/hard_drive/role/medical{
 	pixel_x = -3
-	},
-/obj/machinery/light{
-	dir = 1
 	},
 /obj/effect/turf_decal/tile/blue/fourcorners/contrasted,
 /obj/structure/cable/yellow{
@@ -16448,6 +16395,9 @@
 /obj/machinery/atmospherics/pipe/simple/general/hidden{
 	dir = 4
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/open/floor/iron/sepia,
 /area/maintenance/department/engine)
 "enJ" = (
@@ -16613,11 +16563,6 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/machinery/camera{
-	c_tag = "Chapel - Aft";
-	dir = 5;
-	name = "chapel camera"
-	},
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -30
 	},
@@ -16628,6 +16573,7 @@
 	dir = 1
 	},
 /obj/machinery/light/small,
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark,
 /area/chapel/main)
 "ere" = (
@@ -17849,17 +17795,13 @@
 /obj/structure/sign/poster/official/do_not_question{
 	pixel_y = 32
 	},
-/obj/machinery/camera{
-	c_tag = "Arrivals Customs";
-	dir = 9;
-	name = "customs camera"
-	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/security/checkpoint/customs)
 "eIl" = (
@@ -18082,7 +18024,7 @@
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/structure/table,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Central Primary Hallway - Port Aft Central";
 	name = "hallway camera"
 	},
@@ -18208,11 +18150,6 @@
 /turf/open/floor/carpet/royalblue,
 /area/bridge/meeting_room/council)
 "eKW" = (
-/obj/machinery/camera{
-	c_tag = "Escape Shuttle Hallway - Fore";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/effect/landmark/start/assistant,
 /obj/structure/chair{
 	dir = 1
@@ -18965,9 +18902,7 @@
 /turf/open/floor/iron/dark,
 /area/security/prison/shielded)
 "eTf" = (
-/obj/machinery/camera/directional/north{
-	c_tag = "Xenobiology - Cell 5";
-	name = "xenobiology camera";
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","xeno","rd")
 	},
 /turf/open/floor/iron/grid/steel,
@@ -18986,17 +18921,13 @@
 /turf/open/floor/iron/grid/steel,
 /area/bridge)
 "eTn" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals - Fore Arm";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /obj/machinery/newscaster{
 	pixel_y = 31
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "eTo" = (
@@ -19437,7 +19368,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
 /obj/item/toy/figure/borg,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "AI - Teleporter - Port";
 	name = "ai camera";
 	network = list("minisat");
@@ -19564,7 +19495,7 @@
 /turf/open/floor/plating,
 /area/security/checkpoint/medical)
 "eYX" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Science - Research Director's Office";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -19839,11 +19770,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/machinery/camera{
-	c_tag = "Garden - Starboard";
-	dir = 9;
-	name = "garden camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark/corner{
 	dir = 1
 	},
@@ -19876,12 +19803,8 @@
 /obj/machinery/airalarm/directional/east{
 	pixel_x = 22
 	},
-/obj/machinery/camera{
-	c_tag = "Escape Shuttle Hallway - Aft";
-	dir = 6;
-	name = "hallway camera"
-	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "fdE" = (
@@ -20246,7 +20169,7 @@
 /obj/item/restraints/handcuffs{
 	pixel_y = 3
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Bridge - Port";
 	name = "command camera"
 	},
@@ -20423,12 +20346,8 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "AI - Teleporter - Starboard";
-	dir = 5;
-	name = "ai camera";
-	network = list("minisat");
-	start_active = 1
+/obj/machinery/camera/autoname/directional/south{
+	network = list("minisat")
 	},
 /turf/open/floor/iron/tech/grid,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
@@ -20649,7 +20568,7 @@
 /turf/open/floor/iron/grid/steel,
 /area/hallway/secondary/exit/departure_lounge)
 "foB" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security - Departures Fore"
 	},
 /obj/structure/chair/fancy/bench/left{
@@ -20903,9 +20822,8 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Security Post - Medbay";
-	dir = 5
+/obj/machinery/camera/autoname/directional/south{
+	network = list("ss13","medbay")
 	},
 /turf/open/floor/iron,
 /area/security/checkpoint/medical)
@@ -21223,11 +21141,7 @@
 	pixel_x = -28;
 	pixel_y = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Bridge - Council Chamber";
-	dir = 10;
-	name = "command camera"
-	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/wood,
 /area/bridge/meeting_room/council)
 "fuW" = (
@@ -21638,7 +21552,7 @@
 /area/hallway/primary/fore)
 "fAw" = (
 /obj/effect/landmark/start/lawyer,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Courtroom - Center"
 	},
 /obj/machinery/light{
@@ -21717,15 +21631,6 @@
 /obj/machinery/recharger,
 /turf/open/floor/iron,
 /area/security/checkpoint/escape)
-"fBC" = (
-/obj/machinery/camera{
-	c_tag = "Xenobiology - Cell 4";
-	dir = 9;
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
-/turf/open/floor/iron/grid/steel,
-/area/science/xenobiology)
 "fBJ" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/delivery,
@@ -21814,7 +21719,7 @@
 	},
 /area/ai_monitored/turret_protected/ai)
 "fDc" = (
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "AI Chamber - Fore";
 	name = "motion-sensitive ai camera";
 	network = list("aichamber")
@@ -21974,7 +21879,7 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2{
 	dir = 10
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Research Director's Quarters";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -22268,7 +22173,7 @@
 /obj/item/stock_parts/micro_laser/high,
 /obj/item/stock_parts/micro_laser/high,
 /obj/item/stock_parts/micro_laser/high,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Technology Storage";
 	name = "engineering camera"
 	},
@@ -22315,13 +22220,7 @@
 /obj/machinery/airalarm/directional/west{
 	pixel_x = -22
 	},
-/obj/machinery/camera{
-	c_tag = "AI - Antechamber";
-	dir = 10;
-	name = "ai camera";
-	network = list("minisat");
-	start_active = 1
-	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/bridge)
 "fIN" = (
@@ -22561,11 +22460,7 @@
 	name = "Bridge RC";
 	pixel_x = 30
 	},
-/obj/machinery/camera{
-	c_tag = "Bridge - Command Chair";
-	dir = 6;
-	name = "command camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/grid/steel,
 /area/bridge)
 "fLF" = (
@@ -22802,14 +22697,10 @@
 "fOg" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - Auxiliary Security Entrance";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/structure/disposalpipe/trunk{
 	dir = 2
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/hallway/primary/fore)
 "fOi" = (
@@ -23763,11 +23654,6 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Canister Storage";
-	dir = 9;
-	name = "atmospherics camera"
-	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 4
 	},
@@ -24070,7 +23956,7 @@
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hos)
 "geA" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Supermatter Engine - Laser room";
 	name = "engineering camera";
 	network = list("ss13","engine")
@@ -24316,15 +24202,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/central)
-"ghK" = (
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/bar/opposingcorners{
-	dir = 1
-	},
-/turf/open/floor/iron/dark,
-/area/crew_quarters/bar)
 "ghQ" = (
 /obj/effect/spawner/structure/window/reinforced/tinted,
 /turf/open/floor/plating,
@@ -24391,13 +24268,6 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -26
 	},
-/obj/machinery/camera{
-	c_tag = "AI - Foyer";
-	dir = 10;
-	name = "ai camera";
-	network = list("minisat");
-	start_active = 1
-	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 8
 	},
@@ -24406,6 +24276,11 @@
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner{
 	dir = 4
+	},
+/obj/machinery/camera/motion/directional/west{
+	c_tag = "AI Chamber - Port";
+	name = "motion-sensitive ai camera";
+	network = list("aichamber")
 	},
 /turf/open/floor/iron/dark,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
@@ -25730,7 +25605,7 @@
 	pixel_y = 23;
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Atmospherics - Turbines";
 	name = "atmospherics camera"
 	},
@@ -25782,11 +25657,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/obj/machinery/camera{
-	c_tag = "Bridge - Fore";
-	dir = 5;
-	name = "command camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/grid/steel,
 /area/bridge)
 "gAu" = (
@@ -26170,7 +26041,7 @@
 /turf/open/floor/iron/checker,
 /area/quartermaster/storage)
 "gEP" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Medbay - Genetics Desk";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -26754,9 +26625,8 @@
 /obj/machinery/atmospherics/components/trinary/mixer{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Science - Toxins Mixing Lab";
-	dir = 5;
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Science - Experimentor";
 	name = "science camera";
 	network = list("ss13","rd")
 	},
@@ -26938,16 +26808,12 @@
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Aft";
-	dir = 5;
-	name = "atmospherics camera"
-	},
 /obj/machinery/requests_console{
 	department = "Atmospherics";
 	name = "Atmospherics RC";
 	pixel_y = -30
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark/side,
 /area/engine/atmos)
 "gOY" = (
@@ -27303,11 +27169,7 @@
 /area/quartermaster/exploration_prep)
 "gTR" = (
 /obj/item/kirbyplants/random,
-/obj/machinery/camera{
-	c_tag = "Library - Aft";
-	dir = 5;
-	name = "library camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark,
 /area/library)
 "gTS" = (
@@ -27371,7 +27233,7 @@
 /turf/open/floor/iron/dark,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
 "gUV" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Escape Shuttle Hallway - Aft";
 	name = "hallway camera"
 	},
@@ -27658,11 +27520,6 @@
 /turf/open/floor/iron/techmaint,
 /area/security/checkpoint)
 "gYZ" = (
-/obj/machinery/camera{
-	c_tag = "Escape Shuttle Hallway - Central";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/machinery/light/small,
 /obj/structure/chair{
 	dir = 1
@@ -27670,6 +27527,7 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 8
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark,
 /area/hallway/secondary/exit/departure_lounge)
 "gZd" = (
@@ -27833,11 +27691,6 @@
 /turf/open/floor/iron/grid/steel,
 /area/bridge)
 "hbo" = (
-/obj/machinery/camera/motion{
-	c_tag = "E.V.A. Suit Storage";
-	dir = 10;
-	name = "motion-sensitive command camera"
-	},
 /obj/structure/sign/poster/contraband/missing_gloves{
 	pixel_x = -32
 	},
@@ -27847,6 +27700,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-4"
 	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/ai_monitored/storage/eva)
 "hbD" = (
@@ -28126,7 +27980,7 @@
 /turf/open/floor/iron/dark,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
 "hfY" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Vacant Commissary #1"
 	},
 /obj/machinery/newscaster{
@@ -28679,7 +28533,7 @@
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "hmI" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Port Primary Hallway - Center";
 	name = "hallway camera"
 	},
@@ -29063,12 +28917,8 @@
 /turf/open/floor/iron/dark,
 /area/medical/surgery)
 "htj" = (
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - Bow";
-	dir = 10;
-	name = "hallway camera"
-	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "htv" = (
@@ -29520,18 +29370,14 @@
 /obj/item/stack/sheet/mineral/plasma{
 	amount = 20
 	},
-/obj/machinery/camera{
-	c_tag = "AI - Maintenance";
-	dir = 5;
-	name = "ai camera";
-	network = list("minisat");
-	start_active = 1
-	},
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner{
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner{
 	dir = 4
+	},
+/obj/machinery/camera/autoname/directional/south{
+	network = list("minisat")
 	},
 /turf/open/floor/iron/dark,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
@@ -29665,7 +29511,7 @@
 /obj/effect/turf_decal/guideline/guideline_out/blue{
 	dir = 1
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Starboard Primary Hallway - Port";
 	name = "hallway camera"
 	},
@@ -29903,14 +29749,6 @@
 	},
 /turf/open/floor/iron,
 /area/security/checkpoint/medical)
-"hGi" = (
-/obj/machinery/camera/directional/north{
-	c_tag = "Xenobiology - Cell 1";
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
-/turf/open/floor/iron/grid/steel,
-/area/science/xenobiology)
 "hGw" = (
 /obj/machinery/holopad,
 /obj/effect/turf_decal/box,
@@ -30003,8 +29841,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 1
 	},
-/obj/machinery/camera/autoname{
-	dir = 6;
+/obj/machinery/camera/autoname/directional/east{
 	network = list("ss13","prison")
 	},
 /turf/open/floor/iron/dark,
@@ -30046,7 +29883,7 @@
 /obj/structure/chair/fancy/sofa/old/left{
 	color = "#742925"
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Medbay - Break Room";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -30708,7 +30545,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/trimline/purple/filled/warning,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Science - Research Division Access";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -30978,14 +30815,11 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
-/obj/machinery/camera{
-	c_tag = "Supermatter Engine - Port";
-	dir = 10;
-	name = "engineering camera";
-	network = list("ss13","engine")
-	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
+	},
+/obj/machinery/camera/autoname/directional/west{
+	network = list("ss13","engine")
 	},
 /turf/open/floor/vault,
 /area/engine/engine_room)
@@ -32150,11 +31984,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Port Primary Hallway - Roboticists passageway";
-	dir = 5;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "iix" = (
@@ -32564,7 +32394,7 @@
 /turf/open/floor/iron/dark,
 /area/security/execution/transfer)
 "ioe" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Starboard Primary Hallway - AI antechamber Entrance";
 	name = "hallway camera"
 	},
@@ -32582,7 +32412,7 @@
 /turf/open/floor/prison,
 /area/security/prison)
 "ioj" = (
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Engineering Maintenance - Center";
 	name = "engineering camera"
 	},
@@ -32848,10 +32678,8 @@
 /turf/open/floor/iron/grid,
 /area/medical/virology)
 "irr" = (
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Air Supply";
-	dir = 5;
-	name = "atmospherics camera"
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Atmospherics - Plasma Cell"
 	},
 /turf/open/floor/engine/air/light,
 /area/engine/atmos)
@@ -32956,14 +32784,6 @@
 	dir = 1
 	},
 /area/crew_quarters/dorms)
-"isw" = (
-/obj/machinery/camera/directional/north{
-	c_tag = "Xenobiology - Cell 3";
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
-/turf/open/floor/iron/grid/steel,
-/area/science/xenobiology)
 "isz" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
@@ -35062,7 +34882,7 @@
 /turf/open/floor/iron,
 /area/quartermaster/office)
 "iSn" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Xenobiology - Fore";
 	name = "xenobiology camera";
 	network = list("ss13","xeno","rd")
@@ -35153,14 +34973,10 @@
 	dir = 1
 	},
 /obj/machinery/light,
-/obj/machinery/camera{
-	c_tag = "Bridge - Head of Personnel's Office";
-	dir = 5;
-	name = "command camera"
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
 "iTB" = (
@@ -35354,7 +35170,7 @@
 /turf/open/floor/iron,
 /area/crew_quarters/fitness/recreation)
 "iWh" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Atmospherics - Fore Port";
 	name = "atmospherics camera"
 	},
@@ -35850,13 +35666,12 @@
 /turf/open/floor/engine,
 /area/ai_monitored/turret_protected/ai)
 "jdc" = (
-/obj/machinery/camera{
-	c_tag = "Cargo - Mining Office";
-	dir = 5;
-	name = "cargo camera"
-	},
 /obj/effect/turf_decal/trimline/brown/filled/line,
 /obj/structure/reagent_dispensers/fueltank,
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Cargo - Quartermaster's Office";
+	name = "cargo camera"
+	},
 /turf/open/floor/iron/dark,
 /area/quartermaster/miningdock)
 "jdf" = (
@@ -36457,17 +36272,13 @@
 /area/hallway/primary/port)
 "jkL" = (
 /obj/item/kirbyplants/random,
-/obj/machinery/camera{
-	c_tag = "Library Gameroom";
-	dir = 6;
-	name = "library camera"
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
 /obj/machinery/computer/security/telescreen/entertainment{
 	pixel_x = 32
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/wood,
 /area/library)
 "jlz" = (
@@ -36734,7 +36545,7 @@
 /obj/machinery/airalarm/directional/east{
 	pixel_x = 22
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Telecomms - Antechamber";
 	name = "telecomms camera";
 	network = list("ss13","tcomms")
@@ -37212,7 +37023,7 @@
 	name = "Sign door";
 	req_one_access = "25"
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Cafeteria antechamber";
 	name = "service camera"
 	},
@@ -37785,7 +37596,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 4
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Primary Restroom";
 	name = "Restroom camera"
 	},
@@ -37987,6 +37798,11 @@
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/west{
+	c_tag = "Medbay - Surgery";
+	name = "medbay camera";
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/iron/white,
 /area/medical/medbay/lobby)
 "jIj" = (
@@ -38146,7 +37962,7 @@
 /turf/open/floor/grass,
 /area/hydroponics/garden)
 "jKb" = (
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Engineering Maintenance - Starboard";
 	name = "engineering camera"
 	},
@@ -38217,14 +38033,11 @@
 	pixel_x = -3;
 	pixel_y = 3
 	},
-/obj/machinery/camera/directional/west{
-	c_tag = "Primary Tool Storage";
-	name = "engineering camera"
-	},
 /obj/item/radio/intercom{
 	pixel_x = -28
 	},
 /obj/effect/turf_decal/tile/yellow/fourcorners/contrasted,
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron,
 /area/storage/primary)
 "jLa" = (
@@ -38543,13 +38356,12 @@
 	},
 /obj/machinery/hydroponics/constructable,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera/autoname{
-	dir = 5;
-	network = list("ss13","prison")
-	},
 /obj/machinery/light,
 /obj/structure/window/reinforced{
 	dir = 8
+	},
+/obj/machinery/camera/autoname/directional/south{
+	network = list("ss13","prison")
 	},
 /turf/open/floor/iron/techmaint,
 /area/security/prison)
@@ -38584,11 +38396,6 @@
 /turf/open/floor/plating,
 /area/maintenance/aft)
 "jPA" = (
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - Central Aft";
-	dir = 6;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/guideline/guideline_in/red{
 	dir = 8
 	},
@@ -38598,6 +38405,7 @@
 /obj/effect/turf_decal/guideline/guideline_out/blue{
 	dir = 8
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "jPK" = (
@@ -38732,17 +38540,13 @@
 /obj/effect/turf_decal/guideline/guideline_in_T/red{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Central Primary Hallway - Security Main Entrance";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 1
 	},
 /obj/machinery/newscaster{
 	pixel_y = -29
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "jQL" = (
@@ -38810,14 +38614,14 @@
 /obj/effect/turf_decal/trimline/red/line{
 	dir = 8
 	},
-/obj/machinery/camera/autoname/directional/east{
-	network = list("ss13","prison")
-	},
 /obj/machinery/light{
 	dir = 4
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
+	},
+/obj/machinery/camera/autoname/directional/east{
+	network = list("ss13","prison")
 	},
 /turf/open/floor/prison,
 /area/security/prison)
@@ -39384,7 +39188,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Locker Room - Starboard";
 	name = "dormitories camera"
 	},
@@ -39447,15 +39251,11 @@
 /turf/open/floor/iron/dark,
 /area/ai_monitored/storage/eva)
 "jZL" = (
-/obj/machinery/camera{
-	c_tag = "Engineering Maintenance - Auxiliary Atmospheric entrance";
-	dir = 6;
-	name = "engineering camera"
-	},
 /obj/effect/turf_decal/stripes/corner,
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/dark,
 /area/maintenance/department/engine)
 "jZV" = (
@@ -39568,7 +39368,7 @@
 /obj/machinery/vending/wallmed{
 	pixel_x = -24
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Medbay - Surgery";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -41172,14 +40972,10 @@
 /turf/open/floor/grass/no_border,
 /area/hallway/primary/port)
 "kvE" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals - Aft Arm";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "kvJ" = (
@@ -42066,7 +41862,7 @@
 	dir = 4;
 	pixel_x = -26
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Teleporter";
 	name = "command camera"
 	},
@@ -42327,7 +42123,7 @@
 /obj/machinery/status_display/evac{
 	pixel_y = -32
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Fore Primary Hallway - Starboard";
 	name = "hallway camera"
 	},
@@ -42494,7 +42290,7 @@
 	},
 /area/quartermaster/office)
 "kPe" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Engineering - Central";
 	name = "engineering camera"
 	},
@@ -42595,12 +42391,8 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "AI - Maintenance - Power Station";
-	dir = 9;
-	name = "ai camera";
-	network = list("minisat");
-	start_active = 1
+/obj/machinery/camera/autoname/directional/north{
+	network = list("minisat")
 	},
 /turf/open/floor/iron/tech/grid,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
@@ -42679,7 +42471,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 26
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Garden - Port";
 	name = "garden camera"
 	},
@@ -42744,7 +42536,7 @@
 /obj/machinery/newscaster{
 	pixel_y = -28
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Cryogenic Lounge";
 	name = "recreation camera"
 	},
@@ -42809,7 +42601,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Medbay - Chemistry";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -43210,7 +43002,7 @@
 /turf/open/floor/plating,
 /area/engine/gravity_generator)
 "kWN" = (
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","security")
 	},
 /turf/open/floor/plating,
@@ -43271,7 +43063,7 @@
 /turf/open/floor/prison,
 /area/security/prison)
 "kXo" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Telecomms - Server Room";
 	name = "telecomms camera";
 	network = list("ss13","tcomms")
@@ -43828,11 +43620,8 @@
 "lcG" = (
 /obj/item/kirbyplants/random,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4,
-/obj/machinery/camera/motion/directional/east{
-	c_tag = "E.V.A. Storage";
-	name = "motion-sensitive command camera"
-	},
 /obj/item/toy/plush/moth/firewatch,
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/dark/side{
 	dir = 5
 	},
@@ -43876,13 +43665,10 @@
 /obj/machinery/airalarm/directional/north{
 	pixel_y = 22
 	},
-/obj/machinery/camera{
-	c_tag = "Food Commissary";
-	dir = 9
-	},
 /obj/effect/turf_decal/tile/bar/opposingcorners{
 	dir = 1
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/cafeteria,
 /area/vacant_room/commissary/commissaryFood)
 "ldq" = (
@@ -43930,7 +43716,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Aft hallway";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -44036,7 +43822,7 @@
 /area/medical/apothecary)
 "lfr" = (
 /obj/effect/turf_decal/stripes/line,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Arrivals - Aft Arm - Center";
 	name = "hallway camera"
 	},
@@ -44581,7 +44367,7 @@
 /turf/open/floor/iron/white,
 /area/medical/medbay/lobby)
 "lkP" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Service Hallways";
 	name = "service camera"
 	},
@@ -44653,7 +44439,7 @@
 /obj/structure/sign/poster/official/random{
 	pixel_x = 32
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Dormitories - Fore";
 	name = "dormitories camera"
 	},
@@ -44962,7 +44748,7 @@
 /turf/open/floor/iron,
 /area/quartermaster/sorting)
 "lpz" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Port Primary Hallway - Fore";
 	name = "hallway camera"
 	},
@@ -45046,13 +44832,13 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/exit/departure_lounge)
 "lqv" = (
-/obj/machinery/camera{
-	c_tag = "Science - Toxins Launch Site";
-	dir = 9;
-	name = "science camera"
-	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2{
 	dir = 6
+	},
+/obj/machinery/camera/autoname/directional/north{
+	c_tag = "Xenobiology - Research Area";
+	name = "xenobiology camera";
+	network = list("ss13","xeno","rd")
 	},
 /turf/open/floor/iron/grid/steel,
 /area/science/misc_lab)
@@ -45465,7 +45251,7 @@
 /obj/machinery/airalarm/directional/north{
 	pixel_y = 22
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Medbay - Aft Port";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -45590,7 +45376,7 @@
 /obj/effect/turf_decal/guideline/guideline_out/blue{
 	dir = 8
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Port Primary Hallway - Port";
 	name = "hallway camera"
 	},
@@ -46242,16 +46028,13 @@
 /area/science/shuttledock)
 "lHa" = (
 /obj/machinery/light/small,
-/obj/machinery/camera{
-	c_tag = "Courtroom - Aft";
-	dir = 5
-	},
 /obj/structure/sign/poster/official/obey{
 	pixel_y = -32
 	},
 /obj/structure/chair/fancy/bench/pew/left{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark,
 /area/security/courtroom)
 "lHb" = (
@@ -46416,17 +46199,13 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Library - Museum";
-	dir = 9;
-	name = "library camera"
-	},
 /obj/structure/sign/painting/library{
 	pixel_x = -32
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2{
 	dir = 6
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/wood,
 /area/library/lounge)
 "lJJ" = (
@@ -46458,7 +46237,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Library - Entrance";
 	name = "library camera"
 	},
@@ -46663,11 +46442,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
 	},
-/obj/machinery/camera{
-	c_tag = "Arrivals Docking area - Fore";
-	dir = 6;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/engine{
 	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
@@ -46788,7 +46563,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Technology Storage - Secure";
 	name = "engineering camera"
 	},
@@ -46847,10 +46622,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Medbay - Fore";
-	dir = 9;
-	name = "medbay camera";
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","medbay")
 	},
 /turf/open/floor/iron/white,
@@ -46929,15 +46701,6 @@
 	dir = 8
 	},
 /area/ai_monitored/storage/eva)
-"lRk" = (
-/obj/machinery/camera{
-	c_tag = "Xenobiology - Cell 2";
-	dir = 9;
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
-/turf/open/floor/iron/grid/steel,
-/area/science/xenobiology)
 "lRo" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8
@@ -46998,7 +46761,7 @@
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "lSo" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Starboard Primary Hallway - Starboard";
 	name = "hallway camera"
 	},
@@ -47450,7 +47213,7 @@
 /obj/item/book/manual/wiki/security_space_law,
 /obj/item/radio,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security Post - Arrivals"
 	},
 /obj/effect/turf_decal/trimline/red/filled/line{
@@ -47497,7 +47260,7 @@
 /obj/item/storage/firstaid/regular,
 /obj/item/reagent_containers/syringe,
 /obj/effect/turf_decal/bot,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security - Medbay"
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners/contrasted,
@@ -47934,7 +47697,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/dorms)
 "mfv" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Toxins Secure Storage";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -48068,8 +47831,7 @@
 /obj/machinery/computer/security{
 	dir = 8
 	},
-/obj/machinery/camera/autoname{
-	dir = 6;
+/obj/machinery/camera/autoname/directional/east{
 	network = list("ss13","security")
 	},
 /turf/open/floor/iron/dark,
@@ -48317,7 +48079,7 @@
 	id = "medcell";
 	name = "Medical Cell Locker"
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security Post - Arrivals"
 	},
 /obj/effect/turf_decal/trimline/red/filled/line{
@@ -49729,11 +49491,7 @@
 /obj/structure/sign/poster/official/cleanliness{
 	pixel_x = -32
 	},
-/obj/machinery/camera{
-	c_tag = "Hydroponics - Port";
-	dir = 10;
-	name = "service camera"
-	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/hydroponics)
 "mEH" = (
@@ -49908,7 +49666,7 @@
 /turf/open/floor/iron/sepia,
 /area/engine/engineering)
 "mGW" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Auxiliary Restroom";
 	name = "restroom camera"
 	},
@@ -50335,7 +50093,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Xenobiology - Secure Cell";
 	name = "xenobiology camera";
 	network = list("ss13","xeno","rd")
@@ -50392,7 +50150,7 @@
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "mNx" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Central Primary Hallway - Central Port";
 	name = "hallway camera"
 	},
@@ -51037,7 +50795,7 @@
 	name = "Virology Requests Console";
 	pixel_x = 30
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Virology - Virology Breakroom";
 	name = "virology camera";
 	network = list("ss13","medbay")
@@ -51508,7 +51266,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 8
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Port Primary Hallway - Mech bay";
 	name = "hallway camera"
 	},
@@ -51793,7 +51551,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 30
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Atmospherics - Distro Loop";
 	name = "atmospherics camera"
 	},
@@ -51972,7 +51730,7 @@
 /area/library/lounge)
 "njt" = (
 /obj/machinery/power/tesla_coil,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Engineering - Secure Storage";
 	name = "engineering camera"
 	},
@@ -52681,7 +52439,7 @@
 /obj/structure/bed,
 /obj/item/bedsheet/medical,
 /obj/machinery/iv_drip,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Medbay - Recovery Room";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -53196,7 +52954,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Courtroom - Fore"
 	},
 /obj/structure/chair/fancy/bench/pew/right{
@@ -54270,7 +54028,7 @@
 /turf/open/floor/plating,
 /area/construction)
 "nPP" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Unique Commissary"
 	},
 /turf/open/floor/plating,
@@ -54880,7 +54638,7 @@
 /area/bridge/meeting_room/council)
 "nZD" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Atmospherics - Engine Passage";
 	name = "atmospherics camera"
 	},
@@ -55285,13 +55043,10 @@
 /turf/open/floor/iron,
 /area/hallway/primary/fore)
 "odz" = (
-/obj/machinery/camera{
-	c_tag = "Supermatter Engine - Thermo Electric Generator";
-	dir = 5;
-	name = "engineering camera";
+/obj/machinery/firealarm/directional/south,
+/obj/machinery/camera/autoname/directional/south{
 	network = list("ss13","engine")
 	},
-/obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/engine/engine_room)
 "odD" = (
@@ -55612,11 +55367,7 @@
 /turf/open/floor/iron/techmaint,
 /area/quartermaster/exploration_prep)
 "ojt" = (
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Custom shuttle dock";
-	dir = 9;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/catwalk_floor,
 /area/drydock)
 "oju" = (
@@ -56005,11 +55756,7 @@
 /obj/structure/sign/nanotrasen{
 	pixel_y = 32
 	},
-/obj/machinery/camera{
-	c_tag = "Starboard Primary Hallway - Central";
-	dir = 9;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "oon" = (
@@ -56648,11 +56395,6 @@
 /turf/open/floor/iron/dark,
 /area/quartermaster/storage)
 "owV" = (
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - Central";
-	dir = 6;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/guideline/guideline_out_arrow_con/blue{
 	dir = 9
 	},
@@ -56662,6 +56404,7 @@
 /obj/effect/turf_decal/guideline/guideline_in_arrow_con/red{
 	dir = 9
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron,
 /area/hallway/primary/fore)
 "owW" = (
@@ -56901,13 +56644,10 @@
 /obj/item/computer_hardware/hard_drive/role/lawyer{
 	pixel_x = -5
 	},
-/obj/machinery/camera{
-	c_tag = "Lawyer's Office";
-	dir = 5
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/wood,
 /area/lawoffice)
 "oBN" = (
@@ -57074,7 +56814,7 @@
 /obj/structure/sign/poster/official/do_not_question{
 	pixel_y = -32
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Vacant Office"
 	},
 /obj/item/camera_film{
@@ -57087,7 +56827,7 @@
 "oDB" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/lamp,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Cargo - Quartermaster's Quarters";
 	name = "cargo camera"
 	},
@@ -57129,7 +56869,7 @@
 /obj/effect/turf_decal/guideline/guideline_mid/darkblue{
 	dir = 1
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Fore Primary Hallway - Security shuttle";
 	name = "hallway camera"
 	},
@@ -57258,7 +56998,7 @@
 	},
 /obj/machinery/computer/rdservercontrol,
 /obj/effect/turf_decal/bot,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Science - Server Room";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -57598,7 +57338,7 @@
 "oKv" = (
 /obj/machinery/computer/objective,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Exploration Preparation";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -59374,7 +59114,7 @@
 /turf/open/floor/iron,
 /area/vacant_room/commissary/commissary1)
 "pla" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Science - Research and Development";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -60945,10 +60685,7 @@
 /area/hallway/primary/port)
 "pHV" = (
 /obj/structure/filingcabinet/chestdrawer,
-/obj/machinery/camera{
-	c_tag = "Courtroom - Backroom";
-	dir = 10
-	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/lawoffice)
 "pHW" = (
@@ -61051,7 +60788,7 @@
 "pIV" = (
 /obj/machinery/atmospherics/components/unary/portables_connector/visible,
 /obj/machinery/portable_atmospherics/pump,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Atmospherics - Pumps";
 	name = "atmospherics camera"
 	},
@@ -61090,12 +60827,8 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Theatre";
-	dir = 5;
-	name = "service camera"
-	},
 /obj/machinery/firealarm/directional/south,
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/wood,
 /area/crew_quarters/theatre)
 "pJl" = (
@@ -61130,10 +60863,10 @@
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/maintenance/disposal/incinerator)
 "pJI" = (
-/obj/machinery/camera{
-	c_tag = "Science maintenance - Starboard";
-	dir = 9;
-	name = "science camera"
+/obj/machinery/camera/autoname/directional/north{
+	c_tag = "Xenobiology - Research Area";
+	name = "xenobiology camera";
+	network = list("ss13","xeno","rd")
 	},
 /turf/open/floor/iron/dark,
 /area/maintenance/department/science)
@@ -61552,7 +61285,7 @@
 /obj/machinery/computer/atmos_alert{
 	dir = 4
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Atmospherics - Desk";
 	name = "atmospherics camera"
 	},
@@ -61693,7 +61426,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 8
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Engineering - Chief Engineer's Quarters";
 	name = "engineering camera"
 	},
@@ -61868,7 +61601,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Arrivals - Fore Arm - Far";
 	name = "hallway camera"
 	},
@@ -62416,15 +62149,11 @@
 "qcu" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera{
-	c_tag = "Bar Backroom";
-	dir = 5;
-	name = "service camera"
-	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
 /obj/machinery/firealarm/directional/west,
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark,
 /area/crew_quarters/bar)
 "qcA" = (
@@ -62827,7 +62556,7 @@
 /turf/open/floor/plating,
 /area/ai_monitored/storage/eva)
 "qhL" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Recreation - port";
 	name = "recreation camera"
 	},
@@ -63242,7 +62971,7 @@
 /area/construction)
 "qmP" = (
 /obj/machinery/vending/sustenance,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Cafeteria"
 	},
 /turf/open/floor/iron/cafeteria,
@@ -63584,7 +63313,7 @@
 /obj/machinery/microwave{
 	pixel_y = 5
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Kitchen";
 	name = "service camera"
 	},
@@ -63630,7 +63359,7 @@
 /turf/open/floor/carpet,
 /area/vacant_room/office)
 "qsh" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Dormitories - Locker Room";
 	name = "dormitories camera"
 	},
@@ -63762,7 +63491,7 @@
 /turf/open/floor/iron/dark,
 /area/tcommsat/computer)
 "qtt" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Atmospherics - Mix Cell";
 	name = "atmospherics camera"
 	},
@@ -63885,10 +63614,7 @@
 "quf" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable/yellow,
-/obj/machinery/camera{
-	c_tag = "Telecomms - Server Room";
-	dir = 5;
-	name = "telecomms camera";
+/obj/machinery/camera/autoname/directional/south{
 	network = list("ss13","tcomms")
 	},
 /turf/open/floor/engine{
@@ -63899,7 +63625,7 @@
 "quh" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Cargo Bay - Starboard";
 	name = "cargo camera"
 	},
@@ -64081,7 +63807,7 @@
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/maintenance/disposal/incinerator)
 "qwL" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Arrivals - Inner corridor";
 	name = "hallway camera"
 	},
@@ -64185,7 +63911,7 @@
 	pixel_x = -28;
 	pixel_y = 1
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Escape Shuttle Hallway - Aft Central";
 	name = "hallway camera"
 	},
@@ -64873,10 +64599,7 @@
 /area/quartermaster/qm)
 "qHb" = (
 /obj/structure/reagent_dispensers/water_cooler,
-/obj/machinery/camera{
-	c_tag = "Medbay - Psychologist room";
-	dir = 6;
-	name = "medbay camera";
+/obj/machinery/camera/autoname/directional/east{
 	network = list("ss13","medbay")
 	},
 /turf/open/floor/wood,
@@ -65725,7 +65448,7 @@
 /obj/item/radio/intercom{
 	pixel_y = -28
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Science - Experimentor";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -67601,12 +67324,8 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - VIP lounge";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/machinery/firealarm/directional/north,
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/wood,
 /area/hallway/primary/aft)
 "rsJ" = (
@@ -68029,9 +67748,6 @@
 /obj/item/storage/toolbox/emergency,
 /obj/item/crowbar/red,
 /obj/structure/rack,
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/techmaint,
 /area/maintenance/solars/port)
@@ -68260,7 +67976,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Toxins Storage Passtrough";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -68302,7 +68018,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/crew_quarters/kitchen)
 "rBC" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Gambling Corner";
 	name = "service camera"
 	},
@@ -68516,7 +68232,7 @@
 /turf/open/floor/iron/dark,
 /area/engine/atmos)
 "rEf" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Auxiliary Fore Entrance";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -68571,12 +68287,6 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/camera{
-	c_tag = "Medbay - Central Port";
-	dir = 6;
-	name = "medbay camera";
-	network = list("ss13","medbay")
-	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 8
 	},
@@ -68770,7 +68480,7 @@
 /area/engine/engine_room)
 "rHf" = (
 /obj/machinery/power/apc/auto_name/directional/north,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Science - Toxins Mixing Lab Burn Chamber";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -69131,7 +68841,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
 	dir = 4
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Cargo - Foyer";
 	name = "cargo camera"
 	},
@@ -69305,7 +69015,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = 25
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Medbay - Sleepers";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -69780,7 +69490,7 @@
 	},
 /obj/item/stack/sheet/plasteel/twenty,
 /obj/item/wrench,
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Engineering - Gravity Generator Foyer";
 	name = "engineering camera"
 	},
@@ -69880,7 +69590,7 @@
 /turf/open/floor/iron/techmaint,
 /area/maintenance/department/engine)
 "rSU" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Chapel Office Antechamber";
 	name = "chapel camera"
 	},
@@ -69939,7 +69649,7 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/exit/departure_lounge)
 "rUg" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Central Primary Hallway - Courtroom Entrance";
 	name = "hallway camera"
 	},
@@ -70132,17 +69842,13 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "rWE" = (
-/obj/machinery/camera{
-	c_tag = "Port Primary Hallway - Cargo Office Entrance";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/item/radio/intercom{
 	pixel_y = 24
 	},
 /obj/effect/turf_decal/siding/white{
 	dir = 1
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "rWG" = (
@@ -70283,7 +69989,7 @@
 /obj/structure/reagent_dispensers/peppertank{
 	pixel_y = 32
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","security")
 	},
 /obj/structure/cable/yellow{
@@ -70756,18 +70462,14 @@
 /turf/open/floor/iron,
 /area/storage/primary)
 "sfg" = (
-/obj/machinery/camera{
-	c_tag = "Port Primary Hallway - Starboard";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/machinery/status_display/ai{
 	pixel_y = 32
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "sfk" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Atmospherics - Plasma Cell";
 	name = "atmospherics camera"
 	},
@@ -70805,7 +70507,7 @@
 	},
 /area/maintenance/aft)
 "sfP" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Medbay - Waiting Room";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -70926,11 +70628,7 @@
 /area/hallway/primary/fore)
 "shn" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera{
-	c_tag = "Port Primary Hallway - Starboard";
-	dir = 6;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/dark,
 /area/hallway/primary/central)
 "shs" = (
@@ -71168,7 +70866,7 @@
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "ska" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Arrivals - Lounge";
 	name = "lounge camera"
 	},
@@ -71777,14 +71475,10 @@
 /turf/open/floor/carpet/grimy,
 /area/crew_quarters/locker)
 "ssQ" = (
-/obj/machinery/camera{
-	c_tag = "Fore Primary Hallway - Port Bow";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/machinery/status_display/ai{
 	pixel_y = -32
 	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "ssT" = (
@@ -72264,11 +71958,7 @@
 /turf/open/floor/vault,
 /area/engine/engine_room)
 "syL" = (
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Security shuttle dock";
-	dir = 6;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/catwalk_floor,
 /area/drydock/security)
 "syR" = (
@@ -72371,7 +72061,7 @@
 	name = "Interrogation Intercom";
 	pixel_y = 24
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Interrogation room";
 	network = list("interrogation")
 	},
@@ -72714,7 +72404,7 @@
 /obj/item/crowbar,
 /obj/item/wirecutters,
 /obj/item/stack/cable_coil/white,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Engineering - Gear Storage";
 	name = "engineering camera"
 	},
@@ -72850,7 +72540,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security Post - Science";
 	network = list("ss13","rd")
 	},
@@ -72950,7 +72640,7 @@
 	},
 /area/quartermaster/office)
 "sGY" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Atmospherics - Port";
 	name = "atmospherics camera"
 	},
@@ -73575,7 +73265,7 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Science - Central hallway";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -73586,13 +73276,10 @@
 /turf/open/floor/iron/grid/steel,
 /area/science/research)
 "sQT" = (
-/obj/machinery/camera{
-	c_tag = "Vacant Commissary #2";
-	dir = 9
-	},
 /obj/machinery/newscaster{
 	pixel_y = 31
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/vacant_room/commissary/commissary2)
 "sRl" = (
@@ -74026,7 +73713,7 @@
 /obj/effect/turf_decal/guideline/guideline_in/red{
 	dir = 4
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Central Primary Hallway - Bow";
 	name = "hallway camera"
 	},
@@ -75356,7 +75043,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Science - Experimentor";
 	name = "science camera";
 	network = list("ss13","rd")
@@ -76799,7 +76486,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Atmospherics - Atmos Storage";
 	name = "atmospherics camera"
 	},
@@ -77211,7 +76898,7 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "tNV" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Medbay - Genetics Lab";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -77502,7 +77189,7 @@
 /turf/open/floor/catwalk_floor,
 /area/security/checkpoint/escape)
 "tQo" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Bridge - Dock - Aft";
 	name = "command camera"
 	},
@@ -77510,7 +77197,7 @@
 /turf/open/floor/iron/dark,
 /area/bridge)
 "tQu" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Port Primary Hallway - Checkpoint";
 	name = "hallway camera"
 	},
@@ -77813,7 +77500,7 @@
 /turf/open/floor/iron/dark,
 /area/bridge/showroom/corporate)
 "tUe" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Atmospherics - Nitrous Oxide Cell";
 	name = "atmospherics camera"
 	},
@@ -78138,7 +77825,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Supermatter Engine - Backup Starboard";
 	name = "engineering camera";
 	network = list("ss13","engine")
@@ -78181,12 +77868,12 @@
 /turf/open/floor/engine,
 /area/science/storage)
 "tZF" = (
-/obj/machinery/camera{
-	c_tag = "Science maintenance - Central";
-	dir = 9;
-	name = "science camera"
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/camera/autoname/directional/north{
+	c_tag = "Xenobiology - Research Area";
+	name = "xenobiology camera";
+	network = list("ss13","xeno","rd")
+	},
 /turf/open/floor/iron/dark,
 /area/maintenance/department/science)
 "tZK" = (
@@ -78869,7 +78556,7 @@
 	pixel_y = 6
 	},
 /obj/item/pen,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Engineering - Chief Engineer's Office";
 	name = "engineering camera"
 	},
@@ -79040,14 +78727,10 @@
 /obj/structure/railing/corner{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Central Primary Hallway - Starboard Aft Central";
-	dir = 6;
-	name = "hallway camera"
-	},
 /obj/item/radio/intercom{
 	pixel_x = 28
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "ulP" = (
@@ -79139,10 +78822,6 @@
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Security Post - Engineering";
-	dir = 9
-	},
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
@@ -79159,6 +78838,7 @@
 	pixel_x = -32;
 	pixel_y = 37
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron,
 /area/security/checkpoint/engineering)
 "umz" = (
@@ -79782,7 +79462,7 @@
 /turf/open/floor/vault,
 /area/engine/engine_room)
 "uuU" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Recreation - Cryo Lounge";
 	name = "recreation camera"
 	},
@@ -81018,12 +80698,8 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Kitchen Hatch";
-	dir = 6;
-	name = "service camera"
-	},
 /obj/machinery/firealarm/directional/east,
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/wood,
 /area/crew_quarters/bar/atrium)
 "uJg" = (
@@ -81199,11 +80875,7 @@
 /turf/open/floor/iron,
 /area/engine/atmos)
 "uLG" = (
-/obj/machinery/camera{
-	c_tag = "Port Primary Hallway - Fore";
-	dir = 10;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "uLI" = (
@@ -81289,12 +80961,6 @@
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "uNi" = (
-/obj/machinery/camera{
-	c_tag = "Xenobiology - Aft";
-	dir = 6;
-	name = "xenobiology camera";
-	network = list("ss13","xeno","rd")
-	},
 /obj/item/radio/intercom{
 	pixel_x = 28
 	},
@@ -81306,6 +80972,9 @@
 /obj/item/reagent_containers/food/drinks/soda_cans/cola{
 	pixel_x = 4;
 	pixel_y = 4
+	},
+/obj/machinery/camera/autoname/directional/east{
+	network = list("ss13","xeno","rd")
 	},
 /turf/open/floor/iron/grid/steel,
 /area/science/xenobiology)
@@ -81925,11 +81594,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 26
 	},
-/obj/machinery/camera{
-	c_tag = "Recreation - fore";
-	dir = 9;
-	name = "recreation camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -81976,7 +81641,7 @@
 "uWu" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Science - Shuttle dock";
 	name = "science camera"
 	},
@@ -82216,7 +81881,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Science maintenance - Port";
 	name = "science camera"
 	},
@@ -83005,10 +82670,8 @@
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "vih" = (
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Oxygen Supply";
-	dir = 5;
-	name = "atmospherics camera"
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Atmospherics - Plasma Cell"
 	},
 /turf/open/floor/engine/o2/light,
 /area/engine/atmos)
@@ -83528,7 +83191,7 @@
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","security")
 	},
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -83556,7 +83219,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/crew_quarters/kitchen)
 "vod" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Chapel - Starboard";
 	name = "chapel camera"
 	},
@@ -83761,7 +83424,7 @@
 /obj/effect/turf_decal/stripes/red/line,
 /obj/structure/cable,
 /obj/structure/window/plasma/reinforced,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Supermatter Chamber";
 	network = list("engine")
 	},
@@ -83941,7 +83604,7 @@
 /turf/open/floor/iron,
 /area/medical/cryo)
 "vrW" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Xenobiology - Kill Room";
 	name = "xenobiology camera";
 	network = list("ss13","xeno","rd")
@@ -84101,7 +83764,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "AI Chamber - Antechamber";
 	name = "ai camera";
 	network = list("aichamber");
@@ -84902,7 +84565,7 @@
 /area/hallway/primary/central)
 "vAj" = (
 /obj/structure/window/reinforced,
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Locker Room - Holodeck";
 	name = "dormitories camera"
 	},
@@ -85979,14 +85642,10 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/camera{
-	c_tag = "Engineering - Power Monitoring";
-	dir = 9;
-	name = "engineering camera"
-	},
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/engine/engine_smes)
 "vNZ" = (
@@ -86017,9 +85676,8 @@
 /obj/effect/turf_decal/trimline/purple/line{
 	dir = 4
 	},
-/obj/machinery/camera{
-	c_tag = "Science - Fore hallway";
-	dir = 10;
+/obj/machinery/camera/autoname/directional/west{
+	c_tag = "Research Division - Nanite Lab";
 	name = "science camera";
 	network = list("ss13","rd")
 	},
@@ -86063,11 +85721,7 @@
 /turf/open/floor/engine/light,
 /area/science/explab)
 "vOz" = (
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Escape Pod";
-	dir = 9;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/sepia,
 /area/science/shuttle)
 "vOC" = (
@@ -86164,10 +85818,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Medbay - Back entrance";
-	dir = 9;
-	name = "medbay camera";
+/obj/machinery/camera/autoname/directional/north{
 	network = list("ss13","medbay")
 	},
 /turf/open/floor/iron/white,
@@ -86250,6 +85901,7 @@
 "vQm" = (
 /obj/machinery/portable_atmospherics/canister/nitrous_oxide,
 /obj/effect/turf_decal/delivery,
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/engine/atmos)
 "vQp" = (
@@ -86340,7 +85992,7 @@
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
 "vRu" = (
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Atmospherics - Carbon Dioxide Cell";
 	name = "atmospherics camera"
 	},
@@ -86843,14 +86495,11 @@
 "vXO" = (
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer/on,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera{
-	c_tag = "Telecomms - Storage room";
-	dir = 9;
-	name = "telecomms camera";
-	network = list("ss13","tcomms")
-	},
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
 	dir = 4
+	},
+/obj/machinery/camera/autoname/directional/north{
+	network = list("ss13","tcomms")
 	},
 /turf/open/floor/iron/dark,
 /area/tcommsat/computer)
@@ -87379,7 +87028,7 @@
 /obj/machinery/airalarm/directional/east{
 	pixel_x = 22
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Central Primary Hallway - Central Fore";
 	name = "hallway camera"
 	},
@@ -87563,11 +87212,6 @@
 /turf/open/floor/vault,
 /area/engine/engine_room)
 "whB" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals Docking area - Aft";
-	dir = 5;
-	name = "hallway camera"
-	},
 /obj/structure/table/reinforced,
 /obj/item/nanite_scanner{
 	pixel_x = 4;
@@ -87586,6 +87230,11 @@
 	dir = 1
 	},
 /obj/machinery/firealarm/directional/south,
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Science - Experimentor";
+	name = "science camera";
+	network = list("ss13","rd")
+	},
 /turf/open/floor/iron/techmaint,
 /area/science/nanite)
 "whE" = (
@@ -88112,11 +87761,7 @@
 /turf/closed/wall,
 /area/chapel/main)
 "wov" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals Docking area - Aft";
-	dir = 5;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/engine{
 	initial_gas_mix = "o2=14;n2=23;TEMP=300"
 	},
@@ -88177,7 +87822,7 @@
 	dir = 9
 	},
 /obj/item/kirbyplants/random,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Bridge - Dock - Fore";
 	name = "command camera"
 	},
@@ -88297,7 +87942,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hos)
 "wqP" = (
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Starboard Primary Hallway - Telecomm entrance";
 	name = "hallway camera"
 	},
@@ -88634,11 +88279,7 @@
 /turf/open/floor/plating,
 /area/maintenance/port)
 "wuF" = (
-/obj/machinery/camera{
-	c_tag = "Arrivals - Aft Arm - Far Fore";
-	dir = 10;
-	name = "hallway camera"
-	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/hallway/secondary/entry)
 "wuK" = (
@@ -89402,7 +89043,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Atmospherics - Maintenace access";
 	name = "atmospherics camera"
 	},
@@ -89538,10 +89179,8 @@
 	},
 /area/maintenance/starboard/aft)
 "wHC" = (
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Nitrogen Cell";
-	dir = 5;
-	name = "atmospherics camera"
+/obj/machinery/camera/autoname/directional/south{
+	c_tag = "Atmospherics - Plasma Cell"
 	},
 /turf/open/floor/engine/n2/light,
 /area/engine/atmos)
@@ -89959,19 +89598,10 @@
 	},
 /turf/open/floor/iron,
 /area/quartermaster/storage)
-"wMC" = (
-/obj/machinery/light/small,
-/obj/structure/chair{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral/half/contrasted{
-	dir = 8
-	},
-/turf/open/floor/iron/dark,
-/area/hallway/secondary/exit/departure_lounge)
 "wML" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/turf_decal/bot,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/techmaint,
 /area/maintenance/solars/port)
 "wMM" = (
@@ -90091,7 +89721,7 @@
 	dir = 8
 	},
 /obj/item/paicard,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Bar";
 	name = "service camera"
 	},
@@ -90291,7 +89921,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 26
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Cargo Bay - Aft";
 	name = "cargo camera"
 	},
@@ -91330,12 +90960,8 @@
 /turf/open/floor/iron/dark,
 /area/engine/atmos)
 "xbh" = (
-/obj/machinery/camera{
-	c_tag = "Shuttle construction area - Fore";
-	dir = 9;
-	name = "hallway camera"
-	},
 /obj/machinery/firealarm/directional/north,
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/sepia,
 /area/science/shuttle)
 "xbl" = (
@@ -91388,9 +91014,6 @@
 /turf/open/floor/plating,
 /area/maintenance/aft)
 "xbT" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/item/kirbyplants/random,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 4
@@ -91569,7 +91192,7 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/yellow,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Cargo Bay - Starboard";
 	name = "cargo camera"
 	},
@@ -91614,7 +91237,7 @@
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "xdU" = (
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Port Primary Hallway - lounge";
 	name = "hallway camera"
 	},
@@ -91973,12 +91596,8 @@
 "xgP" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera{
-	c_tag = "Locker Room - Fore";
-	dir = 9;
-	name = "dormitories camera"
-	},
 /obj/structure/disposalpipe/trunk,
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/crew_quarters/locker)
 "xgX" = (
@@ -92148,7 +91767,7 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
 	},
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Chapel - Funeral Parlour";
 	name = "chapel camera"
 	},
@@ -92194,7 +91813,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Cargo - Office";
 	name = "cargo camera"
 	},
@@ -92436,15 +92055,12 @@
 	pixel_y = 30
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera{
-	c_tag = "Custodial bay";
-	dir = 9
-	},
 /obj/structure/closet/l3closet/janitor,
 /obj/item/clothing/gloves/maid,
 /obj/item/clothing/accessory/maidapron,
 /obj/item/clothing/under/costume/maid,
 /obj/item/grenade/clusterbuster/cleaner,
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark/side{
 	dir = 5
 	},
@@ -92503,7 +92119,7 @@
 /obj/effect/turf_decal/guideline/guideline_in_arrow_con/blue,
 /obj/effect/turf_decal/guideline/guideline_mid_arrow_con/purple,
 /obj/machinery/firealarm/directional/north,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Central Primary Hallway - Port";
 	name = "hallway camera"
 	},
@@ -93040,7 +92656,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Engineering - Shared Storage";
 	name = "engineering camera"
 	},
@@ -93224,7 +92840,7 @@
 	name = "Cargo Checkpoint RC";
 	pixel_y = 30
 	},
-/obj/machinery/camera/directional/east{
+/obj/machinery/camera/autoname/directional/east{
 	c_tag = "Security Post - Cargo"
 	},
 /obj/effect/turf_decal/trimline/red/filled/line{
@@ -93353,7 +92969,7 @@
 /obj/machinery/airalarm/directional/north{
 	pixel_y = 22
 	},
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Medbay - Sleepers";
 	name = "medbay camera";
 	network = list("ss13","medbay")
@@ -93682,7 +93298,7 @@
 "xzJ" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/ore_box,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Cargo - Mining Dock";
 	name = "cargo camera"
 	},
@@ -93783,11 +93399,6 @@
 	pixel_y = 1
 	},
 /obj/effect/turf_decal/tile/blue,
-/obj/machinery/camera{
-	c_tag = "Library - Port";
-	dir = 10;
-	name = "library camera"
-	},
 /turf/open/floor/iron/white,
 /area/medical/medbay/lobby)
 "xAA" = (
@@ -93851,11 +93462,6 @@
 /turf/open/floor/carpet/red,
 /area/crew_quarters/bar/atrium)
 "xBr" = (
-/obj/machinery/camera{
-	c_tag = "Central Primary Hallway - Recreation area entrance";
-	dir = 6;
-	name = "hallway camera"
-	},
 /obj/effect/turf_decal/guideline/guideline_in/red{
 	dir = 8
 	},
@@ -93865,6 +93471,7 @@
 /obj/effect/turf_decal/guideline/guideline_mid/purple{
 	dir = 4
 	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "xBu" = (
@@ -94535,11 +94142,7 @@
 /obj/machinery/atmospherics/pipe/manifold/yellow/visible{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Atmospherics - Center";
-	dir = 5;
-	name = "atmospherics camera"
-	},
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/iron/dark/side,
 /area/engine/atmos)
 "xHi" = (
@@ -95174,15 +94777,11 @@
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "xMo" = (
-/obj/machinery/camera{
-	c_tag = "Locker Room - Aft";
-	dir = 10;
-	name = "dormitories camera"
-	},
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
 	dir = 8
 	},
 /obj/machinery/firealarm/directional/west,
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron,
 /area/crew_quarters/locker)
 "xMs" = (
@@ -95292,7 +94891,7 @@
 /obj/structure/sign/poster/contraband/random{
 	pixel_y = -32
 	},
-/obj/machinery/camera/directional/south{
+/obj/machinery/camera/autoname/directional/south{
 	c_tag = "Theatre - Backstage";
 	name = "service camera"
 	},
@@ -95763,7 +95362,7 @@
 "xSF" = (
 /obj/effect/spawner/randomvend/snack,
 /obj/effect/turf_decal/delivery,
-/obj/machinery/camera/directional/west{
+/obj/machinery/camera/autoname/directional/west{
 	c_tag = "Locker Room - Arcade";
 	name = "dormitories camera"
 	},
@@ -95962,8 +95561,7 @@
 	dir = 1
 	},
 /obj/machinery/airalarm/directional/south,
-/obj/machinery/camera/autoname{
-	dir = 5;
+/obj/machinery/camera/autoname/directional/south{
 	network = list("ss13","prison")
 	},
 /turf/open/floor/iron/dark,
@@ -96058,14 +95656,10 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 8
 	},
-/obj/machinery/camera{
-	c_tag = "Cargo Bay - Starboard";
-	dir = 9;
-	name = "cargo camera"
-	},
 /obj/item/radio/intercom{
 	pixel_y = 24
 	},
+/obj/machinery/camera/autoname/directional/north,
 /turf/open/floor/iron/dark,
 /area/quartermaster/storage)
 "xWO" = (
@@ -96333,7 +95927,7 @@
 "xZz" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/turf_decal/stripes/corner,
-/obj/machinery/camera/directional/north{
+/obj/machinery/camera/autoname/directional/north{
 	c_tag = "Engineering Maintenance - Engine Entrance";
 	name = "engineering camera"
 	},
@@ -96558,8 +96152,8 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/end,
-/obj/machinery/camera/directional/south{
-	c_tag = "Science - Mech Bay";
+/obj/machinery/camera/autoname/directional/west{
+	c_tag = "Research Division - Nanite Lab";
 	name = "science camera";
 	network = list("ss13","rd")
 	},
@@ -97032,16 +96626,12 @@
 /turf/open/floor/iron/dark,
 /area/quartermaster/miningdock)
 "yiv" = (
-/obj/machinery/camera{
-	c_tag = "Library - Port";
-	dir = 10;
-	name = "library camera"
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
 	},
+/obj/machinery/camera/autoname/directional/west,
 /turf/open/floor/iron/dark,
 /area/library)
 "yix" = (
@@ -97125,6 +96715,9 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/turf_decal/trimline/red/corner,
+/obj/machinery/camera/autoname/directional/east{
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/iron/white,
 /area/medical/medbay/central)
 "yjd" = (
@@ -97312,11 +96905,7 @@
 	pixel_x = 24
 	},
 /obj/effect/turf_decal/tile/dark_blue/fourcorners/contrasted,
-/obj/machinery/camera{
-	c_tag = "Bridge - Command center";
-	dir = 6;
-	name = "command camera"
-	},
+/obj/machinery/camera/autoname/directional/east,
 /turf/open/floor/iron/dark,
 /area/bridge)
 "ykQ" = (
@@ -111709,7 +111298,7 @@ wru
 uMd
 uMd
 vEQ
-dOX
+wuF
 vJY
 loh
 nbR
@@ -113698,7 +113287,7 @@ xmv
 wks
 ryr
 sSy
-wMC
+gYZ
 jhy
 ooz
 nbg
@@ -118595,7 +118184,7 @@ qcR
 rxd
 cIs
 aDk
-ghK
+ksN
 pFH
 syY
 mRd
@@ -130759,11 +130348,11 @@ ylW
 xIO
 qqV
 siW
-hGi
+eTf
 pqX
 qTc
 xDt
-isw
+eTf
 fIT
 qTc
 xDt
@@ -133329,15 +132918,15 @@ siW
 mUI
 vrW
 siW
-lRk
+eTf
 fIT
 qTc
 xDt
-fBC
+eTf
 pqX
 qTc
 xDt
-bez
+eTf
 fIT
 qTc
 siW
