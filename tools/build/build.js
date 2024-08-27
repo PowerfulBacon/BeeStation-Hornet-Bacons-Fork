@@ -10,6 +10,7 @@ import fs from "fs";
 import Juke from "./juke/index.js";
 import { DreamDaemon, DreamMaker } from "./lib/byond.js";
 import { yarn } from "./lib/yarn.js";
+import { ParseFile } from "./lib/code_generation/generator_parser.js"
 
 Juke.chdir("../..", import.meta.url);
 Juke.setup({ file: import.meta.url }).then((code) => {
@@ -41,6 +42,14 @@ export const WarningParameter = new Juke.Parameter({
   alias: "W",
 });
 
+export const DmRunGenerators = new Juke.Target({
+  executes: async () => {
+    Juke.logger.info("Running 1 code generators...");
+    await ParseFile('generators/interaction_hint.config')
+    Juke.logger.info("DM code generation complete!");
+  },
+});
+
 export const DmMapsIncludeTarget = new Juke.Target({
   executes: async () => {
     const folders = [
@@ -54,6 +63,7 @@ export const DmMapsIncludeTarget = new Juke.Target({
         .map((file) => file.replace("_maps/", ""))
         .map((file) => `#include "${file}"`)
         .join("\n") + "\n";
+    Juke.logger.info("Writing template file");
     fs.writeFileSync("_maps/templates.dm", content);
   },
 });
@@ -61,6 +71,7 @@ export const DmMapsIncludeTarget = new Juke.Target({
 export const DmTarget = new Juke.Target({
   parameters: [DefineParameter],
   dependsOn: ({ get }) => [
+    DmRunGenerators,
     get(DefineParameter).includes("ALL_MAPS") && DmMapsIncludeTarget,
   ],
   inputs: [
