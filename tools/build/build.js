@@ -44,8 +44,11 @@ export const WarningParameter = new Juke.Parameter({
 
 export const DmRunGenerators = new Juke.Target({
   executes: async () => {
-    Juke.logger.info("Running 1 code generators...");
-    await ParseFile('generators/interaction_hint.config')
+    const results = fs.readdirSync('generators/', { recursive: true, withFileTypes: true });
+    Juke.logger.info(`Running ${results.length} code generators...`);
+    for (const file of results) {
+      await ParseFile('generators/' + file.name);
+    }
     Juke.logger.info("DM code generation complete!");
   },
 });
