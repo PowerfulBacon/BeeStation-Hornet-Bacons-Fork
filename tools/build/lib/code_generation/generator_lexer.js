@@ -1,4 +1,13 @@
 
+/**
+ * Couldn't this just all be a regex?
+ * Probably, but:
+ * a) I thought that after I already wrote this. (sunk cost falacy)
+ * b) There are a few complex behaviours that can very vaguely justify proper
+ * parsing, IE the variables supported in the language which would have been
+ * easier to implement if it used regex.
+ */
+
 import Juke from '../../juke/index.js';
 
 // Keywords

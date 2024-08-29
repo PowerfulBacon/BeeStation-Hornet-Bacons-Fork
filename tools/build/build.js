@@ -10,7 +10,7 @@ import fs from "fs";
 import Juke from "./juke/index.js";
 import { DreamDaemon, DreamMaker } from "./lib/byond.js";
 import { yarn } from "./lib/yarn.js";
-import { ParseFile } from "./lib/code_generation/generator_parser.js"
+import { RunCodeGeneration } from "./lib/code_generation/code_generation.js";
 
 Juke.chdir("../..", import.meta.url);
 Juke.setup({ file: import.meta.url }).then((code) => {
@@ -43,14 +43,8 @@ export const WarningParameter = new Juke.Parameter({
 });
 
 export const DmRunGenerators = new Juke.Target({
-  executes: async () => {
-    const results = fs.readdirSync('generators/', { recursive: true, withFileTypes: true });
-    Juke.logger.info(`Running ${results.length} code generators...`);
-    for (const file of results) {
-      await ParseFile('generators/' + file.name);
-    }
-    Juke.logger.info("DM code generation complete!");
-  },
+  executes: () => RunCodeGeneration(DME_NAME, Juke.glob('generators/**/*.config')),
+  onlyWhen: () => Juke.glob('generators/**/*.config').length > 0,
 });
 
 export const DmMapsIncludeTarget = new Juke.Target({
