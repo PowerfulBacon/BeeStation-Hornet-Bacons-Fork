@@ -3,6 +3,8 @@ import fs from "fs";
 import Juke from "../../juke/index.js";
 import { ParseFile } from "./generator_parser.js";
 
+const test = /^\/datum(\/\w+)+$/m;
+
 export const RunCodeGeneration = async (dmeFile, generator_files) => {
   // Parse generators
   Juke.logger.info(`Running ${generator_files.length} code generators...`);
@@ -13,7 +15,9 @@ export const RunCodeGeneration = async (dmeFile, generator_files) => {
   const source_code = Juke.glob('code/**/*.dm');
   Juke.logger.info(`Performing pre-compilation generator injection on ${source_code.length} code files...`);
   for (const file of source_code) {
-    fs.readFileSync(file);
+    const fileContents = fs.readFileSync(file, { encoding: 'utf-8' });
+    fileContents.replace(test, "");
+    fs.writeFileSync(file, { encoding: 'utf-8' })
   }
   Juke.logger.info("DM code generation complete!");
 }

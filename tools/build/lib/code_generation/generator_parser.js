@@ -54,5 +54,4 @@ export class GenerationRule {
     this.tokens = null;
   }
 
-
 }

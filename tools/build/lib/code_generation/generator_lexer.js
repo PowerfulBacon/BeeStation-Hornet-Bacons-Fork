@@ -168,8 +168,10 @@ export const LexString = input => {
  */
 const parse_block = () => {
   error_message = "";
+  ignore_whitespace()
   while ((FindChar($fwdslash) && FindChar($fwdslash)) || PeekChar($eol)) {
     SkipLine();
+    ignore_whitespace()
   }
   if (eof) {
     return false
