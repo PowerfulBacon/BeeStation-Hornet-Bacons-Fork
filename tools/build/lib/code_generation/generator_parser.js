@@ -1,9 +1,9 @@
 
 import fs from 'fs';
 import Juke, { sleep } from '../../juke/index.js';
-import { LEX_SET, LexString } from './generator_lexer.js';
+import { LEX_EOL, LEX_EXTEND, LEX_NAME, LEX_PARENT_PROC, LEX_R_BRACKET, LEX_SET, LexString } from './generator_lexer.js';
 
-export const ParseFile = async (file) => {
+export const ParseFile = (file) => {
   Juke.logger.debug(`Parsing file: ${file}`);
   const fileContents = fs.readFileSync(file, 'utf-8');
   const result = LexString(fileContents);
@@ -18,11 +18,11 @@ export const ParseFile = async (file) => {
  * @returns {GenerationRule}
  */
 const ProcessTokens = (file, tokens) => {
+  Juke.logger.debug(tokens);
   let created_rule = new GenerationRule();
-  created_rule.tokens = tokens;
   let i = 0;
   while (i < tokens.length) {
-    if (tokens[i] == LEX_SET) {
+    if (tokens[i] === LEX_SET) {
       i++;
       let var_name = tokens[i];
       i++;
@@ -35,6 +35,55 @@ const ProcessTokens = (file, tokens) => {
       } else if (var_name.data === 'run_order') {
         created_rule.run_order = parseInt(var_value.data);
       }
+    } else if (tokens[i] === LEX_EXTEND) {
+      i++;
+      // Skip the src part
+      i++;
+      // Read the proc name
+      let proc_name = tokens[i];
+      // Skip the open bracket
+      i++;
+      // Read the arguments
+      let rule_arguments = [];
+      while (tokens[i] !== LEX_R_BRACKET) {
+        // Names
+        if (tokens[i].token === LEX_NAME) {
+          rule_arguments.push(tokens[i].data);
+        }
+        // Read the next token
+        i++;
+      }
+      // Skip R bracket
+      i++;
+      // Skip the new line at the end
+      if (tokens[i] === LEX_EOL) {
+        i++;
+      }
+      // Read the contents
+      let pre_token_stream = [];
+      let post_token_stream = [];
+      let pre = true;
+      while (i + 1 < tokens.length - 1 && tokens[i + 1] !== LEX_EXTEND) {
+        if (tokens[i] === LEX_PARENT_PROC) {
+          pre = false;
+          i++;
+          continue;
+        }
+        if (pre) {
+          pre_token_stream.push(tokens[i]);
+        } else {
+          post_token_stream.push(tokens[i]);
+        }
+        i++;
+      }
+      // Add the semi-parsed rule to the list of rules
+      created_rule.extension_rules.push({
+        name: proc_name.data,
+        arguments: rule_arguments,
+        pre_tokens: pre_token_stream,
+        post_tokens: post_token_stream,
+      });
+      Juke.logger.log(created_rule.extension_rules[created_rule.extension_rules.length - 1]);
     }
     i++;
   }
@@ -51,7 +100,7 @@ export class GenerationRule {
     this.rule_name = null;
     // Run last by default
     this.run_order = 100000;
-    this.tokens = null;
+    this.extension_rules = [];
   }
 
 }
