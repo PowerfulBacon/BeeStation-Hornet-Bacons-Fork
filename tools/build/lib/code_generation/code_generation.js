@@ -1,14 +1,21 @@
 
+/**
+ * Code Generation:
+ *
+ * V1.0.0: @PowerfulBacon - Implements the initial code generation algorithm
+ */
+
 import fs from "fs";
 import Juke from "../../juke/index.js";
 import { ParseFile } from "./generator_parser.js";
 
 // Version number: Increment upon updates to this script to trigger a full rebuild
-const VERSION_NUMBER = "0_0_1";
+const VERSION_NUMBER = "0_0_6";
 
 const test = /^((?:\/\w+)+?)(?:\/proc)?\/(\w+)\((?:\/?(?:\w+\/)+)?\w+(?:\s*,\s*(?:\/?(?:\w+\/)+)?\w+)*\s*\)$/gm;
 
 export const RunCodeGeneration = async (dme_name, generator_files) => {
+  const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.gendat`;
   // Parse generators
   let generation_rules = [];
   for (const file of generator_files) {
@@ -20,13 +27,15 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
     return;
   }
   // Check the last generation time
-  if (!fs.existsSync(`obj/${dme_name}_v${VERSION_NUMBER}.gendat`)) {
+  let rebuilt = false;
+  if (!fs.existsSync(gen_file)) {
     if (!fs.existsSync(`obj/`)) {
       fs.mkdirSync(`obj/`);
     }
-    fs.writeFileSync(`obj/${dme_name}_v${VERSION_NUMBER}.gendat`, "", { encoding: "utf-8" });
+    fs.writeFileSync(gen_file, "", { encoding: "utf-8" });
+    rebuilt = true;
   }
-  const lastBuildTime = fs.statSync(`obj/${dme_name}_v${VERSION_NUMBER}.gendat`).mtime;
+  const lastBuildTime = rebuilt ? new Date(0) : fs.statSync(gen_file).mtime;
   // Create a log of the files that we edited to update the last edit time
   // Create a regex that can detect the paterns that we wish to replace
   const dynamic_regex = new RegExp("^\\s*(" + generation_rules.map(rule => rule.rule_name).join("|") + ")(?:\\((.*?)\\))?\\s*(?:$|//|\\/*)(?=(?:\\n|\\r|.)*?^((?:/\\w+)+(?:/proc)?/\\w*)\\(((?:\\s*[\\w/]+(?:\\s*,\\s*[\\w/]+)*)?\\s*)\\))", "gm");
@@ -53,16 +62,17 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
       if (!existing) {
         existing = [];
       }
-      existing.push({ index: thing.index, file: file });
+      existing.push({ index: thing.index, file: path });
       allTypePaths[key] = existing;
     }
     // Execute generation requests
     for (const thing of fileContents.matchAll(dynamic_regex)) {
       replacementRequests.push(thing);
-      Juke.logger.info(`Updating code injection for file ${file} (File updated since last code injection)`);
+      Juke.logger.info(`Updating code injection for file ${path} (File updated since last code injection)`);
     }
   }
   Juke.logger.info(`Code generation: (Skipped ${skipped}/${source_code.length} files) Located ${Object.keys(allTypePaths).length} procs and ${replacementRequests.length} attributes.`);
   // Write the build results
+  fs.writeFileSync(gen_file, Object.keys(allTypePaths).map(proc => `${proc}::${allTypePaths[proc].map(instance => `${instance.file}:${instance.index}`).join(';')}`).join('\n'));
   Juke.logger.info("Code generation: DM code generation complete!");
 }
