@@ -190,3 +190,6 @@ Temporary Items
 # byond-tracy
 prof.dll
 libprof.so
+
+# Code generator build tools
+/obj/**/*
