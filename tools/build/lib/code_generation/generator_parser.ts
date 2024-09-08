@@ -44,7 +44,7 @@ const ProcessTokens = (file, tokens) => {
       // Skip the open bracket
       i++;
       // Read the arguments
-      let rule_arguments = [];
+      let rule_arguments : number[] = [];
       while (tokens[i] !== LEX_R_BRACKET) {
         // Names
         if (tokens[i].token === LEX_NAME) {
@@ -60,8 +60,8 @@ const ProcessTokens = (file, tokens) => {
         i++;
       }
       // Read the contents
-      let pre_token_stream = [];
-      let post_token_stream = [];
+      let pre_token_stream : number[] = [];
+      let post_token_stream : number[] = [];
       let pre = true;
       while (i + 1 < tokens.length - 1 && tokens[i + 1] !== LEX_EXTEND) {
         if (tokens[i] === LEX_PARENT_PROC) {
@@ -95,11 +95,27 @@ const ProcessTokens = (file, tokens) => {
 
 export class GenerationRule {
 
+  rule_name : string | null;
+  run_order : number;
+  extension_rules : { name: string, arguments: number[], pre_tokens: number[], post_tokens: number[]}[];
+
   constructor() {
     this.rule_name = null;
     // Run last by default
     this.run_order = 100000;
     this.extension_rules = [];
   }
+
+  create_pre_injection(proc_name: string, proc_params: ProcParam[], rule_params: string[]) {
+    // Convert tokens into
+
+  }
+
+}
+
+export class ProcParam {
+
+  proc_name: string;
+  proc_path: string;
 
 }

@@ -7,20 +7,20 @@
 
 import fs from "fs";
 import Juke from "../../juke/index.js";
-import { ParseFile } from "./generator_parser.js";
+import { GenerationRule, ParseFile } from "./generator_parser.js";
 
 // Version number: Increment upon updates to this script to trigger a full rebuild
-const VERSION_NUMBER = "0_0_7";
+const VERSION_NUMBER = "0_1_4";
 
 export const RunCodeGeneration = async (dme_name, generator_files) => {
-  const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.gendat`;
+  const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.dm`;
   // Parse generators
-  let generation_rules = [];
+  let generation_rules : { [id: string] : GenerationRule } = {};
   for (const file of generator_files) {
     const generation_rule = await ParseFile(file);
-    generation_rules.push(generation_rule);
+    generation_rules[generation_rule.rule_name] = generation_rule;
   }
-  if (generation_rules.length === 0) {
+  if (Object.keys(generation_rules).length === 0) {
     Juke.logger.info("No generators installed, skipping code injection.")
     return;
   }
@@ -36,15 +36,17 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
   const lastBuildTime = rebuilt ? new Date(0) : fs.statSync(gen_file).mtime;
   // Create a log of the files that we edited to update the last edit time
   // Create a regex that can detect the paterns that we wish to replace
-  const dynamic_regex = new RegExp("^\\s*(" + generation_rules.map(rule => rule.rule_name).join("|") + ")(?:\\((.*?)\\))?\\s*(?:$|//|\\/*)(?=(?:\\n|\\r|.)*?^((?:/\\w+)+(?:/proc)?/\\w*)\\(((?:\\s*[\\w/]+(?:\\s*,\\s*[\\w/]+)*)?\\s*)\\))", "gm");
+  const dynamic_regex = new RegExp("^\\s*(" + Object.keys(generation_rules).join("|") + ")(?:\\((.*?)\\))?\\s*(?:$|//|\\/\\*)(?=(?:\\n|\\r|.)*?^((?:/\\w+)+(?:/proc)?/\\w*)\\(((?:\\s*[\\w/]+(?:\\s*,\\s*[\\w/]+)*)?\\s*)\\))", "gm");
   // TODO: Read the DME and get the code files from there
   const source_code = Juke.glob('code/**/*.dm');
-  Juke.logger.info(`Code generation: Successfully parsed ${generation_rules.length} rules. Performing pre-compilation generator injection on ${source_code.length} code files...`);
+  Juke.logger.log(dynamic_regex);
+  Juke.logger.info(`Code generation: Successfully parsed ${Object.keys(generation_rules).length} rules. Performing pre-compilation generator injection on ${source_code.length} code files...`);
   // Store this data for usage later on
-  let replacementRequests = [];
+  let replacedSignatures : { [id: string] : CodeInjection } = {};
   let skipped = 0;
   for (const path of source_code) {
     // Check that the file is up to date
+    // If it is, then skip
     let file = fs.statSync(path);
     if (file.mtime < lastBuildTime) {
       skipped ++;
@@ -54,12 +56,33 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
     let fileContents = fs.readFileSync(path, { encoding: 'utf-8' });
     // Execute generation requests
     for (const thing of fileContents.matchAll(dynamic_regex)) {
-      replacementRequests.push(thing);
       Juke.logger.info(`Updating code injection for file ${path} (File updated since last code injection)`);
+      // Calculate the signature
+      // Signature varies if the parameter names are different to simplify multiple rulesets
+      const signature = `${thing[3]}(${thing[4]})`;
+      let injection = replacedSignatures[signature];
+      // Create a new injection signature
+      if (!injection) {
+        injection = replacedSignatures[signature] = new CodeInjection();
+        injection.signature = signature;
+      }
+      // Inject our code
     }
   }
-  Juke.logger.info(`Code generation: Located ${replacementRequests.length} attributes (Skipped ${skipped}/${source_code.length} files).`);
-  // Write the build results
-  fs.writeFileSync(gen_file, replacementRequests.join('\n'));
-  Juke.logger.info("Code generation: DM code generation complete!");
+  // Log the status of the generator
+  Juke.logger.info(`Code generation: DM code generation complete! (Skipped ${skipped}/${source_code.length} files)`);
+}
+
+class CodeInjection {
+
+  signature: string;
+  pre_code: string[];
+  post_code: string[];
+
+  constructor() {
+    this.signature = "";
+    this.pre_code = [];
+    this.post_code = [];
+  }
+
 }
