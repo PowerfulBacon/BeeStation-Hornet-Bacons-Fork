@@ -10,9 +10,7 @@ import Juke from "../../juke/index.js";
 import { ParseFile } from "./generator_parser.js";
 
 // Version number: Increment upon updates to this script to trigger a full rebuild
-const VERSION_NUMBER = "0_0_6";
-
-const test = /^((?:\/\w+)+?)(?:\/proc)?\/(\w+)\((?:\/?(?:\w+\/)+)?\w+(?:\s*,\s*(?:\/?(?:\w+\/)+)?\w+)*\s*\)$/gm;
+const VERSION_NUMBER = "0_0_7";
 
 export const RunCodeGeneration = async (dme_name, generator_files) => {
   const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.gendat`;
@@ -43,7 +41,6 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
   const source_code = Juke.glob('code/**/*.dm');
   Juke.logger.info(`Code generation: Successfully parsed ${generation_rules.length} rules. Performing pre-compilation generator injection on ${source_code.length} code files...`);
   // Store this data for usage later on
-  let allTypePaths = {};
   let replacementRequests = [];
   let skipped = 0;
   for (const path of source_code) {
@@ -55,24 +52,14 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
     }
     // Read the contents of the file
     let fileContents = fs.readFileSync(path, { encoding: 'utf-8' });
-    // Scan for proc names
-    for (const thing of fileContents.matchAll(test)) {
-      let key = thing[1] + "/proc/" + thing[2];
-      let existing = allTypePaths[key];
-      if (!existing) {
-        existing = [];
-      }
-      existing.push({ index: thing.index, file: path });
-      allTypePaths[key] = existing;
-    }
     // Execute generation requests
     for (const thing of fileContents.matchAll(dynamic_regex)) {
       replacementRequests.push(thing);
       Juke.logger.info(`Updating code injection for file ${path} (File updated since last code injection)`);
     }
   }
-  Juke.logger.info(`Code generation: (Skipped ${skipped}/${source_code.length} files) Located ${Object.keys(allTypePaths).length} procs and ${replacementRequests.length} attributes.`);
+  Juke.logger.info(`Code generation: Located ${replacementRequests.length} attributes (Skipped ${skipped}/${source_code.length} files).`);
   // Write the build results
-  fs.writeFileSync(gen_file, Object.keys(allTypePaths).map(proc => `${proc}::${allTypePaths[proc].map(instance => `${instance.file}:${instance.index}`).join(';')}`).join('\n'));
+  fs.writeFileSync(gen_file, replacementRequests.join('\n'));
   Juke.logger.info("Code generation: DM code generation complete!");
 }

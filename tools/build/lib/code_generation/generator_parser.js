@@ -83,7 +83,6 @@ const ProcessTokens = (file, tokens) => {
         pre_tokens: pre_token_stream,
         post_tokens: post_token_stream,
       });
-      Juke.logger.log(created_rule.extension_rules[created_rule.extension_rules.length - 1]);
     }
     i++;
   }
