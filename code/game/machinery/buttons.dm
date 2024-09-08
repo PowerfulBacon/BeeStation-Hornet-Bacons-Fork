@@ -56,6 +56,18 @@
 		else
 			icon_state = skin
 
+ITEM_INTERACTION("Install assembly")
+/obj/machinery/button/proc/install_assembly(obj/item/W, mob/user)
+	if (!panel_open)
+		return
+	if (device)
+		return
+	if(!user.transferItemToLoc(W, src))
+		to_chat(user, "<span class='warning'>\The [W] is stuck to you!</span>")
+		return
+	device = W
+	to_chat(user, "<span class='notice'>You add [W] to the button.</span>")
+
 /obj/machinery/button/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		if(panel_open || allowed(user))

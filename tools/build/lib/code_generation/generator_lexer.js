@@ -621,6 +621,7 @@ const check_string = () => {
   } else {
     currentCharCode = lexing_input.charCodeAt(pointer);
   }
+  buffer = buffer.substring(1, buffer.length - 1)
   return push_token(LEX_STRING, true);
 }
 
