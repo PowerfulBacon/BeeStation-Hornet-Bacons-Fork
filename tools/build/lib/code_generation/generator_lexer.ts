@@ -133,7 +133,7 @@ let currentCharCode = 0;
 
 let lastToken = 0;
 
-let lex_output = [];
+let lex_output : (number | {token: number, data: string})[] = [];
 
 let error_message = "";
 
@@ -169,7 +169,7 @@ export const LexString = input => {
 const parse_block = () => {
   error_message = "";
   ignore_whitespace()
-  while ((FindChar($fwdslash) && FindChar($fwdslash)) || PeekChar($eol)) {
+  while ((FindChar($fwdslash, false) && FindChar($fwdslash, false)) || PeekChar($eol)) {
     SkipLine();
     ignore_whitespace()
   }
@@ -177,13 +177,13 @@ const parse_block = () => {
     return false
   }
   ignore_whitespace();
-  if (FindChar($e)) {
+  if (FindChar($e, false)) {
     if (base_e() !== LEX_EXTEND) {
       error_message = error_message + " (Pass)\nInvalid token, expected either set or extend to start a line when outside of an extend code generation block.";
       return false;
     }
     return parse_extend();
-  } else if (FindChar($s)) {
+  } else if (FindChar($s, false)) {
     // Find set
     if (base_s() !== LEX_SET) {
       error_message = error_message + " (Pass)\nInvalid token, expected either set or extend to start a line when outside of an extend code generation block.";
@@ -241,14 +241,14 @@ const push_token = (token, include_buffer) => {
 }
 
 const require_end_of_line = (error_msg) => {
-  while (FindChar($space) || FindChar($tab))
+  while (FindChar($space, false) || FindChar($tab, false))
     continue;
   return require_token(LEX_EOL, error_msg);
 }
 
 const ignore_whitespace = () => {
   while (true) {
-    while (FindChar($fwdslash) && FindChar($fwdslash)) {
+    while (FindChar($fwdslash, false) && FindChar($fwdslash, false)) {
       SkipLine();
     }
     if (eof)
@@ -281,8 +281,8 @@ const require_variable = (invalid_text) => {
         return false;
       }
       return require_variable(invalid_text);
-    } else if (FindChar($lsbr)) {
-      push_token(LEX_INDEXER_OPEN)
+    } else if (FindChar($lsbr, false)) {
+      push_token(LEX_INDEXER_OPEN, false)
       if (next_token() !== LEX_NUMBER) {
         error_message = error_message + ` (Pass)\nInvalid token, expected a constant numeric value inside of an array index.`;
         return false;
@@ -327,44 +327,44 @@ const require_params = () => {
 }
 
 const next_token = () => {
-  while (FindChar($fwdslash) && FindChar($fwdslash)) {
+  while (FindChar($fwdslash, false) && FindChar($fwdslash, false)) {
     SkipLine();
   }
   if (eof)
     return LEX_FINISHED;
-  if (FindChar($a)) {
+  if (FindChar($a, false)) {
     return base_a();
-  } else if (FindChar($e)) {
+  } else if (FindChar($e, false)) {
     return base_e();
-  } else if (FindChar($o)) {
+  } else if (FindChar($o, false)) {
     return base_o();
-  } else if (FindChar($s)) {
+  } else if (FindChar($s, false)) {
     return base_s();
-  } else if (FindChar($P)) {
+  } else if (FindChar($P, false)) {
     return base_P();
   } else if (currentCharCode >= 48 && currentCharCode <= 57) {
     return base_read_number();
-  } else if (FindChar($lbr)) {
-    return push_token(LEX_L_BRACKET);
-  } else if (FindChar($rbr)) {
-    return push_token(LEX_R_BRACKET);
-  } else if (FindChar($space) || FindChar($tab)) {
+  } else if (FindChar($lbr, false)) {
+    return push_token(LEX_L_BRACKET, false);
+  } else if (FindChar($rbr, false)) {
+    return push_token(LEX_R_BRACKET, false);
+  } else if (FindChar($space, false) || FindChar($tab, false)) {
     buffer = "";
     return LEX_SPACE;
-  } else if (FindChar($equals)) {
-    return push_token(LEX_EQUALS);
-  } else if (FindChar($lsbr)) {
-    return push_token(LEX_INDEXER_OPEN);
-  } else if (FindChar($rsbr)) {
-    return push_token(LEX_INDEXER_CLOSE);
-  } else if (FindChar($comma)) {
-    return push_token(LEX_COMMA);
-  } else if (FindChar($dot)) {
+  } else if (FindChar($equals, false)) {
+    return push_token(LEX_EQUALS, false);
+  } else if (FindChar($lsbr, false)) {
+    return push_token(LEX_INDEXER_OPEN, false);
+  } else if (FindChar($rsbr, false)) {
+    return push_token(LEX_INDEXER_CLOSE, false);
+  } else if (FindChar($comma, false)) {
+    return push_token(LEX_COMMA, false);
+  } else if (FindChar($dot, false)) {
     return base_dot();
-  } else if (FindChar($eol)) {
+  } else if (FindChar($eol, false)) {
     eols_encountered ++;
-    return push_token(LEX_EOL);
-  } else if (FindChar($string_marks)) {
+    return push_token(LEX_EOL, false);
+  } else if (FindChar($string_marks, false)) {
     return check_string();
   }else if ((currentCharCode >= 97 && currentCharCode <= 122) || (currentCharCode >= 65 && currentCharCode <= 90)) {
     return check_name();
@@ -392,7 +392,7 @@ const next_token = () => {
 const parse_block_contents = () => {
   while (true) {
     // Skip rest of the line when we see //
-    while (FindChar($fwdslash) && FindChar($fwdslash)) {
+    while (FindChar($fwdslash, false) && FindChar($fwdslash, false)) {
       let tempBuffer = buffer.substring(0, buffer.length - 2);
       SkipLine();
       buffer = tempBuffer + '\n';
@@ -405,17 +405,17 @@ const parse_block_contents = () => {
       return false;
     }
     // Check for ..()
-    if (FindChar($dot) && FindChar($dot) && FindChar($lbr) && FindChar($rbr)) {
+    if (FindChar($dot, false) && FindChar($dot, false) && FindChar($lbr, false) && FindChar($rbr, false)) {
       // Trim off the last 4 characters of the buffer
       buffer = buffer.substring(0, buffer.length - 4);
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
       }
-      push_token(LEX_PARENT_PROC);
+      push_token(LEX_PARENT_PROC, false);
       continue;
     }
     // Check for # replacements
-    if (FindChar($hash) && FindChar($hash)) {
+    if (FindChar($hash, false) && FindChar($hash, false)) {
       // Trim off the last 4 characters of the buffer
       buffer = buffer.substring(0, buffer.length - 2);
       if (IsDataInBuffer()) {
@@ -435,42 +435,39 @@ const parse_block_contents = () => {
       }
     }
     // Check for add once
-    if (FindChar($a) && FindChar($d) && FindChar($d) && FindChar($space) && FindChar($o) && FindChar($n) && FindChar($c) && FindChar($e) && FindChar($space)) {
+    if (FindChar($a, false) && FindChar($d, false) && FindChar($d, false) && FindChar($space, false) && FindChar($o, false) && FindChar($n, false) && FindChar($c, false) && FindChar($e, false) && FindChar($space, false)) {
       buffer = buffer.substring(0, buffer.length - 9);
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
       }
-      push_token(LEX_ADD);
-      push_token(LEX_ONCE);
+      push_token(LEX_ADD, false);
+      push_token(LEX_ONCE, false);
       ignore_whitespace()
-      if (!require_token(LEX_NAME)) {
-        error_message = error_message + ` \nInvalid token, expected a function name to appear after 'add once'`;
+      if (!require_token(LEX_NAME, `Invalid token, expected a function name to appear after 'add once'`)) {
         return false;
       }
-      if (!require_token(LEX_L_BRACKET)) {
-        error_message = error_message + ` \nInvalid token, the function name appearing after 'add once' was not properly bracketted.`;
+      if (!require_token(LEX_L_BRACKET, `Invalid token, the function name appearing after 'add once' was not properly bracketted.`)) {
         return false;
       }
-      if (!require_token(LEX_R_BRACKET)) {
-        error_message = error_message + ` \nInvalid token, the function name appearing after 'add once' was not properly bracketted.`;
+      if (!require_token(LEX_R_BRACKET, `Invalid token, the function name appearing after 'add once' was not properly bracketted.`)) {
         return false;
       }
-      push_token(LEX_EOL);
+      push_token(LEX_EOL, false);
     }
     // Check if extend is upcoming and will finish us off
-    if (FindChar($e) && FindChar($x) && FindChar($t) && FindChar($e) && FindChar($n) && FindChar($d) && FindChar($space) && FindChar($s) && FindChar($r) && FindChar($c)) {
+    if (FindChar($e, false) && FindChar($x, false) && FindChar($t, false) && FindChar($e, false) && FindChar($n, false) && FindChar($d, false) && FindChar($space, false) && FindChar($s, false) && FindChar($r, false) && FindChar($c, false)) {
       // Trim off the last 4 characters of the buffer
       buffer = buffer.substring(0, buffer.length - 10);
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
       }
-      push_token(LEX_EOL);
-      push_token(LEX_EXTEND);
-      push_token(LEX_SRC);
+      push_token(LEX_EOL, false);
+      push_token(LEX_EXTEND, false);
+      push_token(LEX_SRC, false);
       return parse_extend_src();
     }
     // Just read until the end of the file
-    if (!ReadChar()) {
+    if (!ReadChar(false)) {
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
       }
@@ -480,42 +477,42 @@ const parse_block_contents = () => {
 }
 
 const base_read_number = () => {
-  if (!ReadNumber($space)) {
+  if (!ReadNumber()) {
     error_message = "Invalid token, numbers should not contain non-numeric characters.";
-    return push_token(LEX_FAIL);
+    return push_token(LEX_FAIL, false);
   }
   return push_token(LEX_NUMBER, true);
 }
 
 const base_dot = () => {
-  if (!FindChar($dot) || !FindChar($lbr) || !FindChar($rbr)) {
-    return push_token(LEX_DOT);
+  if (!FindChar($dot, false) || !FindChar($lbr, false) || !FindChar($rbr, false)) {
+    return push_token(LEX_DOT, false);
   }
-  return push_token(LEX_PARENT_PROC);
+  return push_token(LEX_PARENT_PROC, false);
 }
 
 const base_o = () => {
-  if (!FindChar($n) || !FindChar($c) || !FindChar($e) || !PeekWhitespace()) {
+  if (!FindChar($n, false) || !FindChar($c, false) || !FindChar($e, false) || !PeekWhitespace()) {
     return check_name();
   }
-  return push_token(LEX_ONCE);
+  return push_token(LEX_ONCE, false);
 }
 
 const base_a = () => {
-  if (!FindChar($d) || !FindChar($d) || !PeekWhitespace()) {
+  if (!FindChar($d, false) || !FindChar($d, false) || !PeekWhitespace()) {
     return check_name();
   }
-  return push_token(LEX_ADD);
+  return push_token(LEX_ADD, false);
 }
 
 const base_P = () => {
-  if (FindChar($A)) {
-    if (!FindChar($T) || !FindChar($H) || !FindChar($O) || !FindChar($F) || !PeekChar($lbr)) {
+  if (FindChar($A, false)) {
+    if (!FindChar($T, false) || !FindChar($H, false) || !FindChar($O, false) || !FindChar($F, false) || !PeekChar($lbr)) {
       return check_name();
     }
-    return push_token(LEX_PATHOF);
-  } else if (FindChar($R)) {
-    if (!FindChar($O) || !FindChar($C) || !FindChar($_) || !FindChar($N) || !FindChar($A) || !FindChar($M) || !FindChar($E)) {
+    return push_token(LEX_PATHOF, false);
+  } else if (FindChar($R, false)) {
+    if (!FindChar($O, false) || !FindChar($C, false) || !FindChar($_, false) || !FindChar($N, false) || !FindChar($A, false) || !FindChar($M, false) || !FindChar($E, false)) {
       return check_name();
     }
     return push_token(LEX_PROC_NAME, true);
@@ -524,16 +521,16 @@ const base_P = () => {
 };
 
 const base_e = () => {
-  if (!FindChar($x) || !FindChar($t) || !FindChar($e) || !FindChar($n) || !FindChar($d) || !PeekWhitespace()) {
+  if (!FindChar($x, false) || !FindChar($t, false) || !FindChar($e, false) || !FindChar($n, false) || !FindChar($d, false) || !PeekWhitespace()) {
     return check_name();
   }
-  return push_token(LEX_EXTEND);
+  return push_token(LEX_EXTEND, false);
 };
 
 const base_s = () => {
-  if (FindChar($r)) {
+  if (FindChar($r, false)) {
     return check_src()
-  } else if (FindChar($e)) {
+  } else if (FindChar($e, false)) {
     return check_set()
   } else {
     return check_name();
@@ -541,20 +538,20 @@ const base_s = () => {
 };
 
 const check_src = () => {
-  if (FindChar($c) && PeekWhitespace($space)) {
-    return push_token(LEX_SRC);
+  if (FindChar($c, false) && PeekWhitespace($space)) {
+    return push_token(LEX_SRC, false);
   }
   return check_name();
 }
 
 const check_set = () => {
-  if (FindChar($t) && PeekWhitespace($space)) {
-    return push_token(LEX_SET);
+  if (FindChar($t, false) && PeekWhitespace($space)) {
+    return push_token(LEX_SET, false);
   }
   return check_name();
 }
 
-const SkipLine = (char) => {
+const SkipLine = () => {
   if (eof) {
     return;
   }
@@ -600,7 +597,7 @@ const check_string = () => {
   while (currentCharCode !== $string_marks) {
     if (currentCharCode === $eol) {
       error_message = "Invalid token, string was not properly terminated.";
-      return push_token(LEX_FAIL);
+      return push_token(LEX_FAIL, false);
     }
     buffer += lexing_input.charAt(pointer);
     pointer ++;
@@ -608,7 +605,7 @@ const check_string = () => {
       eof = true;
       currentCharCode = $eol;
       error_message = "Invalid token, string was not properly terminated.";
-      return push_token(LEX_FAIL);
+      return push_token(LEX_FAIL, false);
     } else {
       currentCharCode = lexing_input.charCodeAt(pointer);
     }
@@ -638,7 +635,7 @@ const check_name = () => {
     // Bad characters
     if ((currentCharCode < $a || currentCharCode > $z) && (currentCharCode < $A || currentCharCode > $Z) && (currentCharCode < $0 || currentCharCode > $9) && currentCharCode !== $_) {
       error_message = "Invalid token, names must consist of alpha-numeric characters only.";
-      return push_token(LEX_FAIL);
+      return push_token(LEX_FAIL, false);
     }
     buffer += lexing_input.charAt(pointer);
     pointer ++;

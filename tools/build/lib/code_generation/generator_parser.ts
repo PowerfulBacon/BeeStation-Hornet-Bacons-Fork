@@ -107,8 +107,14 @@ export class GenerationRule {
   }
 
   create_pre_injection(proc_name: string, proc_params: ProcParam[], rule_params: string[]) {
-    // Convert tokens into
-
+    // Convert tokens into a string
+    for (const rule of this.extension_rules) {
+      let block = new GeneratedBlock();
+      block.proc_name = rule.name;
+      block.content = "";
+      // Token execution
+      
+    }
   }
 
 }
@@ -117,5 +123,13 @@ export class ProcParam {
 
   proc_name: string;
   proc_path: string;
+
+}
+
+export class GeneratedBlock {
+
+  proc_name: string;
+  post_injection: boolean;
+  content: string;
 
 }
