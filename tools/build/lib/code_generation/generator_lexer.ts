@@ -538,14 +538,14 @@ const base_s = () => {
 };
 
 const check_src = () => {
-  if (FindChar($c, false) && PeekWhitespace($space)) {
+  if (FindChar($c, false) && PeekWhitespace()) {
     return push_token(LEX_SRC, false);
   }
   return check_name();
 }
 
 const check_set = () => {
-  if (FindChar($t, false) && PeekWhitespace($space)) {
+  if (FindChar($t, false) && PeekWhitespace()) {
     return push_token(LEX_SET, false);
   }
   return check_name();
