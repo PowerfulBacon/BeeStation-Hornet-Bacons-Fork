@@ -15,7 +15,8 @@ const VERSION_NUMBER = "0_1_4";
 export const RunCodeGeneration = async (dme_name, generator_files) => {
   const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.dm`;
   // Parse generators
-  let generation_rules : { [id: string] : GenerationRule } = {};
+  //let generation_rules : { [id: string] : GenerationRule } = {};
+  let generation_rules = {};
   for (const file of generator_files) {
     const generation_rule = await ParseFile(file);
     generation_rules[generation_rule.rule_name] = generation_rule;
@@ -42,7 +43,8 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
   Juke.logger.log(dynamic_regex);
   Juke.logger.info(`Code generation: Successfully parsed ${Object.keys(generation_rules).length} rules. Performing pre-compilation generator injection on ${source_code.length} code files...`);
   // Store this data for usage later on
-  let replacedSignatures : { [id: string] : CodeInjection } = {};
+  //let replacedSignatures : { [id: string] : CodeInjection } = {};
+  let replacedSignatures = {};
   let skipped = 0;
   for (const path of source_code) {
     // Check that the file is up to date
@@ -75,9 +77,9 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
 
 class CodeInjection {
 
-  signature: string;
-  pre_code: string[];
-  post_code: string[];
+  //signature: string;
+  //pre_code: string[];
+  //post_code: string[];
 
   constructor() {
     this.signature = "";

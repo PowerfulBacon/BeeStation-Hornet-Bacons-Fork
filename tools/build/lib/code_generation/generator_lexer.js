@@ -109,6 +109,7 @@ const $7 = 55;
 const $8 = 56;
 const $9 = 57;
 
+const $crt = 13;
 const $space = 32;
 const $dot = 46;
 const $hash = 35;
@@ -132,8 +133,15 @@ let buffer = "";
 let currentCharCode = 0;
 
 let lastToken = 0;
+let lastData = '';
 
-let lex_output : (number | {token: number, data: string})[] = [];
+//let lex_output : (number | {token: number, data: string})[] = [];
+let lex_output = [];
+
+/**
+ * Maintain a state so that we can do conditional parsing
+ */
+let state = {};
 
 let error_message = "";
 
@@ -155,7 +163,7 @@ export const LexString = input => {
     if (!parse_block() && !eof) {
       Juke.logger.log(lex_output);
       // TODO: better error message
-      Juke.logger.error(`Failed to parse token ${lexing_input[pointer]} (${currentCharCode}) at position ${pointer}, line: ${eols_encountered}.`);
+      Juke.logger.error(`Failed to parse token ${lexing_input[pointer]} (${currentCharCode}) at position ${pointer}, line: ${eols_encountered}. Last token: ${lastToken}`);
       Juke.logger.error(error_message);
       throw new Juke.ExitCode(1);
     }
@@ -168,8 +176,10 @@ export const LexString = input => {
  */
 const parse_block = () => {
   error_message = "";
+  // Reset the parser state
+  state = {};
   ignore_whitespace()
-  while ((FindChar($fwdslash, false) && FindChar($fwdslash, false)) || PeekChar($eol)) {
+  while ((FindChar($fwdslash, false) && FindChar($fwdslash, false)) || PeekChar($eol) || PeekChar($crt)) {
     SkipLine();
     ignore_whitespace()
   }
@@ -191,7 +201,7 @@ const parse_block = () => {
     }
     return parse_set();
   } else {
-    error_message = error_message + " (Pass)\nInvalid token, expected either set or extend to start a line when outside of an extend code generation block.";
+    error_message = error_message +  ` (Pass)\nInvalid token, expected either set or extend to start a line when outside of an extend code generation block.`;
     return false;
   }
 }
@@ -233,8 +243,10 @@ const push_token = (token, include_buffer) => {
       token: token,
       data: buffer,
     })
+    lastData = buffer;
   } else {
     lex_output.push(token);
+    lastData = null;
   }
   buffer = '';
   return token;
@@ -256,7 +268,7 @@ const ignore_whitespace = () => {
     if (FindChar($eol, true)) {
       eols_encountered ++;
     }
-    else if (!FindChar($space, true) && !FindChar($tab, true)) {
+    else if (!FindChar($space, true) && !FindChar($tab, true) && !FindChar($crt, true)) {
       error_message = "";
       return true;
     }
@@ -311,6 +323,10 @@ const require_params = () => {
   if (!require_token(LEX_NAME, "a named variable must be inside brackets of a function.")) {
     return false;
   }
+  if (!state.params) {
+    state.params = [];
+  }
+  state.params.push(lastData);
   ignore_whitespace();
   while (!PeekChar($rbr)) {
     ignore_whitespace();
@@ -322,7 +338,9 @@ const require_params = () => {
       return false;
     }
     ignore_whitespace();
+    state.params.push(lastData);
   }
+  Juke.logger.log(state.params);
   return true;
 }
 
@@ -461,6 +479,7 @@ const parse_block_contents = () => {
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
       }
+      state = {};
       push_token(LEX_EOL, false);
       push_token(LEX_EXTEND, false);
       push_token(LEX_SRC, false);
@@ -556,22 +575,18 @@ const SkipLine = () => {
     return;
   }
   while (currentCharCode !== $eol) {
-    pointer ++;
+    increment_pointer();
     if (pointer >= lexing_input.length) {
       eof = true;
       currentCharCode = $eol;
       return;
-    } else {
-      currentCharCode = lexing_input.charCodeAt(pointer);
     }
   }
   eols_encountered ++;
-  pointer ++;
+  increment_pointer();
   if (pointer >= lexing_input.length) {
     eof = true;
     currentCharCode = $eol;
-  } else {
-    currentCharCode = lexing_input.charCodeAt(pointer);
   }
 }
 
@@ -581,13 +596,11 @@ const ReadNumber = () => {
   }
   while (currentCharCode >= $0 && currentCharCode <= $9) {
     buffer += lexing_input.charAt(pointer);
-    pointer ++;
+    increment_pointer();
     if (pointer >= lexing_input.length) {
       eof = true;
       currentCharCode = $eol;
       return true;
-    } else {
-      currentCharCode = lexing_input.charCodeAt(pointer);
     }
   }
   return true;
@@ -600,23 +613,19 @@ const check_string = () => {
       return push_token(LEX_FAIL, false);
     }
     buffer += lexing_input.charAt(pointer);
-    pointer ++;
+    increment_pointer();
     if (pointer >= lexing_input.length) {
       eof = true;
       currentCharCode = $eol;
       error_message = "Invalid token, string was not properly terminated.";
       return push_token(LEX_FAIL, false);
-    } else {
-      currentCharCode = lexing_input.charCodeAt(pointer);
     }
   }
   buffer += lexing_input.charAt(pointer);
-  pointer ++;
+  increment_pointer();
   if (pointer >= lexing_input.length) {
     eof = true;
     currentCharCode = $eol;
-  } else {
-    currentCharCode = lexing_input.charCodeAt(pointer);
   }
   buffer = buffer.substring(1, buffer.length - 1)
   return push_token(LEX_STRING, true);
@@ -628,8 +637,7 @@ const check_name = () => {
     // We actually just don't care about paths
     if (currentCharCode === $fwdslash) {
       buffer = "";
-      pointer ++;
-      currentCharCode = lexing_input.charCodeAt(pointer);
+      increment_pointer();
       continue;
     }
     // Bad characters
@@ -638,13 +646,11 @@ const check_name = () => {
       return push_token(LEX_FAIL, false);
     }
     buffer += lexing_input.charAt(pointer);
-    pointer ++;
+    increment_pointer();
     if (pointer >= lexing_input.length) {
       eof = true;
       currentCharCode = $eol;
       return push_token(LEX_NAME, true);
-    } else {
-      currentCharCode = lexing_input.charCodeAt(pointer);
     }
   }
   return push_token(LEX_NAME, true);
@@ -654,13 +660,11 @@ const FindChar = (char, no_buffer) => {
   if (currentCharCode === char) {
     if (!no_buffer)
       buffer += lexing_input.charAt(pointer);
-    pointer ++;
+    increment_pointer();
     if (pointer >= lexing_input.length) {
       eof = true;
       currentCharCode = $eol;
       return false;
-    } else {
-      currentCharCode = lexing_input.charCodeAt(pointer);
     }
     return true;
   }
@@ -670,13 +674,11 @@ const FindChar = (char, no_buffer) => {
 const ReadChar = (no_buffer) => {
   if (!no_buffer)
     buffer += lexing_input.charAt(pointer);
-  pointer ++;
+  increment_pointer();
   if (pointer >= lexing_input.length) {
     eof = true;
     currentCharCode = $eol;
     return false;
-  } else {
-    currentCharCode = lexing_input.charCodeAt(pointer);
   }
   return true;
 }
@@ -691,4 +693,21 @@ const PeekWhitespace = () => {
 
 const IsDataInBuffer = () => {
   return buffer.trim() !== '';
+}
+
+const increment_pointer = () => {
+  pointer ++;
+  if (pointer >= lexing_input.length) {
+    currentCharCode = $eol;
+    return;
+  }
+  currentCharCode = lexing_input.charCodeAt(pointer);
+  while (currentCharCode == $crt) {
+    pointer ++;
+    if (pointer >= lexing_input.length) {
+      currentCharCode = $eol;
+      return;
+    }
+    currentCharCode = lexing_input.charCodeAt(pointer);
+  }
 }
