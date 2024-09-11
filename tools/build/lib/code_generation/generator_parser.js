@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import Juke, { sleep } from '../../juke/index.js';
-import { LEX_ADD, LEX_DM_INJECTION, LEX_DOT, LEX_EOL, LEX_EXTEND, LEX_NAME, LEX_ONCE, LEX_PARENT_PROC, LEX_R_BRACKET, LEX_SET, LexString } from './generator_lexer.js';
+import { LEX_ADD, LEX_COMMA, LEX_DM_INJECTION, LEX_DOT, LEX_EOL, LEX_EXTEND, LEX_INDEXER_OPEN, LEX_NAME, LEX_NUMBER, LEX_ONCE, LEX_PARENT_PROC, LEX_R_BRACKET, LEX_SET, LexString } from './generator_lexer.js';
 
 /**
  *
@@ -133,7 +133,10 @@ export class GenerationRule {
     // This json structure is accessible via proc.params[1]
     let state = {
       proc: {
-        params: proc_params,
+        params: proc_params.map(x => ({
+          name: x.substring(x.lastIndexOf('/') + 1),
+          type: '/' + x.substring(0, x.lastIndexOf('/'))
+        })),
         name: proc_name.substring(proc_name.lastIndexOf('/') + 1),
         fullpath: proc_name,
       },
@@ -161,7 +164,7 @@ export class GenerationRule {
 
   /**
    * Start parsing the token stack
-   * @param {{token: string, data: string}} token
+   * @param {{token: string, data: string, line: number}} token
    * @param {Object} state
    * @param {function() : string} next_token
    * @returns {string}
@@ -169,6 +172,8 @@ export class GenerationRule {
   parse_token_stack(token, state, next_token) {
     switch (token.token)
     {
+      case LEX_EOL:
+        return `\n`;
       case LEX_DM_INJECTION:
         return token.data;
       case LEX_NAME:
@@ -184,10 +189,34 @@ export class GenerationRule {
         if (once.token !== LEX_ONCE) {
           return `add ${this.parse_token_stack(once, state, next_token)}`;
         }
-        // Only add the rule if it hasn't already been added
+        const function_name = next_token();
+        next_token(); //skip brackets
+        let next_parameter = next_token();
+        while (next_parameter.token !== LEX_R_BRACKET) {
+          // Skip commas
+          if (next_parameter.token === LEX_COMMA) {
+            next_parameter = next_token();
+            continue;
+          }
+          // Do something with the parameter
+          next_parameter = next_token();
+        }
         return ``;
+      case LEX_INDEXER_OPEN:
+        let number = next_token();
+        if (number.token !== LEX_NUMBER) {
+          Juke.logger.error(`Unexpected token encountered when parsing rule into string, ${token.token} is unhandled at line ${token.line}! Expected a [ token to be followed by a constant number.`);
+          throw new Error();
+        }
+        const result = state[Number(number.data) - 1];
+        // Skip the closing indexer
+        next_token();
+        if (typeof result === 'string') {
+          return result;
+        }
+        return this.parse_token_stack(next_token(), result, next_token);
       default:
-        Juke.logger.error(`Unexpected token encountered when parsing rule into string, ${token.token} is unhandled!`);
+        Juke.logger.error(`Unexpected token encountered when parsing rule into string, ${token.token} is unhandled at line ${token.line}!`);
         throw new Error();
     }
   }

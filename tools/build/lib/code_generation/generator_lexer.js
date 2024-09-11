@@ -138,7 +138,7 @@ let lastData = '';
 
 //let lex_output : (number | {token: number, data: string})[] = [];
 /**
- * @type {{token: number, data: string}[]}
+ * @type {{token: number, data: string, line: number}[]}
  */
 let lex_output = [];
 
@@ -156,7 +156,7 @@ let eof = false;
 /**
  *
  * @param {string} input
- * @returns {{token: string, data: string}[]}
+ * @returns {{token: string, data: string, line: number}[]}
  */
 export const LexString = input => {
   lexing_input = input;
@@ -251,10 +251,11 @@ const push_token = (token, include_buffer) => {
     lex_output.push({
       token: token,
       data: buffer,
+      line: eols_encountered,
     })
     lastData = buffer;
   } else {
-    lex_output.push({token: token, data: null});
+    lex_output.push({token: token, data: null, line: eols_encountered});
     lastData = null;
   }
   buffer = '';
@@ -311,6 +312,10 @@ const require_variable = (invalid_text) => {
       if (next_token() !== LEX_INDEXER_CLOSE) {
         error_message = error_message + ` (Pass)\nInvalid token, array index was not closed with a constant numeric value inside.`;
         return false;
+      }
+      if (PeekChar($dot)) {
+        located = next_token();
+        return require_variable(invalid_text);
       }
     }
     error_message = "";
@@ -440,26 +445,6 @@ const parse_block_contents = () => {
       }
       push_token(LEX_PARENT_PROC, false);
       continue;
-    }
-    // Check for # replacements
-    if (FindChar($hash, false) && FindChar($hash, false)) {
-      // Trim off the last 2 characters of the buffer
-      buffer = buffer.substring(0, buffer.length - 2);
-      if (IsDataInBuffer()) {
-        push_token(LEX_DM_INJECTION, true);
-      }
-      let found_token = next_token();
-      if (found_token === LEX_PATHOF){
-        if (!require_token(LEX_L_BRACKET, 'PATHOF should always be followed by an opening bracket.') || !require_variable("PATHOF should always contain a variable to get the path of") || !require_token(LEX_R_BRACKET, "PATHOF should always have a closing bracket after its variable")) {
-          return false;
-        }
-        continue;
-      } else if (found_token === LEX_PROC_NAME) {
-        continue;
-      } else {
-        error_message = error_message + ` \nInvalid token, expected either PATHOF or PROC_NAME to supercede ## (Actually found ${found_token})`;
-        return false;
-      }
     }
     // Check for $
     if (FindChar($var, false)) {
