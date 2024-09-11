@@ -1,8 +1,13 @@
 
 import fs from 'fs';
 import Juke, { sleep } from '../../juke/index.js';
-import { LEX_EOL, LEX_EXTEND, LEX_NAME, LEX_PARENT_PROC, LEX_R_BRACKET, LEX_SET, LexString } from './generator_lexer.js';
+import { LEX_ADD, LEX_DM_INJECTION, LEX_DOT, LEX_EOL, LEX_EXTEND, LEX_NAME, LEX_ONCE, LEX_PARENT_PROC, LEX_R_BRACKET, LEX_SET, LexString } from './generator_lexer.js';
 
+/**
+ *
+ * @param {*} file
+ * @returns {GenerationRule}
+ */
 export const ParseFile = (file) => {
   Juke.logger.debug(`Parsing file: ${file}`);
   const fileContents = fs.readFileSync(file, 'utf-8');
@@ -14,15 +19,15 @@ export const ParseFile = (file) => {
 /**
  * Generate a rule from a string of tokens.
  * Why isn't this just a regex again?
- * @param {[{token: String, data: String}|String]} tokens
+ * @param {[{token: String, data: String}]} tokens
  * @returns {GenerationRule}
  */
 const ProcessTokens = (file, tokens) => {
-  Juke.logger.debug(tokens);
+  Juke.logger.warn(JSON.stringify(tokens));
   let created_rule = new GenerationRule();
   let i = 0;
   while (i < tokens.length) {
-    if (tokens[i] === LEX_SET) {
+    if (tokens[i].token === LEX_SET) {
       i++;
       let var_name = tokens[i];
       i++;
@@ -35,7 +40,7 @@ const ProcessTokens = (file, tokens) => {
       } else if (var_name.data === 'run_order') {
         created_rule.run_order = parseInt(var_value.data);
       }
-    } else if (tokens[i] === LEX_EXTEND) {
+    } else if (tokens[i].token === LEX_EXTEND) {
       i++;
       // Skip the src part
       i++;
@@ -46,7 +51,7 @@ const ProcessTokens = (file, tokens) => {
       // Read the arguments
       //let rule_arguments : number[] = [];
       let rule_arguments = [];
-      while (tokens[i] !== LEX_R_BRACKET) {
+      while (tokens[i].token !== LEX_R_BRACKET) {
         // Names
         if (tokens[i].token === LEX_NAME) {
           rule_arguments.push(tokens[i].data);
@@ -57,7 +62,7 @@ const ProcessTokens = (file, tokens) => {
       // Skip R bracket
       i++;
       // Skip the new line at the end
-      if (tokens[i] === LEX_EOL) {
+      if (tokens[i].token === LEX_EOL) {
         i++;
       }
       // Read the contents
@@ -66,8 +71,8 @@ const ProcessTokens = (file, tokens) => {
       let pre_token_stream = [];
       let post_token_stream = [];
       let pre = true;
-      while (i + 1 < tokens.length - 1 && tokens[i + 1] !== LEX_EXTEND) {
-        if (tokens[i] === LEX_PARENT_PROC) {
+      while ((i + 1 < tokens.length && tokens[i + 1].token !== LEX_EXTEND) || i + 1 == tokens.length) {
+        if (tokens[i].token === LEX_PARENT_PROC) {
           pre = false;
           i++;
           continue;
@@ -97,10 +102,18 @@ const ProcessTokens = (file, tokens) => {
 }
 
 export class GenerationRule {
-
-  //rule_name : string;
-  //run_order : number;
-  //extension_rules : { name: string, arguments: number[], pre_tokens: number[], post_tokens: number[]}[];
+  /**
+   * @type {string}
+   */
+  rule_name;
+  /**
+   * @type {number}
+   */
+  run_order;
+  /**
+   * @type {{ name: string, arguments: number[], pre_tokens: {token: string, data: string}[], post_tokens: {token: string, data: string}[]}[]}
+   */
+  extension_rules;
 
   constructor() {
     this.rule_name = "";
@@ -109,15 +122,73 @@ export class GenerationRule {
     this.extension_rules = [];
   }
 
-  //create_pre_injection(proc_name: string, proc_params: ProcParam[], rule_params: string[]) {
-  create_pre_injection(proc_name, proc_params, rule_params) {
+  /**
+   *
+   * @param {string} proc_name (full typepath included)
+   * @param {string[]} proc_params
+   * @param {string[]} rule_params
+   */
+  create_post_injection(proc_name, proc_params, rule_params) {
+    // Create the code structures that we need
+    // This json structure is accessible via proc.params[1]
+    let state = {
+      proc: {
+        params: proc_params,
+        name: proc_name.substring(proc_name.lastIndexOf('/') + 1),
+        fullpath: proc_name,
+      },
+      define: {
+        params: rule_params
+      }
+    };
     // Convert tokens into a string
     for (const rule of this.extension_rules) {
       let block = new GeneratedBlock();
       block.proc_name = rule.name;
       block.content = "";
       // Token execution
+      let current = 0;
+      while (current < rule.post_tokens.length) {
+        block.content += this.parse_token_stack(rule.post_tokens[current], state, () => {
+          current++;
+          return rule.post_tokens[current];
+        });
+        current ++;
+      }
+      Juke.logger.error(block.content);
+    }
+  }
 
+  /**
+   * Start parsing the token stack
+   * @param {{token: string, data: string}} token
+   * @param {Object} state
+   * @param {function() : string} next_token
+   * @returns {string}
+   */
+  parse_token_stack(token, state, next_token) {
+    switch (token.token)
+    {
+      case LEX_DM_INJECTION:
+        return token.data;
+      case LEX_NAME:
+        if (typeof state[token.data] === 'string') {
+          return state[token.data];
+        }
+        return this.parse_token_stack(next_token(), state[token.data], next_token);
+      case LEX_DOT:
+        return this.parse_token_stack(next_token(), state, next_token);
+      case LEX_ADD:
+        const once = next_token();
+        // If we genuienly just find 'add' by itself, parse it as if it was anything else
+        if (once.token !== LEX_ONCE) {
+          return `add ${this.parse_token_stack(once, state, next_token)}`;
+        }
+        // Only add the rule if it hasn't already been added
+        return ``;
+      default:
+        Juke.logger.error(`Unexpected token encountered when parsing rule into string, ${token.token} is unhandled!`);
+        throw new Error();
     }
   }
 

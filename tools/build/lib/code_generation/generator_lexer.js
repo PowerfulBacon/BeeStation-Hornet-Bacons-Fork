@@ -109,6 +109,7 @@ const $7 = 55;
 const $8 = 56;
 const $9 = 57;
 
+const $var = 36;
 const $crt = 13;
 const $space = 32;
 const $dot = 46;
@@ -136,6 +137,9 @@ let lastToken = 0;
 let lastData = '';
 
 //let lex_output : (number | {token: number, data: string})[] = [];
+/**
+ * @type {{token: number, data: string}[]}
+ */
 let lex_output = [];
 
 /**
@@ -149,6 +153,11 @@ let eols_encountered = 1;
 
 let eof = false;
 
+/**
+ *
+ * @param {string} input
+ * @returns {{token: string, data: string}[]}
+ */
 export const LexString = input => {
   lexing_input = input;
   lex_output = [];
@@ -245,7 +254,7 @@ const push_token = (token, include_buffer) => {
     })
     lastData = buffer;
   } else {
-    lex_output.push(token);
+    lex_output.push({token: token, data: null});
     lastData = null;
   }
   buffer = '';
@@ -434,7 +443,7 @@ const parse_block_contents = () => {
     }
     // Check for # replacements
     if (FindChar($hash, false) && FindChar($hash, false)) {
-      // Trim off the last 4 characters of the buffer
+      // Trim off the last 2 characters of the buffer
       buffer = buffer.substring(0, buffer.length - 2);
       if (IsDataInBuffer()) {
         push_token(LEX_DM_INJECTION, true);
@@ -451,6 +460,18 @@ const parse_block_contents = () => {
         error_message = error_message + ` \nInvalid token, expected either PATHOF or PROC_NAME to supercede ## (Actually found ${found_token})`;
         return false;
       }
+    }
+    // Check for $
+    if (FindChar($var, false)) {
+      // Remove the dollar
+      buffer = buffer.substring(0, buffer.length - 1);
+      if (IsDataInBuffer()) {
+        push_token(LEX_DM_INJECTION, true);
+      }
+      if (!require_variable(`Invalid token, expected a function name to appear after '$'`)) {
+        return false;
+      }
+      continue;
     }
     // Check for add once
     if (FindChar($a, false) && FindChar($d, false) && FindChar($d, false) && FindChar($space, false) && FindChar($o, false) && FindChar($n, false) && FindChar($c, false) && FindChar($e, false) && FindChar($space, false)) {
