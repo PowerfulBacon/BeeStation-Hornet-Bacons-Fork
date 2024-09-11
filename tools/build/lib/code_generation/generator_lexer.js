@@ -340,7 +340,7 @@ const require_params = () => {
     ignore_whitespace();
     state.params.push(lastData);
   }
-  Juke.logger.log(state.params);
+  //Juke.logger.log(state.params);
   return true;
 }
 

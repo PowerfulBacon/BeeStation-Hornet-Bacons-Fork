@@ -10,9 +10,17 @@ import Juke from "../../juke/index.js";
 import { GenerationRule, ParseFile } from "./generator_parser.js";
 
 // Version number: Increment upon updates to this script to trigger a full rebuild
-const VERSION_NUMBER = "0_1_4";
+const VERSION_NUMBER = "0_1_5";
+
+let startTime = 0;
+
+const printTime = msg => {
+  Juke.logger.info(msg + ` Duration: ${(Date.now() - startTime) / 1e3 + "s"}`);
+  startTime = Date.now();
+};
 
 export const RunCodeGeneration = async (dme_name, generator_files) => {
+  startTime = Date.now();
   const gen_file = `obj/${dme_name}_v${VERSION_NUMBER}.dm`;
   // Parse generators
   //let generation_rules : { [id: string] : GenerationRule } = {};
@@ -25,6 +33,7 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
     Juke.logger.info("No generators installed, skipping code injection.")
     return;
   }
+  printTime(`Code generation: Successfully parsed ${Object.keys(generation_rules).length} rules.`);
   // Check the last generation time
   let rebuilt = false;
   if (!fs.existsSync(gen_file)) {
@@ -40,8 +49,8 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
   const dynamic_regex = new RegExp("^\\s*(" + Object.keys(generation_rules).join("|") + ")(?:\\((.*?)\\))?\\s*(?:$|//|\\/\\*)(?=(?:\\n|\\r|.)*?^((?:/\\w+)+(?:/proc)?/\\w*)\\(((?:\\s*[\\w/]+(?:\\s*,\\s*[\\w/]+)*)?\\s*)\\))", "gm");
   // TODO: Read the DME and get the code files from there
   const source_code = Juke.glob('code/**/*.dm');
-  Juke.logger.log(dynamic_regex);
-  Juke.logger.info(`Code generation: Successfully parsed ${Object.keys(generation_rules).length} rules. Performing pre-compilation generator injection on ${source_code.length} code files...`);
+  printTime(`Located ${source_code.length} files for injection.`)
+  //Juke.logger.log(dynamic_regex);
   // Store this data for usage later on
   //let replacedSignatures : { [id: string] : CodeInjection } = {};
   let replacedSignatures = {};
@@ -72,7 +81,7 @@ export const RunCodeGeneration = async (dme_name, generator_files) => {
     }
   }
   // Log the status of the generator
-  Juke.logger.info(`Code generation: DM code generation complete! (Skipped ${skipped}/${source_code.length} files)`);
+  printTime(`Code generation: DM code generation complete! (Skipped ${skipped}/${source_code.length} files)`);
 }
 
 class CodeInjection {
