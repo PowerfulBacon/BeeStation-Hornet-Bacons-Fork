@@ -19,12 +19,14 @@
 /obj/machinery/button/indestructible
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
+CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/button)
+
 /obj/machinery/button/Initialize(mapload, ndir = 0, built = 0)
 	. = ..()
 	if(built)
 		setDir(ndir)
 		panel_open = TRUE
-		update_appearance()
+		update_icon()
 
 
 	if(!built && !device && device_type)
@@ -41,30 +43,26 @@
 			board.accesses = req_one_access
 
 
-/obj/machinery/button/update_icon_state()
+/obj/machinery/button/update_icon()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "button-open"
-		return ..()
-	if(machine_stat & (NOPOWER|BROKEN))
-		icon_state = "[skin]-p"
-		return ..()
-	icon_state = skin
-	return ..()
+		if(device)
+			add_overlay("button-device")
+		if(board)
+			add_overlay("button-board")
 
-/obj/machinery/button/update_overlays()
-	. = ..()
-	if(!panel_open)
-		return
-	if(device)
-		. += "button-device"
-	if(board)
-		. += "button-board"
+	else
+		if(machine_stat & (NOPOWER|BROKEN))
+			icon_state = "[skin]-p"
+		else
+			icon_state = skin
 
 /obj/machinery/button/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)
 		if(panel_open || allowed(user))
 			default_deconstruction_screwdriver(user, "button-open", "[skin]",W)
-			update_appearance()
+			update_icon()
 		else
 			to_chat(user, "<span class='danger'>Maintenance Access Denied.</span>")
 			flick("[skin]-denied", src)
@@ -98,7 +96,7 @@
 				playsound(loc, 'sound/items/deconstruct.ogg', 50, 1)
 				qdel(src)
 
-		update_appearance()
+		update_icon()
 		return
 
 	if(user.a_intent != INTENT_HARM && !(W.item_flags & NOBLUDGEON))
@@ -118,12 +116,9 @@
 	if(do_after(eminence, 20, target=get_turf(eminence)))
 		attack_hand(eminence)
 
-/obj/machinery/button/attack_ai(mob/user)
+/obj/machinery/button/attack_silicon(mob/user)
 	if(!panel_open)
 		return attack_hand(user)
-
-/obj/machinery/button/attack_robot(mob/user)
-	return attack_ai(user)
 
 /obj/machinery/button/proc/setup_device()
 	if(id && istype(device, /obj/item/assembly/control))
@@ -149,7 +144,7 @@
 				req_access = list()
 				req_one_access = list()
 				board = null
-			update_appearance()
+			update_icon()
 			to_chat(user, "<span class='notice'>You remove electronics from the button frame.</span>")
 
 		else
@@ -175,9 +170,9 @@
 	icon_state = "[skin]1"
 
 	if(device)
-		device.pulsed()
+		device.pulsed(user)
 
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_appearance)), 15)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon)), 15)
 
 
 /obj/machinery/button/door

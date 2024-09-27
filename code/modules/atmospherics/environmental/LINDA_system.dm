@@ -164,9 +164,9 @@
 		ImmediateCalculateAdjacentTurfs()
 
 /atom/movable/proc/move_update_air(turf/T)
-    if(isturf(T))
-        T.air_update_turf(1)
-    air_update_turf(1)
+	if(isturf(T))
+		T.air_update_turf(1)
+	air_update_turf(1)
 
 /atom/proc/create_atmos_populator() //because a lot of people loves to copy paste awful code lets just make an easy proc to spawn your plasma fires
 	RETURN_TYPE(/datum/mixture_populator)

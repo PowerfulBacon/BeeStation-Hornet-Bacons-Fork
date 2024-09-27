@@ -6,6 +6,9 @@
 /// Two mobs one is facing a person, but the other is perpendicular
 #define FACING_INIT_FACING_TARGET_TARGET_FACING_PERPENDICULAR 3 //! Do I win the most informative but also most stupid define award?
 
+/proc/random_blood_type()
+	return pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+
 /proc/random_eye_color()
 	switch(pick(20;"brown",20;"hazel",20;"grey",15;"blue",15;"green",1;"amber",1;"albino"))
 		if("brown")
@@ -97,6 +100,24 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/apid_headstripes, GLOB.apid_headstripes_list)
 	if(!GLOB.psyphoza_cap_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/psyphoza_cap, GLOB.psyphoza_cap_list)
+	if(!GLOB.diona_leaves_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_leaves, GLOB.diona_leaves_list)
+	if(!GLOB.diona_thorns_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_thorns, GLOB.diona_thorns_list)
+	if(!GLOB.diona_flowers_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_flowers, GLOB.diona_flowers_list)
+	if(!GLOB.diona_moss_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_moss, GLOB.diona_moss_list)
+	if(!GLOB.diona_mushroom_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_mushroom, GLOB.diona_mushroom_list)
+	if(!GLOB.diona_antennae_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_antennae, GLOB.diona_antennae_list)
+	if(!GLOB.diona_eyes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_eyes, GLOB.diona_eyes_list)
+	if(!GLOB.diona_pbody_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_pbody, GLOB.diona_pbody_list)
+
+
 	//For now we will always return none for tail_human and ears.
 	return(
 		list(
@@ -125,7 +146,15 @@
 		"apid_stripes" = pick(GLOB.apid_stripes_list),
 		"apid_headstripes" = pick(GLOB.apid_headstripes_list),
 		"body_model" = gender == MALE ? MALE : gender == FEMALE ? FEMALE : pick(MALE, FEMALE),
-		"psyphoza_cap" = pick(GLOB.psyphoza_cap_list)
+		"psyphoza_cap" = pick(GLOB.psyphoza_cap_list),
+		"diona_leaves" = pick(GLOB.diona_leaves_list),
+		"diona_thorns" = pick(GLOB.diona_thorns_list),
+		"diona_flowers" = pick(GLOB.diona_flowers_list),
+		"diona_moss" = pick(GLOB.diona_moss_list),
+		"diona_mushroom" = pick(GLOB.diona_mushroom_list),
+		"diona_antennae" = pick(GLOB.diona_antennae_list),
+		"diona_eyes" = pick(GLOB.diona_eyes_list),
+		"diona_pbody" = pick(GLOB.diona_pbody_list)
 		)
 	)
 
@@ -771,6 +800,25 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		fully_replace_character_name(oldname,newname)
 		return TRUE
 	return FALSE
+
+/// Special handler for cyborg naming to check if cyborg name preferences match a name that has already been used. Returns TRUE if preferences are good to use and FALSE if not.
+/mob/proc/check_cyborg_name(client/C, obj/item/mmi/mmi)
+	var/name = C?.prefs?.read_character_preference(/datum/preference/name/cyborg)
+
+	//Name is original, add it to the list to prevent it from being used again and return TRUE
+	if(!(name in GLOB.cyborg_name_list))
+		GLOB.cyborg_name_list += name
+		mmi.original_name = name
+		return TRUE
+
+	//Name is not original, but is this the original user of the name? If so we still return TRUE but do not need to add it to the list
+	else if(name == mmi.original_name)
+		return TRUE
+
+	//This name has already been taken and this is not the original user, return FALSE
+	else
+		to_chat(C.mob, "<span class='warning'>Cyborg name already used this round by another character, your name has been randomized</span>")
+		return FALSE
 
 /proc/view_or_range(distance = world.view , center = usr , type)
 	switch(type)
