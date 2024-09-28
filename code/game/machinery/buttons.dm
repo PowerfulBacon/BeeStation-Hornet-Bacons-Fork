@@ -42,6 +42,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/button)
 			board.one_access = 1
 			board.accesses = req_one_access
 
+#define ITEM_INTERACTION(...)
 
 /obj/machinery/button/update_icon()
 	cut_overlays()
@@ -61,14 +62,15 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/button)
 ITEM_INTERACTION("Install assembly")
 /obj/machinery/button/proc/install_assembly(obj/item/W, mob/user)
 	if (!panel_open)
-		return
+		return FALSE
 	if (device)
-		return
+		return FALSE
 	if(!user.transferItemToLoc(W, src))
 		to_chat(user, "<span class='warning'>\The [W] is stuck to you!</span>")
-		return
+		return TRUE
 	device = W
 	to_chat(user, "<span class='notice'>You add [W] to the button.</span>")
+	return TRUE
 
 /obj/machinery/button/attackby(obj/item/W, mob/user, params)
 	if(W.tool_behaviour == TOOL_SCREWDRIVER)

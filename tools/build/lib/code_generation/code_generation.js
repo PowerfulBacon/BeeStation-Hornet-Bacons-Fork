@@ -65,6 +65,8 @@ const buildDynamicRegex = (generation_rules) => {
   );
 };
 
+const typeExtractor = new RegExp(`^((?:\\/\\w+)+?)(\\/proc)?\\/\\w+$`, 'gm');
+
 /**
  * Inject code into the source files based on the generation rules.
  * @param {Array} source_code - List of source files to process.
@@ -93,12 +95,6 @@ const injectCodeIntoFiles = (source_code, dynamic_regex, lastBuildTime, generati
 
       // Generate unique signature based on matched content
       const signature = `${match[3]}(${match[4]})`;
-      let injection = replacedSignatures[signature];
-
-      // If no injection exists for the signature, create a new one
-      if (!injection) {
-        injection = replacedSignatures[signature] = new CodeInjection(signature);
-      }
 
       // Inject code here, you can use `generation_params` if necessary
       const define_name = match[1];
@@ -106,11 +102,31 @@ const injectCodeIntoFiles = (source_code, dynamic_regex, lastBuildTime, generati
       const target_proc = match[3];
       const target_params = match[4];
 
+      Juke.logger.log('\'' + target_proc + '\'');
+      const matches = target_proc.matchAll(typeExtractor);
+      const type = matches.next().value[1];
+
       // You can log or process generation_params here
       const target_rule = generation_rules[define_name];
-      const post_injection = target_rule.create_post_injection(target_proc, target_params.split(",").map(x => x.trim()), define_params.split(",").map(x => x.trim()));
-      injection.post_code += post_injection;
+      // Get the injections that we want to insert
+      const injections = target_rule.create_post_injection(target_proc, target_params.split(",").map(x => x.trim()), define_params.split(",").map(x => x.trim()));
+      for (const injection of injections)
+      {
+        let signature =  type + '/' + injection.proc_name + '(' + target_params + ')';
+        if (!replacedSignatures[signature]) {
+          replacedSignatures[signature] = new CodeInjection(signature);
+        }
+        let extension = replacedSignatures[signature]
+        extension.post_code += '\n' + injection.content;
+      }
     }
+  }
+
+  fs.writeFileSync('obj/generatedCode.dm', '');
+  for (const key of Object.keys(replacedSignatures)) {
+    const thing = replacedSignatures[key];
+    fs.appendFileSync('obj/generatedCode.dm', thing.signature);
+    fs.appendFileSync('obj/generatedCode.dm', thing.pre_code + '\n\t. = ..()\n' + thing.post_code + '\n');
   }
 
   return skipped;

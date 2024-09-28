@@ -127,6 +127,7 @@ export class GenerationRule {
    * @param {string} proc_name (full typepath included)
    * @param {string[]} proc_params
    * @param {string[]} rule_params
+   * @returns {GeneratedBlock[]}
    */
   create_post_injection(proc_name, proc_params, rule_params) {
     // Create the code structures that we need
@@ -144,6 +145,8 @@ export class GenerationRule {
         params: rule_params
       }
     };
+    let output = [];
+    Juke.logger.log('Injecting proc name' + proc_name);
     // Convert tokens into a string
     for (const rule of this.extension_rules) {
       let block = new GeneratedBlock();
@@ -158,8 +161,9 @@ export class GenerationRule {
         });
         current ++;
       }
-      Juke.logger.error(block.content);
+      output.push(block);
     }
+    return output;
   }
 
   /**
@@ -201,7 +205,7 @@ export class GenerationRule {
           // Do something with the parameter
           next_parameter = next_token();
         }
-        return ``;
+        return `add once ` + function_name.data;
       case LEX_INDEXER_OPEN:
         let number = next_token();
         if (number.token !== LEX_NUMBER) {
@@ -235,5 +239,18 @@ export class GeneratedBlock {
   //proc_name: string;
   //post_injection: boolean;
   //content: string;
+
+  /**
+   * @type {string}
+   */
+  proc_name;
+  /**
+   * @type {boolean}
+   */
+  post_injection;
+  /**
+   * @type {string}
+   */
+  content;
 
 }
