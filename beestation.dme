@@ -2223,6 +2223,8 @@
 #include "code\modules\atmospherics\environmental\LINDA_fire.dm"
 #include "code\modules\atmospherics\environmental\LINDA_system.dm"
 #include "code\modules\atmospherics\environmental\LINDA_turf_tile.dm"
+#include "code\modules\atmospherics\gasflow\atmospheric_region.dm"
+#include "code\modules\atmospherics\gasflow\region_mixture.dm"
 #include "code\modules\atmospherics\gasmixtures\auxgm.dm"
 #include "code\modules\atmospherics\gasmixtures\gas_mixture.dm"
 #include "code\modules\atmospherics\gasmixtures\immutable_mixtures.dm"
