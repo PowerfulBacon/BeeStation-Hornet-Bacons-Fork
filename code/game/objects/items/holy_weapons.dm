@@ -306,7 +306,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	block_flags = BLOCKING_PROJECTILE
 	block_level = 1
-	block_power = 20
+	block_cooldown = BLOCK_LEVEL_5
 	var/shield_icon = "shield-red"
 
 /obj/item/nullrod/staff/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, item_layer, atom/origin)
@@ -332,7 +332,7 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_BELT
 	block_flags = BLOCKING_NASTY | BLOCKING_ACTIVE
 	block_level = 1
-	block_power = 30
+	block_cooldown = BLOCK_LEVEL_4
 	sharpness = IS_SHARP
 	bleed_force = BLEED_CUT
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -381,7 +381,7 @@
 	worn_icon_state = "katana"
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY | BLOCKING_PROJECTILE
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
-	block_power = 0
+	block_cooldown = block_cooldown = BLOCK_LEVEL_3
 
 /obj/item/nullrod/claymore/multiverse
 	name = "extradimensional blade"
@@ -453,7 +453,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	armour_penetration = 35
 	block_level = 1
-	block_power = 15
+	block_cooldown = BLOCK_LEVEL_2
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_SHARP
@@ -716,7 +716,7 @@
 	desc = "A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, it is now used to harass the clown."
 	w_class = WEIGHT_CLASS_BULKY
 	force = 14
-	block_power = 40
+	block_cooldown = BLOCK_LEVEL_5
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
 	hitsound = "swing_hit"

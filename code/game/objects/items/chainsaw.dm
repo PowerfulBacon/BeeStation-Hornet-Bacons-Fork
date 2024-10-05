@@ -8,7 +8,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/chainsaw_righthand.dmi'
 	flags_1 = CONDUCT_1
 	force = 13
-	block_power = 20
+	block_cooldown = BLOCK_LEVEL_3
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	attack_weight = 2
 	var/force_on = 24
@@ -93,7 +93,7 @@
 	attack_verb_continuous = list("saws", "shreds", "rends", "guts", "eviscerates")
 	attack_verb_simple = list("saw", "shred", "rend", "gut", "eviscerate")
 	actions_types = list(/datum/action/item_action/startchainsaw)
-	block_power = 50
+	block_cooldown = BLOCK_LEVEL_4
 	armour_penetration = 50
 	light_color = "#ff0000"
 	var/onsound
@@ -133,7 +133,7 @@
 	desc = "The chainsaw you want when you need to kill every damn thing in the room."
 	force_on = 60
 	w_class = WEIGHT_CLASS_LARGE
-	block_power = 75
+	block_cooldown = BLOCK_LEVEL_5
 	block_level = 1
 	attack_weight = 3 //fear him
 	armour_penetration = 75

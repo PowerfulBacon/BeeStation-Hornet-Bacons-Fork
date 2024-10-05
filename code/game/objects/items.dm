@@ -168,14 +168,16 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	/// The tool speed multiplier of how long it takes to do the tool action.
 	var/toolspeed = 1
 
+	/// The cooldown between blocks
+	/// If set to 0, then the item will be unable to perform blocks.
+	var/block_cooldown = 0
+
 	/// The chance that holding this item will block attacks.
 	var/block_level = 0
 	//does the item block better if walking?
 	var/block_upgrade_walk = 0
 	//blocking flags
 	var/block_flags = BLOCKING_ACTIVE
-	//reduces stamina damage taken whilst blocking. block power of 0 means it takes the full force of the attacking weapon
-	var/block_power = 0
 	//what sound does blocking make
 	var/block_sound = 'sound/weapons/parry.ogg'
 	//if a mob hits this barehanded, are they in trouble?

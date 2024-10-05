@@ -80,7 +80,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	attack_weight = 1
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
-	block_power = 40
+	block_cooldown = BLOCK_LEVEL_5
 	block_upgrade_walk = 1
 	block_level = 1
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
@@ -241,7 +241,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	block_level = 0
-	block_power = 30
+	block_cooldown = BLOCK_LEVEL_3
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 50, STAMINA = 0, BLEED = 0)
 
 /obj/item/katana
@@ -261,7 +261,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
-	block_power = 20
+	block_cooldown = BLOCK_LEVEL_4
 	block_level = 1
 	block_upgrade_walk = 1
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY | BLOCKING_PROJECTILE
@@ -547,7 +547,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_flags = ABSTRACT | DROPDEL | ISWEAPON
 	w_class = WEIGHT_CLASS_HUGE
 	block_upgrade_walk = 2
-	block_power = 20
+	block_cooldown = BLOCK_LEVEL_2
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	force = 24
 	attack_weight = 2

@@ -77,7 +77,8 @@
 	item_state = "asclepius_dormant"
 	block_upgrade_walk = 1
 	block_level = 1
-	block_power = 40 //blocks very well to encourage using it. Just because you're a pacifist doesn't mean you can't defend yourself
+	// Blocks very well to encourage using it. Just because you're a pacifist doesn't mean you can't defend yourself
+	block_cooldown = BLOCK_LEVEL_5
 	block_flags = null //not active, so it's null
 	var/activated = FALSE
 	var/usedHand
@@ -854,7 +855,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/shared_storage/blue)
 	throwforce = 1
 	block_upgrade_walk = 1
 	block_level = 1
-	block_power = 20
+	block_cooldown = BLOCK_LEVEL_4
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	hitsound = 'sound/effects/ghost2.ogg'
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "rends")

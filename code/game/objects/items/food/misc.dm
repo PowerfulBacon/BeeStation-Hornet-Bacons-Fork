@@ -161,7 +161,7 @@
 	throwforce = 15
 	block_level = 2
 	block_upgrade_walk = 1
-	block_power = 55
+	block_cooldown = BLOCK_LEVEL_4
 	attack_weight = 2
 	armour_penetration = 80
 	//wound_bonus = -50

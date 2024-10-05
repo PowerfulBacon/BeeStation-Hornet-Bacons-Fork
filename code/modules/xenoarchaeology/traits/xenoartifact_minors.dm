@@ -304,6 +304,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/mob_spawn/sentient_artifact)
 	X.block_level = pick(1, 2, 3, 4)
 	X.block_upgrade_walk = 1
 	X.block_power = 25 * pick(0.8, 1, 1.3, 1.5)
+	X.block_cooldown = BLOCK_LEVEL_5
 
 //============
 // Light, allows artifact to be thrown far

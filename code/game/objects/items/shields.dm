@@ -4,8 +4,8 @@
 	block_level = 1
 	block_upgrade_walk = 1
 	block_flags = BLOCKING_PROJECTILE
-	block_power = 50
 	max_integrity =  75
+	block_cooldown = BLOCK_LEVEL_4
 	item_flags = ISWEAPON
 	var/transparent = FALSE	// makes beam projectiles pass through the shield
 	var/durability = TRUE //the shield uses durability instead of stamina
@@ -134,7 +134,7 @@
 /obj/item/shield/riot/roman/fake
 	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>. It appears to be a bit flimsy."
 	block_upgrade_walk = 1
-	block_power = 0
+	block_cooldown = BLOCK_LEVEL_1
 	max_integrity = 30
 
 /obj/item/shield/riot/roman/shatter(mob/living/carbon/human/owner)
@@ -173,7 +173,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/shields_righthand.dmi'
 	custom_materials = null
 	transparent = FALSE
-	block_power = 25
+	block_cooldown = BLOCK_LEVEL_5
 	max_integrity = 70
 	block_flags = BLOCKING_HUNTER | BLOCKING_PROJECTILE
 	w_class = WEIGHT_CLASS_BULKY

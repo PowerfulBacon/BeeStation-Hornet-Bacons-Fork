@@ -65,7 +65,7 @@
 	force = 15
 	block_level = 1
 	block_upgrade_walk = 1
-	block_power = 50
+	block_cooldown = BLOCK_LEVEL_4
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
@@ -148,7 +148,7 @@
 	item_state = "rapier"
 	lefthand_file = null
 	righthand_file = null
-	block_power = 60
+	block_cooldown = BLOCK_LEVEL_4
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 100)
 
 /obj/item/melee/sabre/mime/on_exit_storage(datum/component/storage/concrete/R)

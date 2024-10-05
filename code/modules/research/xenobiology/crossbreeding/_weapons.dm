@@ -70,7 +70,7 @@ Slimecrossing Weapons
 	armor = list(MELEE = 50,  BULLET = 50, LASER = 50, ENERGY = 0, BOMB = 30, BIO = 0, RAD = 0, FIRE = 80, ACID = 70, STAMINA = 70, BLEED = 0)
 	slot_flags = ITEM_SLOT_BACK
 	attack_weight = 2
-	block_power = 75
+	block_cooldown = BLOCK_LEVEL_5
 	block_level = 3
 	block_upgrade_walk = 1
 	block_flags = BLOCKING_PROJECTILE

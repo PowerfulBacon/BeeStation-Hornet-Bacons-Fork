@@ -289,3 +289,13 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define ENERGY_SHEILD_BLOCK_PROJECTILES (1 << 0)
 /// Energy shields will block melee attacks
 #define ENERGY_SHEILD_BLOCK_MELEE (1 << 1)
+
+// ===========================
+// Blocking Defines
+// ===========================
+
+#define BLOCK_LEVEL_1 60 SECONDS
+#define BLOCK_LEVEL_2 40 SECONDS
+#define BLOCK_LEVEL_3 30 SECONDS
+#define BLOCK_LEVEL_4 20 SECONDS
+#define BLOCK_LEVEL_5 10 SECONDS

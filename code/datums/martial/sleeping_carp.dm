@@ -184,9 +184,9 @@
 	icon_state = "bostaff0"
 	lefthand_file = 'icons/mob/inhands/weapons/staves_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/staves_righthand.dmi'
+	block_cooldown = BLOCK_LEVEL_5
 	block_level = 1
 	block_upgrade_walk = 1
-	block_power = 25
 
 /obj/item/staff/bostaff/ComponentInitialize()
 	. = ..()

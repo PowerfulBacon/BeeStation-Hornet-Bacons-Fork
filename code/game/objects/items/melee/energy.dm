@@ -107,7 +107,7 @@
 	armour_penetration = 35
 	block_level = 1
 	block_upgrade_walk = 1
-	block_power = 35
+	block_cooldown = BLOCK_LEVEL_5
 	block_sound = 'sound/weapons/egloves.ogg'
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 

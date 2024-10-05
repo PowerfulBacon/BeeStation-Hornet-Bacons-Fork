@@ -7,8 +7,6 @@
 	item_flags = NEEDS_PERMIT | NO_MAT_REDEMPTION
 	weapon_weight = WEAPON_MEDIUM
 	fire_rate = 1.5
-	block_power = 20 //staffs can block shit if you're walking
-	block_upgrade_walk = 1
 
 /obj/item/gun/magic/staff/change
 	name = "staff of change"

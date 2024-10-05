@@ -18,7 +18,7 @@
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
 	w_class = WEIGHT_CLASS_SMALL
-	block_power = 0
+	block_cooldown = 0
 	block_level = 0
 	block_flags = BLOCKING_ACTIVE | BLOCKING_NASTY
 	force = 15
