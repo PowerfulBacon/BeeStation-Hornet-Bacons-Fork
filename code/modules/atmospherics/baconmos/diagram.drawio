@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Page-1" id="ENLwGxZUaumKH4mhbuD6">
-    <mxGraphModel dx="3860" dy="2467" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3341" dy="2162" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -70,8 +70,8 @@
         <mxCell id="odC4mh9_WQV0dlQ940GW-66" value="Complicated Algorithm:&lt;div&gt;&lt;br&gt;Attempt to expand zones into your tile, allowing them to expand into another zone if they completely consume it by expanding in the direction of your tile.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;" parent="bLPJszj05LEg_3gyPMTT-1" vertex="1">
           <mxGeometry x="575" y="649" width="240" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="bLPJszj05LEg_3gyPMTT-2" value="Class Structure" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-80" y="-20" width="860" height="740" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-2" value="Class Structure" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-80" y="-20" width="1580" height="740" as="geometry" />
         </mxCell>
         <mxCell id="odC4mh9_WQV0dlQ940GW-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="bLPJszj05LEg_3gyPMTT-2" source="odC4mh9_WQV0dlQ940GW-2" target="odC4mh9_WQV0dlQ940GW-32" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -109,28 +109,70 @@
           <mxGeometry x="570" y="258" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="odC4mh9_WQV0dlQ940GW-25" value="Collection of zones that are directly atmos accessible." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="bLPJszj05LEg_3gyPMTT-2" vertex="1">
-          <mxGeometry x="570" y="108" width="120" height="60" as="geometry" />
+          <mxGeometry x="250" y="108" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="bLPJszj05LEg_3gyPMTT-2" source="odC4mh9_WQV0dlQ940GW-32" target="odC4mh9_WQV0dlQ940GW-42" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="odC4mh9_WQV0dlQ940GW-32" value="Turf" style="html=1;whiteSpace=wrap;shape=swimlane;fontStyle=0;startSize=26;childLayout=stackLayout;horizontal=1;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="bLPJszj05LEg_3gyPMTT-2" vertex="1">
+          <mxGeometry x="377.5" y="400" width="205" height="86" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="bLPJszj05LEg_3gyPMTT-2" source="odC4mh9_WQV0dlQ940GW-32" target="odC4mh9_WQV0dlQ940GW-47" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-59" value="+ air: gas_mixture (shared)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="odC4mh9_WQV0dlQ940GW-32">
+          <mxGeometry y="26" width="205" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-32" value="Turf" style="html=1;whiteSpace=wrap;" parent="bLPJszj05LEg_3gyPMTT-2" vertex="1">
-          <mxGeometry x="425" y="388" width="110" height="50" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-21" value="+ atmos_pass_directions: direction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="odC4mh9_WQV0dlQ940GW-32">
+          <mxGeometry y="56" width="205" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-42" value="Closed Turf" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="bLPJszj05LEg_3gyPMTT-2" vertex="1">
-          <mxGeometry x="320" y="508" width="140" height="52" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-3" value="Bridge" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="740" y="108" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-43" value="+ adjacent_regions" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="odC4mh9_WQV0dlQ940GW-42" vertex="1">
-          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-4" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="bLPJszj05LEg_3gyPMTT-2" source="odC4mh9_WQV0dlQ940GW-3" target="bLPJszj05LEg_3gyPMTT-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="650" y="140" as="sourcePoint" />
+            <mxPoint x="700" y="90" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-47" value="Open Turf" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="bLPJszj05LEg_3gyPMTT-2" vertex="1">
-          <mxGeometry x="510" y="508" width="140" height="52" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-5" value="Bridges create temporary connections between 2 atmos regions, allowing gas to equalise with a pressure according to the amount of area that the bridge has." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="890" y="83" width="160" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="odC4mh9_WQV0dlQ940GW-48" value="+ parent_region" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="odC4mh9_WQV0dlQ940GW-47" vertex="1">
-          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        <mxCell id="bLPJszj05LEg_3gyPMTT-6" value="When a turf is changed, a temporary bridge will be created which equalises the 2 zones and then merges the 2 regions into 1, linking their atmoses permanently." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="890" y="208" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-16" value="Atom" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="660" y="415" width="210" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-17" value="+ atmos_density: AtmosDensityFlag" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-16">
+          <mxGeometry y="26" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-52" value="&lt;b&gt;Atmos Density Flags:&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="1310" y="70" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-53" value="None: Gas flows freely" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="1310" y="100" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-54" value="Block: Atmos is blocked if the item is dense" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="1310" y="130" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-55" value="Block always: Atmos flow is always blocked" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="1310" y="160" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-56" value="Directional: Atmos flow is only blocked in the dir of the atom" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="1310" y="190" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-57" value="Things will be moved around and effects will happen when pressurisation is happening. Important things like mobs will have priority to being thrown, items will be selected randomly." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="890" y="330" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-58" value="Some things should react to regions having gas flows, fire doors should shut and atmos resin dispensors should pop as the pressure drops. Atmos flow rates make it so that the doors don&#39;t need to shut instantly, and some gas will get out but not all of it." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-2">
+          <mxGeometry x="890" y="450" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-61" value="" style="endArrow=none;dashed=1;html=1;rounded=0;endFill=0;startArrow=classic;startFill=1;" edge="1" parent="bLPJszj05LEg_3gyPMTT-2" source="odC4mh9_WQV0dlQ940GW-32" target="bLPJszj05LEg_3gyPMTT-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="550" as="sourcePoint" />
+            <mxPoint x="740" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-62" value="Initialisation Algorithm" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="-370" width="420" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="bLPJszj05LEg_3gyPMTT-78" value="Initialisation steps:&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;1. Search through every turf in order of ascending x, ascending y and then ascending z.&lt;/div&gt;&lt;div&gt;2. Skip if already has an atmos or cannot support an atmos.&lt;/div&gt;&lt;div&gt;3. Expand diagonally right and up until expansion is impossible in either direction.&lt;/div&gt;&lt;div&gt;4. Expand up or right until expansion is impossible.&lt;/div&gt;&lt;div&gt;5. Register this rectangular area as a new zone.&lt;/div&gt;&lt;div&gt;6. Find all border turfs on the right and top of this zone and repeat step 3 from those border turfs.&lt;/div&gt;&lt;div&gt;7. Any zones created in this process are part of the same region. Once a region is created, continue from step 1..&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="bLPJszj05LEg_3gyPMTT-62">
+          <mxGeometry x="35" y="42" width="350" height="236" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
