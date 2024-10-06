@@ -7,7 +7,7 @@
 	density = FALSE
 	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
-	CanAtmosPass = ATMOS_PASS_NO
+	atmos_density = ATMOS_ALWAYS_DENSE
 
 /obj/structure/plasticflaps/opaque
 	opacity = TRUE

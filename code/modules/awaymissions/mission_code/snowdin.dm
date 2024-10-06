@@ -138,15 +138,14 @@
 //liquid plasma!!!!!!//
 
 /turf/open/floor/iron/dark/snowdin
-	initial_gas_mix = FROZEN_ATMOS
-	planetary_atmos = 1
-	initial_temperature = 180
+	planetary_atmos = TRUE
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/iron/dark/snowdin)
 
 /turf/open/lava/plasma
 	name = "liquid plasma"
 	desc = "A flowing stream of chilled liquid plasma. You probably shouldn't get in."
 	icon_state = "liquidplasma"
-	initial_gas_mix = "n2=82;plasma=24;TEMP=120"
 	baseturfs = /turf/open/lava/plasma
 	slowdown = 2
 
@@ -155,6 +154,8 @@
 	light_range = 3
 	light_power = 0.75
 	light_color = LIGHT_COLOR_PURPLE
+
+APPLY_FROZEN_ATMOS(/turf/open/lava/plasma)
 
 /turf/open/lava/plasma/attackby(obj/item/I, mob/user, params)
 	var/obj/item/reagent_containers/glass/C = I

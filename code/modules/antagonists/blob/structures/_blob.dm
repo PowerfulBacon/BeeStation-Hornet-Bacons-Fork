@@ -5,11 +5,14 @@
 	light_range = 2
 	desc = "A thick wall of writhing tendrils."
 	density = TRUE
+	// Blocks atmos flow to:
+	// 1. prevent the station being rapidly depressurised by a blob
+	// 2. prevent the crew from destroying a blob in 2 seconds with fast-flowing plasma
+	atmos_density = ATMOS_DENSE
 	opacity = FALSE
 	anchored = TRUE
 	layer = BELOW_MOB_LAYER
 	pass_flags_self = PASSBLOB
-	CanAtmosPass = ATMOS_PASS_PROC
 	var/point_return = 0 //How many points the blob gets back when it removes a blob of that type. If less than 0, blob cannot be removed.
 	max_integrity = 30
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 70, STAMINA = 0, BLEED = 0)
@@ -18,7 +21,6 @@
 	var/heal_timestamp = 0 //we got healed when?
 	var/brute_resist = 0.5 //multiplies brute damage by this
 	var/fire_resist = 1 //multiplies burn damage by this
-	var/atmosblock = FALSE //if the blob blocks atmos and heat spread
 	var/mob/camera/blob/overmind
 
 CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/blob)
@@ -33,17 +35,12 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/blob)
 	GLOB.blobs += src //Keep track of the blob in the normal list either way
 	setDir(pick(GLOB.cardinals))
 	update_icon()
-	if(atmosblock)
-		air_update_turf(1)
 	ConsumeTile()
 
 /obj/structure/blob/proc/creation_action() //When it's created by the overmind, do this.
 	return
 
 /obj/structure/blob/Destroy()
-	if(atmosblock)
-		atmosblock = FALSE
-		air_update_turf(1)
 	if(overmind)
 		overmind.blobs_legit -= src  //if it was in the legit blobs list, it isn't now
 	GLOB.blobs -= src //it's no longer in the all blobs list either
@@ -66,12 +63,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/blob)
 					if(C)
 						result++
 		. -= result - 1
-
-/obj/structure/blob/BlockThermalConductivity()
-	return atmosblock
-
-/obj/structure/blob/CanAtmosPass(turf/T)
-	return !atmosblock
 
 /obj/structure/blob/update_icon() //Updates color based on overmind color if we have an overmind.
 	if(overmind)

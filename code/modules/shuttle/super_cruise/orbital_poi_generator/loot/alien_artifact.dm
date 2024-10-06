@@ -191,42 +191,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom/movable/proximity_monitor_holder)
 		P.ignore_source_check = TRUE //Allow the projectile to hit the shooter after it gets reflected
 
 //===================
-// Air Blocker
-//===================
-
-/datum/artifact_effect/airfreeze
-	signal_types = list(COMSIG_MOVABLE_MOVED)
-	effect_act_descs = list("depressurised")
-
-/datum/artifact_effect/airfreeze/Initialize(atom/source)
-	. = ..()
-	source.CanAtmosPass = ATMOS_PASS_NO
-
-/datum/artifact_effect/airfreeze/register_signals(source)
-	RegisterSignal(source, COMSIG_MOVABLE_MOVED, PROC_REF(updateAir))
-
-/datum/artifact_effect/airfreeze/proc/updateAir(atom/source, atom/oldLoc)
-	if(isturf(oldLoc))
-		var/turf/oldTurf = oldLoc
-		oldTurf.air_update_turf(TRUE)
-	if(isturf(source.loc))
-		var/turf/newTurf = source.loc
-		newTurf.air_update_turf(TRUE)
-
-//===================
-// Atmos Stabilizer
-//===================
-
-/datum/artifact_effect/atmosfix
-	effect_act_descs = list("depressurised")
-	requires_processing = TRUE
-
-/datum/artifact_effect/atmosfix/process(delta_time)
-	var/turf/T = get_turf(source_object)
-	var/datum/gas_mixture/air = T.return_air()
-	air.populate_from_gas_string(T.initial_gas_mix)
-
-//===================
 // Gravity Well
 //===================
 

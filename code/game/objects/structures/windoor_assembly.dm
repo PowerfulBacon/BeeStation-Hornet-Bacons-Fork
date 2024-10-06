@@ -18,7 +18,6 @@
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER //Just above doors
 	anchored = FALSE
-	CanAtmosPass = ATMOS_PASS_PROC
 	dir = NORTH
 	set_dir_on_move = FALSE
 
@@ -72,12 +71,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/windoor_assembly)
 		return valid_window_location(loc, mover.dir, is_fulltile = FALSE)
 
 	return TRUE
-
-/obj/structure/windoor_assembly/CanAtmosPass(turf/T)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return 1
 
 /obj/structure/windoor_assembly/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER

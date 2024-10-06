@@ -52,13 +52,7 @@
 	base_icon_state = "reinf_glass"
 	floor_tile = /obj/item/stack/tile/rglass
 
-/*
-/turf/open/floor/glass/reinforced/icemoon
-	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
-*/
-
-/turf/open/floor/glass/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/glass/airless)
 
 /turf/open/floor/glass/reinforced/broken_states()
 	return GLOB.reinfglass_turf_damage

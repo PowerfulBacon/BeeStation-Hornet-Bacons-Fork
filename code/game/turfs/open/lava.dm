@@ -28,8 +28,7 @@
 /turf/open/lava/MakeDry(wet_setting = TURF_WET_WATER)
 	return
 
-/turf/open/lava/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/lava/airless)
 
 /turf/open/lava/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
@@ -165,13 +164,12 @@
 	smoothing_groups = list(SMOOTH_GROUP_TURF_OPEN, SMOOTH_GROUP_FLOOR_LAVA)
 	canSmoothWith = list(SMOOTH_GROUP_FLOOR_LAVA)
 
-/turf/open/lava/smooth/cold
-	initial_gas_mix = FROZEN_ATMOS
+APPLY_FROZEN_ATMOS(/turf/open/lava/smooth/cold)
 
 /turf/open/lava/smooth/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/lava/smooth/lava_land_surface
 
-/turf/open/lava/smooth/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/lava/smooth/lava_land_surface)
+
+APPLY_AIRLESS_ATMOS(/turf/open/lava/smooth/airless)

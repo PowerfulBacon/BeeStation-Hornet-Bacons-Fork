@@ -8,13 +8,10 @@
 	brute_resist = 0.25
 	explosion_block = 3
 	point_return = 4
-	atmosblock = TRUE
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 90, ACID = 90, STAMINA = 0, BLEED = 0)
 
 /obj/structure/blob/shield/scannerreport()
-	if(atmosblock)
-		return "Will prevent the spread of atmospheric changes."
-	return "N/A"
+	return "Will prevent the spread of atmospheric changes."
 
 /obj/structure/blob/shield/core
 	point_return = 0
@@ -26,12 +23,6 @@
 /obj/structure/blob/shield/update_desc(updates)
 	. = ..()
 	desc = (obj_integrity < (max_integrity * 0.5)) ? "[damaged_desc]" : initial(desc)
-
-/obj/structure/blob/shield/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir, armour_penetration = 0)
-	. = ..()
-	if(. && obj_integrity > 0)
-		atmosblock = obj_integrity < (max_integrity * 0.5)
-		air_update_turf(TRUE)
 
 /obj/structure/blob/shield/update_icon_state()
 	icon_state = "[initial(icon_state)][(obj_integrity < (max_integrity * 0.5)) ? "_damaged" : null]"

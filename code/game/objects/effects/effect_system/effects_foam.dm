@@ -277,6 +277,8 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "metalfoam"
 	density = TRUE
+	// The whole point of this is to seal breaches in a messy way for emergencies
+	atmos_density = ATMOS_DENSE
 	z_flags = Z_BLOCK_IN_DOWN | Z_BLOCK_IN_UP
 	opacity = TRUE // changed in New()
 	anchored = TRUE
@@ -286,7 +288,6 @@
 	desc = "A lightweight foamed metal wall."
 	gender = PLURAL
 	max_integrity = 20
-	CanAtmosPass = ATMOS_PASS_DENSITY
 
 /obj/structure/foamedmetal/Initialize(mapload)
 	. = ..()

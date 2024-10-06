@@ -71,7 +71,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/open_borgopanel,
 	/datum/admins/proc/view_all_circuits,
 	/client/proc/fix_say,
-	/client/proc/stabilize_atmos,
 	/client/proc/openTicketManager,
 	/client/proc/battle_royale,
 	/client/proc/delete_book,
@@ -797,7 +796,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	message_admins("[key_name_admin(usr)] has [AI_Interact ? "activated" : "deactivated"] their AI interaction")
 
 
-
+/*
+TODO: Re-add
 /client/proc/stabilize_atmos()
 	set name = "Stabilize Atmos"
 	set category = "Adminbus"
@@ -819,6 +819,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	for(var/obj/machinery/portable_atmospherics/canister/can in view())
 		can.valve_open = FALSE
 		can.update_icon()
+*/
 
 /client/proc/delete_book()
 	set category = "Admin"

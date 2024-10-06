@@ -108,37 +108,38 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "necro1"
 	baseturfs = /turf/open/indestructible/necropolis
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
 	heavyfootstep = FOOTSTEP_LAVA
 	tiled_dirt = FALSE
 
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/indestructible/necropolis)
+
 /turf/open/indestructible/necropolis/Initialize(mapload)
 	. = ..()
 	if(prob(12))
 		icon_state = "necro[rand(2,3)]"
 
-/turf/open/indestructible/necropolis/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/indestructible/necropolis/air)
 
 /turf/open/indestructible/boss //you put stone tiles on this and use it as a base
 	name = "necropolis floor"
 	icon = 'icons/turf/boss_floors.dmi'
 	icon_state = "boss"
 	baseturfs = /turf/open/indestructible/boss
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
-/turf/open/indestructible/boss/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/indestructible/boss)
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/indestructible/boss/air)
 
 /turf/open/indestructible/hierophant
 	icon = 'icons/turf/floors/hierophant_floor.dmi'
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	baseturfs = /turf/open/indestructible/hierophant
 	tiled_dirt = FALSE
 	smoothing_flags = SMOOTH_CORNERS
+
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/indestructible/hierophant)
 
 /turf/open/indestructible/hierophant/two
 
@@ -157,7 +158,8 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 
 /turf/open/indestructible/binary
 	name = "tear in the fabric of reality"
-	CanAtmosPass = ATMOS_PASS_NO
+	atmos_density = ATMOS_ALWAYS_DENSE
+	atmos_flow_directions = NONE
 	baseturfs = /turf/open/indestructible/binary
 	icon_state = "binary"
 	footstep = FOOTSTEP_PLATING
@@ -169,7 +171,8 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 /turf/open/indestructible/airblock
 	icon_state = "bluespace"
 	baseturfs = /turf/open/indestructible/airblock
-	CanAtmosPass = ATMOS_PASS_NO
+	atmos_density = ATMOS_ALWAYS_DENSE
+	atmos_flow_directions = NONE
 	init_air = FALSE
 
 /turf/open/Initalize_Atmos(times_fired)

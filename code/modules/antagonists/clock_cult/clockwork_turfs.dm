@@ -343,7 +343,8 @@
 	damage_deflection = 30
 	normal_integrity = 240
 	air_tight = FALSE
-	CanAtmosPass = ATMOS_PASS_YES
+	// Never restricts atmos flow
+	atmos_density = ATMOS_PASS
 	var/construction_state = GEAR_SECURE //Pinion airlocks have custom deconstruction
 	allow_repaint = FALSE
 
@@ -589,6 +590,7 @@
 	smoothing_groups = list(SMOOTH_GROUP_WINDOW_FULLTILE, SMOOTH_GROUP_WINDOW_FULLTILE_BRONZE)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE_BRONZE)
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	max_integrity = 120
 	glass_amount = 2

@@ -4,7 +4,6 @@
 	desc = "Upon closer examination, it's still dirt."
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "dirt"
-	initial_gas_mix = OPENTURF_LOW_PRESSURE
 	planetary_atmos = TRUE
 	attachment_holes = FALSE
 	footstep = FOOTSTEP_SAND
@@ -15,19 +14,21 @@
 	resistance_flags = INDESTRUCTIBLE
 	baseturfs = /turf/open/floor/plating/dirt
 
-/turf/open/floor/plating/dirt/planetary
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+APPLY_OPENTURF_LOW_PRESSURE(/turf/open/floor/plating/dirt)
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/plating/dirt/planetary)
 
 /turf/open/floor/plating/dirt/grass
 	desc = "You're almost positive this is real grass."
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "grass"
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_GRASS
 	clawfootstep = FOOTSTEP_GRASS
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	baseturfs = /turf/open/floor/plating/dirt
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/plating/dirt/grass)
 
 /turf/open/floor/plating/dirt/dark
 	icon_state = "greenerdirt"
@@ -37,7 +38,8 @@
 
 /turf/open/floor/plating/dirt/jungle
 	slowdown = 0.5
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/plating/dirt/jungle)
 
 /turf/open/floor/plating/dirt/jungle/dark
 	icon_state = "greenerdirt"
@@ -53,10 +55,11 @@
 
 /turf/open/floor/grass/jungle
 	name = "jungle grass"
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	planetary_atmos = TRUE
 	desc = "Greener on the other side."
 	color = "#0f9731"
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/grass/jungle)
 
 /turf/open/floor/grass/jungle/Initialize(mapload)
 	.=..()

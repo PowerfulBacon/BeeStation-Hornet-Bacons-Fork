@@ -24,8 +24,7 @@
 /turf/open/floor/engine/light
 	icon_state = "engine_light"
 
-/turf/open/floor/engine/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/engine/airless)
 
 /turf/open/floor/engine/airless/light
 	icon_state = "engine_light"
@@ -81,28 +80,60 @@
 /turf/open/floor/engine/n2o
 	article = "an"
 	name = "\improper N2O floor"
-	initial_gas_mix = ATMOS_TANK_N2O
+
+/turf/open/floor/engine/n2o/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_NITROUS] * 60 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_NITROUS] += 60 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += 60 * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/n2o/light
 	icon_state = "engine_light"
 
 /turf/open/floor/engine/co2
 	name = "\improper CO2 floor"
-	initial_gas_mix = ATMOS_TANK_CO2
+
+/turf/open/floor/engine/co2/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_CO2] * 500 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_CO2] += 500 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += 500 * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/co2/light
 	icon_state = "engine_light"
 
 /turf/open/floor/engine/plasma
 	name = "plasma floor"
-	initial_gas_mix = ATMOS_TANK_PLASMA
+
+/turf/open/floor/engine/plasma/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_PLASMA] * 700 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_PLASMA] += 700 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += 700 * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/plasma/light
 	icon_state = "engine_light"
 
 /turf/open/floor/engine/o2
 	name = "\improper O2 floor"
-	initial_gas_mix = ATMOS_TANK_O2
+
+/turf/open/floor/engine/o2/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_O2] * 1000 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_O2] += 1000 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += 1000 * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/o2/light
 	icon_state = "engine_light"
@@ -110,19 +141,34 @@
 /turf/open/floor/engine/n2
 	article = "an"
 	name = "\improper N2 floor"
-	initial_gas_mix = ATMOS_TANK_N2
+
+/turf/open/floor/engine/n2/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_N2] * 1000 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_N2] += 1000 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += 1000 * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/n2/light
 	icon_state = "engine_light"
 
 /turf/open/floor/engine/air
 	name = "air floor"
-	initial_gas_mix = ATMOS_TANK_AIRMIX
+
+/turf/open/floor/engine/air/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_N2] * 105.8 * MOLES_CELLSTANDARD * T20C + GLOB.gas_data.specific_heats[GAS_O2] * 264.4 * MOLES_CELLSTANDARD * T20C
+	target_mixture.gas_contents[GAS_N2] += 105.8 * MOLES_CELLSTANDARD
+	target_mixture.gas_contents[GAS_O2] += 264.4 * MOLES_CELLSTANDARD
+	target_mixture.total_moles += (264.4 + 105.8) * MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open/floor/engine/air/light
 	icon_state = "engine_light"
-
-
 
 /turf/open/floor/engine/cult
 	name = "engraved floor"
@@ -130,9 +176,8 @@
 	icon_state = "plating"
 	floor_tile = null
 	var/obj/effect/clockwork/overlay/floor/bloodcult/realappearance
-	CanAtmosPass = ATMOS_PASS_NO
-	CanAtmosPassVertical =	ATMOS_PASS_NO
-
+	atmos_density = ATMOS_ALWAYS_DENSE
+	atmos_flow_directions = NONE
 
 /turf/open/floor/engine/cult/Initialize(mapload)
 	. = ..()
@@ -154,12 +199,12 @@
 	qdel(realappearance)
 	realappearance = null
 
-/turf/open/floor/engine/cult/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/engine/cult/airless)
 
 /turf/open/floor/engine/vacuum
 	name = "vacuum floor"
-	initial_gas_mix = AIRLESS_ATMOS
+
+APPLY_AIRLESS_ATMOS(/turf/open/floor/engine/vacuum)
 
 /turf/open/floor/engine/vacuum/light
 	icon_state = "engine_light"

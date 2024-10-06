@@ -112,7 +112,6 @@
 		//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
 		if(((CanAtmosPass == ATMOS_PASS_DENSITY && density) || CanAtmosPass == ATMOS_PASS_NO) && isturf(loc))
 			CanAtmosPass = ATMOS_PASS_YES
-			air_update_turf(TRUE)
 		loc.handle_atom_del(src)
 
 	if(opacity)
@@ -387,6 +386,11 @@
 	var/area/oldarea = get_area(oldloc)
 	var/area/newarea = get_area(newloc)
 	move_stacks++
+
+	// Update maintained turf list
+	if (isturf(loc))
+		// TODO: Update turf atmos flow when we move
+		loc:atmos_flow_directions
 
 	loc = newloc
 
@@ -702,7 +706,7 @@
 		return TRUE
 
 	AddComponent(/datum/component/drift, direction, instant)
-	
+
 	return TRUE
 
 /atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)

@@ -30,6 +30,9 @@
 	open_speed = 2
 	req_one_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
 	processing_flags = START_PROCESSING_MANUALLY
+	// Areas seperated by firedoors will be subdivided.
+	// Explicitly defined to avoid confusion, despite being a subtype of door.
+	atmos_density = ATMOS_DENSE
 	var/emergency_close_timer = 0
 	var/nextstate = null
 	var/boltslocked = TRUE
@@ -377,7 +380,7 @@
 /obj/machinery/door/firedoor/border_only
 	icon = 'icons/obj/doors/firelocks/edge_Doorfire.dmi'
 	flags_1 = ON_BORDER_1
-	CanAtmosPass = ATMOS_PASS_PROC
+	atmos_density = ATMOS_DENSE_DIRECTIONAL
 	assemblytype = /obj/structure/firelock_frame/border
 
 /obj/machinery/door/firedoor/border_only/Initialize(mapload)
@@ -467,12 +470,6 @@
 	if(direction == dir && density)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
-
-/obj/machinery/door/firedoor/border_only/CanAtmosPass(turf/T)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
 
 /obj/machinery/door/firedoor/heavy
 	name = "heavy firelock"

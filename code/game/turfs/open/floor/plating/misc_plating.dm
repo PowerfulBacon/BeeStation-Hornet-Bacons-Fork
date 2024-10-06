@@ -1,11 +1,13 @@
 
 /turf/open/floor/plating/airless
 	icon_state = "plating"
-	initial_gas_mix = AIRLESS_ATMOS
+
+APPLY_AIRLESS_ATMOS(/turf/open/floor/plating/airless)
 
 /turf/open/floor/plating/lavaland
 	icon_state = "plating"
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/floor/plating/lavaland)
 
 /turf/open/floor/plating/abductor
 	name = "alien floor"
@@ -46,7 +48,6 @@
 	name = "ash"
 	desc = "The ground is covered in volcanic ash."
 	baseturfs = /turf/open/floor/plating/ashplanet/wateryrock //I assume this will be a chasm eventually, once this becomes an actual surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	planetary_atmos = TRUE
 	attachment_holes = FALSE
 	footstep = FOOTSTEP_SAND
@@ -54,6 +55,8 @@
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	tiled_dirt = FALSE
+
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/floor/plating/ashplanet)
 
 /turf/open/floor/plating/ashplanet/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
 	return
@@ -139,7 +142,6 @@
 	icon = 'icons/misc/beach.dmi'
 	flags_1 = NONE
 	planetary_atmos = TRUE
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	attachment_holes = FALSE
 	bullet_bounce_sound = null
 	footstep = FOOTSTEP_SAND
@@ -147,6 +149,8 @@
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	resistance_flags = INDESTRUCTIBLE
+
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/plating/beach)
 
 /turf/open/floor/plating/beach/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
 	return
@@ -327,7 +331,6 @@
 	desc = "A sheet of solid ice. Looks slippery."
 	icon = 'icons/turf/floors/ice_turf.dmi'
 	icon_state = "ice-0"
-	initial_gas_mix = FROZEN_ATMOS
 	initial_temperature = 180
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/floor/plating/ice
@@ -338,6 +341,8 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/ice)
 
 /turf/open/floor/plating/ice/Initialize(mapload)
 	. = ..()
@@ -376,7 +381,6 @@
 	desc = "A section of heated plating, helps keep the snow from stacking up too high."
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snowplating"
-	initial_gas_mix = FROZEN_ATMOS
 	initial_temperature = 180
 	attachment_holes = FALSE
 	planetary_atmos = TRUE
@@ -385,8 +389,9 @@
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 
-/turf/open/floor/plating/snowed/cavern
-	initial_gas_mix = "n2=82;plasma=24;TEMP=120"
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/snowed)
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/snowed/cavern)
 
 /turf/open/floor/plating/snowed/smoothed
 	planetary_atmos = TRUE

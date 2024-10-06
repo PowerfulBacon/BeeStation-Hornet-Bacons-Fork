@@ -33,11 +33,9 @@
 	icon_state = "bcircuitoff"
 	on = FALSE
 
-/turf/open/floor/circuit/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/circuit/airless)
 
-/turf/open/floor/circuit/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+APPLY_TCOMMS_ATMOS(/turf/open/floor/circuit/telecomms)
 
 /turf/open/floor/circuit/telecomms/mainframe
 	name = "mainframe base"
@@ -60,11 +58,9 @@
 	icon_normal = "gcircuitanim"
 	floor_tile = /obj/item/stack/tile/circuit/green/anim
 
-/turf/open/floor/circuit/green/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/circuit/green/airless)
 
-/turf/open/floor/circuit/green/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+APPLY_TCOMMS_ATMOS(/turf/open/floor/circuit/green/telecomms)
 
 /turf/open/floor/circuit/green/telecomms/mainframe
 	name = "mainframe base"
@@ -84,11 +80,9 @@
 	icon_normal = "rcircuitanim"
 	floor_tile = /obj/item/stack/tile/circuit/red/anim
 
-/turf/open/floor/circuit/red/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/circuit/red/airless)
 
-/turf/open/floor/circuit/red/telecomms
-	initial_gas_mix = TCOMMS_ATMOS
+APPLY_TCOMMS_ATMOS(/turf/open/floor/circuit/red/telecomms)
 
 /turf/open/floor/pod
 	name = "pod floor"
@@ -183,7 +177,8 @@
 
 /turf/open/floor/bronze/filled/lavaland
 	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/floor/bronze/filled/lavaland)
 
 /turf/open/floor/white
 	name = "white floor"
@@ -256,5 +251,4 @@
 /turf/open/floor/cult/narsie_act()
 	return
 
-/turf/open/floor/cult/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/cult/airless)

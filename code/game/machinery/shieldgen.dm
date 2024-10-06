@@ -4,18 +4,17 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
 	density = TRUE
+	atmos_density = ATMOS_DENSE
 	z_flags = Z_BLOCK_IN_DOWN | Z_BLOCK_IN_UP
 	move_resist = INFINITY
 	opacity = FALSE
 	anchored = TRUE
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	max_integrity = 200 //The shield can only take so much beating (prevents perma-prisons)
-	CanAtmosPass = ATMOS_PASS_DENSITY
 
 /obj/structure/emergency_shield/Initialize(mapload)
 	. = ..()
 	setDir(pick(GLOB.cardinals))
-	air_update_turf(1)
 
 /obj/structure/emergency_shield/Move()
 	var/turf/T = loc
@@ -413,6 +412,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
 	density = TRUE
+	atmos_density = ATMOS_DENSE
 	z_flags = Z_BLOCK_IN_DOWN | Z_BLOCK_IN_UP
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	light_range = 3

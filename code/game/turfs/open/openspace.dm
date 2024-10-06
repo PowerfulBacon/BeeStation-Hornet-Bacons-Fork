@@ -25,11 +25,9 @@ CREATION_TEST_IGNORE_SUBTYPES(/turf/open/openspace)
 		pipe_astar_cost = 100\
 	)
 
-/turf/open/openspace/cold
-	initial_gas_mix = FROZEN_ATMOS
+APPLY_FROZEN_ATMOS(/turf/open/openspace/cold)
 
-/turf/open/openspace/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/openspace/airless)
 
 /turf/open/openspace/can_have_cabling()
 	if(locate(/obj/structure/lattice/catwalk, src))

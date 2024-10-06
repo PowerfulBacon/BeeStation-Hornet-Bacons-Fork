@@ -593,3 +593,11 @@ CREATION_TEST_IGNORE_SELF(/turf)
 		if(!ismopable(movable_content))
 			continue
 		movable_content.wash(clean_types)
+
+/turf/set_density(new_value)
+	if(density == new_value)
+		return
+	. = density
+	density = new_value
+	// Handle atmospherics updates
+	SSair.set_density(x, y, z, density)

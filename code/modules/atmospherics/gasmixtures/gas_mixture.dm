@@ -28,13 +28,6 @@
 	. = ..()
 	if(!.)
 		return
-	if(href_list[VV_HK_PARSE_GASSTRING])
-		var/gasstring = input(usr, "Input Gas String (WARNING: Advanced. Don't use this unless you know how these work.", "Gas String Parse") as text|null
-		if(!istext(gasstring))
-			return
-		log_admin("[key_name(usr)] modified gas mixture [REF(src)]: Set to gas string [gasstring].")
-		message_admins("[key_name(usr)] modified gas mixture [REF(src)]: Set to gas string [gasstring].")
-		populate_from_gas_string(gasstring)
 	if(href_list[VV_HK_EMPTY])
 		log_admin("[key_name(usr)] emptied gas mixture [REF(src)].")
 		message_admins("[key_name(usr)] emptied gas mixture [REF(src)].")
@@ -99,6 +92,12 @@
 	CHECK_IMMUTABILITY
 	total_moles -= gas_contents[gas_type]
 	gas_contents[gas_type] = moles
+	total_moles += moles
+	gas_content_change()
+
+/datum/gas_mixture/proc/add_moles(gas_type, moles)
+	CHECK_IMMUTABILITY
+	gas_contents[gas_type] += moles
 	total_moles += moles
 	gas_content_change()
 

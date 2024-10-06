@@ -674,7 +674,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/rune/narsie)
 	invocation = "Khari'd! Eske'te tannin!"
 	icon_state = "4"
 	color = RUNE_COLOR_DARKRED
-	CanAtmosPass = ATMOS_PASS_DENSITY
+	atmos_density = ATMOS_DENSE
 	var/datum/timedevent/density_timer
 	var/recharging = FALSE
 

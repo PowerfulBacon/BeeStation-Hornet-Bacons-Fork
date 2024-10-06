@@ -8,11 +8,15 @@
 	//bitfield of dirs in which we thermal conductivity is blocked
 	var/conductivity_blocked_directions = NONE
 
-	//used for mapping and for breathing while in walls (because that's a thing that needs to be accounted for...)
-	//string parsed by /datum/gas/proc/copy_from_turf
-	var/initial_gas_mix = OPENTURF_DEFAULT_ATMOS
-	//approximation of MOLES_O2STANDARD and MOLES_N2STANDARD pending byond allowing constant expressions to be embedded in constant strings
-	// If someone will place 0 of some gas there, SHIT WILL BREAK. Do not do that.
+/turf/proc/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+	var/final_thermal_energy = target_mixture.thermal_energy() + GLOB.gas_data.specific_heats[GAS_O2] * MOLES_O2STANDARD * T20C + GLOB.gas_data.specific_heats[GAS_N2] * MOLES_N2STANDARD * T20C
+	target_mixture.gas_contents[GAS_O2] += MOLES_O2STANDARD
+	target_mixture.gas_contents[GAS_N2] += MOLES_N2STANDARD
+	target_mixture.total_moles += MOLES_CELLSTANDARD
+	target_mixture.temperature = 0
+	target_mixture.adjust_thermal_energy(final_thermal_energy)
+	if (!initial)
+		target_mixture.gas_content_change()
 
 /turf/open
 	//used for spacewind

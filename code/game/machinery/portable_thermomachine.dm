@@ -121,7 +121,6 @@
 		delta_temperature *= -1
 	if(delta_temperature)
 		environment.set_temperature(environment.return_temperature() + delta_temperature)
-		air_update_turf()
 	cell.use(required_energy / efficiency)
 
 /obj/machinery/portable_thermomachine/RefreshParts()

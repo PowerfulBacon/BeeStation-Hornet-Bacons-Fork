@@ -162,6 +162,12 @@ if $grep -i '(add_traits|remove_traits)\(.+,\s*src\)' $code_files; then
 	echo -e "${RED}ERROR: Using 'src' as trait sources. Source must be a string key - dont't use references to datums as sources, perhaps use 'REF(src)'.${NC}"
 	st=1
 fi;
+# TODO: Test me, this is a complex query that needs dotall and multiline flags set
+if $grep -Pzi '(?s)(?m)^(?:(?!(\/\w+)+).)*(\/\w+)+\(\)(?:(?!^(\/\w+)+\(?\)?$).)*density\s*=\s*\w+' $code_files; then
+	echo
+	echo -e "${RED}ERROR: Setting density inside of a proc, use set_density instead'.${NC}"
+	st=1
+fi
 
 part "ensure proper lowertext usage"
 # lowertext() is a BYOND-level proc, so it can be used in any sort of code... including the TGS DMAPI which we don't manage in this repository.

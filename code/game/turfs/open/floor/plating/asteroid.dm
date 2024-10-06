@@ -109,8 +109,7 @@
 /turf/open/floor/plating/asteroid/basalt/lava //lava underneath
 	baseturfs = /turf/open/lava/smooth
 
-/turf/open/floor/plating/asteroid/basalt/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/plating/asteroid/basalt/airless)
 
 /turf/open/floor/plating/asteroid/basalt/Initialize(mapload)
 	. = ..()
@@ -130,14 +129,16 @@
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/lava/smooth/lava_land_surface
 
+APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/floor/plating/asteroid/basalt/lava_land_surface)
+
 /turf/open/floor/plating/asteroid/basalt/iceland_surface
-	initial_gas_mix = FROZEN_ATMOS
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/lava/smooth/cold
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/asteroid/basalt/iceland_surface)
 
 /turf/open/floor/plating/asteroid/basalt/planetary
 	resistance_flags = INDESTRUCTIBLE
@@ -151,9 +152,10 @@
 	return
 
 /turf/open/floor/plating/asteroid/airless
-	initial_gas_mix = AIRLESS_ATMOS
 	baseturfs = /turf/open/floor/plating/asteroid/airless
 	turf_type = /turf/open/floor/plating/asteroid/airless
+
+APPLY_AIRLESS_ATMOS(/turf/open/floor/plating/asteroid/airless)
 
 /turf/open/floor/plating/asteroid/snow
 	gender = PLURAL
@@ -163,7 +165,6 @@
 	baseturfs = /turf/open/floor/plating/asteroid/snow
 	icon_state = "snow"
 	icon_plating = "snow"
-	initial_gas_mix = FROZEN_ATMOS
 	environment_type = "snow"
 	flags_1 = NONE
 	planetary_atmos = TRUE
@@ -171,6 +172,8 @@
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null
 	digResult = /obj/item/stack/sheet/snow
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/asteroid/snow)
 
 /turf/open/floor/plating/asteroid/snow/burnt_states()
 	return list("snow_dug")
@@ -188,7 +191,6 @@
 	name = "icy snow"
 	desc = "Looks colder."
 	baseturfs = /turf/open/floor/plating/asteroid/snow/ice
-	initial_gas_mix = "n2=82;plasma=24;TEMP=120"
 	variant_states = 0
 	variant_probability = 0
 	icon_state = "snow-ice"
@@ -199,15 +201,16 @@
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/asteroid/snow/ice)
+
 /turf/open/floor/plating/asteroid/snow/ice/burn_tile()
 	return FALSE
 
-/turf/open/floor/plating/asteroid/snow/airless
-	initial_gas_mix = AIRLESS_ATMOS
+APPLY_AIRLESS_ATMOS(/turf/open/floor/plating/asteroid/snow/airless)
 
-/turf/open/floor/plating/asteroid/snow/temperatre
-	initial_gas_mix = "o2=22;n2=82;TEMP=255.37"
+APPLY_OPENTURF_DEFAULT_ATMOS(/turf/open/floor/plating/asteroid/snow/temperatre)
 
 /turf/open/floor/plating/asteroid/snow/atmosphere
-	initial_gas_mix = FROZEN_ATMOS
 	planetary_atmos = FALSE
+
+APPLY_FROZEN_ATMOS(/turf/open/floor/plating/asteroid/snow/atmosphere)

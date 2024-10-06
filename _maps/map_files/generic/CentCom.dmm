@@ -9922,23 +9922,14 @@
 /area/awaymission/errorroom)
 "LY" = (
 /obj/item/rupee,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0
-	},
+/turf/open/floor/plating/ashplanet/wateryrock,
 /area/awaymission/errorroom)
 "LZ" = (
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0
-	},
+/turf/open/floor/plating/ashplanet/wateryrock,
 /area/awaymission/errorroom)
 "Ma" = (
 /obj/effect/landmark/error,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0
-	},
+/turf/open/floor/plating/ashplanet/wateryrock,
 /area/awaymission/errorroom)
 "Mb" = (
 /obj/structure/signpost/salvation{
@@ -9946,10 +9937,7 @@
 	icon_state = "ladder10";
 	invisibility = 100
 	},
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0
-	},
+/turf/open/floor/plating/ashplanet/wateryrock,
 /area/awaymission/errorroom)
 "Mc" = (
 /obj/structure/lattice,

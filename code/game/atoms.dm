@@ -235,6 +235,13 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom)
 	ComponentInitialize()
 	InitializeAIController()
 
+	// Setup initial atmos density
+	if (atmos_density && isturf(loc) && density || (atmos_density & ATMOS_ALWAYS_DENSE))
+		if (atmos_density & ATMOS_DENSE_DIRECTIONAL)
+			loc:atmos_flow_directions &= ~dir
+		else
+			loc:atmos_flow_directions = NONE
+
 	if(length(smoothing_groups))
 		#ifdef UNIT_TESTS
 		assert_sorted(smoothing_groups, "[type].smoothing_groups")
@@ -1788,7 +1795,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom)
 
 ///Setter for the `density` variable to append behavior related to its changing.
 /atom/proc/set_density(new_value)
-	SHOULD_CALL_PARENT(TRUE)
 	if(density == new_value)
 		return
 	. = density

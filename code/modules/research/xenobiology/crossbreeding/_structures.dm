@@ -186,12 +186,12 @@ GLOBAL_LIST_EMPTY(bluespace_slime_crystals)
 	range_type = "view"
 
 /obj/structure/slime_crystal/blue/process()
-	for(var/turf/open/T in view(2, src))
-		if(isspaceturf(T))
-			continue
-		var/datum/gas_mixture/gas = T.return_air()
-		gas.populate_from_gas_string(OPENTURF_DEFAULT_ATMOS)
-		T.air_update_turf()
+	var/turf/open/T = get_turf(src)
+	if(isspaceturf(T))
+		return
+	var/datum/gas_mixture/gas = T.return_air()
+	gas.set_moles(GAS_O2, MOLES_O2STANDARD)
+	gas.set_moles(GAS_N2, MOLES_N2STANDARD)
 
 /obj/structure/slime_crystal/metal
 	colour = "metal"

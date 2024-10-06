@@ -1,4 +1,23 @@
+// ===========================
+// Atmos Flow Flags
+// ===========================
+
+/// Atmos will be allowed to pass if no other flags are set
+#define ATMOS_PASS 0
+/// Atmos will be blocked by this atom.
+/// By default, when we allow atoms to pass through us, we will create an atmos bridge
+/// which will equalise the pressures between areas
+#define ATMOS_DENSE (1 << 0)
+/// If set, atmos will not flow through this atom ever, and bridges
+/// will not be created when we are not dense
+#define ATMOS_ALWAYS_DENSE ((1 << 0) | (1 << 1))
+/// If set, while dense, atmos will only be blocked in the direction of the object
+#define ATMOS_DENSE_DIRECTIONAL ((1 << 0) | (1 << 2))
+
+// ===========================
 //ATMOS
+// ===========================
+
 //stuff you should probably leave well alone!
 /// kPa*L/(K*mol)
 #define R_IDEAL_GAS_EQUATION 8.31
@@ -201,32 +220,118 @@
 #define CANATMOSPASS(A, O) ( A.CanAtmosPass == ATMOS_PASS_PROC ? A.CanAtmosPass(O) : ( A.CanAtmosPass == ATMOS_PASS_DENSITY ? !A.density : A.CanAtmosPass ) )
 #define CANVERTICALATMOSPASS(A, O) ( A.CanAtmosPassVertical == ATMOS_PASS_PROC ? A.CanAtmosPass(O, TRUE) : ( A.CanAtmosPassVertical == ATMOS_PASS_DENSITY ? !A.density : A.CanAtmosPassVertical ) )
 
-//OPEN TURF ATMOS
-/// the default air mix that open turfs spawn
-#define OPENTURF_DEFAULT_ATMOS "o2=22;n2=82;TEMP=293.15"
-#define OPENTURF_LOW_PRESSURE "o2=14;n2=30;TEMP=293.15"
-/// -193,15°C telecommunications. also used for xenobiology slime killrooms
-#define TCOMMS_ATMOS "n2=100;TEMP=80"
-/// space
-#define AIRLESS_ATMOS "TEMP=2.7"
-/// -93.15°C snow and ice turfs
-#define FROZEN_ATMOS "o2=22;n2=82;TEMP=180"
-/// -14°C kitchen coldroom, just might lose your tail; higher amount of mol to reach about 101.3 kpA
-#define KITCHEN_COLDROOM_ATMOS "o2=26;n2=97;TEMP=[COLD_ROOM_TEMP]"
-/// used in the holodeck burn test program
-#define BURNMIX_ATMOS "o2=100;plasma=200;TEMP=370" //used in the holodeck burn test program
 
-//ATMOSPHERICS DEPARTMENT GAS TANK TURFS
-#define ATMOS_TANK_N2O				"n2o=6000;TEMP=293.15"
-#define ATMOS_TANK_CO2				"co2=50000;TEMP=293.15"
-#define ATMOS_TANK_PLASMA			"plasma=70000;TEMP=293.15"
-#define ATMOS_TANK_O2				"o2=100000;TEMP=293.15"
-#define ATMOS_TANK_N2				"n2=100000;TEMP=293.15"
-#define ATMOS_TANK_AIRMIX			"o2=2644;n2=10580;TEMP=293.15"
+// ============================
+// Default Atmos Mixes
+// ============================
+
+/// the default air mix that open turfs spawn
+#define APPLY_OPENTURF_DEFAULT_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * MOLES_O2STANDARD * T20C\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * MOLES_N2STANDARD * T20C;\
+	target_mixture.gas_contents[GAS_O2] += MOLES_O2STANDARD;\
+	target_mixture.gas_contents[GAS_N2] += MOLES_N2STANDARD;\
+	target_mixture.total_moles += MOLES_O2STANDARD + MOLES_N2STANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
+// Lower pressure default mix
+#define APPLY_OPENTURF_LOW_PRESSURE(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * 0.14 * MOLES_CELLSTANDARD * T20C\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * 0.3 * MOLES_CELLSTANDARD * T20C;\
+	target_mixture.gas_contents[GAS_O2] += 0.14 * MOLES_CELLSTANDARD;\
+	target_mixture.gas_contents[GAS_N2] += 0.3 * MOLES_CELLSTANDARD;\
+	target_mixture.total_moles += 0.14 * MOLES_CELLSTANDARD + 0.3 * MOLES_CELLSTANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+} ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+// Telecommunications atmos mix
+#define APPLY_TCOMMS_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * MOLES_CELLSTANDARD * 80;\
+	target_mixture.gas_contents[GAS_N2] += MOLES_CELLSTANDARD;\
+	target_mixture.total_moles += 0 + MOLES_CELLSTANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+} ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial)
+// Space mix
+#define APPLY_AIRLESS_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	target_mixture.temperature = max(2.7, target_mixture.temperature);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
+// Frozen atmos
+#define APPLY_FROZEN_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * MOLES_O2STANDARD * 180\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * MOLES_N2STANDARD * 180;\
+	target_mixture.gas_contents[GAS_O2] += MOLES_O2STANDARD;\
+	target_mixture.gas_contents[GAS_N2] += MOLES_N2STANDARD;\
+	target_mixture.total_moles += MOLES_O2STANDARD + MOLES_N2STANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
+// -14°C kitchen coldroom, just might lose your tail; higher amount of mol to reach about 101.3 kpA
+#define APPLY_KITCHEN_COLDROOM_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * 0.26 * MOLES_CELLSTANDARD * COLD_ROOM_TEMP\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * 0.97 * MOLES_CELLSTANDARD * COLD_ROOM_TEMP;\
+	target_mixture.gas_contents[GAS_O2] += 0.26 * MOLES_CELLSTANDARD;\
+	target_mixture.gas_contents[GAS_N2] += 0.97 * MOLES_CELLSTANDARD;\
+	target_mixture.total_moles += 0.26 * MOLES_CELLSTANDARD + 0.97 * MOLES_CELLSTANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
+// used in the holodeck burn test program
+#define APPLY_BURNMIX_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * 1 * MOLES_CELLSTANDARD * 370\
+		+ GLOB.gas_data.specific_heats[GAS_PLASMA] * 2 * MOLES_CELLSTANDARD * 370;\
+	target_mixture.gas_contents[GAS_O2] += 1 * MOLES_CELLSTANDARD;\
+	target_mixture.gas_contents[GAS_PLASMA] += 2 * MOLES_CELLSTANDARD;\
+	target_mixture.total_moles += 3 * MOLES_CELLSTANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
 
 //LAVALAND
 #define MAXIMUM_LAVALAND_EQUIPMENT_EFFECT_PRESSURE 90 //! what pressure you have to be under to increase the effect of equipment meant for lavaland
-#define LAVALAND_DEFAULT_ATMOS		"o2=14;n2=5;co2=13;TEMP=300"
+#define APPLY_LAVALAND_DEFAULT_ATMOS(target) ##target/populate_initial_gas(datum/gas_mixture/target_mixture, initial) {\
+	var/final_thermal_energy = target_mixture.thermal_energy()\
+		+ GLOB.gas_data.specific_heats[GAS_O2] * 0.14 * MOLES_CELLSTANDARD * 300\
+		+ GLOB.gas_data.specific_heats[GAS_CO2] * 0.13 * MOLES_CELLSTANDARD * 300\
+		+ GLOB.gas_data.specific_heats[GAS_N2] * 0.05 * MOLES_CELLSTANDARD * 300;\
+	target_mixture.gas_contents[GAS_O2] += 0.14 * MOLES_CELLSTANDARD;\
+	target_mixture.gas_contents[GAS_CO2] += 0.13 * MOLES_CELLSTANDARD;\
+	target_mixture.gas_contents[GAS_N2] += 0.05 * MOLES_CELLSTANDARD;\
+	target_mixture.total_moles += 0.32 * MOLES_CELLSTANDARD;\
+	target_mixture.temperature = 0;\
+	target_mixture.adjust_thermal_energy(final_thermal_energy);\
+	if (!initial) {\
+		target_mixture.gas_content_change();\
+	}\
+}
 
 //ATMOS MIX IDS
 //Lavaland used to live here. That was a mistake.

@@ -14,7 +14,7 @@
 	flags_1 = ON_BORDER_1
 	opacity = FALSE
 	pass_flags_self = PASSTRANSPARENT
-	CanAtmosPass = ATMOS_PASS_PROC
+	atmos_density = ATMOS_DENSE_DIRECTIONAL
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	network_id = NETWORK_DOOR_AIRLOCKS
 	z_flags = NONE // reset zblock
@@ -131,12 +131,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/door/window)
 		return valid_window_location(loc, mover.dir, is_fulltile = FALSE)
 
 	return TRUE
-
-/obj/machinery/door/window/CanAtmosPass(turf/T)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
 
 //used in the AStar algorithm to determinate if the turf the door is on is passable
 /obj/machinery/door/window/CanAStarPass(obj/item/card/id/ID, to_dir)

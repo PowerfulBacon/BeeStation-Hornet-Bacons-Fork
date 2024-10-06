@@ -47,7 +47,8 @@
 
 /turf/open/floor/holofloor/plating/burnmix
 	name = "burn-mix floor"
-	initial_gas_mix = BURNMIX_ATMOS
+
+APPLY_BURNMIX_ATMOS(/turf/open/floor/holofloor/plating/burnmix)
 
 /turf/open/floor/holofloor/grass
 	gender = PLURAL
@@ -171,8 +172,7 @@
 	bullet_bounce_sound = null
 	tiled_dirt = FALSE
 
-/turf/open/floor/holofloor/snow/cold
-	initial_gas_mix = "nob=7500;TEMP=2.7"
+APPLY_FROZEN_ATMOS(/turf/open/floor/holofloor/snow/cold)
 
 /turf/open/floor/holofloor/asteroid
 	gender = PLURAL

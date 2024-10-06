@@ -3,6 +3,7 @@
 	desc = "A window."
 	icon_state = "window"
 	density = TRUE
+	atmos_density = ATMOS_DENSE_DIRECTIONAL
 	layer = ABOVE_OBJ_LAYER //Just above doors
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = TRUE //initially is 0 for tile smoothing
@@ -11,7 +12,6 @@
 	can_be_unanchored = TRUE
 	resistance_flags = ACID_PROOF
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 100, STAMINA = 0, BLEED = 0)
-	CanAtmosPass = ATMOS_PASS_PROC
 	rad_insulation = RAD_VERY_LIGHT_INSULATION
 	rad_flags = RAD_PROTECT_CONTENTS
 	pass_flags_self = PASSTRANSPARENT
@@ -334,11 +334,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	. = ..()
 	move_update_air(T)
 
-/obj/structure/window/CanAtmosPass(turf/T)
-	if(!anchored || !density)
-		return TRUE
-	return !(fulltile || dir == get_dir(loc, T))
-
 //This proc is used to update the icons of nearby windows.
 /obj/structure/window/proc/update_nearby_icons()
 	update_appearance()
@@ -518,6 +513,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	max_integrity = 100
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 
@@ -533,6 +529,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	max_integrity = 500
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	rad_insulation = RAD_FULL_INSULATION
 	glass_amount = 2
@@ -549,6 +546,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	max_integrity = 600
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 
@@ -564,6 +562,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	max_integrity = 4000
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 
@@ -579,6 +578,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	max_integrity = 200
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 
@@ -593,6 +593,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	smoothing_groups = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 
@@ -618,6 +619,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	max_integrity = 500
 	wtype = "shuttle"
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	reinf = TRUE
 	heat_resistance = 1600
@@ -648,6 +650,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	max_integrity = 200
 	wtype = "shuttle"
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	reinf = TRUE
 	heat_resistance = 1600
@@ -671,12 +674,13 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	opacity = TRUE
 	max_integrity = 15
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	glass_amount = 2
 	glass_type = /obj/item/stack/sheet/paperframes
 	heat_resistance = 233
 	decon_speed = 10
-	CanAtmosPass = ATMOS_PASS_YES
+	atmos_density = ATMOS_PASS
 	resistance_flags = FLAMMABLE
 	armor = list(MELEE = 0,  BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 0, STAMINA = 0, BLEED = 0)
 	breaksound = 'sound/items/poster_ripped.ogg'
@@ -762,6 +766,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/structure/window)
 	smoothing_groups = list(SMOOTH_GROUP_WINDOW_FULLTILE, SMOOTH_GROUP_WINDOW_FULLTILE_BRONZE)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE)
 	fulltile = TRUE
+	atmos_density = ATMOS_DENSE
 	flags_1 = PREVENT_CLICK_UNDER_1
 	max_integrity = 50
 	glass_amount = 2
