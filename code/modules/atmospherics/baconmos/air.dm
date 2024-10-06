@@ -3,6 +3,8 @@
  * baconmos procs for atmos
  */
 
+#define ATMOS_AT(x, y, z) atmos_grid[z][x][y]
+
 /datum/controller/subsystem/air
 	/// The atmos grid, stores regions in a list of 2D arrays
 	var/list/atmos_grid = list()
@@ -37,7 +39,7 @@
 		atmos_grid += z_grid
 	for (var/x in 1 to world.maxx)
 		for (var/y in 1 to world.maxy)
-			if (atmos_grid[x][y][z_value])
+			if (ATMOS_AT(x, y, z_value))
 				continue
 			var/list/region_zones = list()
 			build_zone_recursively(x, y, z_value, region_zones)
@@ -61,7 +63,7 @@
 				var/turf/zone_turf = locate(x, top, zone_z)
 				var/turf/identified_turf = locate(x, top + 1, zone_z)
 				// Ensure that atmos can flow from a zone tile upwards
-				if (!CANATMOSPASS(zone_turf, identified_turf) || atmos_grid[identified_turf.x][identified_turf.y][identified_turf.z])
+				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
 					// If atmos cannot flow upwards, we cannot expand up
 					vertical_check = FALSE
 					break
@@ -82,7 +84,7 @@
 				var/turf/zone_turf = locate(right, y, zone_z)
 				var/turf/identified_turf = locate(right + 1, y, zone_z)
 				// Ensure that atmos can flow from a zone tile upwards
-				if (!CANATMOSPASS(zone_turf, identified_turf) || atmos_grid[identified_turf.x][identified_turf.y][identified_turf.z])
+				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
 					// If atmos cannot flow upwards, we cannot expand up
 					horizontal_check = FALSE
 					break
@@ -107,7 +109,7 @@
 				var/turf/zone_turf = locate(right, pointer, zone_z)
 				var/turf/identified_turf = locate(right + 1, pointer, zone_z)
 				// If we cannot expand into the adjacent turf, don't make a zone there
-				if (!CANATMOSPASS(zone_turf, identified_turf) || atmos_grid[identified_turf.x][identified_turf.y][identified_turf.z])
+				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
 					pointer ++
 					continue
 				var/datum/atmospheric_zone/created_region = build_zone_recursively(right + 1, pointer, zone_z)
@@ -119,7 +121,7 @@
 				var/turf/zone_turf = locate(pointer, top, zone_z)
 				var/turf/identified_turf = locate(pointer, top + 1, zone_z)
 				// If we cannot expand into the adjacent turf, don't make a zone there
-				if (!CANATMOSPASS(zone_turf, identified_turf) || atmos_grid[identified_turf.x][identified_turf.y][identified_turf.z])
+				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
 					pointer ++
 					continue
 				var/datum/atmospheric_zone/created_region = build_zone_recursively(pointer, top + 1, zone_z)
@@ -142,7 +144,7 @@
 			var/turf/corner_turf = locate(right + 1, top + 1, zone_z)
 			var/turf/top_turf = locate(right, top + 1, zone_z)
 			var/turf/right_turf = locate(right + 1, top, zone_z)
-			if (atmos_grid[corner_turf.x][corner_turf.y][corner_turf.z] || !CANATMOSPASS(top_turf, corner_turf) || !CANATMOSPASS(right_turf, corner_turf))
+			if (ATMOS_AT(corner_turf.x, corner_turf.y, corner_turf.z) || !CANATMOSPASS(top_turf, corner_turf) || !CANATMOSPASS(right_turf, corner_turf))
 				// Give priority to right expansion
 				right = right + 1
 				expand_vertically = FALSE

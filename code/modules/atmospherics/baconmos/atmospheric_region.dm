@@ -16,8 +16,9 @@
 	gas = new(length(turfs) * CELL_VOLUME, src)
 	var/color = random_color()
 	// Set the turfs air reference
-	for (var/turf/open/T in turfs)
+	for (var/turf/T in turfs)
 		T.air = gas
+		SSair.atmos_grid[T.z][T.x][T.y] = src
 		gas.populate_from_gas_string(T.initial_gas_mix)
 		T.add_atom_colour("#[color]", ADMIN_COLOUR_PRIORITY)
 	// Setup the turfs gas overlays
