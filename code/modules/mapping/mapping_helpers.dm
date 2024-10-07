@@ -568,7 +568,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 		if(isspaceturf(each_turf) || isopenspace(each_turf))
 			continue
 
-		if(!each_turf.CanAtmosPass(my_turf))
+		if(!CANATMOSPASS(each_turf, my_turf))
 			for(var/atom/movable/movable_content as anything in each_turf.contents)
 				if(is_type_in_typecache(movable_content, unliable_atmos_blockers))
 					unliable_atmos_blocking = TRUE
@@ -605,7 +605,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 
 	// puts a directional window for each direction.
 	for(var/turf/each_turf in nearby_turfs)
-		if(!each_turf.CanAtmosPass(my_turf) || isspaceturf(each_turf) || isopenspace(each_turf))
+		if(!CANATMOSPASS(each_turf, my_turf) || isspaceturf(each_turf) || isopenspace(each_turf))
 			continue
 
 		var/obj/d_glass = new window_type(each_turf)

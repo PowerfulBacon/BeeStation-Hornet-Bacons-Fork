@@ -600,4 +600,4 @@ CREATION_TEST_IGNORE_SELF(/turf)
 	. = density
 	density = new_value
 	// Handle atmospherics updates
-	SSair.set_density(x, y, z, density)
+	UPDATE_TURF_ATMOS_FLOW(src)

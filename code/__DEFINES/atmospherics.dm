@@ -15,6 +15,23 @@
 #define ATMOS_DENSE_DIRECTIONAL ((1 << 0) | (1 << 2))
 
 // ===========================
+// Atmos Flow Updaters
+// ===========================
+
+#define UPDATE_TURF_ATMOS_FLOW(turf) SSair.set_atmos_flow_directions(turf.x, turf.y, turf.z, \
+	turf.atmos_flow_directions = ALL \
+	/* Disable all flags if there are fully dense objects here */ \
+	& (turf.atmos_dense_objects && NONE) \
+	/* Disable directional flags based on directionally blocking objects */ \
+	& (turf.atmos_dense_north_objects && (~NORTH)) \
+	& (turf.atmos_dense_east_objects && (~EAST)) \
+	& (turf.atmos_dense_south_objects && (~SOUTH)) \
+	& (turf.atmos_dense_west_objects && (~WEST)) \
+	/* Update for our own blocking status (turfs cannot directionally block atmos) */ \
+	& (turf.atmos_density && (turf.density || turf.atmos_density & ATMOS_ALWAYS_DENSE) && NONE) \
+)
+
+// ===========================
 //ATMOS
 // ===========================
 
@@ -211,14 +228,29 @@
 #define TANK_MIN_RELEASE_PRESSURE 			0
 #define TANK_DEFAULT_RELEASE_PRESSURE 		17
 
-//CANATMOSPASS
-#define ATMOS_PASS_YES 1
-#define ATMOS_PASS_NO 0
-#define ATMOS_PASS_PROC -1 //ask CanAtmosPass()
-#define ATMOS_PASS_DENSITY -2 //just check density
-
-#define CANATMOSPASS(A, O) ( A.CanAtmosPass == ATMOS_PASS_PROC ? A.CanAtmosPass(O) : ( A.CanAtmosPass == ATMOS_PASS_DENSITY ? !A.density : A.CanAtmosPass ) )
-#define CANVERTICALATMOSPASS(A, O) ( A.CanAtmosPassVertical == ATMOS_PASS_PROC ? A.CanAtmosPass(O, TRUE) : ( A.CanAtmosPassVertical == ATMOS_PASS_DENSITY ? !A.density : A.CanAtmosPassVertical ) )
+// Atmos can pass when:
+// - Always can pass if the 2 tiles are not atmos dense
+// - Can never pass if either tile is always dense and if the direction flag is set, the direction matches
+// - Can always pass if both tiles have density of 0
+// - Can not pass if 1 of the tiles has density and if the direction flag is set, the direction matches
+// - Can pass otherwise
+#define CANATMOSPASS(source, target) ( \
+	/* Always pass if the 2 tiles are not atmos dense */ \
+	(!source.atmos_density && !target.atmos_density) \
+	/* Check atmos density in the correct flow directions */ \
+	|| (!ISATMOSDENSE(source, get_dir(source, target)) && !ISATMOSDENSE(target, get_dir(target, source))) \
+	)
+/// Check if a turf is atmos dense
+#define ISATMOSDENSE(turf, check_direction) ( \
+	/* Turf must have atmos density set to something */ \
+	turf.atmos_density \
+	/* Turf needs to be either dense or always dense */ \
+	&& (turf.density || (turf.atmos_density & ATMOS_ALWAYS_DENSE)) \
+	/* Check flow direction requirement */ \
+	&& (check_direction & turf.atmos_flow_directions) \
+	)
+// Temp
+#define CANVERTICALATMOSPASS(A, O) ( FALSE )
 
 
 // ============================

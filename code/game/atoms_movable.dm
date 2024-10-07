@@ -72,6 +72,9 @@
 	/// Whether this atom should have its dir automatically changed when it moves. Setting this to FALSE allows for things such as directional windows to retain dir on moving without snowflake code all of the place.
 	var/set_dir_on_move = TRUE
 
+	/// The direction that we are facing in atmos-land. If we have unmanaged modifications
+	/// of dir, then I'd rather it only break that thing's atmos blocking than the entire system.
+	var/atmos_direction = NONE
 
 /atom/movable/Initialize(mapload)
 	. = ..()
@@ -110,8 +113,24 @@
 
 	if(loc)
 		//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
-		if(((CanAtmosPass == ATMOS_PASS_DENSITY && density) || CanAtmosPass == ATMOS_PASS_NO) && isturf(loc))
-			CanAtmosPass = ATMOS_PASS_YES
+		if (isturf(loc) && atmos_density)
+			var/turf/atmos_location = loc
+			// Check if we are actually validly affecting atmos
+			if (density || (atmos_density & ATMOS_ALWAYS_DENSE))
+				// We are, so deal with ourselves gracefully
+				if (atmos_density & ATMOS_DENSE_DIRECTIONAL)
+					if (atmos_direction & NORTH)
+						atmos_location.atmos_dense_north_objects --
+					if (atmos_direction & EAST)
+						atmos_location.atmos_dense_east_objects --
+					if (atmos_direction & SOUTH)
+						atmos_location.atmos_dense_south_objects --
+					if (atmos_direction & WEST)
+						atmos_location.atmos_dense_west_objects --
+				else
+					atmos_location.atmos_dense_objects --
+				// Trigger an update
+				UPDATE_TURF_ATMOS_FLOW(atmos_location)
 		loc.handle_atom_del(src)
 
 	if(opacity)

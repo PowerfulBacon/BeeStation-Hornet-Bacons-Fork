@@ -16,7 +16,7 @@
  * Sets the atmos density of a tile.
  * This will permanently seperate or connect regions together.
  */
-/datum/controller/subsystem/air/proc/set_density(x, y, z, density)
+/datum/controller/subsystem/air/proc/set_atmos_flow_directions(x, y, z, directions)
 
 /datum/controller/subsystem/air/proc/get_region(x, y, z)
 
@@ -32,7 +32,7 @@
 /datum/controller/subsystem/air/proc/block_flow(x, y, z)
 
 /**
- * Init shit
+ * Inititalise the atmos grid to a consistent state
  */
 
 /datum/controller/subsystem/air/proc/initialise_atmospherics()
