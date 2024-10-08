@@ -236,8 +236,8 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom)
 	InitializeAIController()
 
 	// Setup initial atmos density
-	if (atmos_density && isturf(loc) && density || (atmos_density & ATMOS_ALWAYS_DENSE))
-		if (atmos_density & ATMOS_DENSE_DIRECTIONAL)
+	if (atmos_density && isturf(loc) && density || (atmos_density & ATMOS_ALWAYS_DENSE_FLAG))
+		if (atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG)
 			loc:atmos_flow_directions &= ~dir
 		else
 			loc:atmos_flow_directions = NONE

@@ -176,8 +176,7 @@ APPLY_AIRLESS_ATMOS(/turf/open/floor/engine/airless)
 	icon_state = "plating"
 	floor_tile = null
 	var/obj/effect/clockwork/overlay/floor/bloodcult/realappearance
-	atmos_density = ATMOS_ALWAYS_DENSE
-	atmos_flow_directions = NONE
+	SET_TURF_ATMOS_DENSE
 
 /turf/open/floor/engine/cult/Initialize(mapload)
 	. = ..()

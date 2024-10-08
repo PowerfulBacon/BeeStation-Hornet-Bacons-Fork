@@ -25,9 +25,9 @@
 	var/destination_x
 	var/destination_y
 
+	SET_TURF_ATMOS_DENSE
 	var/static/datum/gas_mixture/immutable/space/space_gas
-	// We do NOT want atmos adjacent turfs
-	init_air = FALSE
+
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
 	light_power = 0.25

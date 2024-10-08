@@ -41,10 +41,10 @@
 		if (!atom.atmos_density)
 			continue
 		// Atom is not currently restricting the flow of atmos
-		if (!atom.density && !(atom.atmos_density & ATMOS_ALWAYS_DENSE))
+		if (!atom.density && !(atom.atmos_density & ATMOS_ALWAYS_DENSE_FLAG))
 			continue
 		// Atom is blocking atmos, check directional flags
-		if (atom.atmos_density & ATMOS_DENSE_DIRECTIONAL)
+		if (atom.atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG)
 			if (atom.dir & NORTH)
 				atmos_dense_north_objects ++
 			if (atom.dir & EAST)
@@ -55,20 +55,5 @@
 				atmos_dense_west_objects ++
 		else
 			atmos_dense_objects ++
-	// Enable always density
-	if (atmos_dense_objects)
-		atmos_flow_directions = NONE
-	// Enable north density
-	if (atmos_dense_north_objects)
-		atmos_flow_directions &= ~NORTH
-	// Enable east density
-	if (atmos_dense_east_objects)
-		atmos_flow_directions &= ~EAST
-	// Enable south density
-	if (atmos_dense_south_objects)
-		atmos_flow_directions &= ~SOUTH
-	// Enable west density
-	if (atmos_dense_west_objects)
-		atmos_flow_directions &= ~WEST
 	// Set the flow directions
 	UPDATE_TURF_ATMOS_FLOW(src)

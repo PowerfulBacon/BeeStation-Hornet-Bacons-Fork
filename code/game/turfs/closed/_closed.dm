@@ -4,9 +4,7 @@ CREATION_TEST_IGNORE_SELF(/turf/closed)
 	layer = CLOSED_TURF_LAYER
 	opacity = TRUE
 	density = TRUE
-	atmos_density = ATMOS_DENSE
-	atmos_flow_directions = NONE
-	init_air = FALSE
+	SET_TURF_ATMOS_DENSE
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	rad_insulation = RAD_MEDIUM_INSULATION
 	pass_flags_self = PASSCLOSEDTURF

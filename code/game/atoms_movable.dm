@@ -101,6 +101,26 @@
 		var/turf/T = loc
 		T.update_above() // Z-Mimic
 
+	// Deal with atmos stuff
+	//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
+	if (isturf(loc) && atmos_density)
+		var/turf/atmos_location = loc
+		// Check if we are actually validly affecting atmos
+		if (density || (atmos_density & ATMOS_ALWAYS_DENSE_FLAG))
+			// We are, so deal with ourselves gracefully
+			if (atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG)
+				if (atmos_direction & NORTH)
+					atmos_location.atmos_dense_north_objects ++
+				if (atmos_direction & EAST)
+					atmos_location.atmos_dense_east_objects ++
+				if (atmos_direction & SOUTH)
+					atmos_location.atmos_dense_south_objects ++
+				if (atmos_direction & WEST)
+					atmos_location.atmos_dense_west_objects ++
+			else
+				atmos_location.atmos_dense_objects ++
+			// Trigger an update
+			UPDATE_TURF_ATMOS_FLOW(atmos_location)
 
 /atom/movable/Destroy(force)
 	QDEL_NULL(proximity_monitor)
@@ -116,9 +136,9 @@
 		if (isturf(loc) && atmos_density)
 			var/turf/atmos_location = loc
 			// Check if we are actually validly affecting atmos
-			if (density || (atmos_density & ATMOS_ALWAYS_DENSE))
+			if (density || (atmos_density & ATMOS_ALWAYS_DENSE_FLAG))
 				// We are, so deal with ourselves gracefully
-				if (atmos_density & ATMOS_DENSE_DIRECTIONAL)
+				if (atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG)
 					if (atmos_direction & NORTH)
 						atmos_location.atmos_dense_north_objects --
 					if (atmos_direction & EAST)

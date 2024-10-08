@@ -395,12 +395,6 @@ SUBSYSTEM_DEF(air)
 	LAZYREMOVE(paused_z_levels, z_level)
 
 /datum/controller/subsystem/air/proc/setup_allturfs()
-	var/times_fired = ++src.times_fired
-
-	for(var/turf/T as anything in ALL_TURFS())
-		if (!T.init_air)
-			continue
-		T.Initalize_Atmos(times_fired)
 
 /datum/controller/subsystem/air/proc/setup_atmos_machinery()
 	for (var/obj/machinery/atmospherics/AM in atmos_machinery + atmos_air_machinery)

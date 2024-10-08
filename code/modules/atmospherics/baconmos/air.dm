@@ -4,7 +4,8 @@
  */
 
 #define ATMOS_AT(x, y, z) atmos_grid[z][x][y]
-#define TURF_SUPPORTS_ATMOS(turf) turf.init_air
+// Turfs get atmos if they allow air init and don't have anything on them blocking their flow
+#define TURF_SUPPORTS_ATMOS(turf) turf.atmos_flow_directions != 0
 
 /datum/controller/subsystem/air
 	/// The atmos grid, stores regions in a list of 2D arrays
@@ -17,6 +18,8 @@
  * This will permanently seperate or connect regions together.
  */
 /datum/controller/subsystem/air/proc/set_atmos_flow_directions(x, y, z, directions)
+	// Check for blocked flow
+	// We know we have to do something if we share a zone with something in that direction
 
 /datum/controller/subsystem/air/proc/get_region(x, y, z)
 

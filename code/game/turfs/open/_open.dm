@@ -158,8 +158,7 @@ APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/indestructible/hierophant)
 
 /turf/open/indestructible/binary
 	name = "tear in the fabric of reality"
-	atmos_density = ATMOS_ALWAYS_DENSE
-	atmos_flow_directions = NONE
+	SET_TURF_ATMOS_DENSE
 	baseturfs = /turf/open/indestructible/binary
 	icon_state = "binary"
 	footstep = FOOTSTEP_PLATING
@@ -171,9 +170,7 @@ APPLY_LAVALAND_DEFAULT_ATMOS(/turf/open/indestructible/hierophant)
 /turf/open/indestructible/airblock
 	icon_state = "bluespace"
 	baseturfs = /turf/open/indestructible/airblock
-	atmos_density = ATMOS_ALWAYS_DENSE
-	atmos_flow_directions = NONE
-	init_air = FALSE
+	SET_TURF_ATMOS_DENSE
 
 /turf/open/Initalize_Atmos(times_fired)
 	//if(!istype(air, /datum/gas_mixture/turf))
