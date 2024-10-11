@@ -8,7 +8,7 @@
 #define TURF_SUPPORTS_ATMOS(turf) turf.atmos_flow_directions != 0
 
 /datum/controller/subsystem/air
-	/// The atmos grid, stores regions in a list of 2D arrays
+	/// The atmos grid, stores zones in a list of 2D arrays
 	var/list/atmos_grid = list()
 	/// List of atmospheric regions in the world
 	var/list/atmospheric_regions = list()
@@ -20,6 +20,17 @@
 /datum/controller/subsystem/air/proc/set_atmos_flow_directions(x, y, z, directions)
 	// Check for blocked flow
 	// We know we have to do something if we share a zone with something in that direction
+	var/turf/existing_turf = locate(x, y, z)
+	// Whether or not flow has been completely disabled on this tile
+	var/disabled_flow = directions == 0
+	// =====================
+	// Part 1: Disallowed flow
+	// =====================
+	// Disallowing north flow
+	if (!(directions * NORTH))
+		// Check if the zone needs to be divided
+		if (y < world.maxx && ATMOS_AT(x, y, z) != ATMOS_AT(x, y + 1, z))
+			// TODO: Add a proc to subdivide regions along a line
 
 /datum/controller/subsystem/air/proc/get_region(x, y, z)
 
@@ -67,6 +78,7 @@
 	var/top = zone_y
 	var/expand_vertically = TRUE
 	var/expand_horizontally = TRUE
+	var/list/attached_zones = list()
 	// Begin expanding diagonally
 	while (TRUE)
 		var/vertical_check = expand_vertically && top < world.maxy
@@ -76,8 +88,13 @@
 			for (var/x in left to right)
 				var/turf/zone_turf = locate(x, top, zone_z)
 				var/turf/identified_turf = locate(x, top + 1, zone_z)
+				// If there is already an atmos at that location, join it
+				if (ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
+					attached_zones |= ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z)
+					vertical_check = FALSE
+					break
 				// Ensure that atmos can flow from a zone tile upwards
-				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z) || !TURF_SUPPORTS_ATMOS(identified_turf))
+				if (!CANATMOSPASS(zone_turf, identified_turf) || !TURF_SUPPORTS_ATMOS(identified_turf))
 					// If atmos cannot flow upwards, we cannot expand up
 					vertical_check = FALSE
 					break
@@ -97,8 +114,13 @@
 			for (var/y in bottom to top)
 				var/turf/zone_turf = locate(right, y, zone_z)
 				var/turf/identified_turf = locate(right + 1, y, zone_z)
+				// If there is already an atmos at that location, join it
+				if (ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z))
+					attached_zones |= ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z)
+					horizontal_check = FALSE
+					break
 				// Ensure that atmos can flow from a zone tile upwards
-				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z) || !TURF_SUPPORTS_ATMOS(identified_turf))
+				if (!CANATMOSPASS(zone_turf, identified_turf) || !TURF_SUPPORTS_ATMOS(identified_turf))
 					// If atmos cannot flow upwards, we cannot expand up
 					horizontal_check = FALSE
 					break
@@ -126,12 +148,15 @@
 				var/turf/zone_turf = locate(right, pointer, zone_z)
 				var/turf/identified_turf = locate(right + 1, pointer, zone_z)
 				// If we cannot expand into the adjacent turf, don't make a zone there
+				// Since the tile will be adjacent, we will already have scanned it for linkups
 				if (!CANATMOSPASS(zone_turf, identified_turf) || ATMOS_AT(identified_turf.x, identified_turf.y, identified_turf.z) || !TURF_SUPPORTS_ATMOS(identified_turf))
 					pointer ++
 					continue
 				var/datum/atmospheric_zone/created_region = build_zone_recursively(right + 1, pointer, zone_z)
 				// Move the pointer up above the created zone
 				pointer = created_region.top + 1
+				// Any zones that we create are definitely linked to us
+				our_region.link_graph_nodes(created_region)
 			// Continue zone expansion above
 			pointer = left
 			while (pointer <= right)
@@ -144,6 +169,11 @@
 				var/datum/atmospheric_zone/created_region = build_zone_recursively(pointer, top + 1, zone_z)
 				// Move the pointer up above the created zone
 				pointer = created_region.right + 1
+				// Any zones that we create are definitely linked to us
+				our_region.link_graph_nodes(created_region)
+			// Linkup to anything we encountered during expansion
+			for (var/datum/atmospheric_zone/linked_zone as anything in attached_zones)
+				our_region.link_graph_nodes(linked_zone)
 			return our_region
 		// Zone can only expand upwards
 		else if (vertical_check && !horizontal_check)

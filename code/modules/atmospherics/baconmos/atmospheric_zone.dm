@@ -33,3 +33,5 @@
 		gas_overlay.alpha = 0
 		for (var/turf/open/T in turfs)
 			T.vis_contents += gas_overlay
+
+/datum/atmospheric_zone/proc/link_graph_nodes(datum/atmospheric_zone/adjacent)
