@@ -33,6 +33,62 @@
 	& ((turf.atmos_density && (turf.density || turf.atmos_density & ATMOS_ALWAYS_DENSE_FLAG)) ? NONE : ALL) \
 	)))
 
+/// Stop contributing air to a turf.
+/// TODO: Use a custom density var to stop people breaking atmos when they use density
+/// incorrectly.
+#define MOVABLE_STOP_CONTRIBUTING_AIR(movable, location, update) if (movable.density || (movable.atmos_density & ATMOS_ALWAYS_DENSE_FLAG)){\
+	var/turf/atmos_location = location;\
+	if (movable.atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG) {\
+		if (movable.atmos_direction & NORTH) {\
+			atmos_location.atmos_dense_north_objects ++;\
+		}\
+		if (movable.atmos_direction & EAST) {\
+			atmos_location.atmos_dense_east_objects ++;\
+		}\
+		if (movable.atmos_direction & SOUTH) {\
+			atmos_location.atmos_dense_south_objects ++;\
+		}\
+		if (movable.atmos_direction & WEST) {\
+			atmos_location.atmos_dense_west_objects ++;\
+		}\
+	}\
+	else {\
+		atmos_location.atmos_dense_objects ++;\
+	}\
+	if (update) {\
+		UPDATE_TURF_ATMOS_FLOW(atmos_location);\
+	}\
+}
+
+/// Start contributing air to our turf.
+/// Doesn't actually update the turf's atmos flow, you have to do that yourself
+/// by calling UPDATE_TURF_ATMOS_FLOW on the loc
+#define MOVABLE_CONTRIBUTE_AIR(movable, update) if (isturf(movable.loc) && movable.atmos_density) {\
+	var/turf/atmos_location = movable.loc;\
+	if (movable.density || (movable.atmos_density & ATMOS_ALWAYS_DENSE_FLAG)){\
+		if (movable.atmos_density & ATMOS_DENSE_DIRECTIONAL_FLAG) {\
+			if (movable.atmos_direction & NORTH) {\
+				atmos_location.atmos_dense_north_objects --;\
+			}\
+			if (movable.atmos_direction & EAST) {\
+				atmos_location.atmos_dense_east_objects --;\
+			}\
+			if (movable.atmos_direction & SOUTH) {\
+				atmos_location.atmos_dense_south_objects --;\
+			}\
+			if (movable.atmos_direction & WEST) {\
+				atmos_location.atmos_dense_west_objects --;\
+			}\
+		}\
+		else {\
+			atmos_location.atmos_dense_objects --;\
+		}\
+		if (update) {\
+			UPDATE_TURF_ATMOS_FLOW(atmos_location);\
+		}\
+	}\
+}
+
 // ===========================
 //ATMOS
 // ===========================

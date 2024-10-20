@@ -27,10 +27,33 @@
 	// Part 1: Disallowed flow
 	// =====================
 	// Disallowing north flow
-	if (!(directions * NORTH))
-		// Check if the zone needs to be divided
-		if (y < world.maxx && ATMOS_AT(x, y, z) != ATMOS_AT(x, y + 1, z))
-			// TODO: Add a proc to subdivide regions along a line
+	if (!(directions & NORTH) && y < world.maxx)
+		// Zone division (usually doesn't require region reconsiliation)
+		if (ATMOS_AT(x, y, z) == ATMOS_AT(x, y + 1, z))
+			var/datum/atmospheric_zone/divided_zone = ATMOS_AT(x, y, z)
+			divided_zone.horizontal_cut(y, NORTH)
+		// Region division (always requires a full reconsiliation)
+	// Disallowing south flow
+	if (!(directions & SOUTH) && y > 1)
+		// Zone division (usually doesn't require region reconsiliation)
+		if (ATMOS_AT(x, y, z) == ATMOS_AT(x, y - 1, z))
+			var/datum/atmospheric_zone/divided_zone = ATMOS_AT(x, y, z)
+			divided_zone.horizontal_cut(y, SOUTH)
+		// Region division (always requires a full reconsiliation)
+	// Disallowing east flow
+	if (!(directions & EAST) && x < world.maxx)
+		// Zone division (usually doesn't require region reconsiliation)
+		if (ATMOS_AT(x, y, z) == ATMOS_AT(x + 1, y, z))
+			var/datum/atmospheric_zone/divided_zone = ATMOS_AT(x, y, z)
+			divided_zone.vertical_cut(y, EAST)
+		// Region division (always requires a full reconsiliation)
+	// Disallowing west flow
+	if (!(directions & WEST) && x > 1)
+		// Zone division (usually doesn't require region reconsiliation)
+		if (ATMOS_AT(x, y, z) == ATMOS_AT(x - 1, y, z))
+			var/datum/atmospheric_zone/divided_zone = ATMOS_AT(x, y, z)
+			divided_zone.vertical_cut(y, WEST)
+		// Region division (always requires a full reconsiliation)
 
 /datum/controller/subsystem/air/proc/get_region(x, y, z)
 
