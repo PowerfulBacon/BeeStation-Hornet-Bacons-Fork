@@ -12,6 +12,15 @@
 	var/list/atmos_grid = list()
 	/// List of atmospheric regions in the world
 	var/list/atmospheric_regions = list()
+	// Tracking stats
+	/// Times zones have been split in 2
+	var/zone_subdivides = 0
+	/// Times zones have been merged into 2
+	var/zone_merges = 0
+	/// Times regions have been recalculated due to 1-tile wide regions being split
+	var/region_splits = 0
+	/// Times regions have been recalculated due to zone border updates
+	var/region_border_udpates = 0
 
 /**
  * Sets the atmos density of a tile.
@@ -163,7 +172,7 @@
 		// Zone cannot expand
 		if (!vertical_check && !horizontal_check)
 			// Return our created zone
-			var/datum/atmospheric_zone/our_region = new(left, bottom, right, top, zone_z)
+			var/datum/atmospheric_zone/our_region = new(null, left, bottom, right, top, zone_z)
 			created_zones += our_region
 			// Continue zone expansion to the right
 			var/pointer = bottom
