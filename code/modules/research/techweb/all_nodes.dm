@@ -2313,7 +2313,6 @@
 		"defib_nanites",
 		"fakedeath_nanites",
 		"purging_plus_nanites",
-		"regenerative_plus_nanites",
 		"sensor_species_nanites",
 		"vampire_nanites",
 	)
