@@ -1,26 +1,49 @@
 #define SIGNAL_ADDTRAIT(trait_ref) "addtrait [trait_ref]"
 #define SIGNAL_REMOVETRAIT(trait_ref) "removetrait [trait_ref]"
 
-// trait accessor defines
-#define ADD_TRAIT(target, trait, source) \
+HEAP_TYPE(/datum/trait_heap, priority)
+
+/datum/trait
+	/// Source of the trait
+	var/source
+	/// The value contained in this trait
+	var/value
+	/// The priority of this value trait, or null if there is no value
+	var/priority
+	var/datum/trait/heap_left
+	var/datum/trait/heap_right
+
+/datum/trait/New(source, value = null, priority = null)
+	. = ..()
+	src.source = source
+	src.value = value
+	// If we have a value, we must have a priority. Default to 0.
+	src.priority = priority || (value ? 0 : null)
+
+/// Add a trait to a target
+/// Parameters:
+/// 1: The target to recieve the trait
+/// 2: The key of the trait
+/// 3: The source of the trait
+/// 4 (optional): The value associated with this trait
+/// 5 (optional): The priority of this trait, if it has a value
+#define ADD_TRAIT(target, _trait, source, args...) \
 	do { \
-		var/list/_L; \
+		var/_L; \
 		if (!target.status_traits) { \
 			target.status_traits = list(); \
-			_L = target.status_traits; \
-			_L[trait] = list(source); \
-			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
+		} \
+		_L = target.status_traits; \
+		if (_L[_trait]) { \
+			var/datum/trait/created_trait = new /datum/trait(source, args);\
+			_L[_trait] |= created_trait; \
 		} else { \
-			_L = target.status_traits; \
-			if (_L[trait]) { \
-				_L[trait] |= list(source); \
-			} else { \
-				_L[trait] = list(source); \
-				SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
-			} \
+			_L[_trait] = new /datum/trait_heap(new /datum/trait(source, args)); \
+			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(_trait), _trait); \
 		} \
 	} while (0)
-#define REMOVE_TRAIT(target, trait, sources) \
+
+#define REMOVE_TRAIT(target, _trait, sources) \
 	do { \
 		var/list/_L = target.status_traits; \
 		var/list/_S; \
@@ -29,21 +52,22 @@
 		} else { \
 			_S = sources\
 		}; \
-		if (_L && _L[trait]) { \
-			for (var/_T in _L[trait]) { \
-				if ((!_S && (_T != ROUNDSTART_TRAIT)) || (_T in _S)) { \
-					_L[trait] -= _T \
+		if (_L && _L[_trait]) { \
+			for (var/datum/trait/_T as anything in _L[_trait]:L) { \
+				if ((!_S && (_T.source != ROUNDSTART_TRAIT)) || (_T.source in _S)) { \
+					_L[_trait] -= _T \
 				} \
 			};\
-			if (!length(_L[trait])) { \
-				_L -= trait; \
-				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
+			if (!length(_L[_trait]:L)) { \
+				_L -= _trait; \
+				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_trait), _trait); \
 			}; \
 			if (!length(_L)) { \
 				target.status_traits = null \
 			}; \
 		} \
 	} while (0)
+
 #define REMOVE_TRAIT_NOT_FROM(target, trait, sources) \
 	do { \
 		var/list/_traits_list = target.status_traits; \
@@ -54,12 +78,12 @@
 			_sources_list = sources\
 		}; \
 		if (_traits_list && _traits_list[trait]) { \
-			for (var/_trait_source in _traits_list[trait]) { \
+			for (var/_trait_source in _traits_list[trait]:L) { \
 				if (!(_trait_source in _sources_list)) { \
 					_traits_list[trait] -= _trait_source \
 				} \
 			};\
-			if (!length(_traits_list[trait])) { \
+			if (!length(_traits_list[trait]:L)) { \
 				_traits_list -= trait; \
 				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
 			}; \
@@ -68,6 +92,7 @@
 			}; \
 		} \
 	} while (0)
+
 #define REMOVE_TRAITS_NOT_IN(target, sources) \
 	do { \
 		var/list/_L = target.status_traits; \
@@ -75,16 +100,17 @@
 		if (_L) { \
 			for (var/_T in _L) { \
 				_L[_T] &= _S;\
-				if (!length(_L[_T])) { \
+				if (!length(_L[_T]:L)) { \
 					_L -= _T; \
 					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T), _T); \
 					}; \
 				};\
-			if (!length(_L)) { \
+			if (!length(_L:L)) { \
 				target.status_traits = null\
 			};\
 		}\
 	} while (0)
+
 #define REMOVE_TRAITS_IN(target, sources) \
 	do { \
 		var/list/_L = target.status_traits; \
@@ -97,12 +123,12 @@
 		if (_L) { \
 			for (var/_T in _L) { \
 				_L[_T] -= _S;\
-				if (!length(_L[_T])) { \
+				if (!length(_L[_T]:L)) { \
 					_L -= _T; \
 					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T)); \
 					}; \
 				};\
-			if (!length(_L)) { \
+			if (!length(_L:L)) { \
 				target.status_traits = null\
 			};\
 		}\
@@ -117,3 +143,6 @@
 			: FALSE)\
 		: FALSE)
 #define HAS_TRAIT_NOT_FROM(target, trait, source) (target.status_traits ? (target.status_traits[trait] ? (length(target.status_traits[trait] - source) > 0) : FALSE) : FALSE)
+
+/// Get the value of the specified trait
+#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (target.status_traits[trait] ? TRUE : FALSE) : FALSE)
