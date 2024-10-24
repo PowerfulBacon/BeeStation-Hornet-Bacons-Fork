@@ -53,12 +53,13 @@ HEAP_TYPE(/datum/trait_heap, priority)
 			_S = sources\
 		}; \
 		if (_L && _L[_trait]) { \
-			for (var/datum/trait/_T as anything in _L[_trait]:L) { \
+			var/datum/trait_heap/heap = _L[_trait];\
+			for (var/datum/trait/_T as anything in heap.elements) { \
 				if ((!_S && (_T.source != ROUNDSTART_TRAIT)) || (_T.source in _S)) { \
-					_L[_trait] -= _T \
+					heap -= _T \
 				} \
 			};\
-			if (!length(_L[_trait]:L)) { \
+			if (!length(heap.elements)) { \
 				_L -= _trait; \
 				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_trait), _trait); \
 			}; \
@@ -78,12 +79,13 @@ HEAP_TYPE(/datum/trait_heap, priority)
 			_sources_list = sources\
 		}; \
 		if (_traits_list && _traits_list[trait]) { \
-			for (var/_trait_source in _traits_list[trait]:L) { \
-				if (!(_trait_source in _sources_list)) { \
-					_traits_list[trait] -= _trait_source \
+			var/datum/trait_heap/heap = _L[_trait];\
+			for (var/datum/trait/_trait in heap.elements) { \
+				if (!(_trait.source in _sources_list)) { \
+					_traits_list[trait] -= _trait \
 				} \
 			};\
-			if (!length(_traits_list[trait]:L)) { \
+			if (!length(heap.elements)) { \
 				_traits_list -= trait; \
 				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
 			}; \
@@ -100,12 +102,13 @@ HEAP_TYPE(/datum/trait_heap, priority)
 		if (_L) { \
 			for (var/_T in _L) { \
 				_L[_T] &= _S;\
-				if (!length(_L[_T]:L)) { \
+				var/datum/trait_heap/heap = _L[_T];\
+				if (!length(heap.elements)) { \
 					_L -= _T; \
 					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T), _T); \
 					}; \
 				};\
-			if (!length(_L:L)) { \
+			if (!length(_L)) { \
 				target.status_traits = null\
 			};\
 		}\
@@ -123,12 +126,13 @@ HEAP_TYPE(/datum/trait_heap, priority)
 		if (_L) { \
 			for (var/_T in _L) { \
 				_L[_T] -= _S;\
-				if (!length(_L[_T]:L)) { \
+				var/datum/trait_heap/heap = _L[_T];\
+				if (!length(heap.elements)) { \
 					_L -= _T; \
 					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T)); \
 					}; \
 				};\
-			if (!length(_L:L)) { \
+			if (!length(_L)) { \
 				target.status_traits = null\
 			};\
 		}\
