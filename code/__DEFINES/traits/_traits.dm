@@ -146,5 +146,6 @@ HEAP_TYPE(/datum/trait_heap, priority)
 		: FALSE)
 #define HAS_TRAIT_NOT_FROM(target, trait, source) (target.status_traits ? (target.status_traits[trait] ? (length(target.status_traits[trait] - source) > 0) : FALSE) : FALSE)
 
+// Note: a?:b is used because : alone breaks the terniary operator
 /// Get the value of the specified trait
-#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]:elements) ? (target.status_traits[trait]:elements[1]:value) : null) : null)
+#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]:elements) ? (target.status_traits[trait]?:elements[1]?:value) : null) : null)
