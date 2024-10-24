@@ -10,8 +10,6 @@ HEAP_TYPE(/datum/trait_heap, priority)
 	var/value
 	/// The priority of this value trait, or null if there is no value
 	var/priority
-	var/datum/trait/heap_left
-	var/datum/trait/heap_right
 
 /datum/trait/New(source, value = null, priority = null)
 	. = ..()
@@ -149,4 +147,4 @@ HEAP_TYPE(/datum/trait_heap, priority)
 #define HAS_TRAIT_NOT_FROM(target, trait, source) (target.status_traits ? (target.status_traits[trait] ? (length(target.status_traits[trait] - source) > 0) : FALSE) : FALSE)
 
 /// Get the value of the specified trait
-#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (target.status_traits[trait] ? TRUE : FALSE) : FALSE)
+#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]:elements) ? (target.status_traits[trait]:elements[1]:value) : null) : null)
