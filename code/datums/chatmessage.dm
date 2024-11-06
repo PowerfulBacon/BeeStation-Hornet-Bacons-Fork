@@ -38,6 +38,7 @@
 #define COLOR_PERSON_UNKNOWN "#999999"
 #define COLOR_CHAT_EMOTE "#727272"
 
+GLOBAL_VAR_INIT(s_chat_message_highest_group, 1)
 
 /**
   * # Chat Message Overlay
@@ -57,6 +58,10 @@
 	var/eol_complete
 	/// Contains the approximate amount of lines for height decay
 	var/approx_lines
+	/// The group that the chat message belongs to. Messages in the same group will overlap each other
+	/// meaning that different variants of the same message can be shown to players.
+	/// Older messages must always have a lower group ID
+	var/group
 	/// Contains the reference to the next chatmessage in the bucket, used by runechat subsystem
 	var/datum/chatmessage/next
 	/// Contains the reference to the previous chatmessage in the bucket, used by runechat subsystem
@@ -80,11 +85,11 @@
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
-/datum/chatmessage/New(text, atom/target, list/client/hearers, language_icon, list/extra_classes = list(), lifespan = CHAT_MESSAGE_LIFESPAN)
+/datum/chatmessage/New(text, atom/target, list/client/hearers, language_icon, list/extra_classes = list(), lifespan = CHAT_MESSAGE_LIFESPAN, group = null)
 	. = ..()
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
-	INVOKE_ASYNC(src, PROC_REF(generate_image), text, target, hearers, language_icon, extra_classes, lifespan)
+	INVOKE_ASYNC(src, PROC_REF(generate_image), text, target, hearers, language_icon, extra_classes, lifespan, group)
 
 /datum/chatmessage/Destroy()
 	if (hearers)
@@ -118,12 +123,14 @@
   * * extra_classes - Extra classes to apply to the span that holds the text
   * * lifespan - The lifespan of the message in deciseconds
   */
-/datum/chatmessage/proc/generate_image(text, atom/target, list/client/hearers, datum/language/language, list/extra_classes, lifespan)
+/datum/chatmessage/proc/generate_image(text, atom/target, list/client/hearers, datum/language/language, list/extra_classes, lifespan, group)
 	/// Cached icons to show what language the user is speaking
 	var/static/list/language_icons
 
 	// Store the hearers
 	src.hearers = hearers
+	// Set the group
+	src.group = group
 
 	if(!LAZYLEN(hearers))
 		return
@@ -211,12 +218,14 @@
 
 	// Translate any existing messages upwards, apply exponential decay factors to timers
 	message_loc = get_atom_on_turf(target)
+	var/lowest_group_id = -1
 	if (LAZYLEN(message_loc.chat_messages))
 		var/idx = 1
 		var/combined_height = approx_lines
 		for(var/datum/chatmessage/m as() in message_loc.chat_messages)
-			if(!m?.message)
+			if(!m?.message && ((m.group && m.group <= lowest_group_id) || (group && group == m.group)))
 				continue
+			lowest_group_id = m.group
 			animate(m.message, pixel_y = m.message.pixel_y + mheight, time = CHAT_MESSAGE_SPAWN_TIME)
 			combined_height += m.approx_lines
 
@@ -315,7 +324,7 @@
 		return CHATMESSAGE_CANNOT_HEAR
 	return ..()
 
-/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, list/hearers, raw_message, list/spans, list/message_mods)
+/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, list/hearers, raw_message, list/spans, list/message_mods, group = null)
 	if(!length(hearers))
 		return
 
@@ -351,7 +360,7 @@
 		for(var/mob/M as() in hearers)
 			if(M?.should_show_chat_message(speaker, message_language, TRUE))
 				clients += M.client
-		new /datum/chatmessage(handled_message, speaker, clients, message_language, list("emote"))
+		new /datum/chatmessage(handled_message, speaker, clients, message_language, list("emote"), group = group)
 	else
 		//4 Possible chat message states:
 		//Show Icon, Understand (Most other languages)
@@ -374,22 +383,23 @@
 						LAZYADD(show_icon_understand, M.client)
 					else
 						LAZYADD(show_icon_scrambled, M.client)
+		var/group_id = group || GLOB.s_chat_message_highest_group++
 		var/scrambled_message
 		var/datum/language/language_instance = message_language ? GLOB.language_datum_instances[message_language] : null
 		if(LAZYLEN(show_icon_scrambled) || LAZYLEN(hide_icon_scrambled))
 			scrambled_message = language_instance?.scramble(handled_message) || scramble_message_replace_chars(handled_message, 100)
 		//Show the correct message to people who should see the icon and understand the language
 		if(LAZYLEN(show_icon_understand))
-			new /datum/chatmessage(handled_message, speaker, show_icon_understand, message_language, spans)
+			new /datum/chatmessage(handled_message, speaker, show_icon_understand, message_language, spans, group = group_id)
 		//Show the correct message to people who should see the icon but not understand the language
 		if(LAZYLEN(hide_icon_understand))
-			new /datum/chatmessage(handled_message, speaker, hide_icon_understand, message_language, spans)
+			new /datum/chatmessage(handled_message, speaker, hide_icon_understand, message_language, spans, group = group_id)
 		//Show the correct message to people who don't understand the language and should see the icon
 		if(LAZYLEN(show_icon_scrambled))
-			new /datum/chatmessage(scrambled_message, speaker, show_icon_scrambled, message_language, spans)
+			new /datum/chatmessage(scrambled_message, speaker, show_icon_scrambled, message_language, spans, group = group_id)
 		//Show the correct message to people who don't understand the language but no icon should be displayed
 		if(LAZYLEN(hide_icon_scrambled))
-			new /datum/chatmessage(scrambled_message, speaker, hide_icon_scrambled, message_language, spans)
+			new /datum/chatmessage(scrambled_message, speaker, hide_icon_scrambled, message_language, spans, group = group_id)
 
 /**
   * Creates a message overlay at a defined location for a given speaker
