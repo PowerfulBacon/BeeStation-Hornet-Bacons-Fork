@@ -176,6 +176,13 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_PLANTHEALING" = TRAIT_PLANTHEALING,
 		"TRAIT_NORADDAMAGE" = TRAIT_NORADDAMAGE,
 		"TRAIT_MOBILE" = TRAIT_MOBILE,
+		"TRAIT_HULK" = TRAIT_HULK,
+	),
+	/mob/living = list(
+		"TRAIT_NO_BUMP_SLAM" = TRAIT_NO_BUMP_SLAM,
+	),
+	/mob/living/carbon = list(
+		"TRAIT_OVERRIDE_SKIN_COLOUR" = TRAIT_OVERRIDE_SKIN_COLOUR,
 		"INSTANT_DO_AFTER" = INSTANT_DO_AFTER
 	),
 	/obj/item/integrated_circuit = list(
