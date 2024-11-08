@@ -26,6 +26,7 @@
 	if(istype(new_holder))
 		holder = new_holder
 	height_displacement = icon('icons/effects/64x64.dmi', "height_displacement")
+	dna_stats = new()
 
 /datum/dna/Destroy()
 	if(iscarbon(holder))

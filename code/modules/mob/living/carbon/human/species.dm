@@ -59,7 +59,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/toxmod = 1
 	var/staminamod = 1		// multiplier for stun duration
 	var/attack_type = BRUTE //Type of damage attack does
-	var/punchdamage = 7      //highest possible punch damage
+	VAR_PRIVATE/punchdamage = 7      //highest possible punch damage
 	var/siemens_coeff = 1 //base electrocution coefficient
 	var/damage_overlay_type = "human" //what kind of damage overlays (if any) appear on our species when wounded?
 	var/fixed_mut_color = "" //to use MUTCOLOR with a fixed color that's independent of dna.feature["mcolor"]
@@ -249,8 +249,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	if(unique && attempts < 10)
 		. = .(gender, TRUE, lastname, ++attempts)
-
-
 
 //Called when cloning, copies some vars that should be kept
 /datum/species/proc/copy_properties_from(datum/species/old_species)
@@ -1653,7 +1651,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			else
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
-		var/damage = user.dna.species.punchdamage
+		var/damage = user.get_punch_damage()
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.get_combat_bodyzone(target)))
 

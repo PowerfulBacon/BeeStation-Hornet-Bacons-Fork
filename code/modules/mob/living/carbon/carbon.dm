@@ -4,6 +4,7 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 
 /mob/living/carbon/Initialize(mapload)
 	. = ..()
+	stats = new(src)
 	create_reagents(1000)
 	update_body_parts() //to update the carbon's new bodyparts appearance
 	GLOB.carbon_list += src
@@ -1251,3 +1252,8 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 /mob/living/carbon/proc/_signal_body_part_update(datum/source)
 	SIGNAL_HANDLER
 	update_body_parts()
+
+/mob/living/carbon/proc/get_punch_damage()
+	if (!(dna?.species))
+		return 7
+	return stats.adjust_strength(UNLINT(dna.species.punchdamage), UNLINT(dna.species.punchdamage) + 7)

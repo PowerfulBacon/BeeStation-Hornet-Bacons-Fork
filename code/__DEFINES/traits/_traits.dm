@@ -6,17 +6,22 @@
 	var/source
 	/// The value contained in this trait
 	var/value
-	/// The priority of this value trait, or null if there is no value
-	var/priority
 
-/datum/trait/New(source, value = null, priority = 0)
+/datum/trait/New(source, value = null)
 	. = ..()
 	src.source = source
 	src.value = value
-	src.priority = priority
 
 /datum/trait/proc/operator~=(b)
 	return source == b
+
+/datum/trait/priority
+	/// The priority of this value trait, or null if there is no value
+	var/priority
+
+/datum/trait/priority/New(source, value = null, priority = 0)
+	. = ..()
+	src.priority = priority
 
 // TODO: Figure out a way of merging ADD_TRAIT and ADD_VALUE_TRAIT with variadic macros
 // without making the opendream/dreamchecker unhappy through the use of compile-time
@@ -58,14 +63,18 @@
 		_L = target.status_traits; \
 		var/list/target_heap = _L[_trait];\
 		if (target_heap != null) { \
-			ADD_HEAP(target_heap, new /datum/trait(source, _trait_value, _trait_priority), priority);\
+			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
 		} else { \
 			target_heap = list(); \
-			ADD_HEAP(target_heap, new /datum/trait(source, _trait_value, _trait_priority), priority);\
+			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
 			_L[_trait] = target_heap;\
 			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(_trait), _trait); \
 		} \
 	} while (0)
+
+#define ADD_NUMERIC_TRAIT(target, _trait, _source, _additive_amount)
+
+#define MULTIPLY_NUMERIC_TRAIT(target, _trait, _source, _multiplicative_amount)
 
 /// Removes a trait from a specific source
 #define REMOVE_TRAIT(target, _trait, sources) \
@@ -111,8 +120,8 @@
 		if (_traits_list && _traits_list[_trait]) { \
 			var/list/_heap = _traits_list[_trait];\
 			for (var/_T as anything in _heap) { \
-				if (!((istype(_T, /datum/trait) ? _T:source : _T) in _sources_list)) { \
-					if (istype(_T, /datum/trait)) {\
+				if (!((istype(_T, /datum/trait/priority) ? _T:source : _T) in _sources_list)) { \
+					if (istype(_T, /datum/trait/priority)) {\
 						REMOVE_HEAP(_heap, _T, priority); \
 					} else {\
 						_heap -= _T;\
@@ -139,8 +148,8 @@
 			for (var/_trait_key as anything in _L) { \
 				var/list/_heap = _L[_trait_key];\
 				for (var/_trait in _heap) { \
-					if (!((istype(_trait, /datum/trait) ? _trait:source : _trait) in _S)) { \
-						if (istype(_trait, /datum/trait)) {\
+					if (!((istype(_trait, /datum/trait/priority) ? _trait:source : _trait) in _S)) { \
+						if (istype(_trait, /datum/trait/priority)) {\
 							REMOVE_HEAP(_heap, _trait, priority); \
 						} else {\
 							_heap -= _trait;\
@@ -172,8 +181,8 @@
 			for (var/_trait_key as anything in _L) { \
 				var/list/_heap = _L[_trait_key];\
 				for (var/_T in _heap) { \
-					if ((istype(_T, /datum/trait) ? _T:source : _T) in _S) { \
-						if (istype(_T, /datum/trait)) {\
+					if ((istype(_T, /datum/trait/priority) ? _T:source : _T) in _S) { \
+						if (istype(_T, /datum/trait/priority)) {\
 							REMOVE_HEAP(_heap, _T, priority); \
 						} else {\
 							_heap -= _T;\
