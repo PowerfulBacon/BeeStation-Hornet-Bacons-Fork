@@ -3997,6 +3997,7 @@
 #include "code\modules\station_goals\dna_vault.dm"
 #include "code\modules\station_goals\shield.dm"
 #include "code\modules\station_goals\station_goal.dm"
+#include "code\modules\stats\character_stats.dm"
 #include "code\modules\surgery\amputation.dm"
 #include "code\modules\surgery\anesthetic_machine.dm"
 #include "code\modules\surgery\blood_filter.dm"
