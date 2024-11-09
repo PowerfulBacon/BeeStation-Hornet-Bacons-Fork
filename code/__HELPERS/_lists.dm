@@ -214,8 +214,10 @@
 			return TRUE
 	return FALSE
 
+GLOBAL_DATUM_INIT(_typecache_temp, /datum, null)
+
 /// Checks for specific types in specifically structured (Assoc "type" = TRUE) lists ('typecaches')
-#define is_type_in_typecache(A, L) (A && length(L) && L[(ispath(A) ? A : A:type)])
+#define is_type_in_typecache(A, L) (A && length(L) && L[(ispath(A) ? A : ((GLOB._typecache_temp = A) && GLOB._typecache_temp.type))])
 
 /// returns a new list with only atoms that are in typecache L
 /proc/typecache_filter_list(list/atoms, list/typecache)
