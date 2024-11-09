@@ -16,7 +16,7 @@
 
 	var/atk_verb = pick("left hook","right hook","straight punch")
 
-	var/damage = 6 + A.dna.species.punchdamage
+	var/damage = 6 + GET_TRAIT_VALUE(A, TRAIT_PUNCH_DAMAGE)
 	if(!damage)
 		playsound(D.loc, A.dna.species.miss_sound, 25, 1, -1)
 		D.visible_message("<span class='warning'>[A]'s [atk_verb] misses [D]!</span>", \

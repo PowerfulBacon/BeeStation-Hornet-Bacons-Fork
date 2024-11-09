@@ -70,7 +70,7 @@ In all, this is a lot like the monkey code. /N
 			visible_message("<span class='danger'>[M] punches [src]!</span>", \
 					"<span class='userdanger'>[M] punches you!</span>", null, COMBAT_MESSAGE_RANGE)
 			var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.get_combat_bodyzone(src)))
-			apply_damage(M.dna.species.punchdamage, BRUTE, affecting)
+			apply_damage(GET_TRAIT_VALUE(M, TRAIT_PUNCH_DAMAGE), BRUTE, affecting)
 			log_combat(M, src, "attacked", M)
 			M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
 

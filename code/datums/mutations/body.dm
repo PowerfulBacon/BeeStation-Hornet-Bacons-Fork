@@ -416,8 +416,8 @@
 /datum/mutation/catclaws/on_acquiring()
 	if(..())
 		return
-	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + owner.dna.species.punchdamage) - owner.dna.species.punchdamage
-	owner.dna.species.punchdamage += added_damage
+	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)) - GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)
+	ADD_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)
 	owner.dna.species.attack_verb = "slash"
 	owner.dna.species.attack_sound = 'sound/weapons/slash.ogg'
 	owner.dna.species.miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -427,14 +427,13 @@
 	if(..())
 		return
 	to_chat(owner, "<span class='warning'> Your claws retract into your hand.</span>")
-	owner.dna.species.punchdamage -= added_damage
+	REMOVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS)
 	owner.dna.species.attack_verb = initial(owner.dna.species.attack_verb)
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.dna.species.miss_sound = initial(owner.dna.species.miss_sound)
 
 /datum/mutation/catclaws/modify()
 	..()
-	if(added_damage)
-		owner.dna.species.punchdamage -= added_damage
-	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + owner.dna.species.punchdamage) - owner.dna.species.punchdamage
-	owner.dna.species.punchdamage += added_damage
+	REMOVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS)
+	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)) - GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)
+	ADD_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)

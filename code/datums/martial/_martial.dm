@@ -38,7 +38,7 @@
 
 /datum/martial_art/proc/basic_hit(mob/living/carbon/human/A,mob/living/carbon/human/D)
 
-	var/damage = A.dna.species.punchdamage
+	var/damage = GET_TRAIT_VALUE(A, TRAIT_PUNCH_DAMAGE)
 
 	var/atk_verb = A.dna.species.attack_verb
 	if(D.body_position == LYING_DOWN)

@@ -407,6 +407,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 
 /datum/species/proc/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+	// Set the punch damage
+	REMOVE_TRAIT(C, TRAIT_PUNCH_DAMAGE, SPECIES_TRAIT)
+	ADD_CUMULATIVE_TRAIT(C, TRAIT_PUNCH_DAMAGE, SPECIES_TRAIT, punchdamage)
 	// Drop the items the new species can't wear
 	if((AGENDER in species_traits))
 		C.gender = PLURAL
@@ -1653,7 +1656,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			else
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
-		var/damage = user.get_punch_damage()
+		var/damage = GET_TRAIT_VALUE(user, TRAIT_PUNCH_DAMAGE)
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.get_combat_bodyzone(target)))
 

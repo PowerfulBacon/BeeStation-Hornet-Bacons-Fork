@@ -44,7 +44,7 @@
 			to_chat(user, "<span class='danger'>You [response_harm_simple] [src]!</span>")
 			playsound(loc, attacked_sound, 25, TRUE, -1)
 
-			attack_threshold_check(user.dna.species.punchdamage)
+			attack_threshold_check(GET_TRAIT_VALUE(user, TRAIT_PUNCH_DAMAGE))
 			log_combat(user, src, "attacked", user)
 			updatehealth()
 			return TRUE

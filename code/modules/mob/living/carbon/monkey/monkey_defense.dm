@@ -42,7 +42,7 @@
 					"<span class='userdanger'>[M] punches you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='danger'>You punch [name]!</span>")
 			playsound(loc, "punch", 25, 1, -1)
-			var/damage = M.dna.species.punchdamage
+			var/damage = GET_TRAIT_VALUE(M, TRAIT_PUNCH_DAMAGE)
 			var/obj/item/bodypart/affecting = get_bodypart(check_zone(M.get_combat_bodyzone(src)))
 			if(!affecting)
 				affecting = get_bodypart(BODY_ZONE_CHEST)

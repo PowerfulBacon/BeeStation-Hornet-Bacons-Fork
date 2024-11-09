@@ -8,7 +8,7 @@
 				"<span class='userdanger'>[M] kicks you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
 		to_chat(M, "<span class='danger'>You kick [src]!</span>")
 		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.get_combat_bodyzone(src)))
-		apply_damage(M.dna.species.punchdamage, BRUTE, affecting)
+		apply_damage(GET_TRAIT_VALUE(M, TRAIT_PUNCH_DAMAGE), BRUTE, affecting)
 
 /mob/living/carbon/alien/larva/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
 	if(user.a_intent == INTENT_HARM)

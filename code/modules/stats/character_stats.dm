@@ -51,8 +51,8 @@
 	src.owner = owner
 
 /datum/character_stats/character/proc/adjust_strength(minimum, maximum)
-	var/proportion = CLAMP01(owner.dna.dna_stats.strength - 1 / 4)
+	var/proportion = CLAMP01(UNLINT(owner.dna.dna_stats.strength) - 1 / 4)
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/update_stats()
-	ADD_MULTIPLICATIVE_TRAIT(owner.dna.species, TRAIT_PUNCH_DAMAGE, SOURCE_STATS, adjust_strength(0.6, 1.4))
+	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_STATS, adjust_strength(0.6, 1.4))
