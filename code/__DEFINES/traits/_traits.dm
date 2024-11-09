@@ -126,10 +126,10 @@
 /// 3: The source of the trait
 /// 4: The amount to multiply the trait by
 #define ADD_MULTIPLICATIVE_TRAIT(_target, _trait, _source, _multiplicative_amount) do { \
-		if (!target.status_traits) { \
+		if (!_target.status_traits) { \
 			_target.status_traits = list(); \
 		}; \
-		var/list/_L = target.status_traits; \
+		var/list/_L = _target.status_traits; \
 		var/list/_target_list = _L[_trait];\
 		if (_target_list != null) { \
 			var/datum/trait/value_head/_head = _target_list[1];\
