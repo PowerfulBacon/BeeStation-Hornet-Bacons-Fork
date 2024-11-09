@@ -62,11 +62,11 @@
 /// 3: The source of the trait
 /// 4: The priority of the trait value
 /// 5: The value stored in the trait
-#define ADD_VALUE_TRAIT(target, _trait, source, _trait_value, _trait_priority) do { \
-		if (!target.status_traits) { \
-			target.status_traits = list(); \
+#define ADD_VALUE_TRAIT(_target, _trait, source, _trait_value, _trait_priority) do { \
+		if (!_target.status_traits) { \
+			_target.status_traits = list(); \
 		}; \
-		var/list/_L = target.status_traits; \
+		var/list/_L = _target.status_traits; \
 		var/list/target_heap = _L[_trait];\
 		if (target_heap != null) { \
 			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
@@ -74,8 +74,8 @@
 			target_heap = list(); \
 			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
 			_L[_trait] = target_heap;\
-			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(_trait), _trait); \
-			SEND_SIGNAL(target, SIGNAL_UPDATETRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_ADDTRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
 		} \
 	} while (0)
 
@@ -91,10 +91,10 @@
 /// 3: The source of the trait
 /// 4: The amount to add to the trait
 #define ADD_CUMULATIVE_TRAIT(_target, _trait, _source, _additive_amount) do { \
-		if (!target.status_traits) { \
-			target.status_traits = list(); \
+		if (!_target.status_traits) { \
+			_target.status_traits = list(); \
 		}; \
-		var/list/_L = target.status_traits; \
+		var/list/_L = _target.status_traits; \
 		var/list/_target_list = _L[_trait];\
 		if (_target_list != null) { \
 			var/datum/trait/value_head/_head = _target_list[1];\
@@ -109,8 +109,8 @@
 			_head.add_cum += _additive_amount;\
 			_head.value = _additive_amount;\
 			_target_list += new /datum/trait/add(_source, _additive_amount);\
-			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(_trait), _trait); \
-			SEND_SIGNAL(target, SIGNAL_UPDATETRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_ADDTRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
 		} \
 	} while (0)
 
@@ -127,7 +127,7 @@
 /// 4: The amount to multiply the trait by
 #define ADD_MULTIPLICATIVE_TRAIT(_target, _trait, _source, _multiplicative_amount) do { \
 		if (!target.status_traits) { \
-			target.status_traits = list(); \
+			_target.status_traits = list(); \
 		}; \
 		var/list/_L = target.status_traits; \
 		var/list/_target_list = _L[_trait];\
@@ -144,8 +144,8 @@
 			_head.mult_cum *= _multiplicative_amount;\
 			_head.value = 0;\
 			_target_list += new /datum/trait/multiply(_source, _multiplicative_amount);\
-			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(_trait), _trait); \
-			SEND_SIGNAL(target, SIGNAL_UPDATETRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_ADDTRAIT(_trait), _trait); \
+			SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
 		} \
 	} while (0)
 
