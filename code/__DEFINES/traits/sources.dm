@@ -136,3 +136,5 @@
 
 #define SOURCE_STATS "stats"
 #define SOURCE_CAT_CLAWS "cat_claws"
+#define SOURCE_DAMAGE_SLOWDOWN "damage_slowdown"
+#define SOURCE_BASE_VALUE "items"

@@ -1255,10 +1255,15 @@
 
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = equipped_speed_mods()
-	if(!speedies)
+	// Run it through the multiplier system
+	REMOVE_TRAIT(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_BASE_VALUE)
+	ADD_CUMULATIVE_TRAIT(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_BASE_VALUE, speedies)
+	// Get the final value
+	var/final_modifier = GET_TRAIT_VALUE(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER)
+	if(!final_modifier)
 		remove_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod)
 	else
-		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod, multiplicative_slowdown = speedies)
+		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod, multiplicative_slowdown = final_modifier)
 
 /// Gets the combined speed modification of all worn items
 /// Except base mob type doesnt really wear items

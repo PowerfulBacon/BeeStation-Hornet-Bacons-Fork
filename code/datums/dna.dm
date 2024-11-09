@@ -27,6 +27,7 @@
 		holder = new_holder
 	height_displacement = icon('icons/effects/64x64.dmi', "height_displacement")
 	dna_stats = new()
+	dna_stats.randomise_stats()
 
 /datum/dna/Destroy()
 	if(iscarbon(holder))

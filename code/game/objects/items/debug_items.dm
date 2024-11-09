@@ -303,7 +303,6 @@
 		TRAIT_RADIMMUNE,
 		TRAIT_VIRUSIMMUNE,
 		TRAIT_PIERCEIMMUNE,
-		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_NODISMEMBER,
 		TRAIT_NOLIMBDISABLE,
 		TRAIT_XENO_IMMUNE,
@@ -334,6 +333,7 @@
 	. = ..()
 	for(var/each in traits_to_give)
 		ADD_TRAIT(user, each, "debug")
+	ADD_MULTIPLICATIVE_TRAIT(user, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, "debug", 0)
 	user.grant_all_languages(TRUE, TRUE, TRUE, "debug")
 	user.grant_language(/datum/language/metalanguage, TRUE, TRUE, "debug")
 

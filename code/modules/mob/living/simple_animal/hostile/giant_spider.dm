@@ -110,18 +110,6 @@
 		log_game("[key_name(src)] took control of [name] with the objective: '[spider_antag.spider_team.directive]'.")
 	return TRUE
 
-// Allows spiders to take damage slowdown. 2 max, but they don't start moving slower until under 75% health
-/mob/living/simple_animal/hostile/poison/giant_spider/updatehealth()
-	. = ..()
-	if(HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
-		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
-		return
-	var/health_percentage = round((health / maxHealth) * 100)
-	if(health_percentage <= 75)
-		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, multiplicative_slowdown = ((100 - health_percentage) / 50))
-	else
-		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
-
 // Handles faster movement on webs
 // This is triggered after the first time a spider steps on/off a web, making web-peeking using this harder
 /mob/living/simple_animal/hostile/poison/giant_spider/Moved(atom/oldloc, dir)

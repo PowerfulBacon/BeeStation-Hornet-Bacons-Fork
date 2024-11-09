@@ -1103,13 +1103,13 @@
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	ADD_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	ADD_MULTIPLICATIVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, 0, type)
 
 /datum/reagent/medicine/pumpup/on_mob_end_metabolize(mob/living/L)
 	..()
 	REMOVE_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	REMOVE_TRAIT(L, TRAIT_STUNRESISTANCE, type)
-	REMOVE_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	REMOVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, type)
 
 /datum/reagent/medicine/pumpup/overdose_process(mob/living/M)
 	if(prob(33))

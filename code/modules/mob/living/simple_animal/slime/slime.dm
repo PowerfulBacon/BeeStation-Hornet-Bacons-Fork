@@ -167,18 +167,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/simple_animal/slime)
 	if(amount)
 		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_reagentmod, multiplicative_slowdown = amount)
 
-/mob/living/simple_animal/slime/updatehealth()
-	. = ..()
-	remove_movespeed_modifier(/datum/movespeed_modifier/slime_healthmod)
-	var/health_deficiency = (100 - health)
-	var/mod = 0
-	if(!HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
-		if(health_deficiency >= 45)
-			mod += (health_deficiency / 25)
-		if(health <= 0)
-			mod += 2
-	add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_healthmod, multiplicative_slowdown = mod)
-
 /mob/living/simple_animal/slime/update_health_hud()
 	if(hud_used)
 		var/severity = 0

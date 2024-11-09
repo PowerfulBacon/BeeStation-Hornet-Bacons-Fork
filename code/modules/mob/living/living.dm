@@ -640,6 +640,17 @@
 	med_hud_set_health()
 	med_hud_set_status()
 	SEND_SIGNAL(src, COMSIG_LIVING_UPDATE_HEALTH)
+	var/health_deficiency = max((maxHealth - health), staminaloss)
+	// Set the base slowdown
+	REMOVE_TRAIT(src, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, SOURCE_DAMAGE_SLOWDOWN)
+	ADD_CUMULATIVE_TRAIT(src, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, SOURCE_DAMAGE_SLOWDOWN, health_deficiency / 75)
+	var/cumulative_slowdown = GET_TRAIT_VALUE(src, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER)
+	if(health_deficiency >= 40 && cumulative_slowdown != 0)
+		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, TRUE, multiplicative_slowdown = cumulative_slowdown)
+		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying, TRUE, multiplicative_slowdown = cumulative_slowdown)
+	else
+		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
+		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying)
 
 //proc used to ressuscitate a mob
 /mob/living/proc/revive(full_heal = FALSE, admin_revive = FALSE)

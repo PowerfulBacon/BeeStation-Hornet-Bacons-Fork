@@ -292,7 +292,7 @@
 	..()
 	ADD_TRAIT(L, TRAIT_STUNIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
-	ADD_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	ADD_MULTIPLICATIVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, 0, type)
 	ADD_TRAIT(L, TRAIT_NOSTAMCRIT, type)
 	ADD_TRAIT(L, TRAIT_NOLIMBDISABLE, type)
 	ADD_TRAIT(L, TRAIT_NOBLOCK, type)
@@ -303,7 +303,7 @@
 /datum/reagent/drug/bath_salts/on_mob_end_metabolize(mob/living/L)
 	REMOVE_TRAIT(L, TRAIT_STUNIMMUNE, type)
 	REMOVE_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
-	REMOVE_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	REMOVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, type)
 	REMOVE_TRAIT(L, TRAIT_NOSTAMCRIT, type)
 	REMOVE_TRAIT(L, TRAIT_NOLIMBDISABLE, type)
 	REMOVE_TRAIT(L, TRAIT_NOBLOCK, type)
@@ -500,11 +500,11 @@
 	overdose_threshold = 16
 
 /datum/reagent/drug/ketamine/on_mob_metabolize(mob/living/L)
-	ADD_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	ADD_MULTIPLICATIVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, 0, type)
 	. = ..()
 
 /datum/reagent/drug/ketamine/on_mob_delete(mob/living/L)
-	REMOVE_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	REMOVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, type)
 	. = ..()
 
 /datum/reagent/drug/ketamine/on_mob_life(mob/living/carbon/M)
@@ -534,8 +534,7 @@
 	M.hallucination += 10
 	//Uh Oh Someone is tired
 	if(prob(40))
-		if(HAS_TRAIT(M, TRAIT_IGNOREDAMAGESLOWDOWN))
-			REMOVE_TRAIT(M, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+		REMOVE_TRAIT(M, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, type)
 		if(prob(33))
 			to_chat(M, "<span class='warning'>Your limbs begin to feel heavy...</span>")
 		else if(prob(33))

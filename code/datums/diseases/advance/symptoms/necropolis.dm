@@ -58,7 +58,7 @@
 		if(5)
 			if(tendrils)
 				tendril(A)
-			ADD_TRAIT(M, TRAIT_PUNCH_DAMAGE, DISEASE_TRAIT, 5)
+			ADD_CUMULATIVE_TRAIT(M, TRAIT_PUNCH_DAMAGE, DISEASE_TRAIT, 5)
 			M.dna.species.brutemod = min(0.6, M.dna.species.brutemod)
 			M.dna.species.burnmod = min(0.6, M.dna.species.burnmod)
 			M.dna.species.heatmod = min(0.6, M.dna.species.heatmod)

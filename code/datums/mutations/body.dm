@@ -417,7 +417,7 @@
 	if(..())
 		return
 	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)) - GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)
-	ADD_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)
+	ADD_CUMULATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)
 	owner.dna.species.attack_verb = "slash"
 	owner.dna.species.attack_sound = 'sound/weapons/slash.ogg'
 	owner.dna.species.miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -436,4 +436,4 @@
 	..()
 	REMOVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS)
 	added_damage = min(17, initial(added_damage) * GET_MUTATION_POWER(src) + GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)) - GET_TRAIT_VALUE(owner, TRAIT_PUNCH_DAMAGE)
-	ADD_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)
+	ADD_CUMULATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_CAT_CLAWS, added_damage)

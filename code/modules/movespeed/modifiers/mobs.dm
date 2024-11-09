@@ -44,9 +44,6 @@
 /datum/movespeed_modifier/slime_reagentmod
 	variable = TRUE
 
-/datum/movespeed_modifier/slime_healthmod
-	variable = TRUE
-
 /datum/movespeed_modifier/config_walk_run
 	multiplicative_slowdown = 1
 	id = MOVESPEED_ID_MOB_WALK_RUN

@@ -48,7 +48,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DISCOORDINATED	"discoordinated" //sets IsAdvancedToolUser to FALSE on humans and monkies
 #define TRAIT_PACIFISM			"pacifism"
 #define TRAIT_IGNORESLOWDOWN	"ignoreslow"
-#define TRAIT_IGNOREDAMAGESLOWDOWN "ignoredamageslowdown"
+#define TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER "damageslowdownmultiplier"	// Multiplies the damage slowdown
+#define TRAIT_ITEM_SLOWDOWN_MULTIPLIER "itemslowdownmultiplier" // Multiplier to item slowdowns
 #define TRAIT_DEATHCOMA			"deathcoma" //Causes death-like unconsciousness
 #define TRAIT_REGEN_COMA		"regencoma"
 #define TRAIT_FAKEDEATH			"fakedeath" //Makes the owner appear as dead to most forms of medical examination
