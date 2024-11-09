@@ -46,6 +46,7 @@
 #define TRAIT_RUSTY "rust_trait"
 #define ACTION_TRAIT "action_trait"
 #define TURF_TRAIT "turf"
+#define SOURCE_STATS "stats"
 
 // unique trait sources, still defines
 #define CLONING_POD_TRAIT "cloning-pod"

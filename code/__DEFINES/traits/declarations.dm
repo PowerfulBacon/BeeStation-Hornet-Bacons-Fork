@@ -314,4 +314,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// For unit testing, all do_afters set on this mob complete instantly and do not sleep
 #define INSTANT_DO_AFTER "instant_do_after"
 
+// Punch damage
+#define TRAIT_PUNCH_DAMAGE "punch_damage"
+
 // END TRAIT DEFINES

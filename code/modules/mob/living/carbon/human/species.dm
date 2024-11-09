@@ -59,7 +59,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/toxmod = 1
 	var/staminamod = 1		// multiplier for stun duration
 	var/attack_type = BRUTE //Type of damage attack does
-	VAR_PRIVATE/punchdamage = 7      //highest possible punch damage
+	VAR_PROTECTED/punchdamage = 7      //highest possible punch damage
 	var/siemens_coeff = 1 //base electrocution coefficient
 	var/damage_overlay_type = "human" //what kind of damage overlays (if any) appear on our species when wounded?
 	var/fixed_mut_color = "" //to use MUTCOLOR with a fixed color that's independent of dna.feature["mcolor"]
@@ -166,6 +166,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /datum/species/New()
 	if(!plural_form)
 		plural_form = "[name]\s"
+	// Set the base punch damage
+	ADD_CUMULATIVE_TRAIT(src, TRAIT_PUNCH_DAMAGE, SPECIES_TRAIT, punchdamage)
 	return ..()
 
 /// Gets a list of all species available to choose in roundstart.

@@ -57,7 +57,6 @@
 	destination.dna.real_name = real_name
 	destination.dna.temporary_mutations = temporary_mutations.Copy()
 	destination.dna.dna_stats = dna_stats.copy()
-	destination.stats.update_from_dna(destination.dna)
 	if(transfer_SE)
 		destination.dna.mutation_index = mutation_index
 		destination.dna.default_mutation_genes = default_mutation_genes
