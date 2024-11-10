@@ -13,9 +13,6 @@
 	src.source = source
 	src.value = value
 
-/datum/trait/proc/operator~=(b)
-	return source == b
-
 /datum/trait/priority
 	/// The priority of this value trait, or null if there is no value
 	var/priority
@@ -161,8 +158,8 @@
 				} \
 			}\
 		} else if (istype(_cached_source, /datum/trait/priority)) { \
-			for (var/_trait_datum in _trait_list) { \
-				var/_T = _trait_datum:source;\
+			for (var/datum/trait/_trait_datum as anything in _trait_list) { \
+				var/_T = _trait_datum.source;\
 				if (##_condition) { \
 					REMOVE_HEAP(_trait_list, _trait_datum, priority); \
 					if (length(_trait_list) && _trait_list[1] != _cached_source) {\
@@ -173,31 +170,33 @@
 		} else if (istype(_cached_source, /datum/trait/value_head)) { \
 			var/_changed = FALSE;\
 			for (var/__i = length(_trait_list); __i >= 2; __i--) {\
-				var/_trait_datum = _trait_list[__i]; \
-				var/_T = _trait_datum:source;\
+				var/datum/trait/_trait_datum = _trait_list[__i]; \
+				var/_T = _trait_datum.source;\
 				if (##_condition) { \
 					_trait_list -= _trait_datum;\
 					_changed = TRUE;\
 				} \
 			} /* We have to perform a full recalculation as infinity and 0 lose precision */ \
 			if (_changed) {\
-				_trait_list[1]:add_cum = 0;\
-				_trait_list[1]:mult_cum = 1;\
+				var/datum/trait/value_head/value_head = _trait_list[1];\
+				value_head.add_cum = 0;\
+				value_head.mult_cum = 1;\
 				for (var/__j = 2; __j <= length(_trait_list); __j++) {\
+					var/datum/trait/scanned_trait = _trait_list[__j];\
 					if (istype(_trait_list[__j], /datum/trait/add)) {\
-						_trait_list[1]:add_cum += _trait_list[__j]:value;\
+						value_head.add_cum += scanned_trait.value;\
 					} else {\
-						_trait_list[1]:mult_cum *= _trait_list[__j]:value;\
+						value_head.mult_cum *= scanned_trait.value;\
 					}\
 				}\
-				_trait_list[1]:value = _trait_list[1]:add_cum * _trait_list[1]:mult_cum;\
+				value_head.value = value_head.add_cum * value_head.mult_cum;\
 				SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
 			}\
 			if (length(_trait_list) == 1) {\
 				_trait_list.Cut();\
 			}\
 		} else { \
-			stack_trace("Invalid trait type found in trait list, [_cached_source] ([isdatum(_cached_source) && _cached_source:type])"); \
+			stack_trace("Invalid trait type found in trait list, [_cached_source]"); \
 		} \
 	}
 
@@ -213,7 +212,7 @@
 		}; \
 		if (_L && _L[_trait]) { \
 			var/list/_heap = _L[_trait];\
-			REMOVE_TRAIT_IF(_target, _trait, _heap, (!_S && (!(_T ~= ROUNDSTART_TRAIT))) || (_T in _S)); \
+			REMOVE_TRAIT_IF(_target, _trait, _heap, (!_S && (_T != ROUNDSTART_TRAIT)) || (_T in _S)); \
 			if (!length(_heap)) { \
 				_L -= _trait; \
 				SEND_SIGNAL(_target, SIGNAL_REMOVETRAIT(_trait), _trait); \
@@ -237,7 +236,7 @@
 		}; \
 		if (_L && _L[_trait]) { \
 			var/list/_heap = _L[_trait];\
-			REMOVE_TRAIT_IF(_target, _trait, _heap, !((istype(_T, /datum/trait/priority) ? _T:source : _T) in _sources_list)); \
+			REMOVE_TRAIT_IF(_target, _trait, _heap, !(_T in _S)); \
 			if (!length(_heap)) { \
 				_L -= _trait; \
 				SEND_SIGNAL(_target, SIGNAL_REMOVETRAIT(_trait), _trait); \
@@ -258,7 +257,7 @@
 		if (_L) { \
 			for (var/_trait_key as anything in _L) { \
 				var/list/_heap = _L[_trait_key];\
-				REMOVE_TRAIT_IF(_target, _trait_key, _heap, !((istype(_T, /datum/trait/priority) ? _T:source : _T) in _sources_list)); \
+				REMOVE_TRAIT_IF(_target, _trait_key, _heap, !(_T in _sources_list)); \
 				if (!length(_heap)) { \
 					_L -= _trait_key; \
 					SEND_SIGNAL(_target, SIGNAL_REMOVETRAIT(_trait_key), _trait_key); \
@@ -279,7 +278,7 @@
 		if (_L) { \
 			for (var/_trait_key as anything in _L) { \
 				var/list/_heap = _L[_trait_key];\
-				REMOVE_TRAIT_IF(_target, _trait_key, _heap, ((istype(_T, /datum/trait/priority) ? _T:source : _T) in _sources_list)); \
+				REMOVE_TRAIT_IF(_target, _trait_key, _heap, (_T in _sources_list)); \
 				if (!length(_heap)) { \
 					_L -= _trait_key; \
 					SEND_SIGNAL(_target, SIGNAL_REMOVETRAIT(_trait_key), _trait_key); \
@@ -304,9 +303,11 @@
 /// Slightly slower than HAS_TRAIT and should be avoided when proc-overhead matters (roughly >1000 calls per second)
 #define HAS_TRAIT_NOT_FROM(target, trait, source) has_trait_not_from(target, trait, source)
 
+GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
+
 // Note: a?:b is used because : alone breaks the terniary operator
 /// Get the value of the specified trait
-#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]) ? (target.status_traits[trait][1]?:value) : null) : null)
+#define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]) ? ((GLOB._trait_located = target.status_traits[trait][1]) && GLOB._trait_located.value) : null) : null)
 
 /proc/has_trait_not_from(datum/target, trait, source)
 	var/list/heap
