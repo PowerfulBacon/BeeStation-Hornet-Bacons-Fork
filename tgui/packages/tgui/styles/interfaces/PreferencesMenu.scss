@@ -340,4 +340,21 @@
       }
     }
   }
+
+  &__Skills {
+    &__SkillsBox {
+      background-color: colors.$light-grey;
+      height: calc(100vh - 150px);
+    }
+
+    &__SkillsIcon {
+      background-color: colors.$white;
+      border: 1px solid black;
+      color: #111;
+      text-align: center;
+      height: 10%;
+      padding-top: 5px;
+      font-size: 300%;
+    }
+  }
 }
