@@ -95,15 +95,6 @@
 	)
 	H.equip_in_one_of_slots(B, slots , qdel_on_fail = TRUE)
 
-/datum/quirk/linguist
-	name = "Linguist"
-	desc = "Although you don't know every language, your intense interest in languages allows you to recognise the features of most languages."
-	icon = "language"
-	value = 1
-	mob_trait = TRAIT_LINGUIST
-	gain_text = "<span class='notice'>You can recognise the linguistic features of every language.</span>"
-	lose_text = "<span class='danger'>You can no longer recognise linguistic features for each language.</span>"
-
 /datum/quirk/multilingual
 	name = "Multilingual"
 	desc = "You spent a portion of your life learning to understand an additional language. You may or may not be able to speak it based on your anatomy."
@@ -178,20 +169,6 @@
 	)
 	H.equip_in_one_of_slots(camera, camera_slots , qdel_on_fail = TRUE)
 	H.regenerate_icons()
-
-/datum/quirk/selfaware
-	name = "Self-Aware"
-	desc = "You know your body well, and can accurately assess the extent of your wounds."
-	icon = "bone"
-	value = 2
-	mob_trait = TRAIT_SELF_AWARE
-
-/datum/quirk/skittish
-	name = "Skittish"
-	desc = "You can conceal yourself in danger. Ctrl-shift-click a closed locker to jump into it, as long as you have access."
-	icon = "trash"
-	value = 2
-	mob_trait = TRAIT_SKITTISH
 
 /datum/quirk/spiritual
 	name = "Spiritual"

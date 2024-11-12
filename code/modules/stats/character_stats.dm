@@ -2,15 +2,15 @@
 	/// Affects item slowdown, punch, melee combat and combat arts
 	/// Value between 1 and 5
 	/// Transfers based on DNA
-	VAR_PRIVATE/strength = 3
+	var/strength = 3
 	/// Affects base movement speed
 	/// Value between 1 and 5
 	/// Transfers based on DNA
-	VAR_PRIVATE/agility = 3
+	var/agility = 3
 	/// Affects stamina resistance and health before crit
 	/// Value between 1 and 5
 	/// Transfers based on DNA
-	VAR_PRIVATE/resilience = 3
+	var/resilience = 3
 
 /datum/character_stats/dna/proc/copy()
 	var/datum/character_stats/dna/stats = new()
@@ -36,15 +36,15 @@
 	/// Affects gun accuracy and action speed for items performed with hands
 	/// Value between 1 and 5
 	/// Transfers based on the mind
-	VAR_PRIVATE/coordination = 3
+	var/coordination = 3
 	/// Affects hackability, unlocks unique and powerful crafting recipes
 	/// Value between 1 and 5
 	/// Transfers based on the mind
-	VAR_PRIVATE/intelligence = 3
+	var/intelligence = 3
 	/// Affects RNG from random roles
 	/// Value between 1 and 5
 	/// Transfers based on the mind
-	VAR_PRIVATE/luck = 3
+	var/luck = 3
 
 /datum/character_stats/mind/proc/copy()
 	var/datum/character_stats/mind/stats = new()
@@ -70,6 +70,8 @@
 /// all over the place for them
 /datum/character_stats/character
 	var/mob/living/carbon/owner
+	// State
+	var/_steps = 0
 
 /// Proxy type that collates stats from DNA and mind
 /datum/character_stats/character/New(mob/living/carbon/owner)
@@ -83,25 +85,36 @@
 	owner = null
 
 /datum/character_stats/character/proc/adjust_strength(minimum, maximum)
-	var/proportion = CLAMP01((UNLINT(owner.dna.dna_stats.strength) - 1) / 4)
+	var/proportion = CLAMP01((owner.dna.dna_stats.strength - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/update_stats()
 	REMOVE_TRAITS_IN(owner, SOURCE_STATS)
+	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 	// === DNA Stats ===
 	// Strength stat modifications
 	if (owner.dna)
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_STATS, adjust_strength(0.6, 1.4))
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_STATS, adjust_strength(1.5, 0.5))
+		if (owner.dna.dna_stats.agility >= 4)
+			ADD_TRAIT(owner, TRAIT_SKITTISH, SOURCE_STATS)
+		if (owner.dna.dna_stats.strength >= 5)
+			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(intercept_movement))
 	// === Mind Stats ===
+	if (owner.mind)
+		if (owner.mind.mind_stats.intelligence >= 4)
+			ADD_TRAIT(owner, TRAIT_LINGUIST, SOURCE_STATS)
+			ADD_TRAIT(owner, TRAIT_SELF_AWARE, SOURCE_STATS)
 
 /datum/character_stats/character/proc/intercept_examine(mob/living/source, mob/living/carbon/user, list/examine_list)
 	SIGNAL_HANDLER
 	if (!istype(user))
 		return
 	// Higher values = you are stronger
-	var/strength_diff = UNLINT(user.dna.dna_stats.strength) - UNLINT(owner.dna.dna_stats.strength)
+	var/strength_diff = user.dna.dna_stats.strength - owner.dna.dna_stats.strength
 	switch (strength_diff)
+		if (0)
+			examine_list += "[owner.p_they()] look[owner.p_s()] roughly similar in strength to you."
 		if (1 to 2)
 			examine_list += "[owner.p_they()] look[owner.p_s()] weaker than you."
 		if (3 to 4)
@@ -110,3 +123,12 @@
 			examine_list += "[owner.p_they()] look[owner.p_s()] stronger than you."
 		if (-4 to -3)
 			examine_list += "[owner.p_they()] look[owner.p_s()] significantly stronger than you."
+
+/datum/character_stats/character/proc/intercept_movement(mob/living/source, atom/oldLoc, forced)
+	SIGNAL_HANDLER
+	if (_steps++%2 != 0)
+		return
+	for (var/mob/living/carbon/other in range(3, source))
+		if (other.dna?.dna_stats.strength <= 2)
+			shake_camera(other, 0.5 SECONDS, 0.5)
+	playsound(source, 'sound/effects/meteorimpact.ogg', 20, TRUE, extrarange=SHORT_RANGE_SOUND_EXTRARANGE)
