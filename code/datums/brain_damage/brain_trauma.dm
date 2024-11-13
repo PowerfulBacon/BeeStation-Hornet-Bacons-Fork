@@ -40,14 +40,14 @@
 
 //Called when given to a mob
 /datum/brain_trauma/proc/on_gain()
-	owner.show_danger_message(gain_text)
+	owner.show_danger_status_message(gain_text)
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(owner, COMSIG_MOVABLE_HEAR, PROC_REF(handle_hearing))
 
 //Called when removed from a mob
 /datum/brain_trauma/proc/on_lose(silent)
 	if(!silent)
-		owner.show_danger_message(lose_text)
+		owner.show_danger_status_message(lose_text)
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
 

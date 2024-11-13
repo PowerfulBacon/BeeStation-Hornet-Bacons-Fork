@@ -88,7 +88,7 @@
 
 
 	victim.visible_message("<span class='warning'>[living_pawn] starts trying to take [target] from [victim]!</span>")
-	victim.show_danger_message("[living_pawn] tries to take your [target]!")
+	victim.show_danger_status_message("[living_pawn] tries to take your [target]!")
 
 	controller.blackboard[BB_MONKEY_PICKPOCKETING] = TRUE
 
@@ -99,7 +99,7 @@
 		for(var/obj/item/I in victim.held_items)
 			if(I == target)
 				victim.visible_message("<span class='danger'>[living_pawn] snatches [target] from [victim].</span>")
-				victim.show_danger_message("[living_pawn] snatched [target] from you!")
+				victim.show_danger_status_message("[living_pawn] snatched [target] from you!")
 				if(victim.temporarilyRemoveItemFromInventory(target))
 					if(!QDELETED(target) && !equip_item(controller))
 						target.forceMove(living_pawn.drop_location())
@@ -107,7 +107,7 @@
 						break
 				else
 					victim.visible_message("<span class='danger'>[living_pawn] tried to snatch [target] from [victim], but failed!</span>")
-					victim.show_danger_message("[living_pawn] tried to grab [target]!")
+					victim.show_danger_status_message("[living_pawn] tried to grab [target]!")
 
 	finish_action(controller, success) //We either fucked up or got the item.
 

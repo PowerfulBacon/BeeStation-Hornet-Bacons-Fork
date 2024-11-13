@@ -663,7 +663,7 @@
 					var/obj/item/organ/O = pick(elligible_organs)
 					O.Remove(src)
 					visible_message("<span class='danger'>[src] vomits up [p_their()] [O.name]!</span>") //no "vomit up your the heart"
-					show_danger_message("You vomit up your [O.name]!")
+					show_danger_status_message("You vomit up your [O.name]!")
 					O.forceMove(drop_location())
 					if(prob(20))
 						O.animate_atom_living()
