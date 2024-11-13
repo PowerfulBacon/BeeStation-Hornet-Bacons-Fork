@@ -1255,11 +1255,8 @@
 
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = equipped_speed_mods()
-	// Run it through the multiplier system
-	REMOVE_TRAIT(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_BASE_VALUE)
-	ADD_CUMULATIVE_TRAIT(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_BASE_VALUE, speedies)
 	// Get the final value
-	var/final_modifier = GET_TRAIT_VALUE(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER)
+	var/final_modifier = SET_BASE_AND_READ(src, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, speedies)
 	if(!final_modifier)
 		remove_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod)
 	else

@@ -309,6 +309,14 @@ GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
 /// Get the value of the specified trait
 #define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]) ? ((GLOB._trait_located = target.status_traits[trait][1]) && GLOB._trait_located.value) : null) : null)
 
+#define SET_BASE_AND_READ(target, trait, default) (target.status_traits ? (length(target.status_traits[trait]) ? (_trait_set_default(target, trait, default)) : default) : default)
+
+/proc/_trait_set_default(atom/target, trait, default)
+	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
+	ADD_CUMULATIVE_TRAIT(target, trait, SOURCE_BASE_VALUE, default)
+	. = GET_TRAIT_VALUE(target, trait)
+	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
+
 /proc/has_trait_not_from(datum/target, trait, source)
 	var/list/heap
 	if ((heap = target.status_traits[trait]) == null)
