@@ -2,7 +2,7 @@
 	name = "Epistemania"
 	desc = "Patient suffers from a manic pursuit of knowlewdge."
 	scan_desc = "epistemania"
-	gain_text = "<span class='notice'>Requesting mentor...</span>"
+	gain_text = "Requesting mentor..."
 	lose_text = ""
 	resilience = TRAUMA_RESILIENCE_ABSOLUTE
 	trauma_flags = TRAUMA_DEFAULT_FLAGS | TRAUMA_NOT_RANDOM | TRAUMA_SPECIAL_CURE_PROOF

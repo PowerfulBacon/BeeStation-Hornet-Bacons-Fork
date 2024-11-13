@@ -5,7 +5,7 @@
 	desc = "Patient has a subtype of delusional disorder, becoming irrationally attached to someone."
 	scan_desc = "monophobia"
 	gain_text = "If you see this message, make a github issue report. The trauma initialized wrong."
-	lose_text = "<span class='warning'>The voices in your head fall silent.</span>"
+	lose_text = "The voices in your head fall silent."
 	can_gain = TRUE
 	trauma_flags = TRAUMA_DEFAULT_FLAGS | TRAUMA_NOT_RANDOM | TRAUMA_SPECIAL_CURE_PROOF
 	resilience = TRAUMA_RESILIENCE_LOBOTOMY
@@ -34,7 +34,7 @@
 			qdel(src)
 			return
 	RegisterSignal(obsession, COMSIG_MIND_CRYOED, PROC_REF(on_obsession_cryoed))
-	gain_text = "<span class='warning'>You hear a sickening, raspy voice in your head. It wants one small task of you...</span>"
+	gain_text = "You hear a sickening, raspy voice in your head. It wants one small task of you..."
 	antagonist = owner.mind.add_antag_datum(new /datum/antagonist/obsessed(src))
 	..()
 	//antag stuff//

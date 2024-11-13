@@ -9,8 +9,8 @@
 	name = "Phobia"
 	desc = "Patient is unreasonably afraid of something."
 	scan_desc = "phobia"
-	gain_text = "<span class='warning'>You start finding default values very unnerving...</span>"
-	lose_text = "<span class='notice'>You no longer feel afraid of default values.</span>"
+	gain_text = "You start finding default values very unnerving..."
+	lose_text = "You no longer feel afraid of default values."
 	var/phobia_type
 	var/next_check = 0
 	var/fearscore = 0
@@ -37,8 +37,8 @@
 
 	faint_length=300
 	cooldown_length=faint_length*2  //Has to be at least faint_length, else it practically doesnt do anything
-	gain_text = "<span class='warning'>You start finding [phobia_type] very unnerving...</span>"
-	lose_text = "<span class='notice'>You no longer feel afraid of [phobia_type].</span>"
+	gain_text = "You start finding [phobia_type] very unnerving..."
+	lose_text = "You no longer feel afraid of [phobia_type]."
 	scan_desc += " of [phobia_type]"
 	trigger_words = SStraumas.phobia_words[phobia_type]
 	trigger_mobs = SStraumas.phobia_mobs[phobia_type]

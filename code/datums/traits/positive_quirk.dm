@@ -7,7 +7,7 @@
 	icon = "beer"
 	value = 1
 	mob_trait = TRAIT_ALCOHOL_TOLERANCE
-	gain_text = "<span class='notice'>You feel like you could drink a whole keg!</span>"
+	gain_text = "You feel like you could drink a whole keg!"
 	lose_text = "<span class='danger'>You don't feel as resistant to alcohol anymore. Somehow.</span>"
 
 /datum/quirk/apathetic
@@ -23,7 +23,7 @@
 	icon = "wine-bottle"
 	value = 2
 	mob_trait = TRAIT_DRUNK_HEALING
-	gain_text = "<span class='notice'>You feel like a drink would do you good.</span>"
+	gain_text = "You feel like a drink would do you good."
 	lose_text = "<span class='danger'>You no longer feel like drinking would ease your pain.</span>"
 	medical_record_text = "Patient has unusually efficient liver metabolism and can slowly regenerate wounds by drinking alcoholic beverages."
 
@@ -33,7 +33,7 @@
 	icon = "smile-beam"
 	value = 2
 	mob_trait = TRAIT_EMPATH
-	gain_text = "<span class='notice'>You feel in tune with those around you.</span>"
+	gain_text = "You feel in tune with those around you."
 	lose_text = "<span class='danger'>You feel isolated from others.</span>"
 
 /datum/quirk/freerunning
@@ -42,7 +42,7 @@
 	icon = "running"
 	value = 2
 	mob_trait = TRAIT_FREERUNNING
-	gain_text = "<span class='notice'>You feel lithe on your feet!</span>"
+	gain_text = "You feel lithe on your feet!"
 	lose_text = "<span class='danger'>You feel clumsy again.</span>"
 
 /datum/quirk/friendly
@@ -51,7 +51,7 @@
 	icon = "hands-helping"
 	value = 1
 	mob_trait = TRAIT_FRIENDLY
-	gain_text = "<span class='notice'>You want to hug someone.</span>"
+	gain_text = "You want to hug someone."
 	lose_text = "<span class='danger'>You no longer feel compelled to hug others.</span>"
 	mood_quirk = TRUE
 
@@ -74,7 +74,7 @@
 	icon = "shoe-prints"
 	value = 1
 	mob_trait = TRAIT_LIGHT_STEP
-	gain_text = "<span class='notice'>You walk with a little more litheness.</span>"
+	gain_text = "You walk with a little more litheness."
 	lose_text = "<span class='danger'>You start tromping around like a barbarian.</span>"
 
 /datum/quirk/musician
@@ -83,7 +83,7 @@
 	icon = "guitar"
 	value = 1
 	mob_trait = TRAIT_MUSICIAN
-	gain_text = "<span class='notice'>You know everything about musical instruments.</span>"
+	gain_text = "You know everything about musical instruments."
 	lose_text = "<span class='danger'>You forget how musical instruments work.</span>"
 
 /datum/quirk/musician/on_spawn()
@@ -101,7 +101,7 @@
 	icon = "language"
 	value = 1
 	mob_trait = TRAIT_LINGUIST
-	gain_text = "<span class='notice'>You can recognise the linguistic features of every language.</span>"
+	gain_text = "You can recognise the linguistic features of every language."
 	lose_text = "<span class='danger'>You can no longer recognise linguistic features for each language.</span>"
 
 /datum/quirk/multilingual
@@ -110,7 +110,7 @@
 	icon = "comments"
 	value = 1
 	mob_trait = TRAIT_MULTILINGUAL
-	gain_text = "<span class='notice'>You have learned to understand an additional language.</span>"
+	gain_text = "You have learned to understand an additional language."
 	lose_text = "<span class='danger'>You have forgotten how to understand a language.</span>"
 	var/datum/language/known_language
 
@@ -147,7 +147,7 @@
 	icon = "eye"
 	value = 1
 	mob_trait = TRAIT_NIGHT_VISION
-	gain_text = "<span class='notice'>The shadows seem a little less dark.</span>"
+	gain_text = "The shadows seem a little less dark."
 	lose_text = "<span class='danger'>Everything seems a little darker.</span>"
 
 /datum/quirk/night_vision/on_spawn()
@@ -163,7 +163,7 @@
 	icon = "camera"
 	value = 1
 	mob_trait = TRAIT_PHOTOGRAPHER
-	gain_text = "<span class='notice'>You know everything about photography.</span>"
+	gain_text = "You know everything about photography."
 	lose_text = "<span class='danger'>You forget how photo cameras work.</span>"
 
 /datum/quirk/photographer/on_spawn()
@@ -199,7 +199,7 @@
 	icon = "bible"
 	value = 1
 	mob_trait = TRAIT_SPIRITUAL
-	gain_text = "<span class='notice'>You have faith in a higher power.</span>"
+	gain_text = "You have faith in a higher power."
 	lose_text = "<span class='danger'>You lose faith!</span>"
 	process = TRUE
 
@@ -225,7 +225,7 @@
 	icon = "spray-can"
 	value = 1
 	mob_trait = TRAIT_TAGGER
-	gain_text = "<span class='notice'>You know how to tag walls efficiently.</span>"
+	gain_text = "You know how to tag walls efficiently."
 	lose_text = "<span class='danger'>You forget how to tag walls properly.</span>"
 
 /datum/quirk/tagger/on_spawn()
@@ -241,7 +241,7 @@
 	icon = "drumstick-bite"
 	value = 1
 	mob_trait = TRAIT_VORACIOUS
-	gain_text = "<span class='notice'>You feel HONGRY.</span>"
+	gain_text = "You feel HONGRY."
 	lose_text = "<span class='danger'>You no longer feel HONGRY.</span>"
 
 /datum/quirk/neet
@@ -250,7 +250,7 @@
 	icon = "money-check-alt"
 	value = 1
 	mob_trait = TRAIT_NEET
-	gain_text = "<span class='notice'>You feel useless to society.</span>"
+	gain_text = "You feel useless to society."
 	lose_text = "<span class='danger'>You no longer feel useless to society.</span>"
 	mood_quirk = TRUE
 	process = TRUE
@@ -268,7 +268,7 @@
 	icon = "hand-middle-finger"
 	value = 2
 	mob_trait = TRAIT_PROSKATER
-	gain_text = "<span class='notice'>You feel like hitting a sick grind!</span>"
+	gain_text = "You feel like hitting a sick grind!"
 	lose_text = "<span class='danger'>You no longer feel like you're in touch with the youth.</span>"
 
 /datum/quirk/proskater/on_spawn()
@@ -281,7 +281,7 @@
 	icon = "heart"
 	value = 1
 	mob_trait = TRAIT_PLUSHIELOVER
-	gain_text = "<span class='notice'>You can't wait to hug a plushie!.</span>"
+	gain_text = "You can't wait to hug a plushie!."
 	lose_text = "<span class='danger'>You don't feel that passion for plushies anymore.</span>"
 
 /datum/quirk/plushielover/on_spawn()

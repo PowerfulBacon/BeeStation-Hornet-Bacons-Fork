@@ -7,7 +7,7 @@
 	name = "Godwoken Syndrome"
 	desc = "Patient occasionally and uncontrollably channels an eldritch god when speaking."
 	scan_desc = "god delusion"
-	gain_text = "<span class='notice'>You feel a higher power inside your mind...</span>"
+	gain_text = "You feel a higher power inside your mind..."
 	lose_text = "<span class='warning'>The divine presence leaves your head, no longer interested.</span>"
 
 /datum/brain_trauma/special/godwoken/on_life()
@@ -53,7 +53,7 @@
 	name = "Spiritual Connection"
 	desc = "Patient claims to receive impulses from the supernatural that they feel compelled to follow."
 	scan_desc = "spiritual involuntary muscle contraction"
-	gain_text = "<span class='notice'>You hear voices in your head, speaking of different directions...</span>"
+	gain_text = "You hear voices in your head, speaking of different directions..."
 	lose_text = "<span class='warning'>The voices in your head fade into silence.</span>"
 
 /datum/brain_trauma/special/ghost_control/on_gain()
@@ -75,7 +75,7 @@
 	name = "Bluespace Prophecy"
 	desc = "Patient can sense the bob and weave of bluespace around them, showing them passageways no one else can see."
 	scan_desc = "bluespace attunement"
-	gain_text = "<span class='notice'>You feel the bluespace pulsing around you...</span>"
+	gain_text = "You feel the bluespace pulsing around you..."
 	lose_text = "<span class='warning'>The faint pulsing of bluespace fades into silence.</span>"
 	var/next_portal = 0
 
@@ -166,7 +166,7 @@
 	desc = "Patient's brain is stuck in a functional near-death state, causing occasional moments of lucid hallucinations, which are often interpreted as the voices of the dead."
 	scan_desc = "chronic functional necrosis"
 	gain_text = "<span class='warning'>You feel dead inside.</span>"
-	lose_text = "<span class='notice'>You feel alive again.</span>"
+	gain_text = "You feel alive again."
 	var/active = FALSE
 
 /datum/brain_trauma/special/death_whispers/on_life()
@@ -193,7 +193,7 @@
 	desc = "Patient seems to be a criminal."
 	scan_desc = "criminal mind"
 	gain_text = "<span class='warning'>Justice is coming for you.</span>"
-	lose_text = "<span class='notice'>You were absolved for your crimes.</span>"
+	gain_text = "You were absolved for your crimes."
 	trauma_flags = TRAUMA_NOT_RANDOM
 	var/obj/effect/hallucination/simple/securitron/beepsky
 

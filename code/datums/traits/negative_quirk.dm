@@ -7,7 +7,7 @@
 	value = -2
 	mood_quirk = TRUE
 	gain_text = "<span class='danger'>Your back REALLY hurts!</span>"
-	lose_text = "<span class='notice'>Your back feels better.</span>"
+	gain_text = "Your back feels better."
 	process = TRUE
 
 /datum/quirk/badback/on_process()
@@ -23,7 +23,7 @@
 	icon = "tint"
 	value = -2
 	gain_text = "<span class='danger'>You feel your vigor slowly fading away.</span>"
-	lose_text = "<span class='notice'>You feel vigorous again.</span>"
+	gain_text = "You feel vigorous again."
 	medical_record_text = "Patient requires regular treatment for blood loss due to low production of blood."
 	process = TRUE
 
@@ -40,7 +40,7 @@
 	icon = "eye-slash"
 	value = -4
 	gain_text = "<span class='danger'>You can't see anything.</span>"
-	lose_text = "<span class='notice'>You miraculously gain back your vision.</span>"
+	gain_text = "You miraculously gain back your vision."
 	medical_record_text = "Subject has permanent blindness."
 
 /datum/quirk/blindness/add()
@@ -63,7 +63,7 @@
 	mob_trait = TRAIT_BRAIN_TUMOR
 	value = -3
 	gain_text = "<span class='danger'>You feel smooth.</span>"
-	lose_text = "<span class='notice'>You feel wrinkled again.</span>"
+	gain_text = "You feel wrinkled again."
 	medical_record_text = "Patient has a tumor in their brain that is slowly driving them to brain death."
 	process = TRUE
 	var/where = "at your feet"
@@ -108,7 +108,7 @@
 	value = -2
 	mob_trait = TRAIT_DEAF
 	gain_text = "<span class='danger'>You can't hear anything.</span>"
-	lose_text = "<span class='notice'>You're able to hear again!</span>"
+	gain_text = "You're able to hear again!"
 	medical_record_text = "Subject's cochlear nerve is incurably damaged."
 
 /datum/quirk/depression
@@ -261,7 +261,7 @@
 	value = -2
 	mob_trait = TRAIT_EASYLIMBDISABLE
 	gain_text = "<span class='danger'>You feel frail.</span>"
-	lose_text = "<span class='notice'>You feel sturdy again.</span>"
+	gain_text = "You feel sturdy again."
 	medical_record_text = "Patient has unusually frail bones, recommend calcium-rich diet."
 
 /datum/quirk/foreigner
@@ -292,7 +292,7 @@
 	value = -1
 	mob_trait = TRAIT_HEAVY_SLEEPER
 	gain_text = "<span class='danger'>You feel sleepy.</span>"
-	lose_text = "<span class='notice'>You feel awake again.</span>"
+	gain_text = "You feel awake again."
 	medical_record_text = "Patient has abnormal sleep study results and is difficult to wake up."
 
 /datum/quirk/hypersensitive
@@ -301,7 +301,7 @@
 	icon = "flushed"
 	value = -1
 	gain_text = "<span class='danger'>You seem to make a big deal out of everything.</span>"
-	lose_text = "<span class='notice'>You don't seem to make a big deal out of everything anymore.</span>"
+	gain_text = "You don't seem to make a big deal out of everything anymore."
 
 /datum/quirk/light_drinker
 	name = "Light Drinker"
@@ -309,7 +309,7 @@
 	icon = "cocktail"
 	value = -1
 	mob_trait = TRAIT_LIGHT_DRINKER
-	gain_text = "<span class='notice'>Just the thought of drinking alcohol makes your head spin.</span>"
+	gain_text = "Just the thought of drinking alcohol makes your head spin."
 	lose_text = "<span class='danger'>You're no longer severely affected by alcohol.</span>"
 
 /datum/quirk/nearsighted //t. errorage
@@ -318,7 +318,7 @@
 	icon = "glasses"
 	value = -1
 	gain_text = "<span class='danger'>Things far away from you start looking blurry.</span>"
-	lose_text = "<span class='notice'>You start seeing faraway things normally again.</span>"
+	gain_text = "You start seeing faraway things normally again."
 	medical_record_text = "Patient requires prescription glasses in order to counteract nearsightedness."
 
 /datum/quirk/nearsighted/add()
@@ -361,7 +361,7 @@
 	value = -2
 	mob_trait = TRAIT_PACIFISM
 	gain_text = "<span class='danger'>You feel repulsed by the thought of violence!</span>"
-	lose_text = "<span class='notice'>You think you can defend yourself again.</span>"
+	gain_text = "You think you can defend yourself again."
 	medical_record_text = "Patient is unusually pacifistic and cannot bring themselves to cause physical harm."
 
 /datum/quirk/trauma/paraplegic
@@ -448,7 +448,7 @@
 	value = -2
 	mob_trait = TRAIT_GRABWEAKNESS
 	gain_text = "<span class='danger'>You feel like a pushover.</span>"
-	lose_text = "<span class='notice'>You feel like standing up for yourself.</span>"
+	gain_text = "You feel like standing up for yourself."
 	medical_record_text = "Patient presents a notably unassertive personality and is easy to manipulate."
 
 /datum/quirk/insanity
@@ -458,7 +458,7 @@
 	value = -2
 	//no mob trait because it's handled uniquely
 	gain_text = "<span class='userdanger'>...</span>"
-	lose_text = "<span class='notice'>You feel in tune with the world again.</span>"
+	gain_text = "You feel in tune with the world again."
 	medical_record_text = "Patient suffers from acute Reality Dissociation Syndrome and experiences vivid hallucinations."
 	process = TRUE
 
@@ -516,7 +516,7 @@
 	icon = "pills"
 	value = -2
 	gain_text = "<span class='danger'>You suddenly feel the craving for drugs.</span>"
-	lose_text = "<span class='notice'>You feel like you should kick your drug habit.</span>"
+	gain_text = "You feel like you should kick your drug habit."
 	medical_record_text = "Patient has a history of hard drugs."
 	process = TRUE
 	var/list/drug_list = list(/datum/reagent/drug/crank, /datum/reagent/drug/krokodil, /datum/reagent/medicine/morphine, /datum/reagent/drug/happiness, /datum/reagent/drug/methamphetamine, /datum/reagent/drug/ketamine) //List of possible IDs
@@ -586,7 +586,7 @@
 	icon = "smoking"
 	value = -1
 	gain_text = "<span class='danger'>You could really go for a smoke right about now.</span>"
-	lose_text = "<span class='notice'>You feel like you should quit smoking.</span>"
+	gain_text = "You feel like you should quit smoking."
 	medical_record_text = "Patient is a current smoker."
 	reagent_type = /datum/reagent/drug/nicotine
 	accessory_type = /obj/item/lighter/greyscale
@@ -619,7 +619,7 @@
 	icon = "angry"
 	value = -1
 	gain_text = "<span class='danger'>You could really go for a drink right about now.</span>"
-	lose_text = "<span class='notice'>You feel like you should quit drinking.</span>"
+	gain_text = "You feel like you should quit drinking."
 	medical_record_text = "Patient is an alcohol abuser."
 	process = TRUE
 	var/where_drink //Where the bottle spawned
@@ -683,7 +683,7 @@
 	value = -2
 	mob_trait = TRAIT_UNSTABLE
 	gain_text = "<span class='danger'>There's a lot on your mind right now.</span>"
-	lose_text = "<span class='notice'>Your mind finally feels calm.</span>"
+	gain_text = "Your mind finally feels calm."
 	medical_record_text = "Patient's mind is in a vulnerable state, and cannot recover from traumatic events."
 
 /datum/quirk/trauma //Generic for quirks that apply a brain trauma

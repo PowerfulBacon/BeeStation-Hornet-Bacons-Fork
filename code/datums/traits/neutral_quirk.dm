@@ -7,8 +7,8 @@
 	icon = "meh-blank"
 	value = 0
 	mob_trait = TRAIT_AGEUSIA
-	gain_text = "<span class='notice'>You can't taste anything!</span>"
-	lose_text = "<span class='notice'>You can taste again!</span>"
+	gain_text = "You can't taste anything!"
+	gain_text = "You can taste again!"
 	medical_record_text = "Patient suffers from ageusia and is incapable of tasting food or reagents."
 
 /datum/quirk/vegetarian
@@ -16,8 +16,8 @@
 	desc = "You find the idea of eating meat morally and physically repulsive."
 	icon = "carrot"
 	value = 0
-	gain_text = "<span class='notice'>You feel repulsion at the idea of eating meat.</span>"
-	lose_text = "<span class='notice'>You feel like eating meat isn't that bad.</span>"
+	gain_text = "You feel repulsion at the idea of eating meat."
+	gain_text = "You feel like eating meat isn't that bad."
 
 /datum/quirk/vegetarian/add()
 	var/mob/living/carbon/human/H = quirk_target
@@ -39,8 +39,8 @@
 	desc = "You find yourself greatly enjoying fruits of the ananas genus. You can't seem to ever get enough of their sweet goodness!"
 	icon = "thumbs-up"
 	value = 0
-	gain_text = "<span class='notice'>You feel an intense craving for pineapple.</span>"
-	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
+	gain_text = "You feel an intense craving for pineapple."
+	gain_text = "Your feelings towards pineapples seem to return to a lukewarm state."
 
 /datum/quirk/pineapple_liker/add()
 	var/mob/living/carbon/human/H = quirk_target
@@ -57,8 +57,8 @@
 	desc = "You find yourself greatly detesting fruits of the ananas genus. Serious, how the hell can anyone say these things are good? And what kind of madman would even dare putting it on a pizza!?"
 	icon = "thumbs-down"
 	value = 0
-	gain_text = "<span class='notice'>You find yourself pondering what kind of idiot actually enjoys pineapples.</span>"
-	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
+	gain_text = "You find yourself pondering what kind of idiot actually enjoys pineapples."
+	gain_text = "Your feelings towards pineapples seem to return to a lukewarm state."
 
 /datum/quirk/pineapple_hater/add()
 	var/mob/living/carbon/human/H = quirk_target
@@ -75,8 +75,8 @@
 	desc = "You dislike food that most people enjoy, and find delicious what they don't."
 	icon = "grin-tongue-squint"
 	value = 0
-	gain_text = "<span class='notice'>You start craving something that tastes strange.</span>"
-	lose_text = "<span class='notice'>You feel like eating normal food again.</span>"
+	gain_text = "You start craving something that tastes strange."
+	gain_text = "You feel like eating normal food again."
 
 /datum/quirk/deviant_tastes/add()
 	var/mob/living/carbon/human/H = quirk_target
@@ -116,5 +116,5 @@
 	value = 0
 	mob_trait = TRAIT_MUTE
 	gain_text = "<span class='danger'>You feel unable to talk.</span>"
-	lose_text = "<span class='notice'>You feel able to talk again.</span>"
+	gain_text = "You feel able to talk again."
 	medical_record_text = "Patient is unable to speak."
