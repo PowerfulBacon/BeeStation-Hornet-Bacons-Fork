@@ -10,9 +10,10 @@
 
 /datum/component/sprint/Initialize(...)
 	. = ..()
-	if (!isliving(owner))
+	if (!isliving(parent))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(owner, COMSIG_MOB_CLICKON, PROC_REF(intercept_clicks))
+	var/atom/parent_atom = parent
+	RegisterSignal(parent_atom, COMSIG_MOB_CLICKON, PROC_REF(intercept_clicks))
 
 /datum/component/sprint/proc/start_sprinting()
 

@@ -289,3 +289,5 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define ENERGY_SHEILD_BLOCK_PROJECTILES (1 << 0)
 /// Energy shields will block melee attacks
 #define ENERGY_SHEILD_BLOCK_MELEE (1 << 1)
+
+#define WEAPON_BASE_INACCURACY 15

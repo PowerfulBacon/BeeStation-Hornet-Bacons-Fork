@@ -469,12 +469,12 @@
 	return FALSE
 
 /mob/living/proc/get_weapon_inaccuracy_modifier(atom/target, obj/item/gun/weapon)
-	. = 0
+	var/weapon_inaccuracy = 0
 	if(HAS_TRAIT(src, TRAIT_POOR_AIM)) //nice shootin' tex
-		. += 25
+		weapon_inaccuracy += 25
 	// Unwielded weapons
 	if(!weapon.is_wielded && weapon.requires_wielding)
-		. += weapon.spread_unwielded
+		weapon_inaccuracy += weapon.spread_unwielded
 	// Nothing to hold onto, slight penalty for flying around in space
 	var/default_speed = get_config_multiplicative_speed() + CONFIG_GET(number/movedelay/run_delay)
 	var/current_speed = cached_multiplicative_slowdown
@@ -494,8 +494,20 @@
 		else
 			// Take the higher value of move time if we don't know what we are buckled to
 			move_time = max(move_time, buckled.last_move_time)
+	// Deciseconds since our last move
+	var/time_since_move = world.time - last_move_time
+	// 1 when we are moving, 10 when we stopped for 1 second
+	var/move_time_multiplier = CLAMP01((10 - time_since_move) / 10)
 	// Lower speed is better, so this is reversed
-	var/speed_delta = default_speed - current_speed
+	// If you are moving at double speed (2), then the calculation is (2) / 1 = 2
+	// If you are moving at half speed, then the calculation is (0.5) / 1 = 0.5
+	var/speed_delta = WEAPON_BASE_INACCURACY * (current_speed / default_speed)
+	// Reduce the speed delta the longer we haven't been moving
+	// If we are standing still for 1 second, then we have an inaccuracy of 0
+	// If we are walking, then we have an inaccuracy of 7.5 degrees
+	// If we are running, then we have an inaccuracy of 15 degrees
+	// Moving any faster linearly increases that
+	speed_delta *= move_time_multiplier
 	// Are we holding onto something?
 	var/is_holding = has_gravity(get_turf(src))
 	if (!is_holding)
@@ -510,16 +522,9 @@
 	// If you are moving slower than the default speed, you get a bonus.
 	// This means with the captain's jetpack, the spread cone is 20 degrees.
 	// However, if you aren't moving, this will be 0
-	if (speed_delta > 0)
-		// We haven't moved in 1 second, give us no penalty to aiming
-		if (move_time + 1 SECONDS < world.time)
-			return
-		. += (speed_delta * 10) * (is_holding ? 1 : 2)
-	else
-		// Can only improve up to the maximum improvement, otherwise shotguns gain accuracy when walking
-		// This means walking will improve your accuracy by a total of 12.
-		// This is only really useful if you are using a gun with a shield.
-		. = max(0, . + speed_delta * 8)
+	weapon_inaccuracy += speed_delta * (is_holding ? 1 : 2)
+	// Account for modifiers to aim
+	return SET_BASE_AND_READ(src, TRAIT_WEAPON_INACCURACY, weapon_inaccuracy)
 
 /mob/living/proc/is_shove_knockdown_blocked()
 	return FALSE

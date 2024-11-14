@@ -2,6 +2,10 @@
 #define SIGNAL_REMOVETRAIT(trait_ref) "removetrait [trait_ref]"
 #define SIGNAL_UPDATETRAIT(trait_ref) "updatetrait [trait_ref]"
 
+// Special trait sources
+#define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention
+#define SOURCE_BASE_VALUE "base_value"
+
 /datum/trait
 	/// Source of the trait
 	var/source
@@ -345,3 +349,5 @@ GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
 			return FALSE
 		. = TRUE
 	return
+
+#undef SOURCE_BASE_VALUE

@@ -11,7 +11,6 @@
 #define DISEASE_TRAIT "disease"
 #define SPECIES_TRAIT "species"
 #define ORGAN_TRAIT "organ"
-#define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention
 #define JOB_TRAIT "job"
 #define CYBORG_ITEM_TRAIT "cyborg-item"
 #define ADMIN_TRAIT "admin" // (B)admins only.
@@ -137,4 +136,3 @@
 #define SOURCE_STATS "stats"
 #define SOURCE_CAT_CLAWS "cat_claws"
 #define SOURCE_DAMAGE_SLOWDOWN "damage_slowdown"
-#define SOURCE_BASE_VALUE "base_value"

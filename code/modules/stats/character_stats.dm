@@ -88,6 +88,13 @@
 	var/proportion = CLAMP01((owner.dna.dna_stats.strength - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
+/datum/character_stats/character/proc/adjust_coordination(minimum, maximum)
+	var/proportion = CLAMP01((owner.mind.mind_stats.coordination - 1) / 4)
+	return (maximum - minimum) * proportion + minimum
+
+/datum/character_stats/character/proc/lookup_coordination(...)
+	return args[clamp(owner.mind.mind_stats.coordination, 1, 5)]
+
 /datum/character_stats/character/proc/update_stats()
 	REMOVE_TRAITS_IN(owner, SOURCE_STATS)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
@@ -102,6 +109,9 @@
 			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(intercept_movement))
 	// === Mind Stats ===
 	if (owner.mind)
+		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_WEAPON_INACCURACY, SOURCE_STATS, lookup_coordination(2, 1.5, 1, 0.6, 0.4))
+		// IF you have really bad aim, then you always get a penalty, even when still
+		ADD_CUMULATIVE_TRAIT(owner, TRAIT_WEAPON_INACCURACY, SOURCE_STATS, lookup_coordination(20, 10, 0, 0, 0))
 		if (owner.mind.mind_stats.intelligence >= 4)
 			ADD_TRAIT(owner, TRAIT_LINGUIST, SOURCE_STATS)
 			ADD_TRAIT(owner, TRAIT_SELF_AWARE, SOURCE_STATS)
