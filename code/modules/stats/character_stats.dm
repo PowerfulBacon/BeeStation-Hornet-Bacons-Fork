@@ -88,12 +88,15 @@
 	var/proportion = CLAMP01((owner.dna.dna_stats.strength - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
+/datum/character_stats/character/proc/lookup_strength(...)
+	return args[clamp(owner.mind.dna_stats.strength, 1, length(args))]
+
 /datum/character_stats/character/proc/adjust_coordination(minimum, maximum)
 	var/proportion = CLAMP01((owner.mind.mind_stats.coordination - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/lookup_coordination(...)
-	return args[clamp(owner.mind.mind_stats.coordination, 1, 5)]
+	return args[clamp(owner.mind.mind_stats.coordination, 1, length(args))]
 
 /datum/character_stats/character/proc/update_stats()
 	REMOVE_TRAITS_IN(owner, SOURCE_STATS)
