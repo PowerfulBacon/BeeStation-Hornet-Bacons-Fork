@@ -89,21 +89,21 @@
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/lookup_strength(...)
-	return args[clamp(owner.mind.dna_stats.strength, 1, length(args))]
+	return args[clamp(owner.dna.dna_stats.strength, 1, length(args))]
 
 /datum/character_stats/character/proc/adjust_agility(minimum, maximum)
 	var/proportion = CLAMP01((owner.dna.dna_stats.agility - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/lookup_agility(...)
-	return args[clamp(owner.mind.dna_stats.agility, 1, length(args))]
+	return args[clamp(owner.dna.dna_stats.agility, 1, length(args))]
 
 /datum/character_stats/character/proc/adjust_resilience(minimum, maximum)
 	var/proportion = CLAMP01((owner.dna.dna_stats.resilience - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
 
 /datum/character_stats/character/proc/lookup_resilience(...)
-	return args[clamp(owner.mind.dna_stats.resilience, 1, length(args))]
+	return args[clamp(owner.dna.dna_stats.resilience, 1, length(args))]
 
 /datum/character_stats/character/proc/adjust_coordination(minimum, maximum)
 	var/proportion = CLAMP01((owner.mind.mind_stats.coordination - 1) / 4)
@@ -118,13 +118,21 @@
 	// === DNA Stats ===
 	// Strength stat modifications
 	if (owner.dna)
+		// Strength
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_STATS, adjust_strength(0.6, 1.4))
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_STATS, adjust_strength(1.5, 0.5))
-		if (owner.dna.dna_stats.agility >= 4)
-			ADD_TRAIT(owner, TRAIT_SKITTISH, SOURCE_STATS)
 		if (owner.dna.dna_stats.strength >= 5)
 			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(intercept_movement))
-		owner.crit_threshold = lookup_resilience(20, 10, 0, -6, -12)
+		// Agility
+		if (owner.dna.dna_stats.agility >= 4)
+			ADD_TRAIT(owner, TRAIT_SKITTISH, SOURCE_STATS)
+		// Resilience effects
+		// - Slight changes to crit thresholds
+		// - Greatly increased stun resistance
+		// - Bleeding rate reduced
+		owner.crit_threshold = lookup_resilience(18, 6, 0, -6, -12)
+		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_STUNRESISTANCE, SOURCE_STATS, lookup_resilience(1.4, 1.1, 1, 0.85, 0.7))
+		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_BLEED_RESISTANCE, SOURCE_STATS, lookup_resilience(1.5, 1.2, 1, 0.85, 0.7))
 	// === Mind Stats ===
 	if (owner.mind)
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_WEAPON_INACCURACY, SOURCE_STATS, lookup_coordination(2, 1.5, 1, 0.6, 0.4))

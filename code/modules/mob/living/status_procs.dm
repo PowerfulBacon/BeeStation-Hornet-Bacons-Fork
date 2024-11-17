@@ -15,6 +15,7 @@
 	return 0
 
 /mob/living/proc/Stun(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STUN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -28,6 +29,7 @@
 		return S
 
 /mob/living/proc/SetStun(amount, ignore_canstun = FALSE) //Sets remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STUN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -45,6 +47,7 @@
 		return S
 
 /mob/living/proc/AdjustStun(amount, ignore_canstun = FALSE) //Adds to remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STUN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -70,6 +73,7 @@
 	return 0
 
 /mob/living/proc/Knockdown(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -83,6 +87,7 @@
 		return K
 
 /mob/living/proc/SetKnockdown(amount, ignore_canstun = FALSE) //Sets remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -100,6 +105,7 @@
 		return K
 
 /mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE) //Adds to remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -123,6 +129,7 @@
 	return 0
 
 /mob/living/proc/Immobilize(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_IMMOBILIZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -136,6 +143,7 @@
 		return I
 
 /mob/living/proc/SetImmobilized(amount, ignore_canstun = FALSE) //Sets remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_IMMOBILIZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -153,6 +161,7 @@
 		return I
 
 /mob/living/proc/AdjustImmobilized(amount, ignore_canstun = FALSE) //Adds to remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_IMMOBILIZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -176,6 +185,7 @@
 	return 0
 
 /mob/living/proc/Paralyze(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_PARALYZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -190,6 +200,7 @@
 		return P
 
 /mob/living/proc/SetParalyzed(amount, ignore_canstun = FALSE) //Sets remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_PARALYZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -207,6 +218,7 @@
 		return P
 
 /mob/living/proc/AdjustParalyzed(amount, ignore_canstun = FALSE) //Adds to remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_PARALYZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -252,6 +264,7 @@
 	return 0
 
 /mob/living/proc/Unconscious(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_UNCONSCIOUS, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANUNCONSCIOUS) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE))  || ignore_canstun)
@@ -263,6 +276,7 @@
 		return U
 
 /mob/living/proc/SetUnconscious(amount, ignore_canstun = FALSE) //Sets remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_UNCONSCIOUS, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANUNCONSCIOUS) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -277,6 +291,7 @@
 		return U
 
 /mob/living/proc/AdjustUnconscious(amount, ignore_canstun = FALSE) //Adds to remaining duration
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNIMMUNE, 1)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_UNCONSCIOUS, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANUNCONSCIOUS) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)

@@ -198,7 +198,7 @@
 	var/dmg_mlt = CONFIG_GET(number/damage_multiplier) * hit_percent
 	brute = round(max(brute * dmg_mlt, 0),DAMAGE_PRECISION)
 	burn = round(max(burn * dmg_mlt, 0),DAMAGE_PRECISION)
-	stamina = round(max(stamina * dmg_mlt, 0),DAMAGE_PRECISION)
+	stamina = round(max(stamina * dmg_mlt * SET_BASE_AND_READ(H, TRAIT_STUNRESISTANCE, 1), 0),DAMAGE_PRECISION)
 	brute = max(0, brute - brute_reduction)
 	burn = max(0, burn - burn_reduction)
 	//No stamina scaling.. for now..

@@ -116,7 +116,7 @@
 
 	var/turf/mover_turf = get_turf(source)
 	if(HAS_TRAIT(mover_turf, TRAIT_RUSTY))
-		ADD_TRAIT(source, TRAIT_STUNRESISTANCE, type)
+		ADD_MULTIPLICATIVE_TRAIT(source, TRAIT_STUNRESISTANCE, type, 0.5)
 		return
 
 	REMOVE_TRAIT(source, TRAIT_STUNRESISTANCE, type)

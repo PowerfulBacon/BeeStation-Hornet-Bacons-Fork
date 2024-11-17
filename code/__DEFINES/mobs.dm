@@ -234,15 +234,6 @@ GLOBAL_LIST_INIT(available_random_trauma_list, list(
 #define MOOD_LEVEL_SAD3 -15
 #define MOOD_LEVEL_SAD4 -20
 
-//Sanity levels for humans
-#define SANITY_MAXIMUM 150
-#define SANITY_GREAT 125
-#define SANITY_NEUTRAL 100
-#define SANITY_DISTURBED 75
-#define SANITY_UNSTABLE 50
-#define SANITY_CRAZY 25
-#define SANITY_INSANE 0
-
 //Nutrition levels for humans
 #define NUTRITION_LEVEL_FAT 600
 #define NUTRITION_LEVEL_FULL 550

@@ -1157,10 +1157,7 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 		return TRUE
 	if(HAS_TRAIT(src, TRAIT_DUMB))
 		return TRUE
-	var/datum/component/mood/mood = src.GetComponent(/datum/component/mood)
-	if(mood)
-		if(mood.sanity < SANITY_UNSTABLE)
-			return TRUE
+	return FALSE
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()

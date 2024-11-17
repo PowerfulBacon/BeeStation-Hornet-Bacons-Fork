@@ -361,11 +361,7 @@
 			to_chat(M, "<span class='warning'>It feels like [src] is freezing as you hug [p_them()].</span>")
 
 		if(HAS_TRAIT(M, TRAIT_FRIENDLY))
-			var/datum/component/mood/mood = M.GetComponent(/datum/component/mood)
-			if (mood.sanity >= SANITY_GREAT)
-				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "friendly_hug", /datum/mood_event/besthug, M)
-			else if (mood.sanity >= SANITY_DISTURBED)
-				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "friendly_hug", /datum/mood_event/betterhug, M)
+			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "friendly_hug", /datum/mood_event/betterhug, M)
 		for(var/datum/brain_trauma/trauma in M.get_traumas())
 			trauma.on_hug(M, src)
 	else if(M.is_zone_selected(BODY_ZONE_HEAD))

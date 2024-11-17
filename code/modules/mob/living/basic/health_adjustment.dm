@@ -49,6 +49,7 @@
 		. = adjust_health(amount * damage_coeff[CLONE] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
 
 /mob/living/basic/adjustStaminaLoss(amount, updating_health = FALSE, forced = FALSE)
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNRESISTANCE, 1)
 	if(forced)
 		staminaloss = max(0, min(BASIC_MOB_MAX_STAMINALOSS, staminaloss + amount))
 	else

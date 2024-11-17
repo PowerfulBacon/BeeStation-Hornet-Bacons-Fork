@@ -84,6 +84,7 @@
 	return FALSE
 
 /mob/living/silicon/pai/adjustStaminaLoss(amount, updating_health, forced = FALSE)
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNRESISTANCE, 1)
 	if(forced)
 		take_holo_damage(amount)
 	else

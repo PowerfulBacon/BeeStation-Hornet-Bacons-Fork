@@ -370,7 +370,7 @@
 	icon = "wheelchair"
 	value = -3
 	medical_record_text = "Patient has an untreatable impairment in motor function in the lower extremities."
-	trauma_type = /datum/brain_trauma/severe/paralysis/paraplegic/
+	trauma_type = /datum/brain_trauma/severe/paralysis/paraplegic
 
 /datum/quirk/trauma/paraplegic/on_spawn()
 	if(quirk_target.buckled) // Handle late joins being buckled to arrival shuttle chairs.

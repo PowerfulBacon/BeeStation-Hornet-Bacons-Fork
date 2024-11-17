@@ -1102,7 +1102,7 @@
 /datum/reagent/medicine/pumpup/on_mob_metabolize(mob/living/L)
 	..()
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
-	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
+	ADD_MULTIPLICATIVE_TRAIT(L, TRAIT_STUNRESISTANCE, type, 0.5)
 	ADD_MULTIPLICATIVE_TRAIT(L, TRAIT_DAMAGE_SLOWDOWN_MULTIPLIER, 0, type)
 
 /datum/reagent/medicine/pumpup/on_mob_end_metabolize(mob/living/L)
@@ -1637,8 +1637,8 @@
 
 
 	var/datum/component/mood/mood = M.GetComponent(/datum/component/mood)
-	if(mood.sanity <= SANITY_NEUTRAL) // only take effect if in negative sanity and then...
-		mood.setSanity(min(mood.sanity+5, SANITY_NEUTRAL)) // set minimum to prevent unwanted spiking over neutral
+	if(mood.mood <= MOOD_LEVEL_NEUTRAL) // only take effect if in negative sanity and then...
+		mood.mood = (min(mood.mood+1, MOOD_LEVEL_NEUTRAL)) // set minimum to prevent unwanted spiking over neutral
 	..()
 	. = 1
 

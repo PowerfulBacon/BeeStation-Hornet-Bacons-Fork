@@ -100,6 +100,7 @@
 /mob/living/carbon/adjustStaminaLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNRESISTANCE, 1)
 	if(amount > 0)
 		take_overall_damage(0, 0, amount, updating_health)
 	else
@@ -108,6 +109,7 @@
 
 /mob/living/carbon/setStaminaLoss(amount, updating_health = TRUE, forced = FALSE)
 	var/current = getStaminaLoss()
+	amount *= SET_BASE_AND_READ(src, TRAIT_STUNRESISTANCE, 1)
 	var/diff = amount - current
 	if(!diff)
 		return
@@ -219,6 +221,9 @@
 /mob/living/carbon/take_overall_damage(brute = 0, burn = 0, stamina = 0, updating_health = TRUE, required_status)
 	if(status_flags & GODMODE)
 		return	//godmode
+
+	// Modify incomming stamina damage
+	stamina *= SET_BASE_AND_READ(src, TRAIT_STUNRESISTANCE, 1)
 
 	var/list/obj/item/bodypart/parts = get_damageable_bodyparts(required_status)
 	var/update = 0

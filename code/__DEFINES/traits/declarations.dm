@@ -317,5 +317,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 #define TRAIT_PUNCH_DAMAGE "punch_damage"
 #define TRAIT_WEAPON_INACCURACY "weapon_inaccuracy"
+#define TRAIT_BLEED_RESISTANCE "bleed_resistance"
 
 // END TRAIT DEFINES

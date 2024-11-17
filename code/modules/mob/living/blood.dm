@@ -148,6 +148,7 @@ bleedsuppress has been replaced for is_bandaged(). Note that is_bleeding() retur
 /mob/living/carbon/proc/add_bleeding(bleed_level)
 	if (HAS_TRAIT(src, TRAIT_NO_BLOOD))
 		return
+	bleed_level *= SET_BASE_AND_READ(src, TRAIT_BLEED_RESISTANCE, 1)
 	playsound(src, 'sound/surgery/blood_wound.ogg', 80, vary = TRUE)
 	apply_status_effect(dna?.species?.bleed_effect || STATUS_EFFECT_BLEED, bleed_level)
 	if (bleed_level >= BLEED_DEEP_WOUND)
