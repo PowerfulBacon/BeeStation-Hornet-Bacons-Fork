@@ -91,6 +91,20 @@
 /datum/character_stats/character/proc/lookup_strength(...)
 	return args[clamp(owner.mind.dna_stats.strength, 1, length(args))]
 
+/datum/character_stats/character/proc/adjust_agility(minimum, maximum)
+	var/proportion = CLAMP01((owner.dna.dna_stats.agility - 1) / 4)
+	return (maximum - minimum) * proportion + minimum
+
+/datum/character_stats/character/proc/lookup_agility(...)
+	return args[clamp(owner.mind.dna_stats.agility, 1, length(args))]
+
+/datum/character_stats/character/proc/adjust_resilience(minimum, maximum)
+	var/proportion = CLAMP01((owner.dna.dna_stats.resilience - 1) / 4)
+	return (maximum - minimum) * proportion + minimum
+
+/datum/character_stats/character/proc/lookup_resilience(...)
+	return args[clamp(owner.mind.dna_stats.resilience, 1, length(args))]
+
 /datum/character_stats/character/proc/adjust_coordination(minimum, maximum)
 	var/proportion = CLAMP01((owner.mind.mind_stats.coordination - 1) / 4)
 	return (maximum - minimum) * proportion + minimum
@@ -110,6 +124,7 @@
 			ADD_TRAIT(owner, TRAIT_SKITTISH, SOURCE_STATS)
 		if (owner.dna.dna_stats.strength >= 5)
 			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(intercept_movement))
+		owner.crit_threshold = lookup_resilience(20, 10, 0, -6, -12)
 	// === Mind Stats ===
 	if (owner.mind)
 		ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_WEAPON_INACCURACY, SOURCE_STATS, lookup_coordination(2, 1.5, 1, 0.6, 0.4))

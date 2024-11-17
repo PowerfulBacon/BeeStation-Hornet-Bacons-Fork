@@ -1,18 +1,10 @@
-#define MINOR_INSANITY_PEN 3
-#define MAJOR_INSANITY_PEN 6
-
 /datum/component/mood
 	var/mood //Real happiness
-	var/sanity = SANITY_NEUTRAL //Current sanity
 	var/shown_mood //Shown happiness, this is what others can see when they try to examine you, prevents antag checking by noticing traitors are always very happy.
 	var/mood_level = 5 //To track what stage of moodies they're on
-	var/sanity_level = 2 //To track what stage of sanity they're on
 	var/mood_modifier = 1 //Modifier to allow certain mobs to be less affected by moodlets
-	var/sanity_modifier = 0.05 //Multiplies sanity changes, lower values make sanity change slower.
 	var/list/datum/mood_event/mood_events = list()
-	var/insanity_effect = 0 //is the owner being punished for low mood? If so, how much?
 	var/atom/movable/screen/mood/screen_obj
-	var/atom/movable/screen/sanity/screen_obj_sanity
 
 /datum/component/mood/Initialize()
 	if(!isliving(parent))
@@ -25,7 +17,6 @@
 	RegisterSignal(parent, COMSIG_MOVABLE_ENTERED_AREA, PROC_REF(check_area_mood))
 
 	RegisterSignal(parent, COMSIG_MOB_HUD_CREATED, PROC_REF(modify_hud))
-	RegisterSignal(parent, COMSIG_HERETIC_MASK_ACT, PROC_REF(direct_sanity_drain))
 	var/mob/living/owner = parent
 	if(owner.hud_used)
 		modify_hud()
@@ -41,19 +32,6 @@
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'><EM>Your current mood</EM>\n"
 	msg += "<span class='notice'>My mental status: </span>" //Long term
-	switch(sanity)
-		if(SANITY_GREAT to INFINITY)
-			msg += "<span class='nicegreen'>My mind feels like a temple!</span>\n"
-		if(SANITY_NEUTRAL to SANITY_GREAT)
-			msg += "<span class='nicegreen'>I have been feeling great lately!</span>\n"
-		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			msg += "<span class='nicegreen'>I have felt quite decent lately.</span>\n"
-		if(SANITY_UNSTABLE to SANITY_DISTURBED)
-			msg += "<span class='warning'>I'm feeling a little bit unhinged...</span>\n"
-		if(SANITY_CRAZY to SANITY_UNSTABLE)
-			msg += "<span class='boldwarning'>I'm freaking out!!!</span>\n"
-		if(SANITY_INSANE to SANITY_CRAZY)
-			msg += "<span class='boldwarning'>AHAHAHAHAHAHAHAHAHAH!!!</span>\n"
 
 	msg += "<span class='notice'>My current mood: </span>" //Short term
 	switch(mood_level)
@@ -153,14 +131,6 @@
 			if(absmood > highest_absolute_mood)
 				highest_absolute_mood = absmood
 
-	if(!conflicting_moodies.len) //no special icons- go to the normal icon states
-		if(sanity < 18)
-			screen_obj.icon_state = "mood_insane"
-		else
-			screen_obj.icon_state = "mood[mood_level]"
-		screen_obj_sanity.icon_state = "sanity[sanity_level]"
-		return
-
 	for(var/i in conflicting_moodies)
 		var/datum/mood_event/event = i
 		if(abs(event.mood_change) == highest_absolute_mood)
@@ -189,69 +159,7 @@
 ///Called on SSmood process
 /datum/component/mood/process(delta_time)
 	var/mob/living/owner = parent
-	switch(sanity)
-		if(SANITY_GREAT-1 to INFINITY)
-			setSanity(sanity+sanity_modifier*delta_time*mood-0.4)
-		if(SANITY_NEUTRAL-1 to SANITY_GREAT-1)
-			setSanity(sanity+sanity_modifier*delta_time*mood-0.2)
-		if(SANITY_DISTURBED-1 to SANITY_NEUTRAL-1)
-			setSanity(sanity+sanity_modifier*delta_time*mood)
-		if(SANITY_UNSTABLE-1 to SANITY_DISTURBED-1)
-			setSanity(sanity+sanity_modifier*delta_time*mood+0.3)
-		if(SANITY_CRAZY-1 to SANITY_UNSTABLE-1)
-			setSanity(sanity+sanity_modifier*delta_time*mood+0.6)
-		if(SANITY_INSANE-1 to SANITY_CRAZY)
-			setSanity(sanity+sanity_modifier*delta_time*mood+0.9)
-		if (-INFINITY to SANITY_INSANE) //prevents it from going below 0. This caused issues.
-			setSanity(0)
 	HandleNutrition(owner)
-
-/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_GREAT)
-	var/mob/living/owner = parent
-
-	if(owner.stat == DEAD) // deadman can't feel mood
-		return
-
-	if(amount == sanity)
-		return
-	// If we're out of the acceptable minimum-maximum range move back towards it in steps of 0.5
-	// If the new amount would move towards the acceptable range faster then use it instead
-	if(sanity < minimum && amount < sanity + 0.5)
-		amount = sanity + 0.5
-
-	// Disturbed stops you from getting any more sane
-	if(HAS_TRAIT(owner, TRAIT_UNSTABLE))
-		sanity = min(amount,sanity)
-	else
-		sanity = amount
-
-	switch(sanity)
-		if(SANITY_INSANE to SANITY_CRAZY)
-			setInsanityEffect(MAJOR_INSANITY_PEN)
-			sanity_level = 6
-		if(SANITY_CRAZY to SANITY_UNSTABLE)
-			setInsanityEffect(MINOR_INSANITY_PEN)
-			sanity_level = 5
-		if(SANITY_UNSTABLE to SANITY_DISTURBED)
-			setInsanityEffect(0)
-			sanity_level = 4
-		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			setInsanityEffect(0)
-			sanity_level = 3
-		if(SANITY_NEUTRAL+1 to SANITY_GREAT+1) //shitty hack but +1 to prevent it from responding to super small differences
-			setInsanityEffect(0)
-			sanity_level = 2
-		if(SANITY_GREAT+1 to INFINITY)
-			setInsanityEffect(0)
-			sanity_level = 1
-	update_mood_icon()
-
-/datum/component/mood/proc/setInsanityEffect(newval)
-	if(newval == insanity_effect)
-		return
-	var/mob/living/master = parent
-	master.crit_threshold = (master.crit_threshold - insanity_effect) + newval
-	insanity_effect = newval
 
 /datum/component/mood/proc/add_event(datum/source, category, type, param) //Category will override any events in the same category, should be unique unless the event is based on the same thing like hunger.
 	SIGNAL_HANDLER
@@ -310,9 +218,7 @@
 	var/mob/living/owner = parent
 	var/datum/hud/hud = owner.hud_used
 	screen_obj = new
-	screen_obj_sanity = new
 	hud.infodisplay += screen_obj
-	hud.infodisplay += screen_obj_sanity
 	RegisterSignal(hud, COMSIG_PARENT_QDELETING, PROC_REF(unmodify_hud))
 	RegisterSignal(screen_obj, COMSIG_CLICK, PROC_REF(hud_click))
 
@@ -325,9 +231,7 @@
 	var/datum/hud/hud = owner.hud_used
 	if(hud?.infodisplay)
 		hud.infodisplay -= screen_obj
-		hud.infodisplay -= screen_obj_sanity
 	QDEL_NULL(screen_obj)
-	QDEL_NULL(screen_obj_sanity)
 
 /datum/component/mood/proc/hud_click(datum/source, location, control, params, mob/user)
 	SIGNAL_HANDLER
@@ -379,12 +283,3 @@
 		add_event(null, "area", /datum/mood_event/area, list(A.mood_bonus, A.mood_message))
 	else
 		clear_event(null, "area")
-
-#undef MINOR_INSANITY_PEN
-#undef MAJOR_INSANITY_PEN
-
-///Causes direct drain of someone's sanity, call it with a numerical value corresponding how badly you want to hurt their sanity
-/datum/component/mood/proc/direct_sanity_drain(datum/source, amount)
-	SIGNAL_HANDLER
-
-	setSanity(sanity + amount)
