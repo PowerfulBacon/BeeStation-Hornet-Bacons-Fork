@@ -330,7 +330,6 @@ GLOBAL_LIST_EMPTY(bluespace_slime_crystals)
 	ADD_TRAIT(affected_mob,TRAIT_RESISTLOWPRESSURE,type)
 	ADD_TRAIT(affected_mob,TRAIT_RESISTHIGHPRESSURE,type)
 	ADD_TRAIT(affected_mob,TRAIT_NOSOFTCRIT,type)
-	ADD_TRAIT(affected_mob,TRAIT_NOHARDCRIT,type)
 
 /obj/structure/slime_crystal/sepia/on_mob_leave(mob/living/affected_mob)
 	REMOVE_TRAIT(affected_mob,TRAIT_NOBREATH,type)
@@ -338,7 +337,6 @@ GLOBAL_LIST_EMPTY(bluespace_slime_crystals)
 	REMOVE_TRAIT(affected_mob,TRAIT_RESISTLOWPRESSURE,type)
 	REMOVE_TRAIT(affected_mob,TRAIT_RESISTHIGHPRESSURE,type)
 	REMOVE_TRAIT(affected_mob,TRAIT_NOSOFTCRIT,type)
-	REMOVE_TRAIT(affected_mob,TRAIT_NOHARDCRIT,type)
 
 /obj/structure/cerulean_slime_crystal
 	name = "Cerulean slime poly-crystal"

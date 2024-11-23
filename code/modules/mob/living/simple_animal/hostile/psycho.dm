@@ -27,7 +27,7 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	obj_damage = 5
 	sidestep_per_cycle = 0
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	melee_damage = 15
 	lose_patience_timeout = 350
 	loot = list(/obj/effect/mob_spawn/human/corpse/psychost)

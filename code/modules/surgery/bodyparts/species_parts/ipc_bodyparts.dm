@@ -5,6 +5,7 @@
 	is_dimorphic = FALSE
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC | BODYTYPE_BOXHEAD
+	feels_pain = FALSE
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"
 	heavy_brute_msg = "sheared"
@@ -20,6 +21,7 @@
 	is_dimorphic = FALSE
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
+	feels_pain = FALSE
 
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"
@@ -35,6 +37,7 @@
 	limb_id = "synth"
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
+	feels_pain = FALSE
 
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"
@@ -50,6 +53,7 @@
 	limb_id = "synth"
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
+	feels_pain = FALSE
 
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"
@@ -65,6 +69,7 @@
 	limb_id = "synth"
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
+	feels_pain = FALSE
 
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"
@@ -80,6 +85,7 @@
 	limb_id = "synth"
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
+	feels_pain = FALSE
 
 	light_brute_msg = "scratched"
 	medium_brute_msg = "dented"

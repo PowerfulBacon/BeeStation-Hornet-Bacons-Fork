@@ -109,9 +109,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(UNCONSCIOUS)
 			if(!(message_mods[MODE_ALIEN]))
 				return
-		if(HARD_CRIT)
-			if(!(message_mods[WHISPER_MODE] || message_mods[MODE_ALIEN]))
-				return
 		if(DEAD)
 			say_dead(original_message)
 			return
@@ -149,8 +146,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 				saymode = null
 				message_mods -= RADIO_EXTENSION
 			message_range = 1
-			if(stat == HARD_CRIT)
-				var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
+			var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
+			if(stat == SOFT_CRIT && health_diff < 15)
 				// If we cut our message short, abruptly end it with a-..
 				var/message_len = length_char(message)
 				message = copytext_char(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"

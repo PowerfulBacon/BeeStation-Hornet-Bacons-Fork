@@ -38,6 +38,9 @@
 			for(var/datum/mutation/HM as() in dna.mutations)
 				HM.on_life()
 
+		if (stat != DEAD)
+			pain_life()
+
 	else
 		. = ..()
 

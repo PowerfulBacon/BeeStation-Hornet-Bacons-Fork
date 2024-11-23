@@ -25,7 +25,7 @@
 	attack_verb_simple = "beat"
 	ventcrawler = VENTCRAWLER_ALWAYS
 	attack_sound = 'sound/effects/singlebeat.ogg'
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	attack_same = 1
 	gold_core_spawnable = HOSTILE_SPAWN
 	see_in_dark = NIGHTVISION_FOV_RANGE

@@ -110,7 +110,7 @@
 		switch(stat)
 			if(SOFT_CRIT)
 				. += "[t_His] breathing is shallow and labored."
-			if(UNCONSCIOUS, HARD_CRIT)
+			if(UNCONSCIOUS)
 				. += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
 
 	var/trait_exam = common_trait_examine()

@@ -316,7 +316,7 @@
 
 	if(!appears_dead)
 		switch(stat)
-			if(UNCONSCIOUS, HARD_CRIT)
+			if(UNCONSCIOUS)
 				msg += "[t_He] [t_is]n't responding to anything around [t_him] and seem[p_s()] to be asleep.\n"
 			if(SOFT_CRIT)
 				msg += "[t_He] [t_is] barely conscious.\n"

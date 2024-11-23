@@ -404,7 +404,7 @@
 			continue
 		if(possible_target in target_blacklist)
 			continue
-		if(player.stat >= HARD_CRIT) //Hardcrit or worse (like being dead lmao)
+		if(player.stat >= UNCONSCIOUS) //Hardcrit or worse (like being dead lmao)
 			continue
 		. += possible_target
 

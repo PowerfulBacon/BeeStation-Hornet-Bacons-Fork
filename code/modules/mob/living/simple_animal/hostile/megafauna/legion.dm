@@ -110,7 +110,7 @@ Difficulty: Medium
 		return
 	var/mob/living/living_target = target
 	switch(living_target.stat)
-		if(UNCONSCIOUS, HARD_CRIT)
+		if(UNCONSCIOUS)
 			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/legion = new(loc)
 			legion.infest(living_target)
 

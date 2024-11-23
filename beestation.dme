@@ -3035,6 +3035,7 @@
 #include "code\modules\mob\living\carbon\carbon_defense.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\carbon_movement.dm"
+#include "code\modules\mob\living\carbon\carbon_pain.dm"
 #include "code\modules\mob\living\carbon\carbon_stripping.dm"
 #include "code\modules\mob\living\carbon\damage_procs.dm"
 #include "code\modules\mob\living\carbon\death.dm"

@@ -112,7 +112,7 @@
 	loot = list(/obj/item/organ/regenerative_core/legion)
 	brood_type = /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion
 	del_on_death = TRUE
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	robust_searching = 1
 	var/dwarf_mob = FALSE
 	var/mob/living/carbon/human/stored_mob
@@ -177,7 +177,7 @@
 	throw_message = "is shrugged off by"
 	pass_flags = PASSTABLE
 	del_on_death = TRUE
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	robust_searching = 1
 	var/can_infest_dead = FALSE
 
@@ -188,7 +188,7 @@
 
 	for(var/mob/living/carbon/human/victim in viewers(1, src)) //Only for corpse right next to/on same tile
 		switch(victim.stat)
-			if(UNCONSCIOUS, HARD_CRIT)
+			if(UNCONSCIOUS)
 				infest(victim)
 				return //This will qdelete the legion.
 			if(DEAD)

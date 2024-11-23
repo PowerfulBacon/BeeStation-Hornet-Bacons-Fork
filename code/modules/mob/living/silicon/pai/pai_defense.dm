@@ -106,15 +106,3 @@
 
 /mob/living/silicon/pai/getStaminaLoss()
 	return FALSE
-
-/mob/living/silicon/pai/setCloneLoss()
-	return FALSE
-
-/mob/living/silicon/pai/setStaminaLoss(amount, updating_health = TRUE)
-	return FALSE
-
-/mob/living/silicon/pai/setToxLoss()
-	return FALSE
-
-/mob/living/silicon/pai/setOxyLoss()
-	return FALSE

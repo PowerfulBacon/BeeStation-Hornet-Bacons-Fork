@@ -25,6 +25,7 @@
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -52,6 +53,7 @@
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -79,6 +81,7 @@
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -106,6 +109,7 @@
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -131,6 +135,7 @@
 	should_draw_greyscale = FALSE
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -239,6 +244,7 @@
 	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ROBOTIC
 	change_exempt_flags = BP_BLOCK_CHANGE_SPECIES
 	w_class = WEIGHT_CLASS_NORMAL
+	feels_pain = FALSE
 
 	brute_reduction = 5
 	burn_reduction = 4

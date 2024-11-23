@@ -54,7 +54,7 @@
 				do_set_blindness(FALSE, overlay, add_color)
 			else
 				do_set_blindness(TRUE, overlay, add_color)
-		if(UNCONSCIOUS, HARD_CRIT)
+		if(UNCONSCIOUS)
 			do_set_blindness(FALSE, overlay, add_color)
 		if(DEAD)
 			do_set_blindness(TRUE, overlay, add_color)

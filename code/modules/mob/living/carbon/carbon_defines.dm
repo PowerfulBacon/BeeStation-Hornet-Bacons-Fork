@@ -84,3 +84,11 @@
 
 	/// Only load in visual organs
 	var/visual_only_organs = FALSE
+
+	// when the mob goes from "normal" to crit
+	var/pain_crit_threshold = PAIN_CRIT_AMOUNT
+	///When the mob enters hard critical state and is fully incapacitated.
+	var/hardcrit_threshold = HEALTH_THRESHOLD_FULLCRIT
+
+	/// Current level of pain, read only
+	var/pain = 0

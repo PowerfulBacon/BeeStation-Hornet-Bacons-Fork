@@ -6,8 +6,7 @@
 #define CONSCIOUS	0
 #define SOFT_CRIT	1
 #define UNCONSCIOUS	2
-#define HARD_CRIT	3
-#define DEAD		4
+#define DEAD		3
 
 //Maximum healthiness an individual can have
 #define MAX_SATIETY 600

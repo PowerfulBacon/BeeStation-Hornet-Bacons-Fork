@@ -167,10 +167,6 @@
 	else
 		CRASH("[src] does not have a HEALTH_HUD but updates it!")
 
-//for carbon suit sensors
-/mob/living/carbon/med_hud_set_health()
-	..()
-
 //called when a carbon changes stat, virus or XENO_HOST
 /mob/living/proc/med_hud_set_status()
 	SIGNAL_HANDLER
@@ -374,7 +370,7 @@
 	switch(stat)
 		if(CONSCIOUS)
 			holder.icon_state = "hudstat"
-		if(UNCONSCIOUS, HARD_CRIT)
+		if(UNCONSCIOUS)
 			holder.icon_state = "hudoffline"
 		else
 			holder.icon_state = "huddead2"

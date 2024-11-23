@@ -124,7 +124,7 @@
 	if(M.IsSleeping())
 		return power * 0.25 //Voluntary unconsciousness yields lower healing.
 	switch(M.stat)
-		if(UNCONSCIOUS, HARD_CRIT)
+		if(UNCONSCIOUS)
 			return power * 0.9
 		if(SOFT_CRIT)
 			return power * 0.5

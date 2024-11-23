@@ -166,12 +166,8 @@
 		updatehealth()
 
 /mob/living/proc/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
-	if(!forced && status_flags & GODMODE)
-		return
-	. = oxyloss
-	oxyloss = amount
-	if(updating_health)
-		updatehealth()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	return adjustOxyLoss(amount - oxyloss, updating_health, forced)
 
 /mob/living/proc/getToxLoss()
 	return toxloss
@@ -185,12 +181,8 @@
 	return amount
 
 /mob/living/proc/setToxLoss(amount, updating_health = TRUE, forced = FALSE)
-	if(!forced && (status_flags & GODMODE))
-		return FALSE
-	toxloss = amount
-	if(updating_health)
-		updatehealth()
-	return amount
+	SHOULD_NOT_OVERRIDE(TRUE)
+	return adjustOxyLoss(amount - toxloss, updating_health, forced)
 
 /mob/living/proc/getFireLoss()
 	return fireloss
@@ -215,12 +207,8 @@
 	return amount
 
 /mob/living/proc/setCloneLoss(amount, updating_health = TRUE, forced = FALSE)
-	if(!forced && ((status_flags & GODMODE) || HAS_TRAIT(src, TRAIT_NOCLONELOSS)))
-		return FALSE
-	cloneloss = amount
-	if(updating_health)
-		updatehealth()
-	return amount
+	SHOULD_NOT_OVERRIDE(TRUE)
+	return adjustCloneLoss(amount - cloneloss, updating_health, forced)
 
 /mob/living/proc/adjustOrganLoss(slot, amount, maximum, required_status)
 	return

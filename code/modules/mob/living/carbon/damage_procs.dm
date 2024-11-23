@@ -107,6 +107,7 @@
 	return amount
 
 /mob/living/carbon/setStaminaLoss(amount, updating_health = TRUE, forced = FALSE)
+	SHOULD_NOT_OVERRIDE(TRUE)
 	var/current = getStaminaLoss()
 	var/diff = amount - current
 	if(!diff)
@@ -132,9 +133,8 @@
   *				 set or clear the failing variable on that organ, making it either cease or start functions again, unlike adjustOrganLoss.
   */
 /mob/living/carbon/setOrganLoss(slot, amount)
-	var/obj/item/organ/O = getorganslot(slot)
-	if(O && !(status_flags & GODMODE))
-		O.setOrganDamage(amount)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	adjustOrganLoss(slot, amount, amount)
 
 /** getOrganLoss
   * inputs: slot (organ slot, like ORGAN_SLOT_HEART)
@@ -189,6 +189,7 @@
 	var/obj/item/bodypart/picked = pick(parts)
 	if(picked.receive_damage(brute, burn, stamina,check_armor ? run_armor_check(picked, (brute ? MELEE : burn ? FIRE : stamina ? STAMINA : null)) : FALSE))
 		update_damage_overlays()
+		give_temporary_pain((brute + burn + stamina) * PAIN_TEMPORARY_DISSIPATION, picked.body_zone)
 
 //Heal MANY bodyparts, in random order
 /mob/living/carbon/heal_overall_damage(brute = 0, burn = 0, stamina = 0, required_status, updating_health = TRUE)
@@ -234,6 +235,7 @@
 
 
 		update |= picked.receive_damage(brute_per_part, burn_per_part, stamina_per_part, FALSE, required_status)
+		give_temporary_pain((brute_per_part + burn_per_part + stamina_per_part) * PAIN_TEMPORARY_DISSIPATION, picked.body_zone)
 
 		brute	= round(brute - (picked.brute_dam - brute_was), DAMAGE_PRECISION)
 		burn	= round(burn - (picked.burn_dam - burn_was), DAMAGE_PRECISION)

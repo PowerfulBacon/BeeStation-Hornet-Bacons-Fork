@@ -10,7 +10,7 @@
 	speak_chance = 0
 	turns_per_move = 5
 	speed = 0
-	stat_attack = HARD_CRIT
+	stat_attack = UNCONSCIOUS
 	robust_searching = 1
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	maxHealth = 100

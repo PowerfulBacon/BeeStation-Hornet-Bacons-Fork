@@ -83,6 +83,9 @@
 	var/medium_burn_msg = "blistered"
 	var/heavy_burn_msg = "peeling away"
 
+	/// Can this bodypart feel pain?
+	var/feels_pain = TRUE
+
 	/// So we know if we need to scream if this limb hits max damage
 	var/last_maxed
 
@@ -663,7 +666,7 @@
 	var/obj/item/cavity_item
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
-	if(owner.stat < HARD_CRIT)
+	if(owner.stat < UNCONSCIOUS)
 		return FALSE
 	return ..()
 

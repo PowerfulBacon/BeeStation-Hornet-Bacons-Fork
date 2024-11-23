@@ -256,7 +256,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/simple_animal/slime)
 			tab_data["Slime Status"] = GENERATE_STAT_TEXT("You can evolve!")
 
 	switch(stat)
-		if(HARD_CRIT, UNCONSCIOUS)
+		if(UNCONSCIOUS)
 			tab_data["Unconscious"] = GENERATE_STAT_TEXT("You are knocked out by high levels of BZ!")
 		else
 			tab_data["Power Level"] = GENERATE_STAT_TEXT("[powerlevel]")
@@ -459,7 +459,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/simple_animal/slime)
 	if (stat == DEAD)
 		. += "<span class='deadsay'>It is limp and unresponsive.</span>"
 	else
-		if (stat == UNCONSCIOUS || stat == HARD_CRIT) // Slime stasis
+		if (stat == UNCONSCIOUS) // Slime stasis
 			. += "<span class='deadsay'>It appears to be alive but unresponsive.</span>"
 		if (getBruteLoss())
 			. += "<span class='warning'>"

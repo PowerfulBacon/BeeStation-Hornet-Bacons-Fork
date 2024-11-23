@@ -228,22 +228,28 @@
 /obj/item/bodypart/head/golem
 	limb_id = "golem"
 	is_dimorphic = FALSE
+	feels_pain = FALSE
 
 /obj/item/bodypart/chest/golem
 	limb_id = "golem"
 	is_dimorphic = FALSE
+	feels_pain = FALSE
 
 /obj/item/bodypart/l_arm/golem
 	limb_id = "golem"
+	feels_pain = FALSE
 
 /obj/item/bodypart/r_arm/golem
 	limb_id = "golem"
+	feels_pain = FALSE
 
 /obj/item/bodypart/l_leg/golem
 	limb_id = "golem"
+	feels_pain = FALSE
 
 /obj/item/bodypart/r_leg/golem
 	limb_id = "golem"
+	feels_pain = FALSE
 
 ///
 /obj/item/bodypart/head/golem/alloy

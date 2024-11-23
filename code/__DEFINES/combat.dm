@@ -293,3 +293,15 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define ENERGY_SHIELD_INVISIBLE (1 << 2)
 /// Energy shield will take max damage when EMP'd
 #define ENERGY_SHIELD_EMP_VULNERABLE (1 << 3)
+
+// Pain numbers
+/// Base damage to pain conversion rate. Going lower than 50% causes death before paincrit (outside of immediate damage pain).
+#define DAMAGE_TO_PAIN_RATE 0.65
+/// Max amount of slowdown that you can incur from pain
+#define MAX_PAIN_SLOWDOWN 1
+/// Pain crit amount
+#define PAIN_CRIT_AMOUNT 100
+/// How much damage converts to temporary pain
+#define PAIN_TEMPORARY_DAMAGE_MULTIPLIER 1.5
+/// Rate at which temporary pain dissipates per second
+#define PAIN_TEMPORARY_DISSIPATION 2
