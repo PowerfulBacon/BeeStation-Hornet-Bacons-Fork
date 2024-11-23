@@ -11,7 +11,7 @@
 	clumsy_check = 0
 	item_flags = NONE
 	casing_ejector = FALSE
-	fire_rate = 3
+	fire_delay = 3
 	weapon_weight = WEAPON_LIGHT
 	burst_size = 3
 	fire_delay = 3 // Slightly worse than the actual sabre
@@ -35,7 +35,6 @@
 	mag_type = /obj/item/ammo_box/magazine/toy/pistol
 	fire_sound = 'sound/weapons/gunshot.ogg'
 	burst_size = 1
-	fire_delay = 0
 	automatic = 0
 	actions_types = list()
 

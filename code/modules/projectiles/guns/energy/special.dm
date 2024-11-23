@@ -157,7 +157,7 @@
 	usesound = list('sound/items/welder.ogg', 'sound/items/welder2.ogg')
 	tool_behaviour = TOOL_WELDER
 	weapon_weight = WEAPON_LIGHT
-	fire_rate = 3
+	fire_delay = 3
 	automatic = 1
 	toolspeed = 0.7 //plasmacutters can be used as welders, and are faster than standard welders
 	var/progress_flash_divisor = 10  //copypasta is best pasta
@@ -340,7 +340,7 @@
 	can_charge = FALSE
 	use_cyborg_cell = TRUE
 	automatic = 1
-	fire_rate = 6
+	fire_delay = 2
 	requires_wielding = FALSE
 
 /obj/item/gun/energy/printer/update_icon()
@@ -356,7 +356,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/temp, /obj/item/ammo_casing/energy/temp/hot)
 	cell_type = "/obj/item/stock_parts/cell/high"
 	automatic = 1
-	fire_rate = 4
+	fire_delay = 3
 	pin = null
 
 /obj/item/gun/energy/temperature/pin

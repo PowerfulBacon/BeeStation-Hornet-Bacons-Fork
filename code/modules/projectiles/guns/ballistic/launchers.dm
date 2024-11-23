@@ -13,7 +13,7 @@
 	spread_unwielded = 8
 	bolt_type = BOLT_TYPE_NO_BOLT
 	weapon_weight = WEAPON_MEDIUM
-	fire_rate = 2
+	fire_delay = 5
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted
 	pin = /obj/item/firing_pin
@@ -55,7 +55,6 @@
 	can_suppress = FALSE
 	pin = /obj/item/firing_pin/implant/pindicate
 	burst_size = 1
-	fire_delay = 0
 	casing_ejector = FALSE
 	weapon_weight = WEAPON_HEAVY
 	bolt_type = BOLT_TYPE_NO_BOLT

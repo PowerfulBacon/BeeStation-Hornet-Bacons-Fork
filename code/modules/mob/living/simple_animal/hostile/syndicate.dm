@@ -366,7 +366,7 @@
 	approaching_target = TRUE
 	ranged = TRUE
 	rapid = 65
-	rapid_fire_delay = 0.5
+	rapid_fire_delay = 1
 	projectiletype = /obj/projectile/beam
 	ranged_cooldown_time = 110
 	vision_range = 9

@@ -54,7 +54,7 @@
 		to_chat(user, "<span class='warning'>Not enough left!</span>")
 		return
 
-	user.changeNext_move(CLICK_CD_RANGE*2)
+	user.changeNext_move(CLICK_CD_MELEE)
 	user.newtonian_move(get_dir(target, user))
 
 	if (get_turf(user) == get_turf(target))

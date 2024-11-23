@@ -14,7 +14,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/tesla_revolver)
 	pin = null
 	shaded_charge = TRUE
-	fire_rate = 1.5
+	fire_delay = 8
 
 /obj/item/gun/energy/tesla_revolver/add_seclight_point()
 	return

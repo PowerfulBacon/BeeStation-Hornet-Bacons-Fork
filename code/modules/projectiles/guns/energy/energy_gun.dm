@@ -67,7 +67,7 @@
 	w_class = WEIGHT_CLASS_LARGE
 	force = 10
 	automatic = 1
-	fire_rate = 3
+	fire_delay = 5
 	full_auto = TRUE
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/hos, /obj/item/ammo_casing/energy/laser/hos, /obj/item/ammo_casing/energy/disabler/hos)
 	ammo_x_offset = 4
@@ -90,7 +90,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 	ammo_type = list(/obj/item/ammo_casing/energy/net, /obj/item/ammo_casing/energy/trap)
 	ammo_x_offset = 1
-	fire_rate = 1.5
+	fire_delay = 8
 	w_class = WEIGHT_CLASS_LARGE
 
 /obj/item/gun/energy/e_gun/dragnet/add_seclight_point()
@@ -114,7 +114,7 @@
 	trigger_guard = TRIGGER_GUARD_NONE
 	ammo_x_offset = 2
 	automatic = 1
-	fire_rate = 5
+	fire_delay = 2
 
 /obj/item/gun/energy/e_gun/turret/add_seclight_point()
 	return

@@ -87,7 +87,7 @@
 	icon_state = "rapidsyringegun"
 	max_syringes = 6
 	automatic = 1
-	fire_rate = 2
+	fire_delay = 5
 
 /obj/item/gun/syringe/syndicate
 	name = "dart pistol"

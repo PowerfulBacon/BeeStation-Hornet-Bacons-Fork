@@ -13,7 +13,7 @@
 	rack_sound = "sound/weapons/pistolrack.ogg"
 	bolt_drop_sound = "sound/weapons/pistolslidedrop.ogg"
 	bolt_wording = "slide"
-	fire_rate = 3
+	fire_delay = 7
 	automatic = 0
 	weapon_weight = WEAPON_LIGHT
 
@@ -135,7 +135,7 @@
 	can_suppress = FALSE
 	fire_sound = 'sound/weapons/laser.ogg'
 	casing_ejector = FALSE
-	fire_rate = 4
+	fire_delay = 3
 	can_suppress = FALSE
 	worn_icon_state = "officer_pistol"
 	var/stripe_state = "officer_com"

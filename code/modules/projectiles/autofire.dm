@@ -20,16 +20,16 @@ Everything else should be handled for you. Good luck soldier.
 			if(var_value) //Admin editing the autofire to true on a gun, let's help them out.
 				if(!autofire_component)
 					autofire_component = AddComponent(/datum/component/full_auto)
-					if(fire_rate)
-						autofire_component.default_fire_delay = (10 / fire_rate)
+					if(fire_delay)
+						autofire_component.default_fire_delay = fire_delay
 					return
 			else //They're trying to disable the full auto of a gun. Remove the relevent component
 				if(autofire_component)
 					autofire_component.RemoveComponent()
 					qdel(autofire_component)
 					return ..()
-		if(NAMEOF(src, fire_rate))
-			autofire_component?.default_fire_delay = (10 / var_value)
+		if(NAMEOF(src, fire_delay))
+			autofire_component?.default_fire_delay = fire_delay
 			return
 
 /obj/item/gun/Initialize(mapload)
@@ -37,8 +37,8 @@ Everything else should be handled for you. Good luck soldier.
 	if(full_auto)
 		canMouseDown = TRUE
 		autofire_component = AddComponent(/datum/component/full_auto)
-		if(fire_rate)
-			autofire_component.default_fire_delay = (10 / fire_rate) //Higher fire rate go brr
+		if(fire_delay)
+			autofire_component.default_fire_delay = fire_delay
 
 /datum/component/full_auto
 	var/atom/autofire_target = null

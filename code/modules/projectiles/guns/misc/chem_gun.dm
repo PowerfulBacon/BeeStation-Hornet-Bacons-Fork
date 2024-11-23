@@ -12,7 +12,7 @@
 	custom_materials = list(/datum/material/iron=2000)
 	clumsy_check = FALSE
 	fire_sound = 'sound/items/syringeproj.ogg'
-	fire_rate = 1.5
+	fire_delay = 20
 	var/time_per_syringe = 250
 	var/syringes_left = 4
 	var/max_syringes = 4
@@ -54,7 +54,7 @@
 	item_state = "chemgun"
 	fire_sound = 'sound/creatures/bee.ogg'
 	automatic = 1
-	fire_rate = 5
+	fire_delay = 2
 	time_per_syringe = 80
 	syringes_left = 20
 	max_syringes = 20

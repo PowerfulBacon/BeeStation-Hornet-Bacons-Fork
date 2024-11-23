@@ -28,7 +28,7 @@
 	bolt_type = BOLT_TYPE_PUMP
 	cartridge_wording = "shell"
 	tac_reloads = FALSE
-	fire_rate = 1 //reee
+	fire_delay = 10
 	recoil = 1
 	pb_knockback = 2
 
@@ -158,7 +158,6 @@
 	w_class = WEIGHT_CLASS_LARGE
 	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/m12g
-	fire_delay = 0
 	pin = /obj/item/firing_pin/implant/pindicate
 	spread_unwielded = 8
 	actions_types = list()
@@ -168,7 +167,7 @@
 	special_mags = TRUE
 	internal_magazine = FALSE
 	tac_reloads = TRUE
-	fire_rate = 2
+	fire_delay = 5
 	automatic = 1
 	recoil = 0
 	bolt_type = BOLT_TYPE_STANDARD	//Not using a pump
@@ -204,7 +203,7 @@
 						)
 	semi_auto = TRUE
 	bolt_type = BOLT_TYPE_NO_BOLT
-	fire_rate = 2 //being double barrelled, you don't rely on internal mechanisms.
+	fire_delay = 5
 	pb_knockback = 3
 
 /obj/item/gun/ballistic/shotgun/doublebarrel/reskin_obj(mob/M)

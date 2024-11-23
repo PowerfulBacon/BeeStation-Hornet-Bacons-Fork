@@ -16,7 +16,7 @@
 	icon_state = "saber"
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
 	pin = null
-	fire_rate = 5
+	fire_delay = 2
 	fire_delay = 2
 	bolt_type = BOLT_TYPE_LOCKING
 	mag_display = TRUE
@@ -44,11 +44,9 @@
 	select = !select
 	if(!select)
 		burst_size = 1
-		fire_delay = 0
 		to_chat(user, "<span class='notice'>You switch to [full_auto ? "full-auto": "semi-automatic."]</span>")
 	else
 		burst_size = initial(burst_size)
-		fire_delay = initial(fire_delay)
 		to_chat(user, "<span class='notice'>You switch to [burst_size]-rnd burst.</span>")
 
 	playsound(user, 'sound/weapons/empty.ogg', 100, 1)
@@ -95,7 +93,7 @@
 	mag_display = TRUE
 	mag_display_ammo = TRUE
 	empty_indicator = TRUE
-	fire_rate = 3
+	fire_delay = 4
 	w_class = WEIGHT_CLASS_BULKY
 	full_auto = TRUE
 
@@ -110,7 +108,7 @@
 	mag_type = /obj/item/ammo_box/magazine/uzim9mm
 	bolt_type = BOLT_TYPE_OPEN
 	mag_display = TRUE
-	fire_rate = 4
+	fire_delay = 3
 	rack_sound = "sound/weapons/pistollock.ogg"
 
 /obj/item/gun/ballistic/automatic/m90
@@ -173,7 +171,6 @@
 		if(0)
 			select = 1
 			burst_size = initial(burst_size)
-			fire_delay = initial(fire_delay)
 			to_chat(user, "<span class='notice'>You switch to [burst_size]-rnd burst.</span>")
 		if(1)
 			select = 2
@@ -181,7 +178,6 @@
 		if(2)
 			select = 0
 			burst_size = 1
-			fire_delay = 0
 			to_chat(user, "<span class='notice'>You switch to semi-auto.</span>")
 	playsound(user, 'sound/weapons/empty.ogg', 100, 1)
 	update_icon()
@@ -196,7 +192,7 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/tommygunm45
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
-	fire_rate = 5
+	fire_delay = 2
 	can_suppress = FALSE
 	bolt_type = BOLT_TYPE_OPEN
 
@@ -209,7 +205,7 @@
 	mag_type = /obj/item/ammo_box/magazine/m556
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
 	can_suppress = FALSE
-	fire_rate = 4
+	fire_delay = 2.5
 
 
 // L6 SAW //
@@ -225,7 +221,7 @@
 	weapon_weight = WEAPON_HEAVY
 	var/cover_open = FALSE
 	can_suppress = FALSE
-	fire_rate = 6
+	fire_delay = 2
 	spread = 7
 	pin = /obj/item/firing_pin/implant/pindicate
 	bolt_type = BOLT_TYPE_OPEN
@@ -306,7 +302,7 @@
 	actions_types = list()
 	mag_display = TRUE
 	automatic = 0
-	fire_rate = 1.5
+	fire_delay = 10
 
 // Improv Pipe Sub-Machinegun //
 
@@ -325,7 +321,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BELT
 	actions_types = null
-	fire_rate = 2
+	fire_delay = 5
 	spread = 10
 
 // Laser rifle (rechargeable magazine) //
@@ -340,5 +336,5 @@
 	actions_types = list()
 	fire_sound = 'sound/weapons/laser.ogg'
 	casing_ejector = FALSE
-	fire_rate = 2
+	fire_delay = 5
 

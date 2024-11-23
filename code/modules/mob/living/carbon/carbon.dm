@@ -270,8 +270,8 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 			changeNext_move(CLICK_CD_BREAKOUT)
 			last_special = world.time + CLICK_CD_BREAKOUT
 		if(type == 2)
-			changeNext_move(CLICK_CD_RANGE)
-			last_special = world.time + CLICK_CD_RANGE
+			changeNext_move(CLICK_CD_RESIST)
+			last_special = world.time + CLICK_CD_RESIST
 		cuff_resist(I)
 
 

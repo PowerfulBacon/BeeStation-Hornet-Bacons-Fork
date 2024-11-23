@@ -104,7 +104,7 @@
 	w_class = WEIGHT_CLASS_HUGE
 	custom_materials = null
 	automatic = 1
-	fire_rate = 10
+	fire_delay = 1
 	weapon_weight = WEAPON_HEAVY
 	ammo_type = list(/obj/item/ammo_casing/energy/laser)
 	cell_type = /obj/item/stock_parts/cell/minigun

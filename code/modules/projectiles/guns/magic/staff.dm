@@ -6,7 +6,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/staves_righthand.dmi'
 	item_flags = NEEDS_PERMIT | NO_MAT_REDEMPTION
 	weapon_weight = WEAPON_MEDIUM
-	fire_rate = 1.5
+	fire_delay = 8
 	block_power = 20 //staffs can block shit if you're walking
 	block_upgrade_walk = 1
 

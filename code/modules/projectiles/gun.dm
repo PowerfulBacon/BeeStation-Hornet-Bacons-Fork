@@ -41,9 +41,8 @@
 	var/sawn_item_state = null			//used if gun has a special sawn-off in-hand sprite
 	var/sawn_off = FALSE
 	var/burst_size = 1					//how large a burst is
-	var/fire_delay = 0					//rate of fire for burst firing and semi auto
+	var/fire_delay = CLICK_CD_RANGE					//maximum rate of fire of the gun, semi, burst and full-auto
 	var/firing_burst = 0				//Prevent the weapon from firing again while already firing
-	var/semicd = 0						//cooldown handler
 	var/weapon_weight = WEAPON_LIGHT
 	var/dual_wield_spread = 24			//additional spread when dual wielding
 	var/spread = 0						//Spread induced by the gun itself.
@@ -79,10 +78,8 @@
 
 	var/automatic = 0 //can gun use it, 0 is no, anything above 0 is the delay between clicks in ds
 
-	var/fire_rate = null //how many times per second can a gun fire? default is 2.5
 	//Autofire
 	var/atom/autofire_target = null //What are we aiming at? This will change if you move your mouse whilst spraying.
-	var/next_autofire = 0 //As to stop mag dumps, Whoops!
 	var/pb_knockback = 0
 	var/ranged_cooldown = 0
 
@@ -432,14 +429,8 @@
 
 /obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0, aimed = FALSE)
 	add_fingerprint(user)
-	if(fire_rate)
-		ranged_cooldown = world.time + 10 / fire_rate
-		user.client?.give_cooldown_cursor(10 / fire_rate)
-	else
-		ranged_cooldown = world.time + CLICK_CD_RANGE
-		user.client?.give_cooldown_cursor(CLICK_CD_RANGE)
-	if(semicd)
-		return
+	ranged_cooldown = world.time + fire_delay
+	user.client?.give_cooldown_cursor(fire_delay)
 
 	var/sprd = 0
 	var/min_gun_sprd = 0
@@ -486,8 +477,6 @@
 			return
 		process_chamber()
 		update_appearance(UPDATE_ICON)
-		semicd = TRUE
-		addtimer(CALLBACK(src, PROC_REF(reset_semicd)), fire_delay)
 
 	if(user)
 		user.update_inv_hands()
@@ -507,9 +496,6 @@
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
 		. += knife_overlay
-
-/obj/item/gun/proc/reset_semicd()
-	semicd = FALSE
 
 /obj/item/gun/attack(mob/M as mob, mob/user)
 	if(user.a_intent == INTENT_HARM) //Flogging
@@ -624,7 +610,7 @@
 	if(HAS_TRAIT(user, TRAIT_PACIFISM)) //This prevents multiplying projectile damage without shooting yourself.
 		return
 
-	if(semicd)
+	if(ranged_cooldown > world.time)
 		return
 
 	if(user == target)
@@ -634,18 +620,13 @@
 		target.visible_message("<span class='warning'>[user] points [src] at [target]'s head, ready to pull the trigger...</span>", \
 			"<span class='userdanger'>[user] points [src] at your head, ready to pull the trigger...</span>")
 
-	semicd = TRUE
-
 	if(!bypass_timer && (!do_after(user, 12 SECONDS, target) || !user.is_zone_selected(BODY_ZONE_PRECISE_MOUTH)))
 		if(user)
 			if(user == target)
 				user.visible_message("<span class='notice'>[user] decided not to shoot.</span>")
 			else if(target && target.Adjacent(user))
 				target.visible_message("<span class='notice'>[user] has decided to spare [target].</span>", "<span class='notice'>[user] has decided to spare your life!</span>")
-		semicd = FALSE
 		return
-
-	semicd = FALSE
 
 	target.visible_message("<span class='warning'>[user] pulls the trigger!</span>", "<span class='userdanger'>[(user == target) ? "You pull" : "[user] pulls"] the trigger!</span>")
 
