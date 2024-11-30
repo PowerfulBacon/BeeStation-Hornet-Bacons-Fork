@@ -541,6 +541,9 @@
 					+ "\n<span class='boldwarning'>If the interview interface is not open, use the Open Interview verb in the top right.</span>")
 
 /mob/dead/new_player/say(message, bubble_type, var/list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	return
+	client.ooc(message)
+
+/mob/dead/new_player/can_hear()
+	return FALSE
 
 #undef LINKIFY_READY
