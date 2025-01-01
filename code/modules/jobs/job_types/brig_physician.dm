@@ -32,6 +32,8 @@
 
 	minimal_lightup_areas = list(/area/medical/morgue)
 
+	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
+
 /datum/outfit/job/brig_physician
 	name = JOB_NAME_BRIGPHYSICIAN
 	jobtype = /datum/job/brig_physician
