@@ -1,13 +1,19 @@
 SUBSYSTEM_DEF(directives)
 	name = "Priority Directives"
 	wait = 10 SECONDS
+	/// The time before the personal directives are issued
+	var/next_personal_directive_time
+	/// The currently active shared directive, which all uplink holders are given access to
 	var/datum/priority_directive/active_directive = null
+	/// The time before the next directive is issued
 	var/next_directive_time
+	/// A list of directive singleton instances
 	var/list/directives = list()
 
 /datum/controller/subsystem/directives/Initialize(start_timeofday)
 	. = ..()
-	next_directive_time = world.time + 15 MINUTES
+	next_directive_time = world.time + 20 MINUTES
+	next_personal_directive_time = world.time + 5 MINUTES
 	for (var/directive_type in subtypesof(/datum/priority_directive))
 		directives += new directive_type()
 
@@ -41,7 +47,6 @@ SUBSYSTEM_DEF(directives)
 	next_directive_time = INFINITY
 	active_directive = selected
 
-/*
 /client/verb/force_directive()
 	set name = "force directive"
 	set category = "powerfulbacon"
@@ -61,7 +66,6 @@ SUBSYSTEM_DEF(directives)
 	selected.start(GLOB.uplinks, player_minds)
 	SSdirectives.next_directive_time = INFINITY
 	SSdirectives.active_directive = selected
-*/
 
 /datum/controller/subsystem/directives/proc/get_uplink_data(datum/component/uplink/uplink)
 	var/data = list()
@@ -113,3 +117,8 @@ SUBSYSTEM_DEF(directives)
 	if (!active_directive)
 		return
 	active_directive.perform_special_action(uplink, user)
+
+/datum/controller/subsystem/directives/proc/queue_directive()
+	next_directive_time = world.time + 15 MINUTES
+
+/datum/controller/subsystem/directives/proc/dispatch_personal_objectives()

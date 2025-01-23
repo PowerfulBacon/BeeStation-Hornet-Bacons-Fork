@@ -106,8 +106,8 @@ export const Uplink = (props, context) => {
   let currentLevel = GetLevel(reputation).name;
 
   return (
-    <Window theme="syndicate" width={900} height={600}>
-      <Window.Content scrollable>
+    <Window theme="syndicate" width={900} height={630}>
+      <Window.Content scrollable minWidth="680px" minHeight="600px">
         <Tabs>
           <Tabs.Tab
             selected={tab === 2}
@@ -156,6 +156,7 @@ export const Uplink = (props, context) => {
 const HomePage = (props, context) => {
   const { data } = useBackend(context);
   const { reputation } = data;
+  const [tab, setTab] = useSharedState(context, 'tab_id', 2);
   let previousLevel = GetLevel(reputation, -1);
   let currentLevel = GetLevel(reputation);
   let nextLevel = GetLevel(reputation, 1);
@@ -163,9 +164,35 @@ const HomePage = (props, context) => {
     <Flex direction="column" className="uplink_page">
       <Flex.Item height="100%">
         <div className="Home Section">
-          <div className="HomeLeft">
-            <div className="HomeTitle">Welcome, Agent.</div>
-            <div className="HomeRanks">
+          <div className="HomeTitle">Welcome, Agent.</div>
+          <div className="HomeTeam border_section">
+            <div className="HomeIntro">
+              <div>Welcome to the Syndicate universal uplink!</div>
+              <div>
+                The Syndicate is a coalition of companies and individuals seeking to reform inter-galactic law
+                to improve the quality of life for all employees. Each organisation within the Syndicate has its
+                own collection of goals, motivations and conflicts. Despite this, we have still managed to set
+                aside our differences to resolve the greatest issue faced by all; Nanotrasen&apos;s monopoly over the
+                individual.
+              </div>
+              <div>
+                This uplink contains everything you need to start making a difference. Ready? Head to
+                the
+                <Box ml={0.5} mr={0.5} inline className="IntroLink" onClick={() => {
+                  setTab(1);
+                }}>directives tab
+                </Box>
+                and find out what you can do to help, or explore our shared
+                <Box ml={0.5} inline className="IntroLink" onClick={() => {
+                  setTab(0);
+                }}>goods-exchange tool
+                </Box>
+                .
+              </div>
+            </div>
+          </div>
+          <div className="HomeBottom">
+            <div className="HomeRanks border_section">
               <RankCard
                 name={previousLevel.name}
                 relation="Previous Rank"
@@ -192,14 +219,20 @@ const HomePage = (props, context) => {
                 progression_colour="#134F12"
               />
             </div>
-          </div>
-          <div className="HomeRight">
-            Current Reputation
-            <div className="HomeButton">200 Reputation</div>
-            Uplink Services
-            <div className="HomeButton">Shop Now</div>
-            Special Directives
-            <div className="HomeButton">None Available</div>
+            <div className="HomeFaction border_section">
+              Message from your organisation:
+              <br />
+              Gorlex Marauders
+              <br />
+              Codewords: Alpha Beta Charlie
+              <br />
+              Codewords: Alpha Beta Charlie
+              <br />
+              <div className="TextFlash">
+                All other Syndicate agents operating in this sector are to be
+                considered hostile if they cannot reproduce the codewords.
+              </div>
+            </div>
           </div>
         </div>
       </Flex.Item>

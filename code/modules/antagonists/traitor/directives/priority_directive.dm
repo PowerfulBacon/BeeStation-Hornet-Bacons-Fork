@@ -80,7 +80,7 @@ NAMED_TUPLE_1(directive_special_action, var, action_name)
 /datum/priority_directive/proc/finish()
 	SHOULD_CALL_PARENT(TRUE)
 	SSdirectives.active_directive = null
-	SSdirectives.next_directive_time = world.time + rand(5 MINUTES, 10 MINUTES)
+	SSdirectives.queue_directive()
 
 /// Activate the directive, requires a list of traitor datums and security minsd
 /datum/priority_directive/proc/start(list/uplinks, list/player_minds)
