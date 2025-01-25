@@ -75,25 +75,25 @@
 	. = ..()
 	update_traitor_icons_added()
 	// Give codewords to the new mob on mind transfer.
-	if(mob_override && istype(traitor_faction) && traitor_faction.give_codewords)
+	if(mob_override)
 		give_codewords(mob_override)
 
 /datum/antagonist/traitor/remove_innate_effects(mob/living/mob_override)
 	. = ..()
 	update_traitor_icons_removed()
 	// Remove codewords from the old mob on mind transfer.
-	if(mob_override && istype(traitor_faction) && traitor_faction.give_codewords)
+	if(mob_override)
 		remove_codewords(mob_override)
 
 /// Enables displaying codewords to this traitor.
 /datum/antagonist/traitor/proc/give_codewords(mob/living/mob_override)
-	if((!mob_override && !owner.current) || !istype(traitor_faction))
+	if((!mob_override && !owner.current))
 		return
 	has_codewords = TRUE
 	RegisterSignal(mob_override || owner.current, COMSIG_MOVABLE_HEAR, PROC_REF(handle_hearing))
 
 /datum/antagonist/traitor/proc/remove_codewords(mob/living/mob_override)
-	if((!mob_override && !owner.current) || !istype(traitor_faction))
+	if((!mob_override && !owner.current))
 		return
 	has_codewords = FALSE
 	UnregisterSignal(mob_override || owner.current, COMSIG_MOVABLE_HEAR, PROC_REF(handle_hearing))

@@ -14,7 +14,7 @@
 
 /datum/action/antag_info/traitor_menu
 	name = "Traitor Info and Backstory"
-	desc = "View and customize your traitor faction, backstory, objectives, codewords, uplink location, \
+	desc = "View and customize your backstory, objectives, codewords, uplink location, \
 	and objective backstories."
 	button_icon_state = "traitor_objectives"
 	icon_icon = 'icons/hud/actions/action_generic.dmi'
@@ -27,15 +27,10 @@
 /datum/antagonist/traitor/ui_data(mob/user)
 
 	var/list/data = list()
-	data["allowed_factions"] = allowed_factions
 	data["allowed_backstories"] = allowed_backstories
-	data["recommended_factions"] = recommended_factions
 	data["recommended_backstories"] = recommended_backstories
 	if(istype(backstory))
 		data["backstory"] = "[backstory.type]"
-	if(istype(traitor_faction))
-		data["faction"] = traitor_faction.key
-		data["employer"] = employer
 
 	var/datum/component/uplink/uplink = uplink_ref?.resolve()
 	data["antag_name"] = name
@@ -70,7 +65,6 @@
 			"name" = backstory.name,
 			"description" = backstory.description,
 			"path" = path,
-			"allowed_factions" = backstory.allowed_factions,
 			"motivations" = backstory.motivations,
 		)
 	data["all_backstories"] = all_backstories
@@ -87,16 +81,7 @@
 			if(istype(backstory)) // bad!!
 				return TRUE
 			var/datum/traitor_backstory/selected_backstory = GLOB.traitor_backstories[params["backstory"]]
-			var/datum/traitor_faction/selected_faction = GLOB.traitor_factions_to_datum[params["faction"]]
-			if(!istype(selected_faction) || !istype(selected_backstory))
-				return TRUE
-			if(istype(traitor_faction) && traitor_faction.key != selected_faction.key) // bad!
-				return TRUE
-			if(!(selected_faction.key in selected_backstory.allowed_factions))
-				return TRUE
 			if(!("[selected_backstory.type]" in allowed_backstories))
 				return TRUE
-			if(!istype(traitor_faction))
-				set_faction(selected_faction)
 			set_backstory(selected_backstory)
 			return TRUE
