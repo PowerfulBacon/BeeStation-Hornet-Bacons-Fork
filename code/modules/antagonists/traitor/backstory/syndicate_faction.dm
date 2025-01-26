@@ -6,6 +6,10 @@
 	/// List of hostile factions
 	var/list/hostile_factions = list()
 
+/// Can this mind be a member of this faction?
+/datum/syndicate_faction/proc/can_be_member(datum/mind/target)
+	return TRUE
+
 /datum/syndicate_faction/animal_rights
 	name = "Animal Rights Consortium"
 	faction_description = {"\
@@ -27,9 +31,20 @@ spread their message.
 		/datum/syndicate_faction/self
 	)
 
+/datum/syndicate_faction/animal_rights/can_be_member(datum/mind/target)
+	if (!target.current)
+		return FALSE
+	var/mob/living/carbon/human/human = target.current
+	// Somehow an animal
+	if (!istype(human))
+		return TRUE
+	if (human.dna.species.type == /datum/species/human || human.dna.species.type == /datum/species/ipc || human.dna.species.type == /datum/species/android)
+		return FALSE
+	return TRUE
+
 /datum/syndicate_faction/gorlex_marauders
 	name = "Gorlex Marauders"
-	faction_description {"\
+	faction_description = {"\
 The Gorlex Marauders are an extremely violent collection of highly
 elite operatives. They are among the groups most feared by high-ranking
 officials of Nanotrasen, primarily due to the severity of their
