@@ -3032,6 +3032,8 @@
 #include "code\modules\mapping\space_management\space_transition.dm"
 #include "code\modules\mapping\space_management\traits.dm"
 #include "code\modules\mapping\space_management\zlevel_manager.dm"
+#include "code\modules\melee\item_attack.dm"
+#include "code\modules\melee\wide_slash.dm"
 #include "code\modules\mentor\config.dm"
 #include "code\modules\mentor\mentor.dm"
 #include "code\modules\mentor\mentor_admintools.dm"
