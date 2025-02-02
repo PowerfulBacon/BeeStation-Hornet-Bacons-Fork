@@ -30,8 +30,5 @@
 	backstory = new_backstory
 	log_game("[key_name(owner)] selected traitor backstory [new_backstory.name]")
 	SSblackbox.record_feedback("tally", "traitor_backstory_selected", 1, new_backstory.name)
-	if(no_faction)
-		if(new_faction.give_codewords)
-			give_codewords()
-		equip(silent)
-	log_game("[key_name(owner)] selected traitor faction [new_faction.name]")
+	give_codewords()
+	equip(silent)
