@@ -25,8 +25,6 @@
 
 				//high dirt - 1/3 chance.
 	var/static/list/high_dirt_areas = typecacheof(list(/area/science/test_area,
-														/area/mine/production,
-														/area/mine/living_quarters,
 														/area/vacant_room/office,
 														/area/ruin/space))
 	if(is_type_in_typecache(A, high_dirt_areas))

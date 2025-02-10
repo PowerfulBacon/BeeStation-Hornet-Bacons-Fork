@@ -11,7 +11,6 @@
 		/obj/eldritch/narsie,
 		/obj/docking_port,
 		/obj/structure/lattice,
-		/obj/structure/stone_tile,
 		/obj/projectile,
 		/obj/effect/projectile,
 		/obj/effect/portal,
@@ -19,8 +18,6 @@
 		/obj/effect/hotspot,
 		/obj/effect/landmark,
 		/obj/effect/temp_visual,
-		/obj/effect/light_emitter/tendril,
-		/obj/effect/collapse,
 		/obj/effect/particle_effect/ion_trails,
 		/obj/effect/dummy/phased_mob
 		))
@@ -42,13 +39,10 @@
 
 /datum/component/chasm/proc/is_safe()
 	//if anything matching this typecache is found in the chasm, we don't drop things
-	var/static/list/chasm_safeties_typecache = typecacheof(list(/obj/structure/lattice/catwalk, /obj/structure/stone_tile))
+	var/static/list/chasm_safeties_typecache = typecacheof(list(/obj/structure/lattice/catwalk))
 
 	var/atom/parent = src.parent
 	var/list/found_safeties = typecache_filter_list(parent.contents, chasm_safeties_typecache)
-	for(var/obj/structure/stone_tile/S in found_safeties)
-		if(S.fallen)
-			LAZYREMOVE(found_safeties, S)
 	return LAZYLEN(found_safeties)
 
 /datum/component/chasm/proc/drop_stuff(AM)

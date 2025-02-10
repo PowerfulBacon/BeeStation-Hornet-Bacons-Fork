@@ -675,3 +675,61 @@
 /datum/chemical_reaction/slime/flight_potion/on_reaction(datum/reagents/holder)
 	new /obj/item/reagent_containers/cup/bottle/potion/flight(get_turf(holder.my_atom))
 	..()
+
+//Potion of Flight
+/obj/item/reagent_containers/cup/bottle/potion
+	icon = 'icons/obj/lavaland/artefacts.dmi'
+	icon_state = "potionflask"
+
+/obj/item/reagent_containers/cup/bottle/potion/flight
+	name = "strange elixir"
+	desc = "A flask with an almost-holy aura emitting from it. The label on the bottle says: 'erqo'hyy tvi'rf lbh jv'atf'."
+	list_reagents = list(/datum/reagent/flightpotion = 5)
+
+/obj/item/reagent_containers/cup/bottle/potion/update_icon()
+	if(reagents.total_volume)
+		icon_state = "potionflask"
+	else
+		icon_state = "potionflask_empty"
+
+/datum/reagent/flightpotion
+	name = "Flight Potion"
+	description = "Strange mutagenic compound of unknown origins."
+	reagent_state = LIQUID
+	process_flags = ORGANIC | SYNTHETIC
+	color = "#FFEBEB"
+	chem_flags = CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
+
+/datum/reagent/flightpotion/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+	if(iscarbon(M) && M.stat != DEAD)
+		var/mob/living/carbon/C = M
+		var/holycheck = ishumanbasic(C)
+		if(reac_volume < 5) // implying xenohumans are holy //as with all things,
+			if(method == INGEST && show_message)
+				to_chat(C, span_notice("<i>You feel nothing but a terrible aftertaste.</i>"))
+			return ..()
+		if(ishuman(C))
+			var/mob/living/carbon/human/H = C
+			var/obj/item/organ/wings/wings = H.getorganslot(ORGAN_SLOT_WINGS)
+			if(H.getorgan(/obj/item/organ/wings))
+				if(wings.flight_level <= WINGS_FLIGHTLESS)
+					wings.flight_level += 1 //upgrade the flight level
+					wings.Refresh(H) //they need to insert to get the flight emote
+			else
+				if(MOB_ROBOTIC in H.mob_biotypes)
+					var/obj/item/organ/wings/cybernetic/newwings = new()
+					newwings.Insert(H)
+				else if(holycheck)
+					var/obj/item/organ/wings/angel/newwings = new()
+					newwings.Insert(H)
+				else
+					var/obj/item/organ/wings/dragon/newwings = new()
+					newwings.Insert(H)
+				to_chat(C, span_userdanger("A terrible pain travels down your back as wings burst out!"))
+				playsound(C.loc, 'sound/items/poster_ripped.ogg', 50, TRUE, -1)
+				C.adjustBruteLoss(20)
+				C.emote("scream")
+		if(holycheck)
+			to_chat(C, span_notice("You feel blessed!"))
+			C.AddComponent(/datum/component/anti_magic, SPECIES_TRAIT, MAGIC_RESISTANCE_HOLY)
+	..()

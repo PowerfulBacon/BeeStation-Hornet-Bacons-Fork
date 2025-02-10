@@ -610,7 +610,9 @@
 	desc = "A common delicacy among miners."
 	icon_state = "ashsteak"
 	food_reagents = list(
-		/datum/reagent/consumable/vitfro = 2
+		/datum/reagent/consumable/nutriment/protein = 7,
+		/datum/reagent/consumable/nutriment/fat = 3,
+		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("tough meat" = 2, "bubblegum" = 1)
 	foodtypes = MEAT

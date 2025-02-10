@@ -5,19 +5,6 @@
 	required_count = 3
 	wanted_types = list(/obj/item/food/meat/steak/goliath)
 
-/datum/bounty/item/mining/goliath_boat
-	name = "Goliath Hide Boat"
-	description = "Commander Menkov wants to participate in the annual Lavaland Regatta. He is asking your shipwrights to build the swiftest boat known to man."
-	reward = 10000
-	wanted_types = list(/obj/vehicle/ridden/lavaboat)
-
-/datum/bounty/item/mining/bone_oar
-	name = "Bone Oars"
-	description = "Commander Menkov requires oars to participate in the annual Lavaland Regatta. Ship a pair over."
-	reward = 4000
-	required_count = 2
-	wanted_types = list(/obj/item/oar)
-
 /datum/bounty/item/mining/bone_axe
 	name = "Bone Axe"
 	description = "Station 12 has had their fire axes stolen by marauding clowns. Ship them a bone axe as a replacement."
@@ -55,23 +42,3 @@
 	reward = 5000
 	required_count = 3
 	wanted_types = list(/obj/item/knife/combat/bone)
-
-/datum/bounty/item/mining/polypore_mushroom
-	name = "Mushroom Bowl"
-	description = "Lieutenant Jeb dropped his favorite mushroom bowl. Cheer him up by shipping a new one, will you?"
-	reward = 7500 //5x mushroom shavings
-	wanted_types = list(/obj/item/reagent_containers/cup/bowl/mushroom_bowl)
-
-/datum/bounty/item/mining/inocybe_mushroom
-	name = "Mushroom Caps"
-	description = "Our botanist claims that he can distill tasty liquor from absolutely any plant. Let's see what he'll do with Inocybe mushroom caps."
-	reward = 4500
-	required_count = 3
-	wanted_types = list(/obj/item/food/grown/ash_flora/mushroom_cap)
-
-/datum/bounty/item/mining/porcini_mushroom
-	name = "Mushroom Leaves"
-	description = "Porcini mushroom leaves are rumored to have healing properties. Our researchers want to put that claim to the test."
-	reward = 4500
-	required_count = 3
-	wanted_types = list(/obj/item/food/grown/ash_flora/mushroom_leaf)

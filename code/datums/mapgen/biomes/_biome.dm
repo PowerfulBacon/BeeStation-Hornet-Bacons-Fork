@@ -123,7 +123,6 @@
 	fauna_types = list(
 		/mob/living/simple_animal/crab,
 		/mob/living/simple_animal/hostile/tree,
-		/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing
 	)
 
 /datum/biome/grassclearing

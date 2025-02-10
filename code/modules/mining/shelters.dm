@@ -42,7 +42,6 @@
 /datum/map_template/shelter/alpha/New()
 	. = ..()
 	whitelisted_turfs = typecacheof(/turf/closed/mineral)
-	banned_objects = typecacheof(/obj/structure/stone_tile)
 
 /datum/map_template/shelter/beta
 	name = "Shelter Beta"
@@ -57,7 +56,6 @@
 /datum/map_template/shelter/beta/New()
 	. = ..()
 	whitelisted_turfs = typecacheof(/turf/closed/mineral)
-	banned_objects = typecacheof(/obj/structure/stone_tile)
 
 /datum/map_template/shelter/charlie
 	name = "Shelter Charlie"
@@ -72,7 +70,6 @@
 /datum/map_template/shelter/charlie/New()
 	. = ..()
 	whitelisted_turfs = typecacheof(/turf/closed/mineral)
-	banned_objects = typecacheof(/obj/structure/stone_tile)
 
 /datum/map_template/shelter/delta
 	name = "Shelter Delta"
@@ -85,7 +82,6 @@
 /datum/map_template/shelter/delta/New()
 	. = ..()
 	whitelisted_turfs = typecacheof(/turf/closed/mineral)
-	banned_objects = typecacheof(/obj/structure/stone_tile)
 
 /datum/map_template/shelter/echo
 	name = "Shelter Echo"

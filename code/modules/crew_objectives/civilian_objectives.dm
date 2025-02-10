@@ -98,11 +98,10 @@
 	. = ..()
 	if(prob(1))
 		hardmode = TRUE
-	var/list/blacklistnormal = list(typesof(/area/space) - - typesof(/area/lavaland) - typesof(/area/mine) - typesof(/area/maintenance) - typesof(/area/ai_monitored/turret_protected) - typesof(/area/tcommsat))
-	var/list/blacklisthard = list(typesof(/area/lavaland) - typesof(/area/mine))
-	var/list/possibleareas = list()
+	var/list/blacklistnormal = typesof(/area/space) + typesof(/area/mine) + typesof(/area/maintenance) + typesof(/area/ai_monitored/turret_protected) + typesof(/area/tcommsat)
+	var/list/possibleareas = typesof(/area/space)
 	if(hardmode)
-		possibleareas = GLOB.teleportlocs - /area - blacklisthard
+		possibleareas = GLOB.teleportlocs - /area
 	else
 		possibleareas = GLOB.teleportlocs - /area - blacklistnormal
 	for(var/i in 1 to rand(1,3))

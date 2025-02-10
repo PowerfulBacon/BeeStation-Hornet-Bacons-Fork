@@ -5,7 +5,6 @@
 	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
 	icon_state = "Fugu0"
 	icon_living = "Fugu0"
-	icon_aggro = "Fugu0"
 	icon_dead = "Fugu_dead"
 	icon_gib = "syndicate_gib"
 	mob_biotypes = list(MOB_ORGANIC, MOB_BEAST)
@@ -25,7 +24,6 @@
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	throw_message = "is avoided by the"
 	vision_range = 5
 	aggro_vision_range = 9
 	mob_size = MOB_SIZE_SMALL

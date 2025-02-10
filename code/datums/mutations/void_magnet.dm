@@ -41,3 +41,81 @@
 /datum/action/spell/void/on_cast(mob/user, atom/target)
 	. = ..()
 	new /obj/effect/immortality_talisman/void(get_turf(user), user)
+
+//Immortality Talisman
+/obj/item/immortality_talisman
+	name = "\improper Immortality Talisman"
+	desc = "A dread talisman that can render you completely invulnerable."
+	icon = 'icons/obj/lavaland/artefacts.dmi'
+	icon_state = "talisman"
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	actions_types = list(/datum/action/item_action/immortality)
+	var/cooldown = 0
+
+/obj/item/immortality_talisman/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/anti_magic, INNATE_TRAIT, (MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY))
+
+/datum/action/item_action/immortality
+	name = "Immortality"
+
+/obj/item/immortality_talisman/attack_self(mob/user)
+	if(cooldown < world.time)
+		SSblackbox.record_feedback("amount", "immortality_talisman_uses", 1)
+		cooldown = world.time + 600
+		new /obj/effect/immortality_talisman(get_turf(user), user)
+	else
+		to_chat(user, span_warning("[src] is not ready yet!"))
+
+/obj/effect/immortality_talisman
+	name = "hole in reality"
+	desc = "It's shaped an awful lot like a person."
+	icon_state = "blank"
+	icon = 'icons/effects/effects.dmi'
+	var/vanish_description = "vanishes from reality"
+	var/can_destroy = TRUE
+
+CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/immortality_talisman)
+
+/obj/effect/immortality_talisman/Initialize(mapload, mob/new_user)
+	. = ..()
+	if(new_user)
+		vanish(new_user)
+
+/obj/effect/immortality_talisman/proc/vanish(mob/user)
+	user.visible_message(span_danger("[user] [vanish_description], leaving a hole in [user.p_their()] place!"))
+
+	desc = "It's shaped an awful lot like [user.name]."
+	setDir(user.dir)
+
+	user.forceMove(src)
+	user.notransform = TRUE
+	user.status_flags |= GODMODE
+
+	can_destroy = FALSE
+
+	addtimer(CALLBACK(src, PROC_REF(unvanish), user), 10 SECONDS)
+
+/obj/effect/immortality_talisman/proc/unvanish(mob/user)
+	user.status_flags &= ~GODMODE
+	user.notransform = FALSE
+	user.forceMove(get_turf(src))
+
+	user.visible_message(span_danger("[user] pops back into reality!"))
+	can_destroy = TRUE
+	qdel(src)
+
+/obj/effect/immortality_talisman/attackby()
+	return
+
+/obj/effect/immortality_talisman/singularity_pull()
+	return
+
+/obj/effect/immortality_talisman/Destroy(force)
+	if(!can_destroy && !force)
+		return QDEL_HINT_LETMELIVE
+	else
+		. = ..()
+
+/obj/effect/immortality_talisman/void
+	vanish_description = "is dragged into the void"

@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(battle_royale_basic_loot, list(
 		/obj/item/knife/poison,
 		/obj/item/throwing_star,
 		/obj/item/syndie_glue,
-		/obj/item/book_of_babel,
 		/obj/item/card/emag,
 		/obj/item/storage/box/emps,
 		/obj/item/storage/box/lethalshot,

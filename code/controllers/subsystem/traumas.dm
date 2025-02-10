@@ -88,10 +88,6 @@ SUBSYSTEM_DEF(traumas)
 	)
 
 	phobia_objs = list(
-		"snakes" = typecacheof(list(
-			/obj/item/rod_of_asclepius
-			)),
-
 		"spiders"   = typecacheof(list(
 			/obj/structure/spider
 			)),

@@ -186,8 +186,8 @@
 	result = /obj/item/food/meat/steak/ashflake
 	reqs = list(
 		/obj/item/food/meat/steak/goliath = 1,
-		/obj/item/food/grown/ash_flora/cactus_fruit = 1,
-		/obj/item/food/grown/ash_flora/mushroom_leaf = 1
+		/obj/item/food/grown/mushroom = 1,
+		/obj/item/food/grown/garlic = 1
 	)
 	subcategory = CAT_MEAT
 

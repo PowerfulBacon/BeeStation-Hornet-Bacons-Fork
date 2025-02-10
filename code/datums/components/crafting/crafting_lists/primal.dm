@@ -182,14 +182,6 @@
 	result = /obj/structure/bonfire
 	category = CAT_PRIMAL
 
-/datum/crafting_recipe/skeleton_key
-	name = "Skeleton Key"
-	time = 3 SECONDS
-	reqs = list(/obj/item/stack/sheet/bone = 5)
-	result = /obj/item/skeleton_key
-	always_available = FALSE
-	category = CAT_PRIMAL
-
 /datum/crafting_recipe/headpike
 	name = "Spike Head (Glass Spear)"
 	time = 6.5 SECONDS
@@ -247,30 +239,11 @@
 	always_available = FALSE
 	category = CAT_PRIMAL
 
-/datum/crafting_recipe/dragon_lasso
-	name = "Ash Drake Lasso"
-	result = /obj/item/mob_lasso/drake
-	time = 2 SECONDS
-	reqs = list(
-		/obj/item/stack/sheet/bone = 10,
-		/obj/item/stack/sheet/sinew = 2,
-		/obj/item/stack/sheet/animalhide/ashdrake = 5
-	)
-	always_available = FALSE
-	category = CAT_PRIMAL
-
 /datum/crafting_recipe/fermenting_barrel
 	name = "Wooden Barrel"
 	result = /obj/structure/fermenting_barrel
 	time = 5 SECONDS
 	reqs = list(/obj/item/stack/sheet/wood = 30)
-	category = CAT_PRIMAL
-
-/datum/crafting_recipe/mushroom_bowl
-	name = "Mushroom Bowl"
-	result = /obj/item/reagent_containers/cup/bowl/mushroom_bowl
-	time = 3 SECONDS
-	reqs = list(/obj/item/food/grown/ash_flora/shavings = 5)
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/charcoal_stylus
@@ -281,18 +254,4 @@
 		/datum/reagent/ash = 30
 	)
 	time = 3 SECONDS
-	category = CAT_PRIMAL
-
-/datum/crafting_recipe/oar
-	name = "Goliath Bone Oar"
-	result = /obj/item/oar
-	time = 1.5 SECONDS
-	reqs = list(/obj/item/stack/sheet/bone = 2)
-	category = CAT_PRIMAL
-
-/datum/crafting_recipe/boat
-	name = "Goliath Hide Boat (lava boat)"
-	result = /obj/vehicle/ridden/lavaboat
-	time = 5 SECONDS
-	reqs = list(/obj/item/stack/sheet/animalhide/goliath_hide = 3)
 	category = CAT_PRIMAL

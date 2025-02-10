@@ -121,14 +121,6 @@
 	name = "combustion chamber vent"
 	id = INCINERATOR_ATMOS_AUXVENT
 
-/obj/machinery/door/poddoor/incinerator_syndicatelava_main
-	name = "turbine vent"
-	id = INCINERATOR_SYNDICATELAVA_MAINVENT
-
-/obj/machinery/door/poddoor/incinerator_syndicatelava_aux
-	name = "combustion chamber vent"
-	id = INCINERATOR_SYNDICATELAVA_AUXVENT
-
 /obj/machinery/door/poddoor/Bumped(atom/movable/AM)
 	if(density)
 		return 0

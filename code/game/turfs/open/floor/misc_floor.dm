@@ -181,10 +181,6 @@
 	icon = 'icons/obj/clockwork_objects.dmi'
 	floor_tile = /obj/item/stack/tile/mineral/bronze/filled
 
-/turf/open/floor/bronze/filled/lavaland
-	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-
 /turf/open/floor/white
 	name = "white floor"
 	desc = "A tile in a pure white color."

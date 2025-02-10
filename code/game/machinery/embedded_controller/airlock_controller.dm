@@ -294,15 +294,6 @@
 	sanitize_external = TRUE
 	sensor_tag = INCINERATOR_ATMOS_AIRLOCK_SENSOR
 
-/obj/machinery/airlock_controller/incinerator_syndicatelava
-	name = "Incinerator Access Console"
-	airpump_tag = INCINERATOR_SYNDICATELAVA_DP_VENTPUMP
-	exterior_door_tag = INCINERATOR_SYNDICATELAVA_AIRLOCK_EXTERIOR
-	id_tag = INCINERATOR_SYNDICATELAVA_AIRLOCK_CONTROLLER
-	interior_door_tag = INCINERATOR_SYNDICATELAVA_AIRLOCK_INTERIOR
-	sanitize_external = TRUE
-	sensor_tag = INCINERATOR_SYNDICATELAVA_AIRLOCK_SENSOR
-
 /obj/machinery/airlock_controller/update_icon_state()
 	icon_state = "[base_icon_state]_[processing ? "process" : "standby"]"
 	return ..()
