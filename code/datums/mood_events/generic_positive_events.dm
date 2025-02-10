@@ -153,10 +153,6 @@
 	mood_change = 2
 	timeout = 3 MINUTES
 
-/datum/mood_event/hope_lavaland
-	description = span_nicegreen("What a peculiar emblem. It makes me feel hopeful for my future.")
-	mood_change = 5
-
 /datum/mood_event/holy_consumption
 	description = "Truly, that was the food of the Divine!"
 	mood_change = 1 // 1 + 5 from it being liked food makes it as good as jolly

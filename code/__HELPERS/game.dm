@@ -408,17 +408,6 @@
 	var/obj/machinery/announcement_system/announcer = pick(GLOB.announcement_systems)
 	announcer.announce("ARRIVAL", character.real_name, rank, list()) //make the list empty to make it announce it in common
 
-/proc/lavaland_equipment_pressure_check(turf/T)
-	. = FALSE
-	if(!istype(T))
-		return
-	var/datum/gas_mixture/environment = T.return_air()
-	if(!istype(environment))
-		return
-	var/pressure = environment.return_pressure()
-	if(pressure <= MAXIMUM_LAVALAND_EQUIPMENT_EFFECT_PRESSURE)
-		. = TRUE
-
 /proc/ispipewire(item)
 	var/static/list/pire_wire = list(
 		/obj/machinery/atmospherics,

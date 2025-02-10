@@ -332,4 +332,4 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/camera/imaginary_friend)
 /mob/camera/imaginary_friend/trapped/setup_friend()
 	real_name = "[owner.real_name]?"
 	name = real_name
-	human_image = icon('icons/mob/lavaland/lavaland_monsters.dmi', icon_state = "curseblob")
+	human_image = icon('icons/mob/cursedblob.dmi', icon_state = "curseblob")

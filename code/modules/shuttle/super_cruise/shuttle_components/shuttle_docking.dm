@@ -13,7 +13,6 @@
 	var/view_range = 0
 	var/list/whitelist_turfs = list(
 		/turf/open/space,
-		/turf/open/floor/plating/lavaland,
 		/turf/open/floor/plating/asteroid,
 		/turf/open/lava,
 		/turf/open/floor/dock,

@@ -63,10 +63,7 @@
 	var/turf/outturf
 	var/lastgen
 	var/productivity = 1
-	var/destroy_output = FALSE //Destroy the output gas instead of actually outputting it. Used on lavaland to prevent cooking the zlevel
-
-/obj/machinery/power/turbine/lavaland
-	destroy_output = TRUE
+	var/destroy_output = FALSE //Destroy the output gas instead of actually outputting it.
 
 /obj/machinery/power/turbine/Destroy()
 	if (compressor && compressor.turbine == src)

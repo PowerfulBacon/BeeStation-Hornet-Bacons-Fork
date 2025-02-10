@@ -104,7 +104,7 @@
 		if(isnull(result)) // null: no good to track z levels
 			. += "pinon[alert ? "alert" : ""]null[icon_suffix]"
 			return
-		else if(!result) // FALSE: z-levels are in different groups. (i.e. Station v.s. Lavaland)
+		else if(!result) // FALSE: z-levels are in different groups.
 			if(!tracks_grand_z)
 				. += "pinon[alert ? "alert" : ""]null[icon_suffix]"
 				return

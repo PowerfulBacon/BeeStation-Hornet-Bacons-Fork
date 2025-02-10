@@ -614,12 +614,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom/movable/screen/storage)
 	screen_loc = ui_slime_health
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/atom/movable/screen/healths/lavaland_elite
-	icon = 'icons/hud/screen_elite.dmi'
-	icon_state = "elite_health0"
-	screen_loc = ui_health
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
 /atom/movable/screen/healthdoll
 	name = "health doll"
 	screen_loc = ui_healthdoll

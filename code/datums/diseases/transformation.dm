@@ -371,24 +371,6 @@
 			return
 	affected_mob.reagents.add_reagent_list(list(/datum/reagent/mutationtoxin/felinid = 1, /datum/reagent/medicine/mutadone = 1))
 
-/datum/disease/transformation/legion
-	name = "Necropolis Infestation"
-	cure_text = "The healing Vitrium Froth of some Lavaland flora"
-	cures = list(/datum/reagent/consumable/vitfro)
-	cure_chance = 10 //about 10 seconds/5 units of Froth to heal. Takes a decent gathering period but just shy of the amount that'll fatten you
-	stage_prob = 5
-	agent = "Legion droppings"
-	desc = "Who knew that spreading the primordial goop of a vile entity would take a toll on the body?"
-	danger = DISEASE_BIOHAZARD
-	visibility_flags = 0
-	stage1	= list("Your skin seems ashy.")
-	stage2	= list("You wonder what it would be like to live on Lavaland forever...")
-	stage3	= list(span_danger("You need darkness."), span_danger("You feel so cold..."), span_danger("Give in."))
-	stage4	= list(span_userdanger("The planet's core calls to you... Lavaland is your home."), span_danger("A thousand voices beckon you to join them."))
-	stage5	= list(span_userdanger("You have become one of Legion. You are one with the Necropolis now, and have no other loyalties. Serve well."))
-	new_form = /mob/living/simple_animal/hostile/asteroid/hivelord/legion/tendril
-	infectable_biotypes = list(MOB_ORGANIC, MOB_INORGANIC, MOB_UNDEAD)
-
 /datum/disease/transformation/psyphoza
 	name = "Acute Fungal Infection"
 	cure_text = "Something that would kill off mold."

@@ -1,4 +1,4 @@
-//The effects of weather occur across an entire z-level. For instance, lavaland has periodic ash storms that scorch most unprotected creatures.
+//The effects of weather occur across an entire z-level.
 
 /datum/weather
 	var/name = "space wind"

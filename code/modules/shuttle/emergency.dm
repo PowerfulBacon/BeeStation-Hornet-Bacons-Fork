@@ -625,7 +625,7 @@
 /obj/machinery/computer/shuttle_flight/pod/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override=FALSE)
 	. = ..()
 	if(recall_docking_port_id == initial(recall_docking_port_id) || override)
-		recall_docking_port_id = "pod_lavaland[idnum]"
+		recall_docking_port_id = "pod_[idnum]"
 
 /**
  * Signal handler for checking if we should lock or unlock escape pods accordingly to a newly set security level
@@ -647,7 +647,7 @@
 	dwidth = 1
 	width = 3
 	height = 4
-	var/target_area = /area/lavaland/surface/outdoors
+	var/target_area = /area/surface/outdoors
 	var/edge_distance = 16
 	// Minimal distance from the map edge, setting this too low can result in shuttle landing on the edge and getting "sliced"
 

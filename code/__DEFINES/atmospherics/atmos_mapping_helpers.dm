@@ -37,13 +37,6 @@
 #define ATMOS_TANK_H2O GAS_WATER_VAPOR + "=100000;TEMP=293.15"
 #define ATMOS_TANK_AIRMIX GAS_O2 + "=2644;" + GAS_N2 + "=10580;TEMP=293.15"
 
-//LAVALAND
-/// what pressure you have to be under to increase the effect of equipment meant for lavaland
-#define MAXIMUM_LAVALAND_EQUIPMENT_EFFECT_PRESSURE 90
-
-//ATMOS MIX IDS
-#define LAVALAND_DEFAULT_ATMOS "o2=14;n2=5;co2=13;TEMP=300"
-
 //AIRLOCK CONTROLLER TAGS
 
 //RnD ordnance burn chamber
@@ -67,12 +60,3 @@
 #define TEST_ROOM_ATMOS_MAINVENT_1 "atmos_test_room_mainvent_1"
 #define TEST_ROOM_ATMOS_MAINVENT_2 "atmos_test_room_mainvent_2"
 
-//Syndicate lavaland base incinerator (lavaland_surface_syndicate_base1.dmm)
-#define INCINERATOR_SYNDICATELAVA_IGNITER "syndicatelava_igniter"
-#define INCINERATOR_SYNDICATELAVA_MAINVENT "syndicatelava_mainvent"
-#define INCINERATOR_SYNDICATELAVA_AUXVENT "syndicatelava_auxvent"
-#define INCINERATOR_SYNDICATELAVA_DP_VENTPUMP "syndicatelava_airlock_pump"
-#define INCINERATOR_SYNDICATELAVA_AIRLOCK_SENSOR "syndicatelava_airlock_sensor"
-#define INCINERATOR_SYNDICATELAVA_AIRLOCK_CONTROLLER "syndicatelava_airlock_controller"
-#define INCINERATOR_SYNDICATELAVA_AIRLOCK_INTERIOR "syndicatelava_airlock_interior"
-#define INCINERATOR_SYNDICATELAVA_AIRLOCK_EXTERIOR "syndicatelava_airlock_exterior"

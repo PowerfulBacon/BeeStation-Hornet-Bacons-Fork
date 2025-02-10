@@ -421,17 +421,6 @@
 	icon_state = "lungs"
 	safe_breath_min = 8
 
-/obj/item/organ/lungs/ashwalker
-	name = "ash walker lungs"
-	desc = "Lungs belonging to the tribal group of lizardmen that have adapted to Lavaland's atmosphere, and thus can breathe its air safely but find the station's \
-	air to be oversaturated with oxygen."
-	safe_breath_min = 4
-	safe_breath_max = 20
-	gas_max = list(
-		/datum/gas/carbon_dioxide = 45,
-		/datum/gas/plasma = MOLES_GAS_VISIBLE
-	)
-
 /obj/item/organ/lungs/diona
 	name = "diona leaves"
 	desc = "A small mass concentrated leaves, used for breathing."

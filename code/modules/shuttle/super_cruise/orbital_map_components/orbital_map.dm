@@ -1,5 +1,5 @@
 /datum/orbital_map
-	//the primary star. Set to be lavaland by default.
+	//the primary star. Set to be Phobos by default.
 	var/datum/orbital_object/center = null
 	//A list of all bodies in their assigned collision zones
 	var/list/collision_zone_bodies = list()

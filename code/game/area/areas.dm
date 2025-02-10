@@ -50,7 +50,7 @@
 	var/lightswitch = TRUE
 	var/vacuum = null
 
-	/// For space, the asteroid, lavaland, etc. Used with blueprints or with weather to determine if we are adding a new area (vs editing a station room)
+	/// For space, the asteroid, etc. Used with blueprints or with weather to determine if we are adding a new area (vs editing a station room)
 	var/outdoors = FALSE
 
 	var/areasize = 0 //Size of the area in open turfs, only calculated for indoors areas.
@@ -140,7 +140,7 @@
 	///Lazylist that contains additional turfs that map generation should be ran on. This is used for ruins which need a noop turf under non-noop areas so they don't leave genturfs behind.
 	var/list/additional_genturfs
 
-	/// Default network root for this area aka station, lavaland, etc
+	/// Default network root for this area aka station, etc
 	var/network_root_id = null
 	/// Area network id when you want to find all devices hooked up to this area
 	var/network_area_id = null

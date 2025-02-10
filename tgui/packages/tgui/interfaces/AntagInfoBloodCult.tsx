@@ -518,7 +518,7 @@ const RunesSection = (_props) => {
             <p>
               <b>Warning:</b>{' '}
               <i>
-                Teleporting from Lavaland or Space will make the destination rune glow brightly and open a rift in reality that
+                Teleporting from Space will make the destination rune glow brightly and open a rift in reality that
                 may not only reveal the rune, but the location of your main base as well, choose your rune locations wisely!
               </i>
             </p>
@@ -620,7 +620,7 @@ const RunesSection = (_props) => {
               summoned will deal brute damage over time. If you get stuck on the rune after summoning a ghost, use your ritual
               dagger to remove the rune before you get hurt too badly.
               <br />
-              This option is only available on the space station itself, as the veil is not weak enough in space or Lavaland to
+              This option is only available on the space station itself, as the veil is not weak enough in space to
               give spirits a physical form.
             </p>
             <p>

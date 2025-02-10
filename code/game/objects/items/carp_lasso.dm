@@ -105,31 +105,6 @@
 	mob_target = null
 	timer = null
 
-///Primal version, allows lavaland goobers to tame goliaths
-/obj/item/mob_lasso/primal
-	name = "primal lasso"
-	desc = "A lasso fashioned out of goliath plating that is often found in the possession of Ash Walkers.\n" + span_notice("Can be used to tame some lavaland animals")
-	uses = 2
-
-/obj/item/mob_lasso/primal/init_whitelists(mapload)
-	whitelist_mob_cache[type] = typecacheof(list(/mob/living/simple_animal/hostile/asteroid/goliath, /mob/living/simple_animal/hostile/asteroid/goldgrub,\
-		/mob/living/simple_animal/hostile/asteroid/basilisk/watcher, /mob/living/simple_animal/hostile/asteroid/gutlunch))
-
-/obj/item/mob_lasso/drake
-	name = "drake lasso"
-	desc = "A lasso fashioned out of the scaly hide of an ash drake.\n" + span_notice("Can be used to tame one, if you can get close enough.")
-	range = 3
-	uses = 1
-
-/obj/item/mob_lasso/drake/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	if(!user.mind?.has_antag_datum(/datum/antagonist/ashwalker))
-		to_chat(user, span_warning("You don't know how to use this!"))
-		return
-	. = ..()
-
-/obj/item/mob_lasso/drake/init_whitelists(mapload)
-	whitelist_mob_cache[type] = typecacheof(list(/mob/living/simple_animal/hostile/megafauna/dragon), only_root_path = TRUE)
-
 /obj/item/mob_lasso/traitor
 	name = "bluespace lasso"
 	desc = "Comes standard with every administrator space-cowboy!\n" + span_notice("Can be used to tame almost anything.")

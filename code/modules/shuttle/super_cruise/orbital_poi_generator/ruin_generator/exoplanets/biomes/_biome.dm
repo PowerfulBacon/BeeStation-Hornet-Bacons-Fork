@@ -20,7 +20,7 @@
 	icon_state = "Unknown Planet"
 	default_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
-	sound_environment = SOUND_AREA_LAVALAND
+	sound_environment = SOUND_AREA_ASTEROID
 	always_unpowered = TRUE
 	power_environ = FALSE
 	power_equip = FALSE

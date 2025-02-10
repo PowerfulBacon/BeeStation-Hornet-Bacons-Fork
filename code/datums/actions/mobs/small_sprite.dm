@@ -13,22 +13,6 @@
 	small_icon = 'icons/mob/alien.dmi'
 	small_icon_state = "alienq"
 
-/datum/action/small_sprite/megafauna
-	icon_icon = 'icons/hud/actions/actions_xeno.dmi'
-	small_icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
-
-/datum/action/small_sprite/megafauna/drake
-	small_icon_state = "ash_whelp"
-
-/datum/action/small_sprite/megafauna/colossus
-	small_icon_state = "Basilisk"
-
-/datum/action/small_sprite/megafauna/bubblegum
-	small_icon_state = "goliath2"
-
-/datum/action/small_sprite/megafauna/legion
-	small_icon_state = "mega_legion"
-
 /datum/action/small_sprite/mega_arachnid
 	small_icon = 'icons/mob/jungle/arachnid.dmi'
 	small_icon_state = "arachnid_mini"

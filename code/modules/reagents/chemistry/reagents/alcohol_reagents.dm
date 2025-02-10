@@ -2341,7 +2341,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "fiery, with an aftertaste of burnt flesh"
 	glass_icon_state = "mauna_loa"
 	glass_name = "Mauna Loa"
-	glass_desc = "Lavaland in a drink... mug... volcano... thing."
+	glass_desc = "Phobos in a drink... mug... volcano... thing."
 
 
 /datum/reagent/consumable/ethanol/mauna_loa/on_mob_life(mob/living/carbon/M)

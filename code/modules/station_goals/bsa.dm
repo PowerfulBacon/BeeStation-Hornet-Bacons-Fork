@@ -132,7 +132,7 @@ DEFINE_BUFFER_HANDLER(/obj/machinery/bsa/middle)
 /obj/machinery/power/bsa/full
 	name = "Bluespace Artillery"
 	desc = "Long range bluespace artillery."
-	icon = 'icons/obj/lavaland/cannon.dmi'
+	icon = 'icons/obj/cannon.dmi'
 	icon_state = "cannon_west"
 	var/base_battery_icon_state = "bsa_west_capacitor"
 	var/static/mutable_appearance/top_layer

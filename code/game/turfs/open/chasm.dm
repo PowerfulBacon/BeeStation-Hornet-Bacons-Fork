@@ -86,16 +86,6 @@
 	. = ..()
 	return TRUE
 
-// Chasms for Lavaland, with planetary atmos and lava glow
-/turf/open/chasm/lavaland
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
-	baseturfs = /turf/open/chasm/lavaland
-	light_range = 1.9 //slightly less range than lava
-	light_power = 0.65 //less bright, too
-	light_color = LIGHT_COLOR_LAVA //let's just say you're falling into lava, that makes sense right
-
-
 // Chasms for the jungle, with planetary atmos and a different icon
 /turf/open/chasm/jungle
 	icon = 'icons/turf/floors/junglechasm.dmi'

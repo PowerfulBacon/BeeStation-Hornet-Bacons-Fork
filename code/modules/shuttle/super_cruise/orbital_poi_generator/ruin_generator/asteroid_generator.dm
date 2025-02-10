@@ -47,38 +47,12 @@
 						/obj/structure/flora/ausbushes/fullgrass, /obj/structure/flora/ausbushes/ppflowers,
 						/obj/structure/flora/ausbushes/sparsegrass, /obj/structure/flora/ausbushes/ywflowers,
 						/obj/structure/flora/bush, /obj/structure/flora/junglebush, /obj/structure/flora/junglebush/b,
-						/obj/structure/flora/junglebush/c, /obj/structure/glowshroom/glowcap, /obj/structure/flora/ash/cap_shroom,
-						/obj/structure/flora/ash/stem_shroom, /obj/structure/flora/ash/cacti)
+						/obj/structure/flora/junglebush/c, /obj/structure/glowshroom/glowcap,
+						/obj/structure/flora/ash/cacti)
 					new plant_type(T)
 		CHECK_TICK
-	//Spawn tendrils and other cave stuff
-	for(var/i in 1 to min(length(high_value_turfs), rand(0, 3)))
-		var/turf/T = pick_n_take(high_value_turfs)
-		if(locate(/obj/structure/spawner/lavaland) in range(3, T))
-			continue
-		var/type_to_spawn = pick(/obj/structure/spawner/lavaland/hivelord, /obj/structure/spawner/lavaland/gutlunch,
-			/obj/structure/spawner/lavaland/asteroid_goliath, /obj/structure/spawner/lavaland/fugu,
-			/obj/structure/spawner/lavaland/basilisk, /obj/structure/spawner/lavaland,
-			/obj/structure/spawner/lavaland/goliath, /obj/structure/spawner/lavaland/legion)
-		new type_to_spawn(T)
 
 	SSair.unpause_z(center_z)
-
-//Spawner types
-/obj/structure/spawner/lavaland/basilisk
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk)
-
-/obj/structure/spawner/lavaland/fugu
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/fugu)
-
-/obj/structure/spawner/lavaland/asteroid_goliath
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/goliath)
-
-/obj/structure/spawner/lavaland/gutlunch
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/gutlunch)
-
-/obj/structure/spawner/lavaland/hivelord
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/hivelord)
 
 /area/asteroid/generated
 	dynamic_lighting = DYNAMIC_LIGHTING_IFSTARLIGHT

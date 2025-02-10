@@ -215,20 +215,3 @@
 	else
 		if(user.loc == src) //so we don't get the message if we resisted multiple times and succeeded.
 			to_chat(user, span_warning("You fail to push [O] out of [src]!"))
-
-/**
-  * Makes the mecha go faster and halves the mecha drill cooldown if in Lavaland pressure.
-  *
-  * Checks for Lavaland pressure, if that works out the mech's speed is equal to fast_pressure_step_in and the cooldown for the mecha drill is halved. If not it uses slow_pressure_step_in and drill cooldown is normal.
-  */
-/obj/vehicle/sealed/mecha/working/ripley/proc/update_pressure()
-	var/turf/T = get_turf(loc)
-
-	if(lavaland_equipment_pressure_check(T))
-		movedelay = fast_pressure_step_in
-		for(var/obj/item/mecha_parts/mecha_equipment/drill/drill in equipment)
-			drill.equip_cooldown = initial(drill.equip_cooldown)/2
-	else
-		movedelay = slow_pressure_step_in
-		for(var/obj/item/mecha_parts/mecha_equipment/drill/drill in equipment)
-			drill.equip_cooldown = initial(drill.equip_cooldown)

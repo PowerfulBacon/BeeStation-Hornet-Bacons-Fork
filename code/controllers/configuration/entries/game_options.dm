@@ -365,11 +365,6 @@
 /datum/config_entry/flag/starlight
 /datum/config_entry/flag/grey_assistants
 
-/datum/config_entry/number/lavaland_budget
-	config_entry_value = 60
-	integer = FALSE
-	min_val = 0
-
 /datum/config_entry/number/space_budget
 	config_entry_value = 40
 	integer = FALSE

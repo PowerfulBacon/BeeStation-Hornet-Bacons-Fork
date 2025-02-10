@@ -1446,25 +1446,6 @@
 	..()
 	return TRUE
 
-/datum/reagent/medicine/lavaland_extract
-	name = "Lavaland Extract"
-	description = "An extract of lavaland atmospheric and mineral elements. Heals the user in small doses, but is extremely toxic otherwise."
-	color = "#6B372E" //dark and red like lavaland
-	chem_flags = CHEMICAL_NOT_SYNTH | CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
-	overdose_threshold = 3 //To prevent people stacking massive amounts of a very strong healing reagent
-
-/datum/reagent/medicine/lavaland_extract/on_mob_life(mob/living/carbon/M)
-	M.heal_bodypart_damage(5,5)
-	..()
-	return TRUE
-
-/datum/reagent/medicine/lavaland_extract/overdose_process(mob/living/M)
-	M.adjustBruteLoss(3*REM, 0, FALSE, BODYTYPE_ORGANIC)
-	M.adjustFireLoss(3*REM, 0, FALSE, BODYTYPE_ORGANIC)
-	M.adjustToxLoss(3*REM, 0)
-	..()
-	return TRUE
-
 //used for changeling's adrenaline power
 /datum/reagent/medicine/changelingadrenaline
 	name = "Changeling Adrenaline"

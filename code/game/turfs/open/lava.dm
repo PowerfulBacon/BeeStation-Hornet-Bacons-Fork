@@ -168,10 +168,5 @@
 /turf/open/lava/smooth/cold
 	initial_gas_mix = FROZEN_ATMOS
 
-/turf/open/lava/smooth/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
-	baseturfs = /turf/open/lava/smooth/lava_land_surface
-
 /turf/open/lava/smooth/airless
 	initial_gas_mix = AIRLESS_ATMOS

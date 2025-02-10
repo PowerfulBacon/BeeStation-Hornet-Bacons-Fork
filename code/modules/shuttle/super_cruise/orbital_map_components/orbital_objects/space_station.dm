@@ -3,7 +3,7 @@
 	mass = 0
 	radius = 30
 	priority = 50
-	//The station maintains its orbit around lavaland by adjustment thrusters.
+	//The station maintains its orbit around Phobos by adjustment thrusters.
 	maintain_orbit = TRUE
 	//Sure, why not?
 	can_dock_anywhere = TRUE

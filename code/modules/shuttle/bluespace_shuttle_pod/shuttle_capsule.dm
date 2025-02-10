@@ -13,7 +13,6 @@
 	if(!blacklisted_turfs)
 		whitelisted_areas = typecacheof(list(
 			/area/space,
-			/area/lavaland,
 			/area/asteroid
 		))
 		whitelisted_turfs = typecacheof(list(
@@ -67,7 +66,7 @@
 		playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 
 		var/turf/T = deploy_location
-		if(!is_mining_level(T.z)) //only report capsules away from the mining/lavaland level
+		if(!is_mining_level(T.z)) //only report capsules away from the mining level
 			message_admins("[ADMIN_LOOKUPFLW(usr)] activated a bluespace capsule away from the mining level! [ADMIN_VERBOSEJMP(T)]")
 			log_admin("[key_name(usr)] activated a bluespace capsule away from the mining level at [AREACOORD(T)]")
 		shuttle_template.load(deploy_location, centered = TRUE)

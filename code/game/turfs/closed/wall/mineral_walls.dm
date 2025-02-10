@@ -353,7 +353,7 @@
 	icon_state = "map-overspace"
 	fixed_underlay = list("space"=1)
 
-/////////////////////Lavaland Base Syndicate Explosive Walls /////////////////////
+///////////////////// Syndicate Base Explosive Walls /////////////////////
 
 /turf/closed/wall/mineral/plastitanium/explosive
 	var/obj/item/bombcore/large/syndicate_base/bombcore

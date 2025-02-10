@@ -105,7 +105,7 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "necro1"
 	baseturfs = /turf/open/indestructible/necropolis
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
@@ -126,7 +126,7 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 	icon_state = "boss"
 	baseturfs = /turf/open/indestructible/boss
 	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 
 /turf/open/indestructible/boss/air
 	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
@@ -134,7 +134,7 @@ CREATION_TEST_IGNORE_SELF(/turf/open)
 /turf/open/indestructible/hierophant
 	icon = 'icons/turf/floors/hierophant_floor.dmi'
 	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	baseturfs = /turf/open/indestructible/hierophant
 	tiled_dirt = FALSE
 	smoothing_flags = SMOOTH_CORNERS

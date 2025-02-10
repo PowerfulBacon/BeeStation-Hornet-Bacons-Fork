@@ -114,17 +114,14 @@ GLOBAL_LIST_INIT(forced_bannable_roles, list(
 #define ROLE_DRONE				"Drone"
 #define ROLE_SENTIENCE			"Sentience Potion Spawn"
 #define ROLE_EXPERIMENTAL_CLONE "Experimental Clone"
-#define ROLE_LAVALAND_ELITE		"Lavaland Elite"
 #define ROLE_SPECTRAL_BLADE		"Spectral Blade"
 #define ROLE_ASHWALKER			"Ashwalker"
 #define ROLE_LIFEBRINGER		"Lifebringer"
 #define ROLE_FREE_GOLEM			"Free Golem"
 #define ROLE_HERMIT				"Hermit"
 #define ROLE_TRANSLOCATED_VET	"Translocated Vet"
-#define ROLE_LAVALAND_ESCAPED_PRISONER	"Lavaland Escaped Prisoner"
 #define ROLE_BEACH_BUM			"Beach Bum"
 #define ROLE_HOTEL_STAFF		"Hotel Staff"
-#define ROLE_LAVALAND_SYNDICATE	"Lavaland Syndicate"
 #define ROLE_DEMONIC_FRIEND		"Demonic Friend"
 #define ROLE_ANCIENT_CREW		"Ancient Crew"
 #define ROLE_SKELETAL_REMAINS	"Skeletal Remains"
@@ -134,24 +131,21 @@ GLOBAL_LIST_INIT(forced_bannable_roles, list(
 #define ROLE_EXPLORATION_VIP	"Exploration VIP"
 #define ROLE_SENTIENT_XENOARTIFACT "Sentient Xenoartifiact"
 
-/// Any ghost role that is not really an antagonist or doesn't antagonize (lavaland, sentience potion, etc)
+/// Any ghost role that is not really an antagonist or doesn't antagonize (sentience potion, etc)
 GLOBAL_LIST_INIT(ghost_role_bannable_roles, list(
 	ROLE_PAI,
 	ROLE_POSIBRAIN,
 	ROLE_DRONE,
 	ROLE_SENTIENCE,
 	ROLE_EXPERIMENTAL_CLONE,
-	ROLE_LAVALAND_ELITE,
 	ROLE_SPECTRAL_BLADE,
 	ROLE_ASHWALKER,
 	ROLE_LIFEBRINGER,
 	ROLE_FREE_GOLEM,
 	ROLE_HERMIT,
 	ROLE_TRANSLOCATED_VET,
-	ROLE_LAVALAND_ESCAPED_PRISONER,
 	ROLE_BEACH_BUM,
 	ROLE_HOTEL_STAFF,
-	ROLE_LAVALAND_SYNDICATE,
 	ROLE_DEMONIC_FRIEND,
 	ROLE_ANCIENT_CREW,
 	ROLE_SKELETAL_REMAINS,

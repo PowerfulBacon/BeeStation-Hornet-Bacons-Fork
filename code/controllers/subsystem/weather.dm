@@ -1,4 +1,4 @@
-//Used for all kinds of weather, ex. lavaland ash storms.
+//Used for all kinds of weather
 SUBSYSTEM_DEF(weather)
 	name = "Weather"
 	flags = SS_BACKGROUND

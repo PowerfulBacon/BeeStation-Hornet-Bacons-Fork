@@ -116,5 +116,5 @@
 /obj/effect/hallucination/simple/stalker_phantom
 	name = "???"
 	desc = "It's coming closer..."
-	image_icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
+	image_icon = 'icons/mob/cursedblob.dmi'
 	image_state = "curseblob"
