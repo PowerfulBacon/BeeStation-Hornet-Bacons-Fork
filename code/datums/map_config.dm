@@ -25,9 +25,6 @@
 	var/space_ruin_levels = 4	//Keep this low, as new ones are created dynamically when needed.
 	var/space_empty_levels = 1
 
-	///Type of the mining level to use
-	var/minetype = "lavaland"
-
 	///Does the map allow custom shuttles to be purchased
 	var/allow_custom_shuttles = TRUE
 	///Default list of json shuttles. Not all shuttles use this system; most use the template variable.
@@ -166,9 +163,6 @@
 	else if (!isnull(temp))
 		log_world("map_config space_empty_levels is not a number!")
 		return
-
-	if ("minetype" in json)
-		minetype = json["minetype"]
 
 	if("map_link" in json)
 		map_link = json["map_link"]

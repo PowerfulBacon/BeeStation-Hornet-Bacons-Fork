@@ -1039,7 +1039,6 @@
 #include "code\datums\records\record.dm"
 #include "code\datums\records\sub_records\crime_record.dm"
 #include "code\datums\records\sub_records\medical_note.dm"
-#include "code\datums\ruins\lavaland.dm"
 #include "code\datums\ruins\space.dm"
 #include "code\datums\station_traits\_station_trait.dm"
 #include "code\datums\station_traits\exclusive_traits.dm"
