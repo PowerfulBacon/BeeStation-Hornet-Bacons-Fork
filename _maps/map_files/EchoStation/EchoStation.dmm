@@ -6041,7 +6041,7 @@
 /turf/open/openspace,
 /area/engine/atmos)
 "cNa" = (
-/obj/structure/flora/ash/tall_shroom,
+/obj/structure/ash/tall_shroom,
 /turf/open/floor/plating/asteroid/basalt/planetary,
 /area/asteroid/paradise)
 "cNm" = (
@@ -34401,7 +34401,7 @@
 /turf/open/floor/prison,
 /area/security/prison)
 "rjR" = (
-/obj/structure/flora/ash/stem_shroom,
+/obj/structure/ash/stem_shroom,
 /turf/open/floor/plating/asteroid/basalt/planetary,
 /area/asteroid/paradise)
 "rjV" = (
@@ -47175,7 +47175,7 @@
 /turf/open/floor/iron,
 /area/medical/medbay/central)
 "xBx" = (
-/obj/structure/flora/ash/tall_shroom,
+/obj/structure/ash/tall_shroom,
 /turf/open/floor/plating/asteroid/planetary,
 /area/engine/engineering)
 "xBP" = (

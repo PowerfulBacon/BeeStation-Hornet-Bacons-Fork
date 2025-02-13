@@ -122,11 +122,6 @@
 
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
-	baseturfs = /turf/open/lava/smooth/lava_land_surface
-
 /turf/open/floor/plating/asteroid/basalt/iceland_surface
 	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
 	planetary_atmos = TRUE

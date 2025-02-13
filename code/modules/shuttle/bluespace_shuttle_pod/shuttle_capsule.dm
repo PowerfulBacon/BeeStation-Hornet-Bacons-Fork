@@ -17,7 +17,7 @@
 		))
 		whitelisted_turfs = typecacheof(list(
 			/turf/open/space,
-			/turf/open/floor/plating/asteroid/basalt/lava_land_surface
+			/turf/open/floor/plating/asteroid/basalt
 		))
 		blacklisted_turfs = typecacheof(list(
 			/turf/open/space/bluespace,

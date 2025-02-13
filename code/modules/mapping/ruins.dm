@@ -4,7 +4,6 @@
 		clear_below_typecache = typecacheof(list(
 			/obj/structure/spawner,
 			/mob/living/simple_animal,
-			/obj/structure/flora/ash
 		))
 	var/sanity = forced_turf ? 1 : PLACEMENT_TRIES
 	if(SSmapping.level_trait(z,ZTRAIT_ISOLATED_RUINS))

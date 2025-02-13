@@ -590,7 +590,3 @@
 
 /obj/machinery/atmospherics/components/unary/airlock_pump/silent
 	is_cycling_audible = FALSE
-
-/obj/machinery/atmospherics/components/unary/airlock_pump/lavaland
-	external_pressure_target = MAXIMUM_LAVALAND_EQUIPMENT_EFFECT_PRESSURE
-

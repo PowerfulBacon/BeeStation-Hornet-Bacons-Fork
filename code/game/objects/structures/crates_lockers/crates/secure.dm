@@ -64,16 +64,6 @@
 	name = "secure kitchen crate"
 	icon_state = "kitchen_secure_crate"
 
-/obj/structure/closet/crate/secure/freezer/pizza
-	name = "secure pizza crate"
-	desc = "An insulated crate with a lock on it, used to secure pizza."
-	req_access = list(28)
-	tamperproof = 10
-
-/obj/structure/closet/crate/secure/freezer/pizza/PopulateContents()
-	. = ..()
-	new /obj/effect/spawner/lootdrop/pizzaparty(src)
-
 /obj/structure/closet/crate/secure/engineering
 	desc = "A crate with a lock on it, painted in the scheme of the station's engineers."
 	name = "secure engineering crate"

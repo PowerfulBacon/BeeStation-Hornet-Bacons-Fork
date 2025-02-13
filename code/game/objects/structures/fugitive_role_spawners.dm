@@ -39,8 +39,3 @@
 	new_spawn.equipOutfit(outfit)
 	message_admins("[ADMIN_LOOKUPFLW(new_spawn)] has been made into a Fugitive Hunter by an event.")
 	log_game("[key_name(new_spawn)] was spawned as a Fugitive Hunter by an event.")
-
-/obj/effect/mob_spawn/human/fugitive_hunter/Destroy()
-	var/obj/structure/fluff/empty_sleeper/S = new(drop_location())
-	S.setDir(dir)
-	return ..()

@@ -46,10 +46,6 @@
 	back = /obj/item/storage/backpack/security
 	belt = /obj/item/storage/belt/security/full
 
-/obj/effect/mob_spawn/human/hotel_staff/Destroy()
-	new/obj/structure/fluff/empty_sleeper/syndicate(get_turf(src))
-	..()
-
 //Ancient cryogenic sleepers. Players become NT crewmen from a hundred year old space station, now on the verge of collapse.
 /obj/effect/mob_spawn/human/oldsec
 	name = "old cryogenics pod"

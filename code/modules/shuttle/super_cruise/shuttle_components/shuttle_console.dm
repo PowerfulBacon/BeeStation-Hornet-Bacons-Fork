@@ -91,10 +91,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	if(!allowed(user) && !isobserver(user))
 		say("Insufficient access rights.")
 		return
-	//Ash walkers cannot use the console because they are unga bungas
-	if(user.mind?.has_antag_datum(/datum/antagonist/ashwalker))
-		to_chat(user, span_warning("This computer has been designed to keep the natives like you from meddling with it, you have no hope of using it."))
-		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "OrbitalMap")
