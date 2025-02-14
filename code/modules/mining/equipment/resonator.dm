@@ -65,7 +65,7 @@
 	icon_state = "shield1"
 	layer = ABOVE_ALL_MOB_LAYER
 	duration = 50
-	var/resonance_damage = 10
+	var/resonance_damage = 25
 	var/damage_multiplier = 1
 	var/creator
 	var/obj/item/resonator/res
@@ -92,30 +92,18 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/resonance)
 	creator = null
 	. = ..()
 
-/obj/effect/temp_visual/resonance/proc/check_pressure(turf/proj_turf)
-	if(!proj_turf)
-		proj_turf = get_turf(src)
-	resonance_damage = initial(resonance_damage)
-	if(lavaland_equipment_pressure_check(proj_turf))
-		name = "strong [initial(name)]"
-		resonance_damage *= 3
-	else
-		name = initial(name)
-	resonance_damage *= damage_multiplier
-
 /obj/effect/temp_visual/resonance/proc/burst()
 	var/turf/T = get_turf(src)
 	new /obj/effect/temp_visual/resonance_crush(T)
 	if(ismineralturf(T))
 		var/turf/closed/mineral/M = T
 		M.gets_drilled(creator)
-	check_pressure(T)
 	playsound(T,'sound/weapons/resonator_blast.ogg',50,1)
 	for(var/mob/living/L in T)
 		if(creator)
 			log_combat(creator, L, "used a resonator field on", "resonator")
 		to_chat(L, span_userdanger("[src] ruptured with you in it!"))
-		L.apply_damage(resonance_damage, BRUTE)
+		L.apply_damage(resonance_damage * damage_multiplier, BRUTE)
 	qdel(src)
 
 /obj/effect/temp_visual/resonance_crush
