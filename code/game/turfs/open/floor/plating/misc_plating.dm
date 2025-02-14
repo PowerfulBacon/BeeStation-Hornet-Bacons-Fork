@@ -29,59 +29,7 @@
 /turf/open/floor/plating/abductor2/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
 	return
 
-/turf/open/floor/plating/ashplanet
-	icon = MAP_SWITCH('icons/turf/floors/ash.dmi', 'icons/turf/mining.dmi')
-	icon_state = "ash"
-	base_icon_state = "ash"
-	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
-	// This is static
-	// Done like this to avoid needing to make it dynamic and save cpu time
-	// 4 to the left, 4 down
-	transform = MAP_SWITCH(TRANSLATE_MATRIX(MINERAL_WALL_OFFSET, MINERAL_WALL_OFFSET), matrix())
-	gender = PLURAL
-	name = "ash"
-	desc = "The ground is covered in volcanic ash."
-	baseturfs = /turf/open/floor/plating/ashplanet/wateryrock //I assume this will be a chasm eventually, once this becomes an actual surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	planetary_atmos = TRUE
-	attachment_holes = FALSE
-	footstep = FOOTSTEP_SAND
-	barefootstep = FOOTSTEP_SAND
-	clawfootstep = FOOTSTEP_SAND
-	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	tiled_dirt = FALSE
-
-/turf/open/floor/plating/ashplanet/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
-	return
-
-/turf/open/floor/plating/ashplanet/break_tile()
-	return
-
-/turf/open/floor/plating/ashplanet/burn_tile()
-	return
-
-/turf/open/floor/plating/ashplanet/ash
-	smoothing_groups = list(SMOOTH_GROUP_TURF_OPEN, SMOOTH_GROUP_FLOOR_ASH)
-	canSmoothWith = list(SMOOTH_GROUP_FLOOR_ASH, SMOOTH_GROUP_CLOSED_TURFS)
-	layer = HIGH_TURF_LAYER
-	slowdown = 1
-
-/turf/open/floor/plating/ashplanet/rocky
-	gender = PLURAL
-	name = "rocky ground"
-	icon = MAP_SWITCH('icons/turf/floors/rocky_ash.dmi', 'icons/turf/mining.dmi')
-	icon_state = "rockyash"
-	base_icon_state = null
-	smoothing_groups = list(SMOOTH_GROUP_TURF_OPEN, SMOOTH_GROUP_FLOOR_ASH_ROCKY)
-	canSmoothWith = list(SMOOTH_GROUP_FLOOR_ASH_ROCKY, SMOOTH_GROUP_CLOSED_TURFS)
-	smoothing_flags = SMOOTH_CORNERS
-	layer = MID_TURF_LAYER
-	footstep = FOOTSTEP_FLOOR
-	barefootstep = FOOTSTEP_HARD_BAREFOOT
-	clawfootstep = FOOTSTEP_HARD_CLAW
-	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-
-/turf/open/floor/plating/ashplanet/wateryrock
+/turf/open/floor/plating/wateryrock
 	gender = PLURAL
 	name = "wet rocky ground"
 	icon = 'icons/turf/mining.dmi'
@@ -98,7 +46,7 @@
 	smoothing_flags = NONE
 	transform = matrix()
 
-/turf/open/floor/plating/ashplanet/wateryrock/Initialize(mapload)
+/turf/open/floor/plating/wateryrock/Initialize(mapload)
 	icon_state = "[icon_state][rand(1, 9)]"
 	. = ..()
 

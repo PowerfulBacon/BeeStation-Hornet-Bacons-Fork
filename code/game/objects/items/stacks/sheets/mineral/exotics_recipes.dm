@@ -10,7 +10,7 @@ STACKSIZE_MACRO(/obj/item/stack/sheet/mineral/bananium)
 /* Adamantine */
 
 GLOBAL_LIST_INIT(adamantine_recipes, list(
-	new /datum/stack_recipe("incomplete servant golem shell", /obj/item/golem_shell/servant, req_amount=25, res_amount=1),
+	new /datum/stack_recipe("incomplete servant golem shell", /obj/item/golem_shell, req_amount=25, res_amount=1),
 	))
 
 STACKSIZE_MACRO(/obj/item/stack/sheet/mineral/adamantine)

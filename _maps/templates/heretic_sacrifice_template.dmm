@@ -60,11 +60,7 @@
 /area/heretic_sacrifice/void)
 "lz" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "mb" = (
 /obj/effect/decal/cleanable/dirt,
@@ -106,11 +102,7 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 10
 	},
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "nP" = (
 /obj/structure/stone_tile/block{
@@ -139,11 +131,7 @@
 /area/heretic_sacrifice/rust)
 "pN" = (
 /obj/effect/decal/cleanable/oil,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "qn" = (
 /obj/effect/decal/remains/human,
@@ -152,11 +140,7 @@
 "qM" = (
 /obj/structure/stone_tile/block/cracked,
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "rP" = (
 /obj/effect/decal/cleanable/dirt,
@@ -223,11 +207,7 @@
 "zb" = (
 /obj/structure/stone_tile/slab,
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "zU" = (
 /obj/effect/decal/fakelattice{
@@ -309,11 +289,7 @@
 /obj/structure/stone_tile/block/burnt{
 	dir = 1
 	},
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "GX" = (
 /obj/effect/landmark/heretic/flesh,
@@ -333,11 +309,7 @@
 /area/heretic_sacrifice/flesh)
 "Ie" = (
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "Je" = (
 /obj/effect/decal/cleanable/dirt,
@@ -347,11 +319,7 @@
 /obj/structure/stone_tile/cracked{
 	dir = 1
 	},
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "JJ" = (
 /obj/effect/decal/remains/human,
@@ -387,11 +355,7 @@
 /area/heretic_sacrifice/flesh)
 "KP" = (
 /obj/structure/stone_tile/surrounding_tile,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "La" = (
 /turf/closed/wall/mineral/plastitanium,
@@ -420,22 +384,14 @@
 /area/heretic_sacrifice/rust)
 "NA" = (
 /obj/structure/stone_tile/burnt,
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "OD" = (
 /obj/effect/landmark/heretic,
 /turf/open/floor/plating/dirt/jungle/wasteland,
 /area/heretic_sacrifice/ash)
 "Pl" = (
-/turf/open/floor/plating/ashplanet/wateryrock{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15";
-	planetary_atmos = 0;
-	slowdown = 0
-	},
+/turf/open/floor/plating/wateryrock,
 /area/heretic_sacrifice/ash)
 "Qi" = (
 /obj/structure/stone_tile,

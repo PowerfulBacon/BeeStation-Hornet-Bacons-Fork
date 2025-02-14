@@ -1,0 +1,1 @@
+/turf/open/floor/plating/ashplanet/wateryrock : /turf/open/floor/plating/wateryrock
