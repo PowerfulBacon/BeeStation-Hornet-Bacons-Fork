@@ -438,6 +438,10 @@
 	addtimer(CALLBACK(src, PROC_REF(reset_status)), 4 + ((tiredness * tiredness_mult) / 10))
 	tiredness = tiredness + (gust_tiredness * tiredness_mult)
 
+/mob/living/simple_animal/hostile/space_dragon/lesser
+	maxHealth = 100
+	health = 100
+
 /mob/living/proc/carp_talk(message, shown_name = real_name)
 	message = trim(message)
 	if(!message)
