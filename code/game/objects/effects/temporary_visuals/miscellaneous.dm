@@ -616,3 +616,21 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/launchpad)
 	duration = time
 	animate(src, time=time, alpha=255)
 	return ..()
+
+/obj/effect/temp_visual/at_shield
+	name = "anti-toolbox field"
+	desc = "A shimmering forcefield protecting the colossus."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "at_shield2"
+	layer = FLY_LAYER
+	light_system = MOVABLE_LIGHT
+	light_range = 2
+	duration = 8
+	var/target
+
+CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/at_shield)
+
+/obj/effect/temp_visual/at_shield/Initialize(mapload, new_target)
+	. = ..()
+	target = new_target
+	INVOKE_ASYNC(src, /atom/movable/proc/orbit, target, 0, FALSE, 0, 0, FALSE, TRUE)
