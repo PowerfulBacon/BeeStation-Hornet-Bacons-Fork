@@ -86,9 +86,6 @@
 /turf/open/floor/plating/asteroid/planetary
 	planetary_atmos = TRUE
 
-/turf/open/floor/plating/lavaland_baseturf
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-
 /turf/open/floor/plating/asteroid/basalt
 	name = "volcanic floor"
 	baseturfs = /turf/open/floor/plating/asteroid/basalt

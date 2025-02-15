@@ -228,17 +228,6 @@
 	category = CAT_PRIMAL
 	dangerous_craft = TRUE
 
-/datum/crafting_recipe/primal_lasso
-	name= "Primal Lasso"
-	result = /obj/item/mob_lasso/primal
-	time = 2 SECONDS
-	reqs = list(
-		/obj/item/stack/sheet/animalhide/goliath_hide = 3,
-		/obj/item/stack/sheet/sinew = 4
-	)
-	always_available = FALSE
-	category = CAT_PRIMAL
-
 /datum/crafting_recipe/fermenting_barrel
 	name = "Wooden Barrel"
 	result = /obj/structure/fermenting_barrel

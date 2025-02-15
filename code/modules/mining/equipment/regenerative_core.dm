@@ -85,6 +85,9 @@
 			if(H.stat == DEAD)
 				to_chat(user, span_notice("[src] is useless on the dead."))
 				return
+			if(HAS_TRAIT(H, TRAIT_NECROPOLIS_INFECTED))
+				to_chat(H, span_danger("The necroplis still has a hold of [H.p_their()] body..."))
+				return
 			if(H != user)
 				to_chat(user, span_notice("You begin to rub the regenerative core on [H]..."))
 				to_chat(H, span_userdanger("[user] begins to smear the regenerative core all over you..."))
@@ -96,9 +99,6 @@
 			else
 				to_chat(user, span_notice("You start to smear [src] on yourself. It feels and smells disgusting, but you feel amazingly refreshed in mere moments."))
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "self"))
-			if(HAS_TRAIT(H, TRAIT_NECROPOLIS_INFECTED))
-				H.ForceContractDisease(new /datum/disease/transformation/legion())
-				to_chat(H, span_userdanger("You feel the necropolis strengthen its grip on your heart and soul... You're powerless to resist for much longer..."))
 			H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "core", /datum/mood_event/healsbadman) //Now THIS is a miner buff (fixed - nerf)
 			qdel(src)

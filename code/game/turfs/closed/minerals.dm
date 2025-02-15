@@ -361,19 +361,6 @@
 	mineralAmt = 1
 	scan_state = "rock_BScrystal"
 
-/turf/closed/mineral/ash_rock //wall piece
-	name = "rock"
-	icon = MAP_SWITCH('icons/turf/walls/rock_wall.dmi', 'icons/turf/mining.dmi')
-	icon_state = "rock2"
-	base_icon_state = "rock_wall"
-	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
-	canSmoothWith = list(SMOOTH_GROUP_CLOSED_TURFS)
-	baseturfs = /turf/open/floor/plating/ashplanet
-	initial_gas_mix = OPENTURF_LOW_PRESSURE
-	environment_type = "waste"
-	turf_type = /turf/open/floor/plating/ashplanet/rocky
-	defer_change = 1
-
 /turf/closed/mineral/snowmountain
 	name = "snowy mountainside"
 	icon = MAP_SWITCH('icons/turf/walls/mountain_wall.dmi', 'icons/turf/mining.dmi')
