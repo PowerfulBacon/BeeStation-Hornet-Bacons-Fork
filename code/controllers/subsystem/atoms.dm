@@ -155,6 +155,9 @@ SUBSYSTEM_DEF(atoms)
 		if(INITIALIZE_HINT_QDEL)
 			qdel(A)
 			return TRUE //Don't need to check anything else since we know it's deleted already
+		if (INITIALIZE_HINT_BASIC)
+			created_atoms += A
+			return QDELING(A)
 		else
 			BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
 

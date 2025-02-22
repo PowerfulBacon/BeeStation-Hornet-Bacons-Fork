@@ -75,7 +75,7 @@
 	if(requires_activation)
 		SSair.add_to_active(src, TRUE)
 
-	return INITIALIZE_HINT_NORMAL
+	return INITIALIZE_HINT_BASIC
 
 /turf/open/space/Destroy()
 	// Cleanup cached z_eventually_space values above us.

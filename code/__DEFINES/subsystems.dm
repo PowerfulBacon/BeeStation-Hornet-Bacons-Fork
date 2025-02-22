@@ -91,6 +91,9 @@
 ///Call qdel on the atom after intialization
 #define INITIALIZE_HINT_QDEL 2
 
+/// Indicates that this thing should not send the initialize signal and does not create any contents
+#define INITIALIZE_HINT_BASIC 3
+
 ///type and all subtypes should always immediately call Initialize in New()
 #define INITIALIZE_IMMEDIATE(X) ##X/New(loc, ...){\
 	..();\

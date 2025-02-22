@@ -22,7 +22,7 @@
 	//This should probably be refactored into a system like the regular configuration
 
 	var/traits = null
-	var/space_ruin_levels = 4	//Keep this low, as new ones are created dynamically when needed.
+	var/space_ruin_levels = 0	//Keep this low, as new ones are created dynamically when needed.
 	var/space_empty_levels = 1
 
 	///Does the map allow custom shuttles to be purchased

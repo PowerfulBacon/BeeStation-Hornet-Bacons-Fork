@@ -189,6 +189,17 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/station)
 		playsound(src, 'sound/machines/terminal_off.ogg', 50, 0)
 	return TRUE
 
+/obj/machinery/gateway/attack_ghost(mob/user)
+	. = ..()
+	if(.)
+		return
+
+	if(linked_gateway)
+		user.abstract_move(get_turf(linked_gateway))
+		return TRUE
+	to_chat(user, "[src] has no destination.")
+	return TRUE
+
 //this is da important part wot makes things go
 /obj/machinery/gateway/station
 
