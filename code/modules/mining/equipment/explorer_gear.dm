@@ -112,48 +112,6 @@
 	. = ..()
 	adjustmask()
 
-/obj/item/clothing/suit/space/hostile_environment
-	name = "H.E.C.K. suit"
-	desc = "Hostile Environment Cross-Kinetic Suit: A suit designed to withstand the wide variety of hazards from Lavaland. It wasn't enough for its last owner."
-	icon = 'icons/obj/clothing/suits/armor.dmi'
-	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
-	icon_state = "hostile_env"
-	item_state = "hostile_env"
-	clothing_flags = THICKMATERIAL //not spaceproof
-	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
-	resistance_flags = FIRE_PROOF | LAVA_PROOF
-	slowdown = 0
-	armor_type = /datum/armor/space_hostile_environment
-	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/resonator, /obj/item/mining_scanner, /obj/item/t_scanner/adv_mining_scanner, /obj/item/gun/energy/recharge/kinetic_accelerator, /obj/item/pickaxe)
-	high_pressure_multiplier = 0.6
-
-
-/datum/armor/space_hostile_environment
-	melee = 70
-	bullet = 40
-	laser = 20
-	energy = 20
-	bomb = 50
-	rad = 100
-	fire = 100
-	acid = 100
-	stamina = 40
-	bleed = 50
-
-/obj/item/clothing/suit/space/hostile_environment/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/spraycan_paintable)
-
-/obj/item/clothing/suit/space/hostile_environment/process(delta_time)
-	. = ..()
-	var/mob/living/carbon/C = loc
-	if(istype(C) && DT_PROB(1, delta_time)) //cursed by bubblegum
-		if(DT_PROB(7.5, delta_time))
-			new /datum/hallucination/oh_yeah(C)
-			to_chat(C, span_colossus("<b>[pick("I AM IMMORTAL.","I SHALL TAKE BACK WHAT'S MINE.","I SEE YOU.","YOU CANNOT ESCAPE ME FOREVER.","DEATH CANNOT HOLD ME.")]</b>"))
-		else
-			to_chat(C, span_warning("[pick("You hear faint whispers.","You smell ash.","You feel hot.","You hear a roar in the distance.")]"))
-
 /obj/item/clothing/head/helmet/space/hostile_environment
 	name = "H.E.C.K. helmet"
 	icon = 'icons/obj/clothing/head/helmet.dmi'

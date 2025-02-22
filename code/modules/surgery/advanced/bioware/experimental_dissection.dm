@@ -40,7 +40,7 @@
 		if(H.dna?.species)
 			if(isabductor(H))
 				return 8000
-			if(isgolem(H) || iszombie(H) || isashwalker(H))
+			if(isgolem(H) || iszombie(H))
 				return 4000
 			if(isslimeperson(H) || isluminescent(H) || isstargazer(H) || isdiona(H))
 				return 3000

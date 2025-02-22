@@ -904,12 +904,6 @@
 	results = list(/datum/reagent/mutationtoxin/goofzombie = 5)
 	required_reagents  = list(/datum/reagent/aslimetoxin = 5, /datum/reagent/drug/krokodil = 10, /datum/reagent/toxin/bad_food = 10) //Because rotting
 
-/datum/chemical_reaction/mutationtoxin/ash
-	name = /datum/reagent/mutationtoxin/ash
-	id = /datum/reagent/mutationtoxin/ash
-	results = list(/datum/reagent/mutationtoxin/ash = 5)
-	required_reagents  = list(/datum/reagent/aslimetoxin = 5, /datum/reagent/mutationtoxin/lizard = 1, /datum/reagent/ash = 10, /datum/reagent/consumable/entpoly = 5)
-
 /datum/chemical_reaction/mutationtoxin/shadow
 	name = /datum/reagent/mutationtoxin/shadow
 	id = /datum/reagent/mutationtoxin/shadow

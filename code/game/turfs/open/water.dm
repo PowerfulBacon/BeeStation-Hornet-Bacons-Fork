@@ -4,7 +4,7 @@
 	desc = "Shallow water."
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "riverwater_motion"
-	baseturfs = /turf/open/chasm/lavaland
+	baseturfs = /turf/open/chasm
 	initial_gas_mix = OPENTURF_LOW_PRESSURE
 	planetary_atmos = TRUE
 	slowdown = 1

@@ -357,23 +357,22 @@
 	name = "expensive forgery"
 	icon = 'icons/hud/screen_gen.dmi'
 	icon_state = "x2"
-	var/possible = list(/obj/item/ship_in_a_bottle,
-						/obj/item/gun/energy/pulse,
-						/obj/item/book/granter/martial/carp,
-						/obj/item/melee/supermatter_sword,
-						/obj/item/lava_staff,
-						/obj/item/energy_katana,
-						/obj/item/hierophant_club,
-						/obj/item/his_grace,
-						/obj/item/gun/energy/minigun,
-						/obj/item/gun/ballistic/automatic/l6_saw,
-						/obj/item/gun/magic/staff/chaos,
-						/obj/item/gun/magic/staff/spellblade,
-						/obj/item/gun/magic/wand/death,
-						/obj/item/gun/magic/wand/fireball,
-						/obj/item/stack/sheet/telecrystal/twenty,
-						/obj/item/nuke_core,
-						/obj/item/banhammer)
+	var/possible = list(
+		/obj/item/gun/energy/pulse,
+		/obj/item/book/granter/martial/carp,
+		/obj/item/melee/supermatter_sword,
+		/obj/item/energy_katana,
+		/obj/item/his_grace,
+		/obj/item/gun/energy/minigun,
+		/obj/item/gun/ballistic/automatic/l6_saw,
+		/obj/item/gun/magic/staff/chaos,
+		/obj/item/gun/magic/staff/spellblade,
+		/obj/item/gun/magic/wand/death,
+		/obj/item/gun/magic/wand/fireball,
+		/obj/item/stack/sheet/telecrystal/twenty,
+		/obj/item/nuke_core,
+		/obj/item/banhammer
+	)
 
 /obj/item/fakeartefact/Initialize(mapload)
 	. = ..()

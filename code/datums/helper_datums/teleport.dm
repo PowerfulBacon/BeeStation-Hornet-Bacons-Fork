@@ -324,11 +324,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/teleportation_wake)
 			visible_message(span_warning("The portal bends inward, but [src] can't seem to pass through it!"), span_warning("The portal has detected your [baddie] and not letting you through!"))
 			return COMPONENT_BLOCK_TELEPORT
 
-	// Ashwalker check
-	if(is_species(src, /datum/species/lizard/ashwalker))
-		visible_message(span_warning("The portal bends inward, but [src] can't seem to pass through it!"), span_warning("You can seem to go through the portal!"))
-		return COMPONENT_BLOCK_TELEPORT
-
 /mob/living/simple_animal/hostile/megafauna/intercept_teleport(channel, turf/origin, turf/destination)
 	. = ..()
 

@@ -2306,13 +2306,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	cost = 12
 	restricted_roles = list(JOB_NAME_CURATOR, JOB_NAME_STAGEMAGICIAN)
 
-/datum/uplink_item/role_restricted/prison_cube
-	name = "Prison Cube"
-	desc = "A very strange artifact recovered from a volcanic planet that is useful for keeping people locked away, but not very useful for keeping their disappearance unknown"
-	item = /obj/item/prisoncube
-	cost = 6
-	restricted_roles = list(JOB_NAME_CURATOR)
-
 /datum/uplink_item/role_restricted/his_grace
 	name = "His Grace"
 	desc = "An incredibly dangerous weapon recovered from a station overcome by the grey tide. Once activated, He will thirst for blood and must be used to kill to sate that thirst. \

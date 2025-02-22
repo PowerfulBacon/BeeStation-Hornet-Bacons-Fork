@@ -678,16 +678,6 @@
 	race = /datum/species/human/krokodil_addict //Not the infectious kind. The days of xenobio zombie outbreaks are long past.
 	taste_description = "krokodil"
 
-
-/datum/reagent/mutationtoxin/ash
-	name = "Ash Mutation Toxin"
-	description = "An ashen toxin."
-	color = "#5EFF3B" //RGB: 94, 255, 59
-	chem_flags = CHEMICAL_RNG_FUN
-	race = /datum/species/lizard/ashwalker
-	taste_description = "savagery"
-
-
 //DANGEROUS RACES
 /datum/reagent/mutationtoxin/shadow
 	name = "Shadow Mutation Toxin"

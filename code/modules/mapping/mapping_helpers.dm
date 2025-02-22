@@ -83,10 +83,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/baseturf_helper)
 	name = "lava baseturf editor"
 	baseturf = /turf/open/lava/smooth
 
-/obj/effect/baseturf_helper/lava_land/surface
-	name = "lavaland baseturf editor"
-	baseturf = /turf/open/lava/smooth/lava_land_surface
-
 CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/mapping_helpers)
 
 /obj/effect/mapping_helpers

@@ -791,3 +791,68 @@
 /datum/reagent/consumable/nutriment/cloth/on_mob_metabolize(mob/living/carbon/M)
 	holder.add_reagent(/datum/reagent/consumable/nutriment, 1)
 	holder.add_reagent(/datum/reagent/consumable/maltodextrin/microplastics, 1)
+
+/datum/reagent/consumable/vitfro
+	name = "Vitrium Froth"
+	description = "A bubbly paste that heals wounds of the skin."
+	color = "#d3a308"
+	chem_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY | CHEMICAL_GOAL_BOTANIST_HARVEST
+	nutriment_factor = 3 * REAGENTS_METABOLISM
+	taste_description = "fruity mushroom"
+
+/datum/reagent/consumable/vitfro/on_mob_life(mob/living/carbon/M)
+	if(prob(80))
+		M.adjustBruteLoss(-1*REM, 0)
+		M.adjustFireLoss(-1*REM, 0)
+		. = TRUE
+	..()
+
+/datum/reagent/consumable/entpoly
+	name = "Entropic Polypnium"
+	description = "An ichor derived from a certain mushroom. Makes for a bad time."
+	color = "#1d043d"
+	chem_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
+	taste_description = "bitter mushroom"
+
+/datum/reagent/consumable/entpoly/on_mob_life(mob/living/carbon/M)
+	if(current_cycle >= 10)
+		M.Unconscious(40, 0)
+		. = 1
+	if(prob(20))
+		M.losebreath += 4
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM, 150)
+		M.adjustToxLoss(3*REM,0)
+		M.adjustStaminaLoss(10*REM,0)
+		M.blur_eyes(5)
+		. = TRUE
+	..()
+
+/datum/reagent/consumable/tinlux
+	name = "Tinea Luxor"
+	description = "A stimulating ichor which causes luminescent fungi to grow on the skin. "
+	color = "#b5a213"
+	chem_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
+	taste_description = "tingling mushroom"
+	//Lazy list of mobs affected by the luminosity of this reagent.
+	var/list/mobs_affected
+
+/datum/reagent/consumable/tinlux/expose_mob(mob/living/M)
+	add_reagent_light(M)
+
+/datum/reagent/consumable/tinlux/on_mob_end_metabolize(mob/living/M)
+	remove_reagent_light(M)
+
+/datum/reagent/consumable/tinlux/proc/on_living_holder_deletion(mob/living/source)
+	remove_reagent_light(source)
+
+/datum/reagent/consumable/tinlux/proc/add_reagent_light(mob/living/living_holder)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = living_holder.mob_light(2)
+	LAZYSET(mobs_affected, living_holder, mob_light_obj)
+	RegisterSignal(living_holder, COMSIG_PARENT_QDELETING, PROC_REF(on_living_holder_deletion))
+
+/datum/reagent/consumable/tinlux/proc/remove_reagent_light(mob/living/living_holder)
+	UnregisterSignal(living_holder, COMSIG_PARENT_QDELETING)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = LAZYACCESS(mobs_affected, living_holder)
+	LAZYREMOVE(mobs_affected, living_holder)
+	if(mob_light_obj)
+		qdel(mob_light_obj)

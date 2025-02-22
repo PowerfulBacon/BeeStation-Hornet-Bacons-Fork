@@ -32,7 +32,6 @@
 												/datum/hallucination/fire,
 												/datum/hallucination/self_delusion,
 												/datum/hallucination/death,
-												/datum/hallucination/delusion,
-												/datum/hallucination/oh_yeah)
+												/datum/hallucination/delusion)
 			for(var/mob/living/carbon/C in GLOB.alive_mob_list)
 				new picked_hallucination(C, TRUE)

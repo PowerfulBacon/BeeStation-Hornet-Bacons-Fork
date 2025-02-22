@@ -87,22 +87,3 @@
 
 /datum/species/lizard/get_species_lore()
 	return null
-
-/*
-	Lizard subspecies: ASHWALKERS
-*/
-/datum/species/lizard/ashwalker
-	name = "Ash Walker"
-	id = SPECIES_ASHWALKER
-	examine_limb_id = SPECIES_LIZARD
-	species_traits = list(MUTCOLORS,EYECOLOR,LIPS, NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_NOGUNS)
-	species_language_holder = /datum/language_holder/lizard/ash
-	mutantlungs = /obj/item/organ/lungs/ashwalker
-	digitigrade_customization = DIGITIGRADE_FORCED
-
-/datum/species/lizard/ashwalker/spec_life(mob/living/carbon/human/H)
-	. = ..()
-	H.cauterise_wounds(0.1)
-	if (H.blood_volume < BLOOD_VOLUME_NORMAL && !H.is_bleeding())
-		H.blood_volume += 0.5
