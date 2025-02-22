@@ -12,7 +12,6 @@
 	response_harm_simple = "strike"
 	status_flags = 0
 	combat_mode = TRUE
-	var/crusher_loot
 	var/throw_message = "bounces off of"
 	var/fromtendril = FALSE
 	see_in_dark = NIGHTVISION_FOV_RANGE
@@ -51,16 +50,6 @@
 			visible_message(span_notice("The [T.name] [throw_message] [src.name]!"))
 			return
 	..()
-
-/mob/living/simple_animal/hostile/asteroid/death(gibbed)
-	SSblackbox.record_feedback("tally", "mobs_killed_mining", 1, type)
-	var/datum/status_effect/crusher_damage/C = has_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
-	if(C && crusher_loot && prob((C.total_damage/maxHealth) * crusher_drop_mod)) //on average, you'll need to kill 4 creatures before getting the item
-		spawn_crusher_loot()
-	..(gibbed)
-
-/mob/living/simple_animal/hostile/asteroid/proc/spawn_crusher_loot()
-	butcher_results[crusher_loot] = 1
 
 /mob/living/simple_animal/hostile/asteroid/handle_temperature_damage()
 	if(bodytemperature < minbodytemp)
