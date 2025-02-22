@@ -637,7 +637,7 @@
 /turf/open/floor/carpet/red,
 /area/centcom/control)
 "aby" = (
-/obj/structure/fluff/empty_sleeper/syndicate{
+/obj/machinery/sleeper/syndie{
 	dir = 1
 	},
 /obj/effect/turf_decal/edges/techfloor{
@@ -5479,7 +5479,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/edges/techfloor,
-/obj/structure/fluff/empty_sleeper/syndicate{
+/obj/machinery/sleeper/syndie{
 	dir = 1
 	},
 /obj/structure/sign/poster/contraband/busty_backdoor_xeno_babes_6{
@@ -13589,7 +13589,7 @@
 /turf/open/floor/iron/techmaint,
 /area/tdome/tdomeobserve)
 "aHT" = (
-/obj/structure/flora/ash/leaf_shroom,
+/obj/structure/flora/leaf_shroom,
 /turf/open/floor/plating/dirt/jungle,
 /area/syndicate_mothership/control)
 "aHU" = (
@@ -15294,11 +15294,11 @@
 /turf/closed/indestructible/riveted,
 /area/awaymission/errorroom)
 "aLW" = (
-/turf/closed/mineral/ash_rock,
+/turf/closed/mineral,
 /area/awaymission/errorroom)
 "aLX" = (
 /obj/structure/speaking_tile,
-/turf/closed/mineral/ash_rock,
+/turf/closed/mineral,
 /area/awaymission/errorroom)
 "aLY" = (
 /obj/item/rupee,
@@ -16111,7 +16111,7 @@
 	},
 /area/centcom/evac)
 "aNZ" = (
-/obj/structure/flora/ash/tall_shroom,
+/obj/structure/flora/tall_shroom,
 /turf/open/floor/plating/dirt/jungle,
 /area/syndicate_mothership/control)
 "aOa" = (
@@ -18402,7 +18402,7 @@
 /turf/open/floor/iron/dark/smooth_edge,
 /area/centcom/supplypod)
 "aTk" = (
-/obj/structure/fluff/empty_sleeper/syndicate{
+/obj/machinery/sleeper/syndie{
 	dir = 1
 	},
 /obj/effect/turf_decal/edges/techfloor{
@@ -19543,7 +19543,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/control)
 "aVT" = (
-/obj/structure/flora/ash,
+/obj/structure/flora,
 /turf/open/floor/plating/dirt/jungle,
 /area/syndicate_mothership/control)
 "aVU" = (
@@ -21446,7 +21446,7 @@
 /turf/open/floor/wood/big,
 /area/syndicate_mothership/control)
 "dSK" = (
-/obj/structure/flora/ash/cacti,
+/obj/structure/flora/cacti,
 /turf/open/floor/plating/dirt/jungle,
 /area/syndicate_mothership/control)
 "dXB" = (
@@ -21530,7 +21530,7 @@
 /turf/open/floor/grass/snow,
 /area/syndicate_mothership)
 "fsD" = (
-/obj/structure/flora/ash/cap_shroom{
+/obj/structure/flora/cap_shroom{
 	pixel_y = 6
 	},
 /turf/open/floor/plating/dirt/jungle,
@@ -21698,7 +21698,7 @@
 /turf/open/floor/carpet/purple,
 /area/syndicate_mothership/control)
 "hur" = (
-/obj/structure/flora/ash/leaf_shroom{
+/obj/structure/flora/leaf_shroom{
 	pixel_x = 11;
 	pixel_y = -7
 	},
@@ -21807,7 +21807,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/fluff/empty_sleeper/syndicate{
+/obj/machinery/sleeper/syndie{
 	icon_state = "sleeper_s-o"
 	},
 /turf/open/floor/iron/tech/grid,
@@ -21937,7 +21937,7 @@
 /obj/structure/sign/poster/contraband/free_key{
 	pixel_y = 32
 	},
-/obj/structure/fluff/empty_sleeper/syndicate{
+/obj/machinery/sleeper/syndie{
 	icon_state = "sleeper_s-o"
 	},
 /turf/open/floor/iron/tech/grid,
@@ -22106,7 +22106,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/edges/techfloor,
-/obj/structure/fluff/empty_sleeper/syndicate,
+/obj/machinery/sleeper/syndie,
 /obj/item/storage/pill_bottle/neurine{
 	pixel_y = -14;
 	pixel_x = -10

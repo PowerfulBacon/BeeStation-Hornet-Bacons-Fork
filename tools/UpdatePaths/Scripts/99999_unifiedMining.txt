@@ -1,2 +1,4 @@
 /turf/open/floor/plating/ashplanet/wateryrock : /turf/open/floor/plating/wateryrock
 /turf/closed/mineral/ash_rock: /turf/closed/mineral
+/obj/structure/fluff/empty_sleeper/syndicate: /obj/machinery/sleeper/syndie{@OLD}
+/obj/structure/flora/ash/@SUBTYPES : /obj/structure/flora/@SUBTYPES{@OLD}

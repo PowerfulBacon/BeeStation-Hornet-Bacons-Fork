@@ -275,7 +275,7 @@
 	H.dna.add_mutation(DWARFISM)
 
 /obj/effect/mob_spawn/human/corpse/damaged/legioninfested/Initialize(mapload)
-	var/type = pick_weight(list("Miner" = 66, "Ashwalker" = 10, "Golem" = 10,JOB_NAME_CLOWN = 10, pick(list("Shadow", "YeOlde","Operative", "Cultist")) = 4))
+	var/type = pick_weight(list("Miner" = 66, "Golem" = 10,JOB_NAME_CLOWN = 10, pick(list("Shadow", "YeOlde","Operative", "Cultist")) = 4))
 	switch(type)
 		if("Miner")
 			mob_species = pick_weight(list(/datum/species/human = 70, /datum/species/lizard = 26, /datum/species/fly = 2, /datum/species/plasmaman = 2))
@@ -301,23 +301,6 @@
 				r_pocket = pick_weight(list(/obj/item/stack/marker_beacon = 20, /obj/item/stack/spacecash/c1000 = 7, /obj/item/reagent_containers/hypospray/medipen/survival = 2, /obj/item/borg/upgrade/modkit/damage = 1 ))
 			if(prob(10))
 				l_pocket = pick_weight(list(/obj/item/stack/spacecash/c1000 = 7, /obj/item/reagent_containers/hypospray/medipen/survival = 2, /obj/item/borg/upgrade/modkit/cooldown = 1 ))
-		if("Ashwalker")
-			mob_species = /datum/species/lizard/ashwalker
-			uniform = /obj/item/clothing/under/costume/gladiator/ash_walker
-			if(prob(95))
-				head = /obj/item/clothing/head/helmet/gladiator
-			else
-				head = /obj/item/clothing/head/helmet/skull
-				suit = /obj/item/clothing/suit/armor/bone
-				gloves = /obj/item/clothing/gloves/bracer
-			if(prob(5))
-				back = pick_weight(list(/obj/item/spear/bonespear = 3, /obj/item/fireaxe/boneaxe = 2))
-			if(prob(10))
-				belt = /obj/item/storage/belt/mining/primitive
-			if(prob(30))
-				r_pocket = /obj/item/knife/combat/bone
-			if(prob(30))
-				l_pocket = /obj/item/knife/combat/bone
 		if(JOB_NAME_CLOWN)
 			name = pick(GLOB.clown_names)
 			outfit = /datum/outfit/job/clown

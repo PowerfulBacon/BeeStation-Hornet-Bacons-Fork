@@ -647,12 +647,14 @@
 	dwidth = 1
 	width = 3
 	height = 4
-	var/target_area = /area/surface/outdoors
+	//var/target_area = /area/surface/outdoors
 	var/edge_distance = 16
 	// Minimal distance from the map edge, setting this too low can result in shuttle landing on the edge and getting "sliced"
 
 /obj/docking_port/stationary/random/Initialize(mapload)
 	. = ..()
+	CRASH("Not implemented: Pod random docking isn't implemented")
+	/*
 	if(!mapload)
 		return
 
@@ -669,6 +671,7 @@
 	// Fallback: couldn't find anything
 	WARNING("docking port '[id]' could not be randomly placed in [target_area]: of [original_len] turfs, none were suitable.")
 	return INITIALIZE_HINT_QDEL
+	*/
 
 //Pod suits/pickaxes
 
@@ -716,7 +719,7 @@
 	if (can_interact(user))
 		return ..()
 
-/obj/item/storage/pod/attack_hand(mob/user, list/modifiers)
+/obj/item/storage/pod/attack_hand(mob/user)
 	if (can_interact(user))
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_SHOW, user)
 	return TRUE

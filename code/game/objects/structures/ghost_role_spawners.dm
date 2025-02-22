@@ -32,11 +32,6 @@
 	shoes = /obj/item/clothing/shoes/sneakers/orange
 	r_pocket = /obj/item/tank/internals/emergency_oxygen
 
-
-/obj/effect/mob_spawn/human/prisoner_transport/Destroy()
-	new/obj/structure/fluff/empty_sleeper/syndicate(get_turf(src))
-	return ..()
-
 //Space Hotel Staff
 /obj/effect/mob_spawn/human/hotel_staff //not free antag u little shits
 	name = "staff sleeper"
@@ -254,8 +249,6 @@
 		/obj/item/stack/sheet/cotton/cloth/durathread			= /datum/species/golem/durathread,
 		/obj/item/stack/sheet/cotton/durathread		= /datum/species/golem/durathread,
 		/obj/item/stack/sheet/snow					= /datum/species/golem/snow,
-		/obj/item/stack/sheet/capitalisium			= /datum/species/golem/capitalist,
-		/obj/item/stack/sheet/stalinium				= /datum/species/golem/soviet,
 		)
 
 	if(istype(I, /obj/item/stack))

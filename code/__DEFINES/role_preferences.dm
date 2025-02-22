@@ -130,6 +130,7 @@ GLOBAL_LIST_INIT(forced_bannable_roles, list(
 #define ROLE_SURVIVALIST		"Exploration Survivalist"
 #define ROLE_EXPLORATION_VIP	"Exploration VIP"
 #define ROLE_SENTIENT_XENOARTIFACT "Sentient Xenoartifiact"
+#define ROLE_LAVALAND_ESCAPED_PRISONER "escaped_prisoner"
 
 /// Any ghost role that is not really an antagonist or doesn't antagonize (sentience potion, etc)
 GLOBAL_LIST_INIT(ghost_role_bannable_roles, list(
