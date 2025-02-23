@@ -160,7 +160,6 @@ SUBSYSTEM_DEF(zclear)
 /datum/controller/subsystem/zclear/proc/begin_tracking(datum/space_level/sl)
 	LAZYOR(autowipe, sl)
 
-
 /*
  * Adds a z-level to the queue to be deleted.
  * If tracking is TRUE, then we will re-wipe the z-level when mobs leave it again.

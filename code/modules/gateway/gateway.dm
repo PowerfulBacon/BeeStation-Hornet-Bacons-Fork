@@ -135,40 +135,12 @@ GLOBAL_DATUM(the_gateway, /obj/machinery/gateway/station)
 	icon_state = active ? "on" : "off"
 	return ..()
 
-// Try to turn it on
-/obj/machinery/gateway/attack_hand(mob/living/user)
-	if(!active && toggleon(user))
-		user.visible_message(span_notice("[user] switches [src] on."), span_notice("You switch [src] on."))
-		return TRUE
-	if(active)
-		to_chat(user, span_warning("You need a multitool to turn it off!"))
-		return TRUE
-	return ..()
-
-// Silicons can turn it on and off however they please
-/obj/machinery/gateway/attack_silicon(mob/user)
-	if(active ? toggleoff(telegraph = TRUE) : toggleon(user))
-		to_chat(user, span_notice("You turn send a [active ? "startup" : "shutdown"] signal to [src]."))
-		visible_message(span_notice("[src] turns on."), ignored_mobs = list(user))
-		return TRUE
-	return ..()
-
-// Otherwise, you need a multitool to turn it off
-/obj/machinery/gateway/multitool_act(mob/living/user, obj/item/I)
-	if(active && toggleoff(telegraph = TRUE))
-		user.visible_message(span_notice("[user] switches [src] off."), span_notice("You switch [src] off."))
-		return TRUE
-	else if(!active)
-		to_chat(user, span_warning("Its already off!"))
-		return TRUE
-	return ..()
-
-/obj/machinery/gateway/proc/toggleon(mob/user)
+/obj/machinery/gateway/proc/toggleon(mob/user, out_message)
 	if(!powered())
-		to_chat(user, span_warning("It has no power!"))
+		&out_message = "No power"
 		return FALSE
 	if(!linked_gateway)
-		to_chat(user, span_warning("No destination found!"))
+		&out_message = "Invalid destination"
 		return FALSE
 
 	active = TRUE

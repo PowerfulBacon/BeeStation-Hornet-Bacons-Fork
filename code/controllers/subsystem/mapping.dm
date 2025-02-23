@@ -337,7 +337,7 @@ SUBSYSTEM_DEF(mapping)
 
 #ifndef LOWMEMORYMODE
 	// TODO: remove this when the DB is prepared for the z-levels getting reordered
-	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
+	for (var/i in 1 to config.space_ruin_levels)
 		++space_levels_so_far
 		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE, orbital_body_type = null))
 #endif

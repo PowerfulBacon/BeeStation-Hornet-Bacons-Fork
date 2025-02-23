@@ -2774,6 +2774,8 @@
 #include "code\modules\games\tarot.dm"
 #include "code\modules\games\unum.dm"
 #include "code\modules\gateway\gateway.dm"
+#include "code\modules\gateway\gateway_destination.dm"
+#include "code\modules\gateway\subsystems\gateway_subsystem.dm"
 #include "code\modules\hallucination\_hallucination.dm"
 #include "code\modules\hallucination\airlock.dm"
 #include "code\modules\hallucination\chat.dm"
