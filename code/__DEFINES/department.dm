@@ -26,6 +26,8 @@
 #define DEPT_BITFLAG_CENTCOM (1<<11)
 #define DEPT_NAME_OTHER "Other"
 #define DEPT_BITFLAG_OTHER (1<<12)
+#define DEPT_NAME_VOLKOVA "Volkova Extraction Group"
+#define DEPT_BITFLAG_VOLKOVA (1<<13)
 
 // not real department. These exist for pref grouping
 #define DEPT_NAME_ASSISTANT "Assistant"

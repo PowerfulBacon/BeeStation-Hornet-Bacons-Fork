@@ -240,6 +240,17 @@
 	exclusive_budget_pool = NON_STATION_BUDGET_BASE
 	..()
 
+/datum/bank_account/department/volkava
+	account_holder = ACCOUNT_VOL_NAME
+	department_id = ACCOUNT_VOL_ID
+	department_bitflag = ACCOUNT_VOL_BITFLAG
+	show_budget_information = TRUE
+
+/datum/bank_account/department/volkava
+	// Enough to get some things and pay the staff
+	exclusive_budget_pool = rand(3000, 4000)
+	..()
+
 /datum/bank_account/department/welfare
 	account_holder = ACCOUNT_NEET_NAME
 	department_id = ACCOUNT_NEET_ID

@@ -62,7 +62,7 @@
 /datum/gear/suit/wintercoat/science
 	display_name = "science winter coat"
 	path = /obj/item/clothing/suit/hooded/wintercoat/science
-	allowed_roles = list(JOB_NAME_SCIENTIST, JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR, JOB_NAME_EXPLORATIONCREW)
+	allowed_roles = list(JOB_NAME_SCIENTIST, JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR)
 
 /datum/gear/suit/wintercoat/engineering
 	display_name = "engineering winter coat"
@@ -113,7 +113,7 @@
 /datum/gear/suit/oldwintercoat/science
 	display_name = "nostalgic science winter coat"
 	path = /obj/item/clothing/suit/hooded/wintercoat/science/old
-	allowed_roles = list(JOB_NAME_SCIENTIST, JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR, JOB_NAME_EXPLORATIONCREW)
+	allowed_roles = list(JOB_NAME_SCIENTIST, JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR)
 
 /datum/gear/suit/oldwintercoat/engineering
 	display_name = "nostalgic engineering winter coat"

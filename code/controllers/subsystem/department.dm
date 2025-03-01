@@ -43,7 +43,8 @@ SUBSYSTEM_DEF(department)
 		EXP_TYPE_SUPPLY = 	SSdepartment.get_jobs_by_dept_id(DEPT_NAME_CARGO),
 		EXP_TYPE_SECURITY = SSdepartment.get_jobs_by_dept_id(DEPT_NAME_SECURITY),
 		EXP_TYPE_SILICON = 	SSdepartment.get_jobs_by_dept_id(DEPT_NAME_SILICON),
-		EXP_TYPE_SERVICE = 	SSdepartment.get_jobs_by_dept_id(DEPT_NAME_CIVILIAN)
+		EXP_TYPE_SERVICE = 	SSdepartment.get_jobs_by_dept_id(DEPT_NAME_CIVILIAN),
+		EXP_TYPE_VOLKOVA =	SSdepartment.get_jobs_by_dept_id(DEPT_NAME_VOLKOVA),
 	)
 
 	return SS_INIT_SUCCESS
@@ -275,7 +276,6 @@ SUBSYSTEM_DEF(department)
 	leaders = list(JOB_NAME_RESEARCHDIRECTOR)
 	jobs = list(JOB_NAME_RESEARCHDIRECTOR,
 				JOB_NAME_SCIENTIST,
-				JOB_NAME_EXPLORATIONCREW,
 				JOB_NAME_ROBOTICIST)
 
 	pref_category_name = DEPT_NAME_SCIENCE

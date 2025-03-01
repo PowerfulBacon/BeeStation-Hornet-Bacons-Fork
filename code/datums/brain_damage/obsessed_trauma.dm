@@ -112,7 +112,7 @@
 	for(var/datum/mind/possible_target in viable_minds)
 		var/weight = 10
 		// MUCH less likely to get a target who's probably going to be off-station for most of the round
-		if(possible_target.assigned_role in list(JOB_NAME_EXPLORATIONCREW, JOB_NAME_SHAFTMINER))
+		if(possible_target.assigned_role == JOB_NAME_SHAFTMINER)
 			weight = 1
 		possible_targets[possible_target] = weight
 	if(length(possible_targets))

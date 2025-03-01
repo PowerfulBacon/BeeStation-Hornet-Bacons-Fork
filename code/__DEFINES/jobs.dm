@@ -52,6 +52,8 @@
 #define JOB_DISPLAY_ORDER_BRIG_PHYS 32
 #define JOB_DISPLAY_ORDER_AI 33
 #define JOB_DISPLAY_ORDER_CYBORG 34
+#define JOB_DISPLAY_ORDER_VOLKOVA_LEADER 50
+#define JOB_DISPLAY_ORDER_VOLKOVA_MINER 51
 
 // should check the ones in `\_DEFINES\economy.dm`
 // It's true that bitflags shouldn't be separated in two DEFINES if these are same, but just in case the system can be devided, it's remained separated.
@@ -87,7 +89,6 @@
 #define JOB_NAME_RESEARCHDIRECTOR "Research Director"
 #define JOB_NAME_SCIENTIST  "Scientist"
 #define JOB_NAME_ROBOTICIST "Roboticist"
-#define JOB_NAME_EXPLORATIONCREW "Exploration Crew"
 
 // Engineering
 #define JOB_NAME_CHIEFENGINEER   "Chief Engineer"
@@ -144,7 +145,9 @@
 #define JOB_NAME_PRISONER "Prisoner"
 #define JOB_SPACE_POLICE "Space Police"
 
-
+// Volkova Extraction Group
+#define JOB_VOLKOVA_LEADER "Volkova Colony Director"
+#define JOB_VOLKOVA_MINER "Volkova Shaft Miner"
 
 //-------------------------------------------------------------------------------------------
 //---------------------------------------- HUD ----------------------------------------------

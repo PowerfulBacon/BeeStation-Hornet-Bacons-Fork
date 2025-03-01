@@ -6,8 +6,9 @@
 	department_head = list(JOB_NAME_HEADOFPERSONNEL)
 	supervisors = "the quartermaster and the head of personnel"
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 3
+	// Disabled: Doesn't spawn on most maps except EchoStation
+	total_positions = 0
+	spawn_positions = 0
 	selection_color = "#dcba97"
 
 	outfit = /datum/outfit/job/miner

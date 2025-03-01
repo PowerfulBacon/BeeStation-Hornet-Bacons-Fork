@@ -5,6 +5,11 @@
 #define PAYCHECK_EASY 35
 #define PAYCHECK_MEDIUM 60
 #define PAYCHECK_HARD 90
+// Paycheck for volkova employees
+// Private work pays good and they need to buy things.
+#define PAYCHECK_VOLKOVA 100
+// Paycheck for volkova management
+#define PAYCHECK_VOLKOVA_HEAD 150
 // given from nanotrasen to heads
 #define PAYCHECK_COMMAND_NT 20
 // given from department budget
@@ -44,6 +49,8 @@
 #define ACCOUNT_COM_NAME "Nanotrasen Commands' Quality ＆ Appearance Maintenance Budget"
 #define ACCOUNT_VIP_ID "VIP"
 #define ACCOUNT_VIP_NAME "Nanotrasen VIP Expense Account Budget"
+#define ACCOUNT_VOL_ID "Volkava"
+#define ACCOUNT_VOL_NAME "Volkava Extraction Corporate Account"
 #define ACCOUNT_NEET_ID "Welfare"
 #define ACCOUNT_NEET_NAME "Space Nations Welfare"
 #define ACCOUNT_GOLEM_ID "Golem"
@@ -65,6 +72,8 @@
 #define ACCOUNT_VIP_BITFLAG (1<<8) // for VIP only vendor items. currently not used.
 // this should use the same bitflag values in `\_DEFINES\jobs.dm` to match.
 // It's true that bitflags shouldn't be separated in two DEFINES if these are same, but just in case the system can be devided, it's remained separated.
+/// Volkava bank account
+#define ACCOUNT_VOL_BITFLAG (1<<9)
 
 /// How much mail the Economy SS will create per minute, regardless of firing time.
 #define MAX_MAIL_PER_MINUTE 3

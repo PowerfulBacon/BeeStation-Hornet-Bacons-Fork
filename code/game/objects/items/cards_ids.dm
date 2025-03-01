@@ -1266,12 +1266,6 @@ update_label("John Doe", "Clowny")
 	assignment = JOB_NAME_ROBOTICIST
 	hud_state = JOB_HUD_ROBOTICIST
 
-/obj/item/card/id/job/exploration_crew
-	name = "Job card (RND) - Explo Crew"
-	icon_state = "exploration"
-	assignment = JOB_NAME_EXPLORATIONCREW
-	hud_state = JOB_HUD_EXPLORATIONCREW
-
 /obj/item/card/id/job/rawscience
 	name = "Job card (RND) - Custom"
 	icon_state = "rawscience"
