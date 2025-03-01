@@ -1,7 +1,7 @@
 import { clamp } from 'common/math';
 import { Component } from 'react';
 
-const FPS = 20;
+const FPS = 10;
 // Scales the positions to make things on the map appear closer or further away.
 const mapDistanceScale = 1;
 
@@ -128,26 +128,26 @@ export class OrbitalMapSvg extends Component {
           </pattern>
           <pattern
             id="grid"
-            width={100 * lockedZoomScale}
-            height={100 * lockedZoomScale}
+            width={1000 * lockedZoomScale}
+            height={1000 * lockedZoomScale}
             patternUnits="userSpaceOnUse"
             x={scaledXOffset}
             y={scaledYOffset}>
-            <rect width={100 * lockedZoomScale} height={100 * lockedZoomScale} fill="url(#smallgrid)" />
+            <rect width={1000 * lockedZoomScale} height={1000 * lockedZoomScale} fill="url(#smallgrid)" />
             <path
               fill="none"
               stroke="#4665DE"
               stroke-width="1"
-              d={'M ' + 100 * lockedZoomScale + ' 0 L 0 0 0 ' + 100 * lockedZoomScale}
+              d={'M ' + 1000 * lockedZoomScale + ' 0 L 0 0 0 ' + 1000 * lockedZoomScale}
             />
           </pattern>
-          <pattern id="smallgrid" width={50 * lockedZoomScale} height={50 * lockedZoomScale} patternUnits="userSpaceOnUse">
-            <rect width={50 * lockedZoomScale} height={50 * lockedZoomScale} fill="#2B2E3B" />
+          <pattern id="smallgrid" width={250 * lockedZoomScale} height={250 * lockedZoomScale} patternUnits="userSpaceOnUse">
+            <rect width={250 * lockedZoomScale} height={250 * lockedZoomScale} fill="#0f0f0f" />
             <path
               fill="none"
               stroke="#4665DE"
               stroke-width="0.5"
-              d={'M ' + 50 * lockedZoomScale + ' 0 L 0 0 0 ' + 50 * lockedZoomScale}
+              d={'M ' + 250 * lockedZoomScale + ' 0 L 0 0 0 ' + 250 * lockedZoomScale}
             />
           </pattern>
         </defs>
@@ -194,6 +194,18 @@ export class OrbitalMapSvg extends Component {
     }
 
     let ourRenderableObject = ourObject && renderableObjectTypes[ourObject.id];
+
+    // Absolute position of our rendered shuttle
+    let absolute_x = ourRenderableObject
+      ? (ourRenderableObject.position_x + xOffset + ourRenderableObject.velocity_x * elapsed * ourRenderableObject.vel_mult) *
+      zoomScale *
+      mapDistanceScale
+      : 0;
+    let absolute_y = ourRenderableObject
+      ? (ourRenderableObject.position_y + yOffset + ourRenderableObject.velocity_y * elapsed * ourRenderableObject.vel_mult) *
+      zoomScale *
+      mapDistanceScale
+      : 0;
 
     let svgComponent = (
       <svg
@@ -264,26 +276,55 @@ export class OrbitalMapSvg extends Component {
           </>
         )}
         {ourRenderableObject && (
-          <circle
-            cx={
-              (ourRenderableObject.position_x +
-                xOffset +
-                ourRenderableObject.velocity_x * elapsed * ourRenderableObject.vel_mult) *
-              zoomScale *
-              mapDistanceScale
-            }
-            cy={
-              (ourRenderableObject.position_y +
-                yOffset +
-                ourRenderableObject.velocity_y * elapsed * ourRenderableObject.vel_mult) *
-              zoomScale *
-              mapDistanceScale
-            }
-            r={Math.max(5 * zoomScale, interdiction_range * zoomScale)}
-            stroke="rgba(0, 255, 0, 0.5)"
-            stroke-width="1"
-            fill="url(#interdictionRange)"
-          />
+          <>
+            {[200, 400, 600, 800].map((r) => (
+              <circle
+                key={r}
+                cx={absolute_x}
+                cy={absolute_y}
+                r={r * zoomScale}
+                stroke="rgba(81, 255, 81, 0.5)"
+                stroke-width="1"
+                fill="none"
+              />
+            ))}
+            {[
+              36, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+              31, 32, 33, 34, 35,
+            ].map((angle) => (
+              <text
+                key={angle * 10}
+                x={0}
+                y={0}
+                fill="rgba(81, 255, 81, 0.5)"
+                fontSize={38 * zoomScale}
+                transform={
+                  'translate(' +
+                  (absolute_x + 850 * Math.cos(((angle - 9) * Math.PI) / 18) * zoomScale) +
+                  ',' +
+                  (absolute_y + 850 * Math.sin(((angle - 9) * Math.PI) / 18) * zoomScale) +
+                  ')' +
+                  'rotate(' +
+                  angle * 10 +
+                  ')'
+                }>
+                {angle}
+              </text>
+            ))}
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+              <line
+                key={angle}
+                style={{
+                  stroke: 'rgba(81, 255, 81, 0.3)',
+                  strokeWidth: '1',
+                }}
+                x1={absolute_x}
+                y1={absolute_y}
+                x2={absolute_x + 800 * Math.cos((angle * Math.PI) / 180) * zoomScale}
+                y2={absolute_y + 800 * Math.sin((angle * Math.PI) / 180) * zoomScale}
+              />
+            ))}
+          </>
         )}
       </svg>
     );

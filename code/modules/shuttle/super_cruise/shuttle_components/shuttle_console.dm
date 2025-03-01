@@ -88,9 +88,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	return GLOB.default_state
 
 /obj/machinery/computer/shuttle_flight/ui_interact(mob/user, datum/tgui/ui)
-	if(!allowed(user) && !isobserver(user))
-		say("Insufficient access rights.")
-		return
 	//Ash walkers cannot use the console because they are unga bungas
 	if(user.mind?.has_antag_datum(/datum/antagonist/ashwalker))
 		to_chat(user, span_warning("This computer has been designed to keep the natives like you from meddling with it, you have no hope of using it."))
@@ -204,10 +201,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	. = ..()
 
 	if(.)
-		return
-
-	if(!allowed(usr))
-		say("Insufficient access rights.")
 		return
 
 	if(admin_controlled)

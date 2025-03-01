@@ -153,6 +153,15 @@
 	var/datum/orbital_vector/vel_new = new(velocity.x * delta_time * velocity_multiplier, velocity.y * delta_time * velocity_multiplier)
 	position.AddSelf(vel_new)
 
+	if (position.x > parent_map.map_size * 0.5)
+		position.x -= parent_map.map_size + 10
+	if (position.x < parent_map.map_size * -0.5)
+		position.x += parent_map.map_size - 10
+	if (position.y > parent_map.map_size * 0.5)
+		position.y -= parent_map.map_size + 10
+	if (position.y < parent_map.map_size * -0.5)
+		position.y += parent_map.map_size - 10
+
 	//Oh we moved btw
 	parent_map.on_body_move(src, prev_x, prev_y)
 

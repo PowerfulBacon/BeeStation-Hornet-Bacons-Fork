@@ -6,6 +6,7 @@ import { Box, Button, Section, Table, DraggableClickableControl, Dropdown, Divid
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 import { useRef } from 'react';
+import { PrimaryFlightDisplay } from 'tgui/components/aviation/PrimaryFlightDisplay';
 
 export const OrbitalMap = (props) => {
   const { act, data } = useBackend();
@@ -374,53 +375,56 @@ export const OrbitalMapDisplay = (props) => {
           </>
         </NoticeBox>
       )}
-      <OrbitalMapComponent
-        position="absolute"
-        step={1}
-        stepPixelSize={2 * zoomScale}
-        onDrag={(e, valueX, valueY) => {
-          setOffset([valueX, valueY]);
-          setTrackedBody(map_objects[0].name);
-        }}
-        valueX={isTracking ? dynamicXOffset : offset[0]}
-        valueY={isTracking ? dynamicYOffset : offset[1]}
-        isTracking={isTracking}
-        dynamicXOffset={dynamicXOffset}
-        dynamicYOffset={dynamicYOffset}
-        currentUpdateIndex={update_index}
-        onClick={(e, xOffset, yOffset) => {
-          const radar = radarRef?.current;
-          if (!radar) {
-            return;
-          }
-          const rect = radar.getBoundingClientRect();
-          let proportionalX = ((e.clientX - rect.left) / radar.offsetWidth) * 500;
-          let proportionalY = ((e.clientY - rect.top) / radar.offsetHeight) * 500;
-          act('setTargetCoords', {
-            x: (proportionalX - 250) / zoomScale + (isTracking ? dynamicXOffset : xOffset),
-            y: (proportionalY - 250) / zoomScale + (isTracking ? dynamicYOffset : yOffset),
-          });
-        }}>
-        {(control) => (
-          <OrbitalMapSvg
-            scaledXOffset={-control.xOffset * zoomScale}
-            scaledYOffset={-control.yOffset * zoomScale}
-            xOffset={-control.xOffset}
-            yOffset={-control.yOffset}
-            ourObject={ourObject}
-            lockedZoomScale={lockedZoomScale}
-            map_objects={map_objects}
-            interdiction_range={interdiction_range}
-            shuttleTargetX={shuttleTargetX}
-            shuttleTargetY={shuttleTargetY}
-            dragStartEvent={(e) => control.handleDragStart(e)}
-            zoomScale={zoomScale}
-            shuttleName={shuttleName}
-            currentUpdateIndex={update_index}>
-            {(control) => control.svgComponent}
-          </OrbitalMapSvg>
-        )}
-      </OrbitalMapComponent>
+      <PrimaryFlightDisplay />
+      {false && (
+        <OrbitalMapComponent
+          position="absolute"
+          step={1}
+          stepPixelSize={2 * zoomScale}
+          onDrag={(e, valueX, valueY) => {
+            setOffset([valueX, valueY]);
+            setTrackedBody(map_objects[0].name);
+          }}
+          valueX={isTracking ? dynamicXOffset : offset[0]}
+          valueY={isTracking ? dynamicYOffset : offset[1]}
+          isTracking={isTracking}
+          dynamicXOffset={dynamicXOffset}
+          dynamicYOffset={dynamicYOffset}
+          currentUpdateIndex={update_index}
+          onClick={(e, xOffset, yOffset) => {
+            const radar = radarRef?.current;
+            if (!radar) {
+              return;
+            }
+            const rect = radar.getBoundingClientRect();
+            let proportionalX = ((e.clientX - rect.left) / radar.offsetWidth) * 500;
+            let proportionalY = ((e.clientY - rect.top) / radar.offsetHeight) * 500;
+            act('setTargetCoords', {
+              x: (proportionalX - 250) / zoomScale + (isTracking ? dynamicXOffset : xOffset),
+              y: (proportionalY - 250) / zoomScale + (isTracking ? dynamicYOffset : yOffset),
+            });
+          }}>
+          {(control) => (
+            <OrbitalMapSvg
+              scaledXOffset={-control.xOffset * zoomScale}
+              scaledYOffset={-control.yOffset * zoomScale}
+              xOffset={-control.xOffset}
+              yOffset={-control.yOffset}
+              ourObject={ourObject}
+              lockedZoomScale={lockedZoomScale}
+              map_objects={map_objects}
+              interdiction_range={interdiction_range}
+              shuttleTargetX={shuttleTargetX}
+              shuttleTargetY={shuttleTargetY}
+              dragStartEvent={(e) => control.handleDragStart(e)}
+              zoomScale={zoomScale}
+              shuttleName={shuttleName}
+              currentUpdateIndex={update_index}>
+              {(control) => control.svgComponent}
+            </OrbitalMapSvg>
+          )}
+        </OrbitalMapComponent>
+      )}
     </>
   );
 };

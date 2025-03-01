@@ -5,6 +5,8 @@
 	var/list/collision_zone_bodies = list()
 	//Object count
 	var/object_count
+	// Map size. width and height of the map before you wrap
+	var/map_size = 1000
 
 /datum/orbital_map/proc/add_body(datum/orbital_object/body)
 	//Add the orbital body in the correct collision zone
