@@ -16,8 +16,8 @@
  * however if a room attachment point is not past the border, the room it generates on that attachment point
  * can go past the border. No attachment points can be generated past the border.
  */
-/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
-	var/datum/async_map_generator/space_ruin/ruin = new(center_x, center_y, center_z, border_x, border_y, linked_objective, forced_decoration, ruin_event)
+/proc/generate_space_ruin(center_x, center_y, center_z, border_x, border_y, forced_decoration)
+	var/datum/async_map_generator/space_ruin/ruin = new(center_x, center_y, center_z, border_x, border_y, forced_decoration)
 	ruin.generate()
 
 /datum/async_map_generator/space_ruin
@@ -64,16 +64,14 @@
 
 	var/stage = 0
 
-/datum/async_map_generator/space_ruin/New(center_x, center_y, center_z, border_x, border_y, datum/orbital_objective/linked_objective, forced_decoration, datum/ruin_event/ruin_event)
+/datum/async_map_generator/space_ruin/New(center_x, center_y, center_z, border_x, border_y, forced_decoration)
 	. = ..()
 	src.center_x = center_x
 	src.center_y = center_y
 	src.center_z = center_z
 	src.border_x = border_x
 	src.border_y = border_y
-	src.linked_objective = linked_objective
 	src.generator_settings = forced_decoration
-	src.ruin_event = ruin_event
 
 	var/datum/space_level/space_level = SSmapping.get_level(center_z)
 	space_level.generating = TRUE
@@ -105,8 +103,6 @@
 	//Place one facing up and one facing down.
 	hallway_connections["[center_x]_[center_y]"] = NORTH
 	placed_hallway_entrances["[center_x]_[center_y]"] = NORTH
-
-	ruin_event?.pre_spawn(center_z)
 
 	valid_ruin_parts = generator_settings.get_valid_rooms()
 
@@ -400,28 +396,6 @@
 
 /datum/async_map_generator/space_ruin/proc/finalize()
 
-	//Generate objective stuff
-	if(linked_objective)
-		var/obj_sanity = 100
-		//Spawn in a sane place.
-		while(obj_sanity > 0)
-			obj_sanity --
-			var/objective_turf = pick(floor_turfs)
-			var/split_loc = splittext(objective_turf, "_")
-			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
-			if(isspaceturf(T))
-				continue
-			if(T.is_blocked_turf(FALSE))
-				continue
-			linked_objective.generate_objective_stuff(T)
-			break
-		if(!obj_sanity)
-			stack_trace("ruin generator failed to find a non-blocked turf to spawn an object")
-			var/objective_turf = pick(floor_turfs)
-			var/split_loc = splittext(objective_turf, "_")
-			var/turf/T = locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z)
-			linked_objective.generate_objective_stuff(T)
-
 	//Generate research disks
 	for(var/i in 1 to rand(1, 5))
 		var/objective_turf = pick(floor_turfs)
@@ -434,12 +408,6 @@
 		var/split_loc = splittext(objective_turf, "_")
 		M.forceMove(locate(text2num(split_loc[1]), text2num(split_loc[2]), center_z))
 	SSzclear.nullspaced_mobs.Cut()
-
-	ruin_event?.post_spawn(floor_turfs, center_z)
-
-	//Start running event
-	if(ruin_event)
-		SSorbits.ruin_events += ruin_event
 
 	SSair.unpause_z(center_z)
 
