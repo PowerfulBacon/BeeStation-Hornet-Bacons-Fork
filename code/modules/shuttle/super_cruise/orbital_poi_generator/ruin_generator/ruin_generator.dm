@@ -33,8 +33,6 @@
 	/// The distance from the edge of the world in which the ruin will be forced to stop generating
 	/// The larger this is, the smaller the ruin will be
 	var/border_y
-	/// The objective linked to the generation of this ruin
-	var/datum/orbital_objective/linked_objective
 	/// The generator settings to use
 	var/datum/generator_settings/generator_settings
 	/// The ruin event to trigger throughout generation

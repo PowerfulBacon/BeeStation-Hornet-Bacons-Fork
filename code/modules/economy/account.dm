@@ -246,7 +246,7 @@
 	department_bitflag = ACCOUNT_VOL_BITFLAG
 	show_budget_information = TRUE
 
-/datum/bank_account/department/volkava
+/datum/bank_account/department/volkava/New(budget)
 	// Enough to get some things and pay the staff
 	exclusive_budget_pool = rand(3000, 4000)
 	..()

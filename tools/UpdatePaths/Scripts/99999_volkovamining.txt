@@ -1,0 +1,2 @@
+/obj/machinery/computer/objective : @DELETE
+/obj/item/circuitboard/computer/objective : @DELETE
