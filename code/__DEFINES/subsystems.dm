@@ -147,8 +147,8 @@
 #define INIT_ORDER_AI_MOVEMENT 		56 //We need the movement setup
 #define INIT_ORDER_AI_CONTROLLERS 	55 //So the controller can get the ref
 #define INIT_ORDER_TICKER			55
+#define INIT_ORDER_ORBITS			53
 #define INIT_ORDER_MAPPING			50
-#define INIT_ORDER_ORBITS			49 // Requires mapping levels to be created to init the map
 #define INIT_ORDER_EARLY_ASSETS		48
 #define INIT_ORDER_TIMETRACK		47
 #define INIT_ORDER_NETWORKS 45

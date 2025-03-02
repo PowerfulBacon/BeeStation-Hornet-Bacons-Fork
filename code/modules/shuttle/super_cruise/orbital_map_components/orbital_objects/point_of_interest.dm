@@ -6,7 +6,7 @@
 	var/init_y
 
 /datum/orbital_object/point_of_interest/New(name, x, y, tile_size = 5)
-	. = ..()
+	. = ..(new /datum/orbital_vector(0, 0), new /datum/orbital_vector(0, 0), PRIMARY_ORBITAL_MAP)
 	src.name = name
 	init_x = x
 	init_y = y

@@ -251,8 +251,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	highlight("#f00")
 	#endif
 
-	ils_beacon = new(src)
-
 	return INITIALIZE_HINT_LATELOAD
 
 
@@ -260,6 +258,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	. = ..()
 	if(SSshuttle.shuttles_loaded)
 		load_roundstart()
+	ils_beacon = new(src)
 
 
 /obj/docking_port/stationary/Destroy(force)

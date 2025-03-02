@@ -1,7 +1,6 @@
 PROCESSING_SUBSYSTEM_DEF(orbits)
 	name = "Orbits"
-	flags = SS_KEEP_TIMING
-	init_order = INIT_ORDER_ORBITS
+	flags = SS_KEEP_TIMING | SS_NO_INIT
 	priority = FIRE_PRIORITY_ORBITS
 	wait = ORBITAL_UPDATE_RATE
 
@@ -45,16 +44,8 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	//Ruin level count
 	var/ruin_levels = 0
 
-/datum/controller/subsystem/processing/orbits/Initialize()
-	//Create the main orbital map.
-	var/list/levels = SSmapping.levels_by_trait(ZTRAIT_MINING)
-	if (length(levels))
-		orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map(levels[0])
-	else
-		WARNING("Could not locate the mining level to create an orbital map for, using the station level instead.")
-		orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map(SSmapping.levels_by_trait(ZTRAIT_STATION)[1])
-
-	return SS_INIT_SUCCESS
+/datum/controller/subsystem/processing/orbits/proc/set_primary_map(datum/space_level/level)
+	orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map(level)
 
 /datum/controller/subsystem/processing/orbits/Recover()
 	orbital_maps |= SSorbits.orbital_maps
@@ -86,13 +77,12 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 	orbits_setup = TRUE
 
 /datum/controller/subsystem/processing/orbits/fire(resumed)
-	if(resumed)
-		. = ..()
-		if(MC_TICK_CHECK)
-			return
-		//Update UIs
-		for(var/datum/tgui/tgui as() in open_orbital_maps)
-			tgui.send_update()
+	. = ..()
+	if(MC_TICK_CHECK)
+		return
+	//Update UIs
+	for(var/datum/tgui/tgui as() in open_orbital_maps)
+		tgui.send_update()
 
 /mob/dead/observer/verb/open_orbit_ui()
 	set name = "View Orbits"
@@ -145,8 +135,10 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 				"name" = object.name,
 				"position_x" = object.position.x,
 				"position_y" = object.position.y,
+				"position_z" = object.position.z,
 				"velocity_x" = object.velocity.x,
 				"velocity_y" = object.velocity.y,
+				"velocity_z" = object.velocity.z,
 				"radius" = object.radius,
 				"render_mode" = object.render_mode,
 				"priority" = object.priority,

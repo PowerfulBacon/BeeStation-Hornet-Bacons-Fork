@@ -12,6 +12,10 @@
     justify-content: center;
   }
 
+  &__map {
+    overflow: hidden;
+  }
+
   &__button {
     width: 60px;
     height: 30px;

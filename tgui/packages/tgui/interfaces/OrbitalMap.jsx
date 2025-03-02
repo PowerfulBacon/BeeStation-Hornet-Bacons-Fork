@@ -134,7 +134,7 @@ export const OrbitalMap = (props) => {
             </div>
             <div class="OrbitalMap__button">ORBIT</div>
           </Flex.Item>
-          <Flex.Item grow>
+          <Flex.Item grow class="OrbitalMap__map">
             <OrbitalMapDisplay
               dynamicXOffset={dynamicXOffset}
               dynamicYOffset={dynamicYOffset}
