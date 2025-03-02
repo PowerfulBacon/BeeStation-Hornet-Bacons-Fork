@@ -26,7 +26,6 @@
 	)
 	var/designate_time = 50
 	var/turf/designating_target_loc
-	var/datum/action/innate/camera_jump/shuttle_docker/docker_action = new
 	///Camera action button to move up a Z level
 	var/datum/action/innate/camera_multiz_up/move_up_action = new
 	///Camera action button to move down a Z level
@@ -55,10 +54,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	if(place_action)
 		place_action.Grant(user)
 		actions += place_action
-
-	if(docker_action)
-		docker_action.Grant(user)
-		actions += docker_action
 
 	if(move_up_action)
 		move_up_action.Grant(user)
@@ -233,9 +228,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 			remove_eye_control(usr)
 			QDEL_NULL(shuttleObject)
 			//Hold the shuttle in the docking position until ready.
-			M.setTimer(INFINITY)
-			say("Waiting for hyperspace lane...")
-			INVOKE_ASYNC(src, PROC_REF(unfreeze_shuttle), M, SSmapping.get_level(eyeobj.z))
+			M.setTimer(20)
 		if(1)
 			to_chat(usr, span_warning("Invalid shuttle requested."))
 		else
@@ -403,45 +396,3 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/camera/ai_eye/remote/shuttle_docker)
 	var/mob/camera/ai_eye/remote/remote_eye = C.remote_control
 	var/obj/machinery/computer/shuttle_flight/origin = remote_eye.origin
 	origin.placeLandingSpot(owner)
-
-/datum/action/innate/camera_jump/shuttle_docker
-	name = "Jump to Location"
-	button_icon_state = "camera_jump"
-
-/datum/action/innate/camera_jump/shuttle_docker/on_activate()
-	if(QDELETED(owner) || !isliving(owner))
-		return
-	var/mob/living/C = owner
-	var/mob/camera/ai_eye/remote/remote_eye = C.remote_control
-	var/obj/machinery/computer/shuttle_flight/console = remote_eye.origin
-
-	if(QDELETED(console.shuttleObject))
-		return
-
-	playsound(console, 'sound/machines/terminal_prompt_deny.ogg', 25, 0)
-
-	var/list/L = list()
-	for(var/V in SSshuttle.stationary)
-		if(!V)
-			stack_trace("SSshuttle.stationary have null entry!")
-			continue
-		var/obj/docking_port/stationary/S = V
-		if(console.shuttleObject.docking_target.z_in_contents(S.z) && (S.id in console.valid_docks))
-			L["(L.len)[S.name]"] = S
-
-	playsound(console, 'sound/machines/terminal_prompt.ogg', 25, FALSE)
-	var/selected = tgui_input_list(usr, "Choose location to jump to", "Locations", sort_list(L))
-	if(isnull(selected))
-		playsound(console, 'sound/machines/terminal_prompt_deny.ogg', 25, FALSE)
-		return
-	if(QDELETED(src) || QDELETED(owner) || !isliving(owner))
-		return
-	playsound(src, "terminal_type", 25, FALSE)
-	var/turf/T = get_turf(L[selected])
-	if(isnull(T))
-		return
-	playsound(console, 'sound/machines/terminal_prompt_confirm.ogg', 25, 0)
-	remote_eye.setLoc(T)
-	to_chat(owner, span_notice("Jumped to [selected]."))
-	C.overlay_fullscreen("flash", /atom/movable/screen/fullscreen/flash/static)
-	C.clear_fullscreen("flash", 3)

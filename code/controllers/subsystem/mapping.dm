@@ -98,11 +98,11 @@ SUBSYSTEM_DEF(mapping)
 	// Create space ruin levels
 	while (space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
-		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE, orbital_body_type = null))
+		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE))
 	// and one level with no ruins
 	for (var/i in 1 to config.space_empty_levels)
 		++space_levels_so_far
-		empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = SELFLOOPING), orbital_body_type = /datum/orbital_object/z_linked/beacon/weak)
+		empty_space = add_new_zlevel("Empty Area [space_levels_so_far]", list(ZTRAIT_LINKAGE = SELFLOOPING))
 	// Pick a random away mission.
 	if(CONFIG_GET(flag/roundstart_away))
 		createRandomZlevel()
@@ -244,7 +244,7 @@ SUBSYSTEM_DEF(mapping)
 	z_list = SSmapping.z_list
 
 #define INIT_ANNOUNCE(X) to_chat(world, span_boldannounce("[X]")); log_world(X)
-/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE, orbital_body_type)
+/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE)
 	. = list()
 	var/start_time = REALTIMEOFDAY
 
@@ -281,11 +281,6 @@ SUBSYSTEM_DEF(mapping)
 	for (var/level in traits)
 		space_levels += add_new_zlevel("[name][i ? " [i + 1]" : ""]", level, contain_turfs = FALSE)
 		++i
-	//Shared orbital body
-	var/datum/orbital_object/z_linked/orbital_body = new orbital_body_type()
-	for(var/datum/space_level/level as() in space_levels)
-		SSorbits.assoc_z_levels["[level.z_value]"] = orbital_body
-		orbital_body.link_to_z(level)
 
 	// load the maps
 	for(var/datum/parsed_map/pm as anything in parsed_maps)
@@ -333,7 +328,7 @@ SUBSYSTEM_DEF(mapping)
 	// load the station
 	station_start = world.maxz + 1
 	INIT_ANNOUNCE("Loading [config.map_name]...")
-	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION, orbital_body_type = /datum/orbital_object/z_linked/station)
+	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION)
 
 	LoadStationRoomTemplates()
 	LoadStationRooms()
@@ -349,11 +344,11 @@ SUBSYSTEM_DEF(mapping)
 	// TODO: remove this when the DB is prepared for the z-levels getting reordered
 	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
-		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE, orbital_body_type = null))
+		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE))
 
 	// load mining
 	if(config.minetype == "lavaland")
-		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND, orbital_body_type = /datum/orbital_object/z_linked/lavaland)
+		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
 	else if (!isnull(config.minetype))
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
 #endif

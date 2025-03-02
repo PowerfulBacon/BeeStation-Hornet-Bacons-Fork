@@ -47,7 +47,12 @@ PROCESSING_SUBSYSTEM_DEF(orbits)
 
 /datum/controller/subsystem/processing/orbits/Initialize()
 	//Create the main orbital map.
-	orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map()
+	var/list/levels = SSmapping.levels_by_trait(ZTRAIT_MINING)
+	if (length(levels))
+		orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map(levels[0])
+	else
+		WARNING("Could not locate the mining level to create an orbital map for, using the station level instead.")
+		orbital_maps[PRIMARY_ORBITAL_MAP] = new /datum/orbital_map(SSmapping.levels_by_trait(ZTRAIT_STATION)[1])
 
 	return SS_INIT_SUCCESS
 

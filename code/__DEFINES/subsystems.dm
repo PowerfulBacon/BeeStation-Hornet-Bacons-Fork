@@ -139,7 +139,6 @@
 #define INIT_ORDER_SECURITY_LEVEL 79 // We need to load before events so that it has a security level to choose from.
 #define INIT_ORDER_ACHIEVEMENTS 	77
 #define INIT_ORDER_RESEARCH			75
-#define INIT_ORDER_ORBITS			74 //Other things use the orbital map, so it needs to be made early on.
 #define INIT_ORDER_STATION			73 //This is high priority because it manipulates a lot of the subsystems that will initialize after it.
 #define INIT_ORDER_DEPARTMENT		72 //This is important: it has access distributing code, so should be initialized quickly
 #define INIT_ORDER_QUIRKS			71
@@ -149,6 +148,7 @@
 #define INIT_ORDER_AI_CONTROLLERS 	55 //So the controller can get the ref
 #define INIT_ORDER_TICKER			55
 #define INIT_ORDER_MAPPING			50
+#define INIT_ORDER_ORBITS			49 // Requires mapping levels to be created to init the map
 #define INIT_ORDER_EARLY_ASSETS		48
 #define INIT_ORDER_TIMETRACK		47
 #define INIT_ORDER_NETWORKS 45

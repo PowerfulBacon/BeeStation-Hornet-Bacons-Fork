@@ -494,10 +494,7 @@
 
 			if(time_left <= 50 && !sound_played) //4 seconds left:REV UP THOSE ENGINES BOYS. - should sync up with the launch
 				sound_played = 1 //Only rev them up once.
-				var/list/areas = list()
-				for(var/area/shuttle/escape/E in GLOB.areas)
-					areas += E
-				hyperspace_sound(HYPERSPACE_WARMUP, areas)
+				hyperspace_sound(HYPERSPACE_WARMUP)
 
 			if(time_left <= 0 && !SSshuttle.emergencyNoEscape)
 				//move each escape pod (or applicable spaceship) to its corresponding transit dock
@@ -506,10 +503,7 @@
 					M.on_emergency_launch()
 
 				//now move the actual emergency shuttle to its transit dock
-				var/list/areas = list()
-				for(var/area/shuttle/escape/E in GLOB.areas)
-					areas += E
-				hyperspace_sound(HYPERSPACE_LAUNCH, areas)
+				hyperspace_sound(HYPERSPACE_LAUNCH)
 				enterTransit()
 				mode = SHUTTLE_ESCAPE
 				launch_status = ENDGAME_LAUNCHED
@@ -521,10 +515,7 @@
 
 		if(SHUTTLE_ESCAPE)
 			if(sound_played && time_left <= HYPERSPACE_END_TIME)
-				var/list/areas = list()
-				for(var/area/shuttle/escape/E in GLOB.areas)
-					areas += E
-				hyperspace_sound(HYPERSPACE_END, areas)
+				hyperspace_sound(HYPERSPACE_END)
 			if(time_left <= PARALLAX_LOOP_TIME)
 				var/area_parallax = FALSE
 				for(var/place in shuttle_areas)

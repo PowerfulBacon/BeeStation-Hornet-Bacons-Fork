@@ -2,9 +2,7 @@
 	var/name = "undefined"
 	//Unique ID of the orbital object
 	var/unique_id = ""
-	//Mass of the object in solar masses
-	var/mass = 0
-	//Radius of the object in ~~parsecs~~ arbitary space units
+	//Radius of the object in arbitary space units
 	var/radius = 1
 	//What render mode to use
 	var/render_mode = RENDER_MODE_DEFAULT
@@ -17,16 +15,10 @@
 	var/datum/orbital_vector/velocity = new()
 	//Static objects don't get moved.
 	var/static_object = FALSE
-	//Does the object actively thrust to maintain a stable orbit?
-	var/maintain_orbit = FALSE
-	//The object in which we are trying to maintain a stable orbit around.
-	var/datum/orbital_object/target_orbital_body
 	//Are we invisible on the map?
 	var/stealth = FALSE
 	//Multiplier for velocity
 	var/velocity_multiplier = 1
-	//Do we ignore gravity?
-	var/ignore_gravity = FALSE
 	//Priority in the sorted list
 	var/priority = 0
 
@@ -36,12 +28,8 @@
 	var/last_update_tick = 0
 
 	//CALCULATED IN INIT
-	//Once objects are outside of this range, we will not apply gravity to them.
-	var/relevant_gravity_range
 	//Are we force-orbitting something?
 	var/orbitting = FALSE
-	//The relative velocity required for a stable orbit
-	var/relative_velocity_required
 	//Bodies that are orbitting us.
 	var/list/orbitting_bodies = list()
 	//Are we currently immune to collisions
@@ -57,6 +45,10 @@
 	//The collision flags we register with
 	//Add to this when you want THIS objects collision proc to be called.
 	var/collision_flags = NONE
+	/// Are we considered to be in orbit?
+	/// Once we enter orbit, we no longer exist on the map and have a countdown
+	/// before we enter the station.
+	var/is_in_orbit = ORBITAL_STATUS_NONE
 
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
@@ -68,8 +60,6 @@
 	var/static/created_amount = 0
 	unique_id = "ObjID[++created_amount]"
 	. = ..()
-	//Calculate relevant grav range
-	relevant_gravity_range = sqrt((mass * GRAVITATIONAL_CONSTANT) / MINIMUM_EFFECTIVE_GRAVITATIONAL_ACCEELRATION)
 	//Process this
 	if(!static_object)
 		START_PROCESSING(SSorbits, src)
@@ -84,63 +74,34 @@
 	STOP_PROCESSING(SSorbits, src)
 	var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
 	map.remove_body(src)
-	LAZYREMOVE(target_orbital_body?.orbitting_bodies, src)
-	if(length(orbitting_bodies))
-		for(var/datum/orbital_object/orbitting_bodies in orbitting_bodies)
-			orbitting_bodies.target_orbital_body = null
-		orbitting_bodies.Cut()
 	. = ..()
 
 /datum/orbital_object/proc/explode()
 	return
 
-//Process orbital objects, calculate gravity
+//Process orbital objects
 /datum/orbital_object/process(delta_time)
 	//Dont process updates for static objects.
 	if(static_object)
 		return PROCESS_KILL
+	if (is_in_orbit == ORBITAL_STATUS_ORBIT)
+		return
 
 	last_update_tick = world.time
 
 	var/datum/orbital_map/parent_map = SSorbits.orbital_maps[orbital_map_index]
 
 	//===================================
-	// GRAVITATIONAL ATTRACTION
+	// GRAVITY
 	//===================================
-	//Gravity is not considered while we have just undocked and are at the center of a massive body.
-	if(!collision_ignored && !ignore_gravity)
-		//Find relevant gravitational bodies.
-		var/list/gravitational_bodies =parent_map.get_relevnant_bodies(src)
-		//Calculate acceleration vector
-		var/datum/orbital_vector/acceleration_per_second = new()
-		//Calculate gravity
-		for(var/datum/orbital_object/gravitational_body as() in gravitational_bodies)
-			//https://en.wikipedia.org/wiki/Gravitational_acceleration
-			var/distance = position.DistanceTo(gravitational_body.position)
-			if(!distance)
-				continue
-			var/acceleration_amount = (GRAVITATIONAL_CONSTANT * gravitational_body.mass) / (distance * distance)
-			//Calculate acceleration direction
-			var/datum/orbital_vector/direction = new (gravitational_body.position.x - position.x, gravitational_body.position.y - position.y)
-			direction.NormalizeSelf()
-			direction.ScaleSelf(acceleration_amount)
-			//Add on the gravitational acceleration
-			acceleration_per_second.AddSelf(direction)
-		//Divide acceleration per second by the tick rate
-		accelerate_towards(acceleration_per_second, delta_time)
+
+	//var/force = -gravity * delta_time * SHUTTLE_WEIGHT
 
 	//===================================
-	// ORBIT CORRECTION
+	// LIFT
 	//===================================
-	//Some objects may automatically thrust to maintain a stable orbit
-	if(maintain_orbit && target_orbital_body)
-		//Velocity should always be perpendicular to the planet
-		var/datum/orbital_vector/perpendicular_vector = new(position.y - target_orbital_body.position.y, target_orbital_body.position.x - position.x)
-		//Calculate the relative velocity we should have
-		perpendicular_vector.NormalizeSelf()
-		perpendicular_vector.ScaleSelf(relative_velocity_required)
-		//Set it because we are a lazy shit
-		velocity = perpendicular_vector.AddSelf(target_orbital_body.velocity)
+
+
 
 	//===================================
 	// MOVEMENT
@@ -164,6 +125,20 @@
 
 	//Oh we moved btw
 	parent_map.on_body_move(src, prev_x, prev_y)
+
+	//===================================
+	// Ground Impact
+	//===================================
+
+	if (position.z <= 0 && impact_ground())
+		return
+
+	//===================================
+	// ORBITAL
+	//===================================
+
+	// Check if we have the height to enter orbit
+	is_in_orbit = position.z > ORBIT_HEIGHT ? ORBITAL_STATUS_READY : ORBITAL_STATUS_NONE
 
 	//===================================
 	// COLLISION CHECKING
@@ -292,40 +267,21 @@
 /datum/orbital_object/proc/collision(datum/orbital_object/other)
 	return
 
-/datum/orbital_object/proc/set_orbitting_around_body(datum/orbital_object/target_body, orbit_radius = 10, force = FALSE)
-	if(orbitting && !force)
-		return
+/// Set the position of the orbital object relative to the world position
+/datum/orbital_object/proc/set_position(world_x, world_y)
+	var/datum/orbital_map/parent_map = SSorbits.orbital_maps[orbital_map_index]
 	var/prev_x = position.x
 	var/prev_y = position.y
-	orbitting = TRUE
-	//Calculates the required velocity for the object to orbit around the target body.
-	//Hopefully the planets gravity doesn't fuck with each other too hard.
-	//Set position
-	var/delta_x = -position.x
-	var/delta_y = -position.y
-	position.x = target_body.position.x + orbit_radius
-	position.y = target_body.position.y
-	delta_x += position.x
-	delta_y += position.y
-	//Move all orbitting b()odies too.
-	if(orbitting_bodies)
-		for(var/datum/orbital_object/object in orbitting_bodies)
-			object.position.AddSelf(new /datum/orbital_vector(delta_x, delta_y))
-	//Set velocity
-	var/relative_velocity = sqrt((GRAVITATIONAL_CONSTANT * (target_body.mass + mass)) / orbit_radius)
-	velocity.x = target_body.velocity.x
-	velocity.y = target_body.velocity.y + relative_velocity
-	//Set random angle
-	var/random_angle = rand(0, 360)	//Is cos and sin in radians?
-	position.RotateSelf(random_angle)
-	velocity.RotateSelf(random_angle)
-	//Update target
-	target_orbital_body = target_body
-	LAZYADD(target_body.orbitting_bodies, src)
-	relative_velocity_required = relative_velocity
-	//We moved, make sure to update the map.
-	var/datum/orbital_map/parent_map = SSorbits.orbital_maps[orbital_map_index]
+	position.x = (world_x / world.maxx) * parent_map.map_size - (parent_map.map_size * 0.5)
+	position.y = (world_y / world.maxy) * parent_map.map_size - (parent_map.map_size * 0.5)
 	parent_map.on_body_move(src, prev_x, prev_y)
 
 /datum/orbital_object/proc/post_map_setup()
 	return
+
+/datum/orbital_object/proc/get_map_turf()
+	RETURN_TYPE(/turf)
+
+/// Return true to cancel the rest of the movement
+/datum/orbital_object/proc/impact_ground()
+	return FALSE

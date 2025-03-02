@@ -86,13 +86,6 @@ SUBSYSTEM_DEF(zclear)
 		if(M.destination)
 			active_levels["[M.destination.z]"] = TRUE
 			living_levels["[M.destination.z]"] = TRUE
-	//Check for shuttles docking
-	for(var/port_id in SSorbits.assoc_shuttles)
-		var/datum/orbital_object/shuttle/shuttle = SSorbits.assoc_shuttles[port_id]
-		if(shuttle.docking_target)
-			for(var/datum/space_level/level in shuttle.docking_target.linked_z_level)
-				active_levels["[level.z_value]"] = TRUE
-				living_levels["[level.z_value]"] = TRUE
 	//Check for shuttles coming in
 	for(var/docking_level in docking_levels)
 		active_levels["[docking_level]"] = TRUE

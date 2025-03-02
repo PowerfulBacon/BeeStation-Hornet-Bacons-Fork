@@ -122,28 +122,6 @@
 			calculated_engine_count ++
 	calculated_acceleration = (calculated_dforce*1000) / (calculated_mass*100)
 
-/obj/machinery/computer/shuttle_flight/custom_shuttle/proc/check_stranded()
-	if(!calculated_engine_count && shuttleObject)
-		say("Fuel reserves depleted, dropping out of supercruise.")
-		if(!shuttleObject.docking_target)
-			if(shuttleObject.can_dock_with)
-				shuttleObject.commence_docking(shuttleObject.can_dock_with, TRUE)
-			else
-				//Send shuttle object to random location
-				var/datum/orbital_object/z_linked/beacon/z_linked = new /datum/orbital_object/z_linked/beacon/ruin/stranded_shuttle(new /datum/orbital_vector(shuttleObject.position.x, shuttleObject.position.y))
-				z_linked.name = "Stranded [shuttleObject]"
-				if(!z_linked)
-					say("Failed to dethrottle shuttle, please contact a Nanotrasen supervisor.")
-					return
-				shuttleObject.commence_docking(z_linked, TRUE)
-		shuttleObject.docking_frozen = TRUE
-		//Dock
-		if(!random_drop())
-			say("Failed to drop at a random location. Please select a location.")
-			shuttleObject.docking_frozen = FALSE
-		return TRUE
-	return FALSE
-
 /obj/machinery/computer/shuttle_flight/custom_shuttle/proc/get_fuel()
 	var/amount = 0
 	for(var/obj/machinery/shuttle/engine/E as() in shuttle_engines)

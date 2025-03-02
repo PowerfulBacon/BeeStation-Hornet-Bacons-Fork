@@ -290,6 +290,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/medical_holosign)
 /obj/item/flashlight/flare/Initialize(mapload)
 	. = ..()
 	fuel = rand(1600, 2000)
+	AddComponent(/datum/component/point_of_interest, "flare", 1)
 
 /obj/item/flashlight/flare/process(delta_time)
 	open_flame(heat)
@@ -318,6 +319,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/medical_holosign)
 
 	remove_emitter("spark")
 	remove_emitter("smoke")
+	qdel(GetComponent(/datum/component/point_of_interest))
 
 /obj/item/flashlight/flare/attack_self(mob/user)
 

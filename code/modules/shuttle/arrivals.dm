@@ -100,7 +100,7 @@
 			mode = SHUTTLE_IDLE
 			sound_played = FALSE
 		else if(!sound_played)
-			hyperspace_sound(HYPERSPACE_WARMUP, areas)
+			hyperspace_sound(HYPERSPACE_WARMUP)
 			sound_played = TRUE
 	else if(!found_awake)
 		Launch(FALSE)
@@ -135,7 +135,7 @@
 	if(mode == SHUTTLE_CALL && timeLeft(1) > dockTime)
 		if(console)
 			console.say(damaged ? "Initiating emergency docking for repairs!" : "Now approaching: [station_name()].")
-		hyperspace_sound(HYPERSPACE_LAUNCH, areas)	//for the new guy
+		hyperspace_sound(HYPERSPACE_LAUNCH)	//for the new guy
 		setTimer(dockTime)
 
 /obj/docking_port/mobile/arrivals/initiate_docking(obj/docking_port/stationary/S1, force=FALSE)
@@ -167,7 +167,7 @@
 	..()
 	if(mode == SHUTTLE_CALL && !sound_played && timeLeft(1) <= HYPERSPACE_END_TIME)
 		sound_played = TRUE
-		hyperspace_sound(HYPERSPACE_END, areas)
+		hyperspace_sound(HYPERSPACE_END)
 
 /obj/docking_port/mobile/arrivals/canDock(obj/docking_port/stationary/S)
 	. = ..()

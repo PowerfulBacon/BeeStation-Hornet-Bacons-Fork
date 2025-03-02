@@ -13,10 +13,6 @@
 	var/angle = 0
 	//Valid docking locations
 	var/list/valid_docks = list()
-	//Docking
-	var/docking_frozen = FALSE
-	var/datum/orbital_object/z_linked/can_dock_with
-	var/datum/orbital_object/z_linked/docking_target
 
 	var/desired_vel_x = 0
 	var/desired_vel_y = 0
@@ -26,6 +22,8 @@
 
 	//The computer controlling us.
 	var/controlling_computer = null
+
+	var/datum/orbital_object/ils_beacon/ils_docking_target
 
 	var/obj/docking_port/mobile/port
 
@@ -41,6 +39,9 @@
 	//Cheating autopilots never fail
 	var/cheating_autopilot = FALSE
 
+	/// If the landing gear down?
+	var/gear_down = GEAR_STATUS_UP
+
 /datum/orbital_object/shuttle/stealth/infiltrator
 	max_thrust = 2.5
 
@@ -55,8 +56,6 @@
 /datum/orbital_object/shuttle/Destroy()
 	var/z_level = port?.z
 	port = null
-	can_dock_with = null
-	docking_target = null
 	valid_docks = null
 	shuttleTarget = null
 	. = ..()
@@ -73,26 +72,6 @@
 /datum/orbital_object/shuttle/process(delta_time)
 	if(check_stuck())
 		return
-
-	if(!QDELETED(docking_target))
-		velocity.x = 0
-		velocity.y = 0
-		MOVE_ORBITAL_BODY(src, docking_target.position.x, docking_target.position.y)
-		//Disable autopilot and thrust while docking to prevent fuel usage.
-		thrust = 0
-		angle = 0
-		autopilot = FALSE
-		return
-	else
-		//If our docking target was deleted, null it to prevent docking interface etc.
-		docking_target = null
-	//I hate that I have to do this, but people keep flying them away.
-	if(position.x > 20000 || position.x < -20000 || position.y > 20000 || position.y < -20000)
-		priority_announce("Bluespace reality fracture detected, source: [name].")
-		MOVE_ORBITAL_BODY(src, rand(-2000, 2000), rand(-2000, 2000))
-		velocity.x = 0
-		velocity.y = 0
-		thrust = 0
 	//AUTOPILOT
 	handle_autopilot()
 	//Do thrust
@@ -101,7 +80,6 @@
 	var/thrust_y = sin(angle) * thrust_amount
 	accelerate_towards(new /datum/orbital_vector(thrust_x, thrust_y), ORBITAL_UPDATE_RATE_SECONDS * delta_time)
 	//Do gravity and movement
-	can_dock_with = null
 	. = ..()
 
 /datum/orbital_object/shuttle/proc/check_stuck()
@@ -120,7 +98,7 @@
 	if(autopilot)
 		target_pos = shuttleTarget.position
 
-	if(docking_target || !target_pos)
+	if(!target_pos)
 		return
 
 	//Relative velocity to target needs to point towards target.
@@ -170,8 +148,8 @@
 	//FULL SPEED
 	thrust = 100
 	//Auto dock
-	if(shuttleTarget && can_dock_with == shuttleTarget)
-		commence_docking(shuttleTarget, TRUE)
+	if(shuttleTarget && ils_docking_target == shuttleTarget)
+		commence_docking(ils_docking_target)
 
 	//Fuck all that, we cheat anyway
 	if(cheating_autopilot)
@@ -186,15 +164,44 @@
 	SSorbits.assoc_shuttles[shuttle_port_id] = src
 	SSorbits.assoc_z_levels["[dock.virtual_z]"] = src
 
-/datum/orbital_object/shuttle/proc/commence_docking(datum/orbital_object/z_linked/docking, forced = FALSE)
-	//Check for valid docks on z-level
-	if(!docking.forced_docking && !forced)
-		can_dock_with = docking
-		return
-	//Begin docking.
-	docking_target = docking
-	//Check for ruin stuff
-	var/datum/orbital_object/z_linked/beacon/ruin/ruin_obj = docking_target
-	if(istype(ruin_obj))
-		if(!ruin_obj.linked_z_level)
-			ruin_obj.assign_z_level()
+/datum/orbital_object/shuttle/proc/gear_down()
+	if (gear_down != GEAR_STATUS_UP)
+		return FALSE
+	gear_down = GEAR_STATUS_MOVING
+	addtimer(VARSET_CALLBACK(src, gear_down, GEAR_STATUS_DEPLOYED), GEAR_DEPLOY_SPEED)
+	play_sound('sound/machines/landing_gear.ogg', 'sound/machines/landing_gear_external.ogg')
+	return TRUE
+
+/datum/orbital_object/shuttle/proc/gear_up()
+	if (gear_down != GEAR_STATUS_DEPLOYED)
+		return FALSE
+	gear_down = GEAR_STATUS_MOVING
+	addtimer(VARSET_CALLBACK(src, gear_down, GEAR_STATUS_UP), GEAR_DEPLOY_SPEED)
+
+/datum/orbital_object/shuttle/proc/play_sound(sound_internal, sound_external)
+	port.play_shuttle_sound(sound_internal, sound_external)
+
+/// Returns either null or an error message
+/datum/orbital_object/shuttle/proc/commence_docking(datum/orbital_object/ils_beacon/beacon)
+	if(QDELETED(beacon))
+		return "Docking target lost, please re-establish orbital trajectory."
+	//Get our port
+	if(!port || port.destination != null)
+		return "Could not locate shuttle."
+	//Check ready
+	if(port.mode == SHUTTLE_RECHARGING)
+		return "Supercruise Warning: Shuttle engines not ready for use."
+	if(port.mode != SHUTTLE_CALL || port.destination)
+		return "Supercruise Warning: Already dethrottling shuttle."
+	//Find the target port
+	var/obj/docking_port/stationary/target_port = beacon.port
+	if(!target_port)
+		return "Could not locate docking zone on the ILS beacon."
+	switch(SSshuttle.moveShuttle(port.id, target_port.id, 1))
+		if(0)
+			QDEL_NULL(src)
+			port.setTimer(20)
+		if(1)
+			return "Invalid shuttle requested."
+		else
+			return "Unable to comply."

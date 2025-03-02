@@ -59,34 +59,20 @@
 	//Find our location
 	var/_z = 2
 
-	var/should_make_level = ismob(AM)
-	if(!should_make_level && isitem(AM))
-		var/obj/item/I = AM
-		if(I.resistance_flags & INDESTRUCTIBLE)	//incase there is an important item
-			should_make_level = TRUE
-
-	if(should_make_level)
-		//Check if we are on a shuttle
-		var/turf/oldTurf = get_turf(OldLoc)
-		var/area/shuttle/shuttleArea = get_area(oldTurf)
-		if(istype(shuttleArea))
-			var/shuttleId = shuttleArea.mobile_port?.id || "null"
-			//Find the shuttle object
-			var/datum/orbital_object/shuttle/shuttleObj = SSorbits.assoc_shuttles[shuttleId]
-			if(shuttleObj)
-				if(length(shuttleObj.can_dock_with?.linked_z_level))
-					_z = shuttleObj.can_dock_with.linked_z_level[1].z_value
-				else if(length(shuttleObj.docking_target?.linked_z_level))
-					_z = shuttleObj.docking_target.linked_z_level[1].z_value
-				else
-					//Interdiction (Its an empty z-level)
-					var/datum/orbital_object/z_linked/beacon/ruin/z_linked = new /datum/orbital_object/z_linked/beacon/ruin/interdiction(
-						new /datum/orbital_vector(shuttleObj.position.x, shuttleObj.position.y)
-					)
-					z_linked.name = "Stranded [AM]"
-					z_linked.assign_z_level()
-					if(length(z_linked.linked_z_level))
-						_z = z_linked.linked_z_level[1].z_value
+	//Check if we are on a shuttle
+	var/turf/oldTurf = get_turf(OldLoc)
+	var/area/shuttle/shuttleArea = get_area(oldTurf)
+	if(istype(shuttleArea))
+		var/shuttleId = shuttleArea.mobile_port?.id || "null"
+		//Find the shuttle object
+		var/datum/orbital_object/shuttle/shuttleObj = SSorbits.assoc_shuttles[shuttleId]
+		// If we are in orbit, then fall to the location of the shuttle
+		if (shuttleObj?.is_in_orbit != ORBITAL_STATUS_ORBIT)
+			var/turf/impact_turf = shuttleObj.get_map_turf()
+			AM.forceMove(impact_turf)
+			// Take damage relative to the height of the shuttle
+			AM.onZImpact(impact_turf, ceil(shuttleObj.position.z / 5000))
+			return
 	if(_z == 2)
 		//Chuck them at the space level
 		for(var/A in SSmapping.z_list)

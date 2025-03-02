@@ -233,6 +233,8 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	var/datum/map_template/shuttle/roundstart_template
 	var/json_key
 
+	var/datum/orbital_object/ils_beacon/ils_beacon
+
 /obj/docking_port/stationary/Initialize(mapload)
 	..()
 	SSshuttle.stationary += src
@@ -249,6 +251,8 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	highlight("#f00")
 	#endif
 
+	ils_beacon = new(src)
+
 	return INITIALIZE_HINT_LATELOAD
 
 
@@ -261,6 +265,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 /obj/docking_port/stationary/Destroy(force)
 	if(force)
 		SSshuttle.stationary -= src
+	QDEL_NULL(ils_beacon)
 	. = ..()
 
 /obj/docking_port/stationary/proc/load_roundstart()
@@ -891,12 +896,12 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	switch(mode)
 		if(SHUTTLE_IGNITING)
 			if(time_left <= 50 && sound_played != mode)
-				hyperspace_sound(HYPERSPACE_WARMUP, shuttle_areas)
+				hyperspace_sound(HYPERSPACE_WARMUP)
 			if(time_left <= 0)
-				hyperspace_sound(HYPERSPACE_LAUNCH, shuttle_areas)
+				hyperspace_sound(HYPERSPACE_LAUNCH)
 		if(SHUTTLE_CALL)
 			if(sound_played != mode && time_left <= HYPERSPACE_END_TIME)
-				hyperspace_sound(HYPERSPACE_END, shuttle_areas)
+				hyperspace_sound(HYPERSPACE_END)
 
 /obj/docking_port/mobile/proc/check_effects()
 	if(!ripples.len)
@@ -1060,7 +1065,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 				return S
 	return null
 
-/obj/docking_port/mobile/proc/hyperspace_sound(phase, list/areas)
+/obj/docking_port/mobile/proc/hyperspace_sound(phase)
 	sound_played = mode
 	var/selected_sound
 	switch(phase)
@@ -1072,6 +1077,10 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 			selected_sound = "hyperspace_end"
 		else
 			CRASH("Invalid hyperspace sound phase: [phase]")
+	play_shuttle_sound("sound/effects/[selected_sound].ogg", "sound/effects/[selected_sound]_distant.ogg")
+
+/// Play a sound to everyone on, and nearby, the shuttle
+/obj/docking_port/mobile/proc/play_shuttle_sound(sound, distant_sound)
 	// This previously was played from each door at max volume, and was one of the worst things I had ever seen.
 	// Now it's instead played from the nearest engine if close, or the first engine in the list if far since it doesn't really matter.
 	// Or a door if for some reason the shuttle has no engine, fuck oh hi daniel fuck it
@@ -1089,10 +1098,11 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 	if(LAZYLEN(engines))
 		distant_source = engines[1]
 	else
-		for(var/A in areas)
-			distant_source = locate(/obj/machinery/door) in A
-			if(distant_source)
-				break
+		for(var/area/area as anything in shuttle_areas)
+			for (var/turf/turf in area.get_contained_turfs())
+				distant_source = locate(/obj/machinery/door) in turf
+				if(distant_source)
+					break
 
 	if(distant_source)
 		for(var/mob/M as() in SSmobs.clients_by_zlevel[z])
@@ -1101,7 +1111,8 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 			if(M.get_virtual_z_level() != get_virtual_z_level())
 				continue
 			if(dist_far <= long_range && dist_far > range)
-				M.playsound_local(distant_source, "sound/effects/[selected_sound]_distance.ogg", 60, falloff_exponent = 20)
+				if (distant_sound)
+					M.playsound_local(distant_source, distant_sound, 60, falloff_exponent = 20)
 			else if(dist_far <= range)
 				var/source
 				if(engines.len == 0)
@@ -1113,7 +1124,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/docking_port)
 						if(dist_near < closest_dist)
 							source = O
 							closest_dist = dist_near
-				M.playsound_local(source, "sound/effects/[selected_sound].ogg", 70, falloff_exponent = range / 2)
+				M.playsound_local(source, sound, 70, falloff_exponent = range / 2)
 
 // Losing all initial engines should get you 2
 // Adding another set of engines at 0.5 time

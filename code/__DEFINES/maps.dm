@@ -52,6 +52,8 @@ require only minor tweaks.
 #define ZTRAIT_POCKETDIM "Pocket Dimension"
 #define ZTRAIT_ISOLATED_RUINS "Isolated Ruins" //Placing ruins on z levels with this trait will use turf reservation instead of usual placement.
 #define ZTRAIT_DEBUG "Debug Level"
+/// Level that we can dock to while in orbit
+#define ZTRAIT_ORBIT "Orbit Level"
 
 // boolean - weather types that occur on the level
 #define ZTRAIT_ASHSTORM "Weather_Ashstorm"
@@ -80,9 +82,9 @@ require only minor tweaks.
 #define ZTRAIT_BASETURF "Baseturf"
 
 /// default trait definitions, used by SSmapping
-#define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = SELFLOOPING, ZTRAIT_STATION = TRUE)
-#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = SELFLOOPING, ZTRAIT_DYNAMIC_LEVEL = TRUE)
+#define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE, ZTRAIT_ORBIT = TRUE)
+#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_ORBIT = TRUE)
+#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_DYNAMIC_LEVEL = TRUE, ZTRAIT_ORBIT = TRUE)
 #define ZTRAITS_LAVALAND list(\
 	ZTRAIT_MINING = TRUE, \
 	ZTRAIT_LAVA_RUINS = TRUE, \

@@ -107,3 +107,35 @@
 
 #define SHUTTLE_CREATOR_MAX_SIZE CONFIG_GET(number/max_shuttle_size)
 #define CUSTOM_SHUTTLE_LIMIT CONFIG_GET(number/max_shuttle_count)
+
+/// Orbital object is not in orbit and cannot enter it
+#define ORBITAL_STATUS_NONE 0
+/// Orbital object has the height to enter orbit
+#define ORBITAL_STATUS_READY 1
+/// Orbital object is currently in orbit
+#define ORBITAL_STATUS_ORBIT 2
+
+/// Landing gear is not deployed
+#define GEAR_STATUS_UP 0
+/// Landing gear is currently deploying/retracting
+#define GEAR_STATUS_MOVING 1
+/// Landing gear is fully deployed and ready to dock
+#define GEAR_STATUS_DEPLOYED 2
+
+#define GEAR_DEPLOY_SPEED 8 SECONDS
+
+/// The maximum speed at which you can safely land a shuttle via
+/// the landing gear.
+#define MAX_SAFE_LANDING_SPEED 60
+
+/// Angle before we start to stall
+#define STALL_ANGLE 25
+/// Constant wing area of the ship
+#define WING_AREA 50
+/// Reference weight in kilograms of a shuttle object, used for
+/// calculating the lift generated.
+/// This results in level flight when traveling at 100m/s at ground
+/// level.
+#define SHUTTLE_WEIGHT 15000
+/// Flight level you have to be at in order to enter orbit
+#define ORBIT_HEIGHT 80000

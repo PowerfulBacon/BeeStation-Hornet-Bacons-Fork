@@ -142,9 +142,6 @@
 	S.density = FALSE
 
 /datum/xenoartifact_trait/minor/sentient/proc/setup_sentience(obj/item/xenoartifact/X, ckey)
-	if(!(SSzclear.get_free_z_level()))
-		playsound(get_turf(X), 'sound/machines/buzz-sigh.ogg', 50, TRUE)
-		return
 	man = new(get_turf(X))
 	man.name = pick(GLOB.xenoa_artifact_names)
 	man.real_name = "[man.name] - [X]"

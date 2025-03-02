@@ -1,12 +1,23 @@
 /datum/orbital_map
-	//the primary star. Set to be lavaland by default.
+	/// the primary star. Set to be lavaland by default.
 	var/datum/orbital_object/center = null
-	//A list of all bodies in their assigned collision zones
+	/// A list of all bodies in their assigned collision zones
 	var/list/collision_zone_bodies = list()
-	//Object count
+	/// Amount of objects on the map
 	var/object_count
-	// Map size. width and height of the map before you wrap
-	var/map_size = 1000
+	/// Map size. width and height of the map before you wrap
+	var/map_size = 4000
+	/// How strong the gravity is of this map (m/s^2)
+	var/gravity = 9
+	/// The air density of the planet. More air results in more lift
+	/// being generated, so this probably shouldn't be changed.
+	var/reference_air_density = 0
+	/// What z-level do we belong to?
+	var/datum/space_level/z_level
+
+/datum/orbital_map/New(datum/space_level/z_level)
+	. = ..()
+	src.z_level = z_level
 
 /datum/orbital_map/proc/add_body(datum/orbital_object/body)
 	//Add the orbital body in the correct collision zone
@@ -29,16 +40,6 @@
 		return
 	LAZYREMOVEASSOC(collision_zone_bodies, pre_position_key, body)
 	LAZYADDASSOCLIST(collision_zone_bodies, post_position_key, body)
-
-//Returns a list of gravitationally relevant bodies.
-/datum/orbital_map/proc/get_relevnant_bodies(datum/orbital_object/source)
-	. = list()
-	//Get all orbital bodies on the map.
-	for(var/collision_zone in collision_zone_bodies)
-		for(var/datum/orbital_object/body as() in collision_zone_bodies[collision_zone])
-			//Distance check last for optimisations
-			if(body != source && body.relevant_gravity_range && source.position.DistanceTo(body.position) <= body.relevant_gravity_range)
-				. += body
 
 //Post setup function that runs after SSorbit init.
 //Moves map objects to the correct positions and gives them velocities so that they can orbit dynamically.
