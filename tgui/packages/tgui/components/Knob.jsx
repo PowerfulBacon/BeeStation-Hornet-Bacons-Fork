@@ -32,6 +32,9 @@ export const Knob = (props) => {
     ranges = {},
     size = 1,
     bipolar,
+    offset = 0,
+    noRing,
+    fullRotation,
     children,
     ...rest
   } = props;
@@ -57,7 +60,9 @@ export const Knob = (props) => {
         const scaledFillValue = scale(fillValue ?? displayValue, minValue, maxValue);
         const scaledDisplayValue = scale(displayValue, minValue, maxValue);
         const effectiveColor = color || keyOfMatchingRange(fillValue ?? value, ranges) || 'default';
-        const rotation = Math.min((scaledDisplayValue - 0.5) * 270, 225);
+        const rotation = fullRotation
+          ? (scaledDisplayValue - 0.5) * 360 + offset
+          : Math.min((scaledDisplayValue - 0.5) * 270 + offset, 225);
         return (
           <div
             className={classes([
@@ -85,20 +90,24 @@ export const Knob = (props) => {
               </div>
             </div>
             {dragging && <div className="Knob__popupValue">{displayElement}</div>}
-            <svg className="Knob__ring Knob__ringTrackPivot" viewBox="0 0 100 100">
-              <circle className="Knob__ringTrack" cx="50" cy="50" r="50" />
-            </svg>
-            <svg className="Knob__ring Knob__ringFillPivot" viewBox="0 0 100 100">
-              <circle
-                className="Knob__ringFill"
-                style={{
-                  strokeDashoffset: Math.max(((bipolar ? 2.75 : 2.0) - scaledFillValue * 1.5) * Math.PI * 50, 0),
-                }}
-                cx="50"
-                cy="50"
-                r="50"
-              />
-            </svg>
+            {!noRing && (
+              <>
+                <svg className="Knob__ring Knob__ringTrackPivot" viewBox="0 0 100 100">
+                  <circle className="Knob__ringTrack" cx="50" cy="50" r="50" />
+                </svg>
+                <svg className="Knob__ring Knob__ringFillPivot" viewBox="0 0 100 100">
+                  <circle
+                    className="Knob__ringFill"
+                    style={{
+                      strokeDashoffset: Math.max(((bipolar ? 2.75 : 2.0) - scaledFillValue * 1.5) * Math.PI * 50, 0),
+                    }}
+                    cx="50"
+                    cy="50"
+                    r="50"
+                  />
+                </svg>
+              </>
+            )}
             {inputElement}
           </div>
         );

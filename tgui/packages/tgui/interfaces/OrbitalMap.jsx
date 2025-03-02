@@ -2,7 +2,7 @@
 
 // Made by powerfulbacon
 
-import { Box, Button, Section, Table, DraggableClickableControl, Dropdown, Divider, NoticeBox, ProgressBar, Flex, OrbitalMapComponent, OrbitalMapSvg } from '../components';
+import { Box, Button, Section, Table, DraggableClickableControl, Dropdown, Divider, NoticeBox, ProgressBar, Flex, OrbitalMapComponent, OrbitalMapSvg, Knob } from '../components';
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 import { useRef } from 'react';
@@ -18,7 +18,6 @@ export const OrbitalMap = (props) => {
     thrust_alert = false,
     damage_alert = false,
     shuttleName = '',
-    interdictionTime = 0,
     designatorInserted = false,
     designatorId = null,
     shuttleId = null,
@@ -36,7 +35,7 @@ export const OrbitalMap = (props) => {
   let trackedObject = null;
   let ourObject = null;
   let firstObjectName = 'null';
-  if (map_objects.length > 0 && interdictionTime === 0) {
+  if (map_objects.length > 0) {
     firstObjectName = map_objects[1].name;
     // Find the right tracked body
     map_objects.forEach((element) => {
@@ -54,244 +53,102 @@ export const OrbitalMap = (props) => {
   }
 
   return (
-    <Window width={1136} height={770}>
+    <Window width={1315} height={640}>
       <Window.Content fitted>
         <Flex height="100%">
           <Flex.Item class="OrbitalMap__radar" grow id="radar" innerRef={radarRef}>
-            {interdictionTime ? (
-              <InterdictionDisplay
-                xOffset={dynamicXOffset}
-                yOffset={dynamicYOffset}
-                zoomScale={zoomScale}
-                setZoomScale={setZoomScale}
-                setXOffset={setXOffset}
-                setYOffset={setYOffset}
-              />
-            ) : (
-              <OrbitalMapDisplay
-                dynamicXOffset={dynamicXOffset}
-                dynamicYOffset={dynamicYOffset}
-                isTracking={trackedBody !== map_objects[0].name}
-                zoomScale={zoomScale}
-                setZoomScale={setZoomScale}
-                setTrackedBody={setTrackedBody}
-                ourObject={ourObject}
-                radarRef={radarRef}
-              />
-            )}
+            <PrimaryFlightDisplay />
           </Flex.Item>
           <Flex.Item class="OrbitalMap__panel">
-            <Section fill scrollable>
-              <Section title="Orbital Body Tracking">
-                <Box bold>Tracking</Box>
-                <Box mb={1}>{trackedBody}</Box>
-                <Box>
-                  <b>X:&nbsp;</b>
-                  {trackedObject && trackedObject.position_x}
-                </Box>
-                <Box>
-                  <b>Y:&nbsp;</b>
-                  {trackedObject && trackedObject.position_y}
-                </Box>
-                <Box>
-                  <b>Velocity:&nbsp;</b>({trackedObject && trackedObject.velocity_x},{' '}
-                  {trackedObject && trackedObject.velocity_y})
-                </Box>
-                <Box>
-                  <b>Radius:&nbsp;</b>
-                  {trackedObject && trackedObject.radius} BSU
-                </Box>
-                <Divider />
-                <Dropdown
-                  selected={trackedBody}
-                  width="100%"
-                  color="grey"
-                  options={map_objects
-                    .sort((first, second) => {
-                      return second.priority - first.priority;
-                    })
-                    .map((map_object) => map_object.name)}
-                  onSelected={(value) => setTrackedBody(value)}
-                />
-              </Section>
-              <Divider />
-              <Section title="Flight Controls">
-                {!thrust_alert || <NoticeBox color="red">{thrust_alert}</NoticeBox>}
-                {!damage_alert || <NoticeBox color="red">{damage_alert}</NoticeBox>}
-                {recall_docking_port_id !== '' ? (
-                  <RecallControl />
-                ) : linkedToShuttle ? (
-                  <ShuttleControls />
-                ) : canLaunch ? (
-                  <>
-                    <NoticeBox>Currently docked, awaiting launch order.</NoticeBox>
-                    <Button
-                      content="INITIATE LAUNCH"
-                      textAlign="center"
-                      fontSize="30px"
-                      icon="rocket"
-                      width="100%"
-                      height="50px"
-                      onClick={() => act('launch')}
-                    />
-                  </>
-                ) : (
-                  <NoticeBox color="red">Not linked to a shuttle.</NoticeBox>
-                )}
-              </Section>
-              {!!designatorInserted && (designatorId ? !shuttleId : shuttleId) && (
-                <>
-                  <Divider />
-                  <Section title="Designator Linking">
-                    {designatorId ? (
-                      <Button content="Download shuttle link from designator" onClick={() => act('updateLinkedId')} />
-                    ) : (
-                      <Button content="Upload shuttle link to designator" onClick={() => act('updateDesignatorId')} />
-                    )}
-                  </Section>
-                </>
-              )}
-            </Section>
+            <div class="OrbitalMap__label">Heading</div>
+            <div class="OrbitalMap__dial">
+              <Knob
+                color="yellow"
+                fullRotation
+                noRing
+                offset={180}
+                minValue={0}
+                maxValue={360}
+                step={10}
+                stepPixelSize={10}
+                value={50}
+              />
+              <div class="OrbitalMap__indicator">050</div>
+            </div>
+            <div class="OrbitalMap__label">Altitude</div>
+            <div class="OrbitalMap__dial">
+              <Knob
+                color="yellow"
+                fullRotation
+                noRing
+                offset={180}
+                minValue={0}
+                maxValue={360}
+                step={10}
+                stepPixelSize={10}
+                value={50}
+              />
+              <div class="OrbitalMap__indicator">18000</div>
+            </div>
+            <div class="OrbitalMap__label">Speed</div>
+            <div class="OrbitalMap__dial">
+              <Knob
+                color="yellow"
+                fullRotation
+                noRing
+                offset={180}
+                minValue={0}
+                maxValue={360}
+                step={10}
+                stepPixelSize={10}
+                value={50}
+              />
+              <div class="OrbitalMap__indicator">180</div>
+            </div>
+            <div class="OrbitalMap__light">
+              <div>APU</div>
+            </div>
+            <div class="OrbitalMap__button">
+              <div>APU</div>
+              <div>TOGGLE</div>
+            </div>
+            <div
+              class="OrbitalMap__button"
+              onClick={() => {
+                act('launch');
+              }}>
+              <div>LAUNCH</div>
+            </div>
+            <div class="OrbitalMap__light bad flashing">
+              <div>GEAR</div>
+              <div>DOWN</div>
+            </div>
+            <div class="OrbitalMap__light bad">
+              <div>TOO</div>
+              <div>FAST</div>
+            </div>
+            <div class="OrbitalMap__button">GEAR</div>
+            <div class="OrbitalMap__light off">
+              <div>ORBIT</div>
+              <div>THRUST</div>
+            </div>
+            <div class="OrbitalMap__button">ORBIT</div>
+          </Flex.Item>
+          <Flex.Item grow>
+            <OrbitalMapDisplay
+              dynamicXOffset={dynamicXOffset}
+              dynamicYOffset={dynamicYOffset}
+              isTracking={trackedBody !== map_objects[0].name}
+              zoomScale={zoomScale}
+              setZoomScale={setZoomScale}
+              setTrackedBody={setTrackedBody}
+              ourObject={ourObject}
+              radarRef={radarRef}
+            />
           </Flex.Item>
         </Flex>
       </Window.Content>
     </Window>
-  );
-};
-
-export const InterdictionDisplay = (props) => {
-  const boxTargetStyle = {
-    fillOpacity: 0,
-    stroke: '#DDDDDD',
-    strokeWidth: '1',
-  };
-
-  const { xOffset, yOffset, zoomScale, setZoomScale, setXOffset, setYOffset } = props;
-
-  let lockedZoomScale = Math.max(Math.min(zoomScale, 4), 0.125);
-
-  const { data } = useBackend();
-
-  const { interdictionTime = 0, interdictedShuttles = [] } = data;
-
-  return (
-    <>
-      <NoticeBox position="absolute" color="red">
-        <Box bold mt={1} ml={1}>
-          ENGINES INTERDICTED
-        </Box>
-        <Box ml={1}>Flight controls disabled. Engine reboot in {interdictionTime / 10} seconds.</Box>
-        <Box ml={1}>Local shuttles have been marked on the map.</Box>
-      </NoticeBox>
-      <Button
-        position="absolute"
-        icon="search-plus"
-        right="20px"
-        top="15px"
-        fontSize="18px"
-        color="grey"
-        onClick={() => setZoomScale(zoomScale * 2)}
-      />
-      <Button
-        position="absolute"
-        icon="search-minus"
-        right="20px"
-        top="47px"
-        fontSize="18px"
-        color="grey"
-        onClick={() => setZoomScale(zoomScale / 2)}
-      />
-      <DraggableClickableControl
-        position="absolute"
-        value={xOffset}
-        dragMatrix={[-1, 0]}
-        step={1}
-        stepPixelSize={2 * zoomScale}
-        onDrag={(e, value) => {
-          setXOffset(value);
-        }}
-        onClick={(e, value) => {}}
-        updateRate={5}>
-        {(control) => (
-          <DraggableClickableControl
-            position="absolute"
-            value={yOffset}
-            dragMatrix={[0, -1]}
-            step={1}
-            stepPixelSize={2 * zoomScale}
-            onDrag={(e, value) => {
-              setYOffset(value);
-            }}
-            onClick={(e, value) => {}}
-            updateRate={5}>
-            {(control1) => (
-              <>
-                {control.inputElement}
-                {control1.inputElement}
-                <svg
-                  onMouseDown={(e) => {
-                    control.handleDragStart(e);
-                    control1.handleDragStart(e);
-                  }}
-                  viewBox="-250 -250 500 500"
-                  position="absolute"
-                  overflowY="hidden">
-                  <defs>
-                    <pattern
-                      id="grid"
-                      width={100 * lockedZoomScale}
-                      height={100 * lockedZoomScale}
-                      patternUnits="userSpaceOnUse"
-                      x={-xOffset * zoomScale}
-                      y={-yOffset * zoomScale}>
-                      <rect width={100 * lockedZoomScale} height={100 * lockedZoomScale} fill="url(#smallgrid)" />
-                      <path
-                        fill="none"
-                        stroke="#CE1935"
-                        stroke-width="1"
-                        d={'M ' + 100 * lockedZoomScale + ' 0 L 0 0 0 ' + 100 * lockedZoomScale}
-                      />
-                    </pattern>
-                    <pattern
-                      id="smallgrid"
-                      width={50 * lockedZoomScale}
-                      height={50 * lockedZoomScale}
-                      patternUnits="userSpaceOnUse">
-                      <rect width={50 * lockedZoomScale} height={50 * lockedZoomScale} fill="#382424" />
-                      <path
-                        fill="none"
-                        stroke="#CE1935"
-                        stroke-width="0.5"
-                        d={'M ' + 50 * lockedZoomScale + ' 0 L 0 0 0 ' + 50 * lockedZoomScale}
-                      />
-                    </pattern>
-                  </defs>
-                  <rect x="-50%" y="-50%" width="100%" height="100%" fill="url(#grid)" />
-                  {interdictedShuttles.map((map_object) => (
-                    <>
-                      <rect
-                        x={(map_object.x * 10 - 25 - xOffset) * zoomScale}
-                        y={(-map_object.y * 10 - 25 - yOffset) * zoomScale}
-                        width={50 * zoomScale}
-                        height={50 * zoomScale}
-                        style={boxTargetStyle}
-                      />
-                      <text
-                        x={Math.max(Math.min((map_object.x * 10 - xOffset + 30) * zoomScale, 200), -250)}
-                        y={Math.max(Math.min((-map_object.y * 10 - yOffset - 30) * zoomScale, 250), -240)}
-                        fill="white"
-                        fontSize={Math.min(40 * lockedZoomScale, 14)}>
-                        {map_object.shuttleName} ({map_object.x},{map_object.y})
-                      </text>
-                    </>
-                  ))}
-                </svg>
-              </>
-            )}
-          </DraggableClickableControl>
-        )}
-      </DraggableClickableControl>
-    </>
   );
 };
 
@@ -375,56 +232,53 @@ export const OrbitalMapDisplay = (props) => {
           </>
         </NoticeBox>
       )}
-      <PrimaryFlightDisplay />
-      {false && (
-        <OrbitalMapComponent
-          position="absolute"
-          step={1}
-          stepPixelSize={2 * zoomScale}
-          onDrag={(e, valueX, valueY) => {
-            setOffset([valueX, valueY]);
-            setTrackedBody(map_objects[0].name);
-          }}
-          valueX={isTracking ? dynamicXOffset : offset[0]}
-          valueY={isTracking ? dynamicYOffset : offset[1]}
-          isTracking={isTracking}
-          dynamicXOffset={dynamicXOffset}
-          dynamicYOffset={dynamicYOffset}
-          currentUpdateIndex={update_index}
-          onClick={(e, xOffset, yOffset) => {
-            const radar = radarRef?.current;
-            if (!radar) {
-              return;
-            }
-            const rect = radar.getBoundingClientRect();
-            let proportionalX = ((e.clientX - rect.left) / radar.offsetWidth) * 500;
-            let proportionalY = ((e.clientY - rect.top) / radar.offsetHeight) * 500;
-            act('setTargetCoords', {
-              x: (proportionalX - 250) / zoomScale + (isTracking ? dynamicXOffset : xOffset),
-              y: (proportionalY - 250) / zoomScale + (isTracking ? dynamicYOffset : yOffset),
-            });
-          }}>
-          {(control) => (
-            <OrbitalMapSvg
-              scaledXOffset={-control.xOffset * zoomScale}
-              scaledYOffset={-control.yOffset * zoomScale}
-              xOffset={-control.xOffset}
-              yOffset={-control.yOffset}
-              ourObject={ourObject}
-              lockedZoomScale={lockedZoomScale}
-              map_objects={map_objects}
-              interdiction_range={interdiction_range}
-              shuttleTargetX={shuttleTargetX}
-              shuttleTargetY={shuttleTargetY}
-              dragStartEvent={(e) => control.handleDragStart(e)}
-              zoomScale={zoomScale}
-              shuttleName={shuttleName}
-              currentUpdateIndex={update_index}>
-              {(control) => control.svgComponent}
-            </OrbitalMapSvg>
-          )}
-        </OrbitalMapComponent>
-      )}
+      <OrbitalMapComponent
+        position="absolute"
+        step={1}
+        stepPixelSize={2 * zoomScale}
+        onDrag={(e, valueX, valueY) => {
+          setOffset([valueX, valueY]);
+          setTrackedBody(map_objects[0].name);
+        }}
+        valueX={isTracking ? dynamicXOffset : offset[0]}
+        valueY={isTracking ? dynamicYOffset : offset[1]}
+        isTracking={isTracking}
+        dynamicXOffset={dynamicXOffset}
+        dynamicYOffset={dynamicYOffset}
+        currentUpdateIndex={update_index}
+        onClick={(e, xOffset, yOffset) => {
+          const radar = radarRef?.current;
+          if (!radar) {
+            return;
+          }
+          const rect = radar.getBoundingClientRect();
+          let proportionalX = ((e.clientX - rect.left) / radar.offsetWidth) * 500;
+          let proportionalY = ((e.clientY - rect.top) / radar.offsetHeight) * 500;
+          act('setTargetCoords', {
+            x: (proportionalX - 250) / zoomScale + (isTracking ? dynamicXOffset : xOffset),
+            y: (proportionalY - 250) / zoomScale + (isTracking ? dynamicYOffset : yOffset),
+          });
+        }}>
+        {(control) => (
+          <OrbitalMapSvg
+            scaledXOffset={-control.xOffset * zoomScale}
+            scaledYOffset={-control.yOffset * zoomScale}
+            xOffset={-control.xOffset}
+            yOffset={-control.yOffset}
+            ourObject={ourObject}
+            lockedZoomScale={lockedZoomScale}
+            map_objects={map_objects}
+            interdiction_range={interdiction_range}
+            shuttleTargetX={shuttleTargetX}
+            shuttleTargetY={shuttleTargetY}
+            dragStartEvent={(e) => control.handleDragStart(e)}
+            zoomScale={zoomScale}
+            shuttleName={shuttleName}
+            currentUpdateIndex={update_index}>
+            {(control) => control.svgComponent}
+          </OrbitalMapSvg>
+        )}
+      </OrbitalMapComponent>
     </>
   );
 };
