@@ -137,5 +137,5 @@
 /// This results in level flight when traveling at 100m/s at ground
 /// level.
 #define SHUTTLE_WEIGHT 15000
-/// Flight level you have to be at in order to enter orbit
-#define ORBIT_HEIGHT 80000
+/// Flight levelORBIT_HEIGHT you have to be at in order to enter orbit
+#define  80000

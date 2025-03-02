@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(shuttle_docking_jammed, FALSE)
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
 	req_access = list()
+	use_power = NO_POWER_USE
 	var/shuttleId
 
 	//For recall consoles
@@ -141,6 +142,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	data["shuttleTargetY"] = shuttleObject.shuttleTargetPos?.y
 	data["validDockingPorts"] = list()
 	data["orbitState"] = shuttleObject.is_in_orbit
+	data["powered"] = powered()
 	// Station docking
 	if (shuttleObject.is_in_orbit == ORBITAL_STATUS_ORBIT)
 		//Stealth shuttles bypass shuttle jamming.
@@ -171,7 +173,14 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 		return
 
 	switch(action)
-		if("setTarget")
+		if ("toggleAPU")
+			// Can be used without power, turn the APU on or off
+			var/area/area = get_area(src)
+			area.apc.toggle_breaker(usr)
+		if ("setTarget")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
 				return
@@ -185,6 +194,9 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 						shuttleObject.shuttleTarget = object
 						return
 		if("setThrust")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
 				return
@@ -193,6 +205,9 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 				return
 			shuttleObject.thrust = clamp(params["thrust"], 0, 100)
 		if("setAngle")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
 				return
@@ -201,14 +216,23 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 				return
 			shuttleObject.angle = params["angle"]
 		if("nautopilot")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject) || !shuttleObject.shuttleTarget)
 				return
 			shuttleObject.autopilot = !shuttleObject.autopilot
 			shuttleObject.shuttleTargetPos = null
 		//Launch the shuttle. Lets do this.
 		if("launch")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			launch_shuttle()
 		if("setTargetCoords")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				return
 			var/x = text2num(params["x"])
@@ -221,14 +245,21 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 			shuttleObject.autopilot = FALSE
 			. = TRUE
 		if ("toggleGear")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				return
 			if (shuttleObject.gear_down == GEAR_STATUS_UP)
 				shuttleObject.gear_down()
 			else
 				shuttleObject.gear_up()
+			. = TRUE
 		// Dock via ILS
 		if ("dockILS")
+			// If you have no power, you can't do this
+			if (!powered())
+				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle has already landed, cannot dock at this time.")
 				return

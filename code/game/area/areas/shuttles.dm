@@ -55,6 +55,9 @@
 
 /area/shuttle/proc/link_to_shuttle(obj/docking_port/mobile/M)
 	mobile_port = M
+	// Shuttles start unpowered by default
+	if (apc.operating)
+		apc.toggle_breaker(usr)
 
 /area/shuttle/get_virtual_z(turf/T)
 	if(mobile_port && is_reserved_level(mobile_port.z))

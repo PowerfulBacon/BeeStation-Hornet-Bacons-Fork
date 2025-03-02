@@ -177,6 +177,7 @@
 		return FALSE
 	gear_down = GEAR_STATUS_MOVING
 	addtimer(VARSET_CALLBACK(src, gear_down, GEAR_STATUS_UP), GEAR_DEPLOY_SPEED)
+	play_sound('sound/machines/landing_gear.ogg', 'sound/machines/landing_gear_external.ogg')
 
 /datum/orbital_object/shuttle/proc/play_sound(sound_internal, sound_external)
 	port.play_shuttle_sound(sound_internal, sound_external)

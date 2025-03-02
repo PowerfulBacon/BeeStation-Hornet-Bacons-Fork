@@ -7,6 +7,7 @@ import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 import { useRef } from 'react';
 import { PrimaryFlightDisplay } from 'tgui/components/aviation/PrimaryFlightDisplay';
+import { classes } from 'common/react';
 
 export const OrbitalMap = (props) => {
   const { act, data } = useBackend();
@@ -21,6 +22,8 @@ export const OrbitalMap = (props) => {
     designatorInserted = false,
     designatorId = null,
     shuttleId = null,
+    landingGear = 0,
+    powered = false,
   } = data;
   const [zoomScale, setZoomScale] = useLocalState('zoomScale', 1);
   const [xOffset, setXOffset] = useLocalState('xOffset', 0);
@@ -73,7 +76,7 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">050</div>
+              <div class="OrbitalMap__indicator">{powered && <>050</>}</div>
             </div>
             <div class="OrbitalMap__label">Altitude</div>
             <div class="OrbitalMap__dial">
@@ -88,7 +91,7 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">18000</div>
+              <div class="OrbitalMap__indicator">{powered && 18000}</div>
             </div>
             <div class="OrbitalMap__label">Speed</div>
             <div class="OrbitalMap__dial">
@@ -103,9 +106,9 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">180</div>
+              <div class="OrbitalMap__indicator">{powered && 180}</div>
             </div>
-            <div class="OrbitalMap__light">
+            <div class={classes(['OrbitalMap__light', !powered && 'bad', !powered && 'flashing'])}>
               <div>APU</div>
             </div>
             <div class="OrbitalMap__button">
@@ -119,15 +122,22 @@ export const OrbitalMap = (props) => {
               }}>
               <div>LAUNCH</div>
             </div>
-            <div class="OrbitalMap__light bad flashing">
+            <div
+              class={classes(['OrbitalMap__light', landingGear === 1 && 'bad', landingGear === 0 && 'off', !powered && 'off'])}>
               <div>GEAR</div>
               <div>DOWN</div>
             </div>
-            <div class="OrbitalMap__light bad">
+            <div class="OrbitalMap__light off">
               <div>TOO</div>
               <div>FAST</div>
             </div>
-            <div class="OrbitalMap__button">GEAR</div>
+            <div
+              class="OrbitalMap__button"
+              onClick={() => {
+                act('toggleGear');
+              }}>
+              GEAR
+            </div>
             <div class="OrbitalMap__light off">
               <div>ORBIT</div>
               <div>THRUST</div>
@@ -179,6 +189,7 @@ export const OrbitalMapDisplay = (props) => {
     shuttleTargetX = 0,
     shuttleTargetY = 0,
     update_index = 0,
+    powered = false,
   } = data;
 
   return (
@@ -259,25 +270,29 @@ export const OrbitalMapDisplay = (props) => {
             y: (proportionalY - 250) / zoomScale + (isTracking ? dynamicYOffset : yOffset),
           });
         }}>
-        {(control) => (
-          <OrbitalMapSvg
-            scaledXOffset={-control.xOffset * zoomScale}
-            scaledYOffset={-control.yOffset * zoomScale}
-            xOffset={-control.xOffset}
-            yOffset={-control.yOffset}
-            ourObject={ourObject}
-            lockedZoomScale={lockedZoomScale}
-            map_objects={map_objects}
-            interdiction_range={interdiction_range}
-            shuttleTargetX={shuttleTargetX}
-            shuttleTargetY={shuttleTargetY}
-            dragStartEvent={(e) => control.handleDragStart(e)}
-            zoomScale={zoomScale}
-            shuttleName={shuttleName}
-            currentUpdateIndex={update_index}>
-            {(control) => control.svgComponent}
-          </OrbitalMapSvg>
-        )}
+        {(control) =>
+          powered ? (
+            <OrbitalMapSvg
+              scaledXOffset={-control.xOffset * zoomScale}
+              scaledYOffset={-control.yOffset * zoomScale}
+              xOffset={-control.xOffset}
+              yOffset={-control.yOffset}
+              ourObject={ourObject}
+              lockedZoomScale={lockedZoomScale}
+              map_objects={map_objects}
+              interdiction_range={interdiction_range}
+              shuttleTargetX={shuttleTargetX}
+              shuttleTargetY={shuttleTargetY}
+              dragStartEvent={(e) => control.handleDragStart(e)}
+              zoomScale={zoomScale}
+              shuttleName={shuttleName}
+              currentUpdateIndex={update_index}>
+              {(control) => control.svgComponent}
+            </OrbitalMapSvg>
+          ) : (
+            <div class="OrbitalMap__off_screen">No power</div>
+          )
+        }
       </OrbitalMapComponent>
     </>
   );
