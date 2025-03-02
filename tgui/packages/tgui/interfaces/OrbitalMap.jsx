@@ -111,7 +111,11 @@ export const OrbitalMap = (props) => {
             <div class={classes(['OrbitalMap__light', !powered && 'bad', !powered && 'flashing'])}>
               <div>APU</div>
             </div>
-            <div class="OrbitalMap__button">
+            <div
+              class="OrbitalMap__button"
+              onClick={() => {
+                act('toggleAPU');
+              }}>
               <div>APU</div>
               <div>TOGGLE</div>
             </div>

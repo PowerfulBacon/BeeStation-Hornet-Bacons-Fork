@@ -17,6 +17,7 @@
 	//The mobile port attached to this area
 	var/obj/docking_port/mobile/mobile_port
 	area_limited_icon_smoothing = /area/shuttle
+	var/start_unpowered = TRUE
 
 /area/shuttle/Initialize(mapload)
 	if(!canSmoothWithAreas)
@@ -55,9 +56,26 @@
 
 /area/shuttle/proc/link_to_shuttle(obj/docking_port/mobile/M)
 	mobile_port = M
-	// Shuttles start unpowered by default
-	if (apc.operating)
-		apc.toggle_breaker(usr)
+	if (start_unpowered)
+		disable_apu()
+	else
+		enable_apu()
+
+/area/shuttle/proc/enable_apu()
+	always_unpowered = FALSE
+	power_environ = TRUE
+	power_equip = TRUE
+	power_light = TRUE
+	requires_power = FALSE
+	power_change()
+
+/area/shuttle/proc/disable_apu()
+	always_unpowered = TRUE
+	power_environ = FALSE
+	power_equip = FALSE
+	power_light = FALSE
+	requires_power = TRUE
+	power_change()
 
 /area/shuttle/get_virtual_z(turf/T)
 	if(mobile_port && is_reserved_level(mobile_port.z))
@@ -95,21 +113,18 @@
 
 /area/shuttle/pirate
 	name = "Pirate Shuttle"
-	requires_power = TRUE
 	canSmoothWithAreas = /area/shuttle/pirate
 
 ////////////////////////////Bounty Hunter Shuttles////////////////////////////
 
 /area/shuttle/hunter
 	name = "Hunter Shuttle"
-	requires_power = TRUE
 	canSmoothWithAreas = /area/shuttle/hunter
 
 ////////////////////////////White Ship////////////////////////////
 
 /area/shuttle/abandoned
 	name = "Abandoned Ship"
-	requires_power = TRUE
 	canSmoothWithAreas = /area/shuttle/abandoned
 
 /area/shuttle/abandoned/bridge
@@ -146,7 +161,6 @@
 
 /area/shuttle/custom/powered
 	name = "Custom Powered player shuttle"
-	requires_power = FALSE
 
 /area/shuttle/arrival
 	name = "Arrival Shuttle"
@@ -173,15 +187,12 @@
 
 /area/shuttle/mining/large
 	name = "Mining Shuttle"
-	requires_power = TRUE
 
 /area/shuttle/science
 	name = "Science Shuttle"
-	requires_power = TRUE
 
 /area/shuttle/exploration
 	name = "Exploration Shuttle"
-	requires_power = TRUE
 
 /area/shuttle/labor
 	name = "Labor Camp Shuttle"
@@ -231,7 +242,6 @@
 	airlock_hack_difficulty = AIRLOCK_WIRE_SECURITY_MAXIMUM
 
 /area/shuttle/caravan
-	requires_power = TRUE
 
 /area/shuttle/caravan/syndicate1
 	name = "Syndicate Fighter"

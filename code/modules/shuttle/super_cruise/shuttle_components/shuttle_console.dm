@@ -116,8 +116,10 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	if(!SSshuttle.getShuttle(shuttleId))
 		data["linkedToShuttle"] = FALSE
 		return data
+	var/area/shuttle/first_area = mobile_port.shuttle_areas[1]
 
 	data["canLaunch"] = TRUE
+	data["powered"] = first_area.powered()
 	if(QDELETED(shuttleObject))
 		data["linkedToShuttle"] = FALSE
 		return data
@@ -142,7 +144,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	data["shuttleTargetY"] = shuttleObject.shuttleTargetPos?.y
 	data["validDockingPorts"] = list()
 	data["orbitState"] = shuttleObject.is_in_orbit
-	data["powered"] = powered()
 	// Station docking
 	if (shuttleObject.is_in_orbit == ORBITAL_STATUS_ORBIT)
 		//Stealth shuttles bypass shuttle jamming.
@@ -175,8 +176,18 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	switch(action)
 		if ("toggleAPU")
 			// Can be used without power, turn the APU on or off
-			var/area/area = get_area(src)
-			area.apc.toggle_breaker(usr)
+			var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
+			if(!mobile_port || mobile_port.destination != null)
+				return
+			var/area/shuttle/first_area = mobile_port.shuttle_areas[1]
+			if (!first_area)
+				return
+			var/apu_on = !first_area.always_unpowered
+			for (var/area/shuttle/shuttle_area in mobile_port.shuttle_areas)
+				if (apu_on)
+					shuttle_area.disable_apu()
+				else
+					shuttle_area.enable_apu()
 		if ("setTarget")
 			// If you have no power, you can't do this
 			if (!powered())
