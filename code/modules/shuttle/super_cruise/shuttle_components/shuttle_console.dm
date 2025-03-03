@@ -116,8 +116,8 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	if(!SSshuttle.getShuttle(shuttleId))
 		data["linkedToShuttle"] = FALSE
 		return data
+	var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
 	var/area/shuttle/first_area = mobile_port.shuttle_areas[1]
-
 	data["canLaunch"] = TRUE
 	data["powered"] = first_area.powered()
 	if(QDELETED(shuttleObject))
