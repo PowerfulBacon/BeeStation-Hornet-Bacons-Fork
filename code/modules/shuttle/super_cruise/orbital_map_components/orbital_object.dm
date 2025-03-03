@@ -13,6 +13,8 @@
 	//Velocity of the object
 	//KILOMETERS PER SECOND
 	var/datum/orbital_vector/velocity = new()
+	/// Pitch of the craft
+	var/pitch = 0
 	//Static objects don't get moved.
 	var/static_object = FALSE
 	//Are we invisible on the map?
@@ -95,13 +97,46 @@
 	// GRAVITY
 	//===================================
 
-	//var/force = -gravity * delta_time * SHUTTLE_WEIGHT
+	var/gravitational_strength = -parent_map.gravity * ((PLANET_RADIUS * PLANET_RADIUS) / ((PLANET_RADIUS + position.z) * (PLANET_RADIUS + position.z)))
+	var/force = gravitational_strength * SHUTTLE_WEIGHT
 
 	//===================================
 	// LIFT
 	//===================================
 
+	// Lift equation
+	// If you pitch up or down too far then good job, you are stalling and are generating 0 lift
+	// so you will be flying up under your thrust alone
+	// Calculate our angle of attack (craft pitch against the angle of the wind
+	// moving over the craft)
+	var/angle_of_attack = pitch
+	if (velocity.x != 0 || velocity.y != 0)
+		angle_of_attack -= arctan(velocity.z / velocity.Length2D())
+	if (angle_of_attack < STALL_ANGLE && angle_of_attack > STALL_LOW_ANGLE)
+		// Air density is calculated by an arbritrary 1/x equation, since the
+		// air kind of gets thinner as you go higher.
+		var/air_density = parent_map.reference_air_density * min(20/max(position.z/500, 1), 1)
+		// Our lift coefficient is calculated by the fairly abritrary equation
+		// (5+pitch)(40-pitch)0.003
+		// This equation has no significance to the real world, it was just the
+		// equation that made a graph pretty similar to a diagram that showed
+		// an example lift coefficient
+		// There is an approximation of 2pi*pitch but that gave really wacky numbers
+		// that didn't really seem right-ish
+		var/lift_coefficient = (5 + angle_of_attack) *(40-angle_of_attack) * 0.003
+		// Since wings have a weird shape, they generate lift in level flight
+		// The equations follow real life until they stopped looking correct, at which
+		// point we just use random modifiers that would seem right if we showed them
+		// to a player (who won't be able to calculate this in real time anyway)
+		// This equation generates the following:
+		// At pitch 18 our level flight speed is ~56 m/s (108 knots) below 10000 m (The height doesn't make sense since we are a planet and mess the numbers up a little for convenience)
+		// At pitch 0 our level flight speed is ~90m/s (174 knots) below 10000m
+		// To reach 80000m (orbit height), at optimal pitch (18 degrees) we need 160m/s of speed (311 knots)
+		// This should only be achievable with orbital thrusters to prevent non-orbital ships from flying
+		// to the station using air density alone
+		force += 0.5 * air_density * velocity.Length() * velocity.Length() * WING_AREA * lift_coefficient
 
+	velocity.z += (force * delta_time) / SHUTTLE_WEIGHT
 
 	//===================================
 	// MOVEMENT
@@ -111,7 +146,7 @@
 	var/prev_y = position.y
 
 	//Move the gravitational body.
-	var/datum/orbital_vector/vel_new = new(velocity.x * delta_time * velocity_multiplier, velocity.y * delta_time * velocity_multiplier)
+	var/datum/orbital_vector/vel_new = new(velocity.x * delta_time * velocity_multiplier, velocity.y * delta_time * velocity_multiplier, velocity.z)
 	position.AddSelf(vel_new)
 
 	if (position.x > parent_map.map_size * 0.5)

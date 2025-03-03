@@ -2,20 +2,23 @@ import { Component } from 'react';
 import '../../styles/components/aviation/PrimaryFlightDisplay.scss';
 
 const FPS = 10;
+const Q = 0.9;
 
 export class PrimaryFlightDisplay extends Component {
   constructor() {
     super();
     this.state = {
-      pitch: 0,
-      speed: 170,
+      display_pitch: 0,
+      display_speed: 0,
+      display_altitude: 0,
     };
   }
 
   update() {
     this.setState((prevState) => ({
-      pitch: prevState.pitch + 1,
-      speed: prevState.speed + 1,
+      display_pitch: prevState.display_pitch * Q + this.props.pitch * (1 - Q),
+      display_speed: prevState.display_speed * Q + this.props.speed * (1 - Q),
+      display_altitude: prevState.display_altitude * Q + this.props.altitude * (1 - Q),
     }));
   }
 
@@ -34,9 +37,9 @@ export class PrimaryFlightDisplay extends Component {
    * Render the altimeter
    */
   render_altimeter() {
-    const speedUnrounded = 3000 + Math.sin((this.state.speed / 180) * Math.PI) * 2000;
-    const speed = Math.round(speedUnrounded);
-    const speedProportion = speedUnrounded % 1;
+    const heightUnrounded = this.state.display_altitude;
+    const height = Math.round(heightUnrounded);
+    const heightProportion = heightUnrounded % 1;
     return (
       <svg viewBox="0 0 100 500" width="100%" height="100%">
         <defs>
@@ -56,15 +59,15 @@ export class PrimaryFlightDisplay extends Component {
             fill: 'rgb(86, 88, 92)',
           }}
         />
-        {[speed - 1200, speed - 800, speed - 400, speed, speed + 400, speed + 800, speed + 1200]
+        {[height - 1200, height - 800, height - 400, height, height + 400, height + 800, height + 1200]
           .map((speed) => Math.round(speed / 400) * 400)
           .map((localHeight) => (
             <>
               <line
                 x1={40}
-                y1={(-(localHeight - speed) * 250) / 1200 + 250}
+                y1={(-(localHeight - height) * 250) / 1200 + 250}
                 x2={60}
-                y2={(-(localHeight - speed) * 250) / 1200 + 250}
+                y2={(-(localHeight - height) * 250) / 1200 + 250}
                 style={{
                   stroke: 'rgb(255, 255, 255)',
                   strokeWidth: 2,
@@ -73,9 +76,9 @@ export class PrimaryFlightDisplay extends Component {
               />
               <line
                 x1={40}
-                y1={(-(localHeight - speed + 200) * 250) / 1200 + 250}
+                y1={(-(localHeight - height + 200) * 250) / 1200 + 250}
                 x2={60}
-                y2={(-(localHeight - speed + 200) * 250) / 1200 + 250}
+                y2={(-(localHeight - height + 200) * 250) / 1200 + 250}
                 style={{
                   stroke: 'rgb(255, 255, 255)',
                   strokeWidth: 1,
@@ -85,7 +88,7 @@ export class PrimaryFlightDisplay extends Component {
               <text
                 x={88}
                 text-anchor="end"
-                y={(-(localHeight - speed) * 250) / 1200 + 250 + 5}
+                y={(-(localHeight - height) * 250) / 1200 + 250 + 5}
                 fill="rgb(255, 255, 255)"
                 fontSize={10}
                 clip-path="url(#container_alt)">
@@ -102,28 +105,28 @@ export class PrimaryFlightDisplay extends Component {
           }}
         />
         <text x={78} text-anchor="end" y={255} fill="rgb(255, 255, 255)" fontSize={12}>
-          {Math.floor(speed / 10)}
+          {Math.floor(height / 10)}
         </text>
-        <text x={78} text-anchor="start" y={255 + 17 * speedProportion} fill="rgb(255, 255, 255)" fontSize={12}>
-          {speed % 10}
-        </text>
-        <text
-          x={78}
-          text-anchor="start"
-          y={238 + 17 * speedProportion}
-          fill="rgb(255, 255, 255)"
-          fontSize={12}
-          clip-path="url(#text-cutoff-alt)">
-          {((speed % 10) + 1) % 10}
+        <text x={78} text-anchor="start" y={255 + 17 * heightProportion} fill="rgb(255, 255, 255)" fontSize={12}>
+          {height % 10}
         </text>
         <text
           x={78}
           text-anchor="start"
-          y={272 + 17 * speedProportion}
+          y={238 + 17 * heightProportion}
           fill="rgb(255, 255, 255)"
           fontSize={12}
           clip-path="url(#text-cutoff-alt)">
-          {((speed % 10) - 1 + 10) % 10}
+          {((height % 10) + 1) % 10}
+        </text>
+        <text
+          x={78}
+          text-anchor="start"
+          y={272 + 17 * heightProportion}
+          fill="rgb(255, 255, 255)"
+          fontSize={12}
+          clip-path="url(#text-cutoff-alt)">
+          {((height % 10) - 1 + 10) % 10}
         </text>
       </svg>
     );
@@ -133,7 +136,7 @@ export class PrimaryFlightDisplay extends Component {
    * Render the velocity indicator
    */
   render_velocity() {
-    const speedUnrounded = 170 + Math.sin((this.state.speed / 180) * Math.PI) * 20;
+    const speedUnrounded = this.state.display_speed;
     const speed = Math.round(speedUnrounded);
     const speedProportion = speedUnrounded % 1;
     return (
@@ -232,7 +235,7 @@ export class PrimaryFlightDisplay extends Component {
    * Render the vertical heading indicator
    */
   render_vertical_situation() {
-    const pitch = Math.sin((this.state.pitch / 180) * Math.PI) * 20;
+    const pitch = this.state.display_pitch;
     return (
       <svg viewBox="-250 -250 500 500" width="100%" height="100%">
         <rect

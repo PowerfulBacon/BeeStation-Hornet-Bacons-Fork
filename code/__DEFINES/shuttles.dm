@@ -130,6 +130,8 @@
 
 /// Angle before we start to stall
 #define STALL_ANGLE 25
+/// Minimum angle of attack before we stall
+#define STALL_LOW_ANGLE -10
 /// Constant wing area of the ship
 #define WING_AREA 50
 /// Reference weight in kilograms of a shuttle object, used for
@@ -139,3 +141,6 @@
 #define SHUTTLE_WEIGHT 15000
 /// Flight level you have to be at in order to enter orbit
 #define ORBIT_HEIGHT 80000
+/// Radius of the planet (relative to orbit height)
+/// Just pick a number, it doesn't matter
+#define PLANET_RADIUS 200000

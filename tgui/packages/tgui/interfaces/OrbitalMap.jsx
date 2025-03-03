@@ -24,6 +24,7 @@ export const OrbitalMap = (props) => {
     shuttleId = null,
     landingGear = 0,
     powered = false,
+    pitch = 0,
   } = data;
   const [zoomScale, setZoomScale] = useLocalState('zoomScale', 1);
   const [xOffset, setXOffset] = useLocalState('xOffset', 0);
@@ -60,7 +61,19 @@ export const OrbitalMap = (props) => {
       <Window.Content fitted>
         <Flex height="100%">
           <Flex.Item class="OrbitalMap__radar" grow id="radar" innerRef={radarRef}>
-            <PrimaryFlightDisplay />
+            <PrimaryFlightDisplay
+              speed={
+                ourObject
+                  ? Math.sqrt(ourObject.velocity_x * ourObject.velocity_x + ourObject.velocity_y * ourObject.velocity_y)
+                  : 0
+              }
+              altitude={
+                ourObject
+                  ? ourObject.position_z
+                  : 0
+              }
+              pitch={pitch}
+            />
           </Flex.Item>
           <Flex.Item class="OrbitalMap__panel">
             <div class="OrbitalMap__label">Heading</div>
@@ -76,7 +89,7 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">{powered && <>050</>}</div>
+              <div class="OrbitalMap__indicator">{!!powered && <>050</>}</div>
             </div>
             <div class="OrbitalMap__label">Altitude</div>
             <div class="OrbitalMap__dial">
@@ -91,7 +104,7 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">{powered && 18000}</div>
+              <div class="OrbitalMap__indicator">{!!powered && 18000}</div>
             </div>
             <div class="OrbitalMap__label">Speed</div>
             <div class="OrbitalMap__dial">
@@ -106,7 +119,7 @@ export const OrbitalMap = (props) => {
                 stepPixelSize={10}
                 value={50}
               />
-              <div class="OrbitalMap__indicator">{powered && 180}</div>
+              <div class="OrbitalMap__indicator">{!!powered && 180}</div>
             </div>
             <div class={classes(['OrbitalMap__light', !powered && 'bad', !powered && 'flashing'])}>
               <div>APU</div>

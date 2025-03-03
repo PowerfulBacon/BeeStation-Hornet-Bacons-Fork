@@ -8,10 +8,10 @@
 	/// Map size. width and height of the map before you wrap
 	var/map_size = 4000
 	/// How strong the gravity is of this map (m/s^2)
-	var/gravity = 9
+	var/gravity = 10
 	/// The air density of the planet. More air results in more lift
-	/// being generated, so this probably shouldn't be changed.
-	var/reference_air_density = 0
+	/// being generated, so this probably shouldn't be changed. kg/m^3
+	var/reference_air_density = 1.225
 	/// What z-level do we belong to?
 	var/datum/space_level/z_level
 

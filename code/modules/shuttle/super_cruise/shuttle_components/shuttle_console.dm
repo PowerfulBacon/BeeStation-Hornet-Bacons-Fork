@@ -136,6 +136,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	else
 		data["shuttleVelX"] = shuttleObject.velocity.x
 		data["shuttleVelY"] = shuttleObject.velocity.y
+	data["pitch"] = shuttleObject.pitch
 	//Docking data
 	data["canDock"] = shuttleObject.ils_docking_target != null
 	data["isInOrbit"] = shuttleObject.is_in_orbit
@@ -172,15 +173,15 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 	if(admin_controlled)
 		say("This shuttle is restricted to authorised personnel only.")
 		return
+	var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
+	var/area/shuttle/first_area = mobile_port.shuttle_areas[1]
+	if (!first_area)
+		return
 
 	switch(action)
 		if ("toggleAPU")
 			// Can be used without power, turn the APU on or off
-			var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
 			if(!mobile_port || mobile_port.destination != null)
-				return
-			var/area/shuttle/first_area = mobile_port.shuttle_areas[1]
-			if (!first_area)
 				return
 			var/apu_on = !first_area.always_unpowered
 			for (var/area/shuttle/shuttle_area in mobile_port.shuttle_areas)
@@ -190,7 +191,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 					shuttle_area.enable_apu()
 		if ("setTarget")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
@@ -206,7 +207,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 						return
 		if("setThrust")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
@@ -217,7 +218,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 			shuttleObject.thrust = clamp(params["thrust"], 0, 100)
 		if("setAngle")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle not in flight.")
@@ -228,7 +229,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 			shuttleObject.angle = params["angle"]
 		if("nautopilot")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject) || !shuttleObject.shuttleTarget)
 				return
@@ -237,12 +238,12 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 		//Launch the shuttle. Lets do this.
 		if("launch")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			launch_shuttle()
 		if("setTargetCoords")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				return
@@ -257,7 +258,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 			. = TRUE
 		if ("toggleGear")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				return
@@ -269,7 +270,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 		// Dock via ILS
 		if ("dockILS")
 			// If you have no power, you can't do this
-			if (!powered())
+			if (!first_area.powered())
 				return
 			if(QDELETED(shuttleObject))
 				say("Shuttle has already landed, cannot dock at this time.")
@@ -278,7 +279,6 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/computer/shuttle_flight)
 				say("Docking target lost, please re-establish orbital trajectory.")
 				return
 			//Get our port
-			var/obj/docking_port/mobile/mobile_port = SSshuttle.getShuttle(shuttleId)
 			if(!mobile_port || mobile_port.destination != null)
 				return
 			//Check ready
