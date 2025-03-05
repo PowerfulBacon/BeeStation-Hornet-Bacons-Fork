@@ -133,14 +133,56 @@
 /// Minimum angle of attack before we stall
 #define STALL_LOW_ANGLE -10
 /// Constant wing area of the ship
+/// Don't change this
 #define WING_AREA 50
 /// Reference weight in kilograms of a shuttle object, used for
 /// calculating the lift generated.
-/// This results in level flight when traveling at 100m/s at ground
-/// level.
-#define SHUTTLE_WEIGHT 15000
+/// This mainly affects how much lift we generate at low
+/// speeds and altitudes.
+#define SHUTTLE_WEIGHT 18000
 /// Flight level you have to be at in order to enter orbit
-#define ORBIT_HEIGHT 80000
+#define ORBIT_HEIGHT 18000
+/// height that shuttle spawns at
+#define SHUTTLE_SPAWN_HEIGHT 20000
 /// Radius of the planet (relative to orbit height)
-/// Just pick a number, it doesn't matter
-#define PLANET_RADIUS 200000
+/// This mainly affects the amount of lift generated at high
+/// altitudes.
+#define PLANET_RADIUS 90000
+/// The maximum speed that a shuttle should be able to achieve without
+/// orbital thrusters in m/s.
+/// This should be calculated such that we cannot reach orbit
+/// on lift alone
+#define MAX_REASONABLE_SHUTTLE_SPEED 100
+/// How much the air density falls off at higher altitudes. Results
+/// in less lift generated at high altitudes, but has less effect
+/// on lift at low altitudes.
+#define AIR_DENSITY_FALLOFF 800
+/// Any additional speed over this won't generate extra lift
+#define WING_MAX_SPEED 150
+
+/*
+
+Copy this into desmos to get a graph if you ever want to
+modify these settings.
+r_{planet} is the radius of the planet
+g is the gravity
+w is the weight of the ship
+v is the velocity of the ship instance
+p is the pitch of the ship instance
+v_{z} is the vertical speed of the ship instance
+the 500 in the a(x) equation is the air density falloff
+
+r_{planet}=196000
+g=10
+w=9500
+v=165
+p=0
+v_{z}=0
+
+f\left(x\right)=-gw\cdot\left(\frac{r_{planet}^{2}}{\left(r_{planet}+x\right)^{2}}\right)
+y=\frac{\left(f\left(x\right)+l\left(x\right)\right)}{w}
+a\left(x\right)=1.6\cdot\min\left(\frac{1}{\max\left(\frac{x}{500},1\right)},1\right)
+l\left(x\right)=\left\{\left|a_{attack}\right|<25:0.5\ \cdot\ a\left(x\right)\cdot v^{2}\cdot50\cdot\left(5+a_{attack}\right)\left(40-a_{attack}\right)0.003,0\right\}
+a_{attack}=p-\left(\arctan\left(\frac{v_{z}}{v}\right)\cdot\frac{360}{2\pi}\right)
+y=-g\left(\frac{r_{planet}^{2}}{\left(r_{planet}+x\right)^{2}}\right)
+ */

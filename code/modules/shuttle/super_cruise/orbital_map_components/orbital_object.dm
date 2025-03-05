@@ -52,6 +52,8 @@
 	/// before we enter the station.
 	var/is_in_orbit = ORBITAL_STATUS_NONE
 
+	var/drag_multiplier = 7
+
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
 		src.orbital_map_index = orbital_map_index
@@ -98,7 +100,8 @@
 	//===================================
 
 	var/gravitational_strength = -parent_map.gravity * ((PLANET_RADIUS * PLANET_RADIUS) / ((PLANET_RADIUS + position.z) * (PLANET_RADIUS + position.z)))
-	var/force = gravitational_strength * SHUTTLE_WEIGHT
+	var/gravitational_acceleration = gravitational_strength * delta_time
+	velocity.z += gravitational_acceleration
 
 	//===================================
 	// LIFT
@@ -112,10 +115,11 @@
 	var/angle_of_attack = pitch
 	if (velocity.x != 0 || velocity.y != 0)
 		angle_of_attack -= arctan(velocity.z / velocity.Length2D())
+	// Air density is calculated by an arbritrary 1/x equation, since the
+	// air kind of gets thinner as you go higher.
+	var/air_density = parent_map.reference_air_density * min(1/max(position.z/AIR_DENSITY_FALLOFF, 1), 1)
+	var/force = 0
 	if (angle_of_attack < STALL_ANGLE && angle_of_attack > STALL_LOW_ANGLE)
-		// Air density is calculated by an arbritrary 1/x equation, since the
-		// air kind of gets thinner as you go higher.
-		var/air_density = parent_map.reference_air_density * min(20/max(position.z/500, 1), 1)
 		// Our lift coefficient is calculated by the fairly abritrary equation
 		// (5+pitch)(40-pitch)0.003
 		// This equation has no significance to the real world, it was just the
@@ -128,15 +132,27 @@
 		// The equations follow real life until they stopped looking correct, at which
 		// point we just use random modifiers that would seem right if we showed them
 		// to a player (who won't be able to calculate this in real time anyway)
-		// This equation generates the following:
-		// At pitch 18 our level flight speed is ~56 m/s (108 knots) below 10000 m (The height doesn't make sense since we are a planet and mess the numbers up a little for convenience)
-		// At pitch 0 our level flight speed is ~90m/s (174 knots) below 10000m
-		// To reach 80000m (orbit height), at optimal pitch (18 degrees) we need 160m/s of speed (311 knots)
+		//
 		// This should only be achievable with orbital thrusters to prevent non-orbital ships from flying
 		// to the station using air density alone
-		force += 0.5 * air_density * velocity.Length() * velocity.Length() * WING_AREA * lift_coefficient
+		// We have a max wing airspeed, because otherwise we start getting into ridiculous speeds
+		var/wing_airspeed = velocity.Length()
+		force += 0.5 * air_density * wing_airspeed * wing_airspeed * WING_AREA * lift_coefficient
 
-	velocity.z += (force * delta_time) / SHUTTLE_WEIGHT
+	var/acceleration_applied = (force * delta_time) / SHUTTLE_WEIGHT
+	velocity.z += acceleration_applied * sin(90 + pitch)
+
+	var/speed = velocity.Length()
+	var/drag_force = 0.5 * air_density * speed * speed * drag_multiplier
+	var/drag_acceleration = -(drag_force * delta_time) / SHUTTLE_WEIGHT
+
+	var/lateral_acceleration = cos(90 + pitch) * acceleration_applied
+	if (velocity.x != 0)
+		var/lift_theta = arctan(velocity.y / velocity.x)
+		velocity.x += cos(lift_theta) * (lateral_acceleration + drag_acceleration)
+		velocity.y += sin(lift_theta) * (lateral_acceleration + drag_acceleration)
+	else
+		velocity.y -= lateral_acceleration
 
 	//===================================
 	// MOVEMENT
@@ -145,7 +161,7 @@
 	var/prev_x = position.x
 	var/prev_y = position.y
 
-	//Move the gravitational body.
+	//Move the gravitational body.t
 	var/datum/orbital_vector/vel_new = new(velocity.x * delta_time * velocity_multiplier, velocity.y * delta_time * velocity_multiplier, velocity.z)
 	position.AddSelf(vel_new)
 
