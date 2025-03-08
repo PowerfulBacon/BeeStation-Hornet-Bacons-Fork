@@ -240,3 +240,13 @@
 	cost = 5
 	always_place = TRUE
 	allow_duplicates = TRUE
+
+/datum/map_template/ruin/lavaland/volkova_base
+	name = "Volkova Base"
+	id = "volkova"
+	description = "The volkova's mining base."
+	prefix = "_maps/templates/"
+	suffix = "volkova_mining_base.dmm"
+	cost = 0
+	always_place = TRUE
+	allow_duplicates = FALSE
