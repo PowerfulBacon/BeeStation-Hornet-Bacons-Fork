@@ -34,15 +34,24 @@
 	name = JOB_VOLKOVA_MINER
 	jobtype = /datum/job/volkova_miner
 
-	id = /obj/item/card/id/job/atmospheric_technician
-	belt = /obj/item/storage/belt/utility/atmostech
-	l_pocket = /obj/item/modular_computer/tablet/pda/atmospheric_technician
-	ears = /obj/item/radio/headset/headset_eng
-	uniform = /obj/item/clothing/under/rank/engineering/atmospheric_technician
-	r_pocket = /obj/item/analyzer
+	id = /obj/item/card/id/job/shaft_miner
+	belt = /obj/item/modular_computer/tablet/pda/shaft_miner
+	ears = /obj/item/radio/headset/headset_cargo/shaft_miner
+	shoes = /obj/item/clothing/shoes/workboots/mining
+	gloves = /obj/item/clothing/gloves/color/black
+	uniform = /obj/item/clothing/under/volkva
+	l_pocket = /obj/item/reagent_containers/hypospray/medipen/survival
+	r_pocket = /obj/item/storage/bag/ore
+	backpack_contents = list(
+		/obj/item/flashlight/seclite=1,\
+		/obj/item/knife/combat/survival=1,\
+		/obj/item/mining_voucher=1,\
+		/obj/item/stack/marker_beacon/ten=1,\
+		/obj/item/discovery_scanner=1)
 
-	backpack = /obj/item/storage/backpack/industrial
-	satchel = /obj/item/storage/backpack/satchel/eng
-	duffelbag = /obj/item/storage/backpack/duffelbag/engineering
-	box = /obj/item/storage/box/survival/engineer
-	pda_slot = ITEM_SLOT_LPOCKET
+	backpack = /obj/item/storage/backpack/explorer
+	satchel = /obj/item/storage/backpack/satchel/explorer
+	duffelbag = /obj/item/storage/backpack/duffelbag
+	box = /obj/item/storage/box/survival/mining
+
+	chameleon_extras = /obj/item/gun/energy/recharge/kinetic_accelerator
