@@ -133,7 +133,7 @@
 	lose_text = span_danger("You forget how musical instruments work.")
 	medical_record_text = "Patient brain scans show a highly-developed auditory pathway."
 
-/datum/quirk/musician/on_spawn()
+/datum/quirk/musician/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/choice_beacon/radial/music/B = new(get_turf(H))
 	var/list/slots = list (
@@ -160,7 +160,7 @@
 	lose_text = span_danger("You don't feel that passion for plushies anymore.")
 	medical_record_text = "Patient demonstrated a high affinity for plushies."
 
-/datum/quirk/plushielover/on_spawn()
+/datum/quirk/plushielover/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/choice_beacon/radial/plushie/B = new(get_turf(H))
 	var/list/slots = list (
@@ -179,7 +179,7 @@
 	process = TRUE
 	medical_record_text = "Patient reports a belief in a higher power."
 
-/datum/quirk/spiritual/on_spawn()
+/datum/quirk/spiritual/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	H.equip_to_slot_or_del(new /obj/item/storage/fancy/candle_box(H), ITEM_SLOT_BACKPACK)
 	H.equip_to_slot_or_del(new /obj/item/storage/box/matches(H), ITEM_SLOT_BACKPACK)

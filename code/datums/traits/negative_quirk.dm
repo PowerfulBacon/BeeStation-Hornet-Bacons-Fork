@@ -50,7 +50,7 @@
 /datum/quirk/blindness/remove()
 	quirk_target.cure_blind(ROUNDSTART_TRAIT)
 
-/datum/quirk/blindness/on_spawn()
+/datum/quirk/blindness/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/clothing/glasses/blindfold/white/B = new(get_turf(H))
 	if(!H.equip_to_slot_if_possible(B, ITEM_SLOT_EYES, bypass_equip_delay_self = TRUE)) //if you can't put it on the user's eyes, put it in their hands, otherwise put it on their eyes
@@ -85,7 +85,7 @@
 
 
 
-/datum/quirk/brainproblems/on_spawn()
+/datum/quirk/brainproblems/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/storage/pill_bottle/mannitol/braintumor/P = new(get_turf(H))
 
@@ -139,7 +139,7 @@
 	var/obj/item/heirloom
 	var/where
 
-/datum/quirk/family_heirloom/on_spawn()
+/datum/quirk/family_heirloom/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/heirloom_type
 
@@ -321,7 +321,7 @@
 /datum/quirk/nearsighted/remove()
 	quirk_target.cure_nearsighted(ROUNDSTART_TRAIT)
 
-/datum/quirk/nearsighted/on_spawn()
+/datum/quirk/nearsighted/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/clothing/glasses/regular/glasses = new(get_turf(H))
 	H.put_in_hands(glasses)
@@ -367,7 +367,7 @@
 	medical_record_text = "Patient has an untreatable impairment in motor function in the lower extremities."
 	trauma_type = /datum/brain_trauma/severe/paralysis/paraplegic/
 
-/datum/quirk/trauma/paraplegic/on_spawn()
+/datum/quirk/trauma/paraplegic/on_spawn(roundstart)
 	if(quirk_target.buckled) // Handle late joins being buckled to arrival shuttle chairs.
 		quirk_target.buckled.unbuckle_mob(quirk_target)
 
@@ -410,7 +410,7 @@
 	quirk_value = -1
 	var/slot_string = "limb"
 
-/datum/quirk/prosthetic_limb/on_spawn()
+/datum/quirk/prosthetic_limb/on_spawn(roundstart)
 	var/limb_slot = read_choice_preference(/datum/preference/choiced/quirk/prosthetic_limb_location) || pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) // default to random
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/bodypart/old_part = H.get_bodypart(limb_slot)
@@ -525,7 +525,7 @@
 	var/process_interval = 30 SECONDS //! how frequently the quirk processes
 	var/next_process = 0 //! ticker for processing
 
-/datum/quirk/junkie/on_spawn()
+/datum/quirk/junkie/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	reagent_type = reagent_type || read_choice_preference(/datum/preference/choiced/quirk/junkie_drug)
 	if (!reagent_type)
@@ -588,7 +588,7 @@
 	accessory_type = /obj/item/lighter/greyscale
 	process = TRUE
 
-/datum/quirk/junkie/smoker/on_spawn()
+/datum/quirk/junkie/smoker/on_spawn(roundstart)
 	drug_container_type = read_choice_preference(/datum/preference/choiced/quirk/smoker_cigarettes)
 	if(!drug_container_type)
 		drug_container_type = pick(GLOB.smoker_cigarettes)
@@ -630,7 +630,7 @@
 	var/tick_number = 0 // Keeping track of how many ticks have passed between a check
 	var/obj/item/reagent_containers/cup/glass/bottle/drink_instance
 
-/datum/quirk/alcoholic/on_spawn()
+/datum/quirk/alcoholic/on_spawn(roundstart)
 	drink_instance = read_choice_preference(/datum/preference/choiced/quirk/alcohol_type)
 	if(!drink_instance)
 		drink_instance = pick(drink_types)

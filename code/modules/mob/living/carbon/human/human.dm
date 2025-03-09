@@ -813,7 +813,7 @@
 				if(has_quirk(T))
 					mind.remove_quirk(T)
 				else
-					mind.add_quirk(T,TRUE)
+					mind.add_quirk(T, FALSE)
 	if(href_list[VV_HK_MAKE_MONKEY])
 		if(!check_rights(R_SPAWN))
 			return

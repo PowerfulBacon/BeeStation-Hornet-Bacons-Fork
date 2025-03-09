@@ -375,7 +375,7 @@
 						SSticker.mode.make_special_antag_chance(humanc)
 
 	if(CONFIG_GET(flag/roundstart_traits))
-		SSquirks.AssignQuirks(character.mind, character.client, TRUE)
+		SSquirks.AssignQuirks(character.mind, character.client, FALSE)
 
 	GLOB.manifest.inject(humanc)
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)

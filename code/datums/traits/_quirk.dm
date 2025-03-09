@@ -21,7 +21,7 @@
 	var/mob/living/quirk_target // The mob that will be affected by this quirk
 	var/abstract_parent_type = /datum/quirk
 
-/datum/quirk/New(datum/mind/quirk_mind, mob/living/quirk_mob, spawn_effects)
+/datum/quirk/New(datum/mind/quirk_mind, mob/living/quirk_mob, roundstart)
 	..()
 	if(!quirk_mind)
 		qdel(src)
@@ -44,9 +44,8 @@
 	if(mob_trait)
 		ADD_TRAIT(quirk_target, mob_trait, ROUNDSTART_TRAIT)
 	add()
-	if(spawn_effects)
-		on_spawn()
-		addtimer(CALLBACK(src, PROC_REF(post_spawn)), 30)
+	on_spawn(roundstart)
+	addtimer(CALLBACK(src, PROC_REF(post_spawn)), 30)
 
 /datum/quirk/Destroy()
 	if(process)
@@ -84,7 +83,7 @@
 
 // laid out in chronological order
 /datum/quirk/proc/add() //special "on add" effects
-/datum/quirk/proc/on_spawn() //these should only trigger when the character is being created for the first time, i.e. roundstart/latejoin
+/datum/quirk/proc/on_spawn(roundstart) //these should only trigger when the character is being created for the first time, i.e. roundstart/latejoin
 /datum/quirk/proc/post_spawn() //for text, disclaimers etc. given after you spawn in with the quirk
 /datum/quirk/proc/on_process() //process() has some special checks, so this is the actual process
 /datum/quirk/proc/on_transfer() //code called right before the quirk is transferred to a new mob

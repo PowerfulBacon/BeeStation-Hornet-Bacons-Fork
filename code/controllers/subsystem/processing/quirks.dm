@@ -41,13 +41,13 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		quirks[initial(T.name)] = T
 		quirk_points[initial(T.name)] = initial(T.quirk_value)
 
-/datum/controller/subsystem/processing/quirks/proc/AssignQuirks(datum/mind/user, client/cli, spawn_effects)
+/datum/controller/subsystem/processing/quirks/proc/AssignQuirks(datum/mind/user, client/cli, roundstart)
 	var/bad_quirk_checker = 0
 	var/list/bad_quirks = list()
 	for(var/V in cli.prefs.all_quirks)
 		var/datum/quirk/Q = quirks[V]
 		if(Q)
-			user.add_quirk(Q, spawn_effects)
+			user.add_quirk(Q, roundstart)
 			bad_quirk_checker += initial(Q.quirk_value)
 		else
 			stack_trace("Invalid quirk \"[V]\" in client [cli.ckey] preferences. the game has reset their quirks automatically.")

@@ -809,14 +809,14 @@
 
 // Quirk Procs //
 
-/datum/mind/proc/add_quirk(quirktype, spawn_effects) //separate proc due to the way these ones are handled
+/datum/mind/proc/add_quirk(quirktype, roundstart) //separate proc due to the way these ones are handled
 	if(HAS_TRAIT(src, quirktype))
 		return
 	var/datum/quirk/T = quirktype
 	var/qname = initial(T.name)
 	if(!SSquirks || !SSquirks.quirks[qname])
 		return
-	new quirktype (src, current, spawn_effects)
+	new quirktype (src, current, roundstart)
 	return TRUE
 
 /datum/mind/proc/remove_quirk(quirktype)

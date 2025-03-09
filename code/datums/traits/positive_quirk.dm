@@ -131,7 +131,7 @@
 	lose_text = span_danger("Everything seems a little darker.")
 	medical_record_text = "Patient possesses a better than average retina."
 
-/datum/quirk/night_vision/on_spawn()
+/datum/quirk/night_vision/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/organ/eyes/eyes = H.getorgan(/obj/item/organ/eyes)
 	if(!eyes || eyes.lighting_alpha)
@@ -148,7 +148,7 @@
 	lose_text = span_danger("You forget how photo cameras work.")
 	medical_record_text = "Patient mentions photography as a stress-relieving hobby."
 
-/datum/quirk/photographer/on_spawn()
+/datum/quirk/photographer/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/camera/spooky/camera = new(get_turf(H))
 	var/list/camera_slots = list (
@@ -187,7 +187,7 @@
 	lose_text = span_danger("You forget how to tag walls properly.")
 	medical_record_text = "Patient recently seen for paint poisoning."
 
-/datum/quirk/tagger/on_spawn()
+/datum/quirk/tagger/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/obj/item/toy/crayon/spraycan/spraycan = new(get_turf(H))
 	H.put_in_hands(spraycan)
@@ -216,7 +216,7 @@
 	process = TRUE
 	medical_record_text = "Patient qualifies for social welfare."
 
-/datum/quirk/neet/on_spawn()
+/datum/quirk/neet/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	var/datum/bank_account/D = H.get_bank_account()
 	if(!D) //if their current mob doesn't have a bank account, likely due to them being a special role (ie nuke op)
@@ -233,6 +233,31 @@
 	lose_text = span_danger("You no longer feel like you're in touch with the youth.")
 	medical_record_text = "Patient demonstrated a high affinity for skateboards."
 
-/datum/quirk/proskater/on_spawn()
+/datum/quirk/proskater/on_spawn(roundstart)
 	var/mob/living/carbon/human/H = quirk_target
 	H.equip_to_slot_or_del(new /obj/item/melee/skateboard/pro(H), ITEM_SLOT_BACKPACK)
+
+/datum/quirk/maintenance_dweller
+	name = "Maintenance Dweller"
+	desc = "For some reason you find yourself spending a lot of time in and around those who dwell in the maintenance tunnels. You will spawn with maintenance access regardless of your job and have a 50% chance to start in maintenance."
+	icon = "hammer"
+	quirk_value = 2
+
+/datum/quirk/maintenance_dweller/on_spawn(roundstart)
+	. = ..()
+	for (var/obj/item/card/id/id_card in quirk_target.get_contents())
+		id_card.access |= ACCESS_MAINT_TUNNELS
+	if (roundstart && prob(50))
+		var/list/possible_spawns = shuffle(GLOB.airlocks)
+		for (var/obj/machinery/door/airlock/airlock)
+			if (!istype(get_area(airlock), /area/maintenance))
+				continue
+			// Strict airlock
+			if (!airlock.allowed(quirk_target))
+				continue
+			for (var/cardinal_direction in GLOB.cardinals)
+				var/turf/location = get_step(airlock, cardinal_direction)
+				if (location.is_blocked_turf())
+					continue
+				quirk_target.forceMove(location)
+				return
