@@ -1394,3 +1394,8 @@
 			to_chat(user, span_notice("You set the price of [I] and everything inside of it to [price] cr."))
 		else
 			to_chat(user, span_notice("You set the price of [I] to [price] cr."))
+		return
+	if (istype(target, /obj/structure/closet/crate/secure/trading))
+		var/obj/structure/closet/crate/secure/trading/target_crate = target
+		target_crate.set_price(user, src)
+		return
