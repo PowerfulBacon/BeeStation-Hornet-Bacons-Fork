@@ -19,6 +19,9 @@
 	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
+"aB" = (
+/turf/closed/wall,
+/area/mine/volkova/medical)
 "aV" = (
 /obj/effect/turf_decal/stripes/closeup{
 	dir = 1
@@ -34,7 +37,7 @@
 /area/mine/volkova/directors_office)
 "bc" = (
 /turf/closed/wall/r_wall,
-/area/mine/volkova/equipment)
+/area/mine/volkova/dorms)
 "be" = (
 /obj/machinery/button/door{
 	id = "miningdorm2";
@@ -49,11 +52,13 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/mine/volkova/dorms)
-"bu" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/mine/volkova/maintenance)
+"bO" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/eastern_hallway)
 "bW" = (
+/turf/closed/wall,
+/area/mine/volkova/directors_office)
+"cb" = (
 /turf/closed/wall,
 /area/mine/volkova/dorms)
 "cw" = (
@@ -61,13 +66,9 @@
 /obj/item/gun/ballistic/shotgun/doublebarrel,
 /obj/item/gun/ballistic/automatic/pistol/m1911,
 /obj/item/gun/ballistic/automatic/pistol/m1911,
+/obj/item/gun/ballistic/rifle/boltaction,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
-"cy" = (
-/turf/open/floor/iron/dark/side{
-	dir = 1
-	},
-/area/mine/volkova/meeting_room)
 "cI" = (
 /obj/machinery/griddle,
 /turf/open/floor/iron/checker/other,
@@ -76,6 +77,12 @@
 /obj/structure/ore_box,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"cO" = (
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/stripes/closeup,
+/obj/effect/turf_decal/caution/stand_clear,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "cU" = (
 /turf/open/floor/plating,
 /area/mine/volkova/maintenance)
@@ -85,13 +92,13 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
-"dj" = (
-/turf/open/floor/iron/tech,
-/area/mine/volkova/eastern_hallway)
 "du" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/mine/volkova/western_hallway)
+"dU" = (
+/turf/open/floor/iron/dark,
+/area/mine/volkova/entrance)
 "eb" = (
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/plating,
@@ -102,14 +109,14 @@
 	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
-"er" = (
-/turf/closed/wall,
-/area/mine/volkova/maintenance)
 "eC" = (
 /obj/machinery/door/airlock/wood,
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
+"eR" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/meeting_room)
 "fl" = (
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
@@ -156,10 +163,7 @@
 	dir = 1
 	},
 /turf/open/floor/iron/tech,
-/area/mine/volkova/dorms)
-"gl" = (
-/turf/open/floor/iron/dark,
-/area/mine/volkova/entrance)
+/area/mine/volkova/eastern_hallway)
 "gn" = (
 /obj/effect/turf_decal/tile/dark_green{
 	dir = 1
@@ -167,9 +171,14 @@
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "gL" = (
-/obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/checker/other,
 /area/mine/volkova/kitchen)
+"hn" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/template_noop)
 "hp" = (
 /obj/machinery/button/door{
 	id = "miningdorm1";
@@ -184,14 +193,6 @@
 	},
 /turf/open/floor/carpet/blue,
 /area/mine/volkova/dorms)
-"ib" = (
-/obj/machinery/door/firedoor,
-/obj/effect/turf_decal/stripes/closeup,
-/obj/effect/turf_decal/caution/stand_clear{
-	dir = 1
-	},
-/turf/open/floor/iron/tech,
-/area/mine/volkova/eastern_hallway)
 "ie" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer4{
 	dir = 4
@@ -199,6 +200,10 @@
 /obj/machinery/light/small,
 /turf/open/floor/carpet/blue,
 /area/mine/volkova/dorms)
+"io" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood,
+/area/mine/volkova/eastern_hallway)
 "iI" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -210,6 +215,16 @@
 /obj/structure/closet/secure_closet/personal,
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
+"jq" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/railing,
+/turf/open/lava/smooth/lava_land_surface,
+/area/template_noop)
+"jB" = (
+/obj/machinery/power/apc/auto_name/directional/east,
+/obj/machinery/power/port_gen/pacman,
+/turf/open/floor/plating,
+/area/mine/volkova/maintenance)
 "jJ" = (
 /obj/machinery/modular_fabricator/autolathe/hacked,
 /turf/open/floor/iron,
@@ -218,6 +233,10 @@
 /obj/effect/turf_decal/stripes/closeup,
 /turf/open/floor/iron/techmaint,
 /area/mine/volkova/entrance)
+"jO" = (
+/obj/machinery/power/apc/auto_name/directional/west,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "jT" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -237,6 +256,10 @@
 /obj/effect/turf_decal/tile/blue/half/contrasted,
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
+"kB" = (
+/obj/machinery/door/airlock/maintenance_hatch,
+/turf/open/floor/plating,
+/area/mine/volkova/entrance)
 "kY" = (
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 4
@@ -258,9 +281,9 @@
 	dir = 8
 	},
 /area/mine/volkova/meeting_room)
-"lU" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/dorms)
+"lY" = (
+/turf/open/floor/wood,
+/area/mine/volkova/eastern_hallway)
 "mp" = (
 /obj/machinery/door/airlock{
 	id_tag = "miningdorm2";
@@ -289,6 +312,17 @@
 	},
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
+"mY" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/power/rtg,
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/template_noop)
+"nm" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/medical)
 "nn" = (
 /obj/structure/fence/door/opened,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
@@ -300,9 +334,6 @@
 "nH" = (
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
-"nN" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/armoury)
 "nP" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -313,6 +344,10 @@
 /obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
+"oj" = (
+/obj/machinery/power/apc/auto_name/directional/east,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "om" = (
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/iron/tech,
@@ -343,9 +378,9 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
-"po" = (
-/turf/closed/wall,
-/area/mine/volkova/medical)
+"pn" = (
+/turf/open/floor/iron/techmaint,
+/area/mine/volkova/western_hallway)
 "py" = (
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
@@ -353,6 +388,10 @@
 /obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
+"pD" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/mine/volkova/maintenance)
 "pO" = (
 /obj/effect/turf_decal/stripes/closeup,
 /obj/effect/turf_decal/caution/stand_clear{
@@ -361,18 +400,12 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
-"pY" = (
-/turf/open/floor/wood,
-/area/mine/volkova/eastern_hallway)
 "qp" = (
 /turf/open/lava/smooth/lava_land_surface,
 /area/template_noop)
 "qq" = (
 /turf/open/floor/iron/tech,
-/area/mine/volkova/western_hallway)
-"qG" = (
-/turf/closed/wall,
-/area/mine/volkova/directors_office)
+/area/mine/volkova/eastern_hallway)
 "qQ" = (
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/wood,
@@ -388,19 +421,13 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
-"rB" = (
-/turf/open/floor/iron/checker/other,
-/area/mine/volkova/kitchen)
-"rN" = (
-/obj/structure/railing/corner{
-	dir = 8
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/template_noop)
-"sb" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+"rL" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/equipment)
+"rO" = (
+/obj/machinery/airalarm/directional/east,
 /turf/open/floor/plating,
-/area/mine/volkova/entrance)
+/area/mine/volkova/maintenance)
 "sD" = (
 /obj/machinery/suit_storage_unit/mining,
 /obj/effect/turf_decal/delivery,
@@ -442,10 +469,10 @@
 	},
 /turf/open/floor/iron/dark/side,
 /area/mine/volkova/meeting_room)
-"tB" = (
-/obj/structure/table/wood,
-/turf/open/floor/wood,
-/area/mine/volkova/eastern_hallway)
+"tz" = (
+/obj/machinery/power/apc/auto_name/directional/west,
+/turf/open/floor/iron/checker/other,
+/area/mine/volkova/kitchen)
 "tD" = (
 /turf/open/floor/iron/dark/side{
 	dir = 8
@@ -459,15 +486,11 @@
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
-/area/mine/volkova/equipment)
+/area/mine/volkova/meeting_room)
 "uf" = (
 /obj/machinery/power/apc/auto_name/directional/east,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
-"uw" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/mine/volkova/dorms)
 "uB" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -26
@@ -485,18 +508,14 @@
 	dir = 8
 	},
 /area/mine/volkova/equipment)
-"vd" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/western_hallway)
 "ve" = (
 /obj/structure/closet/secure_closet/lethalshots,
-/obj/item/ammo_box/magazine/m10mm,
-/obj/item/ammo_box/magazine/m10mm,
 /obj/item/ammo_box/magazine/m10mm,
 /obj/item/ammo_box/magazine/m10mm,
 /obj/item/ammo_box/magazine/m10mm/ap,
 /obj/item/ammo_box/magazine/m10mm/ap,
 /obj/machinery/light/small/directional/west,
+/obj/item/ammo_box/a762,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "vs" = (
@@ -509,6 +528,10 @@
 	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
+"vK" = (
+/obj/structure/lattice/catwalk,
+/turf/open/lava/smooth/lava_land_surface,
+/area/template_noop)
 "vR" = (
 /obj/machinery/button/door{
 	id = "miningdorm3";
@@ -523,11 +546,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
-"vT" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/railing,
-/turf/open/lava/smooth/lava_land_surface,
-/area/template_noop)
 "wj" = (
 /obj/structure/chair/fancy/sofa/corp{
 	dir = 4
@@ -548,6 +566,14 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
+"wT" = (
+/turf/open/floor/iron/dark/side{
+	dir = 1
+	},
+/area/mine/volkova/equipment)
+"wY" = (
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "xb" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/wood,
@@ -558,10 +584,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
-"xq" = (
-/obj/machinery/power/apc/auto_name/directional/east,
-/turf/open/floor/iron/tech,
-/area/mine/volkova/western_hallway)
 "xy" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/iron/tech,
@@ -589,9 +611,10 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
 /area/mine/volkova/maintenance)
-"yD" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/entrance)
+"yT" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/mine/volkova/dorms)
 "ze" = (
 /obj/structure/frame/computer{
 	anchored = 1;
@@ -602,14 +625,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
-"zf" = (
-/obj/structure/lattice/catwalk,
-/obj/machinery/power/rtg,
-/obj/structure/railing{
-	dir = 10
-	},
-/turf/open/lava/smooth/lava_land_surface,
-/area/template_noop)
 "zh" = (
 /obj/machinery/light/small,
 /turf/open/floor/iron/grid,
@@ -652,6 +667,14 @@
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"AS" = (
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/stripes/closeup,
+/obj/effect/turf_decal/caution/stand_clear{
+	dir = 1
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "BF" = (
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 9
@@ -661,10 +684,6 @@
 	},
 /turf/open/floor/carpet/blue,
 /area/mine/volkova/dorms)
-"BI" = (
-/obj/machinery/airalarm/directional/east,
-/turf/open/floor/plating,
-/area/mine/volkova/maintenance)
 "BL" = (
 /obj/effect/turf_decal/stripes/closeup,
 /obj/machinery/door/airlock,
@@ -687,6 +706,9 @@
 /obj/structure/curtain,
 /turf/open/floor/iron/grid,
 /area/mine/volkova/equipment)
+"Cw" = (
+/turf/closed/wall,
+/area/mine/volkova/maintenance)
 "Cz" = (
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/iron/tech,
@@ -760,6 +782,9 @@
 /obj/structure/barricade/sandbags,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"Et" = (
+/turf/closed/wall,
+/area/mine/volkova/kitchen)
 "Ez" = (
 /obj/machinery/mech_bay_recharge_port,
 /turf/open/floor/iron,
@@ -779,14 +804,6 @@
 /area/mine/volkova/meeting_room)
 "EY" = (
 /turf/open/floor/plating/lavaland,
-/area/template_noop)
-"Fj" = (
-/obj/structure/lattice/catwalk,
-/obj/machinery/power/rtg,
-/obj/structure/railing{
-	dir = 8
-	},
-/turf/open/lava/smooth/lava_land_surface,
 /area/template_noop)
 "Fl" = (
 /obj/effect/turf_decal/stripes/line{
@@ -810,19 +827,10 @@
 	dir = 1
 	},
 /area/mine/volkova/equipment)
-"Gl" = (
-/obj/machinery/door/firedoor,
-/obj/effect/turf_decal/stripes/closeup,
-/obj/effect/turf_decal/caution/stand_clear,
-/turf/open/floor/iron/tech,
-/area/mine/volkova/dorms)
 "Gm" = (
 /obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
-"Gt" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/kitchen)
 "GA" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/armor/bulletproof,
@@ -846,14 +854,13 @@
 /obj/machinery/light/small,
 /turf/open/floor/carpet/purple,
 /area/mine/volkova/dorms)
-"Hu" = (
-/obj/machinery/power/apc/auto_name/directional/west,
-/turf/open/floor/iron/tech,
-/area/mine/volkova/dorms)
 "Hz" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron/dark/side,
 /area/mine/volkova/meeting_room)
+"HG" = (
+/turf/open/floor/iron/dark,
+/area/mine/volkova/armoury)
 "HW" = (
 /obj/structure/fence,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
@@ -877,9 +884,6 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
-"Iy" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/meeting_room)
 "IY" = (
 /obj/structure/chair/fancy/comfy{
 	buildstackamount = 0;
@@ -888,6 +892,9 @@
 	},
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
+"Jr" = (
+/turf/closed/wall,
+/area/mine/volkova/equipment)
 "Jt" = (
 /obj/effect/turf_decal/loading_area{
 	dir = 8
@@ -897,11 +904,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/entrance)
-"JI" = (
-/obj/machinery/power/apc/auto_name/directional/east,
-/obj/machinery/power/port_gen/pacman,
-/turf/open/floor/plating,
-/area/mine/volkova/maintenance)
 "JP" = (
 /obj/machinery/computer/mech_bay_power_console,
 /turf/open/floor/iron,
@@ -929,6 +931,9 @@
 	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
+"KQ" = (
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "KY" = (
 /obj/structure/table,
 /obj/machinery/reagentgrinder,
@@ -949,6 +954,9 @@
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"LH" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/entrance)
 "LY" = (
 /obj/structure/chair/office/light,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
@@ -957,6 +965,9 @@
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
+"Ml" = (
+/turf/closed/wall,
+/area/mine/volkova/armoury)
 "Mn" = (
 /obj/machinery/airalarm/directional/south,
 /turf/open/floor/iron/tech,
@@ -975,9 +986,6 @@
 /obj/effect/landmark/start/volkova_miner,
 /turf/open/floor/carpet/blue,
 /area/mine/volkova/dorms)
-"NH" = (
-/turf/closed/wall/r_wall,
-/area/mine/volkova/medical)
 "NK" = (
 /obj/structure/chair/fancy/corp,
 /obj/effect/landmark/start/volkova_director,
@@ -999,17 +1007,22 @@
 	},
 /turf/open/floor/iron/techmaint,
 /area/mine/volkova/dorms)
+"NU" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/power/rtg,
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/lava/smooth/lava_land_surface,
+/area/template_noop)
 "NY" = (
 /obj/structure/closet/secure_closet/miner,
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron/dark/corner,
 /area/mine/volkova/equipment)
-"Ph" = (
-/obj/structure/railing{
-	dir = 10
-	},
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/template_noop)
+"Po" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/western_hallway)
 "Pp" = (
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/carpet/black,
@@ -1018,13 +1031,6 @@
 /turf/open/space/basic,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
-"PL" = (
-/turf/closed/wall,
-/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
-/area/mine/volkova/kitchen)
-"Qf" = (
-/turf/closed/wall,
-/area/mine/volkova/kitchen)
 "Qq" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1077,10 +1083,6 @@
 	},
 /turf/open/floor/plating,
 /area/mine/volkova/directors_office)
-"RK" = (
-/obj/structure/lattice/catwalk,
-/turf/open/lava/smooth/lava_land_surface,
-/area/template_noop)
 "RU" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/reagent_containers/blood,
@@ -1118,19 +1120,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/meeting_room)
-"Ss" = (
+"SQ" = (
 /turf/closed/wall/r_wall,
-/area/mine/volkova/eastern_hallway)
-"SI" = (
-/turf/closed/wall,
-/area/mine/volkova/equipment)
+/area/mine/volkova/kitchen)
 "Tb" = (
 /obj/structure/barricade/sandbags,
 /obj/machinery/door/poddoor/shutters/window,
 /turf/open/floor/iron/tech,
-/area/mine/volkova/armoury)
-"Tr" = (
-/turf/closed/wall,
 /area/mine/volkova/armoury)
 "TM" = (
 /obj/structure/closet/secure_closet/personal,
@@ -1143,6 +1139,16 @@
 	},
 /turf/open/floor/iron/tech/grid,
 /area/mine/volkova/western_hallway)
+"TV" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/template_noop)
+"Ut" = (
+/turf/closed/wall,
+/turf/open/floor/plating/asteroid/basalt/lava_land_surface,
+/area/mine/volkova/kitchen)
 "UT" = (
 /obj/structure/chair/fancy/sofa/corp/right{
 	dir = 4
@@ -1166,12 +1172,6 @@
 	},
 /turf/open/floor/plating,
 /area/mine/volkova/directors_office)
-"Vf" = (
-/turf/open/floor/iron/techmaint,
-/area/mine/volkova/western_hallway)
-"Vg" = (
-/turf/open/floor/iron/dark,
-/area/mine/volkova/armoury)
 "Vk" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
@@ -1195,10 +1195,6 @@
 /obj/effect/spawner/lootdrop/maintenance,
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
-"VM" = (
-/obj/machinery/door/airlock/maintenance_hatch,
-/turf/open/floor/plating,
-/area/mine/volkova/kitchen)
 "VZ" = (
 /obj/structure/fence{
 	dir = 4
@@ -1233,6 +1229,10 @@
 /obj/effect/landmark/start/volkova_miner,
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
+"Xq" = (
+/obj/machinery/door/airlock/maintenance_hatch,
+/turf/open/floor/plating,
+/area/mine/volkova/kitchen)
 "Xv" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/double/brown,
@@ -1241,9 +1241,6 @@
 "Xz" = (
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
-"Yj" = (
-/turf/open/floor/iron/tech,
-/area/mine/volkova/dorms)
 "Ys" = (
 /obj/effect/turf_decal/alphabet/letter_l/quarter{
 	dir = 8
@@ -1253,6 +1250,9 @@
 	},
 /turf/open/floor/iron/tech/grid,
 /area/mine/volkova/western_hallway)
+"YA" = (
+/turf/closed/wall/r_wall,
+/area/mine/volkova/armoury)
 "YH" = (
 /obj/structure/table,
 /turf/open/floor/iron/dark,
@@ -1288,14 +1288,14 @@
 Xz
 Xz
 Xz
-er
-er
-er
-er
-bu
-bu
-er
-er
+Cw
+Cw
+Cw
+Cw
+pD
+pD
+Cw
+Cw
 Xz
 qp
 qp
@@ -1322,14 +1322,14 @@ Rf
 Ej
 HW
 HW
-er
+Cw
 cU
 cU
-BI
+rO
 cU
 cU
 cU
-er
+Cw
 qp
 qp
 qp
@@ -1356,20 +1356,20 @@ Rf
 VZ
 Xz
 cL
-er
+Cw
 cU
-er
-er
-er
-er
+Cw
+Cw
+Cw
+Cw
 cU
-er
-Gt
-Gt
-Gt
-Gt
-Gt
-Gt
+Cw
+SQ
+SQ
+SQ
+SQ
+SQ
+SQ
 Xz
 vs
 qp
@@ -1390,20 +1390,20 @@ Rf
 VZ
 Xz
 cL
-bu
+pD
 cU
-er
+Cw
 CN
 yt
-er
+Cw
 cU
 cU
-VM
-gL
+Xq
+tz
 zK
 Lb
 WJ
-Gt
+SQ
 Xz
 vs
 qp
@@ -1424,20 +1424,20 @@ Rf
 nn
 Xz
 Xz
-bu
+pD
 cU
 eb
-JI
+jB
 Eb
-bc
-bc
-bc
-Gt
+rL
+rL
+rL
+SQ
 QP
-rB
-rB
+gL
+gL
 KY
-Gt
+SQ
 Xz
 Xz
 qp
@@ -1458,23 +1458,23 @@ Rf
 VZ
 cL
 cL
-er
+Cw
 cU
-bc
-bc
-bc
-bc
+rL
+rL
+rL
+rL
 Ce
 Ce
-PL
+Ut
 cI
-rB
+gL
 DE
 Zz
-Gt
+SQ
 Xz
 Xz
-Ph
+hn
 qp
 qp
 qp
@@ -1490,29 +1490,29 @@ Rf
 "}
 (7,1,1) = {"
 AL
-er
-er
-er
+Cw
+Cw
+Cw
 cU
-bc
+rL
 NY
 Vt
-SI
+Jr
 JV
 JV
-Qf
-Qf
+Et
+Et
 Di
 uL
 uL
-nN
-nN
-nN
-rN
-Fj
-Fj
-Fj
-zf
+YA
+YA
+YA
+TV
+NU
+NU
+NU
+mY
 qp
 qp
 qp
@@ -1524,29 +1524,29 @@ Rf
 "}
 (8,1,1) = {"
 Xz
-er
+Cw
 cU
 cU
 cU
-bc
+rL
 WL
-ud
+wT
 Cf
 JV
 zh
-SI
-qq
-qq
+Jr
+wY
+wY
 uL
 cw
 ve
 GA
-nN
+YA
 Xz
 Xz
-RK
-RK
-vT
+vK
+vK
+jq
 qp
 qp
 qp
@@ -1558,24 +1558,24 @@ qp
 "}
 (9,1,1) = {"
 Xz
-bu
+pD
 cU
-er
-er
-bc
+Cw
+Cw
+rL
 vb
 FR
-SI
+Jr
 uc
 xK
-SI
+Jr
 om
-qq
+wY
 mK
 uf
-Vg
+HG
 gg
-nN
+YA
 Xz
 Xz
 vs
@@ -1592,24 +1592,24 @@ qp
 "}
 (10,1,1) = {"
 Xz
-er
+Cw
 cU
 cU
 cU
-bc
-SI
+rL
+Jr
 fl
-SI
-SI
-SI
-SI
-qq
-qq
-Tr
-Tr
+Jr
+Jr
+Jr
+Jr
+wY
+wY
+Ml
+Ml
 Tb
 Tb
-nN
+YA
 Xz
 Xz
 Xz
@@ -1625,25 +1625,25 @@ qp
 qp
 "}
 (11,1,1) = {"
-yD
-yD
-yD
-yD
+LH
+LH
+LH
+LH
 cU
-Iy
+eR
 QK
 Qt
 Qt
 aq
 QK
 EI
-qq
-qq
-qq
+wY
+wY
+wY
 Is
-qq
-qq
-vd
+wY
+wY
+Po
 Xz
 Au
 UY
@@ -1662,22 +1662,22 @@ qp
 jK
 lj
 uB
-yD
+LH
 cU
-Iy
+eR
 ti
 YV
 YV
 YV
-cy
+ud
 BL
-qq
-qq
-xq
+wY
+wY
+oj
 pO
-qq
+wY
 Mn
-vd
+Po
 Xz
 Rd
 EY
@@ -1696,22 +1696,22 @@ qp
 jK
 lj
 lj
-yD
+LH
 cU
-Iy
+eR
 Dq
 YH
 YH
 YH
-cy
-qG
-qG
+ud
+bW
+bW
 Rz
-qG
-qG
-qq
+bW
+bW
+wY
 vx
-vd
+Po
 Xz
 Rd
 EY
@@ -1727,24 +1727,24 @@ Fl
 qp
 "}
 (14,1,1) = {"
-yD
+LH
 aV
 aV
-yD
-sb
-Iy
+LH
+kB
+eR
 Hz
 Sf
 Sf
 Sf
-cy
-qG
+ud
+bW
 aW
 nH
 IY
-qG
+bW
 at
-qq
+wY
 du
 Xz
 Rd
@@ -1761,11 +1761,11 @@ Fl
 qp
 "}
 (15,1,1) = {"
-yD
+LH
 Ez
 Vn
-gl
-gl
+dU
+dU
 ll
 QK
 tD
@@ -1777,11 +1777,11 @@ nH
 nH
 Gm
 oW
-qq
+wY
 TN
-vd
-vd
-vd
+Po
+Po
+Po
 EY
 EY
 EY
@@ -1795,26 +1795,26 @@ Fl
 qp
 "}
 (16,1,1) = {"
-yD
+LH
 UV
 Vn
-gl
-gl
+dU
+dU
 EI
 QK
 jJ
-qG
-qG
-qG
-qG
+bW
+bW
+bW
+bW
 qQ
 NK
 Gm
 oW
-qq
+wY
 Af
 jT
-Vf
+pn
 xH
 Kb
 EY
@@ -1829,27 +1829,27 @@ Fl
 qp
 "}
 (17,1,1) = {"
-yD
+LH
 JP
 Dw
 BQ
 Jt
-NH
+nm
 Ai
-po
-qG
+aB
+bW
 GN
 GN
-qG
+bW
 Aj
 nH
 Gm
 oW
-qq
+wY
 Ys
-vd
-vd
-vd
+Po
+Po
+Po
 EY
 EY
 EY
@@ -1863,24 +1863,24 @@ Fl
 qp
 "}
 (18,1,1) = {"
-yD
-yD
+LH
+LH
 fH
 kv
 sD
-NH
+nm
 df
 Fr
-qG
+bW
 Pp
 GN
 nE
 nH
 nH
 mR
-qG
-qq
-qq
+bW
+wY
+wY
 du
 Xz
 Rd
@@ -1898,24 +1898,24 @@ qp
 "}
 (19,1,1) = {"
 Xz
-yD
-yD
-yD
-yD
-NH
+LH
+LH
+LH
+LH
+nm
 kY
 Dl
-qG
+bW
 Rk
 Xv
-qG
-qG
+bW
+bW
 Vb
-qG
-qG
+bW
+bW
 wI
 pk
-vd
+Po
 Xz
 Rd
 EY
@@ -1935,21 +1935,21 @@ Xz
 qp
 qp
 qp
-NH
+nm
 RU
 xj
 ry
-qG
-qG
-qG
-qG
+bW
+bW
+bW
+bW
 WE
 wj
 UT
 xb
-dj
+qq
 xy
-Ss
+bO
 Xz
 Rd
 EY
@@ -1969,21 +1969,21 @@ ys
 qp
 qp
 qp
-NH
+nm
 LY
 DS
 ak
 py
 ze
-po
+aB
 gd
 Rq
-pY
-pY
+lY
+lY
 xb
 en
-dj
-Ss
+qq
+bO
 Xz
 nP
 sF
@@ -2003,29 +2003,29 @@ ys
 qp
 qp
 qp
-NH
+nm
 DH
 QE
 Ih
 kz
 Nx
-po
+aB
 fQ
-pY
-pY
-pY
-pY
+lY
+lY
+lY
+lY
 KA
-dj
-Ss
-lU
-lU
-lU
-lU
-lU
-lU
-lU
-lU
+qq
+bO
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
 Xz
 Xz
 qp
@@ -2037,29 +2037,29 @@ ys
 qp
 qp
 qp
-NH
-NH
-NH
-po
+nm
+nm
+nm
+aB
 Ai
-po
-po
+aB
+aB
 Vk
-pY
+lY
 oF
-tB
+io
 xb
 gn
-dj
-dj
-Gl
-Hu
-Yj
+qq
+qq
+cO
+jO
+KQ
 Cz
 oy
-Yj
-Yj
-uw
+KQ
+KQ
+yT
 vs
 qp
 qp
@@ -2073,27 +2073,27 @@ qp
 qp
 Xz
 Xz
-Ss
-dj
-dj
-dj
+bO
+qq
+qq
+qq
 Zc
-dj
-dj
-dj
-dj
-dj
-dj
-dj
-dj
-gh
-Yj
-Yj
-Yj
-Yj
-Yj
-Yj
-uw
+qq
+qq
+qq
+qq
+qq
+qq
+qq
+qq
+AS
+KQ
+KQ
+KQ
+KQ
+KQ
+KQ
+yT
 vs
 qp
 qp
@@ -2107,27 +2107,27 @@ qp
 qp
 Pu
 Pu
-Ss
-dj
-dj
-dj
-ib
+bO
+qq
+qq
+qq
+gh
 wy
 oi
-dj
-dj
-dj
-dj
-dj
-dj
-bW
-bW
+qq
+qq
+qq
+qq
+qq
+qq
+cb
+cb
 mp
-bW
-bW
+cb
+cb
 NT
-lU
-lU
+bc
+bc
 vs
 qp
 qp
@@ -2141,26 +2141,26 @@ qp
 qp
 Pu
 Pu
-Ss
-Ss
-Ss
-Ss
-Ss
-Ss
-Ss
-Ss
-Ss
-Ss
-lU
-bW
+bO
+bO
+bO
+bO
+bO
+bO
+bO
+bO
+bO
+bO
+bc
+cb
 sW
-bW
+cb
 Im
 fY
-bW
+cb
 WS
 EF
-lU
+bc
 Xz
 qp
 qp
@@ -2185,16 +2185,16 @@ Xz
 Xz
 Xz
 Xz
-lU
+bc
 NE
 BF
-bW
+cb
 TM
 GS
-bW
+cb
 iY
 sM
-lU
+bc
 qp
 qp
 qp
@@ -2219,16 +2219,16 @@ Xz
 Xz
 Xz
 Xz
-lU
+bc
 rg
 ie
-bW
+cb
 ZC
 be
-bW
+cb
 VE
 vR
-lU
+bc
 qp
 qp
 qp
@@ -2253,16 +2253,16 @@ Xz
 Xz
 Xz
 Xz
-lU
+bc
 GB
 hp
-lU
-lU
-lU
-lU
-lU
-lU
-lU
+bc
+bc
+bc
+bc
+bc
+bc
+bc
 qp
 qp
 qp
@@ -2287,10 +2287,10 @@ qp
 qp
 qp
 qp
-lU
-lU
-lU
-lU
+bc
+bc
+bc
+bc
 qp
 qp
 qp
