@@ -1117,6 +1117,7 @@
 #include "code\game\area\areas\iceland.dm"
 #include "code\game\area\areas\mining.dm"
 #include "code\game\area\areas\shuttles.dm"
+#include "code\game\area\areas\volkova.dm"
 #include "code\game\area\areas\ruins\_ruins.dm"
 #include "code\game\area\areas\ruins\lavaland.dm"
 #include "code\game\area\areas\ruins\space.dm"

@@ -97,6 +97,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Shaft Miner"
 	icon_state = "Shaft Miner"
 
+/obj/effect/landmark/start/volkova_director
+	name = "Volkova Colony Director"
+	icon_state = "Volkova Colony Miner"
+
+/obj/effect/landmark/start/volkova_miner
+	name = "Volkova Shaft Miner"
+	icon_state = "Volkova Shaft Miner"
+
 /obj/effect/landmark/start/exploration
 	name = "Exploration Crew"
 	icon_state = "Exploration Crew"

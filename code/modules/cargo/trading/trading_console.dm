@@ -23,9 +23,18 @@
 			else
 				contents_list[initial(content.name)] ++
 		listed_crates += list(list(
+			"id" = crate.unique_id,
 			"price" = crate.listed_price,
 			"name" = crate.name,
 			"contents" = contents_list
 		))
-	data["listed_crates"] = listed_cratest
+	data["listed_crates"] = listed_crates
 	return data
+
+/obj/machinery/computer/trading_console/ui_act(action, params)
+	. = ..()
+	if (.)
+		return
+	switch (action)
+		if ("purchase")
+			var/id = text2num(params["id"])

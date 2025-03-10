@@ -1,12 +1,18 @@
 /obj/structure/closet/crate/secure/trading
 	name = "trading crate"
 	desc = "Packages goods up so that they can be sold to other factions."
+	var/unique_id = 0
 	/// Who purchased the crate, null if it hasn't been purchased
 	var/datum/bank_account/purchased_by = null
 	/// Is this crate on the market yet?
 	var/on_market = FALSE
 	/// The price this is listed for
 	var/listed_price
+
+/obj/structure/closet/crate/secure/trading/New(loc, ...)
+	. = ..()
+	var/static/crate_count = 0
+	unique_id = ++crate_count
 
 /obj/structure/closet/crate/secure/trading/Destroy()
 	SSeconomy.active_trades -= src
@@ -29,7 +35,7 @@
 	if (on_market)
 		SSeconomy.active_trades -= src
 		on_market = FALSE
-	var/result = tgui_input_number(user, "What price would you like to list these items for?", "Set price", max_price = 100000)
+	var/result = tgui_input_number(user, "What price would you like to list these items for?", "Set price", max_value = 100000)
 	if (!result)
 		to_chat(user, span_notice("You decide not to list the crate on the market."))
 		return
