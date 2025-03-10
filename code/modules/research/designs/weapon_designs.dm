@@ -2,94 +2,6 @@
 /////////////////Weapons/////////////////
 /////////////////////////////////////////
 
-/datum/design/c38/sec
-	id = "sec_38"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c38b/sec
-	id = "sec_38b"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c38_trac
-	name = "Speed Loader (.38 TRAC)"
-	desc = "Designed to quickly reload revolvers. TRAC bullets embed a tracking implant within the target's body."
-	id = "c38_trac"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 20000, /datum/material/silver = 5000, /datum/material/gold = 1000)
-	build_path = /obj/item/ammo_box/c38/trac
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c38_hotshot
-	name = "Speed Loader (.38 Hot Shot)"
-	desc = "Designed to quickly reload revolvers. Hot Shot bullets contain an incendiary payload."
-	id = "c38_hotshot"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 20000, /datum/material/plasma = 5000)
-	build_path = /obj/item/ammo_box/c38/hotshot
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/c38_iceblox
-	name = "Speed Loader (.38 Iceblox)"
-	desc = "Designed to quickly reload revolvers. Iceblox bullets contain a cryogenic payload."
-	id = "c38_iceblox"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 20000, /datum/material/plasma = 5000)
-	build_path = /obj/item/ammo_box/c38/iceblox
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/rubbershot/sec
-	id = "sec_rshot"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/beanbag_slug/sec
-	id = "sec_beanbag_slug"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/shotgun_slug/sec
-	id = "sec_slug"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/buckshot_shell/sec
-	id = "sec_bshot"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/shotgun_dart/sec
-	id = "sec_dart"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/incendiary_slug/sec
-	id = "sec_Islug"
-	build_type = PROTOLATHE
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/breaching_slug/sec
-	name = "Breaching Slug"
-	desc = "A 12 gauge anti-material slug. Great for breaching airlocks and windows with minimal shots."
-	id = "sec_Brslug"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 4000)
-	build_path = /obj/item/ammo_casing/shotgun/breacher
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
 /datum/design/pin_testing
 	name = "Test-Range Firing Pin"
 	desc = "This safety firing pin allows firearms to be operated within proximity to a firing range."
@@ -314,52 +226,6 @@
 
 //WT550 Mags
 
-/datum/design/mag_oldsmg
-	name = "WT-550 Auto Gun Magazine (4.6x30mm)"
-	desc = "A 20 round magazine for the out of date security WT-550 Auto Rifle"
-	id = "mag_oldsmg"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 4000)
-	build_path = /obj/item/ammo_box/magazine/wt550m9
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/mag_oldsmg/rubber
-	name = "WT-550 Rubber Auto Gun Magazine (4.6x30mm Rubber)"
-	desc = "A 20 round magazine for the out of date security WT-550 Auto Rifle"
-	id = "mag_oldsmg_rubber"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 3000)
-	build_path = /obj/item/ammo_box/magazine/wt550m9/rubber
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/mag_oldsmg/ap_mag
-	name = "WT-550 Auto Gun Armour Piercing Magazine (4.6x30mm AP)"
-	desc = "A 20 round armour piercing magazine for the out of date security WT-550 Auto Rifle"
-	id = "mag_oldsmg_ap"
-	materials = list(/datum/material/iron = 6000, /datum/material/silver = 600)
-	build_path = /obj/item/ammo_box/magazine/wt550m9/wtap
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/mag_oldsmg/ic_mag
-	name = "WT-550 Auto Gun Incendiary Magazine (4.6x30mm IC)"
-	desc = "A 20 round armour piercing magazine for the out of date security WT-550 Auto Rifle"
-	id = "mag_oldsmg_ic"
-	materials = list(/datum/material/iron = 6000, /datum/material/silver = 600, /datum/material/glass = 1000)
-	build_path = /obj/item/ammo_box/magazine/wt550m9/wtic
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/stunshell
-	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
-	id = "stunshell"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 200)
-	build_path = /obj/item/ammo_casing/shotgun/stunslug
-	category = list("Ammo")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
 /datum/design/techshell
 	name = "Unloaded Technological Shotshell"
 	desc = "A high-tech shotgun shell which can be loaded with materials to produce unique effects."
@@ -398,16 +264,6 @@
 	materials = list(/datum/material/iron = 5000, /datum/material/glass = 1500, /datum/material/uranium = 1500, /datum/material/silver = 1500)
 	build_path = /obj/item/gun/energy/recharge/ebow/large
 	category = list("Weapons")
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/cryostasis_shotgun_dart
-	name = "Cryostasis Shotgun Dart"
-	desc = "A shotgun dart designed with similar internals to that of a cryostasis beaker, allowing reagents to not react when inside."
-	id = "shotgundartcryostasis"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 3500)
-	build_path = /obj/item/ammo_casing/shotgun/dart/noreact
-	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
 /datum/design/flashbulb
