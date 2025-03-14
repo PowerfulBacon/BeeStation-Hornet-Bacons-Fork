@@ -193,8 +193,10 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
 };
 
 const Department = (props: { department: string } & PropsWithChildren) => {
-  const { children, department: name } = props;
-  const className = `PreferencesMenu__Jobs__departments--${name}`;
+  const { children, department } = props;
+  const name: string = department;
+  const shortName = name.indexOf(' ') !== -1 ? name.substring(0, name.indexOf(' ')) : name;
+  const className = `PreferencesMenu__Jobs__departments--${shortName}`;
 
   return (
     <ServerPreferencesFetcher
@@ -305,11 +307,15 @@ export const JobsPage = () => {
                 <Gap amount={6} />
               </Department>
 
+              <Department department="Medical">
+                <Gap amount={6} />
+              </Department>
               <Department department="Engineering">
                 <Gap amount={6} />
               </Department>
-
-              <Department department="Medical" />
+              <Department department="Science">
+                <Gap amount={6} />
+              </Department>
             </Stack.Item>
 
             <Stack.Item mr={1}>
@@ -324,20 +330,21 @@ export const JobsPage = () => {
               <Department department="Service">
                 <Gap amount={6} />
               </Department>
-
-              <Department department="Cargo" />
+              <Department department="Silicon" />
             </Stack.Item>
 
             <Stack.Item>
-              <Department department="Science">
-                <Gap amount={6} />
-              </Department>
-
               <Department department="Security">
                 <Gap amount={6} />
               </Department>
 
-              <Department department="Silicon" />
+              <Department department="Cargo">
+                <Gap amount={6} />
+              </Department>
+
+              <Department department="Volkova Extraction Group">
+                <Gap amount={6} />
+              </Department>
             </Stack.Item>
           </Stack>
         </Stack.Item>

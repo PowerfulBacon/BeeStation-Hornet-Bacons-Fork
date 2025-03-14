@@ -12,7 +12,12 @@
 		JOB_NAME_BRIGPHYSICIAN,
 		JOB_NAME_GENETICIST,
 		JOB_NAME_PARAMEDIC,
-		JOB_NAME_VIROLOGIST)
+		JOB_NAME_VIROLOGIST,
+		JOB_VOLKOVA_LEADER,
+		JOB_VOLKOVA_MINER)
+	whitelisted_jobs = list(
+		JOB_NAME_SHAFTMINER
+	)
 
 /datum/map_adjustment/echo_station/job_change()
 	change_job_position(JOB_NAME_COOK, 1)

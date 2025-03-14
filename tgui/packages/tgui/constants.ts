@@ -27,6 +27,7 @@ export const COLORS = {
     medbay: '#3498db',
     science: '#9b59b6',
     engineering: '#f1c40f',
+    volkova: '#b1644a',
     cargo: '#f39c12',
     service: '#7cc46a',
     centcom: '#00c100',

@@ -213,6 +213,25 @@ SUBSYSTEM_DEF(department)
 	manifest_category_order = DEPT_MANIFEST_ORDER_SERVICE
 
 // ---------------------------------------------------------------------
+//                                VOLKOVA
+// ---------------------------------------------------------------------
+/datum/department_group/volkova
+	dept_name = DEPT_NAME_VOLKOVA
+	dept_id = DEPT_NAME_VOLKOVA
+	dept_bitflag = DEPT_BITFLAG_VOLKOVA
+	dept_colour = "#b1644a"
+	is_station = TRUE
+
+	leaders = list(JOB_VOLKOVA_LEADER)
+	jobs = list(JOB_VOLKOVA_MINER)
+
+	pref_category_name = DEPT_NAME_VOLKOVA
+	pref_category_order = DEPT_PREF_ORDER_VOLKOVA
+
+	manifest_category_name = DEPT_NAME_VOLKOVA
+	manifest_category_order = DEPT_MANIFEST_ORDER_VOLKOVA
+
+// ---------------------------------------------------------------------
 //                                CIVILIAN
 // ---------------------------------------------------------------------
 /datum/department_group/civilian

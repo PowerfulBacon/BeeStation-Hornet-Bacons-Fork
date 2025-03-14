@@ -17,6 +17,9 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 30
 	},
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "aB" = (
@@ -61,12 +64,22 @@
 "cb" = (
 /turf/closed/wall,
 /area/mine/volkova/dorms)
+"cq" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "cw" = (
 /obj/structure/rack,
 /obj/item/gun/ballistic/shotgun/doublebarrel,
 /obj/item/gun/ballistic/automatic/pistol/m1911,
 /obj/item/gun/ballistic/automatic/pistol/m1911,
 /obj/item/gun/ballistic/rifle/boltaction,
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/dark_red,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "cI" = (
@@ -81,6 +94,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/stripes/closeup,
 /obj/effect/turf_decal/caution/stand_clear,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
 "cU" = (
@@ -92,6 +108,12 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
+"di" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "du" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -106,6 +128,9 @@
 "en" = (
 /obj/effect/turf_decal/tile/cornerrust{
 	dir = 4
+	},
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
 	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
@@ -154,6 +179,12 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -30
 	},
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/dark_red{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "gh" = (
@@ -162,10 +193,16 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
 	},
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "gn" = (
 /obj/effect/turf_decal/tile/dark_green{
+	dir = 1
+	},
+/obj/effect/turf_decal/edges/techfloor{
 	dir = 1
 	},
 /turf/open/floor/iron/tech,
@@ -193,6 +230,12 @@
 	},
 /turf/open/floor/carpet/blue,
 /area/mine/volkova/dorms)
+"hA" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 5
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "ie" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer4{
 	dir = 4
@@ -235,6 +278,9 @@
 /area/mine/volkova/entrance)
 "jO" = (
 /obj/machinery/power/apc/auto_name/directional/west,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
 "jT" = (
@@ -267,7 +313,10 @@
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
 "lj" = (
-/turf/open/floor/iron/techmaint,
+/obj/effect/turf_decal/edges/techfloor_orange{
+	dir = 5
+	},
+/turf/open/floor/iron/tech,
 /area/mine/volkova/entrance)
 "ll" = (
 /obj/effect/turf_decal/stripes/closeup,
@@ -302,6 +351,8 @@
 /area/mine/volkova/dorms)
 "mK" = (
 /obj/machinery/door/airlock/security,
+/obj/effect/turf_decal/stripes/closeup,
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "mR" = (
@@ -334,6 +385,12 @@
 "nH" = (
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
+"nO" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 6
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "nP" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -342,18 +399,30 @@
 /area/template_noop)
 "oi" = (
 /obj/machinery/airalarm/directional/east,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "oj" = (
 /obj/machinery/power/apc/auto_name/directional/east,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "om" = (
 /obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "oy" = (
 /obj/machinery/light/small/directional/west,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
 "oF" = (
@@ -376,6 +445,7 @@
 	dir = 8
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "pn" = (
@@ -406,10 +476,20 @@
 "qq" = (
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
+"qH" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 10
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "qQ" = (
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/wood,
 /area/mine/volkova/directors_office)
+"qU" = (
+/obj/effect/turf_decal/edges/techfloor,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "rg" = (
 /obj/structure/closet/secure_closet/personal,
 /turf/open/floor/carpet/blue,
@@ -421,6 +501,12 @@
 	},
 /turf/open/floor/iron/white,
 /area/mine/volkova/medical)
+"rJ" = (
+/obj/effect/turf_decal/edges/techfloor_orange{
+	dir = 9
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/entrance)
 "rL" = (
 /turf/closed/wall/r_wall,
 /area/mine/volkova/equipment)
@@ -447,6 +533,12 @@
 /obj/machinery/light/small,
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
+"sQ" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "sW" = (
 /obj/machinery/door/airlock{
 	id_tag = "miningdorm1";
@@ -469,6 +561,12 @@
 	},
 /turf/open/floor/iron/dark/side,
 /area/mine/volkova/meeting_room)
+"tm" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 9
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "tz" = (
 /obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/checker/other,
@@ -489,13 +587,22 @@
 /area/mine/volkova/meeting_room)
 "uf" = (
 /obj/machinery/power/apc/auto_name/directional/east,
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/dark_red{
+	dir = 8
+	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "uB" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -26
 	},
-/turf/open/floor/iron/techmaint,
+/obj/effect/turf_decal/edges/techfloor_orange{
+	dir = 10
+	},
+/turf/open/floor/iron/tech,
 /area/mine/volkova/entrance)
 "uL" = (
 /turf/closed/wall,
@@ -516,6 +623,10 @@
 /obj/item/ammo_box/magazine/m10mm/ap,
 /obj/machinery/light/small/directional/west,
 /obj/item/ammo_box/a762,
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/dark_red/half/contrasted,
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "vs" = (
@@ -526,6 +637,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -30
 	},
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "vK" = (
@@ -546,6 +658,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
+"vY" = (
+/obj/effect/turf_decal/edges/techfloor/corners{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "wj" = (
 /obj/structure/chair/fancy/sofa/corp{
 	dir = 4
@@ -554,6 +672,9 @@
 /area/mine/volkova/eastern_hallway)
 "wy" = (
 /obj/machinery/light/small/directional/east,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "wI" = (
@@ -564,14 +685,26 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
+"wR" = (
+/obj/effect/turf_decal/edges/techfloor_orange{
+	dir = 6
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/entrance)
 "wT" = (
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
 /area/mine/volkova/equipment)
 "wY" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "xb" = (
@@ -586,6 +719,7 @@
 /area/mine/volkova/medical)
 "xy" = (
 /obj/machinery/light/small/directional/south,
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "xH" = (
@@ -611,6 +745,12 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
 /area/mine/volkova/maintenance)
+"yE" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "yT" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -643,6 +783,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech/grid,
 /area/mine/volkova/western_hallway)
 "Ai" = (
@@ -673,8 +814,23 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
 	},
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
+"AY" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 9
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
+"Bn" = (
+/obj/effect/turf_decal/edges/techfloor/corners{
+	dir = 4
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "BF" = (
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 9
@@ -711,12 +867,21 @@
 /area/mine/volkova/maintenance)
 "Cz" = (
 /obj/machinery/airalarm/directional/west,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
 "CN" = (
 /obj/machinery/portable_thermomachine,
 /turf/open/floor/plating,
 /area/mine/volkova/maintenance)
+"CU" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "Di" = (
 /obj/effect/turf_decal/stripes/closeup{
 	dir = 1
@@ -802,6 +967,10 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/mine/volkova/meeting_room)
+"ET" = (
+/obj/effect/turf_decal/edges/techfloor,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "EY" = (
 /turf/open/floor/plating/lavaland,
 /area/template_noop)
@@ -837,6 +1006,12 @@
 /obj/item/clothing/suit/armor/bulletproof,
 /obj/item/clothing/suit/armor/bulletproof,
 /obj/machinery/airalarm/directional/south,
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/dark_red{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "GB" = (
@@ -859,12 +1034,24 @@
 /turf/open/floor/iron/dark/side,
 /area/mine/volkova/meeting_room)
 "HG" = (
+/obj/effect/turf_decal/edges/borderfloor/black{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/dark_red/half/contrasted{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/mine/volkova/armoury)
 "HW" = (
 /obj/structure/fence,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"Ib" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 6
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "Ih" = (
 /obj/structure/table,
 /obj/item/storage/firstaid/medical,
@@ -882,6 +1069,9 @@
 /obj/effect/turf_decal/stripes/closeup,
 /obj/effect/turf_decal/caution/stand_clear,
 /obj/machinery/door/firedoor,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
 "IY" = (
@@ -911,6 +1101,12 @@
 "JV" = (
 /turf/open/floor/iron/grid,
 /area/mine/volkova/equipment)
+"Ka" = (
+/obj/effect/turf_decal/edges/techfloor/corners{
+	dir = 1
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "Kb" = (
 /obj/docking_port/stationary{
 	dir = 2;
@@ -929,9 +1125,15 @@
 /obj/effect/turf_decal/tile/cornerrust{
 	dir = 4
 	},
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 1
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "KQ" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 10
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/dorms)
 "KY" = (
@@ -970,8 +1172,15 @@
 /area/mine/volkova/armoury)
 "Mn" = (
 /obj/machinery/airalarm/directional/south,
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech,
 /area/mine/volkova/western_hallway)
+"MM" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 5
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "Nx" = (
 /obj/structure/table/optable{
 	name = "Robotics Operating Table"
@@ -1031,6 +1240,10 @@
 /turf/open/space/basic,
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"PS" = (
+/obj/effect/turf_decal/edges/techfloor/corners,
+/turf/open/floor/iron/tech,
+/area/mine/volkova/eastern_hallway)
 "Qq" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1137,8 +1350,15 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech/grid,
 /area/mine/volkova/western_hallway)
+"TS" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/dorms)
 "TV" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -1195,6 +1415,12 @@
 /obj/effect/spawner/lootdrop/maintenance,
 /turf/open/floor/carpet/red,
 /area/mine/volkova/dorms)
+"VM" = (
+/obj/effect/turf_decal/edges/techfloor/corners{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "VZ" = (
 /obj/structure/fence{
 	dir = 4
@@ -1241,6 +1467,12 @@
 "Xz" = (
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/template_noop)
+"Yr" = (
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 4
+	},
+/turf/open/floor/iron/tech,
+/area/mine/volkova/western_hallway)
 "Ys" = (
 /obj/effect/turf_decal/alphabet/letter_l/quarter{
 	dir = 8
@@ -1248,6 +1480,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
+/obj/effect/turf_decal/edges/techfloor,
 /turf/open/floor/iron/tech/grid,
 /area/mine/volkova/western_hallway)
 "YA" = (
@@ -1269,6 +1502,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/stripes/closeup,
 /obj/effect/turf_decal/caution/stand_clear,
+/obj/effect/turf_decal/edges/techfloor{
+	dir = 8
+	},
 /turf/open/floor/iron/tech,
 /area/mine/volkova/eastern_hallway)
 "Zz" = (
@@ -1535,8 +1771,8 @@ Cf
 JV
 zh
 Jr
-wY
-wY
+tm
+qH
 uL
 cw
 ve
@@ -1570,7 +1806,7 @@ uc
 xK
 Jr
 om
-wY
+ET
 mK
 uf
 HG
@@ -1604,7 +1840,7 @@ Jr
 Jr
 Jr
 wY
-wY
+ET
 Ml
 Ml
 Tb
@@ -1638,11 +1874,11 @@ aq
 QK
 EI
 wY
-wY
-wY
+VM
+di
 Is
-wY
-wY
+di
+qH
 Po
 Xz
 Au
@@ -1660,7 +1896,7 @@ qp
 "}
 (12,1,1) = {"
 jK
-lj
+rJ
 uB
 LH
 cU
@@ -1671,11 +1907,11 @@ YV
 YV
 ud
 BL
-wY
-wY
+hA
+Yr
 oj
 pO
-wY
+Bn
 Mn
 Po
 Xz
@@ -1695,7 +1931,7 @@ qp
 (13,1,1) = {"
 jK
 lj
-lj
+wR
 LH
 cU
 eR
@@ -1744,7 +1980,7 @@ nH
 IY
 bW
 at
-wY
+ET
 du
 Xz
 Rd
@@ -1880,7 +2116,7 @@ nH
 mR
 bW
 wY
-wY
+ET
 du
 Xz
 Rd
@@ -1947,7 +2183,7 @@ WE
 wj
 UT
 xb
-qq
+CU
 xy
 bO
 Xz
@@ -1982,7 +2218,7 @@ lY
 lY
 xb
 en
-qq
+qU
 bO
 Xz
 nP
@@ -2016,7 +2252,7 @@ lY
 lY
 lY
 KA
-qq
+qU
 bO
 bc
 bc
@@ -2050,14 +2286,14 @@ oF
 io
 xb
 gn
-qq
-qq
+vY
+yE
 cO
 jO
-KQ
+TS
 Cz
 oy
-KQ
+TS
 KQ
 yT
 vs
@@ -2074,25 +2310,25 @@ qp
 Xz
 Xz
 bO
-qq
-qq
-qq
+AY
+yE
+yE
 Zc
+yE
+yE
+yE
+yE
+yE
+Ka
 qq
-qq
-qq
-qq
-qq
-qq
-qq
-qq
+PS
 AS
-KQ
-KQ
-KQ
-KQ
-KQ
-KQ
+sQ
+sQ
+sQ
+sQ
+sQ
+nO
 yT
 vs
 qp
@@ -2108,18 +2344,18 @@ qp
 Pu
 Pu
 bO
-qq
-qq
-qq
+MM
+cq
+cq
 gh
 wy
 oi
-qq
-qq
-qq
-qq
-qq
-qq
+cq
+cq
+cq
+cq
+cq
+Ib
 cb
 cb
 mp

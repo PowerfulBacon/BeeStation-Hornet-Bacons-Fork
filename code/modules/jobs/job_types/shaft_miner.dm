@@ -23,6 +23,8 @@
 	display_order = JOB_DISPLAY_ORDER_SHAFT_MINER
 	rpg_title = "Adventurer"
 
+	lock_flags = JOB_LOCK_REASON_MAP
+
 	species_outfits = list(
 		SPECIES_PLASMAMAN = /datum/outfit/plasmaman/shaft_miner
 	)
