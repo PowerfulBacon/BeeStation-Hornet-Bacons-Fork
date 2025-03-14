@@ -469,6 +469,7 @@
 //Plain
 /obj/effect/turf_decal/edges/borderfloor
 	icon_state = "borderfloor"
+	layer = TURF_DECAL_LOWER_LAYER
 
 /obj/effect/turf_decal/edges/borderfloor/corner1
 	icon_state = "borderfloorcorner"
@@ -521,12 +522,14 @@
 
 /obj/effect/turf_decal/edges/techfloor
 	icon_state = "techfloor_edges"
+	layer = TURF_DECAL_LOWER_LAYER
 
 /obj/effect/turf_decal/edges/techfloor/corners
 	icon_state = "techfloor_corners"
 
 /obj/effect/turf_decal/edges/techfloor_orange
 	icon_state = "techfloororange_edges"
+	layer = TURF_DECAL_LOWER_LAYER
 
 /obj/effect/turf_decal/edges/techfloor_orange/corners
 	icon_state = "techfloororange_corners"

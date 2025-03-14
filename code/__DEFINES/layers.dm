@@ -14,6 +14,7 @@
 
 #define TURF_DECAL_LOWEST_LAYER 2.031
 #define TURF_PLATING_DECAL_LAYER 2.031
+#define TURF_DECAL_LOWER_LAYER 2.0389
 #define TURF_DECAL_LAYER 2.039 //Makes turf decals appear in DM how they will look inworld.
 #define TURF_DECAL_STRIPE_LAYER 2.0391
 #define ABOVE_OPEN_TURF_LAYER 2.04
