@@ -61,7 +61,7 @@
 
 	var/outfit = null
 
-	/// Minutes of experience-time required to play in this job. 
+	/// Minutes of experience-time required to play in this job.
 	var/exp_requirements = 0
 	/// Experience required to play this job
 	var/exp_type = ""
@@ -129,6 +129,8 @@
 		lock_flags |= JOB_LOCK_REASON_CONFIG
 	if(SSmapping.map_adjustment && (title in SSmapping.map_adjustment.blacklisted_jobs))
 		lock_flags |= JOB_LOCK_REASON_MAP
+	if (SSmapping.map_adjustment && (title in SSmapping.map_adjustment.whitelisted_jobs))
+		lock_flags &= ~JOB_LOCK_REASON_MAP
 	if(lock_flags || gimmick)
 		SSjob.job_manager_blacklisted |= title
 

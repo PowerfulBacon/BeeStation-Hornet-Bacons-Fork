@@ -20,6 +20,8 @@
 	var/map_file_name = "some_station_map.dmm" // change yourself
 	/// Jobs that this station map won't use
 	var/list/blacklisted_jobs
+	/// Jobs that this station map will use
+	var/list/whitelisted_jobs
 
 /// called on map config is loaded.
 /// You need to change things manually here.

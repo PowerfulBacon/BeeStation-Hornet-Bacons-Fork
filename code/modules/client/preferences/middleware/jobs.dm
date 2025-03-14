@@ -25,9 +25,6 @@
 	if(job.lock_flags)
 		return FALSE
 
-	if (job.faction != "Station")
-		return FALSE
-
 	if (!preferences.set_job_preference_level(job, level))
 		return FALSE
 
