@@ -217,20 +217,6 @@
 		/obj/item/reagent_containers/hypospray/medipen/pumpup = 1,
 	)
 
-//EXPLORATION CREW
-//Slightly more powerful due to the rarity of them ever actually getting a chance to get their mail.
-/datum/job/exploration_crew
-	mail_goodies = list(
-		/obj/item/tank/internals/emergency_oxygen/engi = 20,
-		/obj/item/storage/box/minertracker = 15,
-		/obj/item/stack/sheet/mineral/plasma/five = 15,
-		/obj/item/reagent_containers/hypospray/medipen/survival = 10,
-		/obj/item/mining_voucher/exploration = 7,
-		/obj/item/stack/marker_beacon/thirty = 5,
-		/obj/item/extraction_pack = 5,
-		/obj/item/gps/mining/exploration = 5,
-	)
-
 //GENETICIST
 /datum/job/geneticist
 	mail_goodies = list(
