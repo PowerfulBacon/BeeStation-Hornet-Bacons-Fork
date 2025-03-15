@@ -1,0 +1,10 @@
+#define SKILL_MINMUM 1
+#define SKILL_MAXIMUM 20
+
+#define SKILL_POINTS 35
+#define DEFAULT_SKILL 5
+
+#define CRITICAL_FAILURE 1
+#define FAILURE 2
+#define SUCCESS 3
+#define CRITICAL_SUCCESS 4

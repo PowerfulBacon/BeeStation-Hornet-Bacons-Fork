@@ -20,14 +20,13 @@
 	//Holder for the displacement appearance, related to species height
 	var/icon/height_displacement
 	/// Character stats derived from DNA.
-	var/datum/character_stats/dna/dna_stats
+	var/datum/character_skills/dna/dna_stats
 
 /datum/dna/New(mob/living/new_holder)
 	if(istype(new_holder))
 		holder = new_holder
 	height_displacement = icon('icons/effects/64x64.dmi', "height_displacement")
 	dna_stats = new()
-	dna_stats.randomise_stats()
 
 /datum/dna/Destroy()
 	if(iscarbon(holder))

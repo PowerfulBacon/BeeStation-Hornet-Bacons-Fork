@@ -89,7 +89,7 @@
 	var/soul_glimmer
 
 	/// Stats that transfer along with the mind
-	var/datum/character_stats/mind/mind_stats
+	var/datum/character_skills/mind/mind_stats
 
 /datum/mind/New(var/key)
 	src.key = key

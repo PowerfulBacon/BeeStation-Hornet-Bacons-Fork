@@ -24,10 +24,14 @@
 		// it prevents 'GLOB.poi_list' being glitched. without this, it will show xeno(or some mobs) twice in orbit panel.
 	//color correction
 	RegisterSignal(src, COMSIG_MOVABLE_ENTERED_AREA, PROC_REF(apply_color_correction))
+	setup_skills()
 
 /mob/living/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/movetype_handler)
+
+/mob/living/proc/setup_skills()
+	skills = new /datum/character_skills(src)
 
 /mob/living/prepare_huds()
 	..()
