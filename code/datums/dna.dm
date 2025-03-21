@@ -19,14 +19,11 @@
 	var/current_body_size = BODY_SIZE_NORMAL
 	//Holder for the displacement appearance, related to species height
 	var/icon/height_displacement
-	/// Character stats derived from DNA.
-	var/datum/character_skills/dna/dna_stats
 
 /datum/dna/New(mob/living/new_holder)
 	if(istype(new_holder))
 		holder = new_holder
 	height_displacement = icon('icons/effects/64x64.dmi', "height_displacement")
-	dna_stats = new()
 
 /datum/dna/Destroy()
 	if(iscarbon(holder))
@@ -56,7 +53,7 @@
 	destination.dna.features = features.Copy()
 	destination.dna.real_name = real_name
 	destination.dna.temporary_mutations = temporary_mutations.Copy()
-	destination.dna.dna_stats = dna_stats.copy()
+	holder.skills.copy_dna_stats_to(destination)
 	if(transfer_SE)
 		destination.dna.mutation_index = mutation_index
 		destination.dna.default_mutation_genes = default_mutation_genes
@@ -75,7 +72,7 @@
 	new_dna.real_name = real_name
 	new_dna.update_body_size() //Must come after features.Copy()
 	new_dna.mutations = mutations.Copy()
-	new_dna.dna_stats = dna_stats.copy()
+	holder.skills.copy_dna_stats_to(new_dna.holder)
 
 /datum/dna/proc/compare_dna(datum/dna/other)
 	if (!other)
