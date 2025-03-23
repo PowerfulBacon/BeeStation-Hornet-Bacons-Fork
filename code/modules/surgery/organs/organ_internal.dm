@@ -108,7 +108,13 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/proc/on_death(delta_time = 2)	//runs decay when outside of a person
 	if(organ_flags & (ORGAN_SYNTHETIC | ORGAN_FROZEN))
 		return
-	applyOrganDamage(maxHealth * decay_factor * 0.5 * delta_time)
+	var/decay_rate = 1
+	if (!owner)
+		decay_rate = 2
+	else
+		// Super damaged bodies decay much faster
+		decay_rate *= min(0, max(1, (owner.getBruteLoss() + owner.getFireLoss() - 100) / 100))
+	applyOrganDamage(maxHealth * decay_factor * 0.5 * delta_time * decay_rate)
 
 /obj/item/organ/proc/on_life()	//repair organ damage if the organ is not failing
 	if(organ_flags & ORGAN_FAILING)
