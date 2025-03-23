@@ -48,7 +48,6 @@
 	var/datum/job/assigned_role
 	var/special_role
 	var/list/restricted_roles = list()
-	var/linglink
 	/// Martial art on this mind
 	var/datum/martial_art/martial_art = null
 	var/static/default_martial_art = new/datum/martial_art
@@ -57,12 +56,14 @@
 	var/list/antag_datums
 	var/antag_hud_icon_state = null //this mind's ANTAG_HUD should have this icon_state
 	var/datum/atom_hud/antag/antag_hud = null //this mind's antag HUD
-	var/damnation_type = 0
 	var/datum/mind/soulOwner //who owns the soul.  Under normal circumstances, this will point to src
+	/// The prime mind. During cloning of scanning, we follow this chain to find who
+	/// is the person that controls the mind. The priority for prime minds is given to
+	/// the most recently created, living mind
+	var/datum/mind/prime
 	var/hasSoul = TRUE // If false, renders the character unable to sell their soul.
 	var/holy_role = NONE //is this person a chaplain or admin role allowed to use bibles, Any rank besides 'NONE' allows for this.
 	var/isAntagTarget = FALSE
-	var/no_cloning_at_all = FALSE
 
 	var/datum/mind/enslaved_to //If this mind's master is another mob (i.e. adamantine golems)
 	var/unconvertable = FALSE
@@ -116,6 +117,55 @@
 /datum/mind/proc/clear_current(datum/source)
 	SIGNAL_HANDLER
 	set_current(null)
+
+/// Create a copy of the mind for a new player to take over a duplicate
+/datum/mind/proc/create_copy(mob/living/carbon/human/body, key)
+	RETURN_TYPE(/datum/mind)
+	var/datum/mind/mind_copy = new()
+	mind_copy.name = name
+	mind_copy.ghostname = ghostname
+	mind_copy.memory = memory
+	for (var/datum/quirk/quirk in quirks)
+		mind_copy.quirks += new quirk.type(mind_copy, body, TRUE)
+	// Note that this copies the reference, but jobs are singletons
+	mind_copy.assigned_role = assigned_role
+	mind_copy.special_role = special_role
+	mind_copy.restricted_roles = restricted_roles
+	if (martial_art)
+		mind_copy.martial_art = new martial_art.type()
+	mind_copy.miming = miming
+	mind_copy.hellbound = hellbound
+	// Hard part: copying antag datums
+	// Since some antagonists have side effects such as granting items
+	// on spawn and teleporting the owner, we use a special antag datum
+	// type which looks like the original and copies it's objectives
+	// but isn't actually the antag datum.
+	// Some antagonists are special and we want this copying behaviour,
+	// such as for changelings, so it is up to the antag datum to deal
+	// with copying on a case-by-case basis.
+	for (var/datum/antagonist/antag in antag_datums)
+		mind_copy.add_antag_datum(antag.create_copy())
+	mind_copy.soulOwner = soulOwner == src ? mind_copy : soulOwner
+	// Transfer the prime status to the copy
+	mind_copy.prime = src
+	prime = mind_copy
+	mind_copy.hasSoul = hasSoul
+	mind_copy.holy_role = holy_role
+	mind_copy.isAntagTarget = isAntagTarget
+	mind_copy.enslaved_to = enslaved_to
+	mind_copy.unconvertable = unconvertable
+	mind_copy.late_joiner = TRUE
+	mind_copy.last_death = last_death
+	mind_copy.force_escaped = force_escaped
+	mind_copy.learned_recipes = learned_recipes.Copy()
+	mind_copy.crew_objectives = crew_objectives.Copy()
+	mind_copy.account_id = account_id
+	mind_copy.soul_glimmer = soul_glimmer
+	mind_copy.key = key
+	if (current)
+		current.get_language_holder().transfer_mind_languages(body.get_language_holder())
+	mind_copy.transfer_to(body)
+	return mind_copy
 
 /datum/mind/proc/transfer_to(mob/new_character, var/force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable
@@ -491,10 +541,10 @@
 
 		if(href_list["obj_edit"])
 			for(var/datum/antagonist/A in antag_datums)
-				old_objective = locate(href_list["obj_edit"]) in A.objectives
+				old_objective = locate(href_list["obj_edit"]) in A.get_objectives()
 				if(old_objective)
 					target_antag = A
-					objective_pos = A.objectives.Find(old_objective)
+					objective_pos = A.get_objectives().Find(old_objective)
 					break
 			if(!old_objective)
 				to_chat(usr,"Invalid objective.")
@@ -536,7 +586,7 @@
 			new_objective = new selected_type
 			new_objective.owner = src
 			new_objective.admin_edit(usr)
-			target_antag.objectives += new_objective
+			target_antag.add_objective(new_objective)
 			message_admins("[key_name_admin(usr)] added a new objective for [current]: [new_objective.explanation_text]")
 			log_admin("[key_name(usr)] added a new objective for [current]: [new_objective.explanation_text]")
 			log_objective(new_objective.owner, new_objective.explanation_text, usr)
@@ -550,17 +600,17 @@
 				new_objective = new selected_type
 				new_objective.owner = src
 				new_objective.admin_edit(usr)
-				target_antag.objectives -= old_objective
-				target_antag.objectives.Insert(objective_pos, new_objective)
+				target_antag.remove_objective(old_objective)
+				target_antag.insert_objective(objective_pos, new_objective)
 			message_admins("[key_name_admin(usr)] edited [current]'s objective to [new_objective.explanation_text]")
 			log_admin("[key_name(usr)] edited [current]'s objective to [new_objective.explanation_text]")
 
 	else if (href_list["obj_delete"])
 		var/datum/objective/objective
 		for(var/datum/antagonist/A in antag_datums)
-			objective = locate(href_list["obj_delete"]) in A.objectives
+			objective = locate(href_list["obj_delete"]) in A.get_objectives()
 			if(istype(objective))
-				A.objectives -= objective
+				A.remove_objective(objective)
 				break
 		if(!objective)
 			to_chat(usr,"Invalid objective.")
@@ -572,7 +622,7 @@
 	else if(href_list["obj_completed"])
 		var/datum/objective/objective
 		for(var/datum/antagonist/A in antag_datums)
-			objective = locate(href_list["obj_completed"]) in A.objectives
+			objective = locate(href_list["obj_completed"]) in A.get_objectives()
 			if(istype(objective))
 				objective = objective
 				break
@@ -636,7 +686,7 @@
 /datum/mind/proc/get_all_antag_objectives()
 	var/list/antag_objectives = list()
 	for(var/datum/antagonist/A in antag_datums)
-		antag_objectives |= A.objectives
+		antag_objectives |= A.get_objectives()
 		var/datum/team/team = A.get_team()
 		if(team)
 			antag_objectives |= team.objectives
@@ -750,7 +800,7 @@
 
 /datum/mind/proc/has_objective(objective_type)
 	for(var/datum/antagonist/A in antag_datums)
-		for(var/O in A.objectives)
+		for(var/O in A.get_objectives())
 			if(istype(O,objective_type))
 				return TRUE
 
