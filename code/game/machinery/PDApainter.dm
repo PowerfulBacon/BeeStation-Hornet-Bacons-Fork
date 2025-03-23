@@ -43,7 +43,7 @@
 		"Medical: Chemist" = "pda-chemistry",
 		"Medical: Paramedic" = "pda-paramedical",
 		"Medical: Geneticist" = "pda-genetics",
-		"Medical: Virologist" = "pda-virology",
+		"Medical: Surgeon" = "pda-surgeon",
 		"Security (Standard)" = "pda-security",
 		"Security: Head of Security" = "pda-hos",
 		"Security: Warden" = "pda-warden",
