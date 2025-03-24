@@ -256,6 +256,7 @@
 		// Create a copy of the mind
 		// They share the same everything, including objectives but importantly they are not
 		// a team antagonist.
+		clonemind = clonemind.create_copy(H, H.key)
 	else
 		//everything should be perfect to none
 		clonemind.transfer_to(H)

@@ -427,11 +427,13 @@ GLOBAL_LIST(admin_antag_list)
 	objectives += objective
 	for (var/datum/antagonist/copy in copy_instances)
 		copy.add_objective(objective)
+	log_objective(owner, objective.explanation_text)
 
 /datum/antagonist/proc/insert_objective(index, datum/objective/objective)
 	objectives.Insert(index, objective)
 	for (var/datum/antagonist/copy in copy_instances)
 		copy.insert_objective(index, objective)
+	log_objective(owner, objective.explanation_text)
 
 /datum/antagonist/proc/remove_objective(datum/objective/objective)
 	objectives -= objective
