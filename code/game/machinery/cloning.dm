@@ -180,9 +180,8 @@
 		. = (100 * ((mob_occupant.health + 100) / (heal_level + 100)))
 
 //Start growing a human clone in the pod!
-/obj/machinery/clonepod/proc/growclone(clonename, ui, mutation_index, given_mind, datum/species/mrace, list/features, factions, datum/bank_account/insurance, list/traumas)
+/obj/machinery/clonepod/proc/growclone(clonename, ui, mutation_index, datum/mind/given_mind, datum/species/mrace, list/features, factions, datum/bank_account/insurance, list/traumas)
 	var/result = CLONING_SUCCESS
-
 
 	if(!reagents.has_reagent(/datum/reagent/medicine/synthflesh, fleshamnt))
 		connected_message("Cannot start cloning: Not enough synthflesh.")
@@ -192,7 +191,8 @@
 	if(mess || attempting)
 		return ERROR_MESS_OR_ATTEMPTING
 
-	clonemind = given_mind
+	// Get the person we are actually going to revive
+	clonemind = given_mind?.locate_prime_for_revival()
 
 	// Should we produce a new prime clone?
 	var/new_clone = clonemind.current.stat != DEAD
@@ -253,6 +253,15 @@
 	if(new_clone)
 		//mind is associated with a non-dead body, grab a ghost
 		offer_to_ghost(H)
+		if (!H.key)
+			connected_message("Clone Ejected: Automated neurological checks for the cloned body failed, integrity of the clone could not be assured.")
+			if(internal_radio)
+				SPEAK("The cloning of [H.real_name] has been aborted due to automated neuroactivity assertions failing.")
+			set_occupant(null)
+			qdel(H)
+			countdown.stop()
+			attempting = FALSE
+			return
 		// Create a copy of the mind
 		// They share the same everything, including objectives but importantly they are not
 		// a team antagonist.
@@ -287,8 +296,7 @@
 	return result
 
 /obj/machinery/clonepod/proc/offer_to_ghost(mob/living/carbon/H)
-	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = poll_candidates_for_mob("Do you want to play as [H.real_name]'s accidental clone?", ROLE_EXPERIMENTAL_CLONE, null, 30 SECONDS, H)
+	var/list/mob/dead/observer/candidates = poll_candidates_for_mob("Do you want to play as [H.real_name]'s accidental clone?", ROLE_EXPERIMENTAL_CLONE, null, 15 SECONDS, H)
 	if(length(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		H.key = C.key

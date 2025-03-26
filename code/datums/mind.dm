@@ -61,6 +61,8 @@
 	/// is the person that controls the mind. The priority for prime minds is given to
 	/// the most recently created, living mind
 	var/datum/mind/prime
+	/// Minds that have been printed based on us
+	var/list/children = list()
 	var/hasSoul = TRUE // If false, renders the character unable to sell their soul.
 	var/holy_role = NONE //is this person a chaplain or admin role allowed to use bibles, Any rank besides 'NONE' allows for this.
 	var/isAntagTarget = FALSE
@@ -92,17 +94,27 @@
 	/// What color our soul is
 	var/soul_glimmer
 
+	/// When were we created?
+	var/created_at
+
 /datum/mind/New(var/key)
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
 	setup_soul_glimmer()
+	created_at = world.time
 
 /datum/mind/Destroy()
 	SSticker.minds -= src
 	QDEL_LIST(antag_datums)
 	soulOwner = null
 	set_current(null)
+	// Prime no longer holds us
+	if (prime)
+		prime.children -= src
+	// If we have children, the first becomes the prime
+	for (var/datum/mind/child in children)
+		child.prime = children[1]
 	return ..()
 
 /datum/mind/proc/set_current(mob/new_current)
@@ -135,20 +147,15 @@
 		mind_copy.martial_art = new martial_art.type()
 	mind_copy.miming = miming
 	mind_copy.hellbound = hellbound
-	// Hard part: copying antag datums
-	// Since some antagonists have side effects such as granting items
-	// on spawn and teleporting the owner, we use a special antag datum
-	// type which looks like the original and copies it's objectives
-	// but isn't actually the antag datum.
-	// Some antagonists are special and we want this copying behaviour,
-	// such as for changelings, so it is up to the antag datum to deal
-	// with copying on a case-by-case basis.
-	for (var/datum/antagonist/antag in antag_datums)
-		mind_copy.add_antag_datum(antag.create_copy())
 	mind_copy.soulOwner = soulOwner == src ? mind_copy : soulOwner
-	// Transfer the prime status to the copy
+
+	// Takeover as the prime
+	if (!children)
+		children = list()
+	children += src
 	mind_copy.prime = src
-	prime = mind_copy
+	mind_copy.become_prime()
+
 	mind_copy.hasSoul = hasSoul
 	mind_copy.holy_role = holy_role
 	mind_copy.isAntagTarget = isAntagTarget
@@ -157,15 +164,94 @@
 	mind_copy.late_joiner = TRUE
 	mind_copy.last_death = last_death
 	mind_copy.force_escaped = force_escaped
-	mind_copy.learned_recipes = learned_recipes.Copy()
-	mind_copy.crew_objectives = crew_objectives.Copy()
+	mind_copy.learned_recipes = learned_recipes?.Copy()
+	mind_copy.crew_objectives = crew_objectives?.Copy()
 	mind_copy.account_id = account_id
 	mind_copy.soul_glimmer = soul_glimmer
 	mind_copy.key = key
 	if (current)
 		current.get_language_holder().transfer_mind_languages(body.get_language_holder())
 	mind_copy.transfer_to(body)
+	// Hard part: copying antag datums
+	// Since some antagonists have side effects such as granting items
+	// on spawn and teleporting the owner, we use a special antag datum
+	// type which looks like the original and copies it's objectives
+	// but isn't actually the antag datum.
+	// Some antagonists are special and we want this copying behaviour,
+	// such as for changelings, so it is up to the antag datum to deal
+	// with copying on a case-by-case basis.
+	// Must be done after the mind is assigned to the body as this is not
+	// a simple copy operation
+	for (var/datum/antagonist/antag in antag_datums)
+		mind_copy.add_antag_datum(antag.create_copy())
 	return mind_copy
+
+/// The prime mind is the most recently created mind
+/// This is the mind that gets revived when we click
+/// the button to clone in the machine
+/datum/mind/proc/locate_prime_for_revival()
+	if (prime)
+		return prime
+	return src
+
+/// Get the mind which will become the new prime when performing a cloning
+/// scan. The cloning prime is the most recently created mind with a current
+/// living body.
+/datum/mind/proc/get_prime_for_cloning_scan()
+	if (prime && prime.current && prime.current.stat != DEAD)
+		return prime
+	var/datum/mind/current_prime = src
+	var/prime_creation_time = created_at
+	if (prime)
+		for (var/datum/mind/child in prime.children)
+			if (!child.current || child.current.stat == DEAD)
+				continue
+			if (child.created_at < prime_creation_time)
+				continue
+			prime_creation_time = child.created_at
+			current_prime = child
+	else
+		for (var/datum/mind/child in children)
+			if (!child.current || child.current.stat == DEAD)
+				continue
+			if (child.created_at < prime_creation_time)
+				continue
+			prime_creation_time = child.created_at
+			current_prime = child
+	if (current_prime)
+		return current_prime
+	return src
+
+/// Become the prime mind by culling all of our children
+/datum/mind/proc/become_prime()
+	if (prime)
+		if (!children)
+			children = list()
+		for (var/datum/mind/sibling in prime.children)
+			sibling.prime = src
+			sibling.queue_hallucination()
+			children += sibling
+		prime.children = null
+		prime.prime = src
+	prime = null
+
+/datum/mind/proc/queue_hallucination()
+	addtimer(CALLBACK(src, PROC_REF(hallucinate_prime)), rand(4 MINUTES, 10 MINUTES))
+
+/// Have a sudden flash of our prime
+/datum/mind/proc/hallucinate_prime()
+	set waitfor = FALSE
+	if (!prime || !prime.current)
+		return
+	if (!current || current.stat == DEAD)
+		return
+	current.flash_act(override_blindness_check = TRUE, visual = TRUE, type = /atom/movable/screen/fullscreen/flash/black)
+	current.reset_perspective(prime.current)
+	sleep(40)
+	current.flash_act(override_blindness_check = TRUE, visual = TRUE, type = /atom/movable/screen/fullscreen/flash/black)
+	current.reset_perspective()
+	to_chat(span_userdanger("False memories rush through your head..."))
+	to_chat(span_warning("You begin to process the visions of another world; and you realise the horrifying reality; if you die now then you will be unable to be cloned... <i>[pick("Maybe the geneticist can help...", "Perhaps you should try getting a re-scan.", "Maybe if you can just get another scan of your mind, everything will be alright.", "You wonder if killing the duplicate would help... -or maybe it's better to talk to the geneticist.")]</i>"))
 
 /datum/mind/proc/transfer_to(mob/new_character, var/force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable

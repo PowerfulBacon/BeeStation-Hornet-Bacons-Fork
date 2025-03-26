@@ -576,6 +576,15 @@ DEFINE_BUFFER_HANDLER(/obj/machinery/computer/cloning)
 	if(!can_scan(dna, mob_occupant, has_bank_account))
 		return
 
+	var/datum/mind/mind = mob_occupant.mind.get_prime_for_cloning_scan()
+
+	if (mind != mob_occupant.mind)
+		to_chat(mob_occupant, span_deathmessage("[span_warning("You feel the scanner integrating with your brain, a flash of memories other than your own awaken in your mind!")]<br>Another player is currently in control of a duplicate of your body! Kill them and get re-scanned to become the prime instance and regain control of your soul.<br>You will not be revived if a clone is made while you are dead until you become the prime instance again."))
+
+	// Make the mind that is the prime become the real prime now that it has been
+	// scanned.
+	mind.become_prime()
+
 	var/datum/record/cloning/cloning_record = new(null, 18, dna.blood_type, dna.unique_enzymes, md5(dna.uni_identity), mob_occupant.gender, mob_occupant.mind.assigned_role, mob_occupant.real_name, null, WEAKREF(dna), dna.uni_identity, dna.mutation_index, WEAKREF(mob_occupant.mind), mob_occupant.faction, list(), null, dna.unique_enzymes, has_bank_account)
 
 	if(dna.species)
