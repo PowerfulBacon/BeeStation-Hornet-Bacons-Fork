@@ -16,7 +16,7 @@
 	copy.level = level
 	return copy
 
-/datum/skill/proc/range(minimum, maximum)
+/datum/skill/proc/linear_range(minimum, maximum)
 	var/proportion = CLAMP01((level - SKILL_MINMUM) / (SKILL_MAXIMUM - SKILL_MINMUM))
 	return (maximum - minimum) * proportion + minimum
 
@@ -26,7 +26,7 @@
 	var/proportion = CLAMP01((level - bonus_level) / (SKILL_MAXIMUM - bonus_level))
 	return (maximum - minimum) * proportion + minimum
 
-/datum/skill/proc/skill_check_easy(difficulty, critical = FALSE)
+/datum/skill/proc/skill_check_easy(critical = FALSE)
 	var/dice = rand(1, 20)
 	var/roll = dice + level
 	if (roll > 8)
@@ -38,7 +38,7 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_medium(difficulty, critical = FALSE)
+/datum/skill/proc/skill_check_medium(critical = FALSE)
 	var/dice = rand(1, 20)
 	var/roll = dice + level
 	if (roll > 14)
@@ -50,7 +50,7 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_hard(difficulty, critical = FALSE)
+/datum/skill/proc/skill_check_hard(critical = FALSE)
 	var/dice = rand(1, 20)
 	var/roll = dice + level
 	if (roll > 20)
@@ -62,7 +62,7 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_very_hard(difficulty, critical = FALSE)
+/datum/skill/proc/skill_check_very_hard(critical = FALSE)
 	var/dice = rand(1, 20)
 	var/roll = dice + level
 	if (roll > 26)

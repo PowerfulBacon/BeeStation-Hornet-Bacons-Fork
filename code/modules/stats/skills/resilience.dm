@@ -10,6 +10,6 @@
 	// - Slight changes to crit thresholds
 	// - Greatly increased stun resistance
 	// - Bleeding rate reduced
-	owner.crit_threshold = range(-18, 18)
-	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_STUNRESISTANCE, SOURCE_STATS, range(0.8, 1.5))
-	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_BLEED_RESISTANCE, SOURCE_STATS, range(0.5, 1.5))
+	owner.crit_threshold = linear_range(-18, 18)
+	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_STUNRESISTANCE, SOURCE_STATS, linear_range(0.8, 1.5))
+	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_BLEED_RESISTANCE, SOURCE_STATS, linear_range(0.5, 1.5))

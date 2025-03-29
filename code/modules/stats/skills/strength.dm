@@ -1,11 +1,14 @@
 /datum/skill/strength
 	var/_steps = 0
+	var/datum/action/tackle/tackle
 
 /datum/skill/strength/remove_effects(mob/living/owner)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
 	REMOVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_STATS)
 	REMOVE_TRAIT(owner, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_STATS)
+	if (tackle)
+		tackle.Remove(owner)
 
 /datum/skill/strength/update_effect(mob/living/owner)
 	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(intercept_examine))
@@ -14,6 +17,10 @@
 	// Strength
 	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_PUNCH_DAMAGE, SOURCE_STATS, range(1.4, 0.6))
 	ADD_MULTIPLICATIVE_TRAIT(owner, TRAIT_ITEM_SLOWDOWN_MULTIPLIER, SOURCE_STATS, range(0.5, 1.5))
+	if (level >= 10)
+		if (!tackle)
+			tackle = new()
+		tackle.Grant(owner)
 
 /datum/skill/strength/proc/intercept_movement(mob/living/source, atom/oldLoc, forced)
 	SIGNAL_HANDLER
