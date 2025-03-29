@@ -80,8 +80,8 @@
 			if(HAS_TRAIT(user, TRAIT_PACIFISM))
 				to_chat(user, "<span class='notice'>You don't want to hurt [src]!</span>")
 				return
-			if(GET_TRAIT_VALUE(M, TRAIT_PUNCH_DAMAGE) >= 10)
-				adjustBruteLoss(GET_TRAIT_VALUE(M, TRAIT_PUNCH_DAMAGE))
+			if(GET_TRAIT_VALUE(user, TRAIT_PUNCH_DAMAGE) >= 10)
+				adjustBruteLoss(GET_TRAIT_VALUE(user, TRAIT_PUNCH_DAMAGE))
 				playsound(loc, "punch", 25, 1, -1)
 				visible_message("<span class='danger'>[user] punches [src]!</span>", \
 					"<span class='userdanger'>[user] punches you!</span>", null, COMBAT_MESSAGE_RANGE)

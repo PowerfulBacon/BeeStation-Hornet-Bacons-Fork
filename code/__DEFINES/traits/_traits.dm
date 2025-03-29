@@ -2,6 +2,9 @@
 #define SIGNAL_REMOVETRAIT(trait_ref) "removetrait [trait_ref]"
 #define SIGNAL_UPDATETRAIT(trait_ref) "updatetrait [trait_ref]"
 
+#define SOURCE_BASE_VALUE "source_base_trait"
+#define ROUNDSTART_TRAIT "roundstart_trait"
+
 /datum/trait
 	/// Source of the trait
 	var/source
@@ -304,6 +307,14 @@ GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
 // Note: a?:b is used because : alone breaks the terniary operator
 /// Get the value of the specified trait
 #define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]) ? ((GLOB._trait_located = target.status_traits[trait][1]) && GLOB._trait_located.value) : null) : null)
+
+#define SET_BASE_AND_READ(target, trait, default) (target.status_traits ? (length(target.status_traits[trait]) ? (____trait_set_default(target, trait, default)) : default) : default)
+
+/proc/____trait_set_default(atom/target, trait, default)
+	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
+	ADD_CUMULATIVE_TRAIT(target, trait, SOURCE_BASE_VALUE, default)
+	. = GET_TRAIT_VALUE(target, trait)
+	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
 
 /proc/____has_trait_not_from(datum/target, trait, source)
 	var/list/heap

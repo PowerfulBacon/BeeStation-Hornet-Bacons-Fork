@@ -289,7 +289,3 @@
 	if(!full_heal)
 		return
 	remove_temp_moods()
-	setSanity(initial(sanity))
-
-#undef MINOR_INSANITY_PEN
-#undef MAJOR_INSANITY_PEN

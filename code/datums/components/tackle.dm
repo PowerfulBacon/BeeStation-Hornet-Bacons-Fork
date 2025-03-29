@@ -433,11 +433,6 @@
 
 		if(human_sacker.dna.current_body_size <= BODY_SIZE_SHORT) //JUST YOU WAIT TILL I FIND A CHAIR, BUDDY, THEN YOU'LL BE SORRY
 			attack_mod -= 2
-		var/datum/component/mood/human_sacker_sanity = human_sacker.GetComponent(/datum/component/mood)
-		if(human_sacker_sanity.sanity == SANITY_INSANE) //I've gone COMPLETELY INSANE
-			attack_mod += 15
-			human_sacker.adjustStaminaLoss(100) //AHAHAHAHAHAHAHAHA
-
 		if(human_sacker.is_shove_knockdown_blocked()) // tackling with riot specialized armor, like riot armor, is effective but tiring
 			attack_mod += 2
 			human_sacker.adjustStaminaLoss(20)
