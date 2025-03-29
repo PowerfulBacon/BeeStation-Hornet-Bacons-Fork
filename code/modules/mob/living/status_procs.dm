@@ -6,7 +6,7 @@
 ////////////////////////////// STUN ////////////////////////////////////
 
 /mob/living/proc/IsStun() //If we're stunned
-	return has_status_effect(STATUS_EFFECT_STUN)
+	return has_status_effect(/datum/status_effect/incapacitating/stun)
 
 /mob/living/proc/AmountStun() //How many deciseconds remain in our stun
 	var/datum/status_effect/incapacitating/stun/S = IsStun()
@@ -25,7 +25,7 @@
 		if(S)
 			S.duration = max(world.time + amount, S.duration)
 		else if(amount > 0)
-			S = apply_status_effect(STATUS_EFFECT_STUN, amount)
+			S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
 		return S
 
 /mob/living/proc/SetStun(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -43,7 +43,7 @@
 			if(S)
 				S.duration = world.time + amount
 			else
-				S = apply_status_effect(STATUS_EFFECT_STUN, amount)
+				S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
 		return S
 
 /mob/living/proc/AdjustStun(amount, ignore_canstun = FALSE) //Adds to remaining duration
@@ -57,14 +57,14 @@
 		if(S)
 			S.duration += amount
 		else if(amount > 0)
-			S = apply_status_effect(STATUS_EFFECT_STUN, amount)
+			S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
 		return S
 
 ///////////////////////////////// KNOCKDOWN /////////////////////////////////////
 
 /mob/living/proc/IsKnockdown() //If we're knocked down
 	SHOULD_NOT_OVERRIDE(TRUE)
-	return has_status_effect(STATUS_EFFECT_KNOCKDOWN)
+	return has_status_effect(/datum/status_effect/incapacitating/knockdown)
 
 /mob/living/proc/AmountKnockdown() //How many deciseconds remain in our knockdown
 	var/datum/status_effect/incapacitating/knockdown/K = IsKnockdown()
@@ -83,7 +83,7 @@
 		if(K)
 			K.duration = max(world.time + amount, K.duration)
 		else if(amount > 0)
-			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+			K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
 		return K
 
 /mob/living/proc/SetKnockdown(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -101,7 +101,7 @@
 			if(K)
 				K.duration = world.time + amount
 			else
-				K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+				K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
 		return K
 
 /mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE) //Adds to remaining duration
@@ -115,12 +115,12 @@
 		if(K)
 			K.duration += amount
 		else if(amount > 0)
-			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+			K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
 		return K
 
 ///////////////////////////////// IMMOBILIZED ////////////////////////////////////
 /mob/living/proc/IsImmobilized() //If we're immobilized
-	return has_status_effect(STATUS_EFFECT_IMMOBILIZED)
+	return has_status_effect(/datum/status_effect/incapacitating/immobilized)
 
 /mob/living/proc/AmountImmobilized() //How many deciseconds remain in our Immobilized status effect
 	var/datum/status_effect/incapacitating/immobilized/I = IsImmobilized()
@@ -139,7 +139,7 @@
 		if(I)
 			I.duration = max(world.time + amount, I.duration)
 		else if(amount > 0)
-			I = apply_status_effect(STATUS_EFFECT_IMMOBILIZED, amount)
+			I = apply_status_effect(/datum/status_effect/incapacitating/immobilized, amount)
 		return I
 
 /mob/living/proc/SetImmobilized(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -157,7 +157,7 @@
 			if(I)
 				I.duration = world.time + amount
 			else
-				I = apply_status_effect(STATUS_EFFECT_IMMOBILIZED, amount)
+				I = apply_status_effect(/datum/status_effect/incapacitating/immobilized, amount)
 		return I
 
 /mob/living/proc/AdjustImmobilized(amount, ignore_canstun = FALSE) //Adds to remaining duration
@@ -171,12 +171,12 @@
 		if(I)
 			I.duration += amount
 		else if(amount > 0)
-			I = apply_status_effect(STATUS_EFFECT_IMMOBILIZED, amount)
+			I = apply_status_effect(/datum/status_effect/incapacitating/immobilized, amount)
 		return I
 
 ///////////////////////////////// PARALYZED //////////////////////////////////
 /mob/living/proc/IsParalyzed() //If we're immobilized
-	return has_status_effect(STATUS_EFFECT_PARALYZED)
+	return has_status_effect(/datum/status_effect/incapacitating/paralyzed)
 
 /mob/living/proc/AmountParalyzed() //How many deciseconds remain in our Paralyzed status effect
 	var/datum/status_effect/incapacitating/paralyzed/P = IsParalyzed(FALSE)
@@ -196,7 +196,7 @@
 		if(P)
 			P.duration = max(world.time + amount, P.duration)
 		else if(amount > 0)
-			P = apply_status_effect(STATUS_EFFECT_PARALYZED, amount)
+			P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
 		return P
 
 /mob/living/proc/SetParalyzed(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -214,7 +214,7 @@
 			if(P)
 				P.duration = world.time + amount
 			else
-				P = apply_status_effect(STATUS_EFFECT_PARALYZED, amount)
+				P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
 		return P
 
 /mob/living/proc/AdjustParalyzed(amount, ignore_canstun = FALSE) //Adds to remaining duration
@@ -228,7 +228,7 @@
 		if(P)
 			P.duration += amount
 		else if(amount > 0)
-			P = apply_status_effect(STATUS_EFFECT_PARALYZED, amount)
+			P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
 		return P
 
 //Blanket
@@ -255,7 +255,7 @@
 
 //////////////////UNCONSCIOUS
 /mob/living/proc/IsUnconscious() //If we're unconscious
-	return has_status_effect(STATUS_EFFECT_UNCONSCIOUS)
+	return has_status_effect(/datum/status_effect/incapacitating/unconscious)
 
 /mob/living/proc/AmountUnconscious() //How many deciseconds remain in our unconsciousness
 	var/datum/status_effect/incapacitating/unconscious/U = IsUnconscious()
@@ -272,7 +272,7 @@
 		if(U)
 			U.duration = max(world.time + amount, U.duration)
 		else if(amount > 0)
-			U = apply_status_effect(STATUS_EFFECT_UNCONSCIOUS, amount)
+			U = apply_status_effect(/datum/status_effect/incapacitating/unconscious, amount)
 		return U
 
 /mob/living/proc/SetUnconscious(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -287,7 +287,7 @@
 		else if(U)
 			U.duration = world.time + amount
 		else
-			U = apply_status_effect(STATUS_EFFECT_UNCONSCIOUS, amount)
+			U = apply_status_effect(/datum/status_effect/incapacitating/unconscious, amount)
 		return U
 
 /mob/living/proc/AdjustUnconscious(amount, ignore_canstun = FALSE) //Adds to remaining duration
@@ -299,13 +299,13 @@
 		if(U)
 			U.duration += amount
 		else if(amount > 0)
-			U = apply_status_effect(STATUS_EFFECT_UNCONSCIOUS, amount)
+			U = apply_status_effect(/datum/status_effect/incapacitating/unconscious, amount)
 		return U
 
 /////////////////////////////////// SLEEPING ////////////////////////////////////
 
 /mob/living/proc/IsSleeping() //If we're asleep
-	return has_status_effect(STATUS_EFFECT_SLEEPING)
+	return has_status_effect(/datum/status_effect/incapacitating/sleeping)
 
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
 	var/datum/status_effect/incapacitating/sleeping/S = IsSleeping()
@@ -322,7 +322,7 @@
 	if(S)
 		S.duration = max(world.time + amount, S.duration)
 	else if(amount > 0)
-		S = apply_status_effect(STATUS_EFFECT_SLEEPING, amount)
+		S = apply_status_effect(/datum/status_effect/incapacitating/sleeping, amount)
 	return S
 
 /mob/living/proc/SetSleeping(amount) //Sets remaining duration
@@ -337,7 +337,7 @@
 	else if(S)
 		S.duration = world.time + amount
 	else
-		S = apply_status_effect(STATUS_EFFECT_SLEEPING, amount)
+		S = apply_status_effect(/datum/status_effect/incapacitating/sleeping, amount)
 	return S
 
 /mob/living/proc/AdjustSleeping(amount) //Adds to remaining duration
@@ -349,7 +349,7 @@
 	if(S)
 		S.duration += amount
 	else if(amount > 0)
-		S = apply_status_effect(STATUS_EFFECT_SLEEPING, amount)
+		S = apply_status_effect(/datum/status_effect/incapacitating/sleeping, amount)
 	return S
 
 ///Allows us to set a permanent sleep on a player (use with caution and remember to unset it with SetSleeping() after the effect is over)
@@ -362,7 +362,57 @@
 	if(S)
 		S.duration = -1
 	else
-		S = apply_status_effect(STATUS_EFFECT_SLEEPING, -1)
+		S = apply_status_effect(/datum/status_effect/incapacitating/sleeping, -1)
+	return S
+
+////////////////////////////////  STAGGER /////////////////////////////////////
+
+/mob/living/proc/is_staggered() //If we're asleep
+	return has_status_effect(/datum/status_effect/staggered)
+
+/mob/living/proc/amount_staggered() //How many deciseconds remain in our sleep
+	var/datum/status_effect/staggered/S = is_staggered()
+	if(S)
+		return S.duration - world.time
+	return 0
+
+/mob/living/proc/staggered(amount) //Can't go below remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STAGGERED, amount) & COMPONENT_NO_STUN)
+		return
+	if(status_flags & GODMODE)
+		return
+	var/datum/status_effect/staggered/S = is_staggered()
+	if(S)
+		S.duration = max(world.time + amount, S.duration)
+	else if(amount > 0)
+		S = apply_status_effect(/datum/status_effect/staggered, amount)
+	return S
+
+/mob/living/proc/set_staggered(amount) //Sets remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STAGGERED, amount) & COMPONENT_NO_STUN)
+		return
+	if(status_flags & GODMODE)
+		return
+	var/datum/status_effect/staggered/S = is_staggered()
+	if(amount <= 0)
+		if(S)
+			qdel(S)
+	else if(S)
+		S.duration = world.time + amount
+	else
+		S = apply_status_effect(/datum/status_effect/staggered, amount)
+	return S
+
+/mob/living/proc/adjust_staggered(amount) //Adds to remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STAGGERED, amount) & COMPONENT_NO_STUN)
+		return
+	if(status_flags & GODMODE)
+		return
+	var/datum/status_effect/staggered/S = is_staggered()
+	if(S)
+		S.duration += amount
+	else if(amount > 0)
+		S = apply_status_effect(/datum/status_effect/staggered, amount)
 	return S
 
 ///////////////////////////////// FROZEN /////////////////////////////////////
@@ -399,11 +449,11 @@
 		if(amount) //don't spam up the chat for continuous stuns
 			if(priority_absorb_key["visible_message"] || priority_absorb_key["self_message"])
 				if(priority_absorb_key["visible_message"] && priority_absorb_key["self_message"])
-					visible_message("<span class='warning'>[src][priority_absorb_key["visible_message"]]</span>", "<span class='boldwarning'>[priority_absorb_key["self_message"]]</span>")
+					visible_message(span_warning("[src][priority_absorb_key["visible_message"]]"), span_boldwarning("[priority_absorb_key["self_message"]]"))
 				else if(priority_absorb_key["visible_message"])
-					visible_message("<span class='warning'>[src][priority_absorb_key["visible_message"]]</span>")
+					visible_message(span_warning("[src][priority_absorb_key["visible_message"]]"))
 				else if(priority_absorb_key["self_message"])
-					to_chat(src, "<span class='boldwarning'>[priority_absorb_key["self_message"]]</span>")
+					to_chat(src, span_boldwarning("[priority_absorb_key["self_message"]]"))
 			priority_absorb_key["stuns_absorbed"] += amount
 		return TRUE
 

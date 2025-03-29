@@ -2,10 +2,6 @@
 #define SIGNAL_REMOVETRAIT(trait_ref) "removetrait [trait_ref]"
 #define SIGNAL_UPDATETRAIT(trait_ref) "updatetrait [trait_ref]"
 
-// Special trait sources
-#define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention
-#define SOURCE_BASE_VALUE "base_value"
-
 /datum/trait
 	/// Source of the trait
 	var/source
@@ -33,10 +29,6 @@
 
 /datum/trait/multiply
 
-// TODO: Figure out a way of merging ADD_TRAIT and ADD_VALUE_TRAIT with variadic macros
-// without making the opendream/dreamchecker unhappy through the use of compile-time
-// constant if statements.
-
 /// Add a trait to a target
 /// Parameters:
 /// 1: The target to receive the trait
@@ -61,8 +53,8 @@
 /// 1: The target to receive the trait
 /// 2: The key of the trait
 /// 3: The source of the trait
-/// 4: The priority of the trait value
-/// 5: The value stored in the trait
+/// 4: The value stored in the trait
+/// 5: The priority of the trait value
 #define ADD_VALUE_TRAIT(_target, _trait, source, _trait_value, _trait_priority) do { \
 		if (!_target.status_traits) { \
 			_target.status_traits = list(); \
@@ -70,10 +62,10 @@
 		var/list/_L = _target.status_traits; \
 		var/list/target_heap = _L[_trait];\
 		if (target_heap != null) { \
-			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
+			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority, /datum/trait/priority);\
 		} else { \
 			target_heap = list(); \
-			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority);\
+			ADD_HEAP(target_heap, new /datum/trait/priority(source, _trait_value, _trait_priority), priority, /datum/trait/priority);\
 			_L[_trait] = target_heap;\
 			SEND_SIGNAL(_target, SIGNAL_ADDTRAIT(_trait), _trait); \
 			SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
@@ -165,7 +157,7 @@
 			for (var/datum/trait/_trait_datum as anything in _trait_list) { \
 				var/_T = _trait_datum.source;\
 				if (##_condition) { \
-					REMOVE_HEAP(_trait_list, _trait_datum, priority); \
+					REMOVE_HEAP(_trait_list, _trait_datum, priority, /datum/trait/priority); \
 					if (length(_trait_list) && _trait_list[1] != _cached_source) {\
 						SEND_SIGNAL(_target, SIGNAL_UPDATETRAIT(_trait), _trait); \
 					}\
@@ -299,13 +291,13 @@
 #define HAS_TRAIT(target, trait) (target.status_traits ? (target.status_traits[trait] ? TRUE : FALSE) : FALSE)
 /// Checks if the mob has the specified trait from a specific source.
 /// Slightly slower than HAS_TRAIT and should be avoided when proc-overhead matters (roughly >1000 calls per second)
-#define HAS_TRAIT_FROM(target, trait, source) has_trait_from(target, trait, source)
+#define HAS_TRAIT_FROM(target, trait, source) (target.status_traits && ____has_trait_from(target, trait, source))
 /// Checks if the mob has the specified trait from a specific source and only that source.
 /// Slightly slower than HAS_TRAIT and should be avoided when proc-overhead matters (roughly >1000 calls per second)
-#define HAS_TRAIT_FROM_ONLY(target, trait, source) has_trait_from_only(target, trait, source)
+#define HAS_TRAIT_FROM_ONLY(target, trait, source) (target.status_traits && ____has_trait_from_only(target, trait, source))
 /// Checks if the mob has the specified trait from any source except from the ones specified
 /// Slightly slower than HAS_TRAIT and should be avoided when proc-overhead matters (roughly >1000 calls per second)
-#define HAS_TRAIT_NOT_FROM(target, trait, source) has_trait_not_from(target, trait, source)
+#define HAS_TRAIT_NOT_FROM(target, trait, source) (target.status_traits && ____has_trait_not_from(target, trait, source))
 
 GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
 
@@ -313,41 +305,31 @@ GLOBAL_DATUM_INIT(_trait_located, /datum/trait, null)
 /// Get the value of the specified trait
 #define GET_TRAIT_VALUE(target, trait) (target.status_traits ? (length(target.status_traits[trait]) ? ((GLOB._trait_located = target.status_traits[trait][1]) && GLOB._trait_located.value) : null) : null)
 
-#define SET_BASE_AND_READ(target, trait, default) (target.status_traits ? (length(target.status_traits[trait]) ? (_trait_set_default(target, trait, default)) : default) : default)
-
-/proc/_trait_set_default(atom/target, trait, default)
-	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
-	ADD_CUMULATIVE_TRAIT(target, trait, SOURCE_BASE_VALUE, default)
-	. = GET_TRAIT_VALUE(target, trait)
-	REMOVE_TRAIT(target, trait, SOURCE_BASE_VALUE)
-
-/proc/has_trait_not_from(datum/target, trait, source)
+/proc/____has_trait_not_from(datum/target, trait, source)
 	var/list/heap
 	if ((heap = target.status_traits[trait]) == null)
 		return FALSE
 	for (var/contained_trait in heap)
-		if (!(contained_trait ~= source))
+		if (!(contained_trait == source))
 			return TRUE
 	return FALSE
 
-/proc/has_trait_from(datum/target, trait, source)
+/proc/____has_trait_from(datum/target, trait, source)
 	var/list/heap
 	if ((heap = target.status_traits[trait]) == null)
 		return FALSE
 	for (var/contained_trait in heap)
-		if (contained_trait ~= source)
+		if (contained_trait == source)
 			return TRUE
 	return FALSE
 
-/proc/has_trait_from_only(datum/target, trait, source)
+/proc/____has_trait_from_only(datum/target, trait, source)
 	var/list/heap
 	if ((heap = target.status_traits[trait]) == null)
 		return FALSE
 	. = FALSE
 	for (var/contained_trait in heap)
-		if (!(contained_trait ~= source))
+		if (!(contained_trait == source))
 			return FALSE
 		. = TRUE
 	return
-
-#undef SOURCE_BASE_VALUE

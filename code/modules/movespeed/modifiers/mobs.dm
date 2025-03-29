@@ -71,8 +71,8 @@
 	blacklisted_movetypes = FLOATING
 	variable = TRUE
 
-/datum/movespeed_modifier/shove
-	multiplicative_slowdown = SHOVE_SLOWDOWN_STRENGTH
+/datum/movespeed_modifier/staggered
+	multiplicative_slowdown = STAGGERED_SLOWDOWN_STRENGTH
 
 /datum/movespeed_modifier/human_carry
 	multiplicative_slowdown = HUMAN_CARRY_SLOWDOWN
@@ -80,6 +80,7 @@
 /datum/movespeed_modifier/limbless
 	variable = TRUE
 	movetypes = GROUND
+	blacklisted_movetypes = FLOATING|FLYING
 	flags = IGNORE_NOSLOW
 
 /datum/movespeed_modifier/simplemob_varspeed
