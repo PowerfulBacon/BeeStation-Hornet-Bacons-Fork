@@ -88,15 +88,11 @@
 	/// What color our soul is
 	var/soul_glimmer
 
-	/// Stats that transfer along with the mind
-	var/datum/character_skills/mind/mind_stats
-
 /datum/mind/New(var/key)
 	src.key = key
 	soulOwner = src
 	martial_art = default_martial_art
 	setup_soul_glimmer()
-	mind_stats = new()
 
 /datum/mind/Destroy()
 	SSticker.minds -= src

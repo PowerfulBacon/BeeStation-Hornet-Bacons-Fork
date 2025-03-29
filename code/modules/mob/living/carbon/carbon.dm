@@ -4,7 +4,7 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 
 /mob/living/carbon/Initialize(mapload)
 	. = ..()
-	stats = new(src)
+	skills = new(src)
 	create_reagents(1000)
 	update_body_parts() //to update the carbon's new bodyparts appearance
 	GLOB.carbon_list += src
@@ -16,7 +16,7 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
 	// Holds a circular reference
-	QDEL_NULL(stats)
+	QDEL_NULL(skills)
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
 	QDEL_LIST(bodyparts)
