@@ -10,10 +10,6 @@
 	// Mind Based Skills
 	var/datum/skill/intelligence/intelligence = new(DEFAULT_SKILL)
 	var/datum/skill/coordination/coordination = new(DEFAULT_SKILL)
-	// Job Related Skills
-	var/datum/skill/medical = new(SKILL_MINMUM)
-	var/datum/skill/electrical_engineering = new(SKILL_MINMUM)
-	var/datum/skill/mechanical_engineering = new(SKILL_MINMUM)
 
 /// Proxy type that collates stats from DNA and mind
 /datum/character_skills/New(mob/living/owner)
