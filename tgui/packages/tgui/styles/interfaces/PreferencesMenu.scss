@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'sass:map';
+@use '../base.scss';
 @use '../components/Button.scss';
 @use '../colors.scss';
 
@@ -305,7 +306,6 @@
     &__QuirkList {
       background-color: colors.$light-grey;
       height: calc(90vh - 170px);
-      min-height: 100%;
       overflow-y: scroll;
 
       &__quirk {
@@ -342,20 +342,103 @@
     }
   }
 
-  &__Skills {
-    &__SkillsBox {
-      background-color: colors.$light-grey;
-      height: calc(100vh - 150px);
-    }
+  &__Skills__SkillsBox {
+    height: 100%;
 
-    &__SkillsIcon {
-      background-color: colors.$white;
-      border: 1px solid black;
-      color: #111;
-      text-align: center;
-      height: 10%;
-      padding-top: 5px;
-      font-size: 300%;
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .skills_assignment {
+        flex-grow: 1;
+        background-color: base.$color-bg-section;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: space-around;
+
+        .skill_row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: space-around;
+
+          .skill_header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px 15px;
+            width: 12%;
+            min-width: 100px;
+            flex-shrink: 0;
+
+            .header {
+              font-size: 18px;
+            }
+          }
+
+          .skill_alerts {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            min-width: 100px;
+            flex-shrink: 0;
+            align-items: flex-start;
+            text-wrap: wrap;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .bad {
+              color: colors.$bad;
+            }
+
+            .good {
+              color: colors.$good;
+            }
+          }
+
+          .skill_buttons {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-around;
+            margin-right: 40px;
+            align-items: center;
+
+            .skill_button {
+              width: 35px;
+              height: 20px;
+              border: 2px inset base.$color-fg;
+              border-radius: 6px;
+              background-color: darken(colors.$primary, 15%);
+              margin-right: 2px;
+              transition: color 50ms, background-color 50ms;
+
+              &.active {
+                background-color: colors.$good;
+
+                &:hover {
+                  background-color: lighten(colors.$good, 15%);
+                }
+              }
+
+              &:hover {
+                background-color: colors.$primary;
+
+                & ~ .skill_button:not(.active) {
+                  background-color: colors.$primary;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .skills_notes {
+        flex-basis: 160px;
+        background-color: base.$color-bg-section;
+        margin-top: 10px;
+      }
     }
   }
 }

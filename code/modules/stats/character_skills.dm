@@ -3,6 +3,7 @@
 /datum/character_skills
 	var/mob/living/owner
 	var/mutable = TRUE
+	var/total_points = SKILL_POINTS
 	// DNA Based Skills
 	var/datum/skill/strength/strength = new(DEFAULT_SKILL)
 	var/datum/skill/resilience/resilience = new(DEFAULT_SKILL)

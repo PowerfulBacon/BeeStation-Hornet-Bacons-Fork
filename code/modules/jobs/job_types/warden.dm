@@ -35,6 +35,18 @@
 	lightup_areas = list(/area/security/detectives_office)
 	minimal_lightup_areas = list(/area/security/warden)
 
+	// Must meet minimum requirements to have the tackle ability, as it
+	// is required to arrest people.
+	min_stats_required = list(
+		/datum/skill/strength = 8,
+		/datum/skill/agility = 4
+	)
+	stats_added = list(
+		/datum/skill/strength = 2,
+		// Slight toughness bonus to deal with prisoners fighting back
+		/datum/skill/resilience = 2,
+	)
+
 /datum/job/warden/get_access()
 	. = ..()
 	if(check_config_for_sec_maint())

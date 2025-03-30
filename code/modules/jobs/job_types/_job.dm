@@ -61,7 +61,7 @@
 
 	var/outfit = null
 
-	/// Minutes of experience-time required to play in this job. 
+	/// Minutes of experience-time required to play in this job.
 	var/exp_requirements = 0
 	/// Experience required to play this job
 	var/exp_type = ""
@@ -119,6 +119,10 @@
 	 */
 	var/list/minimal_lightup_areas = list()
 
+	/// Min stats required
+	var/list/min_stats_required = list()
+	/// Stats added by the job
+	var/list/stats_added = list()
 
 /datum/job/New()
 	. = ..()

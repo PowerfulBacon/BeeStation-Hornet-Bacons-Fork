@@ -28,6 +28,12 @@
 
 	minimal_lightup_areas = list(/area/construction/mining/aux_base)
 
+	// Must be able to walk and fight
+	min_stats_required = list(
+		/datum/skill/agility = 2,
+		/datum/skill/strength = 2,
+	)
+
 /datum/outfit/job/miner
 	name = JOB_NAME_SHAFTMINER
 	jobtype = /datum/job/shaft_miner

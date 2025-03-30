@@ -602,7 +602,7 @@
 						directional_blocked = TRUE
 						break
 		if(((!target_table && !target_collateral_human && !target_disposal_bin && !target_pool && !IsKnockdown()) || directional_blocked))
-			if (skills.strength.skill_check_easy(bias = -(20 * (getStaminaLoss() / user.maxHealth))) == SUCCESS)
+			if (skills.strength.skill_check_medium(bias = -(20 * (getStaminaLoss() / user.maxHealth))) == SUCCESS)
 				if (!silent)
 					user.visible_message(span_danger("[user.name] shoves [name], but [p_they()] maintain[p_s()] [p_their()] balance!"),
 						span_danger("You shove [name]!"), null, COMBAT_MESSAGE_RANGE)

@@ -41,6 +41,18 @@
 		/area/security
 	)
 
+	// Heads have a minimum standard to not make
+	// characters which cannot function in their
+	// job roles.
+	min_stats_required = list(
+		/datum/skill/strength = 4,
+		/datum/skill/agility = 4
+	)
+	// Slightly tougher than the average crew
+	stats_added = list(
+		/datum/skill/resilience = 2,
+	)
+
 /datum/job/captain/get_access()
 	return get_all_accesses()
 

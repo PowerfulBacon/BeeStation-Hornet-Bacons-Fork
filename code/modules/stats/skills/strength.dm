@@ -22,6 +22,12 @@
 			tackle = new()
 		tackle.Grant(owner)
 
+/datum/skill/strength/list_data(list/data)
+	if (level <= 1)
+		add_bad_trait_descriptor(data, "Pacifism (&le;1 strength)")
+	if (level >= 10)
+		add_good_trait_descriptor(data, "Tackling (&ge;10 strength)")
+
 /datum/skill/strength/proc/intercept_movement(mob/living/source, atom/oldLoc, forced)
 	SIGNAL_HANDLER
 	if (_steps++%2 != 0)

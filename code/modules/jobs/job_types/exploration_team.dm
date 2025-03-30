@@ -36,6 +36,12 @@
 	)
 	minimal_lightup_areas = list(/area/quartermaster/exploration_dock, /area/quartermaster/exploration_prep)
 
+	// Must be able to walk and fight
+	min_stats_required = list(
+		/datum/skill/agility = 2,
+		/datum/skill/strength = 2,
+	)
+
 /datum/outfit/job/exploration_crew
 	name = JOB_NAME_EXPLORATIONCREW
 	jobtype = /datum/job/exploration_crew

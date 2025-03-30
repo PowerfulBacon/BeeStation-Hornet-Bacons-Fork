@@ -43,6 +43,14 @@
 		/area/security/warden
 	)
 
+	// Heads have a minimum standard to not make
+	// characters which cannot function in their
+	// job roles.
+	min_stats_required = list(
+		/datum/skill/strength = 4,
+		/datum/skill/agility = 4
+	)
+
 /datum/outfit/job/head_of_security
 	name = JOB_NAME_HEADOFSECURITY
 	jobtype = /datum/job/head_of_security

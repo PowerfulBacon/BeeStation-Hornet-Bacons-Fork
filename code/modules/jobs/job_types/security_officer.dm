@@ -41,6 +41,16 @@
 
 	minimal_lightup_areas = list(/area/construction/mining/aux_base)
 
+	// Must meet minimum requirements to have the tackle ability, as it
+	// is required to arrest people.
+	min_stats_required = list(
+		/datum/skill/strength = 8,
+		/datum/skill/agility = 4
+	)
+	stats_added = list(
+		/datum/skill/strength = 2,
+	)
+
 /datum/job/security_officer/get_access()
 	. = ..()
 	if(check_config_for_sec_maint())

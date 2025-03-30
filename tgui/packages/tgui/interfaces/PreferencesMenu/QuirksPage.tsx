@@ -187,7 +187,7 @@ export const QuirksPage = (props) => {
         };
 
         return (
-          <Stack align="center" fill>
+          <Stack align="center">
             <Stack.Item basis="50%">
               <Stack vertical fill align="center">
                 <Stack.Item>
@@ -224,7 +224,7 @@ export const QuirksPage = (props) => {
                 </Stack.Item>
               </Stack>
             </Stack.Item>
-            <Stack vertical fill align="center">
+            <Stack vertical align="center">
               <Stack.Item>
                 <Box fontSize="1.3em">Positive Quirks</Box>
               </Stack.Item>

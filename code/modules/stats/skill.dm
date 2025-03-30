@@ -16,6 +16,13 @@
 	copy.level = level
 	return copy
 
+/datum/skill/proc/list_data(list/data)
+	return
+
+/datum/skill/proc/add_bad_trait_descriptor(list/data, descriptor)
+
+/datum/skill/proc/add_good_trait_descriptor(list/data, descriptor)
+
 /datum/skill/proc/linear_range(minimum, maximum)
 	var/proportion = CLAMP01((level - SKILL_MINMUM) / (SKILL_MAXIMUM - SKILL_MINMUM))
 	return (maximum - minimum) * proportion + minimum

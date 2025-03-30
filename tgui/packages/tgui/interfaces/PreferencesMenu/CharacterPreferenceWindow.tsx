@@ -106,7 +106,7 @@ export const CharacterPreferenceWindow = (props) => {
         </>
       }>
       <Window.Content scrollable>
-        <Flex direction="column" width="100%">
+        <Flex direction="column" width="100%" height="100%">
           <Flex.Item mt={-1}>
             <CharacterProfiles
               activeSlot={data.active_slot - 1}
@@ -177,7 +177,7 @@ export const CharacterPreferenceWindow = (props) => {
             <Divider />
           </Flex.Item>
 
-          <Flex.Item>{pageContents}</Flex.Item>
+          <Flex.Item grow={1}>{pageContents}</Flex.Item>
         </Flex>
       </Window.Content>
     </Window>

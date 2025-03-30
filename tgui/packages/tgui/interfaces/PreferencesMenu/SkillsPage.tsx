@@ -1,28 +1,191 @@
-import { Box, Icon, Stack } from "tgui/components";
+import { Box, Icon, Section, Stack } from 'tgui/components';
 
 export const SkillsPage = () => {
   return (
-    <Box className="PreferencesMenu__Skills__SkillsBox">
-      <Stack fill>
-        <Stack.Item width="10%">
-          <Box className="PreferencesMenu__Skills__SkillsIcon" align="center">
-            <Icon color="#333" name="brain" />
-          </Box>
-        </Stack.Item>
-
-        <Stack.Item
-          align="stretch"
-          style={{
-            'border-right': '1px solid black',
-            'margin-left': 0,
-          }}
-        />
-        <Stack.Item grow>
-          <Box className="PreferencesMenu__Skills__SkillsIcon" align="center">
-            <Icon color="#333" name="brain" />
-          </Box>
-        </Stack.Item>
-      </Stack>
-    </Box>
+    <div className="PreferencesMenu__Skills__SkillsBox" fill>
+      <div className="container">
+        <div className="skills_assignment">
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Strength</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts">
+              <div className="bad">Pacifism (&le;0 strength)</div>
+            </div>
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Resilience</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts" />
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Agility</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts">
+              <div className="bad">Paraplegic (&le;0 agility)</div>
+            </div>
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Coordination</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts" />
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Intelligence</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts" />
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+          <div className="skill_row">
+            <div className="skill_header">
+              <div className="header">Luck</div>
+              <div>0/20</div>
+            </div>
+            <div className="skill_alerts" />
+            <div className="skill_buttons">
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button" />
+              <div className="skill_button active" />
+            </div>
+          </div>
+        </div>
+        <div className="skills_notes">b</div>
+      </div>
+    </div>
   );
 };
