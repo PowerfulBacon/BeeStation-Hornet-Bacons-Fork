@@ -560,6 +560,9 @@
 	var/turf/open/indestructible/sound/pool/target_pool	//This list is getting pretty long, but its better than calling shove_act or something on every atom
 	var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
+	var/disarm_damage = user.skills.strength.linear_range(0, 20)
+	adjustStaminaLoss(disarm_damage)
+
 	//Thank you based whoneedsspace
 	target_collateral_human = locate(/mob/living/carbon) in target_shove_turf.contents
 	if(target_collateral_human)
@@ -598,13 +601,19 @@
 					if(O.flags_1 & ON_BORDER_1 && O.dir == turn(shove_dir, 180) && O.density)
 						directional_blocked = TRUE
 						break
-		if((!target_table && !target_collateral_human && !target_disposal_bin && !target_pool && !IsKnockdown()) || directional_blocked)
-			Knockdown(SHOVE_KNOCKDOWN_SOLID)
-			Immobilize(SHOVE_IMMOBILIZE_SOLID)
-			if (!silent)
-				user.visible_message(span_danger("[user.name] shoves [name], knocking [p_them()] down!"),
-					span_danger("You shove [name], knocking [p_them()] down!"), null, COMBAT_MESSAGE_RANGE)
-			log_combat(user, src, "shoved", "disarm", "knocking them down")
+		if(((!target_table && !target_collateral_human && !target_disposal_bin && !target_pool && !IsKnockdown()) || directional_blocked))
+			if (skills.strength.skill_check_easy(bias = -(20 * (getStaminaLoss() / user.maxHealth))) == SUCCESS)
+				if (!silent)
+					user.visible_message(span_danger("[user.name] shoves [name], but [p_they()] maintain[p_s()] [p_their()] balance!"),
+						span_danger("You shove [name]!"), null, COMBAT_MESSAGE_RANGE)
+				log_combat(user, src, "shoved", "disarm", "failing to knock them down")
+			else
+				Knockdown(SHOVE_KNOCKDOWN_SOLID)
+				Immobilize(SHOVE_IMMOBILIZE_SOLID)
+				if (!silent)
+					user.visible_message(span_danger("[user.name] shoves [name], knocking [p_them()] down!"),
+						span_danger("You shove [name], knocking [p_them()] down!"), null, COMBAT_MESSAGE_RANGE)
+				log_combat(user, src, "shoved", "disarm", "knocking them down")
 		else if(target_table)
 			Paralyze(SHOVE_KNOCKDOWN_TABLE)
 			if (!silent)

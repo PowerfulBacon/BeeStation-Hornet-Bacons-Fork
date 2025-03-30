@@ -601,6 +601,9 @@
 	ADD_TRAIT(src, TRAIT_UNDENSE, LYING_DOWN_TRAIT)
 	if(HAS_TRAIT(src, TRAIT_FLOORED) && !(dir & (NORTH|SOUTH)))
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
+	// If we are grabbing someone, double check that we are still allows to do that
+	if (pulling && !pulling.can_be_pulled(src, grab_state))
+		stop_pulling()
 
 
 /// Proc to append behavior related to lying down.
@@ -610,6 +613,9 @@
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
 	REMOVE_TRAIT(src, TRAIT_UI_BLOCKED, LYING_DOWN_TRAIT)
 	REMOVE_TRAIT(src, TRAIT_UNDENSE, LYING_DOWN_TRAIT)
+	// If we are being grabbed, check that the grabber can continue to grab us
+	if (pulledby && !can_be_pulled(pulledby, pulledby.grab_state))
+		pulledby.stop_pulling()
 
 /mob/living/proc/update_density()
 	if(HAS_TRAIT(src, TRAIT_UNDENSE))
@@ -1355,10 +1361,17 @@
 	C.Paralyze(40)
 
 /mob/living/can_be_pulled(mob/living/user, grab_state, force)
-	if (!(user.mobility_flags & MOBILITY_STAND))
-		if (mobility_flags & MOBILITY_STAND)
-			return FALSE
-	return ..() && !(buckled && buckled.buckle_prevents_pull)
+	if(src == user || !isturf(loc))
+		return FALSE
+	if(anchored || throwing)
+		return FALSE
+	if(force < (move_resist * MOVE_FORCE_PULL_RATIO))
+		return FALSE
+	if (user.body_position != STANDING_UP && body_position == STANDING_UP)
+		return FALSE
+	if (buckled && buckled.buckle_prevents_pull)
+		return FALSE
+	return TRUE
 
 /// Called when mob changes from a standing position into a prone while lacking the ability to stand up at the moment.
 /mob/living/proc/on_fall()
@@ -1771,15 +1784,11 @@
 		set_lying_angle(pick(90, 270))
 		set_body_position(LYING_DOWN)
 		on_fall()
-	// If we are grabbing someone, double check that we are still allows to do that
-	if (pulling)
-
 
 /// Proc to append behavior to the condition of being floored. Called when the condition ends.
 /mob/living/proc/on_floored_end()
 	if(!resting)
 		get_up()
-
 
 /// Proc to append behavior to the condition of being handsblocked. Called when the condition starts.
 /mob/living/proc/on_handsblocked_start()

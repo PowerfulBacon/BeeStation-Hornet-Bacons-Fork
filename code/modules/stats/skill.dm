@@ -26,9 +26,9 @@
 	var/proportion = CLAMP01((level - bonus_level) / (SKILL_MAXIMUM - bonus_level))
 	return (maximum - minimum) * proportion + minimum
 
-/datum/skill/proc/skill_check_easy(critical = FALSE)
+/datum/skill/proc/skill_check_easy(critical = FALSE, bias = 0)
 	var/dice = rand(1, 20)
-	var/roll = dice + level
+	var/roll = dice + level + bias
 	if (roll > 8)
 		if (dice == 20 && critical)
 			return CRITICAL_SUCCESS
@@ -38,9 +38,9 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_medium(critical = FALSE)
+/datum/skill/proc/skill_check_medium(critical = FALSE, bias = 0)
 	var/dice = rand(1, 20)
-	var/roll = dice + level
+	var/roll = dice + level + bias
 	if (roll > 14)
 		if (dice == 20 && critical)
 			return CRITICAL_SUCCESS
@@ -50,9 +50,9 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_hard(critical = FALSE)
+/datum/skill/proc/skill_check_hard(critical = FALSE, bias = 0)
 	var/dice = rand(1, 20)
-	var/roll = dice + level
+	var/roll = dice + level + bias
 	if (roll > 20)
 		if (dice == 20 && critical)
 			return CRITICAL_SUCCESS
@@ -62,9 +62,9 @@
 			return CRITICAL_FAILURE
 		return FAILURE
 
-/datum/skill/proc/skill_check_very_hard(critical = FALSE)
+/datum/skill/proc/skill_check_very_hard(critical = FALSE, bias = 0)
 	var/dice = rand(1, 20)
-	var/roll = dice + level
+	var/roll = dice + level + bias
 	if (roll > 26)
 		if (dice == 20 && critical)
 			return CRITICAL_SUCCESS

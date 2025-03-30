@@ -1176,6 +1176,8 @@
 		return FALSE
 	if(force < (move_resist * MOVE_FORCE_PULL_RATIO))
 		return FALSE
+	if (!(user.mobility_flags & MOBILITY_STAND))
+		return FALSE
 	return TRUE
 
 /**
