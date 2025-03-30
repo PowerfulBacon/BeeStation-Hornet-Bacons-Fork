@@ -664,3 +664,38 @@
 	for(var/reagent in reagents)
 		var/datum/reagent/R = reagent
 		. |= R.expose_mob(src, method, reagents[R], show_message, touch_protection, affecting)
+
+#define NOT_PINNED 0
+#define PINNING 1
+#define PINNED 2
+
+/// Check if we are being pinned or not
+/mob/living/proc/update_pinned()
+	var/new_pinned = NOT_PINNED
+	// Not being pinned or pinning anyone
+	if (pulling)
+		var/mob/living/pulled_mob = pulling
+		if (istype(pulled_mob) && body_position != STANDING_UP && pulled_mob != STANDING_UP && get_dist(src, pulled_mob) == 0)
+			new_pinned = PINNING
+	if (pulledby)
+		var/mob/living/pulled_mob = pulledby
+		if (istype(pulled_mob) && body_position != STANDING_UP && pulled_mob != STANDING_UP && get_dist(src, pulled_mob) == 0)
+			new_pinned = PINNED
+	if (is_pinned == new_pinned)
+		return
+	is_pinned = new_pinned
+	if (new_pinned)
+		ADD_TRAIT(src, TRAIT_IMMOBILIZED, PINNED_TRAIT)
+		ADD_TRAIT(src, TRAIT_FLOORED, PINNED_TRAIT)
+		if (new_pinned == PINNED)
+			ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, PINNED_TRAIT)
+		else
+			REMOVE_TRAIT(src, TRAIT_HANDS_BLOCKED, PINNED_TRAIT)
+	else
+		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PINNED_TRAIT)
+		REMOVE_TRAIT(src, TRAIT_FLOORED, PINNED_TRAIT)
+		REMOVE_TRAIT(src, TRAIT_HANDS_BLOCKED, PINNED_TRAIT)
+
+#undef NOT_PINNED
+#undef PINNING
+#undef PINNED

@@ -177,3 +177,6 @@
 
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object
+
+	/// Whether or not we are pinned. Do not use this, read traits instead
+	VAR_PRIVATE/is_pinned = FALSE

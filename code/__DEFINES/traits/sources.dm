@@ -145,3 +145,4 @@
 /// Sources for TRAIT_IGNORING_GRAVITY
 #define IGNORING_GRAVITY_NEGATION "ignoring_gravity_negation"
 #define FROM_SHADOW_SECT "shadow_sect"
+#define PINNED_TRAIT "pinned"
