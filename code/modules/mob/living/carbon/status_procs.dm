@@ -13,10 +13,6 @@
 		return
 	to_chat(src, span_notice("You're too exhausted to keep going..."))
 	stam_regen_start_time = world.time + STAMINA_CRIT_TIME
-	ADD_TRAIT(src, TRAIT_INCAPACITATED, STAMINA)
-	ADD_TRAIT(src, TRAIT_IMMOBILIZED, STAMINA)
-	ADD_TRAIT(src, TRAIT_FLOORED, STAMINA)
-
 
 /mob/living/carbon/adjust_drugginess(amount)
 	druggy = max(druggy+amount, 0)

@@ -531,14 +531,8 @@ CREATION_TEST_IGNORE_SELF(/mob/living/carbon)
 	var/stam = getStaminaLoss()
 	if(stam >= DAMAGE_PRECISION && (maxHealth - stam) <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSTAMCRIT))
 		if(!stat)
-			if(extend_stam_crit || !HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA))
+			if(extend_stam_crit || stam_regen_start_time <= world.time)
 				enter_stamcrit()
-	else if(HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA))
-		REMOVE_TRAIT(src, TRAIT_INCAPACITATED, STAMINA)
-		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, STAMINA)
-		REMOVE_TRAIT(src, TRAIT_FLOORED, STAMINA)
-	else
-		return
 	update_stamina_hud()
 
 /mob/living/carbon/update_sight()
