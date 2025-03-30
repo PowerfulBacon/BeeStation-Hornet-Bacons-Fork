@@ -36,12 +36,12 @@
 			// Successful tackle
 			user.Knockdown((20 - user.skills.strength.level) * 0.4 SECONDS, ignore_canstun = TRUE)
 			living_target.Knockdown((20 - living_target.skills.strength.level) * 0.4 SECONDS)
-			living_target.grippedby(user, TRUE)
 			// We don't want to stand up unless we explicitly demand it
 			user.set_resting(TRUE)
 			user.Move(get_turf(living_target))
 			user.visible_message(span_warning("[user] tackles [target], pinning them down!"), span_userdanger("You pin down [target]!"))
 			to_chat(target, span_userdanger("[user] pins you to the floor!"))
+			living_target.grippedby(user, TRUE)
 		else
 			// Tackle fails
 			user.Knockdown((20 - user.skills.strength.level) * 0.4 SECONDS, ignore_canstun = TRUE)
