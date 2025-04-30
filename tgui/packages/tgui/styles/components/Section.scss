@@ -18,6 +18,7 @@ $separator-color: colors.$primary !default;
   background-color: functions.fake-alpha($background-color, base.$color-bg);
   background-color: $background-color;
   box-sizing: border-box;
+  border-bottom: 1px solid colors.$primary;
 
   &:last-child {
     margin-bottom: 0;
@@ -52,6 +53,7 @@ $separator-color: colors.$primary !default;
   padding: 0.66em 0.5em;
   margin-top: 0.4em;
   border: 1px solid colors.$primary;
+  border-bottom: none;
   box-shadow: 0px 0px 4px -2px colors.$primary;
 }
 
