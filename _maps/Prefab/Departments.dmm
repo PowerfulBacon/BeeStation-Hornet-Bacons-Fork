@@ -480,6 +480,9 @@
 	color = "#267878"
 	},
 /obj/effect/landmark/start/assistant,
+/obj/effect/turf_decal/edges/borderfloor{
+	dir = 9
+	},
 /turf/open/floor/iron,
 /area/crew_quarters/dorms)
 "lh" = (
