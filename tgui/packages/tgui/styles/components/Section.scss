@@ -8,7 +8,7 @@
 @use '../colors.scss';
 @use '../functions.scss';
 
-$title-text-color: base.$color-fg !default;
+$title-text-color: base.$color-bg !default;
 $background-color: base.$color-bg-section !default;
 $separator-color: colors.$primary !default;
 
@@ -26,8 +26,9 @@ $separator-color: colors.$primary !default;
 
 .Section__title {
   position: relative;
-  padding: 0.5em;
-  border-bottom: base.em(2px) solid $separator-color;
+  padding: 0.2em;
+  background-color: colors.$primary;
+  box-shadow: 0px 0px 6px 0px colors.$primary;
 }
 
 .Section__titleText {
@@ -49,6 +50,9 @@ $separator-color: colors.$primary !default;
 
 .Section__content {
   padding: 0.66em 0.5em;
+  margin-top: 0.4em;
+  border: 1px solid colors.$primary;
+  box-shadow: 0px 0px 4px -2px colors.$primary;
 }
 
 .Section--fitted > .Section__rest > .Section__content {

@@ -7,6 +7,52 @@
 @use '../base.scss';
 @use '../functions.scss' as *;
 
+.Window::before {
+  content: '';
+  position: fixed;
+  top: 32px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 32px);
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    to right,
+    #ff0000 0px,
+    #ff0000 1px,
+    #00ff00 1px,
+    #00ff00 2px,
+    #0000ff 2px,
+    #0000ff 3px
+  );
+  background-size: 3px 100%;
+  opacity: 0.17;
+  mix-blend-mode: multiply;
+}
+
+.Window::after {
+  content: '';
+  position: fixed;
+  top: 32px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 32px);
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    to top,
+    #ff0000 0px,
+    #ff0000 2px,
+    #00ff00 2px,
+    #00ff00 4px,
+    #0000ff 4px,
+    #0000ff 6px
+  );
+  background-size: 100% 6px;
+  opacity: 0.03;
+  mix-blend-mode: multiply;
+}
+
 .Window {
   position: fixed;
   top: 0;
@@ -16,6 +62,7 @@
   color: base.$color-fg;
   background-color: base.$color-bg;
   background-image: linear-gradient(to bottom, base.$color-bg-start 0%, base.$color-bg-end 100%);
+  font-family: monospace;
 }
 
 .Window__titleBar {
