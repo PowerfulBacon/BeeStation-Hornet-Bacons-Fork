@@ -155,6 +155,10 @@
 				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || !either_combat_mode) &&\
 				(HAS_TRAIT(src, TRAIT_RESTRAINED) || !either_combat_mode)
 			)
+				// We are allowed to swap with the target mob when the following is true:
+				// - Neither target or pusher have the NO MOB SWAP trait
+				// - The target is restrained and does not have a higher move resist than our push force, or both target have combat mode disabled (voluntary swap).
+				// - We are either restrained (forced swap), or both target and pusher have combat mode disabled (voluntary swap).
 				mob_swap = TRUE
 		if(mob_swap)
 			//switch our position with M
@@ -193,8 +197,9 @@
 		var/mob/living/L = M
 		if(HAS_TRAIT(L, TRAIT_PUSHIMMUNE))
 			return TRUE
-	// Don't allow pushing the target if they are in combat mode.
-	if(target_combat_mode)
+	// The target cannot be pushed if they don't want to be pushed
+	// and we do not have the move force to overpower them.
+	if(target_combat_mode && M.move_resist >= move_force)
 		return TRUE
 	//anti-riot equipment is also anti-push
 	for(var/obj/item/I in M.held_items)

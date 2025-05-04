@@ -19,7 +19,7 @@
 	move_resist = MOVE_FORCE_VERY_STRONG
 	density = TRUE
 	status_flags = CANSTUN|CANPUSH
-	combat_mode = TRUE //so we always get pushed instead of trying to swap
+	combat_mode = FALSE
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
 	see_in_dark = NIGHTVISION_FOV_RANGE
 	hud_type = /datum/hud/ai
@@ -182,6 +182,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/silicon/ai)
 
 	ADD_TRAIT(src, TRAIT_PULL_BLOCKED, ROUNDSTART_TRAIT)
 	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, ROUNDSTART_TRAIT)
+	ADD_TRAIT(src, TRAIT_NOMOBSWAP, ROUNDSTART_TRAIT)
 
 	alert_control = new(src, list(ALARM_ATMOS, ALARM_FIRE, ALARM_POWER, ALARM_CAMERA, ALARM_BURGLAR, ALARM_MOTION), list(z), camera_view = TRUE)
 	RegisterSignal(alert_control.listener, COMSIG_ALARM_TRIGGERED, PROC_REF(alarm_triggered))
@@ -400,7 +401,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/silicon/ai)
 		to_chat(src, span_notice("You route power from your backup battery to move the bolts."))
 	var/is_anchored = FALSE
 	if(move_resist == MOVE_FORCE_VERY_STRONG)
-		move_resist = MOVE_FORCE_NORMAL
+		move_resist = MOVE_FORCE_WEAK
 	else
 		is_anchored = TRUE
 		move_resist = MOVE_FORCE_VERY_STRONG
