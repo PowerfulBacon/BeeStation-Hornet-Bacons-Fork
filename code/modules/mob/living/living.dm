@@ -164,7 +164,7 @@
 			//switch our position with M
 			if(loc && !loc.Adjacent(M.loc))
 				return TRUE
-			now_pushing = 1
+			now_pushing = TRUE
 			var/oldloc = loc
 			var/oldMloc = M.loc
 
@@ -184,7 +184,7 @@
 			if(!M_passmob)
 				M.pass_flags &= ~PASSMOB
 
-			now_pushing = 0
+			now_pushing = FALSE
 
 			if(!move_failed)
 				return TRUE
@@ -193,10 +193,8 @@
 	//not if he's not CANPUSH of course
 	if(!(M.status_flags & CANPUSH))
 		return TRUE
-	if(isliving(M))
-		var/mob/living/L = M
-		if(HAS_TRAIT(L, TRAIT_PUSHIMMUNE))
-			return TRUE
+	if(HAS_TRAIT(M, TRAIT_PUSHIMMUNE))
+		return TRUE
 	// The target cannot be pushed if they don't want to be pushed
 	// and we do not have the move force to overpower them.
 	if(target_combat_mode && M.move_resist >= move_force)
