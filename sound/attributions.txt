@@ -14,3 +14,10 @@ female_cough_5.ogg: https://freesound.org/people/thatkellytrna/sounds/425777/ , 
 female_cough_6.ogg: https://freesound.org/people/DarkNightPrincess/sounds/625322/ , license: CC0 1.0 DEED
 female_cough_7.ogg: https://freesound.org/people/drotzruhn/sounds/405206/ , license: CC BY 4.0 DEED
 whistle1.ogg: https://freesound.org/people/taure/sounds/411638/ , license: CC0 1.0 DEED
+
+Modified by PowerfulBacon:
+machines/ui/ui_button_hover.ogg:
+- https://freesound.org/people/LilMati/sounds/657950/ , license: CC 0
+machines/ui/ui_open.ogg:
+- https://freesound.org/people/corkob/sounds/415594/ , license: CC 0
+- https://freesound.org/people/gecop/sounds/545027/ , license: CC 0
