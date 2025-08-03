@@ -84,3 +84,30 @@ SUBSYSTEM_DEF(metrics)
 AUTH_CLIENT_VERB(debug_metrics)
 	usr << browse(SSmetrics.get_metrics_json(), "window=aadebug")
 */
+
+/// State should be PLAYER_STATE_GHOST, or one of the other defines in __DEFINES\metrics.dm
+/datum/controller/subsystem/metrics/proc/report_death_state(client/target, state)
+	// Upon death, start tracking how long we are dead for
+	if (state == PLAYER_STATE_GHOST || state == PLAYER_STATE_GHOST_DEAD)
+		// Re-joined the game, or was already dead
+		target.player_details.player_state = state
+		// Became dead when was previously alive
+		if (target.player_details.player_state == PLAYER_STATE_LIVING)
+			target.player_details.time_of_death = world.time
+	// Upon revival, seal data about the death
+	// If we are not revived, then this data remains until the end of
+	// the round, where it is then sealed.
+	if (state == PLAYER_STATE_LIVING)
+		// Already alive, no state change
+		if (target.player_details.player_state == PLAYER_STATE_LIVING)
+			return
+		var/list/player_details = list()
+		player_details["ckey"] = target.ckey
+		player_details["start"] = target.player_details.time_of_death
+		player_details["end"] = world.time
+		player_details["duration"] = world.time - target.player_details.time_of_death
+		player_details["was_revivable"] = FALSE
+		player_details["revived"] = TRUE
+		player_details["respawned"] = FALSE
+		player_details["quit"] = FALSE
+		target.player_details.time_of_death = null

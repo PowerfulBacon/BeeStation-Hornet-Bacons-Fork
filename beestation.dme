@@ -135,6 +135,7 @@
 #include "code\__DEFINES\mentor.dm"
 #include "code\__DEFINES\mergers.dm"
 #include "code\__DEFINES\metacoin.dm"
+#include "code\__DEFINES\metrics.dm"
 #include "code\__DEFINES\mineral.dm"
 #include "code\__DEFINES\mobfactions.dm"
 #include "code\__DEFINES\mobs.dm"

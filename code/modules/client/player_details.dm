@@ -8,6 +8,12 @@
 	var/datum/achievement_data/achievements
 	/// Whether or not this client has voted to leave
 	var/voted_to_leave = FALSE
+	/// The current state of the player
+	var/player_state = PLAYER_STATE_LIVING
+	/// The time of death, or null if the player has not died.
+	/// Used for metrics tracking only, use timeofdeath on /mob/living
+	/// for standard cases.
+	var/time_of_death = null
 
 /datum/player_details/New(key)
 	achievements = new(key)
