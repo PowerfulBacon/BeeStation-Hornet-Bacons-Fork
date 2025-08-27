@@ -18,6 +18,7 @@
 	// Temp: Create some new characters
 	for (var/i in 1 to 2)
 		var/mob/created = add_new_character(grant_to.client, grant_to.mind)
+		created.forceMove(grant_to.loc)
 		enter_candle(created)
 
 /datum/action/second_life/on_activate(mob/user, atom/target, trigger_flags)
