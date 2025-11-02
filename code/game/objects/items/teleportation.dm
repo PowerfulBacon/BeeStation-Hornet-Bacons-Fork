@@ -126,9 +126,6 @@
 /obj/item/hand_tele/Initialize(mapload)
 	. = ..()
 	active_portal_pairs = list()
-
-/obj/item/hand_tele/ComponentInitialize()
-	. = ..()
 	AddComponent(/datum/component/trackable)
 
 /obj/item/hand_tele/pre_attack(atom/target, mob/user, params)

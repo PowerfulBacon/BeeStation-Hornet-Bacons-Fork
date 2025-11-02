@@ -168,9 +168,6 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 			/obj/anomaly/energy_ball,
 			/obj/boh_tear
 		))
-
-/obj/machinery/power/supermatter_crystal/ComponentInitialize()
-	. = ..()
 	AddComponent(/datum/component/trackable)
 
 /obj/machinery/power/supermatter_crystal/Destroy()

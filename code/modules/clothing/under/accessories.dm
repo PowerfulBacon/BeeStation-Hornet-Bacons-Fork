@@ -196,7 +196,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	investigate_flags = ADMIN_INVESTIGATE_TARGET
 
-/obj/item/clothing/accessory/medal/gold/captain/ComponentInitialize()
+/obj/item/clothing/accessory/medal/gold/captain/Initialize()
 	. = ..()
 	AddComponent(/datum/component/trackable)
 

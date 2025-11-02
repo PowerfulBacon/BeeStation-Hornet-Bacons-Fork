@@ -75,7 +75,7 @@
 	w_class = WEIGHT_CLASS_LARGE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
-/obj/item/blackbox/ComponentInitialize()
+/obj/item/blackbox/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/trackable)
 

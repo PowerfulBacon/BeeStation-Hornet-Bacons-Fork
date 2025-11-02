@@ -52,7 +52,7 @@
 	var/legend = FALSE	//Viewing the wire legend
 	investigate_flags = ADMIN_INVESTIGATE_TARGET
 
-/obj/item/areaeditor/blueprints/ComponentInitialize()
+/obj/item/areaeditor/blueprints/Initialize()
 	. = ..()
 	AddComponent(/datum/component/trackable)
 

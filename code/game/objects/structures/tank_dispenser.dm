@@ -11,7 +11,7 @@
 	var/oxygentanks = TANK_DISPENSER_CAPACITY
 	var/plasmatanks = TANK_DISPENSER_CAPACITY
 
-/obj/structure/tank_dispenser/ComponentInitialize()
+/obj/structure/tank_dispenser/Initialize()
 	. = ..()
 	if (plasmatanks > 0)
 		AddComponent(/datum/component/trackable)

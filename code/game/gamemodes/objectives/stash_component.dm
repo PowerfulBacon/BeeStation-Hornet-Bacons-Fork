@@ -57,7 +57,8 @@
 	create_owner_icon(owner)
 
 /datum/component/stash/proc/on_examine(datum/source, mob/viewer, list/examine_text)
-	SIGNAL_HANDLERiewer?.mind in stash_minds)
+	SIGNAL_HANDLER
+	if (viewer?.mind in stash_minds)
 		examine_text += span_notice("You have a stash hidden here! Use <b>Alt-Click</b> to access it.")
 
 /datum/component/stash/proc/access_stash(datum/source, mob/user)

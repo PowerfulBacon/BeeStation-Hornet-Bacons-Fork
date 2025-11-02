@@ -85,7 +85,7 @@
 	weapon_weight = WEAPON_LIGHT
 	investigate_flags = ADMIN_INVESTIGATE_TARGET
 
-/obj/item/gun/energy/laser/captain/ComponentInitialize()
+/obj/item/gun/energy/laser/captain/Initialize()
 	. = ..()
 	AddComponent(/datum/component/trackable)
 

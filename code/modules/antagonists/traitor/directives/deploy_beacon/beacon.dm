@@ -4,7 +4,7 @@
 	icon = 'icons/obj/traitor_beacon.dmi'
 	icon_state = "base"
 
-/obj/item/uplink_beacon/ComponentInitialize()
+/obj/item/uplink_beacon/Initialize()
 	. = ..()
 	AddComponent(/datum/component/deployable, /obj/structure/uplink_beacon, time_to_deploy = 3 SECONDS, can_deploy_check = CALLBACK(src, PROC_REF(can_deploy)))
 

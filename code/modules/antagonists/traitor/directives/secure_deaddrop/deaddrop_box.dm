@@ -10,21 +10,20 @@
 	w_class = WEIGHT_CLASS_BULKY
 	// Prevent it from being opened until it is ready to be opened
 	obj_flags = INDESTRUCTIBLE
-	component_type = /datum/component/storage/concrete/deaddrop
+	storage_type = /datum/storage/deaddrop
 
 /obj/item/storage/deaddrop_box/proc/unlock()
 	// You can now break it to your hearts desire
 	obj_flags &= ~INDESTRUCTIBLE
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	storage.locked = FALSE
+	atom_storage.locked = FALSE
 	if (ismob(loc))
 		var/mob/person = loc
 		to_chat(person, "<span class='notice'>[name] unlocks!</span>")
 		// Sound only plays 3 tile range
 		playsound(src, 'sound/machines/boltsup.ogg', 40, extrarange = -SOUND_RANGE + 3)
 
-/datum/component/storage/concrete/deaddrop
+/datum/storage/deaddrop
 	locked = TRUE
-	can_transfer = FALSE
 	emp_shielded = TRUE
 	quickdraw = FALSE
+	rustle_sound = FALSE

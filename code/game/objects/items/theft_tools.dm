@@ -19,9 +19,6 @@
 /obj/item/nuke_core/Initialize(mapload)
 	. = ..()
 	START_PROCESSING(SSobj, src)
-
-/obj/item/nuke_core/ComponentInitialize()
-	. = ..()
 	AddComponent(/datum/component/trackable)
 
 /obj/item/nuke_core/Destroy()
@@ -131,7 +128,7 @@
 	item_state = "supermattersliver"
 	pulseicon = "supermatter_sliver_pulse"
 
-/obj/item/nuke_core/supermatter_sliver/ComponentInitialize()
+/obj/item/nuke_core/supermatter_sliver/Initialize()
 	. = ..()
 	AddComponent(/datum/component/trackable)
 
