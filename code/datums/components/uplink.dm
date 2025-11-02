@@ -180,8 +180,8 @@ GLOBAL_LIST_EMPTY(uplinks)
 	data["telecrystals"] = telecrystals
 	data["lockable"] = lockable
 	data["compactMode"] = compact_mode
-	data["objectives"] = SSdirectives.get_uplink_data(src)
 	data["reputation"] = reputation
+	data += SSdirectives.get_uplink_data(src)
 	return data
 
 /datum/component/uplink/ui_static_data(mob/user)

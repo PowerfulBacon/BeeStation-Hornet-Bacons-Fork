@@ -52,7 +52,6 @@
     '../components/Tooltip.scss',
     $with: ('background-color': hsl(0, 94.7%, 14.9%))
   );
-  @include meta.load-css('../components/Uplink.scss');
 
   // Interfaces
   @include meta.load-css('../interfaces/Uplink.scss');

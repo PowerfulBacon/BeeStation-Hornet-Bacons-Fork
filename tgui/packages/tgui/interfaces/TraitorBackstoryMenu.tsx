@@ -1,15 +1,72 @@
 import { useBackend, useLocalState } from '../backend';
-import { Button, Dimmer, Stack, Box, Section, Tabs, Flex, Icon, Tooltip } from '../components';
+import {
+  Box,
+  Button,
+  Dimmer,
+  Flex,
+  Icon,
+  Section,
+  Stack,
+  Tabs,
+  Tooltip,
+} from '../components';
 import { Window } from '../layouts';
 import { AntagInfoTraitorContent } from './AntagInfoTraitor';
 
-export const TraitorBackstoryMenu = (_, context) => {
-  const { data } = useBackend(context);
+type Objective = {
+  count: number;
+  name: string;
+  explanation: string;
+  complete: boolean;
+};
+
+type Backstory = {
+  name: string;
+  description: string;
+  path: string;
+  motivations: string[];
+};
+
+type TraitorBackstoryStaticData = {
+  all_backstories: Backstory[];
+  all_motivations: string[];
+};
+
+type TraitorBackstoryData = {
+  allowed_backstories: string[];
+  recommended_backstories: string[];
+  backstory: string | undefined;
+  antag_name: string;
+  code: string | undefined;
+  failsafe_code: string | undefined;
+  has_uplink: boolean;
+  uplink_unlock_info: string | undefined;
+  objectives: Objective[];
+} & (
+  | {
+      has_codewords: true;
+      phrases: string;
+      responses: string;
+    }
+  | {
+      has_codewords: false;
+    }
+) &
+  TraitorBackstoryStaticData;
+
+export const TraitorBackstoryMenu = () => {
+  const { data } = useBackend<TraitorBackstoryData>();
   const { all_backstories = {}, backstory } = data;
-  let has_backstory = all_backstories[backstory];
-  let [ui_phase, set_ui_phase] = useLocalState(context, 'traitor_ui_phase', has_backstory ? 1 : 0);
-  let [tabIndex, setTabIndex] = useLocalState(context, 'traitor_selected_tab', 1);
-  let [selected_backstory, set_selected_backstory] = useLocalState(context, 'traitor_selected_backstory', null);
+  let has_backstory = backstory && all_backstories[backstory];
+  let [ui_phase, set_ui_phase] = useLocalState(
+    'traitor_ui_phase',
+    has_backstory ? 1 : 0,
+  );
+  let [tabIndex, setTabIndex] = useLocalState('traitor_selected_tab', 1);
+  let [selected_backstory, set_selected_backstory] = useLocalState(
+    'traitor_selected_backstory',
+    null,
+  );
   let windowTitle = 'Traitor Backstory';
   switch (ui_phase) {
     case 0:
@@ -25,7 +82,8 @@ export const TraitorBackstoryMenu = (_, context) => {
       theme={'syndicate'}
       width={650}
       height={info_ui ? 650 : 500}
-      title={windowTitle}>
+      title={windowTitle}
+    >
       <Window.Content scrollable>
         {ui_phase === 0 && <IntroductionMenu set_ui_phase={set_ui_phase} />}
         {ui_phase === 1 && !has_backstory && (
@@ -46,13 +104,19 @@ export const TraitorBackstoryMenu = (_, context) => {
                 icon="arrow-left"
                 content="Back"
                 onClick={() => {
-                  set_ui_phase((phase) => phase - 1);
+                  set_ui_phase(ui_phase - 1);
                 }}
               />
-              <Tabs.Tab selected={tabIndex === 1} onClick={() => setTabIndex(1)}>
+              <Tabs.Tab
+                selected={tabIndex === 1}
+                onClick={() => setTabIndex(1)}
+              >
                 Antagonist Info
               </Tabs.Tab>
-              <Tabs.Tab selected={tabIndex === 2} onClick={() => setTabIndex(2)}>
+              <Tabs.Tab
+                selected={tabIndex === 2}
+                onClick={() => setTabIndex(2)}
+              >
                 Backstory
               </Tabs.Tab>
             </Tabs>
@@ -76,8 +140,8 @@ export const TraitorBackstoryMenu = (_, context) => {
   );
 };
 
-const IntroductionMenu = ({ set_ui_phase }, context) => {
-  const { act, data } = useBackend(context);
+const IntroductionMenu = ({ set_ui_phase }) => {
+  const { act, data } = useBackend<TraitorBackstoryData>();
   return (
     <Dimmer>
       <Stack align="baseline" vertical>
@@ -87,12 +151,15 @@ const IntroductionMenu = ({ set_ui_phase }, context) => {
               Traitor Backstory Generator
             </Stack.Item>
             <Stack.Item maxWidth="80vw">
-              This menu is a tool for you to use as an antagonist, giving a foundation for your character&apos;s motivations and
-              reasoning for being a traitor.
+              This menu is a tool for you to use as an antagonist, giving a
+              foundation for your character&apos;s motivations and reasoning for
+              being a traitor.
             </Stack.Item>
             <Stack.Item maxWidth="80vw">
-              Please <strong>select a backstory</strong> - a short description of each will be given. You will{' '}
-              <strong>not</strong> be able to change this after your main backstory is locked in, so choose wisely.
+              Please <strong>select a backstory</strong> - a short description
+              of each will be given. You will <strong>not</strong> be able to
+              change this after your main backstory is locked in, so choose
+              wisely.
             </Stack.Item>
           </Stack>
         </Stack.Item>
@@ -134,57 +201,77 @@ const BackstoryInfo = ({ data, titleColor }) => {
 const MOTIVATION_ICONS = {
   'Forced Into It': 'user-alt-slash',
   'Not Forced Into It': 'user-check',
-  'Money': 'dollar-sign',
-  'Political': 'peace',
-  'Love': 'heart',
-  'Reputation': 'comments-dollar',
+  Money: 'dollar-sign',
+  Political: 'peace',
+  Love: 'heart',
+  Reputation: 'comments-dollar',
   'Death Threat': 'skull',
-  'Authority': 'users',
-  'Fun': 'grin-tongue-wink',
+  Authority: 'users',
+  Fun: 'grin-tongue-wink',
 };
 
-const SelectBackstoryMenu = (
-  { set_ui_phase, selected_backstory, set_selected_backstory, show_nav },
-  context
-) => {
-  const { act, data } = useBackend(context);
+const SelectBackstoryMenu = ({
+  set_ui_phase,
+  selected_backstory,
+  set_selected_backstory,
+  show_nav = false,
+}) => {
+  const { act, data } = useBackend<TraitorBackstoryData>();
   const {
     allowed_backstories = [],
-    all_backstories = {},
+    all_backstories = [],
     recommended_backstories = [],
     all_motivations = [],
     backstory,
   } = data;
 
-  let [motivations, set_motivations] = useLocalState(context, 'traitor_motivations', []);
+  let [motivations, set_motivations] = useLocalState<string[]>(
+    'traitor_motivations',
+    [],
+  );
 
-  const toggle_motivation = (name) =>
-    set_motivations((motivations) => {
-      if (motivations.includes(name)) {
-        let index = motivations.indexOf(name);
-        if (index > -1) {
-          motivations.splice(index, 1);
-        }
-      } else {
-        if (name === 'Not Forced Into It' && motivations.includes('Forced Into It')) {
-          toggle_motivation('Forced Into It');
-        }
-        if (name === 'Forced Into It' && motivations.includes('Not Forced Into It')) {
-          toggle_motivation('Not Forced Into It');
-        }
-        motivations.push(name);
+  const nextMotivation = (name: string, motivations: string[]) => {
+    if (motivations.includes(name)) {
+      let index = motivations.indexOf(name);
+      if (index > -1) {
+        motivations.splice(index, 1);
       }
-      return motivations;
-    });
+    } else {
+      if (
+        name === 'Not Forced Into It' &&
+        motivations.includes('Forced Into It')
+      ) {
+        toggle_motivation('Forced Into It');
+      }
+      if (
+        name === 'Forced Into It' &&
+        motivations.includes('Not Forced Into It')
+      ) {
+        toggle_motivation('Not Forced Into It');
+      }
+      motivations.push(name);
+    }
+    return motivations;
+  };
+
+  const toggle_motivation = (name: string) =>
+    set_motivations(nextMotivation(name, motivations));
 
   let allowed_backstories_filtered = Object.values(all_backstories)
     .filter((value) => allowed_backstories.includes(value.path))
     .map((value) => value.path);
   if (allowed_backstories_filtered.length === 0) {
-    return <Dimmer>No valid backstories found. This is likely a bug. Please reload or reopen the menu.</Dimmer>;
+    return (
+      <Dimmer>
+        No valid backstories found. This is likely a bug. Please reload or
+        reopen the menu.
+      </Dimmer>
+    );
   }
 
-  let current_backstory = all_backstories[backstory] || all_backstories[selected_backstory];
+  let current_backstory =
+    (backstory && all_backstories[backstory]) ||
+    all_backstories[selected_backstory];
   let current_backstory_key = backstory || selected_backstory;
 
   return (
@@ -210,14 +297,19 @@ const SelectBackstoryMenu = (
                 />
               )}
             </>
-          }>
+          }
+        >
           <Box mb={0.5}>
             <strong>What motivates your character?</strong>
           </Box>
           {all_motivations.map((motivation) => (
             <Button.Checkbox
               key={motivation + '-checkbox'}
-              icon={motivations?.includes(motivation) ? MOTIVATION_ICONS[motivation] : 'square-o'}
+              icon={
+                motivations?.includes(motivation)
+                  ? MOTIVATION_ICONS[motivation]
+                  : 'square-o'
+              }
               content={motivation}
               onClick={() => toggle_motivation(motivation)}
               checked={motivations?.includes(motivation)}
@@ -233,7 +325,12 @@ const SelectBackstoryMenu = (
               height="100%"
               width="100%"
               className="Section Section-fill"
-              style={{ padding: '0.66em 0.5em', 'overflow-y': 'scroll', direction: 'rtl' }}>
+              style={{
+                padding: '0.66em 0.5em',
+                'overflow-y': 'scroll',
+                direction: 'rtl',
+              }}
+            >
               <Tabs vertical style={{ direction: 'ltr' }} textAlign="right">
                 {Object.values(all_backstories)
                   .filter((v) => allowed_backstories_filtered?.includes(v.path))
@@ -244,9 +341,19 @@ const SelectBackstoryMenu = (
                       name={backstory.name}
                       selected={current_backstory_key === backstory.path}
                       set_selected_backstory={set_selected_backstory}
-                      is_recommended_objectives={recommended_backstories.includes(backstory.path)}
-                      recommendation_count={backstory.motivations.filter((r) => motivations?.includes(r)).length}
-                      matches_all_recommendations={motivations.filter((r) => !backstory.motivations?.includes(r)).length === 0}
+                      is_recommended_objectives={recommended_backstories.includes(
+                        backstory.path,
+                      )}
+                      recommendation_count={
+                        backstory.motivations.filter((r) =>
+                          motivations?.includes(r),
+                        ).length
+                      }
+                      matches_all_recommendations={
+                        motivations.filter(
+                          (r) => !backstory.motivations?.includes(r),
+                        ).length === 0
+                      }
                     />
                   ))}
               </Tabs>
@@ -274,11 +381,15 @@ const SelectBackstoryMenu = (
   );
 };
 
-const BackstorySection = (
-  { backstory, backstory_locked, show_button, backstory_key, set_ui_phase, fill },
-  context
-) => {
-  const { act } = useBackend(context);
+const BackstorySection = ({
+  backstory,
+  backstory_locked,
+  show_button,
+  backstory_key,
+  set_ui_phase,
+  fill,
+}) => {
+  const { act } = useBackend<TraitorBackstoryData>();
   return (
     <Section
       fill={fill}
@@ -293,8 +404,19 @@ const BackstorySection = (
           {Object.entries(MOTIVATION_ICONS)
             .filter(([k, v]) => backstory.motivations?.includes(k))
             .map(([motivation, icon]) => (
-              <Tooltip key={'icon-motivation-tooltip-' + motivation} content={motivation}>
-                <Icon fontSize={1.75} key={'icon-motivation-' + motivation} mr={1} mt={1} pr={0.5} pl={0.5} name={icon} />
+              <Tooltip
+                key={'icon-motivation-tooltip-' + motivation}
+                content={motivation}
+              >
+                <Icon
+                  fontSize={1.75}
+                  key={'icon-motivation-' + motivation}
+                  mr={1}
+                  mt={1}
+                  pr={0.5}
+                  pl={0.5}
+                  name={icon}
+                />
               </Tooltip>
             ))}
           {show_button ? (
@@ -322,7 +444,8 @@ const BackstorySection = (
             )
           ) : null}
         </>
-      }>
+      }
+    >
       <Box inline dangerouslySetInnerHTML={{ __html: backstory.description }} />
     </Section>
   );
@@ -336,9 +459,14 @@ const BackstoryTab = ({
   recommendation_count,
   matches_all_recommendations,
   set_selected_backstory,
+  key = '',
 }) => {
   return (
-    <Tabs.Tab fontSize={1.05} selected={selected} onClick={() => set_selected_backstory(selected ? null : path)}>
+    <Tabs.Tab
+      fontSize={1.05}
+      selected={selected}
+      onClick={() => set_selected_backstory(selected ? null : path)}
+    >
       {name}
       {is_recommended_objectives && (
         <Tooltip content="This backstory is recommended due to your murderbone status.">
@@ -350,10 +478,22 @@ const BackstoryTab = ({
           <Icon
             fontSize={1.25}
             name="star"
-            color={matches_all_recommendations ? 'yellow' : recommendation_count > 1 ? 'silver' : 'brown'}
+            color={
+              matches_all_recommendations
+                ? 'yellow'
+                : recommendation_count > 1
+                  ? 'silver'
+                  : 'brown'
+            }
             ml={1}
           />
-          <Box inline width="0" color="black" fontSize={1} style={{ transform: 'translate(-12px, -1px)' }}>
+          <Box
+            inline
+            width="0"
+            color="black"
+            fontSize={1}
+            style={{ transform: 'translate(-12px, -1px)' }}
+          >
             {recommendation_count}
           </Box>
         </Tooltip>
@@ -362,8 +502,17 @@ const BackstoryTab = ({
   );
 };
 
-const BackstoryDetails = (_, context) => {
-  const { data } = useBackend(context);
+const BackstoryDetails = (_) => {
+  const { data } = useBackend<TraitorBackstoryData>();
   const { backstory, all_backstories = {} } = data;
-  return <BackstorySection fill backstory={all_backstories[backstory]} />;
+  return (
+    <BackstorySection
+      fill
+      backstory={backstory && all_backstories[backstory]}
+      backstory_locked={false}
+      show_button={false}
+      backstory_key={backstory}
+      set_ui_phase={undefined}
+    />
+  );
 };

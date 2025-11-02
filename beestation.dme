@@ -2382,7 +2382,6 @@
 #include "code\modules\antagonists\traitor\demoraliser.dm"
 #include "code\modules\antagonists\traitor\syndicate_contract.dm"
 #include "code\modules\antagonists\traitor\traitor_objectives.dm"
-#include "code\modules\antagonists\traitor\traitor_spawner.dm"
 #include "code\modules\antagonists\traitor\backstory\syndicate_faction.dm"
 #include "code\modules\antagonists\traitor\backstory\traitor_backstories.dm"
 #include "code\modules\antagonists\traitor\backstory\traitor_backstory_ui.dm"

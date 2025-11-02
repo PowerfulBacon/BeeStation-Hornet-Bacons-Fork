@@ -51,6 +51,9 @@
     min-width: 150px;
     flex-shrink: 0;
     word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
 
   .HomeIntro {
@@ -70,6 +73,7 @@
 .TextFlash {
   color: white;
   animation: 1s ease alertFlash 1;
+  font-family: monospace;
 }
 
 @keyframes alertFlash {
@@ -141,7 +145,12 @@
   position: relative;
   width: 180px;
   height: 100px;
-  background: linear-gradient(0deg, #bd404060 0%, #64282860 30%, #00000060 100%);
+  background: linear-gradient(
+    0deg,
+    #bd404060 0%,
+    #64282860 30%,
+    #00000060 100%
+  );
   margin: 0px 5px;
   padding: 4px 4px;
   border-radius: 4px;
@@ -221,9 +230,56 @@
 
 .border_section {
   border: 2px solid colors.$primary;
-  background: linear-gradient(180deg, color.adjust($color: colors.$primary, $alpha: -0.85), color.adjust($color: colors.$primary, $alpha: -0.75));
+  background: linear-gradient(
+    180deg,
+    color.adjust($color: colors.$primary, $alpha: -0.85),
+    color.adjust($color: colors.$primary, $alpha: -0.75)
+  );
   border-radius: 4px;
   padding: 8px;
+  position: relative;
+  font-family: monospace;
+
+  // Window overrides
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: repeating-linear-gradient(
+      to right,
+      #ff0000 0px,
+      #ff0000 1px,
+      #00ff00 1px,
+      #00ff00 2px,
+      #0000ff 2px,
+      #0000ff 3px
+    );
+    background-size: 3px 100%;
+    opacity: 0.11;
+    mix-blend-mode: multiply;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: repeating-linear-gradient(
+      to top,
+      #ff0000 0px,
+      #ff0000 2px,
+      #00ff00 2px,
+      #00ff00 4px,
+      #0000ff 4px,
+      #0000ff 6px
+    );
+    background-size: 100% 6px;
+    opacity: 0.02;
+    mix-blend-mode: multiply;
+  }
 }
 
 .directive_prize_info {
@@ -297,49 +353,77 @@
   &.excommunicate {
     background-color: #b92f27; // Dark red for Ex-Communication rank
     $luminance: luminance(#b92f27);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.blood-servant {
     background-color: #543219; // Saddle brown for Blood Servant rank
     $luminance: luminance(#543219);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.field-agent {
     background-color: #3960aa; // Cornflower blue for Field Agent rank
     $luminance: luminance(#3960aa);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.specialist {
     background-color: #6724a6; // Hot pink for Specialist rank
     $luminance: luminance(#6724a6);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.operative {
     background-color: #cb2e7d; // Blue violet for Operative rank
     $luminance: luminance(#cb2e7d);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.director {
     background-color: #821111; // Firebrick for Director rank
     $luminance: luminance(#821111);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 
   &.archon {
     background-color: #ffd059; // Gold for Archon rank
     $luminance: luminance(#ffd059);
-    $text-color: if($luminance > 0.35, rgba(0, 0, 0, 1), rgba(255, 255, 255, 1));
+    $text-color: if(
+      $luminance > 0.35,
+      rgba(0, 0, 0, 1),
+      rgba(255, 255, 255, 1)
+    );
     color: $text-color;
   }
 }

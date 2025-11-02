@@ -10,7 +10,10 @@ NAMED_TUPLE_1(directive_special_action, var, action_name)
 /datum/directive_team/proc/grant_punishment(loss_amount)
 	for (var/datum/component/uplink/uplink in uplinks)
 		uplink.reputation -= loss_amount
-	send_message("You have failed to complete a direct order from Syndicate command. You have lost [loss_amount] reputation points as a result of administrative punishment.")
+	if (loss_amount)
+		send_message("You have failed to complete a direct order from Syndicate command. You have lost [loss_amount] reputation points as a result of administrative punishment.")
+	else
+		send_message("You have failed to complete a direct order from Syndicate command. Await further instructions and proceed with prior mission objectives.")
 
 /datum/directive_team/proc/send_message(message)
 	for (var/datum/component/uplink/uplink in uplinks)
@@ -27,7 +30,7 @@ NAMED_TUPLE_1(directive_special_action, var, action_name)
 		// If we are not held by a syndicate, and we are locked then do not give a notification
 		if (!syndicate_antag && uplink.locked)
 			continue
-		to_chat(current, "<span class='traitor_objective'>[uppertext(message)].</span>")
+		to_chat(current, "<span class='traitor_objective'>[uppertext(message)]</span>")
 		SEND_SOUND(current, sound('sound/machines/twobeep_high.ogg', volume = 50))
 
 /// This can only be running once at a time, do not run in parallel
