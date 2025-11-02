@@ -309,13 +309,13 @@
 
 	if (!implant)
 		. = uplink_loc
-		var/datum/component/uplink/U = uplink_loc.AddComponent(
-			/datum/component/uplink,
-			traitor_mob?.mind,
-			TRUE,
-			FALSE,
-			UPLINK_TRAITORS,
-			telecrystals
+		var/datum/component/uplink/U = uplink_loc.AddComponent(\
+			/datum/component/uplink,\
+			traitor_mob?.mind,\
+			TRUE,\
+			FALSE,\
+			UPLINK_TRAITORS,\
+			telecrystals\
 		)
 		if(!U)
 			CRASH("Uplink creation failed.")
