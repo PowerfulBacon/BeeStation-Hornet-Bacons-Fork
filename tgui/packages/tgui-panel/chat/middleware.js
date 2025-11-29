@@ -183,8 +183,12 @@ export const chatMiddleware = (store) => {
         settings.highlightSettings,
         settings.highlightSettingById,
       );
-      chatRenderer.setHighContrast(settings.highContrast);
-
+      if (
+        chatRenderer.setHighContrast(settings.highContrast) ||
+        chatRenderer.setTheme(settings.theme)
+      ) {
+        chatRenderer.rebuildChat();
+      }
       return;
     }
     if (type === 'roundrestart') {

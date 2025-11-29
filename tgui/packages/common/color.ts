@@ -402,3 +402,57 @@ export const contrast = (
     ? (background_luminance + 0.05) / (foreground_luminance + 0.05)
     : (foreground_luminance + 0.05) / (background_luminance + 0.05);
 };
+
+/**
+ * Computes WCAG contrast ratio between two HSVA colors.
+ * Uses the existing contrast() function, which operates in RGB.
+ */
+export function contrastHsva(fg: HsvaColor, bg: HsvaColor): number {
+  const fgRgba = hsvaToRgba(fg);
+  const bgRgba = hsvaToRgba(bg);
+
+  const fgRgb = rgbaToRgb(fgRgba);
+  const bgRgb = rgbaToRgb(bgRgba);
+
+  return contrast(fgRgb, bgRgb);
+}
+
+/**
+ * Inverts an RGB colour's lightnessValue
+ * @param source The RGB colour to invert
+ * @returns The inverted RGB colour of source
+ */
+export const invertLightness = (source: RgbColor): RgbColor => {
+  const originalL = 0.299 * source.r + 0.587 * source.g + 0.114 * source.b;
+
+  const targetL = 255 - originalL;
+
+  const scale = targetL / (originalL || 1);
+
+  const nr = Math.max(0, Math.min(255, Math.round(source.r * scale)));
+  const ng = Math.max(0, Math.min(255, Math.round(source.g * scale)));
+  const nb = Math.max(0, Math.min(255, Math.round(source.b * scale)));
+
+  return {
+    r: nr,
+    g: ng,
+    b: nb,
+  };
+};
+
+/**
+ * Invert a color in HSVA space while preserving hue & saturation.
+ * Equivalent in spirit to the RGB invert(), but works natively on HSVA.
+ */
+export function invertLightnessHsva(source: HsvaColor): HsvaColor {
+  // HSV value is 0–100, so invert the brightness directly
+  const originalV = source.v; // 0–100
+  const invertedV = 100 - originalV; // invert brightness
+
+  return {
+    h: source.h, // preserve hue
+    s: source.s, // preserve saturation
+    v: invertedV, // inverted brightness
+    a: source.a, // preserve alpha
+  };
+}

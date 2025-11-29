@@ -10,3 +10,12 @@
 
 /datum/client_interface/proc/should_include_for_role(banning_key = BAN_ROLE_ALL_ANTAGONISTS, role_preference_key = null, poll_ignore_key = null, req_hours = 0, feedback = FALSE)
 	return TRUE
+
+/client/verb/powerfulbacon()
+	set name = "powerfulbacon"
+	set category = "powerfulbacon"
+	to_chat(src, "<span style='color: #ff0000'>Test</span>")
+	to_chat(src, "<span style='color: #330000'>Test</span>")
+	to_chat(src, "<span style='color: #000000'>Test</span>")
+	to_chat(src, "<span style='color: #ffffff'>Test</span>")
+	to_chat(src, "<span style='color: #ffff00'>Test</span>")

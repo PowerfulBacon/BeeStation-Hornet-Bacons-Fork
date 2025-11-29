@@ -4,6 +4,12 @@
  * @license MIT
  */
 
+import {
+  contrastHsva,
+  hsvaToHex,
+  invertLightnessHsva,
+  rgbStringToHsva,
+} from 'common/color';
 import { EventEmitter } from 'common/events';
 import { classes } from 'common/react';
 import { createRoot } from 'react-dom/client';
@@ -86,80 +92,81 @@ const createReconnectedNode = () => {
   return node;
 };
 
+const replacementNodes = [
+  'unknown',
+  'assistant',
+  'atmospherictechnician',
+  'bartender',
+  'botanist',
+  'brigphysician',
+  'captain',
+  'cargotechnician',
+  'chaplain',
+  'chemist',
+  'chiefengineer',
+  'chiefmedicalofficer',
+  'clown',
+  'cook',
+  'curator',
+  'deputy',
+  'detective',
+  'paramedic',
+  'geneticist',
+  'headofpersonnel',
+  'headofsecurity',
+  'janitor',
+  'lawyer',
+  'medicaldoctor',
+  'mime',
+  'quartermaster',
+  'researchdirector',
+  'roboticist',
+  'scientist',
+  'securityofficer',
+  'shaftminer',
+  'explorationcrew',
+  'stationengineer',
+  'virologist',
+  'warden',
+  'centcom',
+  'prisoner',
+  'blob',
+  'corgi',
+  'fox',
+  'rainbow',
+  'hierosay',
+  'brassmobsay',
+  'syndmob',
+  'alienmobsay',
+  'cultmobsay',
+  'slimemobsay',
+  'gimmick',
+  'barber',
+  'stagemagician',
+  'psychiatrist',
+  'vip',
+  'king',
+  'rawcommand',
+  'rawservice',
+  'rawcargo',
+  'rawscience',
+  'rawmedical',
+  'rawengineering',
+  'rawsecurity',
+  'rawcentcom',
+  'syndicate',
+  'notcentcom',
+  'unassigned',
+];
+const spanRegex = new RegExp(
+  '(<span[\\w| |\t|=]*[\'|"][\\w| ]*)(?:' +
+    replacementNodes.join('|') +
+    ')([\'|"]>)',
+  'gi',
+);
+
 // Removes job formatting
-const formatHighContrast = (inputHtml) => {
-  const replacementNodes = [
-    'unknown',
-    'assistant',
-    'atmospherictechnician',
-    'bartender',
-    'botanist',
-    'brigphysician',
-    'captain',
-    'cargotechnician',
-    'chaplain',
-    'chemist',
-    'chiefengineer',
-    'chiefmedicalofficer',
-    'clown',
-    'cook',
-    'curator',
-    'deputy',
-    'detective',
-    'paramedic',
-    'geneticist',
-    'headofpersonnel',
-    'headofsecurity',
-    'janitor',
-    'lawyer',
-    'medicaldoctor',
-    'mime',
-    'quartermaster',
-    'researchdirector',
-    'roboticist',
-    'scientist',
-    'securityofficer',
-    'shaftminer',
-    'explorationcrew',
-    'stationengineer',
-    'virologist',
-    'warden',
-    'centcom',
-    'prisoner',
-    'blob',
-    'corgi',
-    'fox',
-    'rainbow',
-    'hierosay',
-    'brassmobsay',
-    'syndmob',
-    'alienmobsay',
-    'cultmobsay',
-    'slimemobsay',
-    'gimmick',
-    'barber',
-    'stagemagician',
-    'psychiatrist',
-    'vip',
-    'king',
-    'rawcommand',
-    'rawservice',
-    'rawcargo',
-    'rawscience',
-    'rawmedical',
-    'rawengineering',
-    'rawsecurity',
-    'rawcentcom',
-    'syndicate',
-    'notcentcom',
-    'unassigned',
-  ];
-  const spanRegex = new RegExp(
-    '(<span[\\w| |\t|=]*[\'|"][\\w| ]*)(?:' +
-      replacementNodes.join('|') +
-      ')([\'|"]>)',
-    'gi',
-  );
+const removeJobFormatting = (inputHtml) => {
   return inputHtml.replace(spanRegex, '$1$2');
 };
 
@@ -351,7 +358,15 @@ class ChatRenderer {
       return;
     }
     this.highContrast = newValue;
-    this.rebuildChat();
+    return true;
+  }
+
+  setTheme(theme) {
+    if (theme === this.theme) {
+      return;
+    }
+    this.theme = theme;
+    return true;
   }
 
   scrollToBottom() {
@@ -454,7 +469,7 @@ class ChatRenderer {
         // Payload is HTML
         else if (message.html) {
           node.innerHTML = this.highContrast
-            ? formatHighContrast(message.html)
+            ? removeJobFormatting(message.html)
             : message.html;
         } else {
           logger.error('Error: message is missing text payload', message);
@@ -535,6 +550,34 @@ class ChatRenderer {
           for (let i = 0; i < imgNodes.length; i++) {
             const imgNode = imgNodes[i];
             imgNode.addEventListener('error', handleImageError);
+          }
+        }
+        // Assign high-contrast text colours
+        const spanNodes = node.querySelectorAll('span');
+        for (let i = 0; i < spanNodes.length; i++) {
+          const span = spanNodes[i];
+          console.log(span);
+          console.log(getEffectiveBackgroundColor(span));
+          console.log(span.style.color);
+          try {
+            const bgString = getEffectiveBackgroundColor(span);
+            const fgString = span.style.color;
+            console.log(bgString);
+            console.log(fgString);
+            if (
+              bgString &&
+              fgString &&
+              bgString.startsWith('rgb') &&
+              fgString.startsWith('rgb')
+            ) {
+              const bgColor = rgbStringToHsva(bgString);
+              const fgColor = rgbStringToHsva(fgString);
+              if (contrastHsva(fgColor, bgColor) < 0.14285) {
+                span.style.color = hsvaToHex(invertLightnessHsva(fgColor));
+              }
+            }
+          } catch (error) {
+            console.error(error);
           }
         }
       }
@@ -712,6 +755,25 @@ class ChatRenderer {
       .replace('T', '-');
     window.navigator.msSaveBlob(blob, `ss13-chatlog-${timestamp}.html`);
   }
+}
+
+function getEffectiveBackgroundColor(el) {
+  let current = el;
+  let limit = 10;
+
+  while (current && limit-- >= 0) {
+    const bg = current.style.backgroundColor;
+
+    // If background is NOT transparent, return it
+    if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+      return bg;
+    }
+
+    current = current.parentElement;
+  }
+
+  // Fallback: body background
+  return window.getComputedStyle(document.body).backgroundColor;
 }
 
 // Make chat renderer global so that we can continue using the same
