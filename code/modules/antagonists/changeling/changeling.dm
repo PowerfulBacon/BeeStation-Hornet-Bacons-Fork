@@ -11,10 +11,6 @@
 	ui_name = "AntagInfoChangeling"
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
-	/// Whether to give this changeling objectives or not
-	give_objectives = TRUE
-	/// Whether we assign objectives which compete with other lings
-	var/competitive_objectives = FALSE
 
 	// Changeling Stuff.
 	// If you want good boy points,
@@ -27,6 +23,10 @@
 	var/datum/changeling_profile/first_profile = null
 	/// The amount of DNA gained. Includes DNA sting.
 	var/absorbed_count = 0
+	/// Essentially the health-bar of the changeling, this value decreases over
+	/// time forcing them to hunt. Biomass is decreased rapidly when taking damage
+	/// and changelings can only die when this value is depleted.
+	var/biomass = 200
 	/// The number of chemicals the changeling currently has.
 	var/chem_charges = 20
 	/// The max chemical storage the changeling currently has.
@@ -37,8 +37,6 @@
 	var/chem_recharge_slowdown = 0
 	/// The range this ling can sting things.
 	var/sting_range = 2
-	/// Changeling name, what other lings see over the hivemind when talking.
-	var/changelingID = "Changeling"
 	/// The number of genetics points (to buy powers) this ling currently has.
 	var/genetic_points = 5
 	/// The max number of genetics points (to buy powers) this ling can have..
@@ -106,13 +104,23 @@
 		/datum/language/voltaic,
 	)
 
-/datum/antagonist/changeling/New()
-	. = ..()
-	for(var/datum/antagonist/changeling/other_ling in GLOB.antagonists)
-		if(!other_ling.owner || other_ling.owner == owner)
-			continue
-		competitive_objectives = TRUE
-		break
+	var/static/list/changeling_traits = list(
+		// Changeling death is handled by biomass, their bodies are forms
+		// of autonomous cells, so simply damaging one part isn't enough
+		// to fully kill the changeling
+		TRAIT_NODEATH,
+		TRAIT_NOHARDCRIT,
+		TRAIT_NOSOFTCRIT,
+		TRAIT_NOCRITDAMAGE,
+		// Limbs can be re-attached by putting the cells back together
+		// again.
+		TRAIT_LIMBATTACHMENT,
+		// They do not need organs to live
+		TRAIT_STABLEHEART,
+		TRAIT_STABLELIVER,
+		// Damage slowdown is handled by biomass.
+		TRAIT_IGNOREDAMAGESLOWDOWN
+	)
 
 /datum/antagonist/changeling/Destroy()
 	QDEL_NULL(emporium_action)
@@ -121,12 +129,9 @@
 	return ..()
 
 /datum/antagonist/changeling/on_gain()
-	generate_name()
 	create_emporium()
 	create_innate_actions()
 	create_initial_profile()
-	if(give_objectives)
-		forge_objectives()
 	handle_clown_mutation(owner.current, "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself.")
 	owner.current.get_language_holder().omnitongue = TRUE
 	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/ling_aler.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)
@@ -145,6 +150,8 @@
 	RegisterSignal(living_mob, COMSIG_MOB_LOGIN, PROC_REF(on_login))
 	RegisterSignal(living_mob, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	RegisterSignal(living_mob, COMSIG_LIVING_POST_FULLY_HEAL, PROC_REF(on_fullhealed))
+
+	living_mob.add_traits(changeling_traits, CHANGELING_TRAIT)
 
 	if(living_mob.hud_used)
 		living_mob.hud_used.lingchemdisplay.invisibility = 0
@@ -171,25 +178,12 @@
 		M.hud_used.lingchemdisplay.invisibility = 0
 		M.hud_used.lingchemdisplay.maptext = FORMAT_CHEM_CHARGES_TEXT(chem_charges)
 
-/datum/antagonist/changeling/proc/generate_name()
-	var/static/list/left_changling_names = GLOB.greek_letters.Copy()
-
-	var/honorific
-	if(owner.current.gender == FEMALE)
-		honorific = "Ms."
-	else
-		honorific = "Mr."
-	if(length(left_changling_names))
-		changelingID = pick_n_take(left_changling_names)
-		changelingID = "[honorific] [changelingID]"
-	else
-		changelingID = "[honorific] [pick(GLOB.greek_letters)] No.[rand(1,9)]"
-
 /datum/antagonist/changeling/remove_innate_effects(mob/living/mob_override)
 	var/mob/living/living_mob = mob_override || owner.current
 	handle_clown_mutation(living_mob, removing = FALSE)
 	UnregisterSignal(living_mob, list(COMSIG_MOB_LOGIN, COMSIG_LIVING_LIFE, COMSIG_LIVING_POST_FULLY_HEAL, COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON, COMSIG_MOB_HUD_CREATED))
 	living_mob?.hud_used?.lingchemdisplay?.invisibility = INVISIBILITY_ABSTRACT
+	REMOVE_TRAITS_IN(living_mob, CHANGELING_TRAIT)
 
 /datum/antagonist/changeling/on_removal()
 	remove_changeling_powers(include_innate = TRUE)
@@ -593,14 +587,6 @@
 /datum/antagonist/changeling/farewell()
 	to_chat(owner.current, span_userdanger("You grow weak and lose your powers! You are no longer a changeling and are stuck in your current form!"))
 
-/// Generate objectives for our changeling.
-/datum/antagonist/changeling/proc/forge_objectives()
-	var/datum/objective/survival_of_the_fittest/cull_objective = new
-	cull_objective.owner = owner
-	cull_objective.generate_amount()
-	objectives += cull_objective
-	log_objective(owner, cull_objective.explanation_text)
-
 /datum/antagonist/changeling/proc/update_changeling_icons_added()
 	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_CHANGELING]
 	hud.join_hud(owner.current)
@@ -803,7 +789,6 @@
 
 /datum/antagonist/changeling/xenobio
 	name = "Xenobio Changeling"
-	give_objectives = FALSE
 	show_in_roundend = FALSE //These are here for admin tracking purposes only
 
 /datum/antagonist/changeling/roundend_report()
