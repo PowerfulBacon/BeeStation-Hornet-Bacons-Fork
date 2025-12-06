@@ -132,8 +132,6 @@
 	create_emporium()
 	create_innate_actions()
 	create_initial_profile()
-	handle_clown_mutation(owner.current, "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself.")
-	owner.current.get_language_holder().omnitongue = TRUE
 	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/ling_aler.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)
 
 	for(var/datum/language/language as anything in granted_languages)
