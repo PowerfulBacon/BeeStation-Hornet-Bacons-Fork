@@ -24,7 +24,7 @@
 	var/current_name = real_name
 	if(GetSpecialVoice())
 		current_name = GetSpecialVoice()
-		
+
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling && changeling.mimicing )
@@ -35,8 +35,9 @@
 	return current_name
 
 /mob/living/carbon/human/IsVocal()
-	// how do species that don't breathe talk? magic, that's what.
-	if(!HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT) && !get_organ_slot(ORGAN_SLOT_LUNGS))
+	// If you don't need to breathe, that implies that we have a functional replacement for the lungs
+	// to speak with.
+	if(!HAS_TRAIT(src, TRAIT_NOBREATH) && !get_organ_slot(ORGAN_SLOT_LUNGS))
 		return FALSE
 	if(dna?.species && !dna?.species.speak_no_tongue)
 		if(!get_organ_slot(ORGAN_SLOT_TONGUE))

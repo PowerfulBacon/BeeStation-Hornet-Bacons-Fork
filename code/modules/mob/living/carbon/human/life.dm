@@ -31,7 +31,7 @@
 		if(stat != DEAD)
 			if(undergoing_cardiac_arrest())
 				//heart attack stuff
-				var/we_breath = !HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT)
+				var/we_breath = !HAS_TRAIT(src, TRAIT_NOBREATH)
 
 				if(we_breath)
 					adjustOxyLoss(4 * delta_time)

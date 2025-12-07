@@ -118,6 +118,8 @@
 		// They do not need organs to live
 		TRAIT_STABLEHEART,
 		TRAIT_STABLELIVER,
+		// Manually handled
+		TRAIT_NOBREATH,
 		// Damage slowdown is handled by biomass.
 		TRAIT_IGNOREDAMAGESLOWDOWN
 	)
