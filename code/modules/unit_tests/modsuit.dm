@@ -2,10 +2,10 @@
 /datum/unit_test/modsuit_checks
 
 /datum/unit_test/modsuit_checks/Run()
-	var/list/paths = typesof(/obj/item/mod/control/pre_equipped)
+	var/list/paths = typesof(/obj/item/mod/lightsuit/pre_equipped)
 
 	for(var/modpath in paths)
-		var/obj/item/mod/control/pre_equipped/mod = new modpath()
+		var/obj/item/mod/lightsuit/pre_equipped/mod = new modpath()
 		TEST_ASSERT(mod.theme, "[modpath] spawned without a theme.")
 		var/list/modules = list()
 		var/complexity_max = mod.complexity_max

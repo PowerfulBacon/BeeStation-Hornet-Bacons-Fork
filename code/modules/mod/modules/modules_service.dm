@@ -6,6 +6,7 @@
 	desc = "A shoulder-mounted piece of heavy sonic artillery, this module uses the finest femto-manipulator technology to \
 		precisely deliver an almost lethal squeeze to... a bike horn, producing a significantly memorable sound."
 	icon_state = "bikehorn"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -23,6 +24,7 @@
 		hooking up with culinary scanners located in the helmet to blast food with precise microwave radiation, \
 		allowing them to cook food from a distance, with the greatest of ease. Not recommended for use against grapes."
 	icon_state = "microwave_beam"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -62,6 +64,7 @@
 		miniaturized etheric blasts of space-time beneath the user's feet, this enables them to... \
 		to waddle around, bouncing to and fro with a pep in their step."
 	icon_state = "waddle"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.2
 	incompatible_modules = list(/obj/item/mod/module/waddle)

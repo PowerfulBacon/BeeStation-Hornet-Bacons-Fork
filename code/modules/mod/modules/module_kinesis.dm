@@ -7,6 +7,7 @@
 		letting them move objects as small as a titanium rod to as large as industrial machinery. \
 		Oddly enough, it doesn't seem to work on living creatures."
 	icon_state = "kinesis"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 3
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 3

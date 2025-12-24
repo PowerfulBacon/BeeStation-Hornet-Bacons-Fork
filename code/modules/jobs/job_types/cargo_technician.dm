@@ -63,4 +63,4 @@
 /datum/outfit/job/cargo_tech/mod
 	name = "Cargo Technician (MODsuit)"
 
-	back = /obj/item/mod/control/pre_equipped/loader
+	back = /obj/item/mod/lightsuit/pre_equipped/loader

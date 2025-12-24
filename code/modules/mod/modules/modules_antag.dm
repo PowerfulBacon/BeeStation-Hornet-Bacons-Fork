@@ -15,6 +15,7 @@
 	overlay_state_active = "module_armorbooster_on"
 	use_mod_colors = TRUE
 	mask_worn_overlay = TRUE
+	suit_type = MODSUIT_HARD
 	/// Whether or not this module removes pressure protection.
 	var/remove_pressure_protection = TRUE
 	/// Slowdown added to the control unit while this module is disabled
@@ -114,6 +115,7 @@
 		and the power cost can be an easy indicator of this. However, it is capable of blocking nearly any incoming attack, \
 		though with its low durability, the user remains mortal."
 	icon_state = "energy_shield"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	complexity = 3
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 2
@@ -197,6 +199,7 @@
 		aided by a full replacement of the suit's normal coolant with holy water. \
 		Spells will spall right off this field, though it'll do nothing to help others believe you about all this."
 	icon_state = "magic_nullifier"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	removable = FALSE
 	incompatible_modules = list(/obj/item/mod/module/anti_magic)
 	required_slots = list(ITEM_SLOT_BACK)
@@ -232,6 +235,7 @@
 		they are. This system utilizes a series of tiny moving paint sprayers to both apply and remove different \
 		color patterns to and from the suit."
 	icon_state = "insignia"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	removable = FALSE
 	incompatible_modules = list(/obj/item/mod/module/insignia)
 	overlay_state_inactive = "module_insignia"
@@ -272,6 +276,7 @@
 		protect against the fact that you didn't read the wet floor sign. Honk Co. has come out numerous times \
 		in protest of these modules being legal."
 	icon_state = "noslip"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.1
 	incompatible_modules = list(/obj/item/mod/module/noslip)
@@ -288,6 +293,7 @@
 	name = "\improper MOD flamethrower module"
 	desc = "A custom-manufactured flamethrower, used to burn through your path. Burn well."
 	icon_state = "flamethrower"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 3
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 3
@@ -316,6 +322,7 @@
 	name = "\improper MOD power kick module"
 	desc = "This module uses high-power myomer to generate an incredible amount of energy, transferred into the power of a kick."
 	icon_state = "power_kick"
+	suit_type = MODSUIT_HARD
 	module_type = MODULE_ACTIVE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -377,6 +384,7 @@
 	name = "\improper MOD chameleon module"
 	desc = "A module using chameleon technology to disguise the MOD control unit as another backpack. Only works when the suit is deactivated."
 	icon_state = "chameleon"
+	suit_type = MODSUIT_LIGHT
 	module_type = MODULE_USABLE
 	complexity = 2
 	incompatible_modules = list(/obj/item/mod/module/chameleon)
@@ -452,6 +460,7 @@
 	desc = "A module that keeps the suit in a very tightly fit state, lowering the overall size. \
 		Due to the pressure on all the parts, typical storage modules do not fit."
 	icon_state = "plate_compression"
+	suit_type = MODSUIT_LIGHT
 	complexity = 2
 	incompatible_modules = list(/obj/item/mod/module/plate_compression, /obj/item/mod/module/storage)
 	/// The size we set the suit to.
@@ -479,6 +488,7 @@
 	'I desire the power to scar my enemies mentally as I murder them. Who will stop me implementing this in our next project?' \
 	And thus the Psi-Echo Demoralizer Device was reluctantly invented. The future of psychological warfare, today!"
 	icon_state = "brain_hurties"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 0
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.1
 	removable = FALSE
@@ -498,6 +508,7 @@
 		the wearer simply cannot be observed closely, or heard clearly by those around them.\
 		It also contains some dampening systems to help protect a user from blows to the head."
 	icon_state = "infiltrator"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	complexity = 0
 	removable = FALSE
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0

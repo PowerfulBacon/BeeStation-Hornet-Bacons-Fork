@@ -489,7 +489,7 @@
 	name = "Syndicate Operative - Full Kit"
 
 	glasses = /obj/item/clothing/glasses/night
-	back = /obj/item/mod/control/pre_equipped/nuclear
+	back = /obj/item/mod/lightsuit/pre_equipped/nuclear
 	mask = /obj/item/clothing/mask/gas/syndicate
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 	internals_slot = ITEM_SLOT_RPOCKET

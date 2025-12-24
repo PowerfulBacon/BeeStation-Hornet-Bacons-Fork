@@ -10,12 +10,12 @@
 	var/obj/item/card/id/id_card
 
 /datum/ai_controller/mod/TryPossessPawn(atom/new_pawn)
-	if(!istype(new_pawn, /obj/item/mod/control))
+	var/datum/component/modsuit/modsuit = new_pawn.GetComponent(/datum/component/modsuit)
+	if(!modsuit)
 		return AI_CONTROLLER_INCOMPATIBLE
-	var/obj/item/mod/control/mod = new_pawn
 	id_card = new /obj/item/card/id()
-	if(length(mod.req_access))
-		id_card.access = mod.req_access
+	if(length(modsuit.suit.req_access))
+		id_card.access = modsuit.suit.req_access
 	return ..() //Run parent at end
 
 /datum/ai_controller/mod/UnpossessPawn(destroy)

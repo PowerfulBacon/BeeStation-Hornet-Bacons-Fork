@@ -7,14 +7,14 @@
 
 /datum/action/item_action/mod/New(Target)
 	..()
-	if(!istype(Target, /obj/item/mod/control))
+	if(!istype(Target, /obj/item/mod/lightsuit))
 		qdel(src)
 		return
 	if(ai_action)
 		background_icon_state = ACTION_BUTTON_DEFAULT_BACKGROUND
 
 /datum/action/item_action/mod/Grant(mob/user)
-	var/obj/item/mod/control/mod = master
+	var/obj/item/mod/lightsuit/mod = master
 	if(ai_action && user != mod.ai_assistant)
 		return
 	else if(!ai_action && user == mod.ai_assistant)
@@ -22,7 +22,7 @@
 	return ..()
 
 /datum/action/item_action/mod/Remove(mob/user)
-	var/obj/item/mod/control/mod = master
+	var/obj/item/mod/lightsuit/mod = master
 	if(ai_action && user != mod.ai_assistant)
 		return
 	else if(!ai_action && user == mod.ai_assistant)
@@ -32,7 +32,7 @@
 /datum/action/item_action/mod/on_activate(mob/user, atom/target, trigger_flags)
 	if(!is_available(feedback = TRUE))
 		return FALSE
-	var/obj/item/mod/control/mod = target
+	var/obj/item/mod/lightsuit/mod = target
 	if(mod.malfunctioning && prob(75))
 		mod.balloon_alert(usr, "button malfunctions!")
 		return FALSE
@@ -44,7 +44,7 @@
 	button_icon_state = "deploy"
 
 /datum/action/item_action/mod/deploy/on_activate(mob/user, atom/target, trigger_flags)
-	var/obj/item/mod/control/mod = target
+	var/obj/item/mod/lightsuit/mod = target
 	if(trigger_flags & TRIGGER_SECONDARY_ACTION)
 		mod.quick_deploy(usr)
 	else
@@ -69,7 +69,7 @@
 		update_buttons()
 		addtimer(CALLBACK(src, PROC_REF(reset_ready)), 3 SECONDS)
 		return
-	var/obj/item/mod/control/mod = target
+	var/obj/item/mod/lightsuit/mod = target
 	reset_ready()
 	mod.toggle_activate(usr)
 
@@ -88,7 +88,7 @@
 	button_icon_state = "module"
 
 /datum/action/item_action/mod/module/on_activate(mob/user, atom/target)
-	var/obj/item/mod/control/mod = target
+	var/obj/item/mod/lightsuit/mod = target
 	mod.quick_module(usr)
 
 /datum/action/item_action/mod/module/ai
@@ -100,7 +100,7 @@
 	button_icon_state = "panel"
 
 /datum/action/item_action/mod/panel/on_activate(mob/user, atom/target)
-	var/obj/item/mod/control/mod = target
+	var/obj/item/mod/lightsuit/mod = target
 	mod.ui_interact(usr)
 
 /datum/action/item_action/mod/panel/ai
@@ -118,7 +118,7 @@
 	var/cooldown_timer
 
 /datum/action/item_action/mod/pinned_module/New(Target, obj/item/mod/module/linked_module, mob/user)
-	var/obj/item/mod/control/mod = Target
+	var/obj/item/mod/lightsuit/mod = Target
 	if(user == mod.ai_assistant)
 		ai_action = TRUE
 	. = ..()
@@ -165,7 +165,7 @@
 	. = ..(current_button, force = TRUE)
 	if(override)
 		return
-	var/obj/item/mod/control/mod = master
+	var/obj/item/mod/lightsuit/mod = master
 	if(module == mod.selected_module)
 		current_button.add_overlay(image(icon = 'icons/hud/radials/radial_generic.dmi', icon_state = "module_selected", layer = FLOAT_LAYER-0.1))
 	else if(module.active)

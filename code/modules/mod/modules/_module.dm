@@ -3,6 +3,8 @@
 	name = "\improper MOD module"
 	icon = 'icons/obj/clothing/modsuit/mod_modules.dmi'
 	icon_state = "module"
+	/// The types of suit that this module is allowed to be used inside of.
+	var/suit_type = NONE // suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	/// If it can be removed
 	var/removable = TRUE
 	/// If it's passive, togglable, usable or active
@@ -20,7 +22,7 @@
 	/// ID used by their TGUI
 	var/tgui_id
 	/// Linked MODsuit
-	var/obj/item/mod/control/mod
+	var/datum/component/modsuit/mod
 	/// If we're an active module, what item are we?
 	var/obj/item/device
 	/// Overlay given to the user when the module is inactive

@@ -239,7 +239,7 @@
 					balloon_alert(user, "it's stuck!")
 					return
 				playsound(src, 'sound/machines/click.ogg', 30, TRUE)
-				var/obj/item/mod = new /obj/item/mod/control(drop_location(), external_plating.theme, null, core)
+				var/obj/item/mod = new /obj/item/mod/lightsuit(drop_location(), external_plating.theme, null, core)
 				core = null
 				qdel(src)
 				user.put_in_hands(mod)

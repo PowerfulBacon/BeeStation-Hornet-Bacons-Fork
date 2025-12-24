@@ -130,7 +130,7 @@
 	var/mob/living/carbon/human/owner_mob = owner
 	if (!istype(owner_mob))
 		return FALSE
-	var/obj/item/mod/control/pre_equipped/ninja/ninja_suit = owner_mob.back
+	var/obj/item/mod/lightsuit/pre_equipped/ninja/ninja_suit = owner_mob.back
 	if (!istype(ninja_suit))
 		return FALSE
 	return ninja_suit.active

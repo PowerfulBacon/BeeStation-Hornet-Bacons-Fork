@@ -56,14 +56,17 @@
 	var/extended_desc
 	/// Cooldown for AI moves.
 	COOLDOWN_DECLARE(cooldown_mod_move)
+	/// The flags of the suit
+	var/suit_flags = MODSUIT_LIGHT
 	/// Delay between moves as AI.
 	var/static/movedelay = 0
 
-/datum/component/modsuit/Initialize(datum/mod_theme/theme, new_skin, obj/item/mod/core/new_core)
+/datum/component/modsuit/Initialize(datum/mod_theme/theme, new_skin, obj/item/mod/core/new_core, flags = MODSUIT_LIGHT)
 	if (!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 	if(!movedelay)
 		movedelay = CONFIG_GET(number/movedelay/run_delay)
+	src.suit_flags = suit_flags
 	// Store a reference to the suit, since this is the parent
 	// we will be destroyed when our parent is destroyed.
 	suit = parent
@@ -91,6 +94,8 @@
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_dropped))
 	// Destruction handling
 	RegisterSignal(parent, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_destruction))
+	// Contents handling
+	RegisterSignal(parent, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
 	// Install the modules
 	for(var/obj/item/mod/module/module as anything in theme.inbuilt_modules)
 		module = new module(src)
@@ -215,3 +220,31 @@
 	// Remove the core
 	if (open && core)
 		context.add_left_click_tool_action("Remove core", TOOL_CROWBAR)
+
+/datum/component/modsuit/proc/on_exit(datum/source, atom/movable/part, direction)
+	SIGNAL_HANDLER
+
+	if(part.loc == src)
+		return
+	if(part == core)
+		core.uninstall()
+		update_charge_alert()
+		return
+	if(part.loc == wearer)
+		return
+	if(part in modules)
+		uninstall(part)
+		return
+	if(part in get_parts())
+		if(QDELING(part) && !QDELING(src))
+			qdel(src)
+			return
+		var/datum/mod_part/part_datum = get_part_datum(part)
+		if(part_datum.sealed)
+			seal_part(part, is_sealed = FALSE)
+		if(isnull(part.loc))
+			return
+		if(!wearer)
+			part.forceMove(src)
+			return
+		INVOKE_ASYNC(src, PROC_REF(retract), wearer, part, /* instant = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after

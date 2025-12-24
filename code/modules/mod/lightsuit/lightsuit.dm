@@ -5,14 +5,14 @@
 	icon = 'icons/obj/clothing/modsuit/mod_clothing.dmi'
 	worn_icon = 'icons/mob/clothing/modsuit/mod_clothing.dmi'
 
-/obj/item/mod/control
+/obj/item/mod/lightsuit
 	name = "\improper MOD control unit"
 	desc = "The control unit of a Modular Outerwear Device, a powered suit that protects against various environments."
 	icon_state = "standard-control"
 	inhand_icon_state = "mod_control"
 	base_icon_state = "control"
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_STORAGE_UNIT
 	strip_delay = 10 SECONDS
 	armor_type = /datum/armor/none
 	actions_types = list(
@@ -35,38 +35,37 @@
 	/// Looks of the MOD.
 	var/skin = "standard"
 
-/obj/item/mod/control/Initialize(mapload, datum/mod_theme/new_theme, new_skin, obj/item/mod/core/new_core)
+/obj/item/mod/lightsuit/Initialize(mapload, datum/mod_theme/new_theme, new_skin, obj/item/mod/core/new_core)
 	. = ..()
 	AddComponent(src, /datum/component/modsuit, new_theme || theme, new_skin)
 	for(var/obj/item/part as anything in get_parts())
 		RegisterSignal(part, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_part_destruction))
 	wires = new /datum/wires/mod(src)
 	update_speed()
-	RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
 	RegisterSignal(src, COMSIG_SPEED_POTION_APPLIED, PROC_REF(on_potion))
 
-/obj/item/mod/control/Destroy()
+/obj/item/mod/lightsuit/Destroy()
 	QDEL_NULL(wires)
 	return ..()
 
-/obj/item/mod/control/item_action_slot_check(slot)
+/obj/item/mod/lightsuit/item_action_slot_check(slot)
 	if(slot & slot_flags)
 		return TRUE
 
 // Grant pinned actions to pin owners, gives AI pinned actions to the AI and not the wearer
-/obj/item/mod/control/grant_action_to_bearer(datum/action/action)
+/obj/item/mod/lightsuit/grant_action_to_bearer(datum/action/action)
 	if (!istype(action, /datum/action/item_action/mod/pinned_module))
 		return ..()
 	var/datum/action/item_action/mod/pinned_module/pinned = action
 	give_item_action(action, pinned.pinner, slot_flags)
 
-/obj/item/mod/control/Moved(atom/old_loc, movement_dir, forced = FALSE, list/old_locs)
+/obj/item/mod/lightsuit/Moved(atom/old_loc, movement_dir, forced = FALSE, list/old_locs)
 	. = ..()
 	if(!wearer || old_loc != wearer || loc == wearer)
 		return
 	clean_up()
 
-/obj/item/mod/control/allow_attack_hand_drop(mob/user)
+/obj/item/mod/lightsuit/allow_attack_hand_drop(mob/user)
 	if(user != wearer)
 		return ..()
 	if(active)
@@ -79,7 +78,7 @@
 			playsound(src, 'sound/machines/scanbuzz.ogg', 25, FALSE, SILENCED_SOUND_EXTRARANGE)
 			return FALSE
 
-/obj/item/mod/control/MouseDrop(atom/over_object)
+/obj/item/mod/lightsuit/MouseDrop(atom/over_object)
 	if(usr != wearer || !istype(over_object, /atom/movable/screen/inventory/hand))
 		return ..()
 	if(active)
@@ -97,7 +96,7 @@
 			add_fingerprint(usr)
 			return ..()
 
-/obj/item/mod/control/wrench_act(mob/living/user, obj/item/wrench)
+/obj/item/mod/lightsuit/wrench_act(mob/living/user, obj/item/wrench)
 	if(..())
 		return TRUE
 	if(seconds_electrified && get_charge() && shock(user))
@@ -118,7 +117,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/mod/control/crowbar_act(mob/living/user, obj/item/crowbar)
+/obj/item/mod/lightsuit/crowbar_act(mob/living/user, obj/item/crowbar)
 	. = ..()
 	if(!open)
 		balloon_alert(user, "cover closed!")
@@ -146,7 +145,7 @@
 	playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
 	return FALSE
 
-/obj/item/mod/control/attackby(obj/item/attacking_item, mob/living/user, params)
+/obj/item/mod/lightsuit/attackby(obj/item/attacking_item, mob/living/user, params)
 	if(istype(attacking_item, /obj/item/paicard))
 		if(!open)
 			balloon_alert(user, "cover closed!")
@@ -184,7 +183,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/mod/control/get_cell()
+/obj/item/mod/lightsuit/get_cell()
 	if(!open)
 		return
 	var/obj/item/stock_parts/cell/cell = get_charge_source()
@@ -192,7 +191,7 @@
 		return
 	return cell
 
-/obj/item/mod/control/GetAccess()
+/obj/item/mod/lightsuit/GetAccess()
 	if(ai_controller)
 		if(req_access)
 			return req_access.Copy()
@@ -201,12 +200,12 @@
 	else
 		return ..()
 
-/obj/item/mod/control/on_emag(mob/user)
+/obj/item/mod/lightsuit/on_emag(mob/user)
 	..()
 	locked = !locked
 	balloon_alert(user, "access [locked ? "locked" : "unlocked"]")
 
-/obj/item/mod/control/emp_act(severity)
+/obj/item/mod/lightsuit/emp_act(severity)
 	. = ..()
 	if(!active || !wearer)
 		return
@@ -219,12 +218,12 @@
 	if(wearer.stat < UNCONSCIOUS && prob(10))
 		wearer.emote("scream")
 
-/obj/item/mod/control/on_outfit_equip(mob/living/carbon/human/outfit_wearer, visuals_only, item_slot)
+/obj/item/mod/lightsuit/on_outfit_equip(mob/living/carbon/human/outfit_wearer, visuals_only, item_slot)
 	//if(visuals_only)
 	//	set_wearer(outfit_wearer) //we need to set wearer manually since it doesnt call equipped
 	quick_activation()
 
-/obj/item/mod/control/doStrip(mob/stripper, mob/owner)
+/obj/item/mod/lightsuit/doStrip(mob/stripper, mob/owner)
 	if(active && !toggle_activate(stripper, force_deactivate = TRUE))
 		return
 	for(var/obj/item/part as anything in get_parts())
@@ -233,7 +232,7 @@
 		retract(null, part)
 	return ..()
 
-/obj/item/mod/control/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file)
+/obj/item/mod/lightsuit/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file)
 	. = ..()
 	for(var/obj/item/mod/module/module as anything in modules)
 		var/list/module_icons = module.generate_worn_overlay(standing)
@@ -241,11 +240,11 @@
 			continue
 		. += module_icons
 
-/obj/item/mod/control/update_icon_state()
+/obj/item/mod/lightsuit/update_icon_state()
 	icon_state = "[skin]-[base_icon_state][active ? "-sealed" : ""]"
 	return ..()
 
-/obj/item/mod/control/proc/get_parts(all = FALSE)
+/obj/item/mod/lightsuit/proc/get_parts(all = FALSE)
 	. = list()
 	for(var/key in mod_parts)
 		var/datum/mod_part/part = mod_parts[key]
@@ -253,7 +252,7 @@
 			continue
 		. += part.part_item
 
-/obj/item/mod/control/proc/get_part_datums(all = FALSE)
+/obj/item/mod/lightsuit/proc/get_part_datums(all = FALSE)
 	. = list()
 	for(var/key in mod_parts)
 		var/datum/mod_part/part = mod_parts[key]
@@ -261,7 +260,7 @@
 			continue
 		. += part
 
-/obj/item/mod/control/proc/get_part_datum(obj/item/part)
+/obj/item/mod/lightsuit/proc/get_part_datum(obj/item/part)
 	RETURN_TYPE(/datum/mod_part)
 	var/datum/mod_part/potential_part = mod_parts["[part.slot_flags]"]
 	if(potential_part?.part_item == part)
@@ -271,14 +270,14 @@
 			return mod_part
 	CRASH("get_part_datum called with incorrect item [part] passed.")
 
-/obj/item/mod/control/proc/get_part_from_slot(slot)
+/obj/item/mod/lightsuit/proc/get_part_from_slot(slot)
 	var/datum/mod_part/part = mod_parts["[slot]"]
 	return part?.part_item
 
-/obj/item/mod/control/proc/get_part_datum_from_slot(slot)
+/obj/item/mod/lightsuit/proc/get_part_datum_from_slot(slot)
 	return mod_parts["[slot]"]
 
-/obj/item/mod/control/proc/set_wearer(mob/living/carbon/human/user)
+/obj/item/mod/lightsuit/proc/set_wearer(mob/living/carbon/human/user)
 	if(wearer == user)
 		CRASH("set_wearer() was called with the new wearer being the current wearer: [wearer]")
 	else if(!isnull(wearer))
@@ -292,7 +291,7 @@
 	for(var/obj/item/mod/module/module as anything in modules)
 		module.on_equip()
 
-/obj/item/mod/control/proc/unset_wearer()
+/obj/item/mod/lightsuit/proc/unset_wearer()
 	for(var/obj/item/mod/module/module as anything in modules)
 		module.on_unequip()
 	UnregisterSignal(wearer, list(COMSIG_ATOM_EXITED, COMSIG_SPECIES_GAIN))
@@ -300,7 +299,7 @@
 	SEND_SIGNAL(src, COMSIG_MOD_WEARER_UNSET, wearer)
 	wearer = null
 
-/obj/item/mod/control/proc/get_sealed_slots(list/parts)
+/obj/item/mod/lightsuit/proc/get_sealed_slots(list/parts)
 	var/covered_slots = NONE
 	for(var/obj/item/part as anything in parts)
 		if(!get_part_datum(part).sealed)
@@ -309,7 +308,7 @@
 		covered_slots |= part.slot_flags
 	return covered_slots
 
-/obj/item/mod/control/proc/generate_suit_mask()
+/obj/item/mod/lightsuit/proc/generate_suit_mask()
 	var/list/parts = get_parts(all = TRUE)
 	var/covered_slots = get_sealed_slots(parts)
 	if(GLOB.mod_masks[skin])
@@ -324,7 +323,7 @@
 	GLOB.mod_masks[skin]["[covered_slots]"] = slot_mask
 	return GLOB.mod_masks[skin]["[covered_slots]"]
 
-/obj/item/mod/control/proc/clean_up()
+/obj/item/mod/lightsuit/proc/clean_up()
 	if(QDELING(src))
 		unset_wearer()
 		return
@@ -345,7 +344,7 @@
 	unset_wearer()
 	old_wearer.temporarilyRemoveItemFromInventory(src)
 
-/obj/item/mod/control/proc/on_species_gain(datum/source, datum/species/new_species, datum/species/old_species)
+/obj/item/mod/lightsuit/proc/on_species_gain(datum/source, datum/species/new_species, datum/species/old_species)
 	SIGNAL_HANDLER
 
 	for(var/obj/item/part in get_parts(all = TRUE))
@@ -354,7 +353,7 @@
 		forceMove(drop_location())
 		return
 
-/obj/item/mod/control/proc/quick_module(mob/user)
+/obj/item/mod/lightsuit/proc/quick_module(mob/user)
 	if(!length(modules))
 		return
 	var/list/display_names = list()
@@ -385,14 +384,14 @@
 		return
 	picked_module.on_select()
 
-/obj/item/mod/control/proc/shock(mob/living/user)
+/obj/item/mod/lightsuit/proc/shock(mob/living/user)
 	if(!istype(user) || get_charge() < 1)
 		return FALSE
 	do_sparks(5, TRUE, src)
 	var/check_range = TRUE
 	return electrocute_mob(user, get_charge_source(), src, 0.7, check_range)
 
-/obj/item/mod/control/proc/install(obj/item/mod/module/new_module, mob/user)
+/obj/item/mod/lightsuit/proc/install(obj/item/mod/module/new_module, mob/user)
 	for(var/obj/item/mod/module/old_module as anything in modules)
 		if(is_type_in_list(new_module, old_module.incompatible_modules) || is_type_in_list(old_module, new_module.incompatible_modules))
 			if(user)
@@ -428,7 +427,7 @@
 		balloon_alert(user, "[new_module] added")
 		playsound(src, 'sound/machines/click.ogg', 50, TRUE, SILENCED_SOUND_EXTRARANGE)
 
-/obj/item/mod/control/proc/uninstall(obj/item/mod/module/old_module, deleting = FALSE)
+/obj/item/mod/lightsuit/proc/uninstall(obj/item/mod/module/old_module, deleting = FALSE)
 	modules -= old_module
 	complexity -= old_module.complexity
 	if(wearer)
@@ -442,10 +441,10 @@
 	old_module.mod = null
 
 /// Intended for callbacks, don't use normally, just get wearer by itself.
-/obj/item/mod/control/proc/get_wearer()
+/obj/item/mod/lightsuit/proc/get_wearer()
 	return wearer
 
-/obj/item/mod/control/proc/update_access(mob/user, obj/item/card/id/card)
+/obj/item/mod/lightsuit/proc/update_access(mob/user, obj/item/card/id/card)
 	if(!allowed(user))
 		balloon_alert(user, "insufficient access!")
 		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
@@ -453,7 +452,7 @@
 	req_access = card.access.Copy()
 	balloon_alert(user, "access updated")
 
-/obj/item/mod/control/proc/update_speed()
+/obj/item/mod/lightsuit/proc/update_speed()
 	var/total_slowdown = 0
 	var/prevent_slowdown = HAS_TRAIT(src, TRAIT_SPEED_POTIONED)
 	if (!prevent_slowdown)
@@ -471,48 +470,20 @@
 			part.slowdown = max(part.slowdown, 0)
 	wearer?.update_equipment_speed_mods()
 
-/obj/item/mod/control/proc/set_mod_color(new_color)
+/obj/item/mod/lightsuit/proc/set_mod_color(new_color)
 	for(var/obj/item/part as anything in get_parts(all = TRUE))
 		part.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
 		part.add_atom_colour(new_color, FIXED_COLOUR_PRIORITY)
 	wearer?.regenerate_icons()
 
-/obj/item/mod/control/proc/on_exit(datum/source, atom/movable/part, direction)
-	SIGNAL_HANDLER
-
-	if(part.loc == src)
-		return
-	if(part == core)
-		core.uninstall()
-		update_charge_alert()
-		return
-	if(part.loc == wearer)
-		return
-	if(part in modules)
-		uninstall(part)
-		return
-	if(part in get_parts())
-		if(QDELING(part) && !QDELING(src))
-			qdel(src)
-			return
-		var/datum/mod_part/part_datum = get_part_datum(part)
-		if(part_datum.sealed)
-			seal_part(part, is_sealed = FALSE)
-		if(isnull(part.loc))
-			return
-		if(!wearer)
-			part.forceMove(src)
-			return
-		INVOKE_ASYNC(src, PROC_REF(retract), wearer, part, /* instant = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after
-
-/obj/item/mod/control/proc/on_part_destruction(obj/item/part, damage_flag)
+/obj/item/mod/lightsuit/proc/on_part_destruction(obj/item/part, damage_flag)
 	SIGNAL_HANDLER
 
 	if(QDELING(src))
 		return
 	atom_destruction(damage_flag)
 
-/obj/item/mod/control/proc/on_overslot_exit(obj/item/part, atom/movable/overslot, direction)
+/obj/item/mod/lightsuit/proc/on_overslot_exit(obj/item/part, atom/movable/overslot, direction)
 	SIGNAL_HANDLER
 
 	var/datum/mod_part/part_datum = get_part_datum(part)
@@ -521,7 +492,7 @@
 	UnregisterSignal(part, COMSIG_ATOM_EXITED)
 	part_datum.overslotting = null
 
-/obj/item/mod/control/proc/on_potion(atom/movable/source, obj/item/slimepotion/speed/speed_potion, mob/living/user)
+/obj/item/mod/lightsuit/proc/on_potion(atom/movable/source, obj/item/slimepotion/speed/speed_potion, mob/living/user)
 	SIGNAL_HANDLER
 
 	if(HAS_TRAIT(src, TRAIT_SPEED_POTIONED))
@@ -539,14 +510,14 @@
 	qdel(speed_potion)
 	return SPEED_POTION_STOP
 
-/obj/item/mod/control/proc/get_visor_overlay(mutable_appearance/standing)
+/obj/item/mod/lightsuit/proc/get_visor_overlay(mutable_appearance/standing)
 	var/list/overrides = list()
 	SEND_SIGNAL(src, COMSIG_MOD_GET_VISOR_OVERLAY, standing, overrides)
 	if (length(overrides))
 		return overrides[1]
 	return mutable_appearance(worn_icon, "[skin]-helmet-visor", layer = standing.layer + 0.5)
 
-/obj/item/mod/control/relaymove(mob/user, direction)
+/obj/item/mod/lightsuit/relaymove(mob/user, direction)
 	if((!active && wearer) || get_charge() < CHARGE_PER_STEP || user != ai_assistant || !COOLDOWN_FINISHED(src, cooldown_mod_move) || (wearer?.pulledby?.grab_state > GRAB_PASSIVE))
 		return FALSE
 	var/datum/mod_part/legs_to_move = get_part_datum_from_slot(ITEM_SLOT_FEET)

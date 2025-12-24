@@ -7,6 +7,7 @@
 		containers and projecting the information in an easy-to-read format on the wearer's display. \
 		It cannot detect flavors, so that's up to you."
 	icon_state = "scanner"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.2
@@ -51,6 +52,7 @@
 	name = "\improper MOD anti-gravity module"
 	desc = "A module that uses a gravitational core to make the user completely weightless."
 	icon_state = "antigrav"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	module_type = MODULE_TOGGLE
 	complexity = 3
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.7
@@ -82,6 +84,7 @@
 	name = "\improper MOD teleporter module"
 	desc = "A module that uses a bluespace core to let the user transport their particles elsewhere."
 	icon_state = "teleporter"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 3
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5

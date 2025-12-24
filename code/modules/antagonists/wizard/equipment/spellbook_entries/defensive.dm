@@ -114,11 +114,11 @@
 /datum/spellbook_entry/item/armor
 	name = "Mastercrafted Armour Set"
 	desc = "An artefact suit of armour that allows you to cast spells while providing more protection against attacks and the void of space."
-	item_path = /obj/item/mod/control/pre_equipped/enchanted
+	item_path = /obj/item/mod/lightsuit/pre_equipped/enchanted
 	category = "Defensive"
 
 /datum/spellbook_entry/item/armor/try_equip_item(mob/living/carbon/human/user, obj/item/to_equip)
-	var/obj/item/mod/control/mod = to_equip
+	var/obj/item/mod/lightsuit/mod = to_equip
 	var/obj/item/mod/module/storage/storage = locate() in mod.modules
 	var/obj/item/back = user.back
 	if(back)

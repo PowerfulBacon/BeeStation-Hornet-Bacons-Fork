@@ -4,6 +4,7 @@
 /obj/item/mod/module/visor
 	name = "\improper MOD visor module"
 	desc = "A heads-up display installed into the visor of the suit. They say these also let you see behind you."
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3

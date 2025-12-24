@@ -1578,7 +1578,7 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 			However, this greater mobility comes at a cost, and the suit is ineffective at protecting the wearer from the vacuum of space. \
 			The suit does come pre-equipped with a special psi-emitter stealth module that makes it impossible to recognize the wearer \
 			as well as causing significant demoralization amongst Nanotrasen crew."
-	item = /obj/item/mod/control/pre_equipped/infiltrator
+	item = /obj/item/mod/lightsuit/pre_equipped/infiltrator
 	cost = 6
 
 /datum/uplink_item/suits/space_suit
@@ -1592,12 +1592,12 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 /datum/uplink_item/suits/modsuit
 	name = "Syndicate MODsuit"
 	desc = "The feared MODsuit of a Syndicate agent. Features armoring and a set of inbuilt modules."
-	item = /obj/item/mod/control/pre_equipped/traitor
+	item = /obj/item/mod/lightsuit/pre_equipped/traitor
 	cost = 7
 	purchasable_from = ~(UPLINK_NUKE_OPS | UPLINK_CLOWN_OPS) //you can't buy it in nuke, because the elite modsuit costs the same while being better
 
 /datum/uplink_item/suits/modsuit/spawn_item(spawn_path, mob/user, datum/component/uplink/U)
-	var/obj/item/mod/control/mod = ..()
+	var/obj/item/mod/lightsuit/mod = ..()
 	var/datum/component/tracking_beacon/beacon = mod.GetComponent(/datum/component/tracking_beacon)
 	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 	if(istype(helmet))
@@ -1615,7 +1615,7 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	name = "Elite Syndicate MODsuit"
 	desc = "An upgraded, elite version of the Syndicate MODsuit. It features fireproofing, and also \
 			provides the user with superior armor and mobility compared to the standard Syndicate MODsuit."
-	item = /obj/item/mod/control/pre_equipped/traitor_elite
+	item = /obj/item/mod/lightsuit/pre_equipped/traitor_elite
 	purchasable_from = (UPLINK_NUKE_OPS | UPLINK_CLOWN_OPS)
 
 /datum/uplink_item/suits/energy_shield

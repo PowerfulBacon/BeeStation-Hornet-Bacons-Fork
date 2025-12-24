@@ -74,7 +74,7 @@
 	name = "Research Director (MODsuit)"
 
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/research
+	back = /obj/item/mod/lightsuit/pre_equipped/research
 	suit = null
 	head = null
 	mask = /obj/item/clothing/mask/breath

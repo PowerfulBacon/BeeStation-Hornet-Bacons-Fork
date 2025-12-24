@@ -142,7 +142,7 @@
 
 	set_skin(mod, skin || default_skin)
 
-/datum/mod_theme/proc/set_skin(obj/item/mod/control/mod, skin)
+/datum/mod_theme/proc/set_skin(datum/component/modsuit/mod, skin)
 	mod.skin = skin
 	var/list/used_skin = variants[skin]
 	var/list/parts = mod.get_parts()

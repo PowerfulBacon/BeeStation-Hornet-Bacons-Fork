@@ -670,6 +670,8 @@ GLOBAL_LIST_EMPTY(species_list)
 		slot_strings += "dextrous storage"
 	if(slot_flags & ITEM_SLOT_BACKPACK)
 		slot_strings += "backpack"
+	if (slot_flags & ITEM_SLOT_STORAGE_UNIT)
+		slot_strings += "suit storage unit"
 	return slot_strings
 ///Takes a zone and returns it's "parent" zone, if it has one.
 /proc/deprecise_zone(precise_zone)

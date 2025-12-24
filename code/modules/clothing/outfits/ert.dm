@@ -43,7 +43,7 @@
 	name = "ERT Commander - Class Blue"
 
 	id = /obj/item/card/id/ert
-	back = /obj/item/mod/control/pre_equipped/responsory/commander
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/commander
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/storage/box/zipties/compact=1,
@@ -89,7 +89,7 @@
 /datum/outfit/centcom/ert/commander/inquisitor
 	name = "ERT Commander - Inquisition"
 
-	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/commander
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/inquisitory/commander
 	r_hand = /obj/item/nullrod/claymore/chainsaw_sword
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
@@ -107,7 +107,7 @@
 	name = "ERT Security - Class Blue"
 
 	id = /obj/item/card/id/ert/Security
-	back = /obj/item/mod/control/pre_equipped/responsory/security
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/security
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/storage/box/handcuffs/compact=1,
@@ -142,7 +142,7 @@
 /datum/outfit/centcom/ert/security/inquisitor
 	name = "ERT Security - Inquisition"
 
-	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/security
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/inquisitory/security
 
 	r_hand = /obj/item/nullrod/claymore/chainsaw_sword
 	backpack_contents = list(
@@ -161,7 +161,7 @@
 
 	id = /obj/item/card/id/ert/Medical
 
-	back = /obj/item/mod/control/pre_equipped/responsory/medic
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/medic
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/storage/firstaid/compact,
@@ -202,7 +202,7 @@
 /datum/outfit/centcom/ert/medic/inquisitor
 	name = "ERT Medic - Inquisition"
 
-	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/medic
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/inquisitory/medic
 
 	l_hand = /obj/item/reagent_containers/hypospray/combat/heresypurge
 	r_hand = /obj/item/nullrod/claymore/chainsaw_sword
@@ -221,7 +221,7 @@
 	name = "ERT Engineer - Class Blue"
 
 	id = /obj/item/card/id/ert/Engineer
-	back = /obj/item/mod/control/pre_equipped/responsory/engineer
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/engineer
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/ammo_box/magazine/x200law=1,
@@ -264,7 +264,7 @@
 	name = "ERT Engineer - Inquisition"
 
 	id = /obj/item/card/id/ert/Engineer
-	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/engineer
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/inquisitory/engineer
 
 	r_hand = /obj/item/nullrod/claymore/chainsaw_sword
 	backpack_contents = list(
@@ -282,7 +282,7 @@
 	name = "ERT Janitor - Standard"
 
 	id = /obj/item/card/id/ert/Janitor
-	back = /obj/item/mod/control/pre_equipped/responsory/janitor
+	back = /obj/item/mod/lightsuit/pre_equipped/responsory/janitor
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/storage/box/lights/mixed=1,
@@ -334,7 +334,7 @@
 
 	id = /obj/item/card/id/centcom
 	uniform = /obj/item/clothing/under/rank/centcom/commander
-	back = /obj/item/mod/control/pre_equipped/apocryphal
+	back = /obj/item/mod/lightsuit/pre_equipped/apocryphal
 	suit_store = /obj/item/gun/energy/pulse/destroyer/loyalpin
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
@@ -353,7 +353,7 @@
 
 /datum/outfit/centcom/ert/death_commando/officer
 	name = "Death Commando Officer"
-	back = /obj/item/mod/control/pre_equipped/apocryphal/officer
+	back = /obj/item/mod/lightsuit/pre_equipped/apocryphal/officer
 	backpack_contents = list(
 		/obj/item/storage/box/survival/engineer=1,
 		/obj/item/storage/firstaid/compact=1,
@@ -385,7 +385,7 @@
 /datum/outfit/centcom/ert/death_commando/officer/post_equip(mob/living/carbon/human/squaddie, visuals_only = FALSE)
 	..()
 
-	var/obj/item/mod/control/mod = squaddie.back
+	var/obj/item/mod/lightsuit/mod = squaddie.back
 	if(!istype(mod))
 		return
 	var/obj/item/mod/module/hat_stabilizer/hat_holder = locate() in mod.modules

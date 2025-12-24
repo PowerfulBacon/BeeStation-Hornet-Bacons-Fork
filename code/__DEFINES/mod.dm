@@ -55,3 +55,11 @@ GLOBAL_LIST_INIT(mod_themes, setup_mod_themes())
 GLOBAL_LIST_EMPTY(mod_masks)
 /// Global cache of mod skins to deployed parts to module icon states
 GLOBAL_LIST_EMPTY(mod_module_overlays)
+
+// Modsuit flags define the type of the suit, and which modules are allowed where
+/// Lightsuits, simple but highly portable
+#define MODSUIT_LIGHT (1 << 0)
+/// Hardsuits, armoured and more usable in combat scenarios but less portable.
+#define MODSUIT_HARD (1 << 1)
+/// Mechsuits, extremely heavily armoured, almost entirely for combat/war and impossible to move without a pilot.
+#define MODSUIT_MECH (1 << 2)

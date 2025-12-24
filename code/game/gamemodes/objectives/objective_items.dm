@@ -141,7 +141,7 @@
 
 /datum/objective_item/steal/functionalai/New()
 	. = ..()
-	altitems += typesof(/obj/item/mod/control) // only here so we can account for AIs tucked away in a MODsuit.
+	altitems += typesof(/obj/item/mod/lightsuit) // only here so we can account for AIs tucked away in a MODsuit.
 
 /datum/objective_item/steal/functionalai/check_special_completion(obj/item/potential_storage)
 	var/mob/living/silicon/ai/being
@@ -149,8 +149,8 @@
 	if(istype(potential_storage, /obj/item/aicard))
 		var/obj/item/aicard/card = potential_storage
 		being = card.AI // why is this one capitalized and the other one not? i wish i knew.
-	else if(istype(potential_storage, /obj/item/mod/control))
-		var/obj/item/mod/control/suit = potential_storage
+	else if(istype(potential_storage, /obj/item/mod/lightsuit))
+		var/obj/item/mod/lightsuit/suit = potential_storage
 		if(isAI(suit.ai_assistant))
 			being = suit.ai_assistant
 	else

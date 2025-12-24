@@ -28,6 +28,7 @@
 		However, this design has been locked by Nanotrasen to be primarily utilized for lifting various crates. \
 		A lot of people would say that loading cargo is a dull job, but you could not disagree more."
 	icon_state = "clamp"
+	suit_type = MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 3
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -119,6 +120,7 @@
 	desc = "An integrated drill, typically extending over the user's hand. While useful for drilling through rock, \
 		your drill is surely the one that both pierces and creates the heavens."
 	icon_state = "drill"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -164,6 +166,7 @@
 		this utilizes precise electromagnets and storage compartments to automatically collect and deposit ore. \
 		It's recommended by Nakamura Engineering to actually deposit that ore at local refineries."
 	icon_state = "ore"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.2
@@ -208,6 +211,7 @@
 	name = "\improper MOD loader hydraulic arms module"
 	desc = "A pair of powerful hydraulic arms installed in a MODsuit."
 	icon_state = "launch_loader"
+	suit_type = MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN*10
@@ -262,6 +266,7 @@
 	desc = "A module that connects to the disposal pipeline, causing the user to go into their config selected disposal. \
 		Only seems to work when the suit is on."
 	icon_state = "disposal"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	complexity = 2
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	incompatible_modules = list(/obj/item/mod/module/disposal_connector)
@@ -298,6 +303,7 @@
 	name = "\improper MOD loader hydraulic magnet module"
 	desc = "A powerful hydraulic electromagnet able to launch crates and lockers towards the user, and keep 'em attached."
 	icon_state = "magnet_loader"
+	suit_type = MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 3
@@ -353,6 +359,7 @@
 	desc = "A module that collects ash from the terrain, covering the suit in a protective layer, this layer is \
 		lost when moving across standard terrain."
 	icon_state = "ash_accretion"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	removable = FALSE
 	incompatible_modules = list(/obj/item/mod/module/ash_accretion)
 	overlay_state_inactive = "module_ash"
@@ -464,6 +471,7 @@
 	desc = "A module able to move the suit's parts around, turning it and the user into a sphere. \
 		The sphere can move quickly, even through lava, and launch mining bombs to decimate terrain."
 	icon_state = "sphere"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	removable = FALSE
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.5

@@ -49,7 +49,7 @@ Now we have a basic theme, it lacks a skin which will be covered in the next sec
 Let's go into [here](./mod_types.dm). It's as simple as adding a new suit type with the appropriate modules you want.
 
 ```dm
-/obj/item/mod/control/pre_equipped/psychological
+/obj/item/mod/lightsuit/pre_equipped/psychological
 	theme = /datum/mod_theme/psychological
 	initial_modules = list(
 		/obj/item/mod/module/storage,

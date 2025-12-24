@@ -41,7 +41,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/mod/control/pre_equipped/nuclear
+	back = /obj/item/mod/lightsuit/pre_equipped/nuclear
 	r_pocket = /obj/item/tank/internals/emergency_oxygen
 	id = /obj/item/card/id/syndicate
 
@@ -60,7 +60,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/mod/control/pre_equipped/elite
+	back = /obj/item/mod/lightsuit/pre_equipped/elite
 	id = /obj/item/card/id/syndicate
 
 

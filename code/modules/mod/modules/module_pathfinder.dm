@@ -10,6 +10,7 @@
 		The implant is stored in the module and needs to be injected in a human to function. \
 		Nakamura Engineering swears up and down there's airbrakes."
 	icon_state = "pathfinder"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 1
 	module_type = MODULE_USABLE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 10

@@ -11,6 +11,7 @@
 			from the timeline... with the intruder inside. Not the way you want to go, so it turns \
 			out to be a good deterrent."
 	icon_state = "eradicationlock"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 3
@@ -57,6 +58,7 @@
 			pull to. Very useful tool to get the job done, but keep in mind the suit locks for \
 			safety reasons while preparing a rewind."
 	icon_state = "rewinder"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -98,6 +100,7 @@
 			want! Great for monologues or lunch breaks. Keep in mind moving will end the stop, and the \
 			module has a hefty cooldown period to avoid reality errors."
 	icon_state = "timestop"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -146,6 +149,7 @@
 	name = "\improper MOD timeline jumper module"
 	desc = "A module used to traverse timelines, phasing the user in and out of the stream of events."
 	icon_state = "timeline_jumper"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -202,6 +206,7 @@
 			change the destination of a timeline. this device is capable of wiping a being from the \
 			timestream. They never are, they never were, they never will be."
 	icon_state = "chronogun"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	removable = FALSE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5

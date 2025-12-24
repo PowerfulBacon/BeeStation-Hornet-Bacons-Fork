@@ -39,7 +39,7 @@
 		))
 
 		// Upload the main theme icon
-		var/obj/item/mod/control/temp_suit = new()
+		var/obj/item/mod/lightsuit/temp_suit = new()
 		temp_suit.theme = theme
 		temp_suit.skin = theme.default_skin
 		upload_icon(getFlatIcon(temp_suit, no_anim = TRUE), filename)
@@ -116,7 +116,7 @@
 		if(skin_name == theme.default_skin)
 			continue
 
-		var/obj/item/mod/control/temp_suit = new()
+		var/obj/item/mod/lightsuit/temp_suit = new()
 		temp_suit.theme = theme
 		temp_suit.skin = skin_name
 

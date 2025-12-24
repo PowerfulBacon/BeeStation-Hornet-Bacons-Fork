@@ -74,7 +74,7 @@
 	name = "Captain (MODsuit)"
 
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/magnate
+	back = /obj/item/mod/lightsuit/pre_equipped/magnate
 	suit = null
 	head = null
 	mask = /obj/item/clothing/mask/gas/atmos

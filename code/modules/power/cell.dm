@@ -231,7 +231,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/item/stock_parts/cell)
 	return rating * maxcharge
 
 /obj/item/stock_parts/cell/attackby_storage_insert(datum/component/storage, atom/storage_holder, mob/user)
-	var/obj/item/mod/control/mod = storage_holder
+	var/obj/item/mod/lightsuit/mod = storage_holder
 	return !(istype(mod) && mod.open)
 
 /* Cell variants*/

@@ -6,6 +6,7 @@
 	desc = "What amounts to a series of integrated storage compartments and specialized pockets installed across \
 		the surface of the suit, useful for storing various bits and/or bobs."
 	icon_state = "storage"
+	suit_type = MODSUIT_LIGHT
 	complexity = 3
 	incompatible_modules = list(/obj/item/mod/module/storage, /obj/item/mod/module/plate_compression)
 	required_slots = list(ITEM_SLOT_BACK)
@@ -113,6 +114,7 @@
 		Rather than using gasses for combustion thrust, these jets are capable of accelerating ions using \
 		charge from the suit's charge. Some say this isn't Nakamura Engineering's first foray into jet-enabled suits."
 	icon_state = "jetpack"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 3
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -123,8 +125,6 @@
 	required_slots = list(ITEM_SLOT_BACK)
 	/// Do we stop the wearer from gliding in space.
 	var/stabilizers = FALSE
-	/// Do we give the wearer a speed buff.
-	var/full_speed = FALSE
 	/// The ion trail particles left after the jetpack.
 	var/datum/effect_system/trail_follow/ion/grav_allowed/ion_trail
 
@@ -143,16 +143,12 @@
 	RegisterSignal(mod.wearer, COMSIG_MOVABLE_MOVED,  PROC_REF(move_react))
 	RegisterSignal(mod.wearer, COMSIG_MOVABLE_PRE_MOVE,  PROC_REF(pre_move_react))
 	RegisterSignal(mod.wearer, COMSIG_MOVABLE_SPACEMOVE,  PROC_REF(spacemove_react))
-	if(full_speed)
-		mod.wearer.add_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
 /obj/item/mod/module/jetpack/on_deactivation(display_message = TRUE, deleting = FALSE)
 	ion_trail.stop()
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_PRE_MOVE)
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_SPACEMOVE)
-	if(full_speed)
-		mod.wearer.remove_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
 /obj/item/mod/module/jetpack/get_configuration()
 	. = ..()
@@ -196,15 +192,6 @@
 	ion_trail.generate_effect()
 	return TRUE
 
-/obj/item/mod/module/jetpack/advanced
-	name = "\improper MOD advanced ion jetpack module"
-	desc = "An improvement on the previous model of electric thrusters. This one achieves higher speeds through \
-		mounting of more jets and a red paint applied on it."
-	icon_state = "jetpack_advanced"
-	overlay_state_inactive = "module_jetpackadv"
-	overlay_state_active = "module_jetpackadv_on"
-	full_speed = TRUE
-
 ///Status Readout - Puts a lot of information including health, nutrition, fingerprints, temperature to the suit TGUI.
 /obj/item/mod/module/status_readout
 	name = "\improper MOD status readout module"
@@ -214,6 +201,7 @@
 		and even useful information such as their overall health and wellness. The vitals monitor also comes with a speaker, loud enough \
 		to alert anyone nearby that someone has, in fact, died."
 	icon_state = "status"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.1
 	incompatible_modules = list(/obj/item/mod/module/status_readout)
@@ -293,6 +281,7 @@
 		to allow eating and drinking while retaining protection and atmosphere. However, it won't free you from masks, \
 		lets pepper spray pass through and it will do nothing to improve the taste of a goliath steak."
 	icon_state = "apparatus"
+	suit_type = MODSUIT_LIGHT
 	complexity = 1
 	incompatible_modules = list(/obj/item/mod/module/mouthhole)
 	required_slots = list(ITEM_SLOT_HEAD|ITEM_SLOT_MASK)
@@ -338,6 +327,7 @@
 		electromagnetic pulses that would otherwise damage the electronic systems of the suit or it's modules. \
 		However, it will take from the suit's power to do so."
 	icon_state = "empshield"
+	suit_type = MODSUIT_HARD
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	incompatible_modules = list(/obj/item/mod/module/emp_shield)
@@ -369,6 +359,7 @@
 		useful for providing light in a variety of ranges and colors. \
 		Some survivalists prefer the color green for their illumination, for reasons unknown."
 	icon_state = "flashlight"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
@@ -436,6 +427,7 @@
 		palm of the wearer's glove; however, research seemed to have entirely stopped at burgers. \
 		Notably, all attempts to get it to dispense Earl Grey tea have failed."
 	icon_state = "dispenser"
+	suit_type = MODSUIT_LIGHT
 	module_type = MODULE_USABLE
 	complexity = 3
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 2
@@ -466,6 +458,7 @@
 		as well as internal gyroscopes to ensure the user's safe falling. \
 		Useful for mining, monorail tracks, or even skydiving!"
 	icon_state = "longfall"
+	suit_type = MODSUIT_LIGHT
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
 	incompatible_modules = list(/obj/item/mod/module/longfall)
@@ -495,6 +488,7 @@
 		flexible cooling lines. This circulates coolant at various user-controlled temperatures, \
 		ensuring they're comfortable; even if there are some that like it hot."
 	icon_state = "regulator"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
@@ -597,6 +591,7 @@
 		This prevents them from self-igniting, and leads to greater comfort overall. \
 		The purple glass of the visor seems to be constructed for nostalgic purposes."
 	icon_state = "plasma_stabilizer"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	incompatible_modules = list(/obj/item/mod/module/plasma_stabilizer)
@@ -625,6 +620,7 @@
 		You still need to take the hat off your head while the helmet deploys, though. \
 		This is a must-have for Nanotrasen Captains, enabling them to show off their authoritative hat even while in their MODsuit."
 	icon_state = "hat_holder"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	incompatible_modules = list(/obj/item/mod/module/hat_stabilizer)
 	required_slots = list(ITEM_SLOT_HEAD)
 	/*Intentionally left inheriting 0 complexity and removable = TRUE;

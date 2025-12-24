@@ -4,7 +4,7 @@
 	id = /obj/item/card/id/syndicate/debug
 	uniform = /obj/item/clothing/under/misc/patriotsuit
 	suit_store = /obj/item/tank/internals/emergency_oxygen/magic_oxygen
-	back = /obj/item/mod/control/pre_equipped/debug
+	back = /obj/item/mod/lightsuit/pre_equipped/debug
 	backpack_contents = list(
 		/obj/item/melee/energy/axe=1,
 		/obj/item/storage/part_replacer/bluespace/tier4=1,
@@ -39,7 +39,7 @@
 	id = /obj/item/card/id/syndicate/debug
 	uniform = /obj/item/clothing/under/misc/patriotsuit
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/administrative
+	back = /obj/item/mod/lightsuit/pre_equipped/administrative
 	backpack_contents = list(
 		/obj/item/melee/energy/axe = 1,
 		/obj/item/storage/part_replacer/bluespace/tier4 = 1,
@@ -309,7 +309,7 @@
 	suit = null
 	head = null
 	mask = /obj/item/clothing/mask/gas/sechailer
-	back = /obj/item/mod/control/pre_equipped/corporate
+	back = /obj/item/mod/lightsuit/pre_equipped/corporate
 	internals_slot = ITEM_SLOT_SUITSTORE
 
 /datum/outfit/admiral
@@ -448,11 +448,11 @@
 	uniform = /obj/item/clothing/under/costume/mech_suit/white
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	mask = /obj/item/clothing/mask/breath
-	back = /obj/item/mod/control/pre_equipped/chrono
+	back = /obj/item/mod/lightsuit/pre_equipped/chrono
 
 /datum/outfit/chrono_agent/post_equip(mob/living/carbon/human/agent, visuals_only)
 	. = ..()
-	var/obj/item/mod/control/mod = agent.back
+	var/obj/item/mod/lightsuit/mod = agent.back
 	if(!istype(mod))
 		return
 	var/obj/item/mod/module/eradication_lock/lock = locate(/obj/item/mod/module/eradication_lock) in mod.modules

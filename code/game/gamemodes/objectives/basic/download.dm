@@ -20,8 +20,8 @@
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				// Check ninja MODsuit internal tech disk
-				if(H && (H.stat != DEAD) && istype(H.back, /obj/item/mod/control/pre_equipped/ninja))
-					var/obj/item/mod/control/pre_equipped/ninja/ninja_suit = H.back
+				if(H && (H.stat != DEAD) && istype(H.back, /obj/item/mod/lightsuit/pre_equipped/ninja))
+					var/obj/item/mod/lightsuit/pre_equipped/ninja/ninja_suit = H.back
 					if(ninja_suit.internal_techdisk)
 						ninja_suit.internal_techdisk.stored_research.copy_research_to(checking)
 			var/list/otherwise = M.GetAllContents()

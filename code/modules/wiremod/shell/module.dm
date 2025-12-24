@@ -1,6 +1,7 @@
 /obj/item/mod/module/circuit
 	name = "\improper MOD circuit adapter module"
 	desc = "A module shell that allows a circuit to be inserted into, and interface with, a MODsuit."
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -151,16 +152,16 @@
 		if(potential_module.name == module_to_select.value)
 			module = potential_module
 	if(COMPONENT_TRIGGERED_BY(toggle_suit, port))
-		INVOKE_ASYNC(attached_module.mod, TYPE_PROC_REF(/obj/item/mod/control, toggle_activate), attached_module.mod.wearer)
+		INVOKE_ASYNC(attached_module.mod, TYPE_PROC_REF(/obj/item/mod/lightsuit, toggle_activate), attached_module.mod.wearer)
 	if(COMPONENT_TRIGGERED_BY(toggle_deploy, port))
-		INVOKE_ASYNC(attached_module.mod, TYPE_PROC_REF(/obj/item/mod/control, quick_deploy), attached_module.mod.wearer)
+		INVOKE_ASYNC(attached_module.mod, TYPE_PROC_REF(/obj/item/mod/lightsuit, quick_deploy), attached_module.mod.wearer)
 	if(attached_module.mod.active && module && COMPONENT_TRIGGERED_BY(select_module, port))
 		INVOKE_ASYNC(module, TYPE_PROC_REF(/obj/item/mod/module, on_select))
 
 /obj/item/circuit_component/mod_adapter_core/proc/on_move(atom/movable/source, atom/old_loc, dir, forced)
 	SIGNAL_HANDLER
-	if(istype(source.loc, /obj/item/mod/control))
-		var/obj/item/mod/control/mod = source.loc
+	if(istype(source.loc, /obj/item/mod/lightsuit))
+		var/obj/item/mod/lightsuit/mod = source.loc
 		RegisterSignal(mod, COMSIG_MOD_MODULE_SELECTED, PROC_REF(on_module_select))
 		RegisterSignal(mod, COMSIG_MOD_DEPLOYED, PROC_REF(on_mod_part_toggled))
 		RegisterSignal(mod, COMSIG_MOD_RETRACTED, PROC_REF(on_mod_part_toggled))
@@ -176,7 +177,7 @@
 		module_to_select.possible_options = modules_list
 		if (module_to_select.possible_options.len)
 			module_to_select.set_value(module_to_select.possible_options[1])
-	else if(istype(old_loc, /obj/item/mod/control))
+	else if(istype(old_loc, /obj/item/mod/lightsuit))
 		UnregisterSignal(old_loc, list(COMSIG_MOD_MODULE_SELECTED, COMSIG_ITEM_EQUIPPED))
 		UnregisterSignal(old_loc, COMSIG_MOD_DEPLOYED)
 		UnregisterSignal(old_loc, COMSIG_MOD_RETRACTED)

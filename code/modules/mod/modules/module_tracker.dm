@@ -8,6 +8,7 @@
 	module_type = MODULE_USABLE
 	incompatible_modules = list(/obj/item/mod/module/tracking_beacon)
 	required_slots = list(ITEM_SLOT_HEAD)
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	///weakref of our beacon
 	var/datum/weakref/beacon_ref
 	///weakref of our monitor

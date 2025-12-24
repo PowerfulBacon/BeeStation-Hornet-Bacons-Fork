@@ -10,7 +10,7 @@
 	desc = "This kit will repaint your MODsuit to something unique."
 	icon = 'icons/obj/clothing/modsuit/mod_construction.dmi'
 	icon_state = "paintkit"
-	var/obj/item/mod/control/editing_mod
+	var/obj/item/mod/lightsuit/editing_mod
 	var/atom/movable/screen/color_matrix_proxy_view/proxy_view
 	var/list/current_color
 
@@ -24,18 +24,18 @@
 	. += span_notice("<b>Right-click</b> a MODsuit to recolor.")
 
 /obj/item/mod/paint/pre_attack(atom/attacked_atom, mob/living/user, params)
-	if(!istype(attacked_atom, /obj/item/mod/control))
+	if(!istype(attacked_atom, /obj/item/mod/lightsuit))
 		return ..()
-	var/obj/item/mod/control/mod = attacked_atom
+	var/obj/item/mod/lightsuit/mod = attacked_atom
 	if(mod.active || mod.activating)
 		balloon_alert(user, "unit active!")
 		return TRUE
 	paint_skin(mod, user)
 
 /obj/item/mod/paint/pre_attack_secondary(atom/attacked_atom, mob/living/user, params)
-	if(!istype(attacked_atom, /obj/item/mod/control))
+	if(!istype(attacked_atom, /obj/item/mod/lightsuit))
 		return ..()
-	var/obj/item/mod/control/mod = attacked_atom
+	var/obj/item/mod/lightsuit/mod = attacked_atom
 	if(mod.active || mod.activating)
 		balloon_alert(user, "unit active!")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -174,9 +174,9 @@
 	name = "\improper MOD [skin] skin applier"
 
 /obj/item/mod/skin_applier/pre_attack(atom/attacked_atom, mob/living/user, params)
-	if(!istype(attacked_atom, /obj/item/mod/control))
+	if(!istype(attacked_atom, /obj/item/mod/lightsuit))
 		return ..()
-	var/obj/item/mod/control/mod = attacked_atom
+	var/obj/item/mod/lightsuit/mod = attacked_atom
 	if(mod.active || mod.activating)
 		balloon_alert(user, "unit active!")
 		return TRUE

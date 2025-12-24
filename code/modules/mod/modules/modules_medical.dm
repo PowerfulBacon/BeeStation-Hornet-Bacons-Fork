@@ -11,6 +11,7 @@
 		allowing the user to access in-depth information on the vitals and injuries of others even at a distance, \
 		all with the flick of the wrist. Data is displayed in a convenient package, but it's up to you to do something with it."
 	icon_state = "health"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -70,6 +71,7 @@
 	desc = "A suite of advanced servos, redirecting power from the suit's arms to help carry the wounded; \
 		or simply for fun. However, Nanotrasen has locked the module's ability to assist in hand-to-hand combat."
 	icon_state = "carry"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 1
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	incompatible_modules = list(/obj/item/mod/module/quick_carry, /obj/item/mod/module/constructor)
@@ -101,6 +103,7 @@
 		with a tip fine enough to locate the emergency injection ports on any suit of armor, \
 		penetrating it with ease. Even yours."
 	icon_state = "injector"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
@@ -129,6 +132,7 @@
 		capable of storing and inserting organs into open patients. \
 		It's recommended by the DeForest Medical Corporation to not inform patients it has been used."
 	icon_state = "organ_thrower"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -220,22 +224,6 @@
 		organ.forceMove(drop_location())
 	organ = null
 
-/*
-///Patrient Transport - Generates hardlight bags you can put people in.
-/obj/item/mod/module/criminalcapture/patienttransport
-	name = "\improper MOD patient transport module"
-	desc = "A module built into the forearm of the suit. Countless waves of mostly-lost mining teams being sent to \
-		Indecipheries and other hazardous locations have taught the DeForest Medical Company many lessons. \
-		Physical bodybags are difficult to store, hard to deploy, and even worse to keep intact in tough scenarios. \
-		Enter the hardlight transport bag. Summonable with merely a gesture, weightless, and immunized against \
-		any extreme scenario the wearer could think of, this bag is perfectly designed for \
-		transport of any body in any environment, any time."
-	icon_state = "patient_transport"
-	bodybag_type = /obj/structure/closet/body_bag/environmental/hardlight
-	capture_time = 1.5 SECONDS
-	packup_time = 0.5 SECONDS
-*/
-
 ///Defibrillator - Gives the suit an extendable pair of shock paddles.
 /obj/item/mod/module/defibrillator
 	name = "\improper MOD defibrillator module"
@@ -246,6 +234,7 @@
 		and counter-shock the heart, and the wearer returns to Medical a hero. Don't you even think about using it as a weapon; \
 		regulations on manufacture and software locks expressly forbid it."
 	icon_state = "defibrillator"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 25
@@ -281,6 +270,7 @@
 		surgery, defibrillation, or injection of chemicals to ease patients into not worrying about their \
 		brand-name fashion being marred."
 	icon_state = "thread_ripper"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -355,6 +345,7 @@
 	desc = "A module using an onboard surgical computer which can be connected to other computers to download and \
 		perform advanced surgeries on the go."
 	icon_state = "surgical_processor"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN

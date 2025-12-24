@@ -14,10 +14,9 @@
 	max_integrity = 250
 	circuit = /obj/item/circuitboard/machine/suit_storage_unit
 
-	var/obj/item/clothing/suit/space/suit = null
+	var/obj/item/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
 	var/obj/item/clothing/mask/mask = null
-	var/obj/item/mod/control/mod = null
 	var/obj/item/storage = null
 	// if you add more storage slots, update cook() to clear their radiation too.
 
@@ -27,8 +26,6 @@
 	var/helmet_type = null
 	/// What type of breathmask the unit starts with when spawned.
 	var/mask_type = null
-	/// What type of MOD the unit starts with when spawned.
-	var/mod_type = null
 	/// What type of additional item the unit starts with when spawned.
 	var/storage_type = null
 
@@ -76,16 +73,16 @@
 /obj/machinery/suit_storage_unit/captain
 	mask_type = /obj/item/clothing/mask/gas/sechailer
 	storage_type = /obj/item/tank/jetpack/oxygen/captain
-	mod_type = /obj/item/mod/control/pre_equipped/magnate
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/magnate
 
 /obj/machinery/suit_storage_unit/centcom
 	mask_type = /obj/item/clothing/mask/gas/atmos/centcom
 	storage_type = /obj/item/tank/jetpack/oxygen/captain
-	mod_type = /obj/item/mod/control/pre_equipped/corporate
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/corporate
 
 /obj/machinery/suit_storage_unit/engine
 	mask_type = /obj/item/clothing/mask/breath
-	mod_type = /obj/item/mod/control/pre_equipped/engineering
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/engineering
 	storage_type = /obj/item/clothing/shoes/magboots
 
 /obj/machinery/suit_storage_unit/atmos
@@ -96,7 +93,7 @@
 /obj/machinery/suit_storage_unit/ce
 	mask_type = /obj/item/clothing/mask/breath
 	storage_type = /obj/item/clothing/shoes/magboots/advance
-	mod_type = /obj/item/mod/control/pre_equipped/advanced
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/advanced
 
 /obj/machinery/suit_storage_unit/security
 	suit_type = /obj/item/clothing/suit/space/hardsuit/security
@@ -106,7 +103,7 @@
 /obj/machinery/suit_storage_unit/hos
 	mask_type = /obj/item/clothing/mask/gas/sechailer
 	storage_type = /obj/item/gps/security/off
-	mod_type = /obj/item/mod/control/pre_equipped/safeguard
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/safeguard
 
 /obj/machinery/suit_storage_unit/mining
 	suit_type = /obj/item/clothing/suit/hooded/explorer
@@ -126,22 +123,22 @@
 /obj/machinery/suit_storage_unit/medical
 	mask_type = /obj/item/clothing/mask/breath/medical
 	storage_type = /obj/item/tank/internals/oxygen
-	mod_type = /obj/item/mod/control/pre_equipped/medical
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/medical
 
 /obj/machinery/suit_storage_unit/cmo
 	mask_type = /obj/item/clothing/mask/breath/medical
 	storage_type = /obj/item/gps/off
-	mod_type = /obj/item/mod/control/pre_equipped/rescue
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/rescue
 
 /obj/machinery/suit_storage_unit/rd
 	mask_type = /obj/item/clothing/mask/breath
-	mod_type = /obj/item/mod/control/pre_equipped/research
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/research
 	storage_type = /obj/item/gps/off
 
 /obj/machinery/suit_storage_unit/syndicate
 	mask_type = /obj/item/clothing/mask/gas/syndicate
 	storage_type = /obj/item/tank/jetpack/oxygen/harness
-	mod_type = /obj/item/mod/control/pre_equipped/nuclear
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/nuclear
 
 /obj/machinery/suit_storage_unit/radsuit
 	name = "radiation suit storage unit"
@@ -166,7 +163,7 @@
 	base_icon_state = "industrial"
 
 /obj/machinery/suit_storage_unit/industrial/loader
-	mod_type = /obj/item/mod/control/pre_equipped/loader
+	suit_type = /obj/item/mod/lightsuit/pre_equipped/loader
 
 /obj/machinery/suit_storage_unit/Initialize(mapload)
 	. = ..()
@@ -177,8 +174,6 @@
 		helmet = new helmet_type(src)
 	if(mask_type)
 		mask = new mask_type(src)
-	if(mod_type)
-		mod = new mod_type(src)
 	if(storage_type)
 		storage = new storage_type(src)
 	RefreshParts()
@@ -209,7 +204,7 @@
 			return
 
 		. += "open"
-		if(suit || mod)
+		if(suit)
 			. += "suit"
 		if(helmet)
 			. += "helm"
@@ -240,7 +235,6 @@
 	helmet = null
 	suit = null
 	mask = null
-	mod = null
 	storage = null
 	set_occupant(null)
 
@@ -275,7 +269,6 @@
 			"suit" = create_silhouette_of(/obj/item/clothing/suit/space/eva),
 			"helmet" = create_silhouette_of(/obj/item/clothing/head/helmet/space/eva),
 			"mask" = create_silhouette_of(/obj/item/clothing/mask/breath),
-			"mod" = create_silhouette_of(/obj/item/mod/control),
 			"storage" = create_silhouette_of(/obj/item/tank/internals/oxygen),
 		)
 
@@ -436,8 +429,6 @@
 				helmet.take_damage(burn_damage * 10, BURN, FIRE)
 			if(suit)
 				suit.take_damage(burn_damage * 10, BURN, FIRE)
-			if(mod)
-				mod.take_damage(burn_damage * 10, BURN, FIRE)
 			if(mask)
 				mask.take_damage(burn_damage * 10, BURN, FIRE)
 			if(storage)
@@ -462,9 +453,6 @@
 		if(mask)
 			things_to_clear += mask
 			things_to_clear += mask.GetAllContents()
-		if(mod)
-			things_to_clear += mod
-			things_to_clear += mod.GetAllContents()
 		if(storage)
 			things_to_clear += storage
 			things_to_clear += storage.GetAllContents()
@@ -480,10 +468,8 @@
 
 /obj/machinery/suit_storage_unit/process(delta_time)
 	var/obj/item/stock_parts/cell/cell
-	if(suit && istype(suit))
-		cell = suit.cell
-	if(mod)
-		cell = mod.get_cell()
+	if(suit)
+		cell = suit.get_cell()
 	if(!cell)
 		return
 	use_power(charge_rate * delta_time)
@@ -547,34 +533,27 @@
 			update_icon()
 			return
 	if(state_open && is_operational)
-		if(istype(I, /obj/item/clothing/suit))
+		if(I.slot_flags & ITEM_SLOT_STORAGE_UNIT)
 			if(suit)
 				to_chat(user, span_warning("The unit already contains a suit!"))
 				return
 			if(!user.transferItemToLoc(I, src))
 				return
 			suit = I
-		else if(istype(I, /obj/item/clothing/head))
+		else if(I.slot_flags & ITEM_SLOT_HEAD)
 			if(helmet)
 				to_chat(user, span_warning("The unit already contains a helmet!"))
 				return
 			if(!user.transferItemToLoc(I, src))
 				return
 			helmet = I
-		else if(istype(I, /obj/item/clothing/mask))
+		else if(I.slot_flags & ITEM_SLOT_MASK)
 			if(mask)
 				to_chat(user, span_warning("The unit already contains a mask!"))
 				return
 			if(!user.transferItemToLoc(I, src))
 				return
 			mask = I
-		else if(istype(I, /obj/item/mod/control))
-			if(mod)
-				to_chat(user, "<span class='warning'>The unit already contains a MOD!</span>")
-				return
-			if(!user.transferItemToLoc(I, src))
-				return
-			mod = I
 		else
 			if(storage)
 				to_chat(user, span_warning("The auxiliary storage compartment is full!"))

@@ -12,7 +12,7 @@
 		/obj/item/tank/jetpack/oxygen/captain,
 		)
 	armor_type = /datum/armor/clothing_suit
-	slot_flags = ITEM_SLOT_OCLOTHING
+	slot_flags = ITEM_SLOT_OCLOTHING | ITEM_SLOT_STORAGE_UNIT
 	var/blood_overlay_type = "suit"
 	var/move_sound = null
 	var/footstep = 0

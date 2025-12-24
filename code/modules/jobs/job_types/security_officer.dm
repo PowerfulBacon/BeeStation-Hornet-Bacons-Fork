@@ -179,7 +179,7 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, S
 	name = "Security Officer (MODsuit)"
 
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/security
+	back = /obj/item/mod/lightsuit/pre_equipped/security
 	suit = null
 	head = null
 	mask = /obj/item/clothing/mask/gas/sechailer

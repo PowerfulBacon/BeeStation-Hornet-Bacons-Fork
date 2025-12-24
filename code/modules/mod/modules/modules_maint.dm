@@ -8,6 +8,7 @@
 		up, but was taken out of modern suits because of the springlock's tendency to \"snap\" back \
 		into place when exposed to humidity. You know what it's like to have an entire exoskeleton enter you?"
 	icon_state = "springlock"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 3 // it is inside every part of your suit, so
 	incompatible_modules = list(/obj/item/mod/module/springlock)
 	var/set_off = FALSE
@@ -146,6 +147,7 @@
 	desc = "A tanning module for modular suits. Skin cancer functionality hasn't ever been proven, \
 		although who knows with the rumors..."
 	icon_state = "tanning"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
@@ -167,6 +169,7 @@
 	name = "\improper MOD balloon blower module"
 	desc = "A strange module invented years ago by some ingenious mimes. It blows balloons."
 	icon_state = "bloon"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN*0.5
@@ -192,6 +195,7 @@
 	desc = "A simple module designed by the bureaucrats of Torch Bay. \
 		It dispenses 'warm, clean, and crisp sheets of paper' onto a nearby table. Usually."
 	icon_state = "paper_maker"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -234,6 +238,7 @@
 	desc = "A module installed into the wrist of the suit, this functions as a high-power stamp, \
 		able to switch between accept and deny modes."
 	icon_state = "stamp"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
@@ -259,6 +264,7 @@
 	name = "\improper MOD atrocinator module"
 	desc = "A mysterious orb that has mysterious effects when inserted in a MODsuit."
 	icon_state = "atrocinator"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN

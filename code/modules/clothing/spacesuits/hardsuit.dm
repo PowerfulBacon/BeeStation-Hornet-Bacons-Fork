@@ -122,7 +122,8 @@
 	icon = 'icons/obj/clothing/suits/hardsuit.dmi'
 	worn_icon = 'icons/mob/clothing/suits/hardsuit.dmi'
 	icon_state = "hardsuit-engineering"
-	inhand_icon_state = "eng_hardsuit"
+	inhand_icon_state = "eng_hardsuit
+	"
 	max_integrity = 300
 	armor_type = /datum/armor/space_hardsuit
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/t_scanner, /obj/item/construction/rcd, /obj/item/pipe_dispenser)
@@ -137,7 +138,6 @@
 	var/hardsuit_type
 	/// Whether the helmet is on.
 	var/helmet_on = FALSE
-
 
 /datum/armor/space_hardsuit
 	melee = 10

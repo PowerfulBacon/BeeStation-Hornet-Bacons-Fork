@@ -18,7 +18,7 @@
 	// We only delimb if we are the ninja
 	var/delimbs = FALSE
 	if (istype(owner_mob))
-		var/obj/item/mod/control/pre_equipped/ninja/ninja_suit = owner_mob.back
+		var/obj/item/mod/lightsuit/pre_equipped/ninja/ninja_suit = owner_mob.back
 		if (istype(ninja_suit) && ninja_suit.active)
 			delimbs = TRUE
 	// Get the direction to the clicked target

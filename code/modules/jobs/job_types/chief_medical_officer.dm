@@ -75,7 +75,7 @@
 	name = "Chief Medical Officer (MOD)"
 
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/rescue
+	back = /obj/item/mod/lightsuit/pre_equipped/rescue
 	suit = null
 	head = null
 	uniform = /obj/item/clothing/under/rank/medical/chief_medical_officer

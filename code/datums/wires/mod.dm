@@ -1,5 +1,5 @@
 /datum/wires/mod
-	holder_type = /obj/item/mod/control
+	holder_type = /datum/component/modsuit
 	proper_name = "MOD control unit"
 
 /datum/wires/mod/New(atom/holder)
@@ -10,11 +10,11 @@
 /datum/wires/mod/interactable(mob/user)
 	if(!..())
 		return FALSE
-	var/obj/item/mod/control/mod = holder
+	var/datum/component/modsuit/mod = holder.GetComponent(/datum/component/modsuit)
 	return mod.open
 
 /datum/wires/mod/get_status()
-	var/obj/item/mod/control/mod = holder
+	var/datum/component/modsuit/mod = holder.GetComponent(/datum/component/modsuit)
 	var/list/status = list()
 	status += "The orange light is [mod.seconds_electrified ? "on" : "off"]."
 	status += "The red light is [mod.malfunctioning ? "off" : "blinking"]."
@@ -23,7 +23,7 @@
 	return status
 
 /datum/wires/mod/on_pulse(wire)
-	var/obj/item/mod/control/mod = holder
+	var/datum/component/modsuit/mod = holder.GetComponent(/datum/component/modsuit)
 	switch(wire)
 		if(WIRE_HACK)
 			mod.locked = !mod.locked
@@ -35,11 +35,11 @@
 			mod.interface_break = !mod.interface_break
 
 /datum/wires/mod/on_cut(wire, mend)
-	var/obj/item/mod/control/mod = holder
+	var/datum/component/modsuit/mod = holder.GetComponent(/datum/component/modsuit)
 	switch(wire)
 		if(WIRE_HACK)
 			if(!mend)
-				mod.req_access = list()
+				mod.suit.req_access = list()
 		if(WIRE_DISABLE)
 			mod.malfunctioning = !mend
 		if(WIRE_SHOCK)
@@ -51,7 +51,7 @@
 			mod.interface_break = !mend
 
 /datum/wires/mod/ui_act(action, params)
-	var/obj/item/mod/control/mod = holder
+	var/datum/component/modsuit/mod = holder.GetComponent(/datum/component/modsuit)
 	if(!issilicon(usr) && mod.seconds_electrified && mod.shock(usr))
 		return FALSE
 	return ..()

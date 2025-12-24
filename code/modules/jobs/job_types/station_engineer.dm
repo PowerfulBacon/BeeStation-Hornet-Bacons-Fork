@@ -61,7 +61,7 @@
 	name = "Station Engineer (MODsuit)"
 
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/engineering
+	back = /obj/item/mod/lightsuit/pre_equipped/engineering
 	head = null
 	mask = /obj/item/clothing/mask/breath
 	internals_slot = ITEM_SLOT_SUITSTORE

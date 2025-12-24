@@ -65,6 +65,8 @@
 #define ITEM_SLOT_HANDCUFFED (1<<18)
 /// Legcuff slot (bolas, beartraps)
 #define ITEM_SLOT_LEGCUFFED (1<<19)
+/// Item fits into the storage unit's primary slot
+#define ITEM_SLOT_STORAGE_UNIT (1 << 20)
 
 #define SLOTS_AMT 20 // Keep this up to date!
 

@@ -7,6 +7,7 @@
 		to bend light around the user, as well as mimetic materials to make the surface of the suit match the \
 		surroundings based off sensor data. For some reason, this tech is rarely seen."
 	icon_state = "cloak"
+	suit_type = MODSUIT_HARD
 	module_type = MODULE_TOGGLE
 	complexity = 4
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 2
@@ -101,6 +102,7 @@
 		using the nanites already hosted in the wearer's suit to transmute into monomolecular shuriken. \
 		While these lack the intense bleeding edge of conventional throwing stars, \
 		they have been set to electrify fleeing targets; and branded with the Spider Clan symbol."
+	suit_type = MODSUIT_HARD
 	dispense_type = /obj/item/throwing_star/stamina/ninja
 	cooldown_time = 0.5 SECONDS
 
@@ -116,6 +118,7 @@
 		this decker's dream is normally used to pass through doors like a phantom. \
 		It's also capable of non-precise electro-stimulation of an assassin-saboteur's opponents on disarming attacks."
 	icon_state = "hacker"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	removable = FALSE
 	incompatible_modules = list(/obj/item/mod/module/hacker)
 	required_slots = list(ITEM_SLOT_GLOVES)
@@ -158,6 +161,7 @@
 		Their hand a hand that is cutting, their body a body that is cutting, their mind, a mind that is cutting. \
 		Ranged weapons are forbidden."
 	icon_state = "recall"
+	suit_type = MODSUIT_HARD
 	removable = FALSE
 	module_type = MODULE_USABLE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 2
@@ -281,6 +285,7 @@
 		EMP dampening shield to cause an electromagnetic pulse of its own. While this won't interfere with the wearer, \
 		it will piss off everyone around them."
 	icon_state = "emp_pulse"
+	suit_type = MODSUIT_HARD
 	module_type = MODULE_USABLE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 10
 	cooldown_time = 8 SECONDS
@@ -310,6 +315,7 @@
 		utilize monomolecular fibers or cutting razorwire, this uses hardlight technology to deploy a \
 		trapping field capable of immobilizing even the strongest opponents."
 	icon_state = "energy_net"
+	suit_type = MODSUIT_HARD
 	removable = FALSE
 	module_type = MODULE_ACTIVE
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 6
@@ -396,6 +402,7 @@
 		cure total paralysis. All that's known is that the fluid requires radiation to properly 'cook,' \
 		so this module demands uranium to be refilled with."
 	icon_state = "adrenaline_boost"
+	suit_type = MODSUIT_HARD
 	removable = FALSE
 	module_type = MODULE_USABLE
 	allow_flags = MODULE_ALLOW_INCAPACITATED

@@ -7,6 +7,7 @@
 		polarized, holographic overlay in front of the user's eyes. It's rated high enough for \
 		immunity against extremities such as spot and arc welding, solar eclipses, and handheld flashlights."
 	icon_state = "welding"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 1
 	incompatible_modules = list(/obj/item/mod/module/welding, /obj/item/mod/module/mod_switch)
 	overlay_state_inactive = "module_welding"
@@ -32,6 +33,7 @@
 		to essentially echolocate things beneath the floor, mostly cables and pipes. \
 		A staple of atmospherics work, and counter-smuggling work."
 	icon_state = "tray"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -51,6 +53,7 @@
 		However, these basic models do not feature computerized systems to automatically toggle them on and off, \
 		so numerous users report a certain stickiness to their steps."
 	icon_state = "magnet"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -97,6 +100,7 @@
 		While some older models of cargo-oriented grapples have capacities of a few tons, \
 		these are only capable of working in zero-gravity environments, a blessing to some Engineers."
 	icon_state = "tether"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD
 	module_type = MODULE_ACTIVE
 	module_type = MODULE_ACTIVE
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -157,6 +161,7 @@
 		a common danger in space. This comes with software to notify the wearer that they're even in a radioactive area, \
 		giving a voice to an otherwise silent killer."
 	icon_state = "radshield"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	complexity = 2
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
 	incompatible_modules = list(/obj/item/mod/module/rad_protection)
@@ -200,6 +205,7 @@
 		extremely advanced construction hologram scanner, as well as containing the \
 		latest engineering schematics combined with inbuilt memory to help the user build walls."
 	icon_state = "constructor"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 2
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.2
@@ -223,6 +229,7 @@
 	name = "\improper MOD water mister module"
 	desc = "A module containing a mister, able to spray it over areas."
 	icon_state = "mister"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_ACTIVE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3

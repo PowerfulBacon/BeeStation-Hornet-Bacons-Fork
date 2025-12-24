@@ -73,7 +73,7 @@
 	var/busy = FALSE
 	var/busy_icon_state
 
-	var/obj/item/mod/control/mod_unit = /obj/item/mod/control/pre_equipped/prototype
+	var/obj/item/mod/lightsuit/mod_unit = /obj/item/mod/lightsuit/pre_equipped/prototype
 
 	COOLDOWN_DECLARE(message_cooldown)
 

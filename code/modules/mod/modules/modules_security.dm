@@ -5,6 +5,7 @@
 	name = "\improper MOD magnetic harness module"
 	desc = "Based off old TerraGov harness kits, this magnetic harness automatically attaches dropped guns back to the wearer."
 	icon_state = "mag_harness"
+	suit_type = MODSUIT_HARD
 	complexity = 2
 	use_power_cost = DEFAULT_CHARGE_DRAIN
 	incompatible_modules = list(/obj/item/mod/module/magnetic_harness)
@@ -71,6 +72,7 @@
 	name = "\improper MOD pepper shoulders module"
 	desc = "A module that attaches two pepper sprayers on shoulders of a MODsuit, reacting to touch with a spray around the user."
 	icon_state = "pepper_shoulder"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN
@@ -113,6 +115,7 @@
 		While some users prefer the chest, others the forearm for quick deployment, \
 		some law enforcement prefer the holster to extend from the thigh."
 	icon_state = "holster"
+	suit_type = MODSUIT_HARD
 	module_type = MODULE_USABLE
 	complexity = 2
 	incompatible_modules = list(/obj/item/mod/module/holster)
@@ -159,6 +162,7 @@
 	name = "\improper MOD megaphone module"
 	desc = "A microchip megaphone linked to a MODsuit, for very important purposes, like: loudness."
 	icon_state = "megaphone"
+	suit_type = MODSUIT_LIGHT | MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -180,85 +184,12 @@
 	speech_args[SPEECH_SPANS] |= voicespan
 	drain_power(use_power_cost)
 
-/*
-///Criminal Capture - Lets you put people in transport bags.
-/obj/item/mod/module/criminalcapture
-	name = "\improper MOD criminal capture module"
-	desc = "The private security that had orders to take in people dead were quite \
-		happy with their space-proofed suit, but for those who wanted to bring back \
-		whomever their targets were still breathing needed a way to \"share\" the \
-		space-proofing. And thus: criminal capture! Creates a prisoner transport bag \
-		around the apprehended that has breathable atmos and even stabilizes critical \
-		conditions."
-	icon_state = "criminalcapture"
-	module_type = MODULE_ACTIVE
-	complexity = 2
-	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
-	incompatible_modules = list(/obj/item/mod/module/criminalcapture)
-	cooldown_time = 0.5 SECONDS
-	/// Max bag capacity.
-	var/max_capacity = 3
-	/// Time to capture a prisoner.
-	var/capture_time = 1 SECONDS
-	/// Time to pack a bodybag up.
-	var/packup_time = 0.5 SECONDS
-	/// List of our capture bags.
-	var/list/criminal_capture_bags = list()
-
-/obj/item/mod/module/criminalcapture/Initialize(mapload)
-	. = ..()
-	for(var/i in 1 to max_capacity)
-		criminal_capture_bags += new /obj/structure/closet/body_bag/environmental/prisoner/pressurized(src)
-
-/obj/item/mod/module/criminalcapture/on_select_use(atom/target)
-	. = ..()
-	if(!.)
-		return
-	if(!mod.wearer.Adjacent(target))
-		return
-	if(isliving(target))
-		var/mob/living/living_target = target
-		var/turf/target_turf = get_turf(living_target)
-		playsound(src, 'sound/items/zip.ogg', 25, TRUE)
-		if(!do_after(mod.wearer, capture_time, target = living_target))
-			balloon_alert(mod.wearer, "interrupted!")
-			return
-		var/obj/structure/closet/body_bag/environmental/prisoner/dropped_bag = pop(criminal_capture_bags)
-		dropped_bag.forceMove(target_turf)
-		dropped_bag.close()
-		living_target.forceMove(dropped_bag)
-	else if(istype(target, /obj/structure/closet/body_bag/environmental/prisoner) || istype(target, /obj/item/bodybag/environmental/prisoner))
-		var/obj/item/bodybag/environmental/prisoner/bag = target
-		if(criminal_capture_bags.len >= max_capacity)
-			balloon_alert(mod.wearer, "bag limit reached!")
-			return
-		playsound(src, 'sound/items/zip.ogg', 25, TRUE)
-		if(!do_after(mod.wearer, packup_time, target = bag))
-			balloon_alert(mod.wearer, "interrupted!")
-			return
-		if(criminal_capture_bags.len >= max_capacity)
-			balloon_alert(mod.wearer, "bag limit reached!")
-			return
-		if(locate(/mob/living) in bag)
-			balloon_alert(mod.wearer, "living creatures inside!")
-			return
-		if(istype(bag, /obj/item/bodybag/environmental/prisoner))
-			bag = bag.deploy_bodybag(mod.wearer, get_turf(bag))
-		var/obj/structure/closet/body_bag/environmental/prisoner/structure_bag = bag
-		if(!structure_bag.opened)
-			structure_bag.open(mod.wearer, force = TRUE)
-		bag.forceMove(src)
-		criminal_capture_bags += bag
-		balloon_alert(mod.wearer, "bag stored")
-	else
-		balloon_alert(mod.wearer, "invalid target!")
-*/
-
 ///Mirage grenade dispenser - Dispenses grenades that copy the user's appearance.
 /obj/item/mod/module/dispenser/mirage
 	name = "\improper MOD mirage grenade dispenser module"
 	desc = "This module can create mirage grenades at the user's liking. These grenades create holographic copies of the user."
 	icon_state = "mirage_grenade"
+	suit_type = MODSUIT_HARD
 	cooldown_time = 20 SECONDS
 	overlay_state_inactive = "module_mirage_grenade"
 	dispense_type = /obj/item/grenade/mirage
@@ -293,6 +224,7 @@
 	name = "\improper MOD projectile dampener module"
 	desc = "Using technology from peacekeeper cyborgs, this module weakens all projectiles in nearby range."
 	icon_state = "projectile_dampener"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_TOGGLE
 	complexity = 3
 	active_power_cost = DEFAULT_CHARGE_DRAIN
@@ -347,6 +279,7 @@
 		Its basic function slowly scans around the user for any bio-signatures, however it can be overclocked to scan everywhere at once.\
 		Its loud ping is much harder to hide in an indoor station than in the outdoor operations it was designed for."
 	icon_state = "active_sonar"
+	suit_type = MODSUIT_HARD | MODSUIT_MECH
 	module_type = MODULE_USABLE
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
 	use_power_cost = DEFAULT_CHARGE_DRAIN * 3
