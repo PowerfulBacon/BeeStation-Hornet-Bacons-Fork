@@ -36,16 +36,8 @@
 	var/skin = "standard"
 	/// Theme of the MOD TGUI
 	var/ui_theme = "ntos"
-	/// If the suit is deployed and turned on.
-	var/active = FALSE
-	/// If the suit wire/module hatch is open.
-	var/open = FALSE
-	/// If the suit is ID locked.
-	var/locked = FALSE
 	/// If the suit is malfunctioning.
 	var/malfunctioning = FALSE
-	/// If the suit is currently activating/deactivating.
-	var/activating = FALSE
 	/// How long the MOD is electrified for.
 	var/seconds_electrified = MACHINE_NOT_ELECTRIFIED
 	/// If the suit interface is broken.
@@ -62,16 +54,12 @@
 	var/activation_step_time = MOD_ACTIVATION_STEP_TIME
 	/// Extended description of the theme.
 	var/extended_desc
-	/// MOD core.
-	var/obj/item/mod/core/core
 	/// List of MODsuit part datums.
 	var/list/mod_parts = list()
 	/// Modules the MOD currently possesses.
 	var/list/modules = list()
 	/// Currently used module.
 	var/obj/item/mod/module/selected_module
-	/// AI or pAI mob inhabiting the MOD.
-	var/mob/living/silicon/ai_assistant
 	/// Delay between moves as AI.
 	var/static/movedelay = 0
 	/// Cooldown for AI moves.
@@ -83,15 +71,10 @@
 	. = ..()
 	if(!movedelay)
 		movedelay = CONFIG_GET(number/movedelay/run_delay)
-	if(new_theme)
-		theme = new_theme
-	theme = GLOB.mod_themes[theme]
-	theme.set_up_parts(src, new_skin)
+	AddComponent(src, /datum/component/modsuit, new_theme || theme, new_skin)
 	for(var/obj/item/part as anything in get_parts())
 		RegisterSignal(part, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_part_destruction))
 	wires = new /datum/wires/mod(src)
-	if(length(req_access))
-		locked = TRUE
 	new_core?.install(src)
 	update_speed()
 	RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
@@ -105,8 +88,6 @@
 	STOP_PROCESSING(SSobj, src)
 	for(var/obj/item/mod/module/module as anything in modules)
 		uninstall(module, deleting = TRUE)
-	if(core)
-		QDEL_NULL(core)
 	QDEL_NULL(wires)
 	//QDEL_NULL(mod_link)
 	for(var/datum/mod_part/part_datum as anything in get_part_datums(all = TRUE))
@@ -138,7 +119,6 @@
 /obj/item/mod/control/examine(mob/user)
 	. = ..()
 	if(active)
-		. += span_notice("Charge: [core ? "[get_charge_percent()]%" : "No core"].")
 		. += span_notice("Selected module: [selected_module || "None"].")
 	if(!open && !active)
 		if(!wearer)
@@ -262,34 +242,6 @@
 		update_charge_alert()
 		return TRUE
 	return ..()
-
-/obj/item/mod/control/screwdriver_act(mob/living/user, obj/item/screwdriver)
-	. = ..()
-	if(.)
-		return TRUE
-	if(active || activating || ai_controller)
-		balloon_alert(user, "unit active!")
-		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return FALSE
-	if(isAI(ai_assistant) && locked && !open)
-		balloon_alert(user, "suit locked, consult onboard AI!")
-		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return FALSE
-	if(SEND_SIGNAL(src, COMSIG_MOD_MODULE_REMOVAL, user) & MOD_CANCEL_REMOVAL)
-		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return FALSE
-	balloon_alert(user, "[open ? "closing" : "opening"] cover...")
-	screwdriver.play_tool_sound(src, 100)
-	if(screwdriver.use_tool(src, user, 1 SECONDS))
-		if(active || activating)
-			balloon_alert(user, "unit active!")
-			return TRUE
-		screwdriver.play_tool_sound(src, 100)
-		balloon_alert(user, "cover [open ? "closed" : "opened"]")
-		open = !open
-	else
-		balloon_alert(user, "interrupted!")
-	return TRUE
 
 /obj/item/mod/control/crowbar_act(mob/living/user, obj/item/crowbar)
 	. = ..()
@@ -625,27 +577,6 @@
 		return
 	req_access = card.access.Copy()
 	balloon_alert(user, "access updated")
-
-/obj/item/mod/control/proc/get_charge_source()
-	return core?.charge_source()
-
-/obj/item/mod/control/proc/get_charge()
-	return core?.charge_amount() || 0
-
-/obj/item/mod/control/proc/get_max_charge()
-	return core?.max_charge_amount() || 1 //avoid dividing by 0
-
-/obj/item/mod/control/proc/get_charge_percent()
-	return ROUND_UP((get_charge() / get_max_charge()) * 100)
-
-/obj/item/mod/control/proc/add_charge(amount)
-	return core?.add_charge(amount) || FALSE
-
-/obj/item/mod/control/proc/subtract_charge(amount)
-	return core?.subtract_charge(amount) || FALSE
-
-/obj/item/mod/control/proc/check_charge(amount)
-	return core?.check_charge(amount) || FALSE
 
 /obj/item/mod/control/proc/update_charge_alert()
 	if(!wearer)
