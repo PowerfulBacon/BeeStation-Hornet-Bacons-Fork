@@ -19,7 +19,10 @@
 		armor plating being installed by default, and their actuators only lead to slightly greater speed than industrial suits."
 	/// Default skin of the MOD.
 	var/default_skin = "standard"
-	/// The slot this mod theme fits on
+	/// The slot flags that are required by the target suit for this
+	/// theme to be applicable. If there are any slots required by
+	/// the theme which are not satisfied by the suit, then the theme
+	/// will not be applicable to that suit.
 	var/slot_flags = ITEM_SLOT_BACK
 	/// Armor shared across the MOD parts.
 	var/datum/armor/armor_type = /datum/armor/mod_theme
@@ -94,10 +97,16 @@
 		skin_parts -= skin
 #endif
 
+/datum/mod_theme/proc/can_apply_to(datum/component/modsuit/mod)
+	// The suit must be the same as, or more constrained
+	// than the theme's requirements.
+	if (mod.suit.slot_flags != (mod.suit.slot_flags | slot_flags))
+		return FALSE
+	return TRUE
+
 /// Create parts of the suit and modify them using the theme's variables.
-/datum/mod_theme/proc/set_up_parts(obj/item/mod/control/mod, skin)
+/datum/mod_theme/proc/set_up_parts(datum/component/modsuit/mod, skin)
 	var/list/parts = list(mod)
-	mod.slot_flags = slot_flags
 	mod.extended_desc = extended_desc
 	mod.slowdown_deployed = slowdown_deployed
 	mod.activation_step_time = activation_step_time
@@ -106,7 +115,7 @@
 	mod.charge_drain = charge_drain
 	var/datum/mod_part/control_part_datum = new()
 	control_part_datum.part_item = mod
-	mod.mod_parts["[mod.slot_flags]"] = control_part_datum
+	mod.mod_parts["[mod.suit.slot_flags]"] = control_part_datum
 	for(var/path in variants[default_skin])
 		if(!ispath(path))
 			continue

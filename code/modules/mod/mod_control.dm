@@ -34,148 +34,23 @@
 	var/datum/mod_theme/theme = /datum/mod_theme
 	/// Looks of the MOD.
 	var/skin = "standard"
-	/// Theme of the MOD TGUI
-	var/ui_theme = "ntos"
-	/// If the suit is malfunctioning.
-	var/malfunctioning = FALSE
-	/// How long the MOD is electrified for.
-	var/seconds_electrified = MACHINE_NOT_ELECTRIFIED
-	/// If the suit interface is broken.
-	var/interface_break = FALSE
-	/// How much module complexity can this MOD carry.
-	var/complexity_max = DEFAULT_MAX_COMPLEXITY
-	/// How much module complexity this MOD is carrying.
-	var/complexity = 0
-	/// Power usage of the MOD.
-	var/charge_drain = DEFAULT_CHARGE_DRAIN
-	/// Slowdown of the MOD when all of its pieces are deployed.
-	var/slowdown_deployed = 0.50 //same as syndicate hardsuits
-	/// How long this MOD takes each part to seal.
-	var/activation_step_time = MOD_ACTIVATION_STEP_TIME
-	/// Extended description of the theme.
-	var/extended_desc
-	/// List of MODsuit part datums.
-	var/list/mod_parts = list()
-	/// Modules the MOD currently possesses.
-	var/list/modules = list()
-	/// Currently used module.
-	var/obj/item/mod/module/selected_module
-	/// Delay between moves as AI.
-	var/static/movedelay = 0
-	/// Cooldown for AI moves.
-	COOLDOWN_DECLARE(cooldown_mod_move)
-	/// Person wearing the MODsuit.
-	var/mob/living/carbon/human/wearer
 
 /obj/item/mod/control/Initialize(mapload, datum/mod_theme/new_theme, new_skin, obj/item/mod/core/new_core)
 	. = ..()
-	if(!movedelay)
-		movedelay = CONFIG_GET(number/movedelay/run_delay)
 	AddComponent(src, /datum/component/modsuit, new_theme || theme, new_skin)
 	for(var/obj/item/part as anything in get_parts())
 		RegisterSignal(part, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_part_destruction))
 	wires = new /datum/wires/mod(src)
-	new_core?.install(src)
 	update_speed()
 	RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
 	RegisterSignal(src, COMSIG_SPEED_POTION_APPLIED, PROC_REF(on_potion))
-	for(var/obj/item/mod/module/module as anything in theme.inbuilt_modules)
-		module = new module(src)
-		install(module)
-	START_PROCESSING(SSobj, src)
 
 /obj/item/mod/control/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	for(var/obj/item/mod/module/module as anything in modules)
-		uninstall(module, deleting = TRUE)
 	QDEL_NULL(wires)
-	//QDEL_NULL(mod_link)
-	for(var/datum/mod_part/part_datum as anything in get_part_datums(all = TRUE))
-		var/obj/item/part_item = part_datum.part_item
-		part_datum.part_item = null
-		part_datum.overslotting = null
-		mod_parts -= part_datum
-		if(!QDELING(part_item))
-			qdel(part_item)
 	return ..()
-
-/obj/item/mod/control/atom_destruction(damage_flag)
-	var/atom/visible_atom = wearer || src
-	if(wearer)
-		clean_up()
-	visible_atom.visible_message(span_bolddanger("[src] fall[p_s()] apart, completely destroyed!"), vision_distance = COMBAT_MESSAGE_RANGE)
-	for(var/obj/item/mod/module/module as anything in modules)
-		uninstall(module)
-	if(ai_assistant)
-		if(ispAI(ai_assistant))
-			INVOKE_ASYNC(src, PROC_REF(remove_pai), /* user = */ null, /* forced = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after
-		else
-			for(var/datum/action/action as anything in actions)
-				if(action.owner == ai_assistant)
-					action.Remove(ai_assistant)
-			new /obj/item/mod/ai_minicard(drop_location(), ai_assistant)
-	return ..()
-
-/obj/item/mod/control/examine(mob/user)
-	. = ..()
-	if(active)
-		. += span_notice("Selected module: [selected_module || "None"].")
-	if(!open && !active)
-		if(!wearer)
-			. += span_notice("You could equip it to turn it on.")
-		. += span_notice("You could open the cover with a <b>screwdriver</b>.")
-	else if(open)
-		. += span_notice("You could close the cover with a <b>screwdriver</b>.")
-		. += span_notice("You could use <b>modules</b> on it to install them.")
-		. += span_notice("You could remove modules with a <b>crowbar</b>.")
-		. += span_notice("You could update the access lock with an <b>ID</b>.")
-		. += span_notice("You could access the wire panel with a <b>wire tool</b>.")
-		if(core)
-			. += span_notice("You could remove [core] with a <b>wrench</b>.")
-		else
-			. += span_notice("You could use a <b>MOD core</b> on it to install one.")
-		if(isnull(ai_assistant))
-			. += span_notice("You could install an AI or pAI using their <b>storage card</b>.")
-		else if(isAI(ai_assistant))
-			. += span_notice("You could remove [ai_assistant] with an <b>intellicard</b>.")
-	. += span_notice("<i>You could examine it more thoroughly...</i>")
-
-/obj/item/mod/control/examine_more(mob/user)
-	. = ..()
-	. += "<i>[extended_desc]</i>"
-
-/obj/item/mod/control/process(delta_time)
-	if(seconds_electrified > MACHINE_NOT_ELECTRIFIED)
-		seconds_electrified--
-	if(!active)
-		return
-	if(!get_charge() && active && !activating)
-		power_off()
-		return
-	var/malfunctioning_charge_drain = 0
-	if(malfunctioning)
-		malfunctioning_charge_drain = rand(1,20)
-	subtract_charge((charge_drain + malfunctioning_charge_drain)*delta_time)
-	update_charge_alert()
-	for(var/obj/item/mod/module/module as anything in modules)
-		if(malfunctioning && module.active && DT_PROB(5, delta_time))
-			module.deactivate(display_message = TRUE)
-		module.on_process(delta_time)
-
-/obj/item/mod/control/visual_equipped(mob/user, slot, initial = FALSE) //needs to be visual because we wanna show it in select equipment
-	if(slot & slot_flags)
-		set_wearer(user)
-	else if(wearer)
-		unset_wearer()
-
-/obj/item/mod/control/dropped(mob/user)
-	. = ..()
-	if(!wearer)
-		return
-	clean_up()
 
 /obj/item/mod/control/item_action_slot_check(slot)
-	if(slot == slot_flags)
+	if(slot & slot_flags)
 		return TRUE
 
 // Grant pinned actions to pin owners, gives AI pinned actions to the AI and not the wearer
@@ -578,14 +453,6 @@
 	req_access = card.access.Copy()
 	balloon_alert(user, "access updated")
 
-/obj/item/mod/control/proc/update_charge_alert()
-	if(!wearer)
-		return
-	if(!core)
-		wearer.throw_alert("mod_charge", /atom/movable/screen/alert/nocore)
-		return
-	core.update_charge_alert()
-
 /obj/item/mod/control/proc/update_speed()
 	var/total_slowdown = 0
 	var/prevent_slowdown = HAS_TRAIT(src, TRAIT_SPEED_POTIONED)
@@ -603,10 +470,6 @@
 		if (!part_datum.sealed)
 			part.slowdown = max(part.slowdown, 0)
 	wearer?.update_equipment_speed_mods()
-
-/obj/item/mod/control/proc/power_off()
-	balloon_alert(wearer, "no power!")
-	toggle_activate(wearer, force_deactivate = TRUE)
 
 /obj/item/mod/control/proc/set_mod_color(new_color)
 	for(var/obj/item/part as anything in get_parts(all = TRUE))
@@ -682,3 +545,25 @@
 	if (length(overrides))
 		return overrides[1]
 	return mutable_appearance(worn_icon, "[skin]-helmet-visor", layer = standing.layer + 0.5)
+
+/obj/item/mod/control/relaymove(mob/user, direction)
+	if((!active && wearer) || get_charge() < CHARGE_PER_STEP || user != ai_assistant || !COOLDOWN_FINISHED(src, cooldown_mod_move) || (wearer?.pulledby?.grab_state > GRAB_PASSIVE))
+		return FALSE
+	var/datum/mod_part/legs_to_move = get_part_datum_from_slot(ITEM_SLOT_FEET)
+	if(wearer && (!legs_to_move || !legs_to_move.sealed))
+		return FALSE
+	var/timemodifier = MOVE_DELAY * (ISDIAGONALDIR(direction) ? sqrt(2) : 1) * (wearer ? WEARER_DELAY : LONE_DELAY)
+	if(wearer && !wearer.Process_Spacemove(direction))
+		return FALSE
+	else if(!wearer && (!has_gravity() || !isturf(loc)))
+		return FALSE
+	COOLDOWN_START(src, cooldown_mod_move, movedelay * timemodifier + slowdown_deployed)
+	subtract_charge(CHARGE_PER_STEP)
+	playsound(src, 'sound/mecha/mechmove01.ogg', 25, TRUE)
+	if(ismovable(wearer?.loc))
+		return wearer.loc.relaymove(wearer, direction)
+	else if(wearer)
+		ADD_TRAIT(wearer, TRAIT_FORCED_STANDING, REF(src))
+		addtimer(CALLBACK(src, PROC_REF(ai_fall)), AI_FALL_TIME, TIMER_UNIQUE | TIMER_OVERRIDE)
+	var/atom/movable/mover = wearer || src
+	return step(mover, direction)

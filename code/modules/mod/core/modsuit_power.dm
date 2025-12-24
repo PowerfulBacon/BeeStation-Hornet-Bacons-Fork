@@ -19,3 +19,16 @@
 
 /datum/component/modsuit/proc/check_charge(amount)
 	return core?.check_charge(amount) || FALSE
+
+/datum/component/modsuit/proc/power_off()
+	if (wearer)
+		balloon_alert(wearer, "no power!")
+	toggle_activate(wearer, force_deactivate = TRUE)
+
+/datum/component/modsuit/proc/update_charge_alert()
+	if(!wearer)
+		return
+	if(!core)
+		wearer.throw_alert("mod_charge", /atom/movable/screen/alert/nocore)
+		return
+	core.update_charge_alert()

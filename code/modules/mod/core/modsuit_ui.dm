@@ -54,7 +54,7 @@
 			"configuration_data" = module.get_configuration(user),
 		))
 	data["module_custom_status"] = module_custom_status
-	data["control"] = name
+	data["control"] = suit.name
 	data["module_info"] = module_info
 	var/part_info = list()
 	for(var/obj/item/part as anything in get_parts())
@@ -83,7 +83,7 @@
 	if(.)
 		return
 	if(malfunctioning && prob(75))
-		balloon_alert(ui.user, "button malfunctions!")
+		suit.balloon_alert(ui.user, "malfunction!")
 		return
 	switch(action)
 		if("lock")
@@ -91,7 +91,8 @@
 			if(ai_assistant && isAI(ai_assistant))
 				//Check if the UI user is the AI interacting. Suit pilot cannot toggle lock.
 				if(!isAI(ui.user))
-					balloon_alert(ui.user, "AI permissions required to unlock AI-assisted modsuit.")
+					suit.balloon_alert(ui.user, "access denied")
+					to_chat(ui.user, span_warning("You try to lock the modsuit, but an AI installed in it is overriding the access controls!"))
 					return
 				else
 					to_chat(ui.user, "Permission granted, AI Controller.")
@@ -101,13 +102,6 @@
 			else
 				balloon_alert(ui.user, "access insufficent!")
 				playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		/*
-		if("call")
-			if(!mod_link.link_call)
-				call_link(ui.user, mod_link)
-			else
-				mod_link.end_call()
-		*/
 		if("activate")
 			toggle_activate(ui.user)
 		if("select")

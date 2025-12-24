@@ -1,4 +1,4 @@
-/obj/item/mod/control/transfer_ai(interaction, mob/user, mob/living/silicon/ai/intAI, obj/item/aicard/card)
+/datum/component/modsuit/transfer_ai(interaction, mob/user, mob/living/silicon/ai/intAI, obj/item/aicard/card)
 	. = ..()
 	if(!.)
 		return
@@ -44,7 +44,7 @@
 			card.AI = null
 
 /// Place an AI in control of your suit functions
-/obj/item/mod/control/proc/ai_enter_mod(mob/living/silicon/ai/new_ai)
+/datum/component/modsuit/proc/ai_enter_mod(mob/living/silicon/ai/new_ai)
 	new_ai.control_disabled = FALSE
 	new_ai.radio_enabled = TRUE
 	new_ai.ai_restore_power()
@@ -55,7 +55,7 @@
 	on_gained_assistant(new_ai)
 
 /// Remove an AI's control of your suit functions
-/obj/item/mod/control/proc/ai_exit_mod(obj/item/aicard/card)
+/datum/component/modsuit/proc/ai_exit_mod(obj/item/aicard/card)
 	var/mob/living/silicon/ai/old_ai = ai_assistant
 	old_ai.ai_restore_power()//So the AI initially has power.
 	old_ai.control_disabled = TRUE
@@ -67,7 +67,7 @@
 	on_removed_assistant(old_ai)
 
 /// Place a pAI in control of your suit functions
-/obj/item/mod/control/proc/insert_pai(mob/user, obj/item/paicard/card)
+/datum/component/modsuit/proc/insert_pai(mob/user, obj/item/paicard/card)
 	if (!isnull(ai_assistant))
 		balloon_alert(user, "slot occupied!")
 		return FALSE
@@ -93,7 +93,7 @@
 	return TRUE
 
 /// Removes pAI control from a modsuit
-/obj/item/mod/control/proc/remove_pai(mob/user, forced = FALSE)
+/datum/component/modsuit/proc/remove_pai(mob/user, forced = FALSE)
 	if (isnull(ai_assistant))
 		balloon_alert(user, "no pAI!")
 		return FALSE
@@ -113,14 +113,14 @@
 	on_removed_assistant()
 
 /// Called when a new ai assistant is inserted
-/obj/item/mod/control/proc/on_gained_assistant(mob/living/silicon/new_helper)
+/datum/component/modsuit/proc/on_gained_assistant(mob/living/silicon/new_helper)
 	ai_assistant = new_helper
 	balloon_alert(new_helper, "transferred to a mod unit")
 	for(var/datum/action/action as anything in actions)
 		action.Grant(new_helper)
 
 /// Called when an existing ai assistant is removed
-/obj/item/mod/control/proc/on_removed_assistant()
+/datum/component/modsuit/proc/on_removed_assistant()
 	for(var/datum/action/action as anything in actions)
 		action.Remove(ai_assistant)
 	ai_assistant.remote_control = null
@@ -132,28 +132,6 @@
 #define LONE_DELAY 5
 #define CHARGE_PER_STEP DEFAULT_CHARGE_DRAIN * 2.5
 #define AI_FALL_TIME 1 SECONDS
-
-/obj/item/mod/control/relaymove(mob/user, direction)
-	if((!active && wearer) || get_charge() < CHARGE_PER_STEP || user != ai_assistant || !COOLDOWN_FINISHED(src, cooldown_mod_move) || (wearer?.pulledby?.grab_state > GRAB_PASSIVE))
-		return FALSE
-	var/datum/mod_part/legs_to_move = get_part_datum_from_slot(ITEM_SLOT_FEET)
-	if(wearer && (!legs_to_move || !legs_to_move.sealed))
-		return FALSE
-	var/timemodifier = MOVE_DELAY * (ISDIAGONALDIR(direction) ? sqrt(2) : 1) * (wearer ? WEARER_DELAY : LONE_DELAY)
-	if(wearer && !wearer.Process_Spacemove(direction))
-		return FALSE
-	else if(!wearer && (!has_gravity() || !isturf(loc)))
-		return FALSE
-	COOLDOWN_START(src, cooldown_mod_move, movedelay * timemodifier + slowdown_deployed)
-	subtract_charge(CHARGE_PER_STEP)
-	playsound(src, 'sound/mecha/mechmove01.ogg', 25, TRUE)
-	if(ismovable(wearer?.loc))
-		return wearer.loc.relaymove(wearer, direction)
-	else if(wearer)
-		ADD_TRAIT(wearer, TRAIT_FORCED_STANDING, REF(src))
-		addtimer(CALLBACK(src, PROC_REF(ai_fall)), AI_FALL_TIME, TIMER_UNIQUE | TIMER_OVERRIDE)
-	var/atom/movable/mover = wearer || src
-	return step(mover, direction)
 
 #undef MOVE_DELAY
 #undef WEARER_DELAY

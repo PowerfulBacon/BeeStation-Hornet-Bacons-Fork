@@ -9,6 +9,18 @@
  */
 
 /datum/component/modsuit
+	/// Theme of the MOD TGUI
+	var/ui_theme = "ntos"
+	/// If the suit is malfunctioning.
+	var/malfunctioning = FALSE
+	/// How long the MOD is electrified for.
+	var/seconds_electrified = MACHINE_NOT_ELECTRIFIED
+	/// If the suit interface is broken.
+	var/interface_break = FALSE
+	/// How much module complexity can this MOD carry.
+	var/complexity_max = DEFAULT_MAX_COMPLEXITY
+	/// How much module complexity this MOD is carrying.
+	var/complexity = 0
 	/// If the suit is ID locked.
 	var/locked = FALSE
 	/// If the suit is deployed and turned on.
@@ -19,6 +31,14 @@
 	var/open = FALSE
 	/// Is this suit active?
 	var/active = FALSE
+	/// Power usage of the MOD.
+	var/charge_drain = DEFAULT_CHARGE_DRAIN
+	/// Slowdown of the MOD when all of its pieces are deployed.
+	var/slowdown_deployed = 0.50 //same as syndicate hardsuits
+	/// How long this MOD takes each part to seal.
+	var/activation_step_time = MOD_ACTIVATION_STEP_TIME
+	/// Person wearing the MODsuit.
+	var/mob/living/carbon/human/wearer
 	/// AI or pAI mob inhabiting the suit.
 	var/mob/living/silicon/ai_assistant
 	/// The name of the atom that we are applied to
@@ -26,10 +46,24 @@
 	/// The core inserted into this suit. Cores define the interaction
 	/// with the power mechanics of the suit.
 	var/obj/item/mod/core/core = null
+	/// List of MODsuit part datums.
+	var/list/mod_parts = list()
+	/// Modules the MOD currently possesses.
+	var/list/modules = list()
+	/// Currently used module.
+	var/obj/item/mod/module/selected_module
+	/// Extended description of the theme.
+	var/extended_desc
+	/// Cooldown for AI moves.
+	COOLDOWN_DECLARE(cooldown_mod_move)
+	/// Delay between moves as AI.
+	var/static/movedelay = 0
 
-/datum/component/modsuit/Initialize(datum/mod_theme/theme, new_skin)
+/datum/component/modsuit/Initialize(datum/mod_theme/theme, new_skin, obj/item/mod/core/new_core)
 	if (!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
+	if(!movedelay)
+		movedelay = CONFIG_GET(number/movedelay/run_delay)
 	// Store a reference to the suit, since this is the parent
 	// we will be destroyed when our parent is destroyed.
 	suit = parent
@@ -38,54 +72,140 @@
 		locked = TRUE
 	if (ispath(theme))
 		theme = GLOB.mod_themes[theme]
+	if (!theme.can_apply_to(src))
+		CRASH("Modsuit theme applied to modsuit which is not capable of using that theme.")
 	theme.set_up_parts(src, new_skin)
+	// Install the core
+	new_core?.install(src)
 	// Screentips
 	RegisterSignal(parent, COMSIG_ATOM_ADD_CONTEXT, PROC_REF(display_screentips))
 	// Core connection behaviour
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(check_core_insertion))
 	// Examine overrides
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(on_examine_more))
 	// Tool behaviours
 	RegisterSignal(parent, COMSIG_ATOM_TOOL_ACT(TOOL_SCREWDRIVER), PROC_REF(screwdriver_act))
+	// Equip signals
+	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equipped))
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_dropped))
+	// Destruction handling
+	RegisterSignal(parent, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_destruction))
+	// Install the modules
+	for(var/obj/item/mod/module/module as anything in theme.inbuilt_modules)
+		module = new module(src)
+		install(module)
+	// Start processing
+	START_PROCESSING(SSobj, src)
 
 /// Remove any references when we are destroyed
 /datum/component/modsuit/Destroy(force, silent)
 	. = ..()
+	// Stop processing
+	STOP_PROCESSING(SSobj, src)
+	// Uninstall modules
+	for(var/obj/item/mod/module/module as anything in modules)
+		uninstall(module, deleting = TRUE)
+	// Clear up all part datums
+	for(var/datum/mod_part/part_datum as anything in get_part_datums(all = TRUE))
+		var/obj/item/part_item = part_datum.part_item
+		part_datum.part_item = null
+		part_datum.overslotting = null
+		mod_parts -= part_datum
+		if(!QDELING(part_item))
+			qdel(part_item)
+	// Clear hanging references
 	suit = null
-	// Core gets deleted along with us
+	// Core gets deleted along with us, if still present
 	if (core)
 		QDEL_NULL(core)
 
+/datum/component/modsuit/process(delta_time)
+	if(seconds_electrified > MACHINE_NOT_ELECTRIFIED)
+		seconds_electrified--
+	if(!active)
+		return
+	if(!get_charge() && active && !activating)
+		power_off()
+		return
+	var/malfunctioning_charge_drain = 0
+	if(malfunctioning)
+		malfunctioning_charge_drain = rand(1,20)
+	subtract_charge((charge_drain + malfunctioning_charge_drain)*delta_time)
+	update_charge_alert()
+	for(var/obj/item/mod/module/module as anything in modules)
+		if(malfunctioning && module.active && DT_PROB(5, delta_time))
+			module.deactivate(display_message = TRUE)
+		module.on_process(delta_time)
+
+/// Called when the atom is destroyed through damage (and not through deletion)
+/datum/component/modsuit/proc/on_destruction(datum/source, damage_flag)
+	SIGNAL_HANDLER
+	var/atom/visible_atom = wearer || src
+	if(wearer)
+		clean_up()
+	visible_atom.visible_message(span_bolddanger("[src] fall[p_s()] apart, completely destroyed!"), vision_distance = COMBAT_MESSAGE_RANGE)
+	for(var/obj/item/mod/module/module as anything in modules)
+		uninstall(module)
+	if(ai_assistant)
+		if(ispAI(ai_assistant))
+			// async to appease spaceman DMM because the branch we don't run has a do_after
+			INVOKE_ASYNC(src, PROC_REF(remove_pai), /* user = */ null, /* forced = */ TRUE)
+		else
+			for(var/datum/action/action as anything in actions)
+				if(action.owner == ai_assistant)
+					action.Remove(ai_assistant)
+			new /obj/item/mod/ai_minicard(suit.drop_location(), ai_assistant)
+
+/datum/component/modsuit/proc/on_equipped(datum/source, mob/user, slot)
+	SIGNAL_HANDLER
+	if(slot & suit.slot_flags)
+		set_wearer(user)
+	else if(wearer)
+		unset_wearer()
+
+/datum/component/modsuit/proc/on_dropped(datum/source, mob/user)
+	SIGNAL_HANDLER
+	if(!wearer)
+		return
+	clean_up()
+
+/// Called when someone examines the parent
 /datum/component/modsuit/proc/on_examine(datum/source, mob/user, list/examine_text)
+	SIGNAL_HANDLER
 	if (active)
 		if (core)
 			. += "It has [get_charge_percent()]% charge remaining."
 		else
 			. += "It has no core inserted and will not function."
+		. += "Selected module: [selected_module || "None"]."
+	if(!open && !active)
+		if(!wearer)
+			. += "You could equip it to turn it on."
+		. += "You could open the cover with a <b>screwdriver</b>."
+	else if(open)
+		. += "You could close the cover with a <b>screwdriver</b>."
+		. += "You could use <b>modules</b> on it to install them."
+		. += "You could remove modules with a <b>crowbar</b>."
+		. += "You could update the access lock with an <b>ID</b>."
+		. += "You could access the wire panel with a <b>wire tool</b>."
+		if(core)
+			. += "You could remove [core] with a <b>wrench</b>."
+		else
+			. += "You could use a <b>MOD core</b> on it to install one."
+		if(isnull(ai_assistant))
+			. += "You could install an AI or pAI using their <b>storage card</b>."
+		else if(isAI(ai_assistant))
+			. += "You could remove [ai_assistant] with an <b>intellicard</b>."
+	. += "<i>You could examine it more thoroughly...</i>"
 
-/datum/component/modsuit/proc/check_core_insertion(datum/parent, obj/item/item, mob/living/user, params)
-	if (!istype(item, /obj/item/mod/core))
-		return NONE
-	// Already has a core inserted
-	if (core)
-		if (user)
-			to_chat(user, span_notice("The [suit] already has a core, remove it with a crowbar!"))
-			suit.balloon_alert(user, "No space")
-			playsound(suit, 'sound/machines/scanbuzz.ogg', 15, FALSE, SILENCED_SOUND_EXTRARANGE)
-		return COMPONENT_NO_AFTERATTACK
-	// Move to nullspace
-	if (!user.transferItemToLoc(item, null))
-		return COMPONENT_NO_AFTERATTACK
-	// Register the core
-	core = item
-	// Refresh screentips now that we have a core
-	suit.refresh_screentips()
-	if (user)
-		user.visible_message(span_notice("[user] inserts \the [core] into \the [suit]."), span_notice("You insert \the [core] into \the [suit]."))
-		playsound(suit, 'sound/machines/click.ogg', 15, FALSE, SILENCED_SOUND_EXTRARANGE)
-	return COMPONENT_NO_AFTERATTACK
+/datum/component/modsuit/proc/on_examine_more(datum/source, mob/user, list/examine_text)
+	SIGNAL_HANDLER
+	examine_text += "<i>[extended_desc]</i>"
 
+/// Called when we want to get the screentips for the parent
 /datum/component/modsuit/proc/display_screentips(datum/source, datum/screentip_context/context, mob/user)
+	SIGNAL_HANDLER
 	// No matter what we are attached to, don't allow the cache
 	context.cache_force_disabled = TRUE
 	if (!core)
@@ -95,33 +215,3 @@
 	// Remove the core
 	if (open && core)
 		context.add_left_click_tool_action("Remove core", TOOL_CROWBAR)
-
-/// Screwdriver can open/close the internal access hatch
-/datum/component/modsuit/proc/screwdriver_act(datum/source, mob/living/user, obj/item/screwdriver, list/recipes)
-	if (active || activating || suit.ai_controller)
-		suit.balloon_alert(user, "Suit active")
-		to_chat(user, span_warning("You try to screwdriver \the [suit] but fail, it is currently active."))
-		playsound(suit, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return COMPONENT_BLOCK_TOOL_ATTACK
-	if(isAI(ai_assistant) && locked && !open)
-		suit.balloon_alert(user, "Remote controlled")
-		to_chat(user, span_warning("You try to screwdriver \the [suit] but fail, it is locked by an installed AI unit."))
-		playsound(suit, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return COMPONENT_BLOCK_TOOL_ATTACK
-	if(SEND_SIGNAL(suit, COMSIG_MOD_MODULE_REMOVAL, user) & MOD_CANCEL_REMOVAL)
-		playsound(suit, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
-		return COMPONENT_BLOCK_TOOL_ATTACK
-	suit.balloon_alert(user, "[open ? "closing" : "opening"]...")
-	to_chat(user, span_notice("You start to screw [open ? "shut" : "open"] the internal access hatch on [suit]..."))
-	screwdriver.play_tool_sound(suit, 100)
-	if(screwdriver.use_tool(suit, user, 1 SECONDS))
-		if(active || activating)
-			suit.balloon_alert(user, "unit active!")
-			return COMPONENT_BLOCK_TOOL_ATTACK
-		screwdriver.play_tool_sound(suit, 100)
-		open = !open
-		suit.balloon_alert(user, "cover [open ? "closed" : "opened"]")
-		to_chat(user, span_notice("You screw [open ? "shut" : "open"] the internal access hatch on [suit]."))
-	else
-		to_chat(user, span_warning("You fail to screw [open ? "shut" : "open"] the internal access hatch on [suit]!"))
-	return COMPONENT_BLOCK_TOOL_ATTACK

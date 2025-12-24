@@ -7,14 +7,14 @@
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	/// MOD unit we are powering.
-	var/obj/item/mod/control/mod
+	var/datum/component/modsuit/mod
 
 /obj/item/mod/core/Destroy()
 	if(mod)
 		uninstall()
 	return ..()
 
-/obj/item/mod/core/proc/install(obj/item/mod/control/mod_unit)
+/obj/item/mod/core/proc/install(datum/component/modsuit/mod_unit)
 	mod = mod_unit
 	mod.core = src
 	forceMove(mod)
