@@ -76,6 +76,9 @@
 	if (!theme.can_apply_to(src))
 		CRASH("Modsuit theme applied to modsuit which is not capable of using that theme.")
 	theme.set_up_parts(src, new_skin)
+	// Setup destruction
+	for(var/obj/item/part as anything in get_parts())
+		RegisterSignal(part, COMSIG_ATOM_DESTRUCTION, PROC_REF(on_part_destruction))
 	// Install the core
 	new_core?.install(src)
 	// Screentips
@@ -341,21 +344,6 @@
 		covered_slots |= part.slot_flags
 	return covered_slots
 
-/datum/component/modsuit/proc/generate_suit_mask()
-	var/list/parts = get_parts(all = TRUE)
-	var/covered_slots = get_sealed_slots(parts)
-	if(GLOB.mod_masks[skin])
-		if(GLOB.mod_masks[skin]["[covered_slots]"])
-			return GLOB.mod_masks[skin]["[covered_slots]"]
-	else
-		GLOB.mod_masks[skin] = list()
-	var/icon/slot_mask = icon('icons/blanks/32x32.dmi', "nothing")
-	for(var/obj/item/part as anything in parts)
-		slot_mask.Blend(icon(part.worn_icon, part.icon_state), ICON_OVERLAY)
-	slot_mask.Blend("#fff", ICON_ADD)
-	GLOB.mod_masks[skin]["[covered_slots]"] = slot_mask
-	return GLOB.mod_masks[skin]["[covered_slots]"]
-
 /datum/component/modsuit/proc/on_species_gain(datum/source, datum/species/new_species, datum/species/old_species)
 	SIGNAL_HANDLER
 
@@ -367,3 +355,131 @@
 		else
 			suit.forceMove(suit.drop_location())
 		return
+
+/datum/component/modsuit/proc/on_part_destruction(obj/item/part, damage_flag)
+	SIGNAL_HANDLER
+
+	if(QDELING(src))
+		return
+	suit.atom_destruction(damage_flag)
+
+/datum/component/modsuit/proc/set_mod_color(new_color)
+	for(var/obj/item/part as anything in get_parts(all = TRUE))
+		part.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
+		part.add_atom_colour(new_color, FIXED_COLOUR_PRIORITY)
+	wearer?.regenerate_icons()
+
+/datum/component/modsuit/proc/update_speed()
+	var/total_slowdown = 0
+	var/prevent_slowdown = HAS_TRAIT(src, TRAIT_SPEED_POTIONED)
+	if (!prevent_slowdown)
+		total_slowdown += slowdown_deployed
+
+	var/list/module_slowdowns = list()
+	SEND_SIGNAL(src, COMSIG_MOD_UPDATE_SPEED, module_slowdowns, prevent_slowdown)
+	for (var/module_slow in module_slowdowns)
+		total_slowdown += module_slow
+
+	for(var/datum/mod_part/part_datum as anything in get_part_datums(all = TRUE))
+		var/obj/item/part = part_datum.part_item
+		part.slowdown = total_slowdown / length(mod_parts)
+		if (!part_datum.sealed)
+			part.slowdown = max(part.slowdown, 0)
+	wearer?.update_equipment_speed_mods()
+
+
+/// Intended for callbacks, don't use normally, just get wearer by itself.
+/datum/component/modsuit/proc/get_wearer()
+	return wearer
+
+/datum/component/modsuit/proc/update_access(mob/user, obj/item/card/id/card)
+	if(!allowed(user))
+		balloon_alert(user, "insufficient access!")
+		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
+		return
+	req_access = card.access.Copy()
+	balloon_alert(user, "access updated")
+
+/datum/component/modsuit/proc/on_overslot_exit(obj/item/part, atom/movable/overslot, direction)
+	SIGNAL_HANDLER
+
+	var/datum/mod_part/part_datum = get_part_datum(part)
+	if(overslot != part_datum.overslotting)
+		return
+	UnregisterSignal(part, COMSIG_ATOM_EXITED)
+	part_datum.overslotting = null
+
+/datum/component/modsuit/proc/on_potion(atom/movable/source, obj/item/slimepotion/speed/speed_potion, mob/living/user)
+	SIGNAL_HANDLER
+
+	if(HAS_TRAIT(src, TRAIT_SPEED_POTIONED))
+		to_chat(user, span_warning("[src] has already been coated with red, that's as fast as it'll go!"))
+		return SPEED_POTION_STOP
+
+	if(active)
+		to_chat(user, span_warning("It's too dangerous to smear [speed_potion] on [src] while it's active!"))
+		return SPEED_POTION_STOP
+
+	to_chat(user, span_notice("You slather the red gunk over [src], making it faster."))
+	set_mod_color("#FF0000")
+	ADD_TRAIT(src, TRAIT_SPEED_POTIONED, SLIME_POTION_TRAIT)
+	update_speed()
+	qdel(speed_potion)
+	return SPEED_POTION_STOP
+
+
+/datum/component/modsuit/proc/shock(mob/living/user)
+	if(!istype(user) || get_charge() < 1)
+		return FALSE
+	do_sparks(5, TRUE, src)
+	var/check_range = TRUE
+	return electrocute_mob(user, get_charge_source(), src, 0.7, check_range)
+
+/datum/component/modsuit/proc/install(obj/item/mod/module/new_module, mob/user)
+	for(var/obj/item/mod/module/old_module as anything in modules)
+		if(is_type_in_list(new_module, old_module.incompatible_modules) || is_type_in_list(old_module, new_module.incompatible_modules))
+			if(user)
+				balloon_alert(user, "incompatible with [old_module]!")
+				playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
+			return
+	var/complexity_with_module = complexity
+	complexity_with_module += new_module.complexity
+	if(complexity_with_module > complexity_max)
+		if(user)
+			balloon_alert(user, "above complexity max!")
+			playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
+		return
+	if(!new_module.has_required_parts(mod_parts))
+		if(user)
+			balloon_alert(user, "lacking required parts!")
+			playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
+		return
+	new_module.forceMove(src)
+	modules += new_module
+	complexity += new_module.complexity
+	new_module.mod = src
+	new_module.on_install()
+	if(wearer)
+		new_module.on_equip()
+		var/datum/action/item_action/mod/pinned_module/action = new_module.pinned_to[REF(wearer)]
+		if(action)
+			action.Grant(wearer)
+	if(active && new_module.has_required_parts(mod_parts, need_active = TRUE))
+		new_module.on_part_activation()
+		new_module.part_activated = TRUE
+	if(user)
+		balloon_alert(user, "[new_module] added")
+		playsound(src, 'sound/machines/click.ogg', 50, TRUE, SILENCED_SOUND_EXTRARANGE)
+
+/datum/component/modsuit/proc/uninstall(obj/item/mod/module/old_module, deleting = FALSE)
+	modules -= old_module
+	complexity -= old_module.complexity
+	if(wearer)
+		old_module.on_unequip()
+	if(active)
+		old_module.on_part_deactivation(deleting = deleting)
+		if(old_module.active)
+			old_module.deactivate(display_message = !deleting, deleting = deleting)
+	old_module.on_uninstall(deleting = deleting)
+	QDEL_LIST_ASSOC_VAL(old_module.pinned_to)
+	old_module.mod = null
