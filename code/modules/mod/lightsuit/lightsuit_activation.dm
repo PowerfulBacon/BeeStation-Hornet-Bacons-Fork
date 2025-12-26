@@ -1,8 +1,8 @@
 #define MOD_ACTIVATION_STEP_FLAGS IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_INCAPACITATED/*|IGNORE_SLOWDOWNS*/
 
 /// Creates a radial menu from which the user chooses parts of the suit to deploy/retract. Repeats until all parts are extended or retracted.
-/obj/item/mod/lightsuit/proc/choose_deploy(mob/user)
-	if(!length(mod_parts))
+/obj/item/mod/lightsuit/proc/choose_deploy(datum/component/modsuit/modsuit, mob/user)
+	if(!length(modsuit.mod_parts))
 		return
 	var/list/display_names = list()
 	var/list/items = list()
@@ -21,7 +21,7 @@
 	if(!istype(part) || user.incapacitated())
 		return
 	if(activating)
-		balloon_alert(user, "currently [active ? "unsealing" : "sealing"]!")
+		balloon_alert(user, "currently [modsuit.active ? "unsealing" : "sealing"]!")
 		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
 		return
 	var/parts_to_check = parts - part
@@ -45,7 +45,7 @@
 			break
 
 /// Quickly deploys all parts (or retracts if all are on the wearer)
-/obj/item/mod/lightsuit/proc/quick_deploy(mob/user)
+/obj/item/mod/lightsuit/proc/quick_deploy(datum/component/modsuit/modsuit, mob/user)
 	if(activating)
 		balloon_alert(user, "currently [active ? "unsealing" : "sealing"]!")
 		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
@@ -73,7 +73,7 @@
 	return TRUE
 
 /// Deploys a part of the suit onto the user.
-/obj/item/mod/lightsuit/proc/deploy(mob/user, obj/item/part, instant = FALSE)
+/obj/item/mod/lightsuit/proc/deploy(datum/component/modsuit/modsuit, mob/user, obj/item/part, instant = FALSE)
 	var/datum/mod_part/part_datum = get_part_datum(part)
 	if(!wearer)
 		playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
@@ -119,7 +119,7 @@
 	return FALSE
 
 /// Retract a part of the suit from the user.
-/obj/item/mod/lightsuit/proc/retract(mob/user, obj/item/part, instant = FALSE)
+/obj/item/mod/lightsuit/proc/retract(datum/component/modsuit/modsuit, mob/user, obj/item/part, instant = FALSE)
 	var/datum/mod_part/part_datum = get_part_datum(part)
 	if(part.loc == src)
 		if(!user)
@@ -151,7 +151,7 @@
 	return TRUE
 
 /// Starts the activation sequence, where parts of the suit activate one by one until the whole suit is on
-/obj/item/mod/lightsuit/proc/toggle_activate(mob/user, force_deactivate = FALSE)
+/obj/item/mod/lightsuit/proc/toggle_activate(datum/component/modsuit/modsuit, mob/user, force_deactivate = FALSE)
 	if(!wearer)
 		if(!force_deactivate)
 			balloon_alert(user, "not equipped!")
@@ -230,7 +230,7 @@
 	SEND_SIGNAL(src, COMSIG_MOD_TOGGLED, user)
 	return TRUE
 
-/obj/item/mod/lightsuit/proc/delayed_seal_part(obj/item/clothing/part)
+/obj/item/mod/lightsuit/proc/delayed_seal_part(datum/component/modsuit/modsuit, obj/item/clothing/part)
 	. = FALSE
 	var/datum/mod_part/part_datum = get_part_datum(part)
 	if(do_after(wearer, activation_step_time, wearer, MOD_ACTIVATION_STEP_FLAGS, extra_checks = CALLBACK(src, PROC_REF(get_wearer)), hidden = TRUE))
@@ -239,14 +239,14 @@
 		seal_part(part, is_sealed = !part_datum.sealed)
 		return TRUE
 
-/obj/item/mod/lightsuit/proc/delayed_activation()
+/obj/item/mod/lightsuit/proc/delayed_activation(datum/component/modsuit/modsuit)
 	. = FALSE
 	if(do_after(wearer, activation_step_time, wearer, MOD_ACTIVATION_STEP_FLAGS, extra_checks = CALLBACK(src, PROC_REF(get_wearer)), hidden = TRUE))
 		control_activation(is_on = !active)
 		return TRUE
 
 ///Seals or unseals the given part.
-/obj/item/mod/lightsuit/proc/seal_part(obj/item/clothing/part, is_sealed)
+/obj/item/mod/lightsuit/proc/seal_part(datum/component/modsuit/modsuit, obj/item/clothing/part, is_sealed)
 	var/datum/mod_part/part_datum = get_part_datum(part)
 	part_datum.sealed = is_sealed
 	if(part_datum.sealed)
@@ -290,33 +290,8 @@
 				continue
 			module.deactivate(display_message = FALSE)
 
-/// Finishes the suit's activation
-/obj/item/mod/lightsuit/proc/control_activation(is_on)
-	var/datum/mod_part/part_datum = get_part_datum(src)
-	part_datum.sealed = is_on
-	active = is_on
-	if(active)
-		for(var/obj/item/mod/module/module as anything in modules)
-			if(module.part_activated || !module.has_required_parts(mod_parts, need_active = TRUE))
-				continue
-			module.on_part_activation()
-			module.part_activated = TRUE
-	else
-		for(var/obj/item/mod/module/module as anything in modules)
-			if(!module.part_activated)
-				continue
-			module.on_part_deactivation()
-			module.part_activated = FALSE
-			if(!module.active || (module.allow_flags & MODULE_ALLOW_INACTIVE))
-				continue
-			module.deactivate(display_message = FALSE)
-	update_charge_alert()
-	update_appearance(UPDATE_ICON_STATE)
-	generate_suit_mask()
-	wearer.update_clothing(slot_flags)
-
 /// Quickly deploys all the suit parts and if successful, seals them and turns on the suit. Intended mostly for outfits.
-/obj/item/mod/lightsuit/proc/quick_activation()
+/obj/item/mod/lightsuit/proc/quick_activation(datum/component/modsuit/modsuit)
 	control_activation(is_on = TRUE)
 	for(var/obj/item/part as anything in get_parts())
 		deploy(null, part, instant = TRUE)

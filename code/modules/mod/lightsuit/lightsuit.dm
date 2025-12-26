@@ -30,6 +30,8 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 	siemens_coefficient = 0.5
 	alternate_worn_layer = HANDS_LAYER+0.1 //we want it to go above generally everything, but not hands
+	/// Are we currently in the process of activating?
+	var/activating = FALSE
 	/// The MOD's theme, decides on some stuff like armor and statistics.
 	var/datum/mod_theme/theme = /datum/mod_theme
 	/// Looks of the MOD.
@@ -51,6 +53,23 @@
 /obj/item/mod/lightsuit/item_action_slot_check(slot)
 	if(slot & slot_flags)
 		return TRUE
+
+/obj/item/mod/lightsuit/Exited(atom/movable/part, direction)
+	. = ..()
+	// Handle losing the actual parts of the modsuit itself
+	if(part in get_parts())
+		if(QDELING(part) && !QDELING(src))
+			qdel(src)
+			return
+		var/datum/mod_part/part_datum = get_part_datum(part)
+		if(part_datum.sealed)
+			seal_part(part, is_sealed = FALSE)
+		if(isnull(part.loc))
+			return
+		if(!wearer)
+			part.forceMove(src)
+			return
+		INVOKE_ASYNC(src, PROC_REF(retract), wearer, part, /* instant = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after
 
 // Grant pinned actions to pin owners, gives AI pinned actions to the AI and not the wearer
 /obj/item/mod/lightsuit/grant_action_to_bearer(datum/action/action)
@@ -243,115 +262,6 @@
 /obj/item/mod/lightsuit/update_icon_state()
 	icon_state = "[skin]-[base_icon_state][active ? "-sealed" : ""]"
 	return ..()
-
-/obj/item/mod/lightsuit/proc/get_parts(all = FALSE)
-	. = list()
-	for(var/key in mod_parts)
-		var/datum/mod_part/part = mod_parts[key]
-		if(!all && part.part_item == src)
-			continue
-		. += part.part_item
-
-/obj/item/mod/lightsuit/proc/get_part_datums(all = FALSE)
-	. = list()
-	for(var/key in mod_parts)
-		var/datum/mod_part/part = mod_parts[key]
-		if(!all && part.part_item == src)
-			continue
-		. += part
-
-/obj/item/mod/lightsuit/proc/get_part_datum(obj/item/part)
-	RETURN_TYPE(/datum/mod_part)
-	var/datum/mod_part/potential_part = mod_parts["[part.slot_flags]"]
-	if(potential_part?.part_item == part)
-		return potential_part
-	for(var/datum/mod_part/mod_part in get_part_datums())
-		if(mod_part.part_item == part)
-			return mod_part
-	CRASH("get_part_datum called with incorrect item [part] passed.")
-
-/obj/item/mod/lightsuit/proc/get_part_from_slot(slot)
-	var/datum/mod_part/part = mod_parts["[slot]"]
-	return part?.part_item
-
-/obj/item/mod/lightsuit/proc/get_part_datum_from_slot(slot)
-	return mod_parts["[slot]"]
-
-/obj/item/mod/lightsuit/proc/set_wearer(mob/living/carbon/human/user)
-	if(wearer == user)
-		CRASH("set_wearer() was called with the new wearer being the current wearer: [wearer]")
-	else if(!isnull(wearer))
-		stack_trace("set_wearer() was called with a new wearer without unset_wearer() being called")
-
-	wearer = user
-	SEND_SIGNAL(src, COMSIG_MOD_WEARER_SET, wearer)
-	RegisterSignal(wearer, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
-	RegisterSignal(wearer, COMSIG_SPECIES_GAIN, PROC_REF(on_species_gain))
-	update_charge_alert()
-	for(var/obj/item/mod/module/module as anything in modules)
-		module.on_equip()
-
-/obj/item/mod/lightsuit/proc/unset_wearer()
-	for(var/obj/item/mod/module/module as anything in modules)
-		module.on_unequip()
-	UnregisterSignal(wearer, list(COMSIG_ATOM_EXITED, COMSIG_SPECIES_GAIN))
-	wearer.clear_alert("mod_charge")
-	SEND_SIGNAL(src, COMSIG_MOD_WEARER_UNSET, wearer)
-	wearer = null
-
-/obj/item/mod/lightsuit/proc/get_sealed_slots(list/parts)
-	var/covered_slots = NONE
-	for(var/obj/item/part as anything in parts)
-		if(!get_part_datum(part).sealed)
-			parts -= part
-			continue
-		covered_slots |= part.slot_flags
-	return covered_slots
-
-/obj/item/mod/lightsuit/proc/generate_suit_mask()
-	var/list/parts = get_parts(all = TRUE)
-	var/covered_slots = get_sealed_slots(parts)
-	if(GLOB.mod_masks[skin])
-		if(GLOB.mod_masks[skin]["[covered_slots]"])
-			return GLOB.mod_masks[skin]["[covered_slots]"]
-	else
-		GLOB.mod_masks[skin] = list()
-	var/icon/slot_mask = icon('icons/blanks/32x32.dmi', "nothing")
-	for(var/obj/item/part as anything in parts)
-		slot_mask.Blend(icon(part.worn_icon, part.icon_state), ICON_OVERLAY)
-	slot_mask.Blend("#fff", ICON_ADD)
-	GLOB.mod_masks[skin]["[covered_slots]"] = slot_mask
-	return GLOB.mod_masks[skin]["[covered_slots]"]
-
-/obj/item/mod/lightsuit/proc/clean_up()
-	if(QDELING(src))
-		unset_wearer()
-		return
-	if(active || activating)
-		for(var/obj/item/mod/module/module as anything in modules)
-			if(!module.active)
-				continue
-			module.deactivate(display_message = FALSE)
-		for(var/obj/item/part as anything in get_parts())
-			seal_part(part, is_sealed = FALSE)
-	for(var/obj/item/part as anything in get_parts())
-		if(part.loc == src)
-			continue
-		INVOKE_ASYNC(src, PROC_REF(retract), wearer, part, /* instant = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after
-	if(active)
-		control_activation(is_on = FALSE)
-	var/mob/old_wearer = wearer
-	unset_wearer()
-	old_wearer.temporarilyRemoveItemFromInventory(src)
-
-/obj/item/mod/lightsuit/proc/on_species_gain(datum/source, datum/species/new_species, datum/species/old_species)
-	SIGNAL_HANDLER
-
-	for(var/obj/item/part in get_parts(all = TRUE))
-		if(!(new_species.no_equip_flags & part.slot_flags) || is_type_in_list(new_species, part.species_exception))
-			continue
-		forceMove(drop_location())
-		return
 
 /obj/item/mod/lightsuit/proc/quick_module(mob/user)
 	if(!length(modules))

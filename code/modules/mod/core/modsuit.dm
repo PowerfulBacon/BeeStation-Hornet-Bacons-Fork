@@ -25,8 +25,6 @@
 	var/locked = FALSE
 	/// If the suit is deployed and turned on.
 	var/active = FALSE
-	/// If the suit is currently activating/deactivating.
-	var/activating = FALSE
 	/// If the suit wire/module hatch is open.
 	var/open = FALSE
 	/// Is this suit active?
@@ -130,7 +128,7 @@
 		seconds_electrified--
 	if(!active)
 		return
-	if(!get_charge() && active && !activating)
+	if(!get_charge() && active)
 		power_off()
 		return
 	var/malfunctioning_charge_drain = 0
@@ -235,16 +233,137 @@
 	if(part in modules)
 		uninstall(part)
 		return
-	if(part in get_parts())
-		if(QDELING(part) && !QDELING(src))
-			qdel(src)
-			return
-		var/datum/mod_part/part_datum = get_part_datum(part)
-		if(part_datum.sealed)
-			seal_part(part, is_sealed = FALSE)
-		if(isnull(part.loc))
-			return
-		if(!wearer)
-			part.forceMove(src)
-			return
+
+/datum/component/modsuit/proc/set_wearer(mob/living/carbon/human/user)
+	if(wearer == user)
+		CRASH("set_wearer() was called with the new wearer being the current wearer: [wearer]")
+	else if(!isnull(wearer))
+		stack_trace("set_wearer() was called with a new wearer without unset_wearer() being called")
+
+	wearer = user
+	SEND_SIGNAL(src, COMSIG_MOD_WEARER_SET, wearer)
+	RegisterSignal(wearer, COMSIG_ATOM_EXITED, PROC_REF(on_exit))
+	RegisterSignal(wearer, COMSIG_SPECIES_GAIN, PROC_REF(on_species_gain))
+	update_charge_alert()
+	for(var/obj/item/mod/module/module as anything in modules)
+		module.on_equip()
+
+/datum/component/modsuit/proc/unset_wearer()
+	for(var/obj/item/mod/module/module as anything in modules)
+		module.on_unequip()
+	UnregisterSignal(wearer, list(COMSIG_ATOM_EXITED, COMSIG_SPECIES_GAIN))
+	wearer.clear_alert("mod_charge")
+	SEND_SIGNAL(src, COMSIG_MOD_WEARER_UNSET, wearer)
+	wearer = null
+
+/// Finishes the suit's activation
+/datum/component/modsuit/proc/set_active(is_on)
+	active = is_on
+	if(active)
+		for(var/obj/item/mod/module/module as anything in modules)
+			if(module.part_activated || !module.has_required_parts(mod_parts, need_active = TRUE))
+				continue
+			module.on_part_activation()
+			module.part_activated = TRUE
+	else
+		for(var/obj/item/mod/module/module as anything in modules)
+			if(!module.part_activated)
+				continue
+			module.on_part_deactivation()
+			module.part_activated = FALSE
+			if(!module.active || (module.allow_flags & MODULE_ALLOW_INACTIVE))
+				continue
+			module.deactivate(display_message = FALSE)
+	update_charge_alert()
+	suit.update_appearance(UPDATE_ICON_STATE)
+	generate_suit_mask()
+	wearer.update_clothing(suit.slot_flags)
+
+/datum/component/modsuit/proc/clean_up()
+	if(QDELING(src))
+		unset_wearer()
+		return
+	for(var/obj/item/mod/module/module as anything in modules)
+		if(!module.active)
+			continue
+		module.deactivate(display_message = FALSE)
+	for(var/obj/item/part as anything in get_parts())
+		seal_part(part, is_sealed = FALSE)
+	for(var/obj/item/part as anything in get_parts())
+		if(part.loc == src)
+			continue
 		INVOKE_ASYNC(src, PROC_REF(retract), wearer, part, /* instant = */ TRUE) // async to appease spaceman DMM because the branch we don't run has a do_after
+	if(active)
+		set_active(is_on = FALSE)
+	var/mob/old_wearer = wearer
+	unset_wearer()
+	old_wearer.temporarilyRemoveItemFromInventory(src)
+
+/datum/component/modsuit/proc/get_parts(all = FALSE)
+	. = list()
+	for(var/key in mod_parts)
+		var/datum/mod_part/part = mod_parts[key]
+		if(!all && part.part_item == src)
+			continue
+		. += part.part_item
+
+/datum/component/modsuit/proc/get_part_datums(all = FALSE)
+	. = list()
+	for(var/key in mod_parts)
+		var/datum/mod_part/part = mod_parts[key]
+		if(!all && part.part_item == src)
+			continue
+		. += part
+
+/datum/component/modsuit/proc/get_part_datum(obj/item/part)
+	RETURN_TYPE(/datum/mod_part)
+	var/datum/mod_part/potential_part = mod_parts["[part.slot_flags]"]
+	if(potential_part?.part_item == part)
+		return potential_part
+	for(var/datum/mod_part/mod_part in get_part_datums())
+		if(mod_part.part_item == part)
+			return mod_part
+	CRASH("get_part_datum called with incorrect item [part] passed.")
+
+/datum/component/modsuit/proc/get_part_from_slot(slot)
+	var/datum/mod_part/part = mod_parts["[slot]"]
+	return part?.part_item
+
+/datum/component/modsuit/proc/get_part_datum_from_slot(slot)
+	return mod_parts["[slot]"]
+
+/datum/component/modsuit/proc/get_sealed_slots(list/parts)
+	var/covered_slots = NONE
+	for(var/obj/item/part as anything in parts)
+		if(!get_part_datum(part).sealed)
+			parts -= part
+			continue
+		covered_slots |= part.slot_flags
+	return covered_slots
+
+/datum/component/modsuit/proc/generate_suit_mask()
+	var/list/parts = get_parts(all = TRUE)
+	var/covered_slots = get_sealed_slots(parts)
+	if(GLOB.mod_masks[skin])
+		if(GLOB.mod_masks[skin]["[covered_slots]"])
+			return GLOB.mod_masks[skin]["[covered_slots]"]
+	else
+		GLOB.mod_masks[skin] = list()
+	var/icon/slot_mask = icon('icons/blanks/32x32.dmi', "nothing")
+	for(var/obj/item/part as anything in parts)
+		slot_mask.Blend(icon(part.worn_icon, part.icon_state), ICON_OVERLAY)
+	slot_mask.Blend("#fff", ICON_ADD)
+	GLOB.mod_masks[skin]["[covered_slots]"] = slot_mask
+	return GLOB.mod_masks[skin]["[covered_slots]"]
+
+/datum/component/modsuit/proc/on_species_gain(datum/source, datum/species/new_species, datum/species/old_species)
+	SIGNAL_HANDLER
+
+	for(var/obj/item/part in get_parts(all = TRUE))
+		if(!(new_species.no_equip_flags & part.slot_flags) || is_type_in_list(new_species, part.species_exception))
+			continue
+		if (wearer)
+			suit.forceMove(wearer.drop_location())
+		else
+			suit.forceMove(suit.drop_location())
+		return

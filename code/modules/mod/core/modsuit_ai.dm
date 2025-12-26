@@ -69,19 +69,19 @@
 /// Place a pAI in control of your suit functions
 /datum/component/modsuit/proc/insert_pai(mob/user, obj/item/paicard/card)
 	if (!isnull(ai_assistant))
-		balloon_alert(user, "slot occupied!")
+		suit.balloon_alert(user, "slot occupied!")
 		return FALSE
 	if (isnull(card.pai?.mind))
-		balloon_alert(user, "pAI unresponsive!")
+		suit.balloon_alert(user, "pAI unresponsive!")
 		return FALSE
-	balloon_alert(user, "transferring to unit...")
+	suit.balloon_alert(user, "transferring to unit...")
 	if (!do_after(user, 5 SECONDS, target = src))
-		balloon_alert(user, "interrupted!")
+		suit.balloon_alert(user, "interrupted!")
 		return FALSE
 	if (!user.transferItemToLoc(card, src))
-		balloon_alert(user, "transfer failed!")
+		suit.balloon_alert(user, "transfer failed!")
 		return FALSE
-	balloon_alert(user, "pAI transferred to unit")
+	suit.balloon_alert(user, "pAI transferred to unit")
 	var/mob/living/silicon/pai/pai_assistant = card.pai
 	pai_assistant.can_transmit = TRUE
 	pai_assistant.can_receive = TRUE
