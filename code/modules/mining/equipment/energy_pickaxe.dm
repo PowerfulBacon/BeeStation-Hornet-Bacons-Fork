@@ -104,8 +104,8 @@ APPLY_PLACEHOLDER_TEXT(/obj/machinery/energy_pickaxe_modification, "pickaxe modi
 		///obj/item/stack/sheet/telecrystal
 	)
 
-/obj/machinery/energy_pickaxe_modification/attackby(obj/item/C, mob/user)
-	if (user.a_intent == INTENT_HARM)
+/obj/machinery/energy_pickaxe_modification/attackby(obj/item/C, mob/living/user)
+	if (user.combat_mode)
 		return ..()
 	if (istype(C, /obj/item/stack))
 		var/obj/item/stack/inserted_sheet = C

@@ -98,15 +98,12 @@
 		if (!isturf(T))
 			return
 
-		if(last_act + (5 * I.toolspeed) > world.time)//prevents message spam
-			return
-		last_act = world.time
 		to_chat(user, span_notice("You start picking..."))
 
 		while (ismineralturf(src))
 			if(!I.use_tool(src, user, 5, volume=50))
 				break
-			if(!ismineralturf(src) && !QDELETING(src))
+			if(!ismineralturf(src))
 				break
 			user.do_attack_animation(src, used_item = I)
 			to_chat(user, span_notice("You hit the rock with \the [src]."))

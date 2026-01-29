@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(asteroid_generation)
 	// Load the map
 	var/datum/map_template/asteroid/asteroid_ruin = pick_ruin()
 	var/turf/asteroid_interior_center = locate((reservation.bottom_left_coords[1] + reservation.top_right_coords[1]) / 2, (reservation.bottom_left_coords[2] + reservation.top_right_coords[2]) / 2, reservation.bottom_left_coords[3])
-	var/datum/map_generator/map_place/map_placer = asteroid_ruin.load(asteroid_interior_center, TRUE)
+	var/datum/async_map_generator/map_place/map_placer = asteroid_ruin.load(asteroid_interior_center, TRUE)
 	// Once the map has loaded then we can create the way down
 	map_placer.on_completion(CALLBACK(src, PROC_REF(finalise_asteroid_hole), asteroid_center, asteroid_interior_center, reservation, width, height, biome, ore_list))
 

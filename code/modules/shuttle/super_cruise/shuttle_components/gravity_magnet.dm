@@ -17,10 +17,7 @@ APPLY_PLACEHOLDER_TEXT(/obj/machinery/gravity_magnet, "passive gravity anchor")
 /obj/machinery/gravity_magnet/Initialize(mapload)
 	. = ..()
 	GLOB.zclear_blockers += src
-
-/obj/machinery/gravity_magnet/ComponentInitialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_PARENT_RECIEVE_BUFFER, PROC_REF(handle_buffer_action))
+	RegisterSignal(src, COMSIG_PARENT_RECEIVE_BUFFER, PROC_REF(handle_buffer_action))
 
 /obj/machinery/gravity_magnet/Destroy()
 	linked?.linked = null
@@ -48,15 +45,15 @@ APPLY_PLACEHOLDER_TEXT(/obj/machinery/gravity_magnet, "passive gravity anchor")
 		linked = other_magnet
 		other_magnet.linked = src
 		to_chat(user, "<span class='notice'>You successfully link the 2 magnets together.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 	else if (TRY_STORE_IN_BUFFER(buffer_parent, src))
 		to_chat(user, "<span class='notice'>You successfully store [src] into [buffer_parent]'s buffer.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 	else if (linked)
 		linked.linked = null
 		linked = null
 		to_chat(user, "<span class='notice'>You disconnect the magnets.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 
 /obj/machinery/gravity_magnet/proc/get_magnet_location()
 	var/turf/location = get_turf(src)
@@ -170,6 +167,6 @@ APPLY_PLACEHOLDER_TEXT(/obj/item/gravity_magnet, "gravity anchor")
 	icon_state = "bodybag_folded"
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/gravity_magnet/ComponentInitialize()
+/obj/item/gravity_magnet/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/deployable, /obj/machinery/gravity_magnet, time_to_deploy = 3 SECONDS)

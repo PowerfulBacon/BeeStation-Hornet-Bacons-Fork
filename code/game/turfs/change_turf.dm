@@ -117,13 +117,9 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 	// Quickly handle components before, as they should be transfered and not deleted
 	// as the datum destroy logic will remove all signals and components.
-	var/list/old_datum_components = datum_components
-	var/list/old_comp_lookup = comp_lookup
-	var/list/old_signal_procs = signal_procs
+	var/list/old_datum_components = datum_components?.Copy()
 	// Clear the list references so that they don't get deleted by /datum/Destroy()
 	datum_components = null
-	comp_lookup = null
-	signal_procs = null
 
 	qdel(src) //Just get the side effects and call Destroy
 	//We do this here so anything that doesn't want to persist can clear itself
@@ -148,19 +144,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	// Initialize the atom manually
 	var/is_mapload = old_atoms_state == INITIALIZATION_INNEW_MAPLOAD
 	SSatoms.InitAtom(src, new_turf, list(is_mapload))
-
-	// These need to be set prior to initialisation, otherwise we will have to regenerate
-	// zmimic twice for turfs that are linked to other locations.
-	new_turf.above = old_above
-	old_above?.below = new_turf
-	new_turf.below = old_below
-	old_below?.above = new_turf
-	new_turf.z_depth = old_zdepth
-
-	var/is_mapload = old_atoms_state == INITIALIZATION_INNEW_MAPLOAD
-	SSatoms.InitAtom(src, new_turf, is_mapload)
-
-	SSatoms.initialized = old_atoms_state
 
 	// WARNING WARNING
 	// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS

@@ -17,10 +17,7 @@ GLOBAL_LIST_EMPTY(asteroid_magnet_borders)
 /obj/machinery/asteroid_magnet_border_marker/Initialize(mapload)
 	. = ..()
 	GLOB.asteroid_magnet_borders += src
-
-/obj/machinery/asteroid_magnet_border_marker/ComponentInitialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_PARENT_RECIEVE_BUFFER, PROC_REF(handle_buffer_action))
+	RegisterSignal(src, COMSIG_PARENT_RECEIVE_BUFFER, PROC_REF(handle_buffer_action))
 
 /obj/machinery/asteroid_magnet_border_marker/Destroy()
 	GLOB.asteroid_magnet_borders -= src
@@ -51,10 +48,10 @@ GLOBAL_LIST_EMPTY(asteroid_magnet_borders)
 		var/obj/machinery/computer/asteroid_magnet_controller/border_controller = buffer
 		border_controller.linked_zone = linked_zone
 		to_chat(user, "<span class='notice'>You successfully link [border_controller] into to the asteroid magnet zone.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 	else if (TRY_STORE_IN_BUFFER(buffer_parent, src))
 		to_chat(user, "<span class='notice'>You successfully store [src] into [buffer_parent]'s buffer.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 
 /obj/machinery/asteroid_magnet_border_marker/proc/show_area()
 	if (!linked_zone)

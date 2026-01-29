@@ -88,7 +88,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/asteroid/interior
 	name = "Asteroid Interior"
-	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
+	fullbright_type = FULLBRIGHT_NONE
 	always_unpowered = FALSE
 	area_flags = HIDDEN_AREA
 

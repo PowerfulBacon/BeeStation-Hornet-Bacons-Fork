@@ -10,6 +10,7 @@
 
 /obj/machinery/computer/asteroid_magnet_controller/Initialize(mapload, obj/item/circuitboard/C)
 	..()
+	RegisterSignal(src, COMSIG_PARENT_RECEIVE_BUFFER, PROC_REF(handle_buffer_action))
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/computer/asteroid_magnet_controller/LateInitialize()
@@ -42,10 +43,6 @@
 	if (!is_zone_blocked() && !(zone.right - zone.left > linked_zone.maxx - linked_zone.minx || zone.top - zone.bottom > linked_zone.maxy - linked_zone.miny))
 		pull_asteroid(zone.z, zone.left, zone.right, zone.bottom, zone.top)
 	qdel(created_asteroid)
-
-/obj/machinery/computer/asteroid_magnet_controller/ComponentInitialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_PARENT_RECIEVE_BUFFER, PROC_REF(handle_buffer_action))
 
 /obj/machinery/computer/asteroid_magnet_controller/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -113,10 +110,10 @@
 			to_chat(user, "<span class='notice'>You successfully link [src] to the asteroid magnet zone.</span>")
 		else
 			to_chat(user, "<span class='warning'>The stored border marker doesn't form a rectangular zone.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 	else if (TRY_STORE_IN_BUFFER(buffer_parent, src))
 		to_chat(user, "<span class='notice'>You successfully store [src] into [buffer_parent]'s buffer.</span>")
-		return COMPONENT_BUFFER_RECIEVED
+		return COMPONENT_BUFFER_RECEIVED
 
 /obj/machinery/computer/asteroid_magnet_controller/proc/get_magnet_target(target_name)
 	// Find our current orbital object to get the map we are working on

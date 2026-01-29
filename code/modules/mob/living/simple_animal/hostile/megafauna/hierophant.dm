@@ -503,7 +503,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/hierophant/squares)
 	. = ..()
 	if(ismineralturf(loc))
 		var/turf/closed/mineral/M = loc
-		M.take_damage(150, BRUTE, MAGIC, FALSE)
+		M.take_damage(150, BRUTE, FIRE, FALSE)
 
 /obj/effect/temp_visual/hierophant/wall //smoothing and pooling were not friends, but pooling is dead.
 	name = "vortex wall"
@@ -635,7 +635,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/hierophant/blast)
 		hit_things += new_caster
 	if(ismineralturf(loc)) //drill mineral turfs
 		var/turf/closed/mineral/M = loc
-		M.take_damage(150, BRUTE, MAGIC, FALSE)
+		M.take_damage(150, BRUTE, FIRE, FALSE)
 		if(defuse && istype(loc, /turf/closed/mineral/gibtonite))
 			var/turf/closed/mineral/gibtonite/G = loc
 			G.defuse()

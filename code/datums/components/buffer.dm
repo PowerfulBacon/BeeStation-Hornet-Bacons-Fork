@@ -1,3 +1,30 @@
+/**
+ * To use:
+ *
+ * /obj/item/buffer_handler
+ * 		...
+ *
+ * REGISTER_BUFFER_HANDLER(/obj/item/buffer_handler)
+ *
+ * DEFINE_BUFFER_HANDLER(/obj/item/buffer_handler)
+ * 		// Handle running a callback when something gets put in our buffer
+ *
+ * /obj/item/buffer_handler/proc/store_buffer(obj/item/thing_with_buffer, datum/buffer_target)
+ * 		// Store something in the buffer
+ *		STORE_IN_BUFFER(thing_with_buffer, buffer_target)
+ *
+ * /obj/item/buffer_handler/proc/clear_buffer(obj/item/thing_with_buffer)
+ * 		FLUSH_BUFFER(thing_with_buffer)
+ *
+ * To give something a buffer, add the /datum/component/buffer. This will
+ * automatically make it so that clicking on things with it will send
+ * the buffer to the target.
+ * Using the buffer item in hand will automatically clear the buffer.
+ * The buffer component DOES NOT add items to the buffer, you need to
+ * call STORE_IN_BUFFER manually.
+ *
+ */
+
 /// Helper that allows for atoms to receive buffer information
 #define REGISTER_BUFFER_HANDLER(TYPEPATH) ##TYPEPATH/Initialize(mapload) {\
 		. = ..();\
