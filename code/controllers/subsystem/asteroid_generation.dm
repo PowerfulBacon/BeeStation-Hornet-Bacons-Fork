@@ -88,8 +88,21 @@ SUBSYSTEM_DEF(asteroid_generation)
 		best_top = asteroid_center
 		best_bottom = asteroid_interior_center
 	// Create the hole that can be laddered down
-	best_top.ChangeTurf(/turf/open/floor/mineral/gold, flags = CHANGETURF_IGNORE_AIR)
-	best_bottom.ChangeTurf(/turf/open/floor/mineral/gold, flags = CHANGETURF_IGNORE_AIR)
+	for (var/direction in GLOB.cardinals)
+		fracture(best_top, 4, direction)
+
+/datum/controller/subsystem/asteroid_generation/proc/fracture(turf/location, distance, direction)
+	if (!(/turf/baseturf_skipover/asteroid in location.baseturfs))
+		return
+	location.ChangeTurf(/turf/open/openspace, flags = CHANGETURF_INHERIT_AIR)
+	if (prob(50))
+		direction = turn(direction, prob(50) ? 90 : -90)
+	if (distance > 0)
+		// Spawn a branching fracture out
+		if (prob(20))
+			fracture(get_step(location, direction), distance - 1, turn(direction, prob(50) ? 90 : -90))
+		// Expand the fracture
+		fracture(get_step(location, direction), distance - 1, direction)
 
 /datum/controller/subsystem/asteroid_generation/proc/pick_ruin()
 	return pick_weight(asteroid_ruins)

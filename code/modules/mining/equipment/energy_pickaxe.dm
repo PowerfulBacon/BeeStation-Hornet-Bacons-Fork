@@ -37,9 +37,10 @@
 
 /obj/item/pickaxe/energy_pickaxe/use_tool(atom/target, mob/living/user, delay, amount, volume, datum/callback/extra_checks)
 	if (istype(target, /turf/closed/mineral))
-		try_power_attack(target, user)
-		return TRUE
-	. = ..()
+		// Power attack triggers instantly
+		if (try_power_attack(target, user))
+			return TRUE
+	return ..()
 
 /obj/item/pickaxe/energy_pickaxe/proc/try_power_attack(turf/closed/mineral/target, mob/user)
 	SHOULD_NOT_SLEEP(TRUE)
