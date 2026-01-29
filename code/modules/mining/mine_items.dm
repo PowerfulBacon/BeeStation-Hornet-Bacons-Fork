@@ -66,6 +66,7 @@
 	new /obj/item/survivalcapsule(src)
 	new /obj/item/assault_pod/mining(src)
 	new /obj/item/clothing/suit/hooded/wintercoat/miner(src)
+	new /obj/machinery/gravity_magnet(src)
 
 
 /**********************Shuttle Computer**************************/
