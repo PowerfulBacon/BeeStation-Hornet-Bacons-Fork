@@ -86,6 +86,18 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	camera_networks = list(CAMERA_NETWORK_STATION)
 	requires_power = FALSE
 
+/area/asteroid/interior
+	name = "Asteroid Interior"
+	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
+	always_unpowered = FALSE
+	area_flags = HIDDEN_AREA
+
+/area/asteroid/interior/border
+	name = "Asteroid Border"
+	virtual_z = ASTEORID_BORDER_VIRTUAL_Z
+
+//STATION13
+
 /area/paradise/surface
 	name = "paradise surface"
 	ambientsounds = list('sound/ambience/seag1.ogg','sound/ambience/seag2.ogg','sound/ambience/seag2.ogg','sound/ambience/ambiodd.ogg','sound/ambience/ambinice.ogg')

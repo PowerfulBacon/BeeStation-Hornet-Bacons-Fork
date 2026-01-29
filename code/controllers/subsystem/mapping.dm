@@ -366,10 +366,21 @@ SUBSYSTEM_DEF(mapping)
 		LAZYADD(SSzclear.free_levels, add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE, orbital_body_type = null))
 
 	// load mining
-	if(current_map.minetype == "lavaland")
+	if (config.minetype == "asteroid")
+		new /datum/orbital_object/z_linked/lavaland/shattered
+	else if(current_map.minetype == "lavaland")
 		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND, orbital_body_type = /datum/orbital_object/z_linked/lavaland)
 	else if (!isnull(current_map.minetype))
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[current_map.minetype]' was set! This is being ignored! Update the maploader code!")
+#else
+	// load mining
+	if (config.minetype == "asteroid")
+		new /datum/orbital_object/z_linked/lavaland/shattered
+	else if(config.minetype == "lavaland")
+		INIT_ANNOUNCE("This map is set to use lavaland but low memory mode is enabled, lavaland will be inaccessible!")
+		new /datum/orbital_object/z_linked/lavaland/shattered
+	else if (!isnull(config.minetype))
+		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
 #endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
@@ -500,6 +511,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 		holodeck_templates[holo_template.template_id] = holo_template
 
 /datum/controller/subsystem/mapping/proc/RequestBlockReservation(width, height, z, type = /datum/turf_reservation, turf_type_override)
+	RETURN_TYPE(/datum/turf_reservation)
 	UNTIL((!z || reservation_ready["[z]"]) && !clearing_reserved_turfs)
 	var/datum/turf_reservation/reserve = new type
 	if(turf_type_override)

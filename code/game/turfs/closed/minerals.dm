@@ -17,11 +17,12 @@
 	layer = EDGED_TURF_LAYER
 	temperature = T20C
 	max_integrity = 200
+	var/drop_multiplier = 1
+	var/mining_cooldown
 	var/environment_type = "asteroid"
 	var/turf/open/floor/plating/turf_type = /turf/open/floor/plating/asteroid/airless
 	var/obj/item/stack/ore/mineralType = null
 	var/mineralAmt = 3
-	var/last_act = 0
 	var/scan_state = "" //Holder for the image we display when we're pinged by a mining scanner
 	var/defer_change = 0
 
@@ -61,6 +62,32 @@
 	return ..()
 
 
+/turf/closed/mineral/after_damage(damage_amount, damage_type, damage_flag)
+	. = ..()
+	update_icon(UPDATE_OVERLAYS)
+
+/turf/closed/mineral/update_overlays()
+	. = ..()
+	var/damage_proportion = integrity / max_integrity
+	if (damage_proportion == 1)
+		return
+	var/mutable_appearance/damage_app
+	switch (damage_proportion)
+		if (0.8 to 1)
+			damage_app = mutable_appearance('icons/turf/damage.dmi', "0")
+		if (0.6 to 0.8)
+			damage_app = mutable_appearance('icons/turf/damage.dmi', "1")
+		if (0.4 to 0.6)
+			damage_app = mutable_appearance('icons/turf/damage.dmi', "2")
+		if (0.2 to 0.4)
+			damage_app = mutable_appearance('icons/turf/damage.dmi', "3")
+		if (0 to 0.2)
+			damage_app = mutable_appearance('icons/turf/damage.dmi', "4")
+	damage_app.pixel_x = 4
+	damage_app.pixel_y = 4
+	if (damage_app)
+		. += damage_app
+
 /turf/closed/mineral/attackby(obj/item/I, mob/user, params)
 	if (!ISADVANCEDTOOLUSER(user))
 		to_chat(usr, span_warning("You don't have the dexterity to do this!"))
@@ -71,22 +98,26 @@
 		if (!isturf(T))
 			return
 
-		if(last_act + (40 * I.toolspeed) > world.time)//prevents message spam
+		if(last_act + (5 * I.toolspeed) > world.time)//prevents message spam
 			return
 		last_act = world.time
 		to_chat(user, span_notice("You start picking..."))
 
-		if(I.use_tool(src, user, 40, volume=50))
-			if(ismineralturf(src))
-				to_chat(user, span_notice("You finish cutting into the rock."))
-				gets_drilled(user)
-				SSblackbox.record_feedback("tally", "pick_used_mining", 1, I.type)
+		while (ismineralturf(src))
+			if(!I.use_tool(src, user, 5, volume=50))
+				break
+			if(!ismineralturf(src) && !QDELETING(src))
+				break
+			user.do_attack_animation(src, used_item = I)
+			to_chat(user, span_notice("You hit the rock with \the [src]."))
+			take_damage(100 / I.toolspeed, BRUTE, MELEE, FALSE)
+			SSblackbox.record_feedback("tally", "pick_used_mining", 1, I.type)
 	else
-		return attack_hand(user)
+		return ..()
 
 /turf/closed/mineral/proc/gets_drilled()
 	if (mineralType && (mineralAmt > 0))
-		new mineralType(src, mineralAmt)
+		new mineralType(src, CEILING(mineralAmt * drop_multiplier, 1))
 		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, mineralType)
 	for(var/obj/effect/temp_visual/mining_overlay/M in src)
 		qdel(M)
@@ -124,12 +155,14 @@
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		var/obj/item/I = H.is_holding_tool_quality(TOOL_MINING)
-		if(I)
+		if(I && mining_cooldown < world.time)
+			mining_cooldown = world.time + CLICK_CD_MELEE
 			attackby(I, H)
 		return
 	else if(iscyborg(AM))
 		var/mob/living/silicon/robot/R = AM
-		if(R.module_active && R.module_active.tool_behaviour == TOOL_MINING)
+		if(R.module_active && R.module_active.tool_behaviour == TOOL_MINING && mining_cooldown < world.time)
+			mining_cooldown = world.time + CLICK_CD_MELEE
 			attackby(R.module_active, R)
 			return
 	else
@@ -190,6 +223,12 @@
 		else
 			Change_Ore(path, 1)
 			Spread_Vein(path)
+
+/turf/closed/mineral/copyTurf(turf/T)
+	var/turf/closed/mineral/new_turf = ..()
+	new_turf.mineralAmt = mineralAmt
+	new_turf.scan_state = scan_state
+	new_turf.mineralType = mineralType
 
 /turf/closed/mineral/random/high_chance
 	icon_state = "rock_highchance"
@@ -631,3 +670,26 @@
 	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	defer_change = 1
+
+/turf/closed/mineral/tough
+	max_integrity = 460
+
+/turf/closed/mineral/tough/Initialize(mapload)
+	. = ..()
+	add_atom_colour("#c9c9c9", FIXED_COLOUR_PRIORITY)
+
+/turf/closed/mineral/hard
+	max_integrity = 700
+	mineralAmt = 6
+
+/turf/closed/mineral/hard/Initialize(mapload)
+	. = ..()
+	add_atom_colour("#b7b7b7", FIXED_COLOUR_PRIORITY)
+
+/turf/closed/mineral/dense
+	max_integrity = 1200
+	mineralAmt = 8
+
+/turf/closed/mineral/dense/Initialize(mapload)
+	. = ..()
+	add_atom_colour("#9c9c9c", FIXED_COLOUR_PRIORITY)

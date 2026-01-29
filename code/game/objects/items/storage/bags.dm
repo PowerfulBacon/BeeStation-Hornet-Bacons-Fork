@@ -250,9 +250,9 @@
 /obj/item/storage/bag/ore/cyborg
 	name = "cyborg mining satchel"
 
-/obj/item/storage/bag/ore/holding //miners, your messiah has arrived
+/obj/item/storage/bag/ore/holding
 	name = "mining satchel of holding"
-	desc = "A revolution in convenience, this satchel allows for huge amounts of ore storage. It's been outfitted with anti-malfunction safety measures."
+	desc = "A revolution in convenience, this satchel allows for greater amounts of ore storage. It's been outfitted with anti-malfunction safety measures."
 	icon_state = "satchel_bspace"
 
 /obj/item/storage/bag/ore/holding/Initialize(mapload)

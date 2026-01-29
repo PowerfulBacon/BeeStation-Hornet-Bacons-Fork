@@ -7,6 +7,8 @@
 
 	resistance_flags = INDESTRUCTIBLE
 
+	resistance_flags = INDESTRUCTIBLE
+
 	FASTDMM_PROP(\
 		pipe_astar_cost = 100\
 	)

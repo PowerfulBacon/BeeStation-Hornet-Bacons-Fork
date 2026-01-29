@@ -147,6 +147,9 @@
 	/// Whether the lights in this area aren't turned off when it's empty at roundstart
 	var/lights_always_start_on = FALSE
 
+	/// The virtual Z value of this area
+	var/virtual_z = null
+
 	///The areas specific color correction
 	var/color_correction = /datum/client_colour/area_color
 
@@ -580,6 +583,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 
 /// Gets an areas virtual z value. For having multiple areas on the same z-level treated mechanically as different z-levels
 /area/proc/get_virtual_z(turf/T)
+	if (!isnull(virtual_z))
+		return virtual_z
 	return T.z
 
 /area/get_virtual_z_level()

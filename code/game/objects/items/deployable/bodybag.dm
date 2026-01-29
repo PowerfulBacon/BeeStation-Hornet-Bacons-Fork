@@ -20,7 +20,8 @@
 			qdel(user)
 			return OXYLOSS
 		user.forceMove(R)
-		return OXYLOSS
+		return (OXYLOSS)
+	..()
 
 // Bluespace bodybag
 

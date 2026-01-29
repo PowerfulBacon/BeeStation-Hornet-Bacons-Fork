@@ -40,3 +40,12 @@
 /// BYOND's string procs don't support being used on datum references (as in it doesn't look for a name for stringification)
 /// We just use this macro to ensure that we will only pass strings to this BYOND-level function without developers needing to really worry about it.
 #define LOWER_TEXT(thing) lowertext(UNLINT("[thing]"))
+
+#define APPLY_PLACEHOLDER_TEXT(typepath, text) ##typepath{;\
+	maptext = "<span class='maptext center'>" + ##text + "</span>";\
+	maptext_height = 32;\
+	maptext_width = 64;\
+	maptext_x = -16;\
+	maptext_y = 24;\
+	layer = 5\
+	}

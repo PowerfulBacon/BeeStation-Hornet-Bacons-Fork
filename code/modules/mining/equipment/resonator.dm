@@ -108,7 +108,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/temp_visual/resonance)
 	new /obj/effect/temp_visual/resonance_crush(T)
 	if(ismineralturf(T))
 		var/turf/closed/mineral/M = T
-		M.gets_drilled(creator)
+		M.take_damage(200, BRUTE, BOMB, FALSE)
 	check_pressure(T)
 	playsound(T,'sound/weapons/resonator_blast.ogg',50,1)
 	for(var/mob/living/L in T)

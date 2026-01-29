@@ -51,7 +51,7 @@
 	. = ..()
 	if(ismineralturf(target))
 		var/turf/closed/mineral/M = target
-		M.gets_drilled()
+		M.take_damage(300, BRUTE, MELEE)
 
 //Elites can't talk (normally)!
 /mob/living/simple_animal/hostile/asteroid/elite/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, message_range = 7, datum/saymode/saymode = null)

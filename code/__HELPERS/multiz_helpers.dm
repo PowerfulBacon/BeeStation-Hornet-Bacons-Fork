@@ -1,7 +1,7 @@
-GLOBAL_DATUM(temporary_multiz_step_ref, /turf)
+GLOBAL_VAR_TYPED(temporary_multiz_step_ref, /turf)
 
 #define get_step_multiz(ref, dir) \
-	((dir & UP) ? ( \
+	(dir & UP ? ( \
 		(GLOB.temporary_multiz_step_ref = get_turf(ref)) ? get_step(GET_TURF_ABOVE(GLOB.temporary_multiz_step_ref), dir & ~UP) : null \
 	) : ( \
 		(dir & DOWN) ? ( \
@@ -30,6 +30,7 @@ GLOBAL_DATUM(temporary_multiz_step_ref, /turf)
 	if(source_loc.get_virtual_z_level() == checking_loc.get_virtual_z_level())
 		return TRUE
 	return FALSE
+
 
 /proc/get_dir_multiz(turf/us, turf/them)
 	us = get_turf(us)

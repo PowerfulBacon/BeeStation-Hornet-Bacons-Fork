@@ -20,6 +20,7 @@
 		/obj/item/ammo_box/magazine/recharge,
 		/obj/item/toy/batong,
 		/obj/item/modular_computer,
+		/obj/item/pickaxe/energy_pickaxe
 	))
 
 /obj/machinery/recharger/RefreshParts()
@@ -44,6 +45,9 @@
 			if (istype(charging, /obj/item/ammo_box/magazine/recharge))
 				var/obj/item/ammo_box/magazine/recharge/magazine = charging
 				. += span_notice("- \The [charging]'s cell is at <b>[magazine.ammo_count() / magazine.max_ammo * 100]%</b>.")
+			else if (istype(charging, /obj/item/pickaxe/energy_pickaxe))
+				var/obj/item/pickaxe/energy_pickaxe/pickaxe = charging
+				. += span_notice("- \The [charging]'s cell is at <b>[FLOOR(100 * pickaxe.charge / pickaxe.max_charge, 1)]%</b>.")
 			else if(cell)
 				. += span_notice("- \The [charging]'s cell is at <b>[cell.percent()]%</b>.")
 			else
@@ -151,6 +155,15 @@
 				R.stored_ammo += new R.ammo_type(R)
 				active_power_usage = (1000 WATT / recharge_coeff)
 				update_use_power(ACTIVE_POWER_USE)
+
+		if (istype(charging, /obj/item/pickaxe/energy_pickaxe))
+			var/obj/item/pickaxe/energy_pickaxe/e_pick = charging
+			if (e_pick.charge < e_pick.max_charge)
+				update_use_power(ACTIVE_POWER_USE)
+			else
+				update_use_power(IDLE_POWER_USE)
+			e_pick.charge = min(e_pick.charge + 200 * recharge_coeff * delta_time, e_pick.max_charge)
+
 		update_appearance()
 	else
 		update_use_power(IDLE_POWER_USE)
@@ -169,6 +182,10 @@
 			var/obj/item/melee/baton/B = charging
 			if(B.cell)
 				B.cell.charge = 0
+
+		if (istype(charging, /obj/item/pickaxe/energy_pickaxe))
+			var/obj/item/pickaxe/energy_pickaxe/e_pick = charging
+			e_pick.charge = 0
 
 
 

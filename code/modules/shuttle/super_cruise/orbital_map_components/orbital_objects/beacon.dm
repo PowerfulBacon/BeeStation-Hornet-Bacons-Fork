@@ -33,22 +33,92 @@
 /datum/orbital_object/z_linked/beacon/ruin/asteroid
 	name = "Asteroid"
 	render_mode = RENDER_MODE_DEFAULT
+	var/static/list/rare_minerals = list(
+		/obj/item/stack/ore/uranium = 5, /obj/item/stack/ore/diamond = 1, /obj/item/stack/ore/gold = 10,
+		/obj/item/stack/ore/silver = 12, /obj/item/stack/ore/plasma = 20, /obj/item/stack/ore/titanium = 11,
+		/turf/closed/mineral/gibtonite = 6, /obj/item/stack/ore/bluespace_crystal = 1
+	)
+	var/static/list/common_minerals = list(
+		/obj/item/stack/ore/uranium = 2, /obj/item/stack/ore/gold = 3,
+		/obj/item/stack/ore/silver = 8, /obj/item/stack/ore/plasma = 15, /obj/item/stack/ore/iron = 40,
+		/turf/closed/mineral/gibtonite = 4,
+		/obj/item/stack/ore/copper = 15
+	)
+	/// Minerals that we contain, associating to their weight of spawning
+	var/list/minerals = list()
+	var/rare_material_point = 0
 
-/datum/orbital_object/z_linked/beacon/ruinasteroid/New()
+/datum/orbital_object/z_linked/beacon/ruin/asteroid/New()
 	. = ..()
 	radius = rand(30, 70)
+	SSorbits.asteroids ++
+	// Generate spawned minerals
+	minerals[/datum] = rand(100, 300)
+	// Generate some rich materials
+	for (var/i in 1 to rand(1, 3))
+		var/selected_type = pick_weight(common_minerals)
+		minerals[selected_type] = max(rand(50, 150), minerals[selected_type])
+	// Generate other materials
+	for (var/i in 1 to rand(3, 5))
+		var/selected_type = pick_weight(common_minerals)
+		minerals[selected_type] = max(rand(5, 30), minerals[selected_type])
+	// Generate rare materials
+	for (var/i in 1 to rand(0, 3))
+		var/selected_type = pick_weight(rare_minerals)
+		minerals[selected_type] = max(rand(5, 30), minerals[selected_type])
+	// Convert into 0 to 1 ranges
+	var/maximum = 0
+	for (var/material_type in minerals)
+		maximum += minerals[material_type]
+	var/current = 0
+	for (var/material_type in minerals)
+		var/stored_current = minerals[material_type]
+		minerals[material_type] = current / maximum
+		current += stored_current
+	rare_material_point = rand(40, 70)/100
+
+/datum/orbital_object/z_linked/beacon/ruin/asteroid/Destroy(force, ...)
+	. = ..()
+	SSorbits.asteroids --
 
 /datum/orbital_object/z_linked/beacon/ruin/asteroid/assign_z_level()
 	var/datum/space_level/assigned_space_level = SSzclear.get_free_z_level()
 	linked_z_level = list(assigned_space_level)
 	SSorbits.assoc_z_levels["[assigned_space_level.z_value]"] = src
-	generate_asteroids(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value, 120, rand(-0.5, 0), rand(40, 70))
+	var/datum/asteroid_generator/asteroid_generator = new()
+	asteroid_generator.min_radius = 4
+	asteroid_generator.max_radius = 7
+	asteroid_generator.weight_offset = rand(-0.4, -0.6)
+	asteroid_generator.scale = rand(20, 40)
+	asteroid_generator.biome = list(/turf/closed/mineral = 0, /turf/closed/mineral/tough = rare_material_point * 0.3, /turf/closed/mineral/hard = rare_material_point * 0.6, /turf/closed/mineral/dense = rare_material_point)
+	asteroid_generator.ores_list = minerals
+	asteroid_generator.generate_interior = TRUE
+	var/list/sizes = asteroid_generator.generate_asteroids(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value)
+	contained_zones += new /datum/orbital_zone(name, sizes[1], sizes[3], sizes[4], sizes[2], assigned_space_level.z_value)
 
 /datum/orbital_object/z_linked/beacon/ruin/asteroid/post_map_setup()
 	//Orbit around the systems central gravitional body
 	//Pack closely together to make an asteriod belt.
 	var/datum/orbital_map/linked_map = SSorbits.orbital_maps[orbital_map_index]
 	set_orbitting_around_body(linked_map.center, 1200 + 20 * rand(-10, 10))
+
+/datum/orbital_object/z_linked/beacon/ruin/asteroid/get_scan_data()
+	var/data = list()
+	data["Mineral Scan"] = list()
+	var/index = 0
+	for (var/turf/closed/mineral/mineral_path as() in minerals)
+		var/atom/mineral_type = mineral_path
+		index ++
+		if (mineral_path == /turf/closed/mineral || !mineral_path || mineral_path == /datum)
+			continue
+		if (ispath(mineral_type, /turf/closed/mineral))
+			mineral_type = initial(mineral_path.mineralType)
+		if (!mineral_type)
+			continue
+		var/spawn_point = minerals[mineral_path]
+		var/proportion = index == length(minerals) ? (1 - spawn_point) : (minerals[minerals[index + 1]] - spawn_point)
+		data["Mineral Scan"] += "[initial(mineral_type.name)] - [round(proportion * 100)]%"
+	return data
 
 //====================
 // Regular Ruin Z-levels
@@ -112,7 +182,12 @@
 	var/datum/space_level/assigned_space_level = SSzclear.get_free_z_level()
 	linked_z_level = list(assigned_space_level)
 	SSorbits.assoc_z_levels["[assigned_space_level.z_value]"] = src
-	generate_asteroids(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value, 120, -0.4, 40)
+	var/datum/asteroid_generator/asteroid_generator = new()
+	asteroid_generator.min_radius = 40
+	asteroid_generator.max_radius = 120
+	asteroid_generator.weight_offset = -0.4
+	asteroid_generator.scale = 40
+	asteroid_generator.generate_asteroids(world.maxx / 2, world.maxy / 2, assigned_space_level.z_value, 40, 120, -0.4, 40)
 
 /datum/orbital_object/z_linked/beacon/ruin/stranded_shuttle/post_map_setup()
 	return

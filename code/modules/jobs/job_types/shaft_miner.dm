@@ -57,14 +57,15 @@
 	shoes = /obj/item/clothing/shoes/workboots/mining
 	gloves = /obj/item/clothing/gloves/color/black
 	uniform = /obj/item/clothing/under/rank/cargo/miner/lavaland
-	l_pocket = /obj/item/reagent_containers/hypospray/medipen/survival
+	l_pocket = /obj/item/device_linker
 	r_pocket = /obj/item/storage/bag/ore	//causes issues if spawned in backpack
 	backpack_contents = list(
 		/obj/item/flashlight/seclite=1,\
 		/obj/item/knife/combat/survival=1,\
 		/obj/item/mining_voucher=1,\
 		/obj/item/stack/marker_beacon/ten=1,\
-		/obj/item/discovery_scanner=1)
+		/obj/item/discovery_scanner=1,\
+		/obj/item/gravity_magnet=1)
 
 	backpack = /obj/item/storage/backpack/explorer
 	satchel = /obj/item/storage/backpack/satchel/explorer

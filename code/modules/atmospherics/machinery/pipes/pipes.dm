@@ -23,6 +23,8 @@
 
 	vis_flags = VIS_INHERIT_PLANE
 
+	var/fastdmm_pathfinding_tag = ""
+
 /obj/machinery/atmospherics/pipe/New()
 	add_atom_colour(pipe_color, FIXED_COLOUR_PRIORITY)
 	if(!volume) // Pipes can have specific volumes or have it determined by their device_type.

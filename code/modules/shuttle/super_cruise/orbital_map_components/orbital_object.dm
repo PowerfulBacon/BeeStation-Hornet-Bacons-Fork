@@ -58,6 +58,10 @@
 	//Add to this when you want THIS objects collision proc to be called.
 	var/collision_flags = NONE
 
+	/// A list of the zones which we can contain, structures or asteroids which we can
+	/// pull with the magnet.
+	var/list/contained_zones = list()
+
 /datum/orbital_object/New(datum/orbital_vector/position, datum/orbital_vector/velocity, orbital_map_index)
 	if(orbital_map_index)
 		src.orbital_map_index = orbital_map_index
@@ -70,6 +74,9 @@
 	. = ..()
 	//Calculate relevant grav range
 	relevant_gravity_range = sqrt((mass * GRAVITATIONAL_CONSTANT) / MINIMUM_EFFECTIVE_GRAVITATIONAL_ACCEELRATION)
+	// Abstract object not on a map
+	if (!src.orbital_map_index)
+		return
 	//Process this
 	if(!static_object)
 		START_PROCESSING(SSorbits, src)
@@ -82,13 +89,14 @@
 
 /datum/orbital_object/Destroy()
 	STOP_PROCESSING(SSorbits, src)
-	var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
-	map.remove_body(src)
-	LAZYREMOVE(target_orbital_body?.orbitting_bodies, src)
-	if(length(orbitting_bodies))
-		for(var/datum/orbital_object/orbitting_bodies in orbitting_bodies)
-			orbitting_bodies.target_orbital_body = null
-		orbitting_bodies.Cut()
+	if (orbital_map_index)
+		var/datum/orbital_map/map = SSorbits.orbital_maps[orbital_map_index]
+		map.remove_body(src)
+		LAZYREMOVE(target_orbital_body?.orbitting_bodies, src)
+		if(length(orbitting_bodies))
+			for(var/datum/orbital_object/orbitting_bodies in orbitting_bodies)
+				orbitting_bodies.target_orbital_body = null
+			orbitting_bodies.Cut()
 	. = ..()
 
 /datum/orbital_object/proc/explode()
@@ -320,3 +328,6 @@
 
 /datum/orbital_object/proc/post_map_setup()
 	return
+
+/datum/orbital_object/proc/get_scan_data()
+	return list()

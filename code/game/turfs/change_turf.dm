@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(T.icon != icon)
 		T.icon = icon
 	if(color)
-		T.atom_colours = atom_colours.Copy()
+		T.atom_colours = atom_colours?.Copy()
 		T.update_atom_colour()
 	if(T.dir != dir)
 		T.setDir(dir)
@@ -114,6 +114,17 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	SEND_SIGNAL(src, COMSIG_TURF_CHANGE, path, new_baseturfs, flags, post_change_callbacks)
 
 	changing_turf = TRUE
+
+	// Quickly handle components before, as they should be transfered and not deleted
+	// as the datum destroy logic will remove all signals and components.
+	var/list/old_datum_components = datum_components
+	var/list/old_comp_lookup = comp_lookup
+	var/list/old_signal_procs = signal_procs
+	// Clear the list references so that they don't get deleted by /datum/Destroy()
+	datum_components = null
+	comp_lookup = null
+	signal_procs = null
+
 	qdel(src) //Just get the side effects and call Destroy
 	//We do this here so anything that doesn't want to persist can clear itself
 	var/list/old_listen_lookup = _listen_lookup?.Copy()
@@ -138,6 +149,19 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	var/is_mapload = old_atoms_state == INITIALIZATION_INNEW_MAPLOAD
 	SSatoms.InitAtom(src, new_turf, list(is_mapload))
 
+	// These need to be set prior to initialisation, otherwise we will have to regenerate
+	// zmimic twice for turfs that are linked to other locations.
+	new_turf.above = old_above
+	old_above?.below = new_turf
+	new_turf.below = old_below
+	old_below?.above = new_turf
+	new_turf.z_depth = old_zdepth
+
+	var/is_mapload = old_atoms_state == INITIALIZATION_INNEW_MAPLOAD
+	SSatoms.InitAtom(src, new_turf, is_mapload)
+
+	SSatoms.initialized = old_atoms_state
+
 	// WARNING WARNING
 	// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
 	// It's possible because turfs are fucked, and if you have one in a list and it's replaced with another one, the list ref points to the new turf
@@ -145,6 +169,10 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		LAZYOR(new_turf._listen_lookup, old_listen_lookup)
 	if(old_signal_procs)
 		LAZYOR(new_turf._signal_procs, old_signal_procs)
+	// Remember that the reference does not changing with turfs, so we do not need to re-register the parent
+	// because the parent stays the same.
+	if (old_datum_components)
+		LAZYOR(new_turf.datum_components, old_datum_components)
 
 	for(var/datum/callback/callback as anything in post_change_callbacks)
 		callback.InvokeAsync(new_turf)
@@ -189,6 +217,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	// we need to update gravity for any mob on a tile that is being created or destroyed
 	for(var/mob/living/target in new_turf.contents)
 		target.refresh_gravity()
+
+	SEND_SIGNAL(src, COMSIG_POST_TURF_CHANGE, path, new_baseturfs, flags, post_change_callbacks)
 
 	return new_turf
 
