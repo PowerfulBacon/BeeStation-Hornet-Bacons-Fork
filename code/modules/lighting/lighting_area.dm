@@ -9,28 +9,22 @@
 
 	dynamic_lighting = new_dynamic_lighting
 
-	if (IS_DYNAMIC_LIGHTING(src))
-		cut_overlay(GLOB.fullbright_overlay)
-		cut_overlay(GLOB.starlight_overlay)
-		blend_mode = BLEND_DEFAULT
-		if(lighting_overlay)
-			cut_overlay(lighting_overlay)
-		if(lighting_overlay_opacity && lighting_overlay_colour)
-			update_lighting_overlay()
-			add_overlay(lighting_overlay)
-		for(var/turf/T as anything in get_contained_turfs())
-			if (!T.fullbright_type)
-				T.lighting_build_overlay()
-			T.update_above()
-
+	cut_overlay(GLOB.fullbright_overlay)
+	cut_overlay(GLOB.starlight_overlay)
+	if (fullbright_type == FULLBRIGHT_STARLIGHT)
+		add_overlay(GLOB.starlight_overlay)
 	else
-		if(lighting_overlay)
-			cut_overlay(lighting_overlay)
-		if (fullbright_type == FULLBRIGHT_STARLIGHT)
-			add_overlay(GLOB.starlight_overlay)
-		else
-			add_overlay(GLOB.fullbright_overlay)
-		blend_mode = BLEND_DEFAULT
+		add_overlay(GLOB.fullbright_overlay)
+	if(lighting_overlay)
+		cut_overlay(lighting_overlay)
+	if(lighting_overlay_opacity && lighting_overlay_colour)
+		update_lighting_overlay()
+		add_overlay(lighting_overlay)
+	if (IS_DYNAMIC_LIGHTING(src))
+		for(var/turf/T as anything in get_contained_turfs())
+			T.lighting_build_overlay()
+			T.update_above()
+	else
 		for(var/turf/T as anything in get_contained_turfs())
 			if (T.lighting_object)
 				T.lighting_clear_overlay()

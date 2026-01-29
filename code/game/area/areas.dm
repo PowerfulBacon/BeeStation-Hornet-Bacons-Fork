@@ -227,7 +227,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		power_equip = TRUE
 		power_environ = TRUE
 
-	if(dynamic_lighting == DYNAMIC_LIGHTING_DISABLED)
+	if(dynamic_lighting == DYNAMIC_LIGHTING_DISABLED || fullbright_type != FULLBRIGHT_NONE)
 		set_base_luminosity(src, 1)
 
 	. = ..()
@@ -240,7 +240,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	else if (fullbright_type == FULLBRIGHT_DEFAULT)
 		add_overlay(GLOB.fullbright_overlay)
 	// We require dynamic lighting for a lighting overlay
-	if(IS_DYNAMIC_LIGHTING(src) && lighting_overlay_opacity && lighting_overlay_colour)
+	else if(lighting_overlay_opacity && lighting_overlay_colour)
 		generate_lighting_overlay()
 	reg_in_areas_in_z()
 

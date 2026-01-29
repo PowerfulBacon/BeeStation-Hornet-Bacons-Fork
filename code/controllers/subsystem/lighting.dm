@@ -40,9 +40,6 @@ SUBSYSTEM_DEF(lighting)
 			continue
 
 		for(var/turf/T as anything in A.get_contained_turfs())
-			if(T.fullbright_type)
-				continue
-
 			new/atom/movable/lighting_object(T)
 			CHECK_TICK
 		CHECK_TICK
