@@ -176,7 +176,8 @@ CREATION_TEST_IGNORE_SELF(/turf)
 		Entered(content, null)
 
 	var/area/A = loc
-	if(fullbright_type && IS_DYNAMIC_LIGHTING(A))
+	// If we didn't get fullbright from our area
+	if(fullbright_type && A.fullbright_type == FULLBRIGHT_NONE)
 		if (fullbright_type == FULLBRIGHT_STARLIGHT)
 			add_overlay(GLOB.starlight_overlay)
 		else
