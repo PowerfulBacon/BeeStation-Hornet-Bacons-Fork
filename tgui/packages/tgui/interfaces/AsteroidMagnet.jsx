@@ -1,13 +1,14 @@
 import { toTitleCase } from 'common/string';
-import { Box, Button, Section, Table, Flex, NoticeBox } from '../components';
+
 import { useBackend, useLocalState } from '../backend';
+import { Box, Button, Flex, NoticeBox, Section, Table } from '../components';
 import { Window } from '../layouts';
 
 export const AsteroidMagnet = (props, context) => {
-  const { act, data } = useBackend(context);
+  const { act, data } = useBackend();
   const { area_connected = false, area_width = 0, area_height = 0, nearby_objects = [] } = data;
 
-  const [targetObject, setTargetObject] = useLocalState(context, 'targetObject', '');
+  const [targetObject, setTargetObject] = useLocalState('targetObject', '');
 
   return (
     <Window width={350} height={550}>

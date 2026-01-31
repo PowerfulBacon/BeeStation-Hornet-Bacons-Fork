@@ -1,6 +1,5 @@
 import { clamp } from 'common/math';
-import { Component } from 'react';
-import { Fragment } from 'tgui/components';
+import { Component, Fragment } from 'react';
 
 const FPS = 20;
 // Scales the positions to make things on the map appear closer or further away.

@@ -2,6 +2,7 @@
 	name = "energy pickaxe"
 	desc = "An charged pickaxe which uses energy to create a plasma surface, allowing it to cut through dense rock with ease."
 	icon_state = "energy_pick_base"
+	stamina_use = 0
 	var/datum/energy_pick_upgrade/applied_upgrade
 	var/ready = TRUE
 	var/animation_played = FALSE
